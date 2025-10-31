@@ -1,0 +1,42 @@
+{
+  "COLOR": [
+    "color",
+    "summaries[0].colorName"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "NUMBER_OF_PIECES": [
+    "number_of_pieces",
+    "attributes.number_of_pieces[0].value"
+  ],
+  "AGE_RANGE_DESCRIPTION": [
+    "age_range_description",
+    "attributes.age_range_description[0].value"
+  ],
+  "BRAND": [
+    "brand",
+    "summaries[0].brandName"
+  ],
+  "MODEL_NUMBER": [
+    "model_number",
+    "summaries[0].modelNumber"
+  ],
+  "ITEM_NAME": [
+    "item_name",
+    "summaries[0].itemName"
+  ],
+  "ITEM_WEIGHT": [
+    "item_weight",
+    "attributes.item_weight[0].value"
+  ],
+  "ITEM_DIMENSIONS": [
+    "item_dimensions",
+    "attributes.item_dimensions[0].width.value"
+  ],
+  "ITEM_PACKAGE_WEIGHT": [
+    "item_package_weight",
+    "attributes.item_package_weight[0].value"
+  ]
+}

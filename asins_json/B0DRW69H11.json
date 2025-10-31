@@ -1,0 +1,547 @@
+{
+  "asin": "B0DRW69H11",
+  "attributes": {
+    "has_multiple_battery_powered_components": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Building Elements",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 2.491,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_pieces": [
+      {
+        "value": 780,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Wild Animals: Majestic Rhino with Birds 31171",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "3 ANIMALS IN ONE BOX – The LEGO Creator 3 in 1 Wild Animals: Majestic Rhino with Birds (31171) lets kids ages 9 and up build and rebuild 3 different animal figures with the same bricks",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "ENDLESS PLAY OPTIONS – Young builders can construct 3 different animal models: a majestic rhino with colorful birds, a mighty hippo, or a playful walrus (models cannot be built simultaneously)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "POSABLE ANIMAL FIGURINES – All 3 models have posable features, including the legs, ears, and mouth of the rhino and hippo, as well as the head, neck, and fins of the walrus",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "CREATIVE KIDS' DECOR – Completed animal figures can be displayed proudly in a child's bedroom or playroom",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GIFT FOR BOYS & GIRLS – This 3 in 1 building toy provides a immersive build-and-play experience for kids who love animals",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "LEGO CREATOR TOYS – Every 3 in 1 set (sold separately) lets kids build 3 different models inspired by some of their biggest passions, including animals, vehicles and houses",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "DIMENSIONS – This 780-piece rebuildable LEGO toy set features a posable rhino toy that measures over 4.5 in. (12 cm) high, 9.5 in. (24 cm) long, and 2.5 in. (7 cm) wide",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer_maximum_age": [
+      {
+        "value": 1200.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 10.315
+        },
+        "length": {
+          "unit": "inches",
+          "value": 15.039
+        },
+        "height": {
+          "unit": "inches",
+          "value": 2.776
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "60141000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "cpsia_cautionary_statement": [
+      {
+        "value": "no_warning_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      
+      {
+        "value": "1234567890123",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "toy-interlocking-building-sets",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 7.1882
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 26.0096
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 38.4048
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "6529407",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "non_lithium_battery_packaging": [
+      {
+        "value": "batteries_packed_with_equipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Multicolor",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "sub_brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Nature and Animals",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.139,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "educational_objective": [
+      {
+        "language_tag": "en_US",
+        "value": "Concentration",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "safety_warning": [
+      {
+        "language_tag": "en_US",
+        "value": "No Warning Applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "toy_building_block_type": [
+      {
+        "value": "interlocking_toy_building_block",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "theme": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "6529407",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Since 1958, LEGO bricks have met the highest industry standards, so they are consistent, compatible and connect and come apart easily every time – and it's still that way today",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer_minimum_age": [
+      {
+        "value": 108.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Creator 3 in 1 Wild Animals: Majestic Rhino with Birds Pretend Play Toy for Kids - Safari Toy Building Set for Girls & Boys, Ages 9+ - Build 3 Animals in 1 Kit - Gift for Birthdays - 31171",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 59.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2025-08-01T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2025-07-02T04:00:00Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_audience_keyword": [
+      {
+        "language_tag": "en_US",
+        "value": "Unisex Children",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_assembly_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "dimensions": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "item": {
+        "height": {
+          "unit": "inches",
+          "value": 2.776
+        },
+        "length": {
+          "unit": "inches",
+          "value": 15.039
+        },
+        "weight": {
+          "unit": "pounds",
+          "value": 2.491
+        },
+        "width": {
+          "unit": "inches",
+          "value": 10.315
+        }
+      },
+      "package": {
+        "height": {
+          "unit": "inches",
+          "value": 2.8299999971134
+        },
+        "length": {
+          "unit": "inches",
+          "value": 15.1199999845776
+        },
+        "weight": {
+          "unit": "pounds",
+          "value": 2.51106516418
+        },
+        "width": {
+          "unit": "inches",
+          "value": 10.2399999895552
+        }
+      }
+    }
+  ],
+  "identifiers": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "identifiers": [
+        {
+          "identifierType": "EAN",
+          "identifier": "0673419407688"
+        },
+        {
+          "identifierType": "UPC",
+          "identifier": "673419407688"
+        }
+      ]
+    }
+  ],
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/81pyUXwDBFL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51ZzHlPFbgL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51ZzHlPFbgL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/8166MkAFvfL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/514hdntur1L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/514hdntur1L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/81zt7rBa+4L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51vhGAVQnFL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51vhGAVQnFL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/819eP8--DdL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51-VVY8lBUL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51-VVY8lBUL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/715cBRVOwiL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/4178TdkL3hL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/4178TdkL3hL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71kfjssgrzL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41QO1+ylO+L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41QO1+ylO+L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/81v5EDE21bL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51Xaeo3tmFL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51Xaeo3tmFL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "TOY_BUILDING_BLOCK"
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "LEGO",
+      "browseClassification": {
+        "displayName": "Building Sets",
+        "classificationId": "166099011"
+      },
+      "color": "Multicolor",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "LEGO Creator 3 in 1 Wild Animals: Majestic Rhino with Birds Pretend Play Toy for Kids - Safari Toy Building Set for Girls & Boys, Ages 9+ - Build 3 Animals in 1 Kit - Gift for Birthdays - 31171",
+      "manufacturer": "LEGO",
+      "memorabilia": false,
+      "modelNumber": "6529407",
+      "packageQuantity": 1,
+      "partNumber": "6529407",
+      "releaseDate": "2025-08-01",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "toy_display_on_website",
+      "websiteDisplayGroupName": "Toy"
+    }
+  ]
+}

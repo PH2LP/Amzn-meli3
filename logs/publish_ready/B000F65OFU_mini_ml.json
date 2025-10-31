@@ -1,0 +1,299 @@
+{
+  "asin": "B000F65OFU",
+  "brand": "Everpure",
+  "model": "EV9262-71",
+  "category_id": "CBT433579",
+  "category_name": "Water Filters",
+  "category_similarity": 0.578,
+  "title_ai": "Sistema de Agua Potable Everpure H-104 EV926271",
+  "description_ai": "El sistema de filtración Everpure EV9262-71 lleva la tecnología de filtración de agua comercial a tu hogar, garantizando un acceso confiable a agua de calidad superior. Este filtro es esencial para mantener la salud de tu familia, ya que proporciona agua más limpia y libre de contaminantes. Su diseño compacto ahorra espacio, requiriendo solo un área de instalación de 5 pulgadas de ancho, 20 pulgadas de alto y 5 pulgadas de profundidad, además de necesitar un grifo separado para su funcionamiento.\n\nLa tecnología de filtración Micro-Pure exclusiva de Everpure reduce contaminantes potencialmente dañinos en el agua potable, asegurando que cada vaso que sirvas sea seguro y saludable. Este sistema es capaz de filtrar partículas tan pequeñas como 0.5 micrones, lo que significa que no solo mejora el sabor y olor del agua al eliminar el cloro, sino que también reduce la presencia de plomo a niveles por debajo de los estándares de la EPA. Además, cuenta con la certificación NSF/ANSI estándar 53, que garantiza la reducción de quistes como Cryptosporidium y Giardia mediante métodos mecánicos.\n\nCon una capacidad de filtración de 1,000 galones, este sistema equivale a aproximadamente 7,500 botellas de agua, lo que representa un ahorro significativo en costos y un impacto positivo en el medio ambiente al reducir el uso de plástico. Fabricado en los Estados Unidos, el Everpure EV9262-71 utiliza contenedores de metal de grado comercial que protegen el filtro de posibles rupturas, asegurando durabilidad y eficacia a largo plazo. Este sistema es una inversión inteligente para cualquier hogar que valore la calidad del agua y la salud de sus habitantes.\n\n📌 **Especificaciones del producto**\n• Marca: Everpure\n• Modelo: EV9262-71\n• Dimensiones del paquete: 9.65 x 10.16 x 53.85 cm\n• Peso del paquete: 1.27 kg\n• Brand: Everpure\n• Model Number: EV9262-71\n• Part Number: EV926271\n• Color: Silver\n• Item Weight: 2.8 pounds\n• Capacity: 1500 gallons\n• Modelo: EV9262-71\n• Código universal: 054568105066\n• Tema: STYLE_NAME\n\n\n🌍 **Información importante para compradores internacionales**\n• Producto completamente nuevo y original.\n• Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.  \n• En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.  \n• Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.  \n• Envío internacional asegurado con número de seguimiento.  \n• Soporte en español e inglés.  \n",
+  "package": {
+    "length_cm": 9.65,
+    "width_cm": 10.16,
+    "height_cm": 53.85,
+    "weight_kg": 1.27
+  },
+  "price": {
+    "base_usd": 554.0,
+    "markup_pct": 35,
+    "final_usd": 747.9
+  },
+  "gtin": [
+    "0012345678905"
+  ],
+  "images": [
+    {
+      "variant": "MAIN",
+      "url": "https://m.media-amazon.com/images/I/61wyBPKUODL.jpg",
+      "w": null,
+      "h": null,
+      "order": 0
+    },
+    {
+      "variant": "PT01",
+      "url": "https://m.media-amazon.com/images/I/813btSbF0jL.jpg",
+      "w": null,
+      "h": null,
+      "order": 1
+    },
+    {
+      "variant": "PT02",
+      "url": "https://m.media-amazon.com/images/I/81xa0CUHjxL.jpg",
+      "w": null,
+      "h": null,
+      "order": 2
+    },
+    {
+      "variant": "PT03",
+      "url": "https://m.media-amazon.com/images/I/71jnU6br0YL.jpg",
+      "w": null,
+      "h": null,
+      "order": 3
+    },
+    {
+      "variant": "PT04",
+      "url": "https://m.media-amazon.com/images/I/71zjM7F7H-L.jpg",
+      "w": null,
+      "h": null,
+      "order": 4
+    },
+    {
+      "variant": "PT05",
+      "url": "https://m.media-amazon.com/images/I/81IQpux4-CL.jpg",
+      "w": null,
+      "h": null,
+      "order": 5
+    },
+    {
+      "variant": "PT06",
+      "url": "https://m.media-amazon.com/images/I/81ax6B0wHzL.jpg",
+      "w": null,
+      "h": null,
+      "order": 6
+    },
+    {
+      "variant": "PT07",
+      "url": "https://m.media-amazon.com/images/I/81+WNOI1B3L.jpg",
+      "w": null,
+      "h": null,
+      "order": 7
+    }
+  ],
+  "attributes_mapped": {
+    "BRAND": {
+      "value_name": "Everpure"
+    },
+    "MODEL": {
+      "value_name": "EV9262-71"
+    },
+    "HEIGHT": {
+      "value_struct": {
+        "number": 15.0,
+        "unit": "cm"
+      }
+    },
+    "GTIN": {
+      "value_name": "054568105066"
+    },
+    "MPN": {
+      "value_name": "EV926271"
+    },
+    "VALUE_ADDED_TAX": {
+      "value_name": "554.0"
+    },
+    "SELLER_SKU": {
+      "value_name": "B000F65OFU"
+    },
+    "IS_FLAMMABLE": {
+      "value_name": "False"
+    },
+    "IS_KIT": {
+      "value_name": "1"
+    },
+    "DESCRIPTIVE_TAGS": {
+      "value_name": "en_US"
+    },
+    "PRODUCT_DATA_SOURCE": {
+      "value_name": "2006-03-24T23:00:29-00:00"
+    },
+    "MODEL_NUMBER": {
+      "value_name": "EV9262-71"
+    },
+    "PART_NUMBER": {
+      "value_name": "EV926271"
+    },
+    "COLOR": {
+      "value_name": "Silver"
+    },
+    "ITEM_WEIGHT": {
+      "value_name": "2.8 pounds"
+    },
+    "CAPACITY": {
+      "value_name": "1500 gallons"
+    },
+    "THEME": {
+      "value_name": "STYLE_NAME"
+    },
+    "MATERIAL": {
+      "value_name": "Glass"
+    },
+    "ITEM_DIMENSIONS": {
+      "value_name": "5.0 x 5.0 x 15.0 inches"
+    },
+    "ITEM_PACKAGE_WEIGHT": {
+      "value_name": "1.27 kilograms"
+    },
+    "EXTERNAL_TESTING_CERTIFICATION": {
+      "value_name": "ANSI, NSF"
+    },
+    "ITEM_PACKAGE_QUANTITY": {
+      "value_name": "1"
+    },
+    "STYLE": {
+      "value_name": "System"
+    },
+    "PACKAGE_DIMENSIONS": {
+      "value_name": "centimeters"
+    },
+    "MANUFACTURER": {
+      "value_name": "en_US"
+    },
+    "BULLET_1": {
+      "value_name": "THE PENTAIR EVERPURE ADVANTAGE: Bringing commercial water filtration technology to your home. Reliable access to cleaner quality water is essential for life!"
+    },
+    "BULLET_2": {
+      "value_name": "EXCLUSIVE MICRO-PURE FILTRATION TECHNOLOGY reduces potentially harmful contaminants that may be in your family’s drinking water in a compact space-saving design (Installation space required: 5W x 20H x 5D inch; Separate faucet required)"
+    },
+    "BULLET_3": {
+      "value_name": "COMMERCIAL GRADE WATER FOR YOUR HOME. Reduces particles as small as 0.5 micron in size. Superior Chlorine Taste & Odor reduction, reduces lead to below EPA standards and is NSF/ANSI standard 53 certified to reduce cysts such as Cryptosporidium and Giardia by mechanical means"
+    },
+    "ITEM_QTY": {
+      "value_name": "1"
+    },
+    "BATTERIES_INCLUDED": {
+      "value_name": "False"
+    },
+    "BATTERIES_REQUIRED": {
+      "value_name": "False"
+    }
+  },
+  "main_characteristics": [
+    {
+      "id": "BRAND",
+      "name": "Brand",
+      "value_name": "Everpure"
+    },
+    {
+      "id": "MODEL_NUMBER",
+      "name": "Model Number",
+      "value_name": "EV9262-71"
+    },
+    {
+      "id": "PART_NUMBER",
+      "name": "Part Number",
+      "value_name": "EV926271"
+    },
+    {
+      "id": "COLOR",
+      "name": "Color",
+      "value_name": "Silver"
+    },
+    {
+      "id": "ITEM_WEIGHT",
+      "name": "Item Weight",
+      "value_name": "2.8 pounds"
+    },
+    {
+      "id": "CAPACITY",
+      "name": "Capacity",
+      "value_name": "1500 gallons"
+    },
+    {
+      "id": "MODEL",
+      "name": "Modelo",
+      "value_name": "EV9262-71"
+    },
+    {
+      "id": "GTIN",
+      "name": "Código universal",
+      "value_name": "054568105066"
+    },
+    {
+      "id": "THEME",
+      "name": "Tema",
+      "value_name": "STYLE_NAME"
+    }
+  ],
+  "second_characteristics": [
+    {
+      "id": "MATERIAL",
+      "name": "Material",
+      "value_name": "Glass"
+    },
+    {
+      "id": "ITEM_DIMENSIONS",
+      "name": "Item Dimensions",
+      "value_name": "5.0 x 5.0 x 15.0 inches"
+    },
+    {
+      "id": "ITEM_PACKAGE_WEIGHT",
+      "name": "Item Package Weight",
+      "value_name": "1.27 kilograms"
+    },
+    {
+      "id": "EXTERNAL_TESTING_CERTIFICATION",
+      "name": "External Testing Certification",
+      "value_name": "ANSI, NSF"
+    },
+    {
+      "id": "ITEM_PACKAGE_QUANTITY",
+      "name": "Item Package Quantity",
+      "value_name": "1"
+    },
+    {
+      "id": "STYLE",
+      "name": "Style",
+      "value_name": "System"
+    },
+    {
+      "id": "PACKAGE_DIMENSIONS",
+      "name": "Dimensiones del paquete",
+      "value_name": "centimeters"
+    },
+    {
+      "id": "MANUFACTURER",
+      "name": "Fabricante",
+      "value_name": "en_US"
+    },
+    {
+      "id": "BULLET_1",
+      "name": "Detalle destacado 1",
+      "value_name": "THE PENTAIR EVERPURE ADVANTAGE: Bringing commercial water filtration technology to your home. Reliable access to cleaner quality water is essential for life!"
+    },
+    {
+      "id": "BULLET_2",
+      "name": "Detalle destacado 2",
+      "value_name": "EXCLUSIVE MICRO-PURE FILTRATION TECHNOLOGY reduces potentially harmful contaminants that may be in your family’s drinking water in a compact space-saving design (Installation space required: 5W x 20H x 5D inch; Separate faucet required)"
+    },
+    {
+      "id": "BULLET_3",
+      "name": "Detalle destacado 3",
+      "value_name": "COMMERCIAL GRADE WATER FOR YOUR HOME. Reduces particles as small as 0.5 micron in size. Superior Chlorine Taste & Odor reduction, reduces lead to below EPA standards and is NSF/ANSI standard 53 certified to reduce cysts such as Cryptosporidium and Giardia by mechanical means"
+    },
+    {
+      "id": "ITEM_QTY",
+      "name": "Contenido del paquete",
+      "value_name": "1"
+    },
+    {
+      "id": "Batteries_Included",
+      "name": "Baterías incluidas",
+      "value_name": "False"
+    },
+    {
+      "id": "Batteries_Required",
+      "name": "Requiere baterías",
+      "value_name": "False"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "asin": "B092RCLKHN",
+  "brand": "Garmin",
+  "model": "010-02562-00",
+  "category_id": "CBT388015",
+  "category_name": "Modeling Products",
+  "category_similarity": 0.563,
+  "title_ai": "Garmin 010-02562-00 - Dispositivo de navegación portátil",
+  "description_ai": "El Garmin 010-02562-00 es un dispositivo diseñado para aquellos que buscan llevar su actividad física y su salud al siguiente nivel. Este modelo combina tecnología avanzada con un diseño elegante, ofreciendo una experiencia de usuario intuitiva y accesible. Su pantalla de alta resolución permite una visualización clara de las métricas, facilitando el seguimiento de tus progresos en tiempo real.\n\nUna de las principales ventajas del Garmin 010-02562-00 es su capacidad para monitorear diversas actividades deportivas, desde correr hasta nadar, adaptándose a las necesidades de cada usuario. Además, cuenta con funciones de seguimiento de la frecuencia cardíaca y del sueño, lo que te permite obtener un panorama completo de tu salud y rendimiento. Con esta información, podrás establecer metas más realistas y alcanzables, mejorando así tu calidad de vida.\n\nLa duración de la batería es otro aspecto destacado de este dispositivo. Con una autonomía prolongada, podrás disfrutar de tus actividades sin preocuparte por la carga constante. Esto es especialmente beneficioso para quienes realizan entrenamientos largos o actividades al aire libre, donde el acceso a una fuente de energía puede ser limitado. \n\nEn resumen, el Garmin 010-02562-00 es una herramienta valiosa para quienes desean optimizar su rendimiento físico y cuidar de su bienestar. Con su tecnología avanzada y funcionalidades prácticas, este dispositivo se convierte en un aliado indispensable en tu camino hacia un estilo de vida más activo y saludable.\n\n📌 **Especificaciones del producto**\n• Marca: Garmin\n• Modelo: 010-02562-00\n• Dimensiones del paquete: 1.0 x 1.0 x 1.0 cm\n• Peso del paquete: 0.5 kg\n• Brand: Garmin\n• Model Number: 010-02562-00\n• Color: Black\n• Item Name: Garmin Forerunner 55, GPS Running Watch with Daily Suggested Workouts, Up to 2 Weeks of Battery Life\n• Modelo: 010-02562-00\n\n\n🌍 **Información importante para compradores internacionales**\n• Producto completamente nuevo y original.\n• Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.  \n• En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.  \n• Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.  \n• Envío internacional asegurado con número de seguimiento.  \n• Soporte en español e inglés.  \n",
+  "package": {
+    "length_cm": 1.0,
+    "width_cm": 1.0,
+    "height_cm": 1.0,
+    "weight_kg": 0.5
+  },
+  "price": {
+    "base_usd": 10.0,
+    "markup_pct": 35,
+    "final_usd": 13.5
+  },
+  "gtins": [
+    "617647011"
+  ],
+  "images": [],
+  "attributes_mapped": {
+    "BRAND": {
+      "value_name": "Garmin"
+    },
+    "MODEL": {
+      "value_name": "010-02562-00"
+    },
+    "SELLER_SKU": {
+      "value_name": "B092RCLKHN"
+    },
+    "MODEL_NUMBER": {
+      "value_name": "010-02562-00"
+    },
+    "COLOR": {
+      "value_name": "Black"
+    },
+    "ITEM_NAME": {
+      "value_name": "Garmin Forerunner 55, GPS Running Watch with Daily Suggested Workouts, Up to 2 Weeks of Battery Life"
+    },
+    "MATERIAL": {
+      "value_name": "Not specified"
+    },
+    "SIZE": {
+      "value_name": "One Size"
+    },
+    "STYLE": {
+      "value_name": "Watch"
+    },
+    "PACKAGE_QUANTITY": {
+      "value_name": "1"
+    },
+    "RELEASE_DATE": {
+      "value_name": "2021-06-02"
+    },
+    "BATTERY_LIFE": {
+      "value_name": "Up to 2 Weeks"
+    },
+    "MANUFACTURER": {
+      "value_name": "Garmin"
+    }
+  },
+  "main_characteristics": [
+    {
+      "id": "BRAND",
+      "name": "Brand",
+      "value_name": "Garmin"
+    },
+    {
+      "id": "MODEL_NUMBER",
+      "name": "Model Number",
+      "value_name": "010-02562-00"
+    },
+    {
+      "id": "COLOR",
+      "name": "Color",
+      "value_name": "Black"
+    },
+    {
+      "id": "ITEM_NAME",
+      "name": "Item Name",
+      "value_name": "Garmin Forerunner 55, GPS Running Watch with Daily Suggested Workouts, Up to 2 Weeks of Battery Life"
+    },
+    {
+      "id": "MODEL",
+      "name": "Modelo",
+      "value_name": "010-02562-00"
+    }
+  ],
+  "second_characteristics": [
+    {
+      "id": "MATERIAL",
+      "name": "Material",
+      "value_name": "Not specified"
+    },
+    {
+      "id": "SIZE",
+      "name": "Size",
+      "value_name": "One Size"
+    },
+    {
+      "id": "STYLE",
+      "name": "Style",
+      "value_name": "Watch"
+    },
+    {
+      "id": "PACKAGE_QUANTITY",
+      "name": "Package Quantity",
+      "value_name": "1"
+    },
+    {
+      "id": "RELEASE_DATE",
+      "name": "Release Date",
+      "value_name": "2021-06-02"
+    },
+    {
+      "id": "BATTERY_LIFE",
+      "name": "Battery Life",
+      "value_name": "Up to 2 Weeks"
+    },
+    {
+      "id": "MANUFACTURER",
+      "name": "Fabricante",
+      "value_name": "Garmin"
+    }
+  ]
+}

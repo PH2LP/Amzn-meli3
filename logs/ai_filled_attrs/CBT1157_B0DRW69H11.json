@@ -1,0 +1,102 @@
+[
+  {
+    "id": "BRAND",
+    "value_name": "LEGO"
+  },
+  {
+    "id": "LINE",
+    "value_name": "Nature and Animals"
+  },
+  {
+    "id": "MODEL",
+    "value_name": "Wild Animals: Majestic Rhino with Birds 31171"
+  },
+  {
+    "id": "PIECES_NUMBER",
+    "value_name": "780"
+  },
+  {
+    "id": "HEIGHT",
+    "value_name": "12 cm"
+  },
+  {
+    "id": "WIDTH",
+    "value_name": "7 cm"
+  },
+  {
+    "id": "LENGTH",
+    "value_name": "24 cm"
+  },
+  {
+    "id": "TOY_MATERIALS",
+    "value_name": "Plastic"
+  },
+  {
+    "id": "TOY_COMPONENTS",
+    "value_name": "LEGO Building Elements"
+  },
+  {
+    "id": "MIN_RECOMMENDED_AGE",
+    "value_name": "9 years"
+  },
+  {
+    "id": "MAX_RECOMMENDED_AGE",
+    "value_name": ""
+  },
+  {
+    "id": "IS_COLLECTIBLE",
+    "value_name": "Sí"
+  },
+  {
+    "id": "COLOR",
+    "value_name": "Multicolor"
+  },
+  {
+    "id": "ITEM_CONDITION",
+    "value_name": "Nuevo"
+  },
+  {
+    "id": "IS_FLAMMABLE",
+    "value_name": "No"
+  },
+  {
+    "id": "IS_SUITABLE_FOR_SHIPMENT",
+    "value_name": "Sí"
+  },
+  {
+    "id": "IS_KIT",
+    "value_name": "No"
+  },
+  {
+    "id": "HAS_COMPATIBILITIES",
+    "value_name": "No"
+  },
+  {
+    "id": "EMPTY_GTIN_REASON",
+    "value_name": ""
+  },
+  {
+    "id": "GTIN",
+    "value_name": ""
+  },
+  {
+    "id": "INMETRO_CERTIFICATION_REGISTRATION_NUMBER",
+    "value_name": ""
+  },
+  {
+    "id": "APPROVAL_CERTIFICATION_NUMBER",
+    "value_name": ""
+  },
+  {
+    "id": "PRODUCT_AUTHORIZATION_RPIN_NUMBER",
+    "value_name": ""
+  },
+  {
+    "id": "SIC_ESTABLISHMENT_REGISTRY_NUMBER",
+    "value_name": ""
+  },
+  {
+    "id": "REGISTRATION_LICENSE_ESTABLISHMENT_NUMBER",
+    "value_name": ""
+  }
+]

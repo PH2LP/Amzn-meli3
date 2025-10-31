@@ -1,0 +1,8 @@
+{
+  "COLOR": [
+    "main_characteristics[5].value_name"
+  ],
+  "MATERIAL": [
+    "second_characteristics[0].value_name"
+  ]
+}

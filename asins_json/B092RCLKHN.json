@@ -1,0 +1,29 @@
+{
+  "asin": "B092RCLKHN",
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Garmin",
+      "browseClassification": {
+        "displayName": "Running GPS Units",
+        "classificationId": "617647011"
+      },
+      "color": "Black",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Garmin Forerunner 55, GPS Running Watch with Daily Suggested Workouts, Up to 2 Weeks of Battery Life, Black - 010-02562-00",
+      "manufacturer": "Garmin",
+      "memorabilia": false,
+      "modelNumber": "010-02562-00",
+      "packageQuantity": 1,
+      "partNumber": "010-02562-00",
+      "releaseDate": "2021-06-02",
+      "size": "One Size",
+      "style": "Watch",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "wireless_display_on_website",
+      "websiteDisplayGroupName": "Wireless"
+    }
+  ]
+}

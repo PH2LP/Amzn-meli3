@@ -1,0 +1,13 @@
+venv/
+.env
+__pycache__/
+*.log
+venv/
+.env
+__pycache__/
+outputs/
+inputs/amazon_json/
+*.xlsx
+*.log
+data/cbt_embeddings.npy
+data/cbt_categories.json
