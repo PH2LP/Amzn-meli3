@@ -19,17 +19,17 @@ load_dotenv()
 # ────────────────────────────────────────────────────────────────
 # CONFIG
 # ────────────────────────────────────────────────────────────────
-DATA_DIR = Path("data")
-LOGS_DIR = Path("logs/categories")
+DATA_DIR = Path("resources/data")
+LOGS_DIR = Path("storage/logs/categories")
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
 # Detecta automáticamente nombres de archivo
 EMB_PATH = None
 TXT_PATH = None
-for emb in ["data/cbt_embeddings.npy", "data/category_embeddings.npy"]:
+for emb in ["resources/data/cbt_embeddings.npy", "resources/data/category_embeddings.npy"]:
     if Path(emb).exists():
         EMB_PATH = emb
-for meta in ["data/cbt_categories_meta.json", "data/category_texts.json"]:
+for meta in ["resources/data/cbt_categories_meta.json", "resources/data/category_texts.json"]:
     if Path(meta).exists():
         TXT_PATH = meta
 
@@ -196,8 +196,8 @@ def match_category(ai_category: str, asin: str = None):
     }
 
     if asin:
-        os.makedirs("logs/categories", exist_ok=True)
-        out_path = f"logs/categories/{asin}_category.json"
+        os.makedirs("storage/logs/categories", exist_ok=True)
+        out_path = f"storage/logs/categories/{asin}_category.json"
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
 

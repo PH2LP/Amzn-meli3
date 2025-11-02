@@ -574,10 +574,10 @@ Do NOT include Markdown, code fences, or explanations.
 
         # Guardar logs para depuración
         asin = amazon_json.get("asin", "UNKNOWN")
-        os.makedirs("logs/ai_filled_attrs", exist_ok=True)
-        with open(f"logs/ai_filled_attrs/{cid}_{asin}.json", "w", encoding="utf-8") as f:
+        os.makedirs("storage/logs/ai_filled_attrs", exist_ok=True)
+        with open(f"storage/logs/ai_filled_attrs/{cid}_{asin}.json", "w", encoding="utf-8") as f:
             json.dump(filled, f, indent=2, ensure_ascii=False)
-        print(f"💾 Log guardado: logs/ai_filled_attrs/{cid}_{asin}.json")
+        print(f"💾 Log guardado: storage/logs/ai_filled_attrs/{cid}_{asin}.json")
         print(f"✅ IA completó {sum(1 for a in filled if a.get('value_name'))}/{len(filled)} atributos")
 
         return filled
@@ -1085,7 +1085,7 @@ def main():
         asin = os.path.basename(f).replace(".json", "")
         print(f"🔄 Procesando {asin}...")
         try:
-            mini_path = f"logs/publish_ready/{asin}_mini_ml.json"
+            mini_path = f"storage/logs/publish_ready/{asin}_mini_ml.json"
             if not os.path.exists(mini_path):
                 print(f"⚠️ No existe mini_ml para {asin}, saltando...")
                 continue

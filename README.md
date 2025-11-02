@@ -20,31 +20,37 @@ Pipeline automatizado para importar productos desde Amazon SP-API y publicarlos 
 ```
 revancha/
 ├── main.py                      # Pipeline principal
-├── amazon_api.py                # Cliente Amazon SP-API
-├── transform_mapper_new.py      # Transformación Amazon → ML
-├── mainglobal.py                # Publicación en MercadoLibre CBT
-├── category_matcher.py          # Matching de categorías con IA
-├── uploader.py                  # Gestor de imágenes
+├── .env                         # Credenciales (no incluido en repo)
+├── .gitignore                   # Archivos ignorados por Git
+├── README.md                    # Este archivo
+├── src/                         # Código fuente
+│   ├── amazon_api.py           # Cliente Amazon SP-API
+│   ├── transform_mapper_new.py # Transformación Amazon → ML
+│   ├── mainglobal.py           # Publicación en MercadoLibre CBT
+│   ├── category_matcher.py     # Matching de categorías con IA
+│   └── uploader.py             # Gestor de imágenes
 ├── utils/                       # Scripts de utilidad
 │   ├── auto_refresh_token.py   # Refresh token ML
 │   ├── auto_refresh_token_amzn.py  # Refresh token Amazon
 │   └── verificar_publicaciones.py  # Verificador de publicaciones
-├── data/                        # Datos de categorías y embeddings
-│   ├── cbt_categories.json
-│   ├── cbt_categories_meta.json
-│   └── cbt_embeddings.npy
-├── asins_json/                  # JSONs descargados de Amazon
-├── logs/                        # Logs y caches
-│   ├── publish_ready/          # JSONs listos para publicar
-│   ├── categories/             # Cache de categorías
-│   ├── ai_title_cache.json
-│   ├── ai_desc_cache.json
-│   ├── category_cache.json
-│   └── pipeline_report.json
-├── schemas/                     # Schemas CBT de categorías
-├── asins.txt                    # Lista de ASINs a procesar
-├── .env                         # Credenciales (no incluido en repo)
-└── REPORTE_FINAL.md            # Reporte de resultados
+├── resources/                   # Datos y recursos estáticos
+│   ├── asins.txt               # Lista de ASINs a procesar
+│   ├── data/                   # Datos de categorías y embeddings
+│   │   ├── cbt_categories_meta.json
+│   │   └── cbt_embeddings.npy
+│   └── schemas/                # Schemas CBT de categorías
+├── storage/                     # Datos generados (ignorado por Git)
+│   ├── asins_json/             # JSONs descargados de Amazon
+│   └── logs/                   # Logs y caches
+│       ├── publish_ready/      # JSONs listos para publicar
+│       ├── categories/         # Cache de categorías
+│       ├── ai_title_cache.json
+│       ├── ai_desc_cache.json
+│       ├── category_cache.json
+│       └── pipeline_report.json
+├── docs/                        # Documentación
+│   └── REPORTE_FINAL.md        # Reporte de resultados
+└── venv/                        # Entorno virtual Python
 
 ```
 

@@ -36,15 +36,15 @@ from openai import OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
 # Category matcher local (embeddings)
-from category_matcher import match_category
+from src.category_matcher import match_category
 
 API = "https://api.mercadolibre.com"
 HEADERS = {"Authorization": f"Bearer {ML_ACCESS_TOKEN}"} if ML_ACCESS_TOKEN else {}
 
 # ---------- 2) Cachés ----------
-CACHE_EQ_PATH   = "logs/ai_equivalences_cache.json"
-TITLE_CACHE_PATH= "logs/ai_title_cache.json"
-DESC_CACHE_PATH = "logs/ai_desc_cache.json"
+CACHE_EQ_PATH   = "storage/logs/ai_equivalences_cache.json"
+TITLE_CACHE_PATH= "storage/logs/ai_title_cache.json"
+DESC_CACHE_PATH = "storage/logs/ai_desc_cache.json"
 
 def _load_cache(path, default=None):
     try:
@@ -647,7 +647,7 @@ def detect_category(amazon_json)->Tuple[str,str,float]:
     print("🧭 Detectando categoría (embeddings locales)…")
 
     # 📌 Cache por ASIN
-    CAT_CACHE_PATH = "logs/category_cache.json"
+    CAT_CACHE_PATH = "storage/logs/category_cache.json"
     try:
         cat_cache = json.load(open(CAT_CACHE_PATH, "r", encoding="utf-8"))
     except:
@@ -741,7 +741,7 @@ def build_mini_ml(amazon_json: dict) -> dict:
     cat_id, cat_name, sim = detect_category(amazon_json)
 
     # ✅ Si la categoría ya está en caché → IA de equivalencias OFF
-    CAT_CACHE_PATH = "logs/category_cache.json"
+    CAT_CACHE_PATH = "storage/logs/category_cache.json"
     try:
         cat_cache = json.load(open(CAT_CACHE_PATH, "r", encoding="utf-8"))
     except:
@@ -1000,8 +1000,8 @@ def build_mini_ml(amazon_json: dict) -> dict:
         print(f"📡 Descargando schema {cat_id} desde API…")
         schema = get_category_schema(cat_id)
         if schema:
-            os.makedirs("schemas", exist_ok=True)
-            with open(f"schemas/{cat_id}.json", "w", encoding="utf-8") as f:
+            os.makedirs("resources/schemas", exist_ok=True)
+            with open(f"resources/schemas/{cat_id}.json", "w", encoding="utf-8") as f:
                 json.dump(schema, f, indent=2, ensure_ascii=False)
             print(f"💾 Schema {cat_id} guardado localmente.")
 
@@ -1181,7 +1181,7 @@ def main():
     amazon_json = load_json_file(path)
     out = build_mini_ml(amazon_json)
 
-    out_dir = "logs/publish_ready"
+    out_dir = "storage/logs/publish_ready"
     os.makedirs(out_dir, exist_ok=True)
     out_path = os.path.join(out_dir, f"{out['asin'] or 'NOASIN'}_mini_ml.json")
     save_json_file(out_path, out)
@@ -1189,7 +1189,7 @@ def main():
     print(f"✅ Guardado: {out_path}")
     # Mostrar un resumen útil
     total_attrs = len(out.get("attributes_mapped", {}))
-    schema_path = f"schemas/{out['category_id']}.json"
+    schema_path = f"resources/schemas/{out['category_id']}.json"
     schema_total = 0
     if os.path.exists(schema_path):
         try:

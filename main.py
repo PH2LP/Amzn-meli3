@@ -30,17 +30,17 @@ if sys.prefix == sys.base_prefix:
 load_dotenv(override=True)
 
 # Imports de módulos propios
-from amazon_api import get_product_data_from_asin
-from transform_mapper_new import build_mini_ml, load_json_file, save_json_file
-from mainglobal import publish_item
+from src.amazon_api import get_product_data_from_asin
+from src.transform_mapper_new import build_mini_ml, load_json_file, save_json_file
+from src.mainglobal import publish_item
 
 # ═════════════════════════════════════════════════════════
 # CONFIGURACIÓN
 # ═════════════════════════════════════════════════════════
 
-ASINS_FILE = "asins.txt"
-AMAZON_JSON_DIR = Path("asins_json")
-MINI_ML_DIR = Path("logs/publish_ready")
+ASINS_FILE = "resources/asins.txt"
+AMAZON_JSON_DIR = Path("storage/asins_json")
+MINI_ML_DIR = Path("storage/logs/publish_ready")
 OUTPUT_JSON_DIR = Path("outputs/json")
 
 # Crear directorios necesarios
@@ -315,7 +315,7 @@ def main():
         )
 
         # Guardar reporte
-        report_path = Path("logs/pipeline_report.json")
+        report_path = Path("storage/logs/pipeline_report.json")
         with open(report_path, "w") as f:
             json.dump(results, f, indent=2)
         print(f"📄 Reporte guardado en: {report_path}")

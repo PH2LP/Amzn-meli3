@@ -18,14 +18,14 @@ build/
 
 # Logs
 *.log
-logs/*.log
-logs/pipeline_report.json
-logs/verification_report.json
+storage/logs/*.log
+storage/logs/pipeline_report.json
+storage/logs/verification_report.json
 
 # Caches
-logs/ai_title_cache.json
-logs/ai_desc_cache.json
-logs/category_cache.json
+storage/logs/ai_title_cache.json
+storage/logs/ai_desc_cache.json
+storage/logs/category_cache.json
 
 # IDE
 .vscode/
@@ -45,12 +45,16 @@ Thumbs.db
 *.xlsx
 
 # Data files (large, regenerable)
+resources/data/cbt_embeddings.npy
+resources/data/cbt_categories.json
 data/cbt_embeddings.npy
 data/cbt_categories.json
 
 # Directories
 outputs/
 inputs/amazon_json/
+storage/asins_json/
+storage/logs/
 
 # Keep important files
 !README.md
