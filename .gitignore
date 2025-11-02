@@ -1,13 +1,58 @@
-venv/
+# Environment variables
 .env
+.env.local
+.env.*.local
+
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Logs
 *.log
-venv/
-.env
-__pycache__/
-outputs/
-inputs/amazon_json/
+logs/*.log
+logs/pipeline_report.json
+logs/verification_report.json
+
+# Caches
+logs/ai_title_cache.json
+logs/ai_desc_cache.json
+logs/category_cache.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.orig
 *.xlsx
-*.log
+
+# Data files (large, regenerable)
 data/cbt_embeddings.npy
 data/cbt_categories.json
+
+# Directories
+outputs/
+inputs/amazon_json/
+
+# Keep important files
+!README.md
+!REPORTE_FINAL.md
+!.gitignore
