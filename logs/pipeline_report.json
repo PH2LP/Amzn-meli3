@@ -1,0 +1,52 @@
+{
+  "downloaded": [
+    "B092RCLKHN",
+    "B0BGQLZ921",
+    "B0DRW69H11",
+    "B0CYM126TT",
+    "B0DRW8G3WK",
+    "B0BXSLRQH7",
+    "B0D3H3NKBN",
+    "B0DCYZJBYD",
+    "B0CHLBDJYP",
+    "B0CJQG4PMF",
+    "B0CLC6NBBX",
+    "B0D1Z99167",
+    "B081SRSNWW",
+    "B0BRNY9HZB"
+  ],
+  "transformed": [
+    "B092RCLKHN",
+    "B0BGQLZ921",
+    "B0DRW69H11",
+    "B0CYM126TT",
+    "B0DRW8G3WK",
+    "B0BXSLRQH7",
+    "B0D3H3NKBN",
+    "B0DCYZJBYD",
+    "B0CHLBDJYP",
+    "B0CJQG4PMF",
+    "B0CLC6NBBX",
+    "B0D1Z99167",
+    "B081SRSNWW",
+    "B0BRNY9HZB"
+  ],
+  "published": [
+    "B092RCLKHN",
+    "B0BGQLZ921",
+    "B0CYM126TT",
+    "B0DRW8G3WK",
+    "B0BXSLRQH7",
+    "B0D3H3NKBN",
+    "B0DCYZJBYD",
+    "B0CHLBDJYP",
+    "B0CJQG4PMF",
+    "B0D1Z99167",
+    "B081SRSNWW",
+    "B0BRNY9HZB"
+  ],
+  "failed": [
+    "B0DRW69H11",
+    "B0CLC6NBBX"
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "asin": "B0CHLBDJYP",
+  "attributes": {
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Coach Leather Moisturizer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Luxurious Leather Care: Treat your leather to some TLC. Coach Leather Moisturizer extends the natural life & beauty of quality tanned leathers while preserving their unique character. Regular use will help preserve the leather's suppleness and color",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Preserve the Beauty: Protect your investment. To preserve the beauty of your Coach leather, we recommend regular cleaning and conditioning every three months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Where to Use It: Coach Leather Moisturizer may be used on all Coach Leathers except buffalo, calfskin, suede or haircalf leathers. Test in an inconspicuous spot and let dry for at least one hour to ensure no negative reaction before proceeding",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "How to Use It: Apply a small amount of Coach Leather Moisturizer to a clean, soft cloth. Rub onto the leather using circular strokes and buff the leather to produce a natural luster. Wipe off residue",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "This is COACH: Having the courage to be real since 1941. COACH is the Original American House of Leather - with a legacy of craft and a community that champions the courage to live authentically",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "COACH",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "53100000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "import_designation": [
+      {
+        "language_tag": "en_US",
+        "value": "Made in the USA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "193971638454",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0193971638454",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00193971638454",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "collection": [
+      {
+        "language_tag": "en_US",
+        "value": "5/1/FY20",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "handbag-accessories",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 4.7
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 4.9
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 10.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "One Size",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "224",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "standardized_values": [
+          "Multi"
+        ],
+        "value": "Multi",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.14,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "occasion_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Anniversary, Birthday, Wedding, Bachelorette Party, Women's Day, Prom, New Years, Mother's Day, Bridal Shower",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Coach",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "224",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "department": [
+      {
+        "language_tag": "en_US",
+        "value": "womens",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "unisex-adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Coach Leather Moisturizer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 15.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2023-09-07T23:57:22.097Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Leather",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61JPN1e5V1L.jpg",
+          "height": 2000,
+          "width": 2001
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31ByZ6xiqVL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31ByZ6xiqVL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/61BXFg1k+FL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41OJtTTMY9L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41OJtTTMY9L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/81Pg6AGSogL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/5143CuaNPyL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/5143CuaNPyL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81piNJgRISL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41SNS6QSZhL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41SNS6QSZhL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71mDSrZsfRL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/416z2igSuQL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/416z2igSuQL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "ACCESSORY"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [],
+      "displayGroupRanks": []
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "COACH",
+      "color": "Multi",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Coach Leather Moisturizer",
+      "manufacturer": "Coach",
+      "memorabilia": false,
+      "modelNumber": "224",
+      "packageQuantity": 1,
+      "partNumber": "224",
+      "size": "One Size",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "apparel_display_on_website",
+      "websiteDisplayGroupName": "Apparel"
+    }
+  ]
+}

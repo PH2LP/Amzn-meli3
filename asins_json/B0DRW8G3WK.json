@@ -1,0 +1,522 @@
+{
+  "asin": "B0DRW8G3WK",
+  "attributes": {
+    "has_multiple_battery_powered_components": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Building Elements",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 1.329,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_pieces": [
+      {
+        "value": 709,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Mini Bonsai Trees 10373",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "MINIATURE ZEN GARDEN – Find your center while building the LEGO Botanicals Mini Bonsai Trees (10373) collection for adults 18 years old and up",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "THREE SEASONAL SCENES – Create a ginkgo bonsai tree with yellow leaves, a black pine bonsai tree with green needles and a wisteria bonsai tree with hanging lilac flowers",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "MINDFUL BUILDING RITUAL – Experience the meditative focus of traditional bonsai artistry as you customize each tree using their interchangeable leaves",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "NATURE-INSPIRED DECOR – Accent a shelf or room with home decor that celebrates the beauty of the outdoors",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GIFT FOR MEN AND WOMEN – Makes an ideal present for builders who love arts and crafts projects, 3D puzzles, and the immersive experience of building adult LEGO sets",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "EXPAND YOUR GARDEN – Combine with other LEGO Botanicals sets (sold separately) to create a complete indoor botanical display",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "DIMENSIONS – The wisteria bonsai tree in this 709-piece set measures over 7 in. (19 cm) high, 5.5 in. (14 cm) wide and 4 in. (10 cm) deep",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer_maximum_age": [
+      {
+        "value": 1200.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "subject_character": [
+      {
+        "language_tag": "en_US",
+        "value": "Bonsai",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 10.315
+        },
+        "length": {
+          "unit": "inches",
+          "value": 11.102
+        },
+        "height": {
+          "unit": "inches",
+          "value": 2.323
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "60141000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "cpsia_cautionary_statement": [
+      {
+        "value": "no_warning_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "673419407632",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0673419407632",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "toy-interlocking-building-sets",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 6.096
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 25.908
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 28.194
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "6529395",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "non_lithium_battery_packaging": [
+      {
+        "value": "batteries_packed_with_equipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Multicolor",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "sub_brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Botanicals",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.549,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "educational_objective": [
+      {
+        "language_tag": "en_US",
+        "value": "Concentration",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "safety_warning": [
+      {
+        "language_tag": "en_US",
+        "value": "No Warning Applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "toy_building_block_type": [
+      {
+        "value": "interlocking_toy_building_block",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "theme": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "6529395",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Since 1958, LEGO bricks have met the highest industry standards, so they are consistent, compatible and connect and come apart easily every time – and it's still that way today",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer_minimum_age": [
+      {
+        "value": 216.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Botanicals Mini Bonsai Trees Building Set - Artificial Bonsai Tree Building Blocks for Adults, Ages 18+ - DIY Home and Office Decor for Men and Women - Gift for Christmas - 10373",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 64.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2025-08-01T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2025-07-02T04:00:00Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_audience_keyword": [
+      {
+        "language_tag": "en_US",
+        "value": "Unisex Adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_assembly_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/81niL4idn8L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/417qRCa9daL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/417qRCa9daL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81S4JzC+4xL.jpg",
+          "height": 2560,
+          "width": 2560
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51dJQHL9MQL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51dJQHL9MQL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/81Kam+z2sCL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51J7cRpiGzL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51J7cRpiGzL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81QHPmYoSUL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51R0kHznv3L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51R0kHznv3L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71zKAQqpwZL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41m-y71w8BL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41m-y71w8BL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/81WHpMYIdyL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51MBI99ikPL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51MBI99ikPL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71mFsiHe47L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51glgX50gxL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51glgX50gxL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "TOY_BUILDING_BLOCK"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [],
+      "displayGroupRanks": []
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "LEGO",
+      "browseClassification": {
+        "displayName": "Categories",
+        "classificationId": "165795011"
+      },
+      "color": "Multicolor",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "LEGO Botanicals Mini Bonsai Trees Building Set - Artificial Bonsai Tree Building Blocks for Adults, Ages 18+ - DIY Home and Office Decor for Men and Women - Gift for Christmas - 10373",
+      "manufacturer": "LEGO",
+      "memorabilia": false,
+      "modelNumber": "6529395",
+      "packageQuantity": 1,
+      "partNumber": "6529395",
+      "releaseDate": "2025-08-01",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "toy_display_on_website",
+      "websiteDisplayGroupName": "Toy"
+    }
+  ]
+}

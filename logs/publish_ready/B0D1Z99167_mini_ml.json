@@ -1,0 +1,359 @@
+{
+  "asin": "B0D1Z99167",
+  "brand": "Method",
+  "model": "377791",
+  "category_id": "CBT392701",
+  "category_name": "Body Care",
+  "category_similarity": 0.557,
+  "title_ai": "Set de Regalo Method Pure Peace Cuidado Personal 3.4 oz",
+  "description_ai": "Descubre la experiencia de cuidado personal que ofrece el set de Method, modelo 377791. Este práctico paquete incluye tres botellas de 3.4 oz de gel de jabón corporal, gel de champú y acondicionador, ideales para llevar en tus viajes, ya que cumplen con las regulaciones de la TSA. Cada producto está diseñado para limpiar y nutrir tu piel y cabello, brindando una sensación de frescura y bienestar.\n\nAdemás de su funcionalidad, el set de Method se destaca por su compromiso con el medio ambiente. Las botellas, excluyendo la tapa, están fabricadas con un 65% de plástico reciclado, lo que contribuye a la reducción de residuos. Estos productos son libres de parabenos y ftalatos, garantizando una opción más saludable para tu piel. Al elegir Method, no solo cuidas de ti, sino también del planeta.\n\nOtro aspecto a resaltar es que Method es una marca libre de crueldad. Todos sus productos son probados por personas, no en animales, lo que refleja un compromiso ético con el bienestar animal. Este set es perfecto para regalar o para probar una variedad de artículos de cuidado personal de Method, permitiéndote disfrutar de su fragancia Pure Peace, que combina notas de agua de rosa y peonías, evocando una sensación de serenidad y tranquilidad.\n\n📌 **Especificaciones del producto**\n• Marca: Method\n• Modelo: 377791\n• Dimensiones del paquete: 10.0 x 13.3 x 17.7 cm\n• Peso del paquete: 0.415 kg\n• Marca: Method\n• Modelo: 377791\n• Peso: 0.415 kg\n• Dimensiones: 4.0 cm x 13.3 cm x 17.7 cm\n• Cantidad: 1\n• Número de Parte: 377791\n• Rango de Edad: Adulto\n• Tema: Cuidado Personal\n• Cantidad de Items: 3\n• Tipo de Item: Geles de baño y ducha\n• Modelo: 377791\n• Código universal: 843536110368\n• Peso: ounces\n• Género objetivo: unisex\n\n\n🌍 **Información importante para compradores internacionales**\n• Producto completamente nuevo y original.\n• Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.  \n• En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.  \n• Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.  \n• Envío internacional asegurado con número de seguimiento.  \n• Soporte en español e inglés.  \n",
+  "package": {
+    "length_cm": 10.0,
+    "width_cm": 13.3,
+    "height_cm": 17.7,
+    "weight_kg": 0.415
+  },
+  "price": {
+    "base_usd": 14.99,
+    "markup_pct": 35,
+    "final_usd": 20.24
+  },
+  "gtins": [
+    "0843536110368",
+    "10843536110365",
+    "843536110368"
+  ],
+  "images": [
+    {
+      "variant": "MAIN",
+      "url": "https://m.media-amazon.com/images/I/61qXFFr8IdL.jpg",
+      "w": null,
+      "h": null,
+      "order": 0
+    },
+    {
+      "variant": "PT01",
+      "url": "https://m.media-amazon.com/images/I/71UQit+6iSL.jpg",
+      "w": null,
+      "h": null,
+      "order": 1
+    },
+    {
+      "variant": "PT02",
+      "url": "https://m.media-amazon.com/images/I/61FfLE5dSnL.jpg",
+      "w": null,
+      "h": null,
+      "order": 2
+    },
+    {
+      "variant": "PT03",
+      "url": "https://m.media-amazon.com/images/I/61bJ7ZXGBDL.jpg",
+      "w": null,
+      "h": null,
+      "order": 3
+    },
+    {
+      "variant": "PT04",
+      "url": "https://m.media-amazon.com/images/I/61B0hQTkwlL.jpg",
+      "w": null,
+      "h": null,
+      "order": 4
+    },
+    {
+      "variant": "PT05",
+      "url": "https://m.media-amazon.com/images/I/71LmGwqqvTL.jpg",
+      "w": null,
+      "h": null,
+      "order": 5
+    }
+  ],
+  "attributes_mapped": {
+    "BRAND": {
+      "value_name": "Method"
+    },
+    "MODEL": {
+      "value_name": "377791"
+    },
+    "SELLER_SKU": {
+      "value_name": "B0D1Z99167"
+    },
+    "MARCA": {
+      "value_name": "Method"
+    },
+    "MODELO": {
+      "value_name": "377791"
+    },
+    "PESO": {
+      "value_name": "0.415 kg"
+    },
+    "DIMENSIONES": {
+      "value_name": "4.0 cm x 13.3 cm x 17.7 cm"
+    },
+    "CANTIDAD": {
+      "value_name": "1"
+    },
+    "NUMERO_DE_PARTES": {
+      "value_name": "377791"
+    },
+    "RANGO_DE_EDAD": {
+      "value_name": "Adulto"
+    },
+    "TEMA": {
+      "value_name": "Cuidado Personal"
+    },
+    "CANTIDAD_DE_ITEMS": {
+      "value_name": "3"
+    },
+    "TIPO_DE_ITEM": {
+      "value_name": "Geles de baño y ducha"
+    },
+    "GTIN": {
+      "value_name": "843536110368"
+    },
+    "ITEM_WEIGHT": {
+      "value_name": "ounces"
+    },
+    "TARGET_GENDER": {
+      "value_name": "unisex"
+    },
+    "MATERIAL": {
+      "value_name": "Plástico, 65% reciclado"
+    },
+    "COLOR": {
+      "value_name": "Sin Color"
+    },
+    "ESTILO": {
+      "value_name": "Viaje"
+    },
+    "CARACTERISTICAS": {
+      "value_name": "Cruelty Free, Sin parabenos ni ftalatos"
+    },
+    "VOLUMEN_LIQUIDO": {
+      "value_name": "10.2 fl oz"
+    },
+    "FRAGANCIA": {
+      "value_name": "Pure Peace"
+    },
+    "ADVERTENCIA_DE_SEGURIDAD": {
+      "value_name": "Solo para uso externo."
+    },
+    "DIRECCIONES": {
+      "value_name": "1. Mojar el cuerpo o el cabello, 2. Aplicar el producto adecuado, 3. Masajear, 4. Enjuagar bien."
+    },
+    "VIDA_UTIL": {
+      "value_name": "900 días"
+    },
+    "BENEFICIO_DEL_PRODUCTO": {
+      "value_name": "Nutritivo"
+    },
+    "EMPAQUE": {
+      "value_name": "Botellas de 3.4 oz"
+    },
+    "GENERO_OBJETIVO": {
+      "value_name": "Unisex"
+    },
+    "REQUIERE_BATERIAS": {
+      "value_name": "No"
+    },
+    "FECHA_DE_LANZAMIENTO": {
+      "value_name": "2024-07-11"
+    },
+    "AUDIENCIA_OBJETIVO": {
+      "value_name": "Adulto Unisex"
+    },
+    "ITEM_DIMENSIONS": {
+      "value_name": "centimeters"
+    },
+    "PACKAGE_DIMENSIONS": {
+      "value_name": "centimeters"
+    },
+    "MANUFACTURER": {
+      "value_name": "en_US"
+    },
+    "BULLET_1": {
+      "value_name": "Contains (1) 3.4oz TSA-friendly bottle of gel liquid body soap (1) 3.4oz bottle of gel liquid shampoo (1) 3.4oz bottle of gel liquid conditioner"
+    },
+    "BULLET_2": {
+      "value_name": "Bottle (minus cap) made from 65% recycled plastic (PCR). made without parabens or phthalates"
+    }
+  },
+  "main_characteristics": [
+    {
+      "id": "MARCA",
+      "name": "Marca",
+      "value_name": "Method"
+    },
+    {
+      "id": "MODELO",
+      "name": "Modelo",
+      "value_name": "377791"
+    },
+    {
+      "id": "PESO",
+      "name": "Peso",
+      "value_name": "0.415 kg"
+    },
+    {
+      "id": "DIMENSIONES",
+      "name": "Dimensiones",
+      "value_name": "4.0 cm x 13.3 cm x 17.7 cm"
+    },
+    {
+      "id": "CANTIDAD",
+      "name": "Cantidad",
+      "value_name": "1"
+    },
+    {
+      "id": "NUMERO_DE_PARTES",
+      "name": "Número de Parte",
+      "value_name": "377791"
+    },
+    {
+      "id": "RANGO_DE_EDAD",
+      "name": "Rango de Edad",
+      "value_name": "Adulto"
+    },
+    {
+      "id": "TEMA",
+      "name": "Tema",
+      "value_name": "Cuidado Personal"
+    },
+    {
+      "id": "CANTIDAD_DE_ITEMS",
+      "name": "Cantidad de Items",
+      "value_name": "3"
+    },
+    {
+      "id": "TIPO_DE_ITEM",
+      "name": "Tipo de Item",
+      "value_name": "Geles de baño y ducha"
+    },
+    {
+      "id": "BRAND",
+      "name": "Marca",
+      "value_name": "en_US"
+    },
+    {
+      "id": "MODEL",
+      "name": "Modelo",
+      "value_name": "377791"
+    },
+    {
+      "id": "GTIN",
+      "name": "Código universal",
+      "value_name": "843536110368"
+    },
+    {
+      "id": "ITEM_WEIGHT",
+      "name": "Peso",
+      "value_name": "ounces"
+    },
+    {
+      "id": "TARGET_GENDER",
+      "name": "Género objetivo",
+      "value_name": "unisex"
+    }
+  ],
+  "second_characteristics": [
+    {
+      "id": "MATERIAL",
+      "name": "Material",
+      "value_name": "Plástico, 65% reciclado"
+    },
+    {
+      "id": "COLOR",
+      "name": "Color",
+      "value_name": "Sin Color"
+    },
+    {
+      "id": "ESTILO",
+      "name": "Estilo",
+      "value_name": "Viaje"
+    },
+    {
+      "id": "CARACTERISTICAS",
+      "name": "Características",
+      "value_name": "Cruelty Free, Sin parabenos ni ftalatos"
+    },
+    {
+      "id": "VOLUMEN_LIQUIDO",
+      "name": "Volumen Líquido",
+      "value_name": "10.2 fl oz"
+    },
+    {
+      "id": "FRAGANCIA",
+      "name": "Fragancia",
+      "value_name": "Pure Peace"
+    },
+    {
+      "id": "ADVERTENCIA_DE_SEGURIDAD",
+      "name": "Advertencia de Seguridad",
+      "value_name": "Solo para uso externo."
+    },
+    {
+      "id": "DIRECCIONES",
+      "name": "Direcciones",
+      "value_name": "1. Mojar el cuerpo o el cabello, 2. Aplicar el producto adecuado, 3. Masajear, 4. Enjuagar bien."
+    },
+    {
+      "id": "VIDA_UTIL",
+      "name": "Vida Útil",
+      "value_name": "900 días"
+    },
+    {
+      "id": "BENEFICIO_DEL_PRODUCTO",
+      "name": "Beneficio del Producto",
+      "value_name": "Nutritivo"
+    },
+    {
+      "id": "EMPAQUE",
+      "name": "Empaque",
+      "value_name": "Botellas de 3.4 oz"
+    },
+    {
+      "id": "GENERO_OBJETIVO",
+      "name": "Género Objetivo",
+      "value_name": "Unisex"
+    },
+    {
+      "id": "REQUIERE_BATERIAS",
+      "name": "Requiere Baterías",
+      "value_name": "No"
+    },
+    {
+      "id": "FECHA_DE_LANZAMIENTO",
+      "name": "Fecha de Lanzamiento",
+      "value_name": "2024-07-11"
+    },
+    {
+      "id": "AUDIENCIA_OBJETIVO",
+      "name": "Audiencia Objetivo",
+      "value_name": "Adulto Unisex"
+    },
+    {
+      "id": "ITEM_DIMENSIONS",
+      "name": "Dimensiones del producto",
+      "value_name": "centimeters"
+    },
+    {
+      "id": "PACKAGE_DIMENSIONS",
+      "name": "Dimensiones del paquete",
+      "value_name": "centimeters"
+    },
+    {
+      "id": "MANUFACTURER",
+      "name": "Fabricante",
+      "value_name": "en_US"
+    },
+    {
+      "id": "BULLET_1",
+      "name": "Detalle destacado 1",
+      "value_name": "Contains (1) 3.4oz TSA-friendly bottle of gel liquid body soap (1) 3.4oz bottle of gel liquid shampoo (1) 3.4oz bottle of gel liquid conditioner"
+    },
+    {
+      "id": "BULLET_2",
+      "name": "Detalle destacado 2",
+      "value_name": "Bottle (minus cap) made from 65% recycled plastic (PCR). made without parabens or phthalates"
+    }
+  ]
+}

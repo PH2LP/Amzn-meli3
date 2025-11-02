@@ -277,29 +277,56 @@ def first_of(amazon_json, keys):
             # 🔹 Evitar tomar etiquetas de idioma como "en_us"
             if nk in fk and not fk.endswith("language_tag"):
                 val = str(v).strip()
-                # Evitar valores triviales o marcadores de idioma
-                if val.lower() not in {"en_us", "default", "none", "null"}:
-                    return val
+                # Evitar valores triviales, marcadores de idioma y unidades sin valores
+                invalid_values = {
+                    "en_us", "default", "none", "null", "n/a", "na",
+                    "kilograms", "grams", "pounds", "ounces", "kg", "g", "lb", "oz",
+                    "centimeters", "millimeters", "inches", "cm", "mm", "in",
+                    "true", "false", "yes", "no"
+                }
+                if val.lower() not in invalid_values and len(val) > 0:
+                    # También evitar valores que sean solo unidades (números con unidades pegadas)
+                    if not re.match(r'^\d+(\.\d+)?\s*(kg|g|lb|oz|cm|mm|in|kilograms|grams|pounds|ounces|centimeters|millimeters|inches)$', val.lower()):
+                        return val
     return ""
 def extract_gtins(amazon_json)->List[str]:
-    flat = flatten(amazon_json)
+    """
+    Extrae SOLO GTINs reales (UPC/EAN) del JSON de Amazon SP-API.
+    NO extrae classificationId, unspsc_code, ni otros números.
+    """
     out = []
-    # SP-API suele traer GTIN bajo externally_assigned_product_identifier
-    for k,v in flat.items():
+
+    # 1. Buscar en externally_assigned_product_identifier (lugar correcto)
+    flat = flatten(amazon_json)
+    for k, v in flat.items():
         lk = normalize_key(k)
         if "externallyassignedproductidentifier" in lk and lk.endswith("value"):
-            g = re.sub(r"\D","",str(v))
-            if 8 <= len(g) <= 14: out.append(g)
-    if not out:
-        raw = json.dumps(flat)
-        for m in re.findall(r"\b\d{8,14}\b", raw):
-            out.append(m)
-    # normalizar
+            g = re.sub(r"\D", "", str(v))
+            if 12 <= len(g) <= 14:  # Solo GTINs válidos (12-14 dígitos)
+                out.append(g)
+
+    # 2. Buscar en attributes.item_package_upc (Amazon a veces lo pone ahí)
+    attrs = amazon_json.get("attributes", {})
+    for attr_name in ["item_package_upc", "upc", "ean", "gtin"]:
+        if attr_name in attrs:
+            values = attrs[attr_name]
+            if isinstance(values, list):
+                for item in values:
+                    if isinstance(item, dict) and "value" in item:
+                        g = re.sub(r"\D", "", str(item["value"]))
+                        if 12 <= len(g) <= 14:
+                            out.append(g)
+
+    # 3. NO hacer fallback genérico - Si no encontramos GTIN, devolver lista vacía
+    # Esto evita agarrar classificationId, unspsc_code, etc.
+
+    # Normalizar y deduplicar
     clean, seen = [], set()
     for g in out:
-        g2 = g.lstrip("0") or g
-        if g2 not in seen:
-            seen.add(g2); clean.append(g2)
+        if g not in seen and 12 <= len(g) <= 14:
+            seen.add(g)
+            clean.append(g)
+
     return sorted(clean)
 
 def extract_images(amazon_json, max_images=10):
@@ -508,7 +535,10 @@ Datos: {json.dumps(datos, ensure_ascii=False)[:2000]}"""
             if mini_ml.get("main_characteristics"):
                 for ch in mini_ml["main_characteristics"]:
                     if isinstance(ch, dict) and ch.get("name") and ch.get("value_name"):
-                        specs_lines.append(f"• {ch['name']}: {ch['value_name']}")
+                        val = str(ch["value_name"]).strip()
+                        # Filtrar marcadores de idioma y valores inválidos
+                        if val and val.lower() not in {"en_us", "en-us", "default", "null", "none", "n/a", "not specified"}:
+                            specs_lines.append(f"• {ch['name']}: {val}")
 
         if specs_lines:
             texto += "\n\n📌 **Especificaciones del producto**\n" + "\n".join(specs_lines)
@@ -532,27 +562,77 @@ Datos: {json.dumps(datos, ensure_ascii=False)[:2000]}"""
 def ai_characteristics(amazon_json)->Tuple[List[dict], List[dict]]:
     """Extrae main/second characteristics con IA (robusto, JSON-only)."""
     if not client: return [], []
-    prompt = f"""From this Amazon JSON, extract product characteristics in JSON:
+
+    # Extraer primero TODOS los atributos disponibles
+    all_attrs = amazon_json.get("attributes", {})
+    summaries = amazon_json.get("summaries", [{}])[0] if amazon_json.get("summaries") else {}
+
+    prompt = f"""Extract ALL product characteristics from this Amazon product JSON. You MUST be VERY thorough and extract AT LEAST 20-30 characteristics total.
+
+Divide them into TWO groups:
+1. "main" - Most important specs (10-15 items): brand, model, weight, dimensions, quantity, part_number, age_range, theme, etc.
+2. "second" - Additional details (10-15 items): material, color, style, features, battery info, packaging, compatibility, warnings, etc.
+
+Format (STRICT JSON):
 {{
- "main": [{{"id":"BRAND","name":"Brand","value_name":"..."}}, ...],
- "second": [{{"id":"MATERIAL","name":"Material","value_name":"..."}}, ...]
+ "main": [{{"id":"BRAND","name":"Marca","value_name":"Sony"}}, {{"id":"MODEL","name":"Modelo","value_name":"WH-1000XM5"}}, ...],
+ "second": [{{"id":"MATERIAL","name":"Material","value_name":"Plastic, Leather"}}, {{"id":"COLOR","name":"Color","value_name":"Black"}}, ...]
 }}
-Rules:
-- Fill only with evidence from JSON.
-- Use metric if relevant.
-- Min 6 total items.
-Amazon JSON (truncated):
-{json.dumps(amazon_json)[:8000]}"""
+
+CRITICAL RULES:
+- Extract AT LEAST 10 items for "main" and AT LEAST 10 items for "second" (minimum 20 total)
+- Extract ONLY actual values from the JSON data, NEVER use metadata like "en_US", "language_tag", "marketplace_id"
+- For array attributes like {{"color":[{{"value":"Red","language_tag":"en_US"}}]}}, extract ONLY "Red"
+- Use descriptive Spanish names: "Marca", "Modelo", "Peso", "Dimensiones", "Material", "Color", etc.
+- Convert measurements to metric (cm, kg, L, mL)
+- Be EXHAUSTIVE - extract everything: specifications, features, dimensions, materials, compatibility, age ratings, warnings, packaging details, etc.
+- Include data from both "attributes" and "summaries" sections
+
+Available attributes: {list(all_attrs.keys())[:50]}
+Available summaries: {list(summaries.keys())[:30]}
+
+Full JSON (truncated):
+{json.dumps(amazon_json)[:12000]}"""
+
     try:
         r = client.chat.completions.create(
-            model=OPENAI_MODEL, temperature=0.2,
-            messages=[{"role":"system","content":"Return ONLY valid JSON."},
+            model=OPENAI_MODEL, temperature=0.3,
+            messages=[{"role":"system","content":"You are an expert at extracting product specifications. Return ONLY valid JSON with AT LEAST 20 total characteristics. Extract actual values, never metadata."},
                       {"role":"user","content":prompt}],
         )
         m = re.search(r"\{.*\}", (r.choices[0].message.content or "").strip(), re.S)
         data = json.loads(m.group(0)) if m else {}
-        return data.get("main", []) or [], data.get("second", []) or []
-    except:
+
+        # Filtrar valores inválidos
+        def clean_chars(chars):
+            cleaned = []
+            for ch in chars:
+                if isinstance(ch, dict) and ch.get("value_name"):
+                    val = str(ch["value_name"]).strip()
+                    # Eliminar marcadores de idioma y valores inválidos
+                    if val and val.lower() not in {"en_us", "en-us", "default", "null", "none", "n/a", "not specified", "language_tag", "marketplace_id", "atvpdkikx0der"}:
+                        if len(val) > 0 and not val.startswith("marketplaceId"):
+                            cleaned.append(ch)
+            return cleaned
+
+        main = clean_chars(data.get("main", []) or [])
+        second = clean_chars(data.get("second", []) or [])
+
+        # Si aún son muy pocos, agregar fallback básico
+        if len(main) + len(second) < 10:
+            # Extraer atributos básicos directamente del JSON
+            if summaries.get("brand"):
+                main.append({"id": "BRAND", "name": "Marca", "value_name": str(summaries["brand"])})
+            if summaries.get("modelNumber"):
+                main.append({"id": "MODEL", "name": "Modelo", "value_name": str(summaries["modelNumber"])})
+            if summaries.get("color"):
+                second.append({"id": "COLOR", "name": "Color", "value_name": str(summaries["color"])})
+            if summaries.get("manufacturer"):
+                second.append({"id": "MANUFACTURER", "name": "Fabricante", "value_name": str(summaries["manufacturer"])})
+
+        return main, second
+    except Exception as e:
+        print(f"⚠️ Error en ai_characteristics: {e}")
         return [], []
 
 # ---------- 8) Categoría (embeddings locales) ----------
@@ -602,19 +682,37 @@ def detect_category(amazon_json)->Tuple[str,str,float]:
 
 # ---------- 9) Schema ML ----------
 def get_category_schema(category_id):
+    """
+    Descarga schema de categoría desde ML API con reintentos.
+    Incluye todos los campos necesarios del schema.
+    """
     try:
-        r = requests.get(f"{API}/categories/{category_id}/attributes", headers=HEADERS, timeout=15)
+        # Primero intenta sin token (público)
+        r = requests.get(f"{API}/categories/{category_id}/attributes", timeout=15)
+        if r.status_code == 401 and HEADERS:
+            # Si falla, intenta con autenticación
+            r = requests.get(f"{API}/categories/{category_id}/attributes", headers=HEADERS, timeout=15)
+
         r.raise_for_status()
+        schema_raw = r.json()
+
         schema = {}
-        for a in r.json():
+        for a in schema_raw:
             if a.get("id"):
                 schema[a["id"]] = {
                     "value_type": a.get("value_type"),
-                    "values": {v["name"].lower(): v["id"] for v in a.get("values",[]) if v.get("id")},
-                    "allowed_units": [u["id"] for u in a.get("allowed_units",[])] if a.get("allowed_units") else []
+                    "values": {v["name"].lower(): v["id"] for v in a.get("values",[]) if v.get("id") and v.get("name")},
+                    "allowed_units": [u["id"] for u in a.get("allowed_units",[])] if a.get("allowed_units") else [],
+                    "tags": a.get("tags", {}),
+                    "hierarchy": a.get("hierarchy", ""),
+                    "relevance": a.get("relevance", 0)
                 }
-        print(f"📘 Schema {category_id}: {len(schema)} atributos.")
+
+        print(f"📘 Schema {category_id}: {len(schema)} atributos descargados.")
         return schema
+    except requests.exceptions.HTTPError as e:
+        print(f"⚠️ Error HTTP obteniendo schema {category_id}: {e.response.status_code}")
+        return {}
     except Exception as e:
         print(f"⚠️ No se pudo obtener schema {category_id}: {e}")
         return {}
@@ -687,15 +785,16 @@ def build_mini_ml(amazon_json: dict) -> dict:
         _save_cache(TITLE_CACHE_PATH, title_cache)
 
     # ==== DESCRIPCIÓN ====
+    # Preparar datos para descripción (siempre, no solo si falta en caché)
+    datos_desc = {
+        "brand": brand,
+        "model": model,
+        "bullets": bullets[:8]
+    }
+
     if asin in desc_cache:
         desc_es = desc_cache[asin]
     else:
-        datos_desc = {
-            "brand": brand,
-            "model": model,
-            "bullets": bullets[:8]
-        }
-
         try:
             desc_es = ai_desc_es(datos_desc)
         except:
@@ -708,17 +807,80 @@ def build_mini_ml(amazon_json: dict) -> dict:
         desc_cache[asin] = desc_es
         _save_cache(DESC_CACHE_PATH, desc_cache)
 
-    # dimensiones
+    # dimensiones del PAQUETE (shipping dimensions, NO product dimensions)
     flat = flatten(amazon_json)
     L = get_pkg_dim(flat, "length")
     W = get_pkg_dim(flat, "width")
     H = get_pkg_dim(flat, "height")
     KG= get_pkg_dim(flat, "weight")
+
+    # Extraer valores con fallback a item_dimensions si package no existe
+    length_cm = (L or {}).get("number") if L else None
+    width_cm = (W or {}).get("number") if W else None
+    height_cm = (H or {}).get("number") if H else None
+    weight_kg = (KG or {}).get("number") if KG else None
+
+    # Si NO hay dimensiones de paquete, intentar estimar desde item_dimensions
+    if length_cm is None or width_cm is None or height_cm is None:
+        item_dims = amazon_json.get("attributes", {}).get("item_dimensions", [{}])[0]
+        if isinstance(item_dims, dict):
+            if length_cm is None and "length" in item_dims:
+                val = _read_number(item_dims["length"].get("value"))
+                unit = item_dims["length"].get("unit", "inches")
+                if val: length_cm = _to_cm(val, unit)
+            if width_cm is None and "width" in item_dims:
+                val = _read_number(item_dims["width"].get("value"))
+                unit = item_dims["width"].get("unit", "inches")
+                if val: width_cm = _to_cm(val, unit)
+            if height_cm is None and "height" in item_dims:
+                val = _read_number(item_dims["height"].get("value"))
+                unit = item_dims["height"].get("unit", "inches")
+                if val: height_cm = _to_cm(val, unit)
+
+    # Si aún no hay peso, buscar item_weight
+    if weight_kg is None:
+        item_weight = amazon_json.get("attributes", {}).get("item_weight", [{}])[0]
+        if isinstance(item_weight, dict) and "value" in item_weight:
+            val = _read_number(item_weight.get("value"))
+            unit = item_weight.get("unit", "pounds")
+            if val: weight_kg = _to_kg(val, unit)
+
+    # Aplicar mínimos: ML rechaza dimensiones < 5cm o peso < 0.1kg
+    # Si estimamos desde item_dimensions, añadir margen de +20% para empaque
+    if length_cm and not L:  # Si viene de item_dimensions (no de package)
+        length_cm = round(length_cm * 1.2, 2)  # +20% margen de empaque
+    if width_cm and not W:
+        width_cm = round(width_cm * 1.2, 2)
+    if height_cm and not H:
+        height_cm = round(height_cm * 1.2, 2)
+    if weight_kg and not KG:
+        weight_kg = round(weight_kg * 1.15, 3)  # +15% margen de empaque
+
+    # Si NO hay dimensiones, estimación inteligente basada en peso/precio
+    if not length_cm or not width_cm or not height_cm:
+        # Estimación basada en peso y tipo de producto
+        est_weight = weight_kg or 0.2
+        # Pequeño (<0.2kg): 15x12x8 cm
+        # Mediano (0.2-2kg): 25x20x15 cm
+        # Grande (>2kg): 40x35x25 cm
+        if est_weight < 0.2:
+            length_cm = length_cm or 15.0
+            width_cm = width_cm or 12.0
+            height_cm = height_cm or 8.0
+        elif est_weight < 2.0:
+            length_cm = length_cm or 25.0
+            width_cm = width_cm or 20.0
+            height_cm = height_cm or 15.0
+        else:
+            length_cm = length_cm or 40.0
+            width_cm = width_cm or 35.0
+            height_cm = height_cm or 25.0
+
     pkg = {
-        "length_cm": (L or {}).get("number", 1.0),
-        "width_cm":  (W or {}).get("number", 1.0),
-        "height_cm": (H or {}).get("number", 1.0),
-        "weight_kg": (KG or {}).get("number", 0.5)
+        "length_cm": max(length_cm, 10.0),
+        "width_cm": max(width_cm, 10.0),
+        "height_cm": max(height_cm, 10.0),
+        "weight_kg": max(weight_kg or 0.15, 0.1)
     }
 
     # precio (mini)

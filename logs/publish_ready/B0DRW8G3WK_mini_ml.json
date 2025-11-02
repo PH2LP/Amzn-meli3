@@ -1,0 +1,406 @@
+{
+  "asin": "B0DRW8G3WK",
+  "brand": "LEGO",
+  "model": "Mini Bonsai Trees 10373",
+  "category_id": "CBT116629",
+  "category_name": "Tree Ornaments",
+  "category_similarity": 0.475,
+  "title_ai": "LEGO Mini Bonsai Trees 10373 - Set de Construcción Decorativ",
+  "description_ai": "Descubre la colección de Mini Bonsai Trees de LEGO, diseñada especialmente para adultos a partir de 18 años. Este set te ofrece la oportunidad de encontrar tu centro mientras construyes un jardín zen en miniatura. Con tres escenas estacionales, podrás crear un bonsái de ginkgo con hojas amarillas, un bonsái de pino negro con agujas verdes y un bonsái de glicinia con flores lilas colgantes, lo que te permitirá disfrutar de la belleza de la naturaleza en la comodidad de tu hogar.\n\nLa experiencia de construcción es un ritual de atención plena que te conecta con la tradición del arte del bonsái. Cada árbol es personalizable gracias a sus hojas intercambiables, lo que te permite dar rienda suelta a tu creatividad y diseñar un espacio que refleje tu estilo personal. Este enfoque meditativo no solo es relajante, sino que también te brinda una satisfacción única al ver cómo tu obra cobra vida.\n\nAdemás de ser una excelente opción para tu propio hogar, el set Mini Bonsai Trees es un regalo ideal para hombres y mujeres que disfrutan de proyectos de arte y manualidades, así como de rompecabezas en 3D. Su diseño elegante y natural se adapta perfectamente a cualquier decoración, convirtiéndolo en un acento atractivo para estanterías o habitaciones.\n\nCon 709 piezas, el bonsái de glicinia de este set mide más de 19 cm de altura, 14 cm de ancho y 10 cm de profundidad. También puedes expandir tu jardín combinándolo con otros sets de LEGO Botanicals, creando así una exhibición botánica completa en interiores. Este set no solo es un proyecto de construcción, sino una forma de traer la serenidad de la naturaleza a tu vida diaria.\n\n📌 **Especificaciones del producto**\n• Marca: LEGO\n• Modelo: Mini Bonsai Trees 10373\n• Dimensiones del paquete: 10.0 x 25.91 x 28.19 cm\n• Peso del paquete: 0.549 kg\n• Marca: LEGO\n• Modelo: Mini Bonsai Trees 10373\n• Peso: 0.549 kg\n• Dimensiones: 10.315 x 11.102 x 2.323 pulgadas\n• Cantidad: 1\n• Número de Piezas: 709\n• Número de Items: 1\n• Número de Parte: 6529395\n• Rango de Edad: Adulto\n• Tema: LEGO\n• Edad Máxima del Fabricante: 1200 meses\n• Edad Mínima del Fabricante: 18 meses\n• Cantidad de Paquete: 1\n• Nombre del Item: LEGO Botanicals Mini Bonsai Trees Building Set\n• Código universal: 673419407632\n• Número de piezas: 709\n• Peso: pounds\n• Género objetivo: unisex\n\n\n🌍 **Información importante para compradores internacionales**\n• Producto completamente nuevo y original.\n• Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.  \n• En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.  \n• Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.  \n• Envío internacional asegurado con número de seguimiento.  \n• Soporte en español e inglés.  \n",
+  "package": {
+    "length_cm": 10.0,
+    "width_cm": 25.91,
+    "height_cm": 28.19,
+    "weight_kg": 0.549
+  },
+  "price": {
+    "base_usd": 64.99,
+    "markup_pct": 35,
+    "final_usd": 87.74
+  },
+  "gtins": [
+    "0673419407632",
+    "673419407632"
+  ],
+  "images": [
+    {
+      "variant": "MAIN",
+      "url": "https://m.media-amazon.com/images/I/81niL4idn8L.jpg",
+      "w": null,
+      "h": null,
+      "order": 0
+    },
+    {
+      "variant": "PT01",
+      "url": "https://m.media-amazon.com/images/I/81S4JzC+4xL.jpg",
+      "w": null,
+      "h": null,
+      "order": 1
+    },
+    {
+      "variant": "PT02",
+      "url": "https://m.media-amazon.com/images/I/81Kam+z2sCL.jpg",
+      "w": null,
+      "h": null,
+      "order": 2
+    },
+    {
+      "variant": "PT03",
+      "url": "https://m.media-amazon.com/images/I/81QHPmYoSUL.jpg",
+      "w": null,
+      "h": null,
+      "order": 3
+    },
+    {
+      "variant": "PT04",
+      "url": "https://m.media-amazon.com/images/I/71zKAQqpwZL.jpg",
+      "w": null,
+      "h": null,
+      "order": 4
+    },
+    {
+      "variant": "PT05",
+      "url": "https://m.media-amazon.com/images/I/81WHpMYIdyL.jpg",
+      "w": null,
+      "h": null,
+      "order": 5
+    },
+    {
+      "variant": "PT06",
+      "url": "https://m.media-amazon.com/images/I/71mFsiHe47L.jpg",
+      "w": null,
+      "h": null,
+      "order": 6
+    }
+  ],
+  "attributes_mapped": {
+    "BRAND": {
+      "value_name": "LEGO"
+    },
+    "MODEL": {
+      "value_name": "Mini Bonsai Trees 10373"
+    },
+    "COLOR": {
+      "value_name": "en_US"
+    },
+    "MATERIAL": {
+      "value_name": "en_US"
+    },
+    "SELLER_SKU": {
+      "value_name": "B0DRW8G3WK"
+    },
+    "PESO": {
+      "value_name": "0.549 kg"
+    },
+    "DIMENSIONES": {
+      "value_name": "10.315 x 11.102 x 2.323 pulgadas"
+    },
+    "CANTIDAD": {
+      "value_name": "1"
+    },
+    "NUMERO_DE_PIEZAS": {
+      "value_name": "709"
+    },
+    "NUMERO_DE_ITEMS": {
+      "value_name": "1"
+    },
+    "PART_NUMBER": {
+      "value_name": "6529395"
+    },
+    "RANGO_DE_EDAD": {
+      "value_name": "Adulto"
+    },
+    "TEMA": {
+      "value_name": "LEGO"
+    },
+    "EDAD_MAXIMA_DEL_FABRICANTE": {
+      "value_name": "1200 meses"
+    },
+    "EDAD_MINIMA_DEL_FABRICANTE": {
+      "value_name": "18 meses"
+    },
+    "CANTIDAD_DE_PAQUETE": {
+      "value_name": "1"
+    },
+    "NOMBRE_DEL_ITEM": {
+      "value_name": "LEGO Botanicals Mini Bonsai Trees Building Set"
+    },
+    "GTIN": {
+      "value_name": "673419407632"
+    },
+    "NUMBER_OF_PIECES": {
+      "value_name": "709"
+    },
+    "THEME": {
+      "value_name": "en_US"
+    },
+    "AGE_RANGE": {
+      "value_name": "en_US"
+    },
+    "ITEM_WEIGHT": {
+      "value_name": "pounds"
+    },
+    "TARGET_GENDER": {
+      "value_name": "unisex"
+    },
+    "ESTILO": {
+      "value_name": "Decoración de interiores"
+    },
+    "CARACTERISTICAS": {
+      "value_name": "Construcción de bonsáis, decoración inspirada en la naturaleza"
+    },
+    "ADVERTENCIA_DE_SEGURIDAD": {
+      "value_name": "No Warning Applicable"
+    },
+    "OBJETIVO_EDUCATIVO": {
+      "value_name": "Concentración"
+    },
+    "INCLUYE_BATERIAS": {
+      "value_name": "No"
+    },
+    "REQUIERE_ASAMBLEA": {
+      "value_name": "No"
+    },
+    "PESO_DEL_PAQUETE": {
+      "value_name": "0.549 kg"
+    },
+    "DIMENSIONES_DEL_PAQUETE": {
+      "value_name": "6.096 x 25.908 x 28.194 cm"
+    },
+    "FECHA_DE_LANZAMIENTO": {
+      "value_name": "2025-08-01"
+    },
+    "FECHA_DE_SALIDA": {
+      "value_name": "2025-07-02"
+    },
+    "TIPO_DE_JUGUETE": {
+      "value_name": "Bloques de construcción interconectables"
+    },
+    "SUB_MARCA": {
+      "value_name": "Botanicals"
+    },
+    "CARACTERISTICA_ESPECIAL": {
+      "value_name": "Desde 1958, los ladrillos LEGO cumplen con los más altos estándares de la industria."
+    },
+    "ITEM_DIMENSIONS": {
+      "value_name": "inches"
+    },
+    "PACKAGE_DIMENSIONS": {
+      "value_name": "centimeters"
+    },
+    "MANUFACTURER": {
+      "value_name": "1200.0"
+    },
+    "SUB_BRAND": {
+      "value_name": "en_US"
+    },
+    "BULLET_1": {
+      "value_name": "MINIATURE ZEN GARDEN – Find your center while building the LEGO Botanicals Mini Bonsai Trees (10373) collection for adults 18 years old and up"
+    }
+  },
+  "main_characteristics": [
+    {
+      "id": "BRAND",
+      "name": "Marca",
+      "value_name": "LEGO"
+    },
+    {
+      "id": "MODEL",
+      "name": "Modelo",
+      "value_name": "Mini Bonsai Trees 10373"
+    },
+    {
+      "id": "PESO",
+      "name": "Peso",
+      "value_name": "0.549 kg"
+    },
+    {
+      "id": "DIMENSIONES",
+      "name": "Dimensiones",
+      "value_name": "10.315 x 11.102 x 2.323 pulgadas"
+    },
+    {
+      "id": "CANTIDAD",
+      "name": "Cantidad",
+      "value_name": "1"
+    },
+    {
+      "id": "NUMERO_DE_PIEZAS",
+      "name": "Número de Piezas",
+      "value_name": "709"
+    },
+    {
+      "id": "NUMERO_DE_ITEMS",
+      "name": "Número de Items",
+      "value_name": "1"
+    },
+    {
+      "id": "PART_NUMBER",
+      "name": "Número de Parte",
+      "value_name": "6529395"
+    },
+    {
+      "id": "RANGO_DE_EDAD",
+      "name": "Rango de Edad",
+      "value_name": "Adulto"
+    },
+    {
+      "id": "TEMA",
+      "name": "Tema",
+      "value_name": "LEGO"
+    },
+    {
+      "id": "EDAD_MAXIMA_DEL_FABRICANTE",
+      "name": "Edad Máxima del Fabricante",
+      "value_name": "1200 meses"
+    },
+    {
+      "id": "EDAD_MINIMA_DEL_FABRICANTE",
+      "name": "Edad Mínima del Fabricante",
+      "value_name": "18 meses"
+    },
+    {
+      "id": "CANTIDAD_DE_PAQUETE",
+      "name": "Cantidad de Paquete",
+      "value_name": "1"
+    },
+    {
+      "id": "NOMBRE_DEL_ITEM",
+      "name": "Nombre del Item",
+      "value_name": "LEGO Botanicals Mini Bonsai Trees Building Set"
+    },
+    {
+      "id": "GTIN",
+      "name": "Código universal",
+      "value_name": "673419407632"
+    },
+    {
+      "id": "NUMBER_OF_PIECES",
+      "name": "Número de piezas",
+      "value_name": "709"
+    },
+    {
+      "id": "THEME",
+      "name": "Tema",
+      "value_name": "en_US"
+    },
+    {
+      "id": "AGE_RANGE",
+      "name": "Edad recomendada",
+      "value_name": "en_US"
+    },
+    {
+      "id": "ITEM_WEIGHT",
+      "name": "Peso",
+      "value_name": "pounds"
+    },
+    {
+      "id": "TARGET_GENDER",
+      "name": "Género objetivo",
+      "value_name": "unisex"
+    }
+  ],
+  "second_characteristics": [
+    {
+      "id": "MATERIAL",
+      "name": "Material",
+      "value_name": "Plástico"
+    },
+    {
+      "id": "COLOR",
+      "name": "Color",
+      "value_name": "Multicolor"
+    },
+    {
+      "id": "ESTILO",
+      "name": "Estilo",
+      "value_name": "Decoración de interiores"
+    },
+    {
+      "id": "CARACTERISTICAS",
+      "name": "Características",
+      "value_name": "Construcción de bonsáis, decoración inspirada en la naturaleza"
+    },
+    {
+      "id": "ADVERTENCIA_DE_SEGURIDAD",
+      "name": "Advertencia de Seguridad",
+      "value_name": "No Warning Applicable"
+    },
+    {
+      "id": "OBJETIVO_EDUCATIVO",
+      "name": "Objetivo Educativo",
+      "value_name": "Concentración"
+    },
+    {
+      "id": "INCLUYE_BATERIAS",
+      "name": "Incluye Baterías",
+      "value_name": "No"
+    },
+    {
+      "id": "REQUIERE_ASAMBLEA",
+      "name": "Requiere Asamblea",
+      "value_name": "No"
+    },
+    {
+      "id": "PESO_DEL_PAQUETE",
+      "name": "Peso del Paquete",
+      "value_name": "0.549 kg"
+    },
+    {
+      "id": "DIMENSIONES_DEL_PAQUETE",
+      "name": "Dimensiones del Paquete",
+      "value_name": "6.096 x 25.908 x 28.194 cm"
+    },
+    {
+      "id": "FECHA_DE_LANZAMIENTO",
+      "name": "Fecha de Lanzamiento",
+      "value_name": "2025-08-01"
+    },
+    {
+      "id": "FECHA_DE_SALIDA",
+      "name": "Fecha de Salida",
+      "value_name": "2025-07-02"
+    },
+    {
+      "id": "TIPO_DE_JUGUETE",
+      "name": "Tipo de Juguete",
+      "value_name": "Bloques de construcción interconectables"
+    },
+    {
+      "id": "SUB_MARCA",
+      "name": "Sub Marca",
+      "value_name": "Botanicals"
+    },
+    {
+      "id": "CARACTERISTICA_ESPECIAL",
+      "name": "Característica Especial",
+      "value_name": "Desde 1958, los ladrillos LEGO cumplen con los más altos estándares de la industria."
+    },
+    {
+      "id": "ITEM_DIMENSIONS",
+      "name": "Dimensiones del producto",
+      "value_name": "inches"
+    },
+    {
+      "id": "PACKAGE_DIMENSIONS",
+      "name": "Dimensiones del paquete",
+      "value_name": "centimeters"
+    },
+    {
+      "id": "MANUFACTURER",
+      "name": "Fabricante",
+      "value_name": "1200.0"
+    },
+    {
+      "id": "SUB_BRAND",
+      "name": "Sub-marca",
+      "value_name": "en_US"
+    },
+    {
+      "id": "BULLET_1",
+      "name": "Detalle destacado 1",
+      "value_name": "MINIATURE ZEN GARDEN – Find your center while building the LEGO Botanicals Mini Bonsai Trees (10373) collection for adults 18 years old and up"
+    }
+  ],
+  "force_no_gtin": true
+}

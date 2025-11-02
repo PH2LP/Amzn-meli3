@@ -1,0 +1,364 @@
+{
+  "asin": "B0CJQG4PMF",
+  "attributes": {
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "primary_stone": [
+      {
+        "gem_type": [
+          {
+            "language_tag": "en_US",
+            "value": "Stainless Steel"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "occasion_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Valentine's Day party",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "theme": [
+      {
+        "language_tag": "en_US",
+        "value": "Love",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "department": [
+      {
+        "language_tag": "en_US",
+        "value": "womens",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "LEE&RO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "LEE&RO Heart Earrings Dangle Valentine's Day Earrings Pink Heart Earrings Red Heart Earrings Cute Love Dangling Heart Earrings for Women",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 9.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "stone": [
+      {
+        "shape": [
+          {
+            "language_tag": "en_US",
+            "value": "Heart"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "dangle-earrings",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "finish_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Polished",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2023-09-24T15:12:01.618Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Stainless Steel",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "metal_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Stainless Steel",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "female",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/81jbqkbb+bL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/518Twb2Qh1L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/518Twb2Qh1L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71CuYu8cZwL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51GKmb8Qc1L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51GKmb8Qc1L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71IEKb3+uIL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41A4Xj6MSBL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41A4Xj6MSBL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81Cd5NnWMvL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51mmtXW0F5L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51mmtXW0F5L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/61JMOSYcKsL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41PqfXCbk6L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41PqfXCbk6L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/81jhb9QKyOL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51MIdW3Ji9L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51MIdW3Ji9L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/61D6T0lMpyL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/414Jj4Xkb-L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/414Jj4Xkb-L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/71Cw9Z9VaML.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/410Mx-A5h1L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/410Mx-A5h1L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "EARRING"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "childAsins": [
+            "B0C46YVT3L",
+            "B0C46XRJ8Y",
+            "B0C46WDYH9",
+            "B0C46XD55N",
+            "B0C46X5PFT",
+            "B0C46XGB19",
+            "B0C46WZ6XY",
+            "B0C46X33R3",
+            "B0C473PJLM",
+            "B0C4772C38",
+            "B0C46VQS51",
+            "B0C46WXMKT",
+            "B0C46XBB6D",
+            "B0C46YGLFH",
+            "B0C46XJ3TY",
+            "B0C46W6Y6P",
+            "B0C46VFKF8",
+            "B0C46WH2FY"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "7454922011",
+          "title": "Women's Drop & Dangle Earrings",
+          "link": "https://www.amazon.com/gp/bestsellers/fashion/7454922011",
+          "rank": 1502
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "fashion_display_on_website",
+          "title": "Clothing, Shoes & Jewelry",
+          "link": "https://www.amazon.com/gp/bestsellers/fashion",
+          "rank": 185992
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "LEE&RO",
+      "browseClassification": {
+        "displayName": "Drop & Dangle",
+        "classificationId": "7454922011"
+      },
+      "itemClassification": "VARIATION_PARENT",
+      "itemName": "LEE&RO Heart Earrings Dangle Valentine's Day Earrings Pink Heart Earrings Red Heart Earrings Cute Love Dangling Heart Earrings for Women",
+      "memorabilia": false,
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "jewelry_display_on_website",
+      "websiteDisplayGroupName": "Jewelry"
+    }
+  ]
+}

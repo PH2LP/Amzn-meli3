@@ -1,0 +1,506 @@
+{
+  "asin": "B0BRNY9HZB",
+  "attributes": {
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "10 Rocks, 4 Glow-in-the-Dark Puffy Paints, 6 Standard Paints, Gold & Silver Glitter Glue. Google Eyes, Gem Stickers, Gold & Black Transfer Stickers",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "art_craft_kit_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Rock Painting Kit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_pieces": [
+      {
+        "value": 31,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "painting kits for kids",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Kid",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Unleash & Spark Your Creativity: The ultimate gift for any child who loves art, creativity, and a little bit of magic. With this fun and educational kit, kids can unleash their creativity and create truly unique and eye-catching 'glowing' rock designs.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Includes: 10 natural white river rocks, 4 puffy glow-in-the-dark paints, 6 standard paints, gold & silver glitter glue, 2 paintbrushes (fine tip and wider tip), googly eyes, gem stickers, gold and black transfer stickers, and instruction manual.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Let It Glow: The main attraction is the puffy glow-in-the-dark paints. When the lights go out, these paints will light up and provide beautiful designs. Imagine the look on your child's face as they watch their rock designs come to life in the dark!",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Fun & Easy: Whether you're a beginner or an experienced rock painter, the Glow-in-the-Dark Rock Painting Kit has something for you. The fine-tip paintbrush is great for precise lines, while the wider brush is perfect for larger areas. With the included googly eyes, gem stickers, and transfer stickers, kids can get creative and add their personal touch to their rocks.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "A Fun And Educational Gift For All Ages: It fascinates children as soon as they pull it out of the box and is a perfect STEM project. It's a fun and engaging way for kids to spend their time and unleash their creativity. Great set for individual play or as a group activity. The process is fun, and the final result is immensely satisfying.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 5.0
+        },
+        "length": {
+          "unit": "inches",
+          "value": 7.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "kids crafts",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Dan&Darci",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "60121200",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "seasons": [
+      {
+        "language_tag": "en_US",
+        "value": "All Seasons",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "855831008868",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0855831008868",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "childrens-drawing-kits",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 25,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.764654545454547
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 17.399
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 21.7932
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "Large",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Satisfaction Guarantee",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "DD-071",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Box",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "paint_type": [
+      {
+        "language_tag": "en_US",
+        "value": "glow-in-the-dark, standard",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Gold,Silver,White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.97,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Dan&Darci",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_boxes": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "gifts for kids",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Glow-In-the-Dark",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Dan&Darci Kids Rock Painting Kit - Glow in The Dark - Christmas Gifts Arts & Crafts for Boys and Girls Ages 6-12 - Craft Activities Kits - Creative Art Toys for 6, 7, 8, 9, 10, 11 & 12 Year Old Kid",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 19.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2023-01-04T21:28:17.566Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_audience_keyword": [
+      {
+        "language_tag": "en_US",
+        "value": "Unisex Children",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51Maoil9peL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51Maoil9peL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/812+xR9XGoL.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51YvYLv6N1L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51YvYLv6N1L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81M3wwUz28L.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51XKuLuZ5-L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51XKuLuZ5-L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/81V5WbTourL.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51gZpo4RfmL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51gZpo4RfmL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81clB3nSJgL.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51xwsjUJlQL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51xwsjUJlQL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/81b+B0KidSL.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51llhlZTv9L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51llhlZTv9L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/81KqMzEkfUL.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51iQBoy2-EL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51iQBoy2-EL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/81kEs6dQBJL.jpg",
+          "height": 2250,
+          "width": 2250
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51+VO5FTVjL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51+VO5FTVjL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/815CutQbNnL.jpg",
+          "height": 2250,
+          "width": 2250
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "ART_CRAFT_KIT"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "19431268011",
+          "title": "Kids' Drawing Kits",
+          "link": "https://www.amazon.com/gp/bestsellers/toys-and-games/19431268011",
+          "rank": 1
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "toy_display_on_website",
+          "title": "Toys & Games",
+          "link": "https://www.amazon.com/gp/bestsellers/toys-and-games",
+          "rank": 69
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Dan&Darci",
+      "browseClassification": {
+        "displayName": "Drawing",
+        "classificationId": "19431268011"
+      },
+      "color": "Gold,Silver,White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Dan&Darci Kids Rock Painting Kit - Glow in The Dark - Christmas Gifts Arts & Crafts for Boys and Girls Ages 6-12 - Craft Activities Kits - Creative Art Toys for 6, 7, 8, 9, 10, 11 & 12 Year Old Kid",
+      "manufacturer": "Dan&Darci",
+      "memorabilia": false,
+      "modelNumber": "gifts for kids",
+      "partNumber": "DD-071",
+      "size": "Large",
+      "style": "Box",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "art_and_craft_supply_display_on_website",
+      "websiteDisplayGroupName": "Art and Craft Supply"
+    }
+  ]
+}

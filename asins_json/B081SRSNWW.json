@@ -1,0 +1,666 @@
+{
+  "asin": "B081SRSNWW",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "grams",
+        "value": 40.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "What’s in it: The ampoule is infused with a blend of Hyaluronic Acid which attracts moisture into skin to help improve moisture retention and prevent water loss.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Each mask is developed to target various skin concerns. The one time dose is premeasured to deliver an exact amount for best results.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Clinical results after 1 use: Reduced skin’s temperature by 11°F.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "*Clinical testing on 20 women aged 20-60 using the product one time.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "scent": [
+      {
+        "language_tag": "en_US",
+        "value": "Unscented",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "short_product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "A two-step face mask inspired by Cryotherapy that moisturizes with Hyaluronic Acid and cools skin. It includes a highly concentrated ampoule with Hyaluronic Acid and a soft, flexible, skin-cooling mask.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "centimeters",
+          "value": 16.5
+        },
+        "length": {
+          "unit": "centimeters",
+          "value": 18.5
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 0.03
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Dr.Jart+",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "53131600",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "889810253826",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "8809642714533",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0889810253826",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00889810253826",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "08809642714533",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_form": [
+      {
+        "language_tag": "en_US",
+        "value": "Sheet",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "safety_data_sheet_url": [
+      {
+        "language_tag": "en_US",
+        "value": "https://msds.suppliernet.elcompanies.com/sds_management/sds?product=H5A800V01U",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 1.2
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 16.5
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 18.6
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Anti-Wrinkle",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Hydrating",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Moisturizing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Puffiness",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "8213018003501",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Moisturizing Mask",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "female",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Dr.Jart+",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "safety_warning": [
+      {
+        "language_tag": "en_US",
+        "value": "No Warning Applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ingredients": [
+      {
+        "language_tag": "en_US",
+        "value": "STEP 01: Hyaluronic Acid Ampoule Pack Water/Eau, Dipropylene Glycol, Glycerin, Caprylic/Capric Triglyceride, Niacinamide, 1,2-Hexanediol, Butylene Glycol, PEG-240/HDI Copolymer Bis-Decyltetradeceth-20 Ether, Glyceryl Stearate, PEG-100 Stearate, Sorbitan Sesquioleate, Glycereth-26, Dimethicone, Cetearyl Alcohol, Trehalose, Mangifera Indica (Mango) Seed Butter, Macadamia Ternifolia Seed Oil, Sodium Hyaluronate, Glyceryl Acrylate/Acrylic Acid Copolymer, Ethylhexylglycerin, Disodium EDTA, Betaine, Allantoin, Melia Azadirachta Leaf Extract, Melia Azadirachta Flower Extract, Coccinia Indica Fruit Extract, Tocopherol, Potassium Laurate, Solanum Melongena (Eggplant) Fruit Extract, Aloe Barbadensis Flower Extract, Simmondsia Chinensis (Jojoba) Seed Oil, Ocimum Sanctum Leaf Extract, Curcuma Longa (Turmeric) Root Extract, Corallina Of?cinalis Extract, Undaria Pinnati?da Extract, Musa Sapientum (Banana) Fruit Extract, Cynara Scolymus (Artichoke) Leaf Extract, Brassica Oleracea Capitata (Cabbage) Leaf Extract, Asparagus Of?cinalis Extract, Allium Cepa (Onion) Bulb Extract STEP 02: Cryo Rubber Moisturizing Mask Water/Eau, Methylpropanediol, Chondrus Crispus Extract, Glycerin, Xanthan Gum, Ceratonia Siliqua (Carob) Gum, Potassium Chloride, Dipropylene Glycol, Hydroxya- cetophenone, Sucrose, Panthenol, Polyglyceryl-10 Laurate, Algin, Titanium Dioxide/CI 77891, Caprylyl Glycol, Allantoin, Calcium Chloride, Melia Azadirachta Leaf Extract, Melia Azadirachta Flower Extract, Dipotassium Glycyrrhizate, Butylene Glycol, Ethylhexylglycerin, Coccinia Indica Fruit Extract, Disodium EDTA, Sodium Citrate, Citric Acid, Solanum Melongena (Eggplant) Fruit Extract, Aloe Barbadensis Flower Extract, Xylitylglucoside, Simmondsia Chinensis (Jojoba) Seed Oil, Anhydroxylitol, Ocimum Sanctum Leaf Extract, Curcuma Longa (Turmeric) Root Extract, Corallina Of?cinalis Extract, Xylitol, Laminaria Japonica Extract*, Hydrogen Dimethicone, Glucose, Kaolin, Diatomaceous Earth/Terre de diatomees. Please be aware that ingredient lists may change or vary from time to time. Please refer to the ingredient list on the product package you receive for the most up to date list of ingredients.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "H5A8010000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gpsr_safety_attestation": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Clinical results after 1 use: Reduced skin’s temperature by 11°F.* *Clinical testing on 20 women aged 20-60 using the product one time.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Dr.Jart+ Cryo Rubber Korean Face Mask with Moisturizing Hyaluronic Acid | Korean Skin Care | Travel Size, 1 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 16.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2019-11-11T08:00:00.000Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Ampoule with Hyaluronic Acid, Skin-Cooling Mask",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "active_ingredients": [
+      {
+        "language_tag": "en_US",
+        "value": "Hyaluronic Acid",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "hyaluronic_acid",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_liquid_double_sealed": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_expiration_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Shelf Life",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "facial-treatment-masks",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "liquid_volume": [
+      {
+        "unit": "milliliters",
+        "value": 44.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "directions": [
+      {
+        "language_tag": "en_US",
+        "value": "Open the ampoule, and smooth the serum over skin, gently apply mask. Wear the face mask on skin for 30 to 40 minutes. Sit so mask doesn’t slip off.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fc_shelf_life": [
+      {
+        "unit": "days",
+        "value": 900.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "specific_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Open ampoule and smooth serum over skin. Gently apply face rubber mask. Sit and leave on for 30-40 minutes.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Blue",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "configuration": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.09,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_volume": [
+      {
+        "unit": "milliliters",
+        "value": 4.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skin_type": [
+      {
+        "language_tag": "en_US",
+        "value": "All",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "customer_package_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Standard Packaging",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_use_body_part": [
+      {
+        "value": "face",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Hydrating",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Moisturizing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Cooling",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Cooling, Flexible",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lifestyle": [
+      {
+        "language_tag": "en_US",
+        "value": "Premium Beauty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_audience_keyword": [
+      {
+        "language_tag": "en_US",
+        "value": "Unisex Adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Women",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Skincare_Face",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Skincare_Face_Masks",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Skincare_Face_Masks_SheetMasks",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/71NoPDT5TuL.jpg",
+          "height": 2560,
+          "width": 2560
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/412MLJmggkL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/412MLJmggkL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71hn3pghrsL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51gvWHoh51L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51gvWHoh51L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/715MzUdY65L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/519CExGkyXL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/519CExGkyXL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81KHn2ikRBL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51wOfExjcbL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51wOfExjcbL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71vQrKn4oQL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51r8EluDhKL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51r8EluDhKL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/61K--qEq5lL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51nBE1xqIwL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51nBE1xqIwL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "SKIN_TREATMENT_MASK"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0FTBK93DH"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "11061121",
+          "title": "Facial Masks",
+          "link": "https://www.amazon.com/gp/bestsellers/beauty/11061121",
+          "rank": 4
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "beauty_display_on_website",
+          "title": "Beauty & Personal Care",
+          "link": "https://www.amazon.com/gp/bestsellers/beauty",
+          "rank": 999
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Dr.Jart+",
+      "browseClassification": {
+        "displayName": "Masks",
+        "classificationId": "11061121"
+      },
+      "color": "Blue",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Dr.Jart+ Cryo Rubber Korean Face Mask with Moisturizing Hyaluronic Acid | Korean Skin Care | Travel Size, 1 Pack",
+      "manufacturer": "Dr.Jart+",
+      "memorabilia": false,
+      "modelNumber": "H5A8010000",
+      "packageQuantity": 1,
+      "partNumber": "8213018003501",
+      "size": "1 Count (Pack of 1)",
+      "style": "Moisturizing Mask",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "prestige_beauty_display_on_website",
+      "websiteDisplayGroupName": "Prestige Beauty"
+    }
+  ]
+}

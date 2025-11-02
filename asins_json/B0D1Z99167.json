@@ -1,0 +1,489 @@
+{
+  "asin": "B0D1Z99167",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "ounces",
+        "value": 3.4,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_liquid_double_sealed": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Contains (1) 3.4oz TSA-friendly bottle of gel liquid body soap (1) 3.4oz bottle of gel liquid shampoo (1) 3.4oz bottle of gel liquid conditioner",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Bottle (minus cap) made from 65% recycled plastic (PCR). made without parabens or phthalates",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Cruelty free. tested by people, not on animals",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Perfect for gifting and sampling a variety of method personal care items",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Pure peace fragrance has notes of rose water and peonies and smells like sweet serenity",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "scent": [
+      {
+        "language_tag": "en_US",
+        "value": "Pure Peace",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Method",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "53131600",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_expiration_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Shelf Life",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_ingredients": [
+      {
+        "language_tag": "en_US",
+        "value": "Pure Essence",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "843536110368",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0843536110368",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "10843536110365",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_form": [
+      {
+        "language_tag": "en_US",
+        "value": "Liquid",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "bath-and-shower-gels",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 3,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 4.0
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 13.3
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 17.7
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "3.4 Fl Oz (Pack of 3)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "liquid_volume": [
+      {
+        "unit": "fluid_ounces",
+        "value": 10.2,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "directions": [
+      {
+        "language_tag": "en_US",
+        "value": "1. Wet your body or hair, 2. Apply the appropriate product (body soap, shampoo, or conditioner), 3. Massage the product into your body or hair, 4. Rinse off thoroughly.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fc_shelf_life": [
+      {
+        "unit": "days",
+        "value": 900.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "377791",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "standardized_values": [
+          "No Color"
+        ],
+        "value": "No Color",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.415,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skin_type": [
+      {
+        "language_tag": "en_US",
+        "value": "All",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "SC Johnson",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "safety_warning": [
+      {
+        "language_tag": "en_US",
+        "value": "For external use only.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "377791",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Cruelty Free",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Nourishing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Method Body Wash and Hair Care Gift Set, Pure Peace, 3.4 oz Travel Size Bottles",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 14.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2024-07-11T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lifestyle": [
+      {
+        "language_tag": "en_US",
+        "value": "Mass Beauty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2024-07-11T08:00:01.000Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_audience_keyword": [
+      {
+        "language_tag": "en_US",
+        "value": "Unisex Adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Fl Oz"
+        },
+        "value": 10.2,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61qXFFr8IdL.jpg",
+          "height": 1863,
+          "width": 2560
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31AhlnASZFL.jpg",
+          "height": 364,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31AhlnASZFL._SL75_.jpg",
+          "height": 55,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71UQit+6iSL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51rGwG6UfQL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51rGwG6UfQL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/61FfLE5dSnL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41ggS9aTtHL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41ggS9aTtHL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/61bJ7ZXGBDL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41rVAg+-V-L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41rVAg+-V-L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/61B0hQTkwlL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41J7FCI5MdL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41J7FCI5MdL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71LmGwqqvTL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/416s52eVNRL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/416s52eVNRL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "SKIN_CARE_AGENT"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "11056291",
+          "title": "Bath & Shower Gels",
+          "link": "https://www.amazon.com/gp/bestsellers/beauty/11056291",
+          "rank": 284
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "beauty_display_on_website",
+          "title": "Beauty & Personal Care",
+          "link": "https://www.amazon.com/gp/bestsellers/beauty",
+          "rank": 12373
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Method",
+      "browseClassification": {
+        "displayName": "Body Washes",
+        "classificationId": "11056291"
+      },
+      "color": "No Color",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Method Body Wash and Hair Care Gift Set, Pure Peace, 3.4 oz Travel Size Bottles",
+      "manufacturer": "SC Johnson",
+      "memorabilia": false,
+      "modelNumber": "377791",
+      "packageQuantity": 1,
+      "partNumber": "377791",
+      "releaseDate": "2024-07-11",
+      "size": "3.4 Fl Oz (Pack of 3)",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "beauty_display_on_website",
+      "websiteDisplayGroupName": "Beauty"
+    }
+  ]
+}

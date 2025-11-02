@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(tee:*)",
+      "Bash(curl:*)",
+      "Bash('https://api.mercadolibre.com/oauth/token' )",
+      "Bash(cat:*)",
+      "Bash(git checkout:*)",
+      "Bash(for file in /Users/felipemelucci/Desktop/revancha/logs/publish_ready/*.json)",
+      "Bash(done)",
+      "Bash(for asin in B0CLC6NBBX B0D1Z99167 B081SRSNWW B0BRNY9HZB)",
+      "Bash(do rm -f logs/publish_ready/$asin_mini_ml.json)",
+      "Bash(for asin in B092RCLKHN B0BGQLZ921 B0DRW69H11 B0CYM126TT B0DRW8G3WK B0BXSLRQH7 B0D3H3NKBN B0DCYZJBYD B0CHLBDJYP B0CJQG4PMF B0CLC6NBBX B0D1Z99167 B081SRSNWW B0BRNY9HZB)",
+      "Bash(do echo \"=== $asin ===\")",
+      "Bash(while read asin)",
+      "Bash(do if grep -q \"✅ Publicado exitosamente:\" /tmp/pipeline_no_synthetic_gtin.log)",
+      "Bash(then echo \"✅ $asin\" else echo \"❌ $asin\" fi done)",
+      "Bash(for cbt in CBT2668550635 CBT2668600315 CBT2668487833 CBT2972597772 CBT2668649979 CBT2668575901 CBT2972610762 CBT2972598040 CBT2668551411)",
+      "Bash(do grep -B20 \"$cbt\" /tmp/pipeline_no_synthetic_gtin.log)",
+      "Bash(asins.txt)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

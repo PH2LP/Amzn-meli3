@@ -1,0 +1,465 @@
+{
+  "asin": "B0CYM126TT",
+  "attributes": {
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Building Elements",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 5.223,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_pieces": [
+      {
+        "value": 2193,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "21351",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "age_range_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Adult",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "MOVIE DIORAMA KIT FOR ADULTS – Build 3 iconic locations from Tim Burton’s The Nightmare Before Christmas to create playful holiday decorations for your home with this collectible LEGO Ideas set",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "8 TIM BURTON'S THE NIGHTMARE BEFORE CHRISTMAS CHARACTERS – Jack Skellington, Sally, Santa Clause, Lock, Shock and Barrel LEGO minifigures, plus Zero the dog and a buildable, 2-faced The Mayor figure",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "RECREATE THE NIGHTMARE BEFORE CHRISTMAS MOVIE SCENES – Connectible models of Spiral Hill and the graveyard, Jack Skellington’s house and the Halloween Town Hall with a fountain outside",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "AUTHENTIC MOVIE DETAILS – Look at the moon behind Spiral Hill, lift the roof off Jack’s house to reveal his formula for Christmas and place Jack on the lectern in the Town Hall ready to give his speech",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "HOLIDAY GIFT IDEA FOR MEN, WOMEN, AND ANY FILM-LOVER – Gift this LEGO diorama set for adults to any Tim Burton’s The Nightmare Before Christmas fan or movie memorabilia collector",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "LEGO FANS' CHOICE – This collectible LEGO set for adults is part of a range of LEGO Ideas sets, each created by a fan designer, voted for by LEGO fans and produced by the LEGO Group",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "DIMENSIONS – The model of Jack’s house in this 2,193-piece model kit measures over 10.5 in. (32 cm) high, 20 in. (51 cm) wide and 10.5 in. (27 cm) deep",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer_maximum_age": [
+      {
+        "value": 1200.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 14.882
+        },
+        "length": {
+          "unit": "inches",
+          "value": 21.85
+        },
+        "height": {
+          "unit": "inches",
+          "value": 3.425
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "60141000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "cpsia_cautionary_statement": [
+      {
+        "value": "no_warning_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "673419394130",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0673419394130",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "toy-interlocking-building-sets",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 9.7
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 37.7
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 55.5
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "6474654",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_gender": [
+      {
+        "value": "unisex",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Multicolor",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "sub_brand": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Ideas",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 2.38,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "safety_warning": [
+      {
+        "language_tag": "en_US",
+        "value": "No",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "theme": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "6474654",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer_minimum_age": [
+      {
+        "value": 216.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "LEGO Disney Tim Burton's The Nightmare Before Christmas Decor - Building Set for Adults for Display, Ages 18+ - Collectible DIY Craft for Fans of Iconic Movie with Minifigures Included - 21351",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 199.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2024-12-01T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2024-12-01T05:00:00Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "target_audience_keyword": [
+      {
+        "language_tag": "en_US",
+        "value": "Unisex Children",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_assembly_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51sDdvP6DpL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51sDdvP6DpL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/81puB2yORhL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51fJUXbxIIL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51fJUXbxIIL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81ccND2CrvL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51hGip-cy7L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51hGip-cy7L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/81BZ5pTY+XL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41rjP6VmILL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41rjP6VmILL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71STpjHbv+L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41xeGsaarlL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41xeGsaarlL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71X7r6puu7L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51NCTTyvYJL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51NCTTyvYJL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/815+pzpEOpL.jpg",
+          "height": 2000,
+          "width": 2000
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "TOY_FIGURE_PLAYSET"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [],
+      "displayGroupRanks": []
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "LEGO",
+      "browseClassification": {
+        "displayName": "Categories",
+        "classificationId": "165795011"
+      },
+      "color": "Multicolor",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "LEGO Disney Tim Burton's The Nightmare Before Christmas Decor - Building Set for Adults for Display, Ages 18+ - Collectible DIY Craft for Fans of Iconic Movie with Minifigures Included - 21351",
+      "manufacturer": "LEGO",
+      "memorabilia": false,
+      "modelNumber": "6474654",
+      "packageQuantity": 1,
+      "partNumber": "6474654",
+      "releaseDate": "2024-12-01",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "toy_display_on_website",
+      "websiteDisplayGroupName": "Toy"
+    }
+  ]
+}

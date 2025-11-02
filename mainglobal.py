@@ -14,12 +14,8 @@ mainglobal.py — v14.2 (IA híbrida + dimensiones de paquete + limpieza total)
 ──────────────────────────────────────────────────────────────────────────────
 """
 from dotenv import load_dotenv
-load_dotenv(override=True)
 import os, sys, json, glob, time, requests, re
 from typing import Tuple, Dict, Any, List
-from dotenv import load_dotenv
-from normalize_ml_attrs import fill_attributes_with_ai
-from category_matcher import match_category
 
 # ============ Inicialización ============
 if sys.prefix == sys.base_prefix:
@@ -28,7 +24,8 @@ if sys.prefix == sys.base_prefix:
         print(f"⚙️ Activando entorno virtual automáticamente desde: {vpy}")
         os.execv(vpy, [vpy] + sys.argv)
 
-load_dotenv()
+# Recargar .env con override para asegurar token actualizado
+load_dotenv(override=True)
 ML_ACCESS_TOKEN = os.getenv("ML_ACCESS_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 INPUT_DIR = "outputs/json"
@@ -103,6 +100,11 @@ def http_post(url, body, extra_headers=None, timeout=60):
     if extra_headers:
         h.update(extra_headers)
     r = requests.post(url, headers=h, json=body, timeout=timeout)
+    # Retry con delay si rate limited
+    if r.status_code == 429:
+        print("⏳ Rate limited, esperando 10s y reintentando...")
+        time.sleep(10)
+        r = requests.post(url, headers=h, json=body, timeout=timeout)
     if not r.ok:
         raise RuntimeError(f"POST {url} → {r.status_code} {r.text}")
     return r.json()
@@ -714,15 +716,38 @@ def publish_item(asin_json):
         mk_pct = price.get("markup_pct", 0.35)
         cid = mini.get("category_id", "CBT1157")
 
+        # ✅ Validar y limpiar GTINs ANTES de construir attributes
+        valid_gtins = []
+        for g in gtins:
+            g_str = str(g).strip()
+            if g_str.isdigit() and 12 <= len(g_str) <= 14:
+                valid_gtins.append(g_str)
+        gtins = valid_gtins
+
+        # ✅ Si fallo previo con GTIN → no enviar GTIN
+        if mini.get("last_error") == "GTIN_REUSED" or mini.get("force_no_gtin"):
+            gtins = []
+
+        # ✅ Si no hay GTIN válido, no agregarlo (ML rechaza GTINs sintéticos)
+        if not gtins:
+            print("⚠️ Sin GTIN válido - algunos países pueden rechazar la publicación")
+
+        # ✅ Si hay más de un GTIN → usar solo el primero
+        if len(gtins) > 1:
+            gtins = [gtins[0]]
+
         print(f"💰 Precio base: ${base_price} + {mk_pct*100:.0f}% → ${net_amount}")
         print(f"📦 {L}×{W}×{H} cm – {KG} kg")
 
         # 🔹 Atributos pre-mapeados
         attributes = []
         for aid, info in mini.get("attributes_mapped", {}).items():
+            # ✅ Si force_no_gtin está activo, saltar GTIN en attributes_mapped
+            if aid == "GTIN" and (mini.get("force_no_gtin") or mini.get("last_error") == "GTIN_REUSED"):
+                continue
             val = info.get("value_name") or ""
             if val:
-                attributes.append({"id": aid, "value_name": val})
+                attributes.append({"id": aid, "value_name": str(val)})
 
         # 🔹 Agregar GTIN si está
         if gtins:
@@ -742,10 +767,13 @@ def publish_item(asin_json):
         for block in (main_chars + second_chars):
             if not isinstance(block, dict):
                 continue
+            # ✅ Si force_no_gtin está activo, saltar GTIN en características
+            if block.get("id") == "GTIN" and (mini.get("force_no_gtin") or mini.get("last_error") == "GTIN_REUSED"):
+                continue
             if block.get("id") and block.get("value_name"):
                 attributes.append({
                     "id": block["id"],
-                    "value_name": block["value_name"]
+                    "value_name": str(block["value_name"])
                 })
 
         # 🔹 Deduplicar IDs
@@ -809,6 +837,18 @@ def publish_item(asin_json):
 
             ml_schema = http_get(f"https://api.mercadolibre.com/categories/{cid}/attributes")
 
+            # ✅ Si force_no_gtin está activo, crear copia de mini_ml sin GTIN para evitar que la IA lo agregue
+            mini_for_ai = mini.copy()
+            if mini.get("force_no_gtin") or mini.get("last_error") == "GTIN_REUSED":
+                # Eliminar GTINs del JSON que se pasa a la IA
+                mini_for_ai.pop("gtins", None)
+                if "attributes_mapped" in mini_for_ai and "GTIN" in mini_for_ai["attributes_mapped"]:
+                    mini_for_ai["attributes_mapped"].pop("GTIN")
+                if "main_characteristics" in mini_for_ai:
+                    mini_for_ai["main_characteristics"] = [c for c in mini_for_ai["main_characteristics"] if c.get("id") != "GTIN"]
+                if "second_characteristics" in mini_for_ai:
+                    mini_for_ai["second_characteristics"] = [c for c in mini_for_ai["second_characteristics"] if c.get("id") != "GTIN"]
+
             prompt = f"""
 Eres un experto en estructura de categorías de Mercado Libre.
 Tienes el siguiente SCHEMA de atributos para la categoría {cid} y un JSON transformado (mini_ml).
@@ -816,7 +856,7 @@ Rellena 'value_name' solo usando la información disponible en el JSON transform
 No inventes valores ni uses datos externos. Si no hay información, déjalo vacío.
 
 JSON transformado (mini_ml):
-{json.dumps(mini, ensure_ascii=False)[:14000]}
+{json.dumps(mini_for_ai, ensure_ascii=False)[:14000]}
 
 Schema de categoría:
 {json.dumps(ml_schema, ensure_ascii=False)[:14000]}
@@ -842,10 +882,89 @@ Devuelve SOLO un array JSON con los atributos rellenados.
             # Limpieza mínima (sin fallback)
             cleaned_attrs = []
             seen_ids = set()
+
+            # Lista de atributos problemáticos que causan errores en ML
+            BLACKLISTED_ATTRS = {
+                "VALUE_ADDED_TAX",  # Invalid en MLA
+                "ITEM_DIMENSIONS",   # No existe en la mayoría de categorías
+                "PACKAGE_DIMENSIONS", # No existe en la mayoría de categorías
+                "ITEM_WEIGHT",       # No existe en la mayoría de categorías
+                "ITEM_PACKAGE_WEIGHT", # No existe en la mayoría de categorías
+                "ITEM_PACKAGE_DIMENSIONS", # No existe en la mayoría de categorías
+                "BULLET_1", "BULLET_2", "BULLET_3",  # No existen
+                "Batteries_Included", "Batteries_Required",  # Formato incorrecto
+                "BATTERIES_REQUIRED",  # Duplicado
+                "AGE_RANGE", "AGE_RANGE_DESCRIPTION",  # No existe en mayoría
+                "TARGET_GENDER",  # No existe en mayoría
+                "SAFETY",  # No existe en mayoría
+                "ASSEMBLY_REQUIRED",  # No existe en mayoría
+                "ITEM_QTY",  # No existe en mayoría
+                "DESCRIPTIVE_TAGS",  # No modificable
+                "DIAL_COLOR", "DIAL_WINDOW_MATERIAL", "WATER_RESISTANCE_LEVEL",  # Específicos de relojes
+                "NUMBER_OF_PIECES",  # No existe en mayoría de categorías
+                "LIQUID_VOLUME",  # No existe en mayoría
+                "ITEM_FORM",  # No existe en mayoría
+                "PRODUCT_BENEFIT",  # No existe en mayoría
+                "SPECIAL_INGREDIENTS",  # No existe en mayoría
+                "ITEM_PACKAGE_QUANTITY",  # No existe en mayoría
+                "IS_FLAMMABLE",  # Requiere valores específicos que no tenemos
+                "FINISH_TYPE",  # Causa duplicados con FINISH
+                "CONTROL_METHOD",  # No existe
+                "HEADPHONES_FORM_FACTOR",  # No existe
+                "HEADPHONES_JACK",  # No existe
+                "RECOMMENDED_USES_FOR_PRODUCT",  # No existe
+                "INCLUDED_COMPONENTS",  # No existe en mayoría
+                "SENT",  # No existe
+                "ITEM_TYPE_KEYWORD",  # No existe
+                "IS_CRUELTY_FREE", "IS_FRAGRANCE_FREE", "WITH_HYALURONIC_ACID",  # Valores booleanos problemáticos
+                "EARPICE_SHAPE", "EARPIECE_SHAPE", "AUDIO_DRIVER_TYPE", "NUMBER_OF_LITHIUM_ION_CELLS",  # Headphones específicos
+                "BATTERY_WEIGHT", "WATER_RESISTANCE_DEPTH", "MAIN_COLOR",  # Problemáticos con unidades/valores
+                "TOY_BUILDING_BLOCK_TYPE",  # No existe
+                "MATERIAL_TYPE_FREE",  # No existe
+                "SALE_FORMAT",  # Requiere UNITS_PER_PACK, mejor omitir ambos
+                "UNITS_PER_PACK",  # Problemático, requiere SALE_FORMAT
+                "UNSPSC_CODE", "IMPORT_DESIGNATION",  # No existen
+                "NUMBER_OF_ITEMS",  # No existe en mayoría
+                "SCENT", "FRAGRANCE",  # Duplicados entre sí, causan conflicto
+                "UNIT_VOLUME",  # Requiere conversión a L/mL, mejor omitir
+                "BULLET_POINT", "IS_ASSEMBLY_REQUIRED", "SAFETY_WARNING",  # No existen
+                "EDUCATIONAL_OBJECTIVE", "LIST_PRICE", "SPECIAL_FEATURE",  # No existen
+                "BATTERY",  # No existe
+                "SPECIAL_FEATURES", "RELEASE_DATE", "PACKAGE_QUANTITY",  # No existen
+                "WEBSITE_DISPLAY_GROUP_NAME", "TRADE_IN_ELIGIBLE", "WEBSITE_DISPLAY_GROUP",  # No existen
+                "MEMORABILIA", "ITEM_NAME", "ITEM_CLASSIFICATION",  # No existen
+                "BROWSE_CLASSIFICATION", "ADULT_PRODUCT", "AUTOGRAPHED",  # No existen
+                "ITEM_TYPE", "BULLET_POINTS",  # No existen
+                "PACKAGING", "LITHIUM_BATTERY_ENERGY_CONTENT",  # No existen
+                "QUANTITY", "SKIN_TYPE", "GENDER", "IS_STRENGTHENER"  # Valores inválidos desde datos de Amazon
+            }
+
             for a in attributes:
                 if not isinstance(a, dict) or "id" not in a:
                     continue
                 aid = a["id"]
+
+                # Filtrar atributos en blacklist
+                if aid in BLACKLISTED_ATTRS:
+                    continue
+
+                # Filtrar atributos en español (nombres inválidos de IA)
+                # Los atributos válidos de ML son en inglés: BRAND, MODEL, WEIGHT, etc.
+                # Los inválidos son: MARCA, MODELO, PESO, DIMENSIONES, etc.
+                spanish_prefixes = ["MARCA", "MODELO", "PESO", "DIMENSIONES", "CARACTERISTICAS",
+                                    "NUMERO_DE", "RANGO_DE", "GARANTIA", "TEMA", "BATERIA",
+                                    "ESTILO", "TIPO_DE", "MATERIAL_DE", "RESISTENCIA_",
+                                    "LONGITUD_DE", "DIAMETRO_DE", "GROSOR_DE", "ANCHO_DE",
+                                    "FORMA_DEL", "VENTANA_DEL", "VIDA_UTIL", "CANTIDAD", "CABLE",
+                                    "EMPAQUETADO", "ADVERTENCIAS", "DIRECCIONES", "VOLUMEN_",
+                                    "INGREDIENTES_", "COMPATIBILIDAD", "GENERO_", "EMPAQUE",
+                                    "PRECIO_LISTA", "USOS_RECOMENDADOS", "BENEFICIO_", "CONTENIDO_",
+                                    "INFORMACION_", "ADVERTENCIA_", "CARACTERISTICA_", "BATERIAS_",
+                                    "INCLUYE_", "SOPORTE_", "FORMATO_DE", "NIVEL_DE", "CONTROL_DE",
+                                    "VIDA_MEDIA_DE", "TECNOLOGIA_DE"]
+                if any(aid.startswith(prefix) for prefix in spanish_prefixes):
+                    continue
+
                 if aid in seen_ids:
                     continue
                 val = a.get("value_name")
@@ -855,7 +974,8 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                     val = val.split(",")[0].strip()
                 if not val or str(val).lower() in ["null", "none", "undefined", ""]:
                     continue
-                cleaned_attrs.append({"id": aid, "value_name": val})
+                # CRITICAL: ML API requires value_name to be STRING always
+                cleaned_attrs.append({"id": aid, "value_name": str(val)})
                 seen_ids.add(aid)
             attributes = cleaned_attrs
 
@@ -864,19 +984,7 @@ Devuelve SOLO un array JSON con los atributos rellenados.
         except Exception as e:
             print(f"⚠️ Error completando atributos IA solo con mini_ml: {e}")
 
-            # ✅ Si hay más de un GTIN → eliminar todos excepto el primero
-            if len(gtins) > 1:
-                print("⚠️ Multiples GTIN detectados → usando solo el primero")
-                gtins = [gtins[0]]
-
-            # ✅ Si fallo previo con GTIN → no enviar GTIN
-            if mini.get("last_error") == "GTIN_REUSED":
-                print("⚠️ Reintentando sin GTIN por conflicto en catálogo")
-                attributes = [a for a in attributes if a.get("id") != "GTIN"]
-
-        
-
-                # 🔹 Publicación
+        # 🔹 Publicación
         body = {
             "title": ai_title_es[:60],
             "category_id": cid,
