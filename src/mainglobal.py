@@ -729,6 +729,37 @@ def publish_item(asin_json):
         price = mini.get("price", {})
 
         L, W, H, KG = pkg.get("length_cm"), pkg.get("width_cm"), pkg.get("height_cm"), pkg.get("weight_kg")
+
+        # ✅ Validar dimensiones - rechazar fallbacks genéricos
+        # ML rechaza dimensiones que parecen fallbacks (10×10×10, 1×1×1, etc.)
+        if L and W and H and KG:
+            # Detectar dimensiones fallback/genéricas
+            is_fallback = False
+
+            # Caso 1: Todas las dimensiones son iguales (10×10×10, 1×1×1)
+            if L == W == H:
+                is_fallback = True
+                print(f"⚠️ Dimensiones fallback detectadas (todas iguales): {L}×{W}×{H}")
+
+            # Caso 2: Dimensiones muy pequeñas o muy genéricas
+            if L < 5 or W < 5 or H < 5:
+                if not (L == 1 and W > 10 and H > 10):  # Permitir productos muy delgados reales
+                    is_fallback = True
+                    print(f"⚠️ Dimensiones sospechosas (muy pequeñas): {L}×{W}×{H}")
+
+            # Caso 3: Peso muy bajo y sospechoso
+            if KG < 0.05:
+                is_fallback = True
+                print(f"⚠️ Peso sospechoso (muy bajo): {KG} kg")
+
+            if is_fallback:
+                print("❌ Dimensiones rechazadas - NO SE PUEDE PUBLICAR sin dimensiones reales")
+                print("💡 Sugerencia: Obtener dimensiones reales del producto antes de publicar")
+                return None  # Abortar publicación
+        else:
+            print("❌ Faltan dimensiones - NO SE PUEDE PUBLICAR")
+            return None
+
         base_price = price.get("base_usd", 0)
         tax = price.get("tax_usd", 0)
         cost = price.get("cost_usd", base_price)  # fallback si no hay tax
@@ -839,14 +870,72 @@ def publish_item(asin_json):
 
         attributes = normalized
 
-        print(f"🧩 Atributos totales listos: {len(attributes)}")
+        print(f"🧩 Atributos totales antes de filtrado: {len(attributes)}")
 
-        # 🔹 Sale terms, imágenes dummy (o cargar si querés mantener upload_images_to_meli)
+        # ========================================
+        # 🧹 FILTRADO CRÍTICO DE ATRIBUTOS (SIEMPRE)
+        # ========================================
+        # Este filtrado se ejecuta SIEMPRE, antes de IA y antes de publicar
+        # Lista completa de atributos que NUNCA deben enviarse a ML
+        BLACKLISTED_ATTRS = {
+            "VALUE_ADDED_TAX",  # Causa error 3510 en MLA
+            "ITEM_DIMENSIONS", "PACKAGE_DIMENSIONS", "ITEM_PACKAGE_DIMENSIONS",
+            "ITEM_WEIGHT", "ITEM_PACKAGE_WEIGHT",
+            "BULLET_1", "BULLET_2", "BULLET_3", "BULLET_POINT", "BULLET_POINTS",
+            "Batteries_Included", "Batteries_Required", "BATTERIES_REQUIRED",
+            "AGE_RANGE", "AGE_RANGE_DESCRIPTION",
+            "TARGET_GENDER", "SAFETY", "ASSEMBLY_REQUIRED", "IS_ASSEMBLY_REQUIRED",
+            "ITEM_QTY", "DESCRIPTIVE_TAGS", "NUMBER_OF_PIECES",
+            "LIQUID_VOLUME", "ITEM_FORM", "PRODUCT_BENEFIT", "SPECIAL_INGREDIENTS",
+            "ITEM_PACKAGE_QUANTITY", "IS_FLAMMABLE", "FINISH_TYPE", "CONTROL_METHOD",
+            "HEADPHONES_FORM_FACTOR", "HEADPHONES_JACK", "RECOMMENDED_USES_FOR_PRODUCT",
+            "INCLUDED_COMPONENTS", "SENT", "ITEM_TYPE_KEYWORD",
+            "IS_CRUELTY_FREE", "IS_FRAGRANCE_FREE", "WITH_HYALURONIC_ACID",
+            "EARPICE_SHAPE", "EARPIECE_SHAPE", "AUDIO_DRIVER_TYPE", "NUMBER_OF_LITHIUM_ION_CELLS",
+            "BATTERY_WEIGHT", "WATER_RESISTANCE_DEPTH", "MAIN_COLOR",
+            "TOY_BUILDING_BLOCK_TYPE", "MATERIAL_TYPE_FREE", "SALE_FORMAT", "UNITS_PER_PACK",
+            "UNSPSC_CODE", "IMPORT_DESIGNATION", "NUMBER_OF_ITEMS", "SCENT", "FRAGRANCE",
+            "UNIT_VOLUME", "SAFETY_WARNING", "EDUCATIONAL_OBJECTIVE", "LIST_PRICE",
+            "SPECIAL_FEATURE", "BATTERY", "SPECIAL_FEATURES", "RELEASE_DATE",
+            "PACKAGE_QUANTITY", "WEBSITE_DISPLAY_GROUP_NAME", "TRADE_IN_ELIGIBLE",
+            "WEBSITE_DISPLAY_GROUP", "MEMORABILIA", "ITEM_NAME", "ITEM_CLASSIFICATION",
+            "BROWSE_CLASSIFICATION", "ADULT_PRODUCT", "AUTOGRAPHED", "ITEM_TYPE",
+            "PACKAGING", "LITHIUM_BATTERY_ENERGY_CONTENT", "QUANTITY", "SKIN_TYPE",
+            "GENDER", "IS_STRENGTHENER", "DIAL_COLOR", "DIAL_WINDOW_MATERIAL",
+            "WATER_RESISTANCE_LEVEL"
+        }
+
+        # Filtrar atributos en blacklist
+        pre_filter_count = len(attributes)
+        attributes = [a for a in attributes if a.get("id") not in BLACKLISTED_ATTRS]
+
+        # Filtrar atributos en español (nombres inválidos)
+        spanish_prefixes = ["MARCA", "MODELO", "PESO", "DIMENSIONES", "CARACTERISTICAS",
+                           "NUMERO_DE", "RANGO_DE", "GARANTIA", "TEMA", "BATERIA"]
+        attributes = [a for a in attributes if not any(a.get("id","").startswith(p) for p in spanish_prefixes)]
+
+        blacklist_filtered = pre_filter_count - len(attributes)
+        if blacklist_filtered > 0:
+            print(f"🧹 Filtrados {blacklist_filtered} atributos inválidos (blacklist)")
+
+        # 🔹 Sale terms, imágenes desde mini_ml
         sale_terms = [
             {"id": "WARRANTY_TYPE", "value_id": "2230280", "value_name": "Seller warranty"},
             {"id": "WARRANTY_TIME", "value_name": "30 days"}
         ]
-        images = []  # usar mini["images"] si lo agregás luego
+
+        # Cargar imágenes del mini_ml
+        images = []
+        for img in mini.get("images", []):
+            if isinstance(img, dict) and img.get("url"):
+                images.append({"source": img["url"]})
+            elif isinstance(img, str):
+                images.append({"source": img})
+
+        if not images:
+            print("❌ No hay imágenes en mini_ml - NO SE PUEDE PUBLICAR")
+            print("💡 Sugerencia: Verificar que el transform_mapper cargue las imágenes correctamente")
+            return None  # Abortar publicación
 
         attributes = add_required_defaults(cid, attributes)
         attributes = autofill_required_attrs(cid, attributes)
@@ -910,106 +999,28 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                 if isinstance(attributes_ai, list):
                     attributes.extend(attributes_ai)
 
-            # Limpieza: filtrar contra schema oficial de la categoría
+            # Filtrado adicional contra schema oficial (si está disponible)
             cleaned_attrs = []
             seen_ids = set()
-            filtered_count = 0
+            schema_filtered = 0
 
             if valid_attr_ids:
                 print(f"📋 Schema de categoría {cid} tiene {len(valid_attr_ids)} atributos válidos")
-
-            # Lista de atributos problemáticos que causan errores en ML
-            # NOTA: Esta blacklist es redundante si filtramos contra el schema,
-            # pero la mantenemos como seguridad adicional
-            BLACKLISTED_ATTRS = {
-                "VALUE_ADDED_TAX",  # Invalid en MLA
-                "ITEM_DIMENSIONS",   # No existe en la mayoría de categorías
-                "PACKAGE_DIMENSIONS", # No existe en la mayoría de categorías
-                "ITEM_WEIGHT",       # No existe en la mayoría de categorías
-                "ITEM_PACKAGE_WEIGHT", # No existe en la mayoría de categorías
-                "ITEM_PACKAGE_DIMENSIONS", # No existe en la mayoría de categorías
-                "BULLET_1", "BULLET_2", "BULLET_3",  # No existen
-                "Batteries_Included", "Batteries_Required",  # Formato incorrecto
-                "BATTERIES_REQUIRED",  # Duplicado
-                "AGE_RANGE", "AGE_RANGE_DESCRIPTION",  # No existe en mayoría
-                "TARGET_GENDER",  # No existe en mayoría
-                "SAFETY",  # No existe en mayoría
-                "ASSEMBLY_REQUIRED",  # No existe en mayoría
-                "ITEM_QTY",  # No existe en mayoría
-                "DESCRIPTIVE_TAGS",  # No modificable
-                "DIAL_COLOR", "DIAL_WINDOW_MATERIAL", "WATER_RESISTANCE_LEVEL",  # Específicos de relojes
-                "NUMBER_OF_PIECES",  # No existe en mayoría de categorías
-                "LIQUID_VOLUME",  # No existe en mayoría
-                "ITEM_FORM",  # No existe en mayoría
-                "PRODUCT_BENEFIT",  # No existe en mayoría
-                "SPECIAL_INGREDIENTS",  # No existe en mayoría
-                "ITEM_PACKAGE_QUANTITY",  # No existe en mayoría
-                "IS_FLAMMABLE",  # Requiere valores específicos que no tenemos
-                "FINISH_TYPE",  # Causa duplicados con FINISH
-                "CONTROL_METHOD",  # No existe
-                "HEADPHONES_FORM_FACTOR",  # No existe
-                "HEADPHONES_JACK",  # No existe
-                "RECOMMENDED_USES_FOR_PRODUCT",  # No existe
-                "INCLUDED_COMPONENTS",  # No existe en mayoría
-                "SENT",  # No existe
-                "ITEM_TYPE_KEYWORD",  # No existe
-                "IS_CRUELTY_FREE", "IS_FRAGRANCE_FREE", "WITH_HYALURONIC_ACID",  # Valores booleanos problemáticos
-                "EARPICE_SHAPE", "EARPIECE_SHAPE", "AUDIO_DRIVER_TYPE", "NUMBER_OF_LITHIUM_ION_CELLS",  # Headphones específicos
-                "BATTERY_WEIGHT", "WATER_RESISTANCE_DEPTH", "MAIN_COLOR",  # Problemáticos con unidades/valores
-                "TOY_BUILDING_BLOCK_TYPE",  # No existe
-                "MATERIAL_TYPE_FREE",  # No existe
-                "SALE_FORMAT",  # Requiere UNITS_PER_PACK, mejor omitir ambos
-                "UNITS_PER_PACK",  # Problemático, requiere SALE_FORMAT
-                "UNSPSC_CODE", "IMPORT_DESIGNATION",  # No existen
-                "NUMBER_OF_ITEMS",  # No existe en mayoría
-                "SCENT", "FRAGRANCE",  # Duplicados entre sí, causan conflicto
-                "UNIT_VOLUME",  # Requiere conversión a L/mL, mejor omitir
-                "BULLET_POINT", "IS_ASSEMBLY_REQUIRED", "SAFETY_WARNING",  # No existen
-                "EDUCATIONAL_OBJECTIVE", "LIST_PRICE", "SPECIAL_FEATURE",  # No existen
-                "BATTERY",  # No existe
-                "SPECIAL_FEATURES", "RELEASE_DATE", "PACKAGE_QUANTITY",  # No existen
-                "WEBSITE_DISPLAY_GROUP_NAME", "TRADE_IN_ELIGIBLE", "WEBSITE_DISPLAY_GROUP",  # No existen
-                "MEMORABILIA", "ITEM_NAME", "ITEM_CLASSIFICATION",  # No existen
-                "BROWSE_CLASSIFICATION", "ADULT_PRODUCT", "AUTOGRAPHED",  # No existen
-                "ITEM_TYPE", "BULLET_POINTS",  # No existen
-                "PACKAGING", "LITHIUM_BATTERY_ENERGY_CONTENT",  # No existen
-                "QUANTITY", "SKIN_TYPE", "GENDER", "IS_STRENGTHENER"  # Valores inválidos desde datos de Amazon
-            }
 
             for a in attributes:
                 if not isinstance(a, dict) or "id" not in a:
                     continue
                 aid = a["id"]
 
-                # 1. Filtrar contra schema oficial (más importante)
+                # Filtrar contra schema oficial (solo si está disponible)
                 if valid_attr_ids is not None and aid not in valid_attr_ids:
-                    filtered_count += 1
+                    schema_filtered += 1
                     continue
 
-                # 2. Filtrar atributos en blacklist (seguridad adicional)
-                if aid in BLACKLISTED_ATTRS:
-                    filtered_count += 1
-                    continue
-
-                # Filtrar atributos en español (nombres inválidos de IA)
-                # Los atributos válidos de ML son en inglés: BRAND, MODEL, WEIGHT, etc.
-                # Los inválidos son: MARCA, MODELO, PESO, DIMENSIONES, etc.
-                spanish_prefixes = ["MARCA", "MODELO", "PESO", "DIMENSIONES", "CARACTERISTICAS",
-                                    "NUMERO_DE", "RANGO_DE", "GARANTIA", "TEMA", "BATERIA",
-                                    "ESTILO", "TIPO_DE", "MATERIAL_DE", "RESISTENCIA_",
-                                    "LONGITUD_DE", "DIAMETRO_DE", "GROSOR_DE", "ANCHO_DE",
-                                    "FORMA_DEL", "VENTANA_DEL", "VIDA_UTIL", "CANTIDAD", "CABLE",
-                                    "EMPAQUETADO", "ADVERTENCIAS", "DIRECCIONES", "VOLUMEN_",
-                                    "INGREDIENTES_", "COMPATIBILIDAD", "GENERO_", "EMPAQUE",
-                                    "PRECIO_LISTA", "USOS_RECOMENDADOS", "BENEFICIO_", "CONTENIDO_",
-                                    "INFORMACION_", "ADVERTENCIA_", "CARACTERISTICA_", "BATERIAS_",
-                                    "INCLUYE_", "SOPORTE_", "FORMATO_DE", "NIVEL_DE", "CONTROL_DE",
-                                    "VIDA_MEDIA_DE", "TECNOLOGIA_DE"]
-                if any(aid.startswith(prefix) for prefix in spanish_prefixes):
-                    continue
-
+                # Deduplicar
                 if aid in seen_ids:
                     continue
+
                 val = a.get("value_name")
                 if isinstance(val, list) and val:
                     val = val[0]
@@ -1017,14 +1028,16 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                     val = val.split(",")[0].strip()
                 if not val or str(val).lower() in ["null", "none", "undefined", ""]:
                     continue
-                # CRITICAL: ML API requires value_name to be STRING always
+
+                # ML API requiere value_name como STRING siempre
                 cleaned_attrs.append({"id": aid, "value_name": str(val)})
                 seen_ids.add(aid)
+
             attributes = cleaned_attrs
 
-            if filtered_count > 0:
-                print(f"🧹 Filtrados {filtered_count} atributos inválidos (no existen en schema o blacklist)")
-            print(f"🧽 Atributos finales listos: {len(attributes)} válidos para publicar")
+            if schema_filtered > 0:
+                print(f"🧹 Filtrados {schema_filtered} atributos adicionales (no en schema de categoría)")
+            print(f"🧽 Atributos finales IA listos: {len(attributes)} válidos para publicar")
 
         except Exception as e:
             print(f"⚠️ Error completando atributos IA solo con mini_ml: {e}")
