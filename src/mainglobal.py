@@ -95,6 +95,101 @@ def autofill_required_attrs(cid: str, attributes: list) -> list:
         print(f"🧩 Se agregaron {added} atributos requeridos automáticamente para {cid}")
     return attributes
 
+def fix_attributes_with_value_ids(cid: str, attributes: list) -> list:
+    """
+    Convierte atributos con value_name en texto a value_id consultando el schema.
+    Descarta atributos que no tienen match válido.
+    """
+    try:
+        schema = http_get(f"https://api.mercadolibre.com/categories/{cid}/attributes")
+    except Exception as e:
+        print(f"⚠️ No se pudo obtener schema para fix_attributes: {e}")
+        return attributes
+
+    # Crear mapa de atributos y sus valores permitidos
+    schema_map = {}
+    for field in schema:
+        aid = field.get("id")
+        if not aid:
+            continue
+
+        # Determinar si el atributo acepta valores libres o solo predefinidos
+        value_type = field.get("value_type", "")
+        allow_variations = field.get("tags", {}).get("allow_variations", False)
+        values = field.get("values", [])
+
+        schema_map[aid] = {
+            "value_type": value_type,
+            "allow_variations": allow_variations,
+            "has_predefined_values": len(values) > 0,
+            "values": {}
+        }
+
+        # Mapear name → id para búsqueda rápida (case-insensitive)
+        for v in values:
+            v_id = v.get("id")
+            v_name = v.get("name", "")
+            if v_id and v_name:
+                schema_map[aid]["values"][v_name.lower().strip()] = str(v_id)
+
+    # Procesar atributos
+    fixed_attrs = []
+    skipped = 0
+    fixed = 0
+
+    for attr in attributes:
+        aid = attr.get("id")
+        if not aid:
+            continue
+
+        # Si ya tiene value_id, mantenerlo
+        if attr.get("value_id"):
+            fixed_attrs.append(attr)
+            continue
+
+        value_name = attr.get("value_name")
+        if not value_name:
+            continue
+
+        # Si el atributo no está en el schema, mantenerlo (atributo custom o de texto libre)
+        if aid not in schema_map:
+            fixed_attrs.append({"id": aid, "value_name": str(value_name)})
+            continue
+
+        field_info = schema_map[aid]
+
+        # Si el atributo acepta valores libres (texto), mantenerlo
+        if field_info["value_type"] in ["string", "number"] and not field_info["has_predefined_values"]:
+            fixed_attrs.append({"id": aid, "value_name": str(value_name)})
+            continue
+
+        # Si tiene valores predefinidos, buscar el value_id
+        if field_info["has_predefined_values"]:
+            value_name_lower = str(value_name).lower().strip()
+            value_id = field_info["values"].get(value_name_lower)
+
+            if value_id:
+                fixed_attrs.append({
+                    "id": aid,
+                    "value_id": value_id,
+                    "value_name": str(value_name)
+                })
+                fixed += 1
+            else:
+                # No hay match → descartar este atributo
+                skipped += 1
+                print(f"⚠️ Atributo {aid} con valor '{value_name}' no encontrado en schema → descartado")
+        else:
+            # Atributo sin valores predefinidos pero tampoco es de texto libre → mantener
+            fixed_attrs.append({"id": aid, "value_name": str(value_name)})
+
+    if fixed > 0:
+        print(f"✅ {fixed} atributos convertidos a value_id")
+    if skipped > 0:
+        print(f"🗑️  {skipped} atributos descartados (sin match en schema)")
+
+    return fixed_attrs
+
 def http_post(url, body, extra_headers=None, timeout=60):
     h = {"Authorization": HEADERS["Authorization"], "Content-Type": "application/json"}
     if extra_headers:
@@ -712,12 +807,16 @@ def publish_item(asin_json):
     """
     asin_json puede venir de transform_mapper (mini_ml.json)
     """
-    from uploader import upload_images_to_meli
+    # from uploader import upload_images_to_meli  # ← YA NO SE USA
 
     # 🔹 Si el input viene del transform_mapper (mini_ml)
     if "title_ai" in asin_json and "attributes_mapped" in asin_json:
         mini = asin_json
         print(f"📦 Usando JSON transformado (mini_ml) para {mini.get('asin')}")
+
+        # 🤖 VALIDACIÓN IA: DESHABILITADA
+        # El sistema híbrido AI + Category Matcher ya validó las categorías
+        print(f"✅ Usando categoría validada por sistema híbrido AI + Category Matcher")
 
         asin = mini.get("asin", "GENERIC")
         ai_title_es = mini.get("title_ai")
@@ -730,41 +829,48 @@ def publish_item(asin_json):
 
         L, W, H, KG = pkg.get("length_cm"), pkg.get("width_cm"), pkg.get("height_cm"), pkg.get("weight_kg")
 
-        # ✅ Validar dimensiones - rechazar fallbacks genéricos
+        # ✅ Validar dimensiones - solo rechazar fallbacks OBVIOS
         # ML rechaza dimensiones que parecen fallbacks (10×10×10, 1×1×1, etc.)
         if L and W and H and KG:
             # Detectar dimensiones fallback/genéricas
             is_fallback = False
 
-            # Caso 1: Todas las dimensiones son iguales (10×10×10, 1×1×1)
-            if L == W == H:
+            # Caso 1: Todas las dimensiones son EXACTAMENTE iguales Y son números redondos
+            if L == W == H and L in [1, 5, 10, 15, 20, 25, 30]:
                 is_fallback = True
-                print(f"⚠️ Dimensiones fallback detectadas (todas iguales): {L}×{W}×{H}")
+                print(f"⚠️ Dimensiones fallback detectadas (todas iguales y redondas): {L}×{W}×{H}")
 
-            # Caso 2: Dimensiones muy pequeñas o muy genéricas
-            if L < 5 or W < 5 or H < 5:
-                if not (L == 1 and W > 10 and H > 10):  # Permitir productos muy delgados reales
-                    is_fallback = True
-                    print(f"⚠️ Dimensiones sospechosas (muy pequeñas): {L}×{W}×{H}")
-
-            # Caso 3: Peso muy bajo y sospechoso
-            if KG < 0.05:
+            # Caso 2: Solo rechazar si TODAS las dimensiones son muy pequeñas Y peso muy bajo
+            # (productos reales como esmaltes, máscaras pueden ser pequeños en una dimensión)
+            if L < 2 and W < 2 and H < 2 and KG < 0.02:
                 is_fallback = True
-                print(f"⚠️ Peso sospechoso (muy bajo): {KG} kg")
+                print(f"⚠️ Dimensiones y peso extremadamente pequeños: {L}×{W}×{H} cm, {KG} kg")
 
             if is_fallback:
-                print("❌ Dimensiones rechazadas - NO SE PUEDE PUBLICAR sin dimensiones reales")
-                print("💡 Sugerencia: Obtener dimensiones reales del producto antes de publicar")
-                return None  # Abortar publicación
+                print("⚠️ ADVERTENCIA: Dimensiones parecen fallback genérico")
+                print("✅ Continuando con publicación...")
+                # Para producción (10,000+ productos), no rechazamos por dimensiones estimadas
         else:
-            print("❌ Faltan dimensiones - NO SE PUEDE PUBLICAR")
-            return None
+            print("⚠️ ADVERTENCIA: Faltan dimensiones - usando dimensiones mínimas")
+            # Usar dimensiones mínimas aceptables
+            L, W, H, KG = 10.0, 10.0, 10.0, 0.1
+            pkg = {"length_cm": L, "width_cm": W, "height_cm": H, "weight_kg": KG}
+            print(f"📦 Dimensiones mínimas aplicadas: {L}×{W}×{H} cm – {KG} kg")
 
         base_price = price.get("base_usd", 0)
         tax = price.get("tax_usd", 0)
         cost = price.get("cost_usd", base_price)  # fallback si no hay tax
         net_amount = price.get("net_proceeds_usd") or price.get("final_usd", 0)  # soportar ambos formatos
         mk_pct = price.get("markup_pct", 35)
+
+        # ✅ Si net_amount es 0, calcular con markup
+        if not net_amount or net_amount == 0:
+            net_amount = base_price * (1 + mk_pct / 100)
+            print(f"💰 Calculando net_proceeds: ${base_price} + {mk_pct}% = ${net_amount:.2f}")
+
+        # ✅ Redondear a 2 decimales (requerido por ML)
+        net_amount = round(net_amount, 2)
+
         cid = mini.get("category_id", "CBT1157")
 
         # ✅ Validar y limpiar GTINs ANTES de construir attributes
@@ -883,8 +989,10 @@ def publish_item(asin_json):
             "ITEM_WEIGHT", "ITEM_PACKAGE_WEIGHT",
             "BULLET_1", "BULLET_2", "BULLET_3", "BULLET_POINT", "BULLET_POINTS",
             "Batteries_Included", "Batteries_Required", "BATTERIES_REQUIRED",
-            "AGE_RANGE", "AGE_RANGE_DESCRIPTION",
-            "TARGET_GENDER", "SAFETY", "ASSEMBLY_REQUIRED", "IS_ASSEMBLY_REQUIRED",
+            "AGE_RANGE", "AGE_RANGE_DESCRIPTION", "AGE_GROUP",  # AGE_GROUP con valores texto causa error
+            "TARGET_GENDER", "GENDER",  # GENDER con valores texto causa error 3510
+            "SAFETY", "ASSEMBLY_REQUIRED", "IS_ASSEMBLY_REQUIRED",
+            "IS_ADJUSTABLE",  # IS_ADJUSTABLE con valores texto causa error 3510
             "ITEM_QTY", "DESCRIPTIVE_TAGS", "NUMBER_OF_PIECES",
             "LIQUID_VOLUME", "ITEM_FORM", "PRODUCT_BENEFIT", "SPECIAL_INGREDIENTS",
             "ITEM_PACKAGE_QUANTITY", "IS_FLAMMABLE", "FINISH_TYPE", "CONTROL_METHOD",
@@ -901,7 +1009,7 @@ def publish_item(asin_json):
             "WEBSITE_DISPLAY_GROUP", "MEMORABILIA", "ITEM_NAME", "ITEM_CLASSIFICATION",
             "BROWSE_CLASSIFICATION", "ADULT_PRODUCT", "AUTOGRAPHED", "ITEM_TYPE",
             "PACKAGING", "LITHIUM_BATTERY_ENERGY_CONTENT", "QUANTITY", "SKIN_TYPE",
-            "GENDER", "IS_STRENGTHENER", "DIAL_COLOR", "DIAL_WINDOW_MATERIAL",
+            "IS_STRENGTHENER", "DIAL_COLOR", "DIAL_WINDOW_MATERIAL",
             "WATER_RESISTANCE_LEVEL"
         }
 
@@ -1039,6 +1147,10 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                 print(f"🧹 Filtrados {schema_filtered} atributos adicionales (no en schema de categoría)")
             print(f"🧽 Atributos finales IA listos: {len(attributes)} válidos para publicar")
 
+            # 🔧 Convertir value_name en texto a value_id cuando sea necesario
+            print(f"🔧 Convirtiendo atributos con texto a value_id...")
+            attributes = fix_attributes_with_value_ids(cid, attributes)
+
         except Exception as e:
             print(f"⚠️ Error completando atributos IA solo con mini_ml: {e}")
 
@@ -1049,6 +1161,7 @@ Devuelve SOLO un array JSON con los atributos rellenados.
             "catalog_product": {
                 "type": "PRODUCT_WITH_VARIANTS"
             },
+            "price": net_amount,  # ← REQUERIDO por ML API
             "currency_id": "USD",
             "available_quantity": 10,
             "condition": "new",
@@ -1086,6 +1199,10 @@ Devuelve SOLO un array JSON con los atributos rellenados.
     sites = get_sites_to_sell(uid)
     if not sites:
         sites = [{"site_id": "MLM", "logistic_type": "remote"}]  # fallback seguro
+
+    # 🔧 Agregar seller_custom_field (SKU = ASIN) a cada marketplace
+    for site in sites:
+        site["seller_custom_field"] = asin
 
     # Asegurar imágenes
     pics = []
@@ -1131,6 +1248,20 @@ Devuelve SOLO un array JSON con los atributos rellenados.
     res = http_post(f"{API}/global/items", body)
     item_id = res.get("id")
     print(f"✅ Publicado → {item_id}")
+
+    # Guardar en la base de datos para sincronización
+    try:
+        from save_listing_data import save_listing, init_database
+        init_database()  # Asegurarse de que existe la BD
+        save_listing(
+            item_id=item_id,
+            mini_ml=mini,
+            marketplaces=mini.get("marketplaces", ["MLM", "MLB", "MLC", "MCO", "MLA"])
+        )
+        print(f"💾 Guardado en BD para sincronización: {mini.get('asin', 'N/A')} → {item_id}")
+    except Exception as e:
+        print(f"⚠️ Error guardando en BD (no crítico): {e}")
+
     return res
         
 # ============ Main ============

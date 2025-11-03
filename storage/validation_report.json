@@ -1,0 +1,31 @@
+{
+  "validated": [
+    "B092RCLKHN",
+    "B0BGQLZ921",
+    "B0CYM126TT",
+    "B0DRW8G3WK",
+    "B0BXSLRQH7",
+    "B0D3H3NKBN",
+    "B0DCYZJBYD",
+    "B0CHLBDJYP",
+    "B0CJQG4PMF",
+    "B0CLC6NBBX",
+    "B0D1Z99167",
+    "B081SRSNWW",
+    "B0BRNY9HZB"
+  ],
+  "fixed": [
+    "B0DRW69H11"
+  ],
+  "warnings": [
+    "B0DRW69H11: ⚠️ Categoría CBT455425 no permite publicar",
+    "B0DRW69H11: → Usando categoría flexible: CBT1157",
+    "B0CYM126TT: ⚠️ ITEM_CONDITION='Nuevo' no válido",
+    "B0D3H3NKBN: ⚠️ COLOR='Road Trip' no válido",
+    "B0CHLBDJYP: ⚠️ COLOR='Multi' no válido",
+    "B0CJQG4PMF: ⚠️ COLOR='Rojo y Rosa' no válido",
+    "B0CJQG4PMF: ⚠️ FINISH='Pulido' no válido",
+    "B0D1Z99167: ⚠️ COLOR='Sin Color' no válido",
+    "B081SRSNWW: ⚠️ COLOR='Azul' no válido"
+  ]
+}

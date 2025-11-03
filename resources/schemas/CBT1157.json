@@ -2,17 +2,31 @@
   "BRAND": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "LINE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "MODEL": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "LICENSE": {
     "value_type": "string",
@@ -44,12 +58,24 @@
       "playmobil": "49605627",
       "hot wheels": "49550895"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "PIECES_NUMBER": {
     "value_type": "number",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "CHARACTER_VERSION": {
     "value_type": "string",
@@ -57,7 +83,13 @@
       "pikachu": "28463671",
       "mario bros": "28463672"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "RECOMMENDED_CONSTRUCTIONS": {
     "value_type": "string",
@@ -65,7 +97,13 @@
       "home": "9872828",
       "mechanical workshop": "9872829"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "FILTRABLE_RECOMMENDED_AGE_GROUP": {
     "value_type": "list",
@@ -76,7 +114,14 @@
       "9 - 13 years": "59569263",
       "+ 14 years": "59569264"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "PRESENTATION": {
     "value_type": "string",
@@ -84,7 +129,12 @@
       "bucket": "5355755",
       "box": "131493"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_HEIGHT": {
     "value_type": "number_unit",
@@ -95,7 +145,14 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_WIDTH": {
     "value_type": "number_unit",
@@ -106,7 +163,14 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_LENGTH": {
     "value_type": "number_unit",
@@ -117,7 +181,14 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_WEIGHT": {
     "value_type": "number_unit",
@@ -128,7 +199,14 @@
       "lb",
       "mg",
       "oz"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "HEIGHT": {
     "value_type": "number_unit",
@@ -139,7 +217,12 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "WIDTH": {
     "value_type": "number_unit",
@@ -150,7 +233,12 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "LENGTH": {
     "value_type": "number_unit",
@@ -161,12 +249,22 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "DETAILED_MODEL": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "COLLECTION": {
     "value_type": "string",
@@ -175,14 +273,22 @@
       "star wars": "447715",
       "transformers": "1006834"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "TOY_MATERIALS": {
     "value_type": "string",
     "values": {
       "plastic": "9872830"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "PIECES_SHAPES": {
     "value_type": "string",
@@ -191,7 +297,12 @@
       "block": "9872832",
       "circle": "9872833"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "TOY_COMPONENTS": {
     "value_type": "string",
@@ -200,7 +311,12 @@
       "wheels": "11468268",
       "window": "11468269"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "MIN_RECOMMENDED_AGE": {
     "value_type": "number_unit",
@@ -208,7 +324,10 @@
     "allowed_units": [
       "months",
       "years"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "MAX_RECOMMENDED_AGE": {
     "value_type": "number_unit",
@@ -216,7 +335,10 @@
     "allowed_units": [
       "months",
       "years"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "CHARACTERS": {
     "value_type": "string",
@@ -230,7 +352,12 @@
       "dovahkiin": "415870",
       "josé carioca": "49550832"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "IS_MAGNETIC": {
     "value_type": "boolean",
@@ -238,12 +365,20 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "TOY_SAFETY_CERTIFICATE_NUMBER": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "IS_COLLECTIBLE": {
     "value_type": "boolean",
@@ -251,37 +386,67 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "GTIN": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
   },
   "INMETRO_CERTIFICATION_REGISTRATION_NUMBER": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "APPROVAL_CERTIFICATION_NUMBER": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "PRODUCT_AUTHORIZATION_RPIN_NUMBER": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SIC_ESTABLISHMENT_REGISTRY_NUMBER": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "REGISTRATION_LICENSE_ESTABLISHMENT_NUMBER": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "EMPTY_GTIN_REASON": {
     "value_type": "list",
@@ -291,7 +456,14 @@
       "the product does not have registered code": "17055160",
       "another reason": "17055161"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "RECOMMENDED_AGE_GROUP": {
     "value_type": "list",
@@ -302,7 +474,13 @@
       "9-12 years": "50141497",
       "12+ years": "49882301"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "TOYS_SAFETY_CERTIFICATIONS": {
     "value_type": "string",
@@ -311,12 +489,23 @@
       "ce": "11184161",
       "kc": "11184162"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "COLORS_NUMBER": {
     "value_type": "number",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "TOY_ASSEMBLED_LENGTH": {
     "value_type": "number_unit",
@@ -327,7 +516,12 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "TOY_ASSEMBLED_HEIGHT": {
     "value_type": "number_unit",
@@ -338,7 +532,12 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "TOY_ASSEMBLED_DEPTH": {
     "value_type": "number_unit",
@@ -349,7 +548,12 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "WEIGHT": {
     "value_type": "number_unit",
@@ -359,12 +563,24 @@
       "kg",
       "lb",
       "oz"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "MPN": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
   },
   "ITEM_CONDITION": {
     "value_type": "list",
@@ -372,7 +588,12 @@
       "new": "2230284",
       "refurbished": "2230582"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_TOM_BRAND": {
     "value_type": "boolean",
@@ -380,7 +601,13 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_HIGHLIGHT_BRAND": {
     "value_type": "boolean",
@@ -388,7 +615,13 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "GIFTABLE": {
     "value_type": "string",
@@ -398,12 +631,25 @@
       "cart": "54973165",
       "checkout": "54973166"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "VALUE_ADDED_TAX": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "IMPORT_DUTY": {
     "value_type": "list",
@@ -426,38 +672,71 @@
       "26 %": "49553254",
       "70 %": "49553255"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_SKU": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_WIDTH": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "cm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_LENGTH": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "cm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_HEIGHT": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "cm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_TYPE": {
     "value_type": "list",
@@ -465,14 +744,24 @@
       "no additional packaging": "47115155",
       "with additional packaging": "47115156"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "g"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "IS_FLAMMABLE": {
     "value_type": "boolean",
@@ -480,7 +769,13 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "WITH_POSITIVE_IMPACT": {
     "value_type": "boolean",
@@ -488,7 +783,13 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -498,7 +799,13 @@
       "exceeded": "13414679",
       "indeterminate": "13414680"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_KIT": {
     "value_type": "boolean",
@@ -506,12 +813,24 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "DESCRIPTIVE_TAGS": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PRODUCT_CHEMICAL_FEATURES": {
     "value_type": "list",
@@ -523,7 +842,14 @@
       "explosive": "7651074",
       "toxic or infectious": "7651075"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "FOODS_AND_DRINKS": {
     "value_type": "list",
@@ -531,7 +857,14 @@
       "for humans": "7575926",
       "for animals": "7575927"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "MEDICINES": {
     "value_type": "list",
@@ -541,7 +874,14 @@
       "for animals with a medical prescription": "7575932",
       "for animals without a medical prescription": "7575933"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "BATTERIES_FEATURES": {
     "value_type": "list",
@@ -550,7 +890,14 @@
       "lithium installed": "7575935",
       "for cars (lead-acid)": "7575936"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "SHIPMENT_PACKING": {
     "value_type": "list",
@@ -561,7 +908,14 @@
       "self-shipping": "7575939",
       "exb": "27037932"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "ADDITIONAL_INFO_REQUIRED": {
     "value_type": "list",
@@ -569,7 +923,14 @@
       "has imei": "7435893",
       "has serial number": "7435894"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "EXCLUDED_PLATFORMS": {
     "value_type": "list",
@@ -579,7 +940,14 @@
       "desktop": "9936779",
       "mobile": "9936780"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_SUITABLE_FOR_SHIPMENT": {
     "value_type": "boolean",
@@ -587,19 +955,37 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PRODUCT_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
     "value_type": "string",
     "values": {
       "pharma": "24219544"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "HAS_COMPATIBILITIES": {
     "value_type": "boolean",
@@ -607,17 +993,36 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "CATALOG_TITLE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "SEARCH_ENHANCEMENT_FIELDS": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PRODUCT_FEATURES": {
     "value_type": "list",
@@ -637,7 +1042,14 @@
       "magnetic": "52092586",
       "can roll": "52233302"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_NEW_OFFER": {
     "value_type": "boolean",
@@ -645,16 +1057,34 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "SYI_PYMES_ID": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   }
 }

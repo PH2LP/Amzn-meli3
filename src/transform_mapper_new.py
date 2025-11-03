@@ -36,7 +36,10 @@ from openai import OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
 # Category matcher local (embeddings)
-from src.category_matcher import match_category
+try:
+    from src.category_matcher import match_category
+except ModuleNotFoundError:
+    from category_matcher import match_category
 
 API = "https://api.mercadolibre.com"
 HEADERS = {"Authorization": f"Bearer {ML_ACCESS_TOKEN}"} if ML_ACCESS_TOKEN else {}
@@ -239,8 +242,9 @@ def get_pkg_dim(flat, kind) -> Dict[str, Any] | None:
                 return {"number": round(float(_to_cm(num, "cm")), 2), "unit": "cm"}
     return None
 
-# ---------- 5) Precio ----------
+# ---------- 5) Precio + Tax ----------
 def get_amazon_base_price(amazon_json) -> float:
+    """Extrae el precio base del producto (sin tax)"""
     flat = flatten(amazon_json)
     candidates = [
         "attributes.list_price[0].value",
@@ -258,9 +262,52 @@ def get_amazon_base_price(amazon_json) -> float:
                 return round(num, 2)
     return 10.0
 
-def compute_price(base) -> Dict[str, float]:
-    final = round(base * (1.0 + MARKUP_PCT), 2)
-    return {"base_usd": round(base,2), "markup_pct": int(MARKUP_PCT*100), "final_usd": final}
+def get_amazon_tax(amazon_json) -> float:
+    """
+    Extrae el tax del producto de Amazon.
+    El tax es lo que el seller paga por el producto (parte del costo).
+    """
+    flat = flatten(amazon_json)
+    candidates = [
+        "offers.listings[0].price.tax",
+        "offers.listings[0].price.sales_tax",
+        "price.tax",
+        "summaries[0].listprice.tax",
+        "estimated_fees[0].tax_amount",
+        "tax_amount",
+        "sales_tax",
+    ]
+    for p in candidates:
+        v = _find_in_flat(flat, [p])
+        if v is not None:
+            num = _read_number(v)
+            if num is not None and num > 0:
+                return round(num, 2)
+    # Si no se encuentra tax, asumir 0 (algunos productos pueden no tener tax)
+    return 0.0
+
+def compute_price(base, tax=0.0) -> Dict[str, float]:
+    """
+    Calcula el precio final para ML usando net_proceeds.
+
+    Fórmula:
+    1. costo_total = precio_base + tax (lo que el seller paga)
+    2. net_proceeds = costo_total * (1 + markup) (lo que el seller quiere ganar)
+
+    ML se encarga automáticamente de:
+    - Agregar comisiones
+    - Agregar shipping costs
+    - Calcular el precio final que ve el comprador
+    """
+    cost = round(base + tax, 2)
+    net_proceeds = round(cost * (1.0 + MARKUP_PCT), 2)
+    return {
+        "base_usd": round(base, 2),
+        "tax_usd": round(tax, 2),
+        "cost_usd": cost,
+        "markup_pct": int(MARKUP_PCT * 100),
+        "net_proceeds_usd": net_proceeds
+    }
 
 # ---------- 6) Brand / Model / GTIN / Images ----------
 BASE_EQUIV = {
@@ -274,20 +321,44 @@ def first_of(amazon_json, keys):
     for k in keys:
         nk = normalize_key(k)
         for fk, v in norm_flat.items():
-            # 🔹 Evitar tomar etiquetas de idioma como "en_us"
-            if nk in fk and not fk.endswith("language_tag"):
-                val = str(v).strip()
-                # Evitar valores triviales, marcadores de idioma y unidades sin valores
-                invalid_values = {
-                    "en_us", "default", "none", "null", "n/a", "na",
-                    "kilograms", "grams", "pounds", "ounces", "kg", "g", "lb", "oz",
-                    "centimeters", "millimeters", "inches", "cm", "mm", "in",
-                    "true", "false", "yes", "no"
-                }
-                if val.lower() not in invalid_values and len(val) > 0:
-                    # También evitar valores que sean solo unidades (números con unidades pegadas)
-                    if not re.match(r'^\d+(\.\d+)?\s*(kg|g|lb|oz|cm|mm|in|kilograms|grams|pounds|ounces|centimeters|millimeters|inches)$', val.lower()):
-                        return val
+            # 🔹 Evitar tomar etiquetas de idioma, metadata, o IDs de marketplace
+            # Filtrar por nombre de la key
+            if "languagetag" in fk or "language_tag" in fk:
+                continue
+            if "marketplaceid" in fk or "marketplace_id" in fk:
+                continue
+            if not (nk in fk):
+                continue
+
+            val = str(v).strip()
+
+            # Evitar valores triviales, marcadores de idioma, metadata y unidades sin valores
+            invalid_values = {
+                # Language tags y locales
+                "en_us", "en-us", "es_mx", "pt_br", "language_tag",
+                # Marketplace IDs
+                "atvpdkikx0der", "a1am78c64um0y8", "marketplace_id",
+                # Valores vacíos o genéricos
+                "default", "none", "null", "n/a", "na", "not specified", "unknown",
+                # Unidades solas (sin valores numéricos)
+                "kilograms", "grams", "pounds", "ounces", "kg", "g", "lb", "oz",
+                "centimeters", "millimeters", "inches", "meters", "cm", "mm", "in", "m",
+                # Booleanos solos
+                "true", "false", "yes", "no"
+            }
+
+            if val.lower() in invalid_values or len(val) == 0:
+                continue
+
+            # También evitar valores que sean solo unidades (números con unidades pegadas)
+            if re.match(r'^\d+(\.\d+)?\s*(kg|g|lb|oz|cm|mm|in|m|kilograms|grams|pounds|ounces|centimeters|millimeters|inches|meters)$', val.lower()):
+                continue
+
+            # Evitar valores que sean solo IDs de marketplace
+            if len(val) == 14 and val.isalnum() and val.isupper():
+                continue
+
+            return val
     return ""
 def extract_gtins(amazon_json)->List[str]:
     """
@@ -814,78 +885,42 @@ def build_mini_ml(amazon_json: dict) -> dict:
     H = get_pkg_dim(flat, "height")
     KG= get_pkg_dim(flat, "weight")
 
-    # Extraer valores con fallback a item_dimensions si package no existe
+    # Extraer valores directamente - SIN FALLBACKS
+    # Las dimensiones del paquete SIEMPRE deben estar en el JSON de SP-API
     length_cm = (L or {}).get("number") if L else None
     width_cm = (W or {}).get("number") if W else None
     height_cm = (H or {}).get("number") if H else None
     weight_kg = (KG or {}).get("number") if KG else None
 
-    # Si NO hay dimensiones de paquete, intentar estimar desde item_dimensions
-    if length_cm is None or width_cm is None or height_cm is None:
-        item_dims = amazon_json.get("attributes", {}).get("item_dimensions", [{}])[0]
-        if isinstance(item_dims, dict):
-            if length_cm is None and "length" in item_dims:
-                val = _read_number(item_dims["length"].get("value"))
-                unit = item_dims["length"].get("unit", "inches")
-                if val: length_cm = _to_cm(val, unit)
-            if width_cm is None and "width" in item_dims:
-                val = _read_number(item_dims["width"].get("value"))
-                unit = item_dims["width"].get("unit", "inches")
-                if val: width_cm = _to_cm(val, unit)
-            if height_cm is None and "height" in item_dims:
-                val = _read_number(item_dims["height"].get("value"))
-                unit = item_dims["height"].get("unit", "inches")
-                if val: height_cm = _to_cm(val, unit)
+    # Validar que TODAS las dimensiones existan
+    if not all([length_cm, width_cm, height_cm, weight_kg]):
+        print(f"⚠️ ADVERTENCIA: Dimensiones de paquete incompletas en {asin}")
+        print(f"   Length: {length_cm}, Width: {width_cm}, Height: {height_cm}, Weight: {weight_kg}")
+        print("   Las dimensiones del paquete deben estar en item_package_dimensions del JSON de Amazon")
+        # Usar mínimos de ML como último recurso (10cm, 0.1kg)
+        length_cm = length_cm or 10.0
+        width_cm = width_cm or 10.0
+        height_cm = height_cm or 10.0
+        weight_kg = weight_kg or 0.1
 
-    # Si aún no hay peso, buscar item_weight
-    if weight_kg is None:
-        item_weight = amazon_json.get("attributes", {}).get("item_weight", [{}])[0]
-        if isinstance(item_weight, dict) and "value" in item_weight:
-            val = _read_number(item_weight.get("value"))
-            unit = item_weight.get("unit", "pounds")
-            if val: weight_kg = _to_kg(val, unit)
-
-    # Aplicar mínimos: ML rechaza dimensiones < 5cm o peso < 0.1kg
-    # Si estimamos desde item_dimensions, añadir margen de +20% para empaque
-    if length_cm and not L:  # Si viene de item_dimensions (no de package)
-        length_cm = round(length_cm * 1.2, 2)  # +20% margen de empaque
-    if width_cm and not W:
-        width_cm = round(width_cm * 1.2, 2)
-    if height_cm and not H:
-        height_cm = round(height_cm * 1.2, 2)
-    if weight_kg and not KG:
-        weight_kg = round(weight_kg * 1.15, 3)  # +15% margen de empaque
-
-    # Si NO hay dimensiones, estimación inteligente basada en peso/precio
-    if not length_cm or not width_cm or not height_cm:
-        # Estimación basada en peso y tipo de producto
-        est_weight = weight_kg or 0.2
-        # Pequeño (<0.2kg): 15x12x8 cm
-        # Mediano (0.2-2kg): 25x20x15 cm
-        # Grande (>2kg): 40x35x25 cm
-        if est_weight < 0.2:
-            length_cm = length_cm or 15.0
-            width_cm = width_cm or 12.0
-            height_cm = height_cm or 8.0
-        elif est_weight < 2.0:
-            length_cm = length_cm or 25.0
-            width_cm = width_cm or 20.0
-            height_cm = height_cm or 15.0
-        else:
-            length_cm = length_cm or 40.0
-            width_cm = width_cm or 35.0
-            height_cm = height_cm or 25.0
-
+    # Usar dimensiones reales de Amazon (sin aplicar mínimos artificiales)
+    # ML acepta dimensiones menores a 10cm si son las reales del producto
     pkg = {
-        "length_cm": max(length_cm, 10.0),
-        "width_cm": max(width_cm, 10.0),
-        "height_cm": max(height_cm, 10.0),
-        "weight_kg": max(weight_kg or 0.15, 0.1)
+        "length_cm": round(length_cm, 2),
+        "width_cm": round(width_cm, 2),
+        "height_cm": round(height_cm, 2),
+        "weight_kg": round(weight_kg, 3)
     }
 
-    # precio (mini)
+    # precio + tax (mini)
     base_price = get_amazon_base_price(amazon_json)
-    price = compute_price(base_price)
+    tax = get_amazon_tax(amazon_json)
+    price = compute_price(base_price, tax)
+
+    if tax > 0:
+        print(f"💰 Precio: ${base_price} + tax ${tax} = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
+    else:
+        print(f"💰 Precio: ${base_price} (sin tax) → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
 
     # ================== IMÁGENES (Amazon → mini_ml imágenes con metadata) ==================
     # Usamos extract_images (una por variante, ordenada, hi-res)

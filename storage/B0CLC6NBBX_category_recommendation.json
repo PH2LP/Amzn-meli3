@@ -1,0 +1,37 @@
+{
+  "recommended_category": "CBT436014",
+  "category_name": "Bluetooth",
+  "reason": "BRAND not required",
+  "all_options": [
+    {
+      "id": "CBT436014",
+      "name": "Bluetooth",
+      "accepts_picun": false,
+      "accepts_freetext": false
+    },
+    {
+      "id": "CBT416844",
+      "name": "Audio Interfaces",
+      "accepts_picun": false,
+      "accepts_freetext": false
+    },
+    {
+      "id": "CBT434918",
+      "name": "Audio Interfaces",
+      "accepts_picun": false,
+      "accepts_freetext": false
+    },
+    {
+      "id": "CBT3697",
+      "name": "Headphones",
+      "accepts_picun": false,
+      "accepts_freetext": false
+    },
+    {
+      "id": "CBT123325",
+      "name": "Headphones",
+      "accepts_picun": false,
+      "accepts_freetext": false
+    }
+  ]
+}

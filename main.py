@@ -142,6 +142,11 @@ def publish_asin(asin: str) -> bool:
 
             result = publish_item(mini_ml)
 
+            # Verificar si result es None (publicación abortada)
+            if result is None:
+                print(f"⚠️ Publicación abortada para {asin} (dimensiones/imágenes inválidas)")
+                return False
+
             # El response de MercadoLibre CBT usa "item_id", no "id"
             item_id = result.get("item_id") or result.get("id")
             if item_id:

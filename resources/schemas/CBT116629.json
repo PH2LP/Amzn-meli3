@@ -2,12 +2,24 @@
   "BRAND": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "MODEL": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "COLOR": {
     "value_type": "string",
@@ -64,7 +76,13 @@
       "cyan": "338779",
       "light blue": "52029"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "PATTERN_NAME": {
     "value_type": "string",
@@ -72,7 +90,13 @@
       "animals": "5590332",
       "plain": "930483"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "SALE_FORMAT": {
     "value_type": "list",
@@ -80,12 +104,20 @@
       "unit": "1359391",
       "pack": "1359392"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "UNITS_PER_PACK": {
     "value_type": "number",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "conditional_required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "HEIGHT": {
     "value_type": "number_unit",
@@ -93,7 +125,10 @@
     "allowed_units": [
       "cm",
       "mm"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "WIDTH": {
     "value_type": "number_unit",
@@ -101,7 +136,10 @@
     "allowed_units": [
       "cm",
       "mm"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "LENGTH": {
     "value_type": "number_unit",
@@ -109,7 +147,10 @@
     "allowed_units": [
       "cm",
       "mm"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "DIAMETER": {
     "value_type": "number_unit",
@@ -117,7 +158,10 @@
     "allowed_units": [
       "cm",
       "mm"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
   },
   "PACKAGE_HEIGHT": {
     "value_type": "number_unit",
@@ -128,7 +172,14 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_WIDTH": {
     "value_type": "number_unit",
@@ -139,7 +190,14 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_LENGTH": {
     "value_type": "number_unit",
@@ -150,7 +208,14 @@
       "ft",
       "m",
       "mm"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "PACKAGE_WEIGHT": {
     "value_type": "number_unit",
@@ -161,7 +226,14 @@
       "lb",
       "mg",
       "oz"
-    ]
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "MAIN_COLOR": {
     "value_type": "list",
@@ -183,7 +255,12 @@
       "white": "2450308",
       "beige": "2450281"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "WEIGHT": {
     "value_type": "number_unit",
@@ -191,7 +268,10 @@
     "allowed_units": [
       "g",
       "kg"
-    ]
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
   },
   "CHRISTMAS_TREE_ORNAMENT_SHAPE": {
     "value_type": "string",
@@ -201,7 +281,12 @@
       "round": "5572569",
       "star": "25471044"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "MATERIAL": {
     "value_type": "string",
@@ -209,7 +294,10 @@
       "metal": "112648",
       "plastic": "2748302"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "IS_LED": {
     "value_type": "boolean",
@@ -217,7 +305,10 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "IS_HANGABLE": {
     "value_type": "boolean",
@@ -225,12 +316,24 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
   },
   "GTIN": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
   },
   "VERTICAL_TAGS": {
     "value_type": "string",
@@ -241,19 +344,38 @@
       "is_beauty_premium": "53559155",
       "has_dimensions_images": "53559156"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "MPN": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
   },
   "ITEM_CONDITION": {
     "value_type": "list",
     "values": {
       "new": "2230284"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_TOM_BRAND": {
     "value_type": "boolean",
@@ -261,12 +383,24 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "VALUE_ADDED_TAX": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "IMPORT_DUTY": {
     "value_type": "list",
@@ -289,38 +423,71 @@
       "26 %": "49553254",
       "70 %": "49553255"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_SKU": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_WIDTH": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "cm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_LENGTH": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "cm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_HEIGHT": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "cm"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_TYPE": {
     "value_type": "list",
@@ -328,14 +495,24 @@
       "no additional packaging": "47115155",
       "with additional packaging": "47115156"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
       "g"
-    ]
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "IS_FLAMMABLE": {
     "value_type": "boolean",
@@ -343,7 +520,13 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "WITH_POSITIVE_IMPACT": {
     "value_type": "boolean",
@@ -351,7 +534,13 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -361,7 +550,13 @@
       "exceeded": "13414679",
       "indeterminate": "13414680"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_KIT": {
     "value_type": "boolean",
@@ -369,12 +564,24 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "DESCRIPTIVE_TAGS": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PRODUCT_CHEMICAL_FEATURES": {
     "value_type": "list",
@@ -386,7 +593,14 @@
       "explosive": "7651074",
       "toxic or infectious": "7651075"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "FOODS_AND_DRINKS": {
     "value_type": "list",
@@ -394,7 +608,14 @@
       "for humans": "7575926",
       "for animals": "7575927"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "MEDICINES": {
     "value_type": "list",
@@ -404,7 +625,14 @@
       "for animals with a medical prescription": "7575932",
       "for animals without a medical prescription": "7575933"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "BATTERIES_FEATURES": {
     "value_type": "list",
@@ -413,7 +641,14 @@
       "lithium installed": "7575935",
       "for cars (lead-acid)": "7575936"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "SHIPMENT_PACKING": {
     "value_type": "list",
@@ -424,7 +659,14 @@
       "self-shipping": "7575939",
       "exb": "27037932"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "ADDITIONAL_INFO_REQUIRED": {
     "value_type": "list",
@@ -432,7 +674,14 @@
       "has imei": "7435893",
       "has serial number": "7435894"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "EXCLUDED_PLATFORMS": {
     "value_type": "list",
@@ -442,7 +691,14 @@
       "desktop": "9936779",
       "mobile": "9936780"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_SUITABLE_FOR_SHIPMENT": {
     "value_type": "boolean",
@@ -450,19 +706,37 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PRODUCT_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
     "value_type": "string",
     "values": {
       "pharma": "24219544"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "HAS_COMPATIBILITIES": {
     "value_type": "boolean",
@@ -470,17 +744,36 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "CATALOG_TITLE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "SEARCH_ENHANCEMENT_FIELDS": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PRODUCT_FEATURES": {
     "value_type": "list",
@@ -500,7 +793,14 @@
       "magnetic": "52092586",
       "can roll": "52233302"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "IS_NEW_OFFER": {
     "value_type": "boolean",
@@ -508,16 +808,34 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "SYI_PYMES_ID": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
-    "allowed_units": []
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
   }
 }

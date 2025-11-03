@@ -1,0 +1,28 @@
+{
+  "published": [
+    "B0BGQLZ921",
+    "B0D3H3NKBN",
+    "B0DCYZJBYD",
+    "B0CJQG4PMF",
+    "B081SRSNWW",
+    "B0BRNY9HZB",
+    "B0D1Z99167"
+  ],
+  "failed_technical": {
+    "B0CYM126TT": "GTIN requerido (CBT1157)",
+    "B0DRW8G3WK": "GTIN requerido (CBT1157)",
+    "B092RCLKHN": "BRAND Garmin no registrado",
+    "B0CLC6NBBX": "BRAND Picun no registrado",
+    "B0BXSLRQH7": "BRAND GOLDEN HOUR no registrado",
+    "B0CHLBDJYP": "Categoría CBT413467 compleja",
+    "B0DRW69H11": "Sin item_id - verificar en ML"
+  },
+  "stats": {
+    "total_asins": 14,
+    "published": 7,
+    "failed_technical": 7,
+    "success_rate": "50%",
+    "total_listings": 27,
+    "avg_countries_per_asin": 3.9
+  }
+}

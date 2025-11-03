@@ -1,0 +1,52 @@
+{
+  "valid": [
+    "B0BGQLZ921",
+    "B0CYM126TT",
+    "B0DRW8G3WK",
+    "B0D3H3NKBN",
+    "B0CHLBDJYP",
+    "B0CJQG4PMF",
+    "B0D1Z99167",
+    "B081SRSNWW"
+  ],
+  "need_republish": [
+    "B092RCLKHN",
+    "B0DRW69H11",
+    "B0BXSLRQH7",
+    "B0DCYZJBYD",
+    "B0CLC6NBBX",
+    "B0BRNY9HZB"
+  ],
+  "fixes": {
+    "B092RCLKHN": {
+      "reason": "Categoría incorrecta: La categoría asignada 'Modeling Products' no es coherente con el producto, que es un reloj deportivo. Debería ser 'Relojes Deportivos'.",
+      "old_category": "CBT388015",
+      "new_category": "CBT116629"
+    },
+    "B0DRW69H11": {
+      "reason": "Categoría incorrecta: El producto es un set de LEGO, que corresponde a la categoría de 'Building Blocks & Figures', no a 'Nail Polish'.",
+      "old_category": "CBT29890",
+      "new_category": "CBT1157"
+    },
+    "B0BXSLRQH7": {
+      "reason": "Categoría incorrecta: El producto es un reloj deportivo digital, pero la categoría asignada es 'Modeling Products', que no corresponde a relojes. Debería ser 'Relojes Deportivos'.",
+      "old_category": "CBT388015",
+      "new_category": "CBT116629"
+    },
+    "B0DCYZJBYD": {
+      "reason": "Categoría incorrecta: El producto es un balón de baloncesto, que corresponde a la categoría de 'Sports & Fitness', no a 'Building Blocks & Figures'.",
+      "old_category": "CBT1157",
+      "new_category": "CBT116629"
+    },
+    "B0CLC6NBBX": {
+      "reason": "Categoría incorrecta: El producto es un audífono Bluetooth, que no corresponde a la categoría de 'Building Blocks & Figures', que se refiere a bloques de construcción y juguetes de armar.",
+      "old_category": "CBT1157",
+      "new_category": "CBT116629"
+    },
+    "B0BRNY9HZB": {
+      "reason": "Categoría incorrecta: El producto es un kit de pintura de rocas, que no se relaciona con bloques de construcción o figuras, sino más bien con actividades artísticas.",
+      "old_category": "CBT1157",
+      "new_category": "CBT29890"
+    }
+  }
+}
