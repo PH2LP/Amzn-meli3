@@ -248,7 +248,7 @@ JSON de producto (recortado):
 {json.dumps(amazon_json)[:12000]}
 """
         resp = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             temperature=0,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -296,11 +296,19 @@ def get_ai_copy_and_category(amazon_json) -> Tuple[str, str, str, str]:
     fallback_title = amazon_json.get("title") or amazon_json.get("asin") or "Producto"
     fallback_desc = (f"{fallback_title}. Producto nuevo e importado. "
                      "Ideal para regalar o ampliar tu colección.\n\n"
-                     "Información Importante:\n"
-                     "• Envío desde Estados Unidos.\n"
-                     "• Producto nuevo, original y sellado.\n"
-                     "• Garantía internacional de 30 días.\n"
-                     "• Voltaje 110V (puede requerir adaptador).")
+                     "🔎 Información importante para compras internacionales\n\n"
+                     "• Producto nuevo y original\n"
+                     "• Envío desde Estados Unidos con seguimiento\n"
+                     "• Impuestos y aduana incluidos en el precio\n"
+                     "• Compra protegida por Mercado Libre\n"
+                     "• Garantía de 30 días desde la entrega\n"
+                     "• Factura emitida por Mercado Libre (no factura local del país)\n"
+                     "• Productos eléctricos: 110-120V + clavija americana\n"
+                     "• Puede requerir adaptador o transformador, según el país\n"
+                     "• Medidas y peso pueden aparecer en sistema imperial\n"
+                     "• Si incluye baterías, pueden enviarse retiradas por normas aéreas\n"
+                     "• Atención al cliente en español e inglés\n\n"
+                     "Somos ONEWORLD 🌎")
     fallback_model = amazon_json.get("attributes", {}).get("model", [{}])[0].get("value", "") or "Genérico"
     fallback_kw = "juego de construcción lego" if "lego" in (amazon_json.get("title","").lower()) else "producto genérico"
 
@@ -326,11 +334,21 @@ Reglas de estilo:
 - Título natural (no lista de keywords), con Mayúscula inicial. Asegura acrónimos (LEGO) en mayúsculas.
 - Si el título original sirve, condénsalo a 60 caracteres en buen español.
 - Al final de la descripción agrega EXACTO:
-"Información Importante:
-• Envío desde Estados Unidos.
-• Producto nuevo, original y sellado.
-• Garantía internacional de 30 días.
-• Voltaje 110V (puede requerir adaptador)."
+"🔎 Información importante para compras internacionales
+
+• Producto nuevo y original
+• Envío desde Estados Unidos con seguimiento
+• Impuestos y aduana incluidos en el precio
+• Compra protegida por Mercado Libre
+• Garantía de 30 días desde la entrega
+• Factura emitida por Mercado Libre (no factura local del país)
+• Productos eléctricos: 110-120V + clavija americana
+• Puede requerir adaptador o transformador, según el país
+• Medidas y peso pueden aparecer en sistema imperial
+• Si incluye baterías, pueden enviarse retiradas por normas aéreas
+• Atención al cliente en español e inglés
+
+Somos ONEWORLD 🌎"
 
 JSON DE AMAZON (recortado):
 {json.dumps(amazon_json)[:15000]}
@@ -559,7 +577,7 @@ Do NOT include Markdown, code fences, or explanations.
 
         # 🔹 Ejecutamos la IA
         resp = client.chat.completions.create(
-            model="gpt-4o",
+            model="gpt-4o-mini",
             temperature=0.2,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -642,7 +660,7 @@ def get_additional_characteristics_ai(amazon_json: dict):
     """
 
             resp = client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 temperature=0.4,
                 messages=[{"role": "user", "content": prompt}],
             )
@@ -712,8 +730,10 @@ def publish_item(asin_json):
 
         L, W, H, KG = pkg.get("length_cm"), pkg.get("width_cm"), pkg.get("height_cm"), pkg.get("weight_kg")
         base_price = price.get("base_usd", 0)
-        net_amount = price.get("final_usd", 0)
-        mk_pct = price.get("markup_pct", 0.35)
+        tax = price.get("tax_usd", 0)
+        cost = price.get("cost_usd", base_price)  # fallback si no hay tax
+        net_amount = price.get("net_proceeds_usd") or price.get("final_usd", 0)  # soportar ambos formatos
+        mk_pct = price.get("markup_pct", 35)
         cid = mini.get("category_id", "CBT1157")
 
         # ✅ Validar y limpiar GTINs ANTES de construir attributes
@@ -736,7 +756,10 @@ def publish_item(asin_json):
         if len(gtins) > 1:
             gtins = [gtins[0]]
 
-        print(f"💰 Precio base: ${base_price} + {mk_pct*100:.0f}% → ${net_amount}")
+        if tax > 0:
+            print(f"💰 Precio: ${base_price} + tax ${tax} = costo ${cost} + {mk_pct}% markup → net proceeds ${net_amount}")
+        else:
+            print(f"💰 Precio: ${base_price} (sin tax) + {mk_pct}% markup → net proceeds ${net_amount}")
         print(f"📦 {L}×{W}×{H} cm – {KG} kg")
 
         # 🔹 Atributos pre-mapeados
@@ -835,7 +858,15 @@ def publish_item(asin_json):
             from openai import OpenAI
             client = OpenAI(api_key=OPENAI_API_KEY)
 
-            ml_schema = http_get(f"https://api.mercadolibre.com/categories/{cid}/attributes")
+            # Descargar schema de categoría para filtrado
+            try:
+                ml_schema = http_get(f"https://api.mercadolibre.com/categories/{cid}/attributes")
+                # Crear mapa de IDs válidos del schema
+                valid_attr_ids = {attr.get("id") for attr in ml_schema if attr.get("id")}
+            except Exception as e:
+                print(f"⚠️ No se pudo descargar schema de {cid}: {e}")
+                print("   Se usará solo la blacklist para filtrar atributos")
+                valid_attr_ids = None  # Desactivar filtrado por schema
 
             # ✅ Si force_no_gtin está activo, crear copia de mini_ml sin GTIN para evitar que la IA lo agregue
             mini_for_ai = mini.copy()
@@ -865,7 +896,7 @@ Devuelve SOLO un array JSON con los atributos rellenados.
 """
 
             resp = client.chat.completions.create(
-                model="gpt-4o",
+                model="gpt-4o-mini",
                 temperature=0.2,
                 messages=[{"role": "user", "content": prompt}],
             )
@@ -879,11 +910,17 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                 if isinstance(attributes_ai, list):
                     attributes.extend(attributes_ai)
 
-            # Limpieza mínima (sin fallback)
+            # Limpieza: filtrar contra schema oficial de la categoría
             cleaned_attrs = []
             seen_ids = set()
+            filtered_count = 0
+
+            if valid_attr_ids:
+                print(f"📋 Schema de categoría {cid} tiene {len(valid_attr_ids)} atributos válidos")
 
             # Lista de atributos problemáticos que causan errores en ML
+            # NOTA: Esta blacklist es redundante si filtramos contra el schema,
+            # pero la mantenemos como seguridad adicional
             BLACKLISTED_ATTRS = {
                 "VALUE_ADDED_TAX",  # Invalid en MLA
                 "ITEM_DIMENSIONS",   # No existe en la mayoría de categorías
@@ -944,8 +981,14 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                     continue
                 aid = a["id"]
 
-                # Filtrar atributos en blacklist
+                # 1. Filtrar contra schema oficial (más importante)
+                if valid_attr_ids is not None and aid not in valid_attr_ids:
+                    filtered_count += 1
+                    continue
+
+                # 2. Filtrar atributos en blacklist (seguridad adicional)
                 if aid in BLACKLISTED_ATTRS:
+                    filtered_count += 1
                     continue
 
                 # Filtrar atributos en español (nombres inválidos de IA)
@@ -979,7 +1022,9 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                 seen_ids.add(aid)
             attributes = cleaned_attrs
 
-            print(f"🧽 Atributos IA (solo mini_ml) listos: {len(attributes)} válidos para publicar")
+            if filtered_count > 0:
+                print(f"🧹 Filtrados {filtered_count} atributos inválidos (no existen en schema o blacklist)")
+            print(f"🧽 Atributos finales listos: {len(attributes)} válidos para publicar")
 
         except Exception as e:
             print(f"⚠️ Error completando atributos IA solo con mini_ml: {e}")
@@ -1043,8 +1088,9 @@ Devuelve SOLO un array JSON con los atributos rellenados.
         pics = [{"source": "https://http2.mlstatic.com/D_NQ_NP_2X_664019-MLA54915512781_042023-F.webp"}]
 
     body["pictures"] = pics
-    body["site_id"] = sites[0]["site_id"]
-    body["logistic_type"] = sites[0]["logistic_type"]
+    # Para CBT (Cross Border Trade), NO especificar site_id para que se replique en todos los marketplaces
+    # El array sites_to_sell define automáticamente dónde se publica
+    body["logistic_type"] = "remote"  # CBT siempre usa logística remota (cross-border)
     body["sites_to_sell"] = sites
 
         # === 🔧 Corrección final de atributos requeridos antes del POST ===
@@ -1076,26 +1122,29 @@ Devuelve SOLO un array JSON con los atributos rellenados.
         
 # ============ Main ============
 def main():
-    files = sorted(glob.glob(os.path.join(INPUT_DIR, "*.json")))
+    # Buscar directamente los archivos mini_ml procesados
+    mini_ml_dir = "storage/logs/publish_ready"
+    files = sorted(glob.glob(os.path.join(mini_ml_dir, "*_mini_ml.json")))
+
     print(f"\n🚀 Publicador CBT iniciado ({len(files)} productos)\n")
     if not files:
-        print("⚠️ No hay archivos JSON.")
+        print("⚠️ No hay archivos mini_ml para publicar.")
+        print(f"   Busqué en: {mini_ml_dir}/")
         return
+
     for f in files:
-        asin = os.path.basename(f).replace(".json", "")
+        asin = os.path.basename(f).replace("_mini_ml.json", "")
         print(f"🔄 Procesando {asin}...")
         try:
-            mini_path = f"storage/logs/publish_ready/{asin}_mini_ml.json"
-            if not os.path.exists(mini_path):
-                print(f"⚠️ No existe mini_ml para {asin}, saltando...")
-                continue
-            with open(mini_path, "r", encoding="utf-8") as fh:
+            with open(f, "r", encoding="utf-8") as fh:
                 mini_ml = json.load(fh)
             publish_item(mini_ml)
         except Exception as e:
             print(f"❌ Error {asin}: {e}")
+            import traceback
+            traceback.print_exc()
         finally:
-            time.sleep(1)
+            time.sleep(2)  # Esperar entre publicaciones para evitar rate limiting
     print("\n✅ Proceso completo.")
 
 if __name__ == "__main__":
