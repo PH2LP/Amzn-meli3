@@ -1,0 +1,115 @@
+# PREGUNTAS PERSONALIZADAS - US ONE WORLD
+# Formato: PREGUNTA | KEYWORDS | RESPUESTA
+# Keywords en español e inglés para máxima cobertura
+
+# ========================================
+# ENVÍOS
+# ========================================
+
+PREGUNTA: ¿Desde dónde envían el producto?
+KEYWORDS: desde.+donde|de.+donde|origen|envian|envia|procedencia|from.+where|where.+from|ship.+from|shipping.+from|where.+located
+RESPUESTA: El producto se envía desde Estados Unidos a través del programa Mercado Libre Global Selling.
+
+PREGUNTA: ¿Cuánto tarda en llegar?
+KEYWORDS: cuanto.+tarda|demora|tiempo|llega|entrega|dias|when.+arrive|how.+long|delivery.+time|takes.+to.+arrive|shipping.+time
+RESPUESTA: El tiempo de entrega estimado se indica en la misma publicación.
+
+PREGUNTA: ¿Hacen envíos a todo el país?
+KEYWORDS: envio.+todo|cobertura|envian.+a|llega.+a|provincia|region|ship.+to|deliver.+to|all.+country|nationwide|everywhere
+RESPUESTA: Sí, Mercado Libre gestiona la logística y entrega en todas las provincias del país.
+
+PREGUNTA: ¿Qué pasa si el paquete se pierde o daña?
+KEYWORDS: pierde|perdido|dañado|roto|problema|lost|damaged|broken|missing|package.+problem|not.+received
+RESPUESTA: Mercado Libre protege tu compra. Si hay un inconveniente, recibís un reemplazo o reembolso total.
+
+PREGUNTA: ¿Qué pasa si no estoy cuando llega?
+KEYWORDS: no.+estoy|ausente|nadie|retirar|sucursal|not.+home|nobody.+home|miss.+delivery|pickup|branch
+RESPUESTA: El correo hará 2 intentos de entrega. Si no estás, podés retirarlo en la sucursal indicada por el correo.
+
+# ========================================
+# GARANTÍA
+# ========================================
+
+PREGUNTA: ¿El producto tiene garantía?
+KEYWORDS: garantia|garantía|warranty|guarantee|covered|protection
+RESPUESTA: Si, todos nuestros productos cuentan con garantía del vendedor, compre con total tranquilidad.
+
+PREGUNTA: ¿Qué incluye la garantía?
+KEYWORDS: incluye.+garantia|cubre|cobertura|que.+cubre|warranty.+cover|what.+covered|warranty.+include
+RESPUESTA: Cubre defectos de fábrica y funcionamiento normal del producto.
+
+# ========================================
+# PAGOS
+# ========================================
+
+PREGUNTA: ¿Qué medios de pago aceptan?
+KEYWORDS: medio.+pago|forma.+pago|como.+pag|metodo.+pago|payment.+method|how.+to.+pay|accept|credit.+card
+RESPUESTA: Todos los habilitados por Mercado Pago (tarjetas de crédito, débito y efectivo según disponibilidad).
+
+PREGUNTA: ¿Hay cuotas?
+KEYWORDS: cuota|cuotas|mensual|financ|plazo|installment|monthly.+payment|payment.+plan|financing
+RESPUESTA: Las cuotas y métodos disponibles dependen del país desde donde compres. Podés verlas haciendo clic en: "Ver los medios de pago" (abajo del precio). Si necesitás, puedo ayudarte durante todo el proceso. ¡Cualquier otra pregunta estoy para ayudarte!
+
+# ========================================
+# FACTURACIÓN
+# ========================================
+
+PREGUNTA: ¿Entregan factura?
+KEYWORDS: factura|invoice|recibo|comprobante|fiscal|receipt|bill
+RESPUESTA: Su factura la va a emitir MercadoLibre. Debido a que vendemos desde usa, también hacemos los impuestos acá.
+
+# ========================================
+# DEVOLUCIONES
+# ========================================
+
+PREGUNTA: ¿Puedo devolver el producto si no me gusta?
+KEYWORDS: devol|retorn|cambio|no.+gusta|no.+me.+sirve|return|refund|give.+back|send.+back|not.+like
+RESPUESTA: Sí. Tenés 30 días desde que lo recibís para hacer una devolución sin costo.
+
+PREGUNTA: ¿Qué pasa si el producto llega diferente a la descripción?
+KEYWORDS: diferente|distinto|no.+es.+igual|error|equivocado|wrong|different|not.+same|not.+as.+described|mismatch
+RESPUESTA: Podés hacer un reclamo y Mercado Libre te devuelve el dinero o se envía un reemplazo.
+
+# ========================================
+# ATENCIÓN AL CLIENTE
+# ========================================
+
+PREGUNTA: ¿Responden rápido?
+KEYWORDS: responde|respuesta|rapido|demora.+responder|atienden|customer.+service|reply|response.+time|how.+fast|quick
+RESPUESTA: Sí, estamos disponibles todos los días para ayudarte con cualquier duda.
+
+PREGUNTA: ¿Pueden enviarme más fotos?
+KEYWORDS: foto|imagen|picture|photo|more.+picture|additional.+photo|send.+photo
+RESPUESTA: Puede ver todas las imágenes del producto en la publicación.
+
+# ========================================
+# ORIGEN & CALIDAD
+# ========================================
+
+PREGUNTA: ¿El producto es original?
+KEYWORDS: original|autentico|authentico|falso|trucho|legitimo|copia|replica|pirata|authentic|genuine|real|fake|counterfeit|legit|is.?it.?original
+RESPUESTA: Sí, trabajamos únicamente con productos originales, nuevos y en su empaque sellado.
+
+PREGUNTA: ¿Incluye todos los accesorios?
+KEYWORDS: incluye|accesorios|viene.+con|trae|contenido|include|accessories|comes.+with|what.+included|in.+the.+box
+RESPUESTA: Sí, incluye exactamente lo que se detalla en las imágenes y descripción del producto.
+
+# ========================================
+# COMPRA SEGURA
+# ========================================
+
+PREGUNTA: ¿Mi compra está protegida?
+KEYWORDS: proteg|segur|confiable|estafa|scam|safe|secure|protected|trust|buyer.+protection
+RESPUESTA: Sí, Mercado Libre protege tu compra en todo el proceso hasta que recibas el producto en perfecto estado.
+
+PREGUNTA: ¿Desde dónde se envía el producto?
+KEYWORDS: se.+envia|procedencia|ubicacion|pais|ship.+from|ships.+from|shipping.+origin|where.+ship
+RESPUESTA: Se envía desde Estados Unidos. El envío y la gestión de importación están incluidos en el precio.
+
+PREGUNTA: ¿Hay costos adicionales de aduana o impuestos?
+KEYWORDS: aduana|aduanas|customs|impuesto|tax|extra|adicional|pagar.+mas|additional.+cost|duties|import.+tax|customs.+fee
+RESPUESTA: MercadoLibre se encarga de hacer toda la gestion, usted no debe hacer ningun tramite ni pagar nada mas.
+
+PREGUNTA: ¿Las medidas/publicidad son correctas?
+KEYWORDS: medida|dimension|tamaño|size|especificacion|correct|accurate|measurement|real.+size|true.+to.+size
+RESPUESTA: Sí. Todos los datos vienen del fabricante oficial. Si necesitás confirmar una medida exacta, te la pasamos.
