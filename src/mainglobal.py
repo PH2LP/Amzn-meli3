@@ -53,6 +53,40 @@ def http_get(url, params=None, extra_headers=None, timeout=30):
         raise RuntimeError(f"GET {url} → {r.status_code} {r.text}")
     return r.json()
 
+def parse_ml_error_for_missing_fields(error_text: str) -> list:
+    """
+    Parsea errores de MercadoLibre para detectar campos faltantes.
+
+    Ejemplos de errores:
+    - "attribute [SIZE_GRID_ID] is missing"
+    - "Attribute HEIGHT with value Default is required and was omitted"
+
+    Returns:
+        Lista de field_ids faltantes
+    """
+    import re
+    missing_fields = []
+
+    # Patrón 1: "attribute [FIELD_ID] is missing"
+    matches = re.findall(r'attribute\s+\[(\w+)\]\s+is\s+missing', error_text, re.IGNORECASE)
+    missing_fields.extend(matches)
+
+    # Patrón 2: "Attribute FIELD_ID with value Default is required"
+    matches = re.findall(r'Attribute\s+(\w+)\s+with\s+value\s+Default', error_text, re.IGNORECASE)
+    missing_fields.extend(matches)
+
+    # Patrón 3: "Attribute FIELD_ID ... was omitted"
+    matches = re.findall(r'Attribute\s+(\w+)\s+.*?was\s+omitted', error_text, re.IGNORECASE)
+    missing_fields.extend(matches)
+
+    # Deduplicar
+    missing_fields = list(set(missing_fields))
+
+    if missing_fields:
+        print(f"🔍 Detectados campos faltantes en error de ML: {missing_fields}")
+
+    return missing_fields
+
 def ai_extract_missing_fields(asin: str, amazon_json: dict, required_fields: list) -> dict:
     """
     Usa IA para extraer valores de campos requeridos faltantes del JSON completo de Amazon.
@@ -1398,9 +1432,57 @@ Devuelve SOLO un array JSON con los atributos rellenados.
     attributes = final_attrs
 
     print("🚀 Publicando item desde mini_ml ...")
-    res = http_post(f"{API}/global/items", body)
-    item_id = res.get("id")
-    print(f"✅ Publicado → {item_id}")
+
+    # Retry inteligente: intentar hasta 2 veces si faltan campos
+    max_retries = 2
+    for retry_attempt in range(max_retries):
+        try:
+            res = http_post(f"{API}/global/items", body)
+            item_id = res.get("id")
+            print(f"✅ Publicado → {item_id}")
+            break  # Éxito, salir del loop
+
+        except RuntimeError as e:
+            error_text = str(e)
+
+            # Si es el último intento, re-raise el error
+            if retry_attempt >= max_retries - 1:
+                raise
+
+            # Parsear error para detectar campos faltantes
+            missing_field_ids = parse_ml_error_for_missing_fields(error_text)
+
+            if not missing_field_ids:
+                # No hay campos faltantes detectables, re-raise error
+                raise
+
+            # Intentar extraer campos faltantes con IA
+            print(f"🤖 Reintento {retry_attempt + 1}/{max_retries}: Extrayendo campos faltantes con IA...")
+
+            # Crear lista de "campos requeridos" ficticios para ai_extract_missing_fields
+            fake_required_fields = [
+                {"id": field_id, "name": field_id.replace("_", " ").title(), "value_type": "string"}
+                for field_id in missing_field_ids
+            ]
+
+            extracted_values = ai_extract_missing_fields(asin, amazon_json, fake_required_fields)
+
+            if not extracted_values:
+                print("⚠️ IA no pudo extraer los campos faltantes")
+                raise
+
+            # Agregar campos extraídos a los atributos
+            for field_id, value in extracted_values.items():
+                if value:
+                    print(f"   ✅ Agregando {field_id} = {value}")
+                    body["attributes"].append({
+                        "id": field_id,
+                        "value_name": str(value)
+                    })
+
+            # Actualizar body y reintentar
+            print("🔄 Reintentando publicación con campos agregados...")
+            continue  # Volver al inicio del loop para reintentar
 
     # Guardar en la base de datos para sincronización
     try:
