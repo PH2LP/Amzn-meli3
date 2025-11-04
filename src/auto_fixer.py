@@ -19,7 +19,7 @@ import json
 import re
 from typing import Dict, List, Optional, Tuple
 from pathlib import Path
-import anthropic
+from openai import OpenAI
 import os
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -164,7 +164,7 @@ def fix_missing_brand(mini_ml: dict, amazon_json: dict) -> dict:
 
 def fix_missing_color_with_ai(mini_ml: dict, amazon_json: dict) -> dict:
     """Usa IA para detectar el color del producto"""
-    client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
+    client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
     # Extraer título y descripción
     title = amazon_json.get('summaries', [{}])[0].get('itemName', '')
@@ -178,13 +178,13 @@ Si no tiene un color específico o es transparente, responde "No aplica"
 """
 
     try:
-        response = client.messages.create(
-            model="claude-3-5-haiku-20241022",
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
             max_tokens=50,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        color = response.content[0].text.strip()
+        color = response.choices[0].message.content.strip()
 
         if color and color != "No aplica":
             # ✅ Modificar attributes_mapped en lugar de attributes
@@ -311,7 +311,7 @@ def fix_category_with_ai(mini_ml: dict, amazon_json: dict, error_sites: List[str
     """
     Usa IA para encontrar una categoría alternativa que esté permitida
     """
-    client = anthropic.Anthropic(api_key=os.getenv('ANTHROPIC_API_KEY'))
+    client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
     title = amazon_json.get('summaries', [{}])[0].get('itemName', '')
     current_category = mini_ml.get('category_id', '')
@@ -326,13 +326,13 @@ Responde SOLO con el ID de categoría (ej: CBT123456)
 """
 
     try:
-        response = client.messages.create(
-            model="claude-3-5-haiku-20241022",
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
             max_tokens=100,
             messages=[{"role": "user", "content": prompt}]
         )
 
-        new_category = response.content[0].text.strip()
+        new_category = response.choices[0].message.content.strip()
 
         if new_category.startswith('CBT'):
             mini_ml['category_id'] = new_category
