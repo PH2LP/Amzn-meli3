@@ -1083,24 +1083,51 @@ def publish_item(asin_json):
                 if "second_characteristics" in mini_for_ai:
                     mini_for_ai["second_characteristics"] = [c for c in mini_for_ai["second_characteristics"] if c.get("id") != "GTIN"]
 
-            prompt = f"""
-Eres un experto en estructura de categorías de Mercado Libre.
-Tienes el siguiente SCHEMA de atributos para la categoría {cid} y un JSON transformado (mini_ml).
-Rellena 'value_name' solo usando la información disponible en el JSON transformado.
-No inventes valores ni uses datos externos. Si no hay información, déjalo vacío.
+            # ✅ NUEVO: Identificar atributos REQUERIDOS del schema
+            required_attrs = []
+            for attr in ml_schema:
+                tags = attr.get("tags", {})
+                if tags.get("required") or tags.get("catalog_required"):
+                    required_attrs.append({
+                        "id": attr.get("id"),
+                        "name": attr.get("name"),
+                        "value_type": attr.get("value_type"),
+                        "values": attr.get("values", [])[:20] if attr.get("values") else []  # Solo primeros 20 valores
+                    })
 
-JSON transformado (mini_ml):
-{json.dumps(mini_for_ai, ensure_ascii=False)[:14000]}
+            print(f"🎯 {len(required_attrs)} atributos REQUERIDOS detectados en schema")
 
-Schema de categoría:
-{json.dumps(ml_schema, ensure_ascii=False)[:14000]}
+            prompt = f"""Eres un experto en completar atributos de productos para Mercado Libre.
 
-Devuelve SOLO un array JSON con los atributos rellenados.
-"""
+TAREA CRÍTICA: Debes completar TODOS los atributos REQUERIDOS listados abajo usando la información del producto.
+
+ATRIBUTOS REQUERIDOS (DEBES COMPLETAR TODOS):
+{json.dumps(required_attrs, ensure_ascii=False, indent=2)[:8000]}
+
+INFORMACIÓN DEL PRODUCTO (úsala para completar los atributos):
+{json.dumps(mini_for_ai, ensure_ascii=False, indent=2)[:10000]}
+
+INSTRUCCIONES:
+1. Completa TODOS los atributos requeridos listados arriba
+2. Para cada atributo, extrae el valor correcto de la información del producto
+3. Si un atributo tiene "values" predefinidos, usa el value_name exacto de la lista
+4. Si no tiene valores predefinidos, usa texto libre apropiado
+5. Si realmente no hay información para un atributo, usa un valor por defecto razonable
+6. NUNCA dejes un atributo requerido vacío
+
+FORMATO DE RESPUESTA (array JSON):
+[
+  {{"id": "BRAND", "value_name": "LEGO"}},
+  {{"id": "MODEL", "value_name": "31171"}},
+  ...
+]
+
+Devuelve SOLO el array JSON, sin explicaciones."""
 
             resp = client.chat.completions.create(
-                model="gpt-4o-mini",
-                temperature=0.2,
+                model="gpt-4o",  # ✅ Modelo más potente para tarea crítica
+                temperature=0.1,  # ✅ Más determinista
+                max_tokens=2000,  # ✅ Suficiente para muchos atributos
                 messages=[{"role": "user", "content": prompt}],
             )
 
