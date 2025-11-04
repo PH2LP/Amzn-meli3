@@ -737,8 +737,24 @@ Full JSON (truncated):
             for ch in chars:
                 if isinstance(ch, dict) and ch.get("value_name"):
                     val = str(ch["value_name"]).strip()
+
+                    # Lista completa de valores inválidos
+                    invalid_values = {
+                        # Language tags y locales
+                        "en_us", "en-us", "es_mx", "pt_br", "language_tag",
+                        # Marketplace IDs
+                        "atvpdkikx0der", "a1am78c64um0y8", "marketplace_id",
+                        # Valores vacíos o genéricos
+                        "default", "none", "null", "n/a", "na", "not specified", "unknown",
+                        # Unidades solas (sin valores numéricos) - CRÍTICO PARA DIMENSIONES
+                        "kilograms", "grams", "pounds", "ounces", "kg", "g", "lb", "oz",
+                        "centimeters", "millimeters", "inches", "meters", "cm", "mm", "in", "m",
+                        # Booleanos solos
+                        "true", "false", "yes", "no"
+                    }
+
                     # Eliminar marcadores de idioma y valores inválidos
-                    if val and val.lower() not in {"en_us", "en-us", "default", "null", "none", "n/a", "not specified", "language_tag", "marketplace_id", "atvpdkikx0der"}:
+                    if val and val.lower() not in invalid_values:
                         if len(val) > 0 and not val.startswith("marketplaceId"):
                             cleaned.append(ch)
             return cleaned
