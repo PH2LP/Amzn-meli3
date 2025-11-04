@@ -601,14 +601,15 @@ class PublishPhase(PipelinePhase):
         Usa el CategoryMatcher y verifica requisitos de cada categoría.
         """
         try:
-            from src.category_matcher import CategoryMatcher
+            from src.category_matcher import load_embeddings, find_top_k_categories
             import requests
 
-            matcher = CategoryMatcher()
+            # Cargar embeddings
+            embeddings, texts, ids = load_embeddings()
             product_desc = f"{mini_ml.get('brand', '')} {mini_ml.get('title_ai', '')}"
 
             # Obtener top 5 categorías similares
-            candidates = matcher.find_best_category(product_desc, top_n=5)
+            candidates = find_top_k_categories(product_desc, embeddings, texts, ids, k=5)
             self.log(asin, f"Evaluando {len(candidates)} categorías alternativas...", "INFO")
 
             for cat_id, similarity in candidates:

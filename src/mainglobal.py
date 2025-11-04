@@ -913,6 +913,10 @@ def publish_item(asin_json):
                 continue
             val = info.get("value_name") or ""
             if val:
+                # ✅ VALIDACIÓN CRÍTICA: Nunca enviar ASIN como GTIN
+                if aid == "GTIN" and (str(val).startswith("B0") or len(str(val)) == 10):
+                    print(f"⚠️ ASIN '{val}' detectado como GTIN → Omitiendo")
+                    continue
                 attributes.append({"id": aid, "value_name": str(val)})
 
         # 🔹 Agregar GTIN si está
