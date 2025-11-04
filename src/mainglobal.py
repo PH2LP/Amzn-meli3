@@ -1158,6 +1158,13 @@ Devuelve SOLO un array JSON con los atributos rellenados.
 
             attributes = cleaned_attrs
 
+            # ✅ FILTRO FINAL: Eliminar GTIN si force_no_gtin está activo (evita que IA lo agregue)
+            if mini.get("force_no_gtin") or mini.get("last_error") == "GTIN_REUSED":
+                pre_gtin_count = len(attributes)
+                attributes = [a for a in attributes if a.get("id") != "GTIN"]
+                if len(attributes) < pre_gtin_count:
+                    print(f"🚫 GTIN removido de atributos finales ({pre_gtin_count - len(attributes)} instancias)")
+
             if schema_filtered > 0:
                 print(f"🧹 Filtrados {schema_filtered} atributos adicionales (no en schema de categoría)")
             print(f"🧽 Atributos finales IA listos: {len(attributes)} válidos para publicar")
