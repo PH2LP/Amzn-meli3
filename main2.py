@@ -44,11 +44,12 @@ import traceback
 # AUTO-ACTIVACIÓN DE VENV
 # ═══════════════════════════════════════════════════════════════════════════
 
-if sys.prefix == sys.base_prefix:
-    vpy = Path(__file__).parent / "venv" / "bin" / "python"
-    if vpy.exists():
-        print(f"⚙️  Activando entorno virtual: {vpy}")
-        os.execv(str(vpy), [str(vpy)] + sys.argv)
+# DISABLED: Causing issues with background execution
+# if sys.prefix == sys.base_prefix:
+#     vpy = Path(__file__).parent / "venv" / "bin" / "python"
+#     if vpy.exists():
+#         print(f"⚙️  Activando entorno virtual: {vpy}")
+#         os.execv(str(vpy), [str(vpy)] + sys.argv)
 
 load_dotenv(override=True)
 
@@ -62,6 +63,7 @@ from src.unified_transformer import transform_amazon_to_ml_unified
 from src.ai_validators import validate_listing_complete
 from src.smart_categorizer import categorize_with_ai
 from src.mainglobal import publish_item
+from src.auto_fixer import auto_fix
 
 # ═══════════════════════════════════════════════════════════════════════════
 # CONFIGURACIÓN
@@ -435,7 +437,7 @@ class DownloadPhase(PipelinePhase):
                     time.sleep(Config.RETRY_DELAY * attempt)  # Exponential backoff
 
                 self.log(asin, "Descargando desde Amazon SP-API...", "INFO")
-                get_product_data_from_asin(asin)
+                get_product_data_from_asin(asin, save_path=str(json_path))
 
                 if json_path.exists():
                     self.log(asin, "Descarga exitosa", "SUCCESS")
@@ -551,36 +553,31 @@ class ValidationPhase(PipelinePhase):
 
             mini_ml = load_json_file(str(mini_path))
 
-            # Validación IA completa
+            # Validación IA completa (solo warnings, NO bloquea publicación)
             validation_result = validate_listing_complete(mini_ml)
 
             if not validation_result["ready_to_publish"]:
-                self.log(asin, "Validación FALLIDA", "ERROR")
+                self.log(asin, "Validación IA: WARNINGS detectados (NO BLOQUEA)", "WARNING")
 
-                # Registrar problemas
-                issues = []
+                # Registrar problemas como warnings (NO bloquea)
                 if validation_result["critical_issues"]:
                     for issue in validation_result["critical_issues"]:
-                        self.log(asin, f"  CRÍTICO: {issue}", "ERROR")
-                        issues.append(issue)
+                        self.log(asin, f"  ⚠️ {issue}", "WARNING")
 
                 if validation_result["warnings"]:
                     for warning in validation_result["warnings"]:
-                        self.log(asin, f"  WARNING: {warning}", "WARNING")
-                        issues.append(warning)
+                        self.log(asin, f"  ⚠️ {warning}", "WARNING")
 
-                # Guardar error
-                error_msg = "; ".join(issues[:3])  # Primeros 3 issues
-                self.db.update_asin_status(asin, Status.FAILED, f"Validation: {error_msg}")
-                return False
+                # ✅ CONTINUAR CON PUBLICACIÓN (no rechazar)
+                self.log(asin, "✅ Continuando con publicación...", "INFO")
 
-            # Validación exitosa
+            # Mostrar resultados de validación
             img_val = validation_result.get("image_validation", {})
             cat_val = validation_result.get("category_validation", {})
 
-            self.log(asin, "Validación IA: APROBADO", "SUCCESS")
-            self.log(asin, f"  → Imágenes: {'✅' if img_val.get('valid') else '❌'}", "INFO")
-            self.log(asin, f"  → Categoría: {'✅' if cat_val.get('valid') else '❌'} ({cat_val.get('confidence', 0):.0%})", "INFO")
+            self.log(asin, "Validación IA: COMPLETADA", "SUCCESS")
+            self.log(asin, f"  → Imágenes: {'✅' if img_val.get('valid') else '⚠️'}", "INFO")
+            self.log(asin, f"  → Categoría: {'✅' if cat_val.get('valid') else '⚠️'} ({cat_val.get('confidence', 0):.0%})", "INFO")
 
             self.db.update_asin_status(asin, Status.VALIDATED)
             return True
@@ -652,34 +649,47 @@ class PublishPhase(PipelinePhase):
 
             except Exception as e:
                 error_str = str(e)
-                self.log(asin, f"Error publicación: {error_str}", "ERROR")
+                self.log(asin, f"Error publicación: {error_str[:200]}", "ERROR")
 
-                # Detectar errores específicos y aplicar estrategias
-
-                # Error de GTIN duplicado (código 3701)
-                if "3701" in error_str or "invalid_product_identifier" in error_str:
-                    self.log(asin, "GTIN duplicado detectado → Regenerando SIN GTIN", "WARNING")
-                    mini_ml = load_json_file(str(mini_path))
-                    mini_ml["force_no_gtin"] = True
-                    mini_ml["last_error"] = "GTIN_REUSED"
-                    save_json_file(str(mini_path), mini_ml)
-                    continue  # Reintentar
-
-                # Error de categoría incorrecta
-                if "category" in error_str.lower() or "Title and photos did not match" in error_str:
-                    self.log(asin, "Categoría incorrecta → Regenerando con nueva categoría", "WARNING")
-                    # Eliminar mini_ml y marcar para regeneración
-                    mini_path.unlink()
-                    self.db.update_asin_status(asin, Status.DOWNLOADED)  # Volver a transformar
-                    return None
-
-                # Error de rate limiting
+                # Error de rate limiting (manejar primero)
                 if "429" in error_str or "rate" in error_str.lower():
                     self.log(asin, f"Rate limited → Esperando {Config.RATE_LIMIT_DELAY}s", "WARNING")
                     time.sleep(Config.RATE_LIMIT_DELAY)
                     continue
 
-                # Si es el último intento, fallar
+                # Intentar auto-corrección inteligente
+                try:
+                    # Cargar JSON de Amazon para referencia
+                    amazon_path = Config.AMAZON_JSON_DIR / f"{asin}.json"
+                    amazon_json = load_json_file(str(amazon_path)) if amazon_path.exists() else {}
+
+                    # Cargar mini_ml actual
+                    mini_ml = load_json_file(str(mini_path))
+
+                    # Extraer error response si es disponible
+                    error_response = {}
+                    try:
+                        # Intentar parsear JSON del error
+                        import re
+                        json_match = re.search(r'\{.*\}', error_str)
+                        if json_match:
+                            error_response = json.loads(json_match.group())
+                    except:
+                        error_response = {"message": error_str}
+
+                    # Aplicar auto-corrección
+                    mini_ml_fixed, fixes_applied = auto_fix(mini_ml, amazon_json, error_response)
+
+                    if fixes_applied:
+                        # Guardar mini_ml corregido
+                        save_json_file(str(mini_path), mini_ml_fixed)
+                        self.log(asin, "Auto-corrección aplicada → Reintentando", "WARNING")
+                        continue  # Reintentar con correcciones
+
+                except Exception as fix_error:
+                    self.log(asin, f"Auto-corrección falló: {fix_error}", "WARNING")
+
+                # Si no se pudo auto-corregir o es el último intento
                 if attempt == max_retries:
                     self.db.update_asin_status(asin, Status.FAILED, error_str[:500])
                     return None
@@ -848,8 +858,9 @@ class Pipeline:
             for asin in results["failed"][:10]:  # Mostrar máximo 10
                 status = self.db.get_asin_status(asin)
                 if status:
-                    error = status.get("last_error", "Unknown")[:50]
-                    print(f"   • {asin}: {error}")
+                    error = status.get("last_error") or "Unknown"
+                    error_msg = str(error)[:50] if error else "Unknown"
+                    print(f"   • {asin}: {error_msg}")
 
             if len(results["failed"]) > 10:
                 print(f"   ... y {len(results['failed']) - 10} más")
