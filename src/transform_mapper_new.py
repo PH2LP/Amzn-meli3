@@ -35,11 +35,22 @@ MARKUP_PCT = float(os.getenv("MARKUP_PCT", "35")) / 100.0
 from openai import OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
-# Category matcher local (embeddings)
+# Category matcher V2 (embeddings + AI validation + SP API hints)
 try:
-    from src.category_matcher import match_category
+    from src.category_matcher_v2 import CategoryMatcherV2
 except ModuleNotFoundError:
-    from category_matcher import match_category
+    from category_matcher_v2 import CategoryMatcherV2
+
+# Instancia global del category matcher V2
+_category_matcher_v2 = None
+
+def get_category_matcher_v2():
+    """Lazy initialization del CategoryMatcherV2"""
+    global _category_matcher_v2
+    if _category_matcher_v2 is None:
+        print("🚀 Inicializando Category Matcher V2 (primera vez)...")
+        _category_matcher_v2 = CategoryMatcherV2()
+    return _category_matcher_v2
 
 API = "https://api.mercadolibre.com"
 HEADERS = {"Authorization": f"Bearer {ML_ACCESS_TOKEN}"} if ML_ACCESS_TOKEN else {}
@@ -732,23 +743,45 @@ def detect_category(amazon_json)->Tuple[str,str,float]:
         print(f"🧠 Cache encontrado → IA OFF ✅")
         return cat_id, cat_name, sim
 
-    # ✅ Nueva categorización → guardar en cache
+    # ✅ Nueva categorización con CategoryMatcherV2 → guardar en cache
     try:
-        res = match_category(title, asin)
-        cat_id  = res.get("matched_category_id", "CBT1157")
-        cat_name = res.get("matched_category_name", "Default")
-        sim     = float(res.get("similarity", 0.0))
+        # Preparar datos del producto para CategoryMatcherV2
+        product_data = {
+            'title': title,
+            'asin': asin
+        }
 
-        print(f"🤖 Nueva categorización embeddings → IA ON")
-        cat_cache[asin] = {"id": cat_id, "name": cat_name, "sim": sim}
-        os.makedirs("logs", exist_ok=True)
+        # Extraer hints de SP API si existen en amazon_json
+        if 'productTypes' in amazon_json and amazon_json['productTypes']:
+            product_data['productType'] = amazon_json['productTypes'][0].get('productType')
+
+        if 'summaries' in amazon_json and amazon_json['summaries']:
+            browse_class = amazon_json['summaries'][0].get('browseClassification', {})
+            if browse_class:
+                product_data['browseClassification'] = browse_class.get('displayName')
+
+        # Usar CategoryMatcherV2
+        matcher = get_category_matcher_v2()
+        result = matcher.find_category(product_data, use_ai=True)
+
+        cat_id = result.get("category_id", "CBT1157")
+        cat_name = result.get("category_name", "Default")
+        sim = float(result.get("confidence", 0.0))
+        method = result.get("method", "unknown")
+
+        print(f"🤖 CategoryMatcherV2 → {cat_name} ({cat_id}) | Confianza: {sim:.2f} | Método: {method}")
+
+        cat_cache[asin] = {"id": cat_id, "name": cat_name, "sim": sim, "method": method}
+        os.makedirs("storage/logs", exist_ok=True)
         with open(CAT_CACHE_PATH, "w", encoding="utf-8") as f:
             json.dump(cat_cache, f, indent=2, ensure_ascii=False)
 
         return cat_id, cat_name, sim
 
     except Exception as e:
-        print(f"⚠️ CategoryMatcher error: {e}")
+        print(f"⚠️ CategoryMatcherV2 error: {e}")
+        import traceback
+        traceback.print_exc()
         return "CBT1157","Default",0.0
 
 # ---------- 9) Schema ML ----------
