@@ -35,11 +35,22 @@ MARKUP_PCT = float(os.getenv("MARKUP_PCT", "35")) / 100.0
 from openai import OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY) if OPENAI_API_KEY else None
 
-# Category matcher local (embeddings)
+# Category matcher V2 (embeddings + IA)
 try:
-    from src.category_matcher import match_category
+    from src.category_matcher_v2 import CategoryMatcherV2
 except ModuleNotFoundError:
-    from category_matcher import match_category
+    from category_matcher_v2 import CategoryMatcherV2
+
+# Singleton de CategoryMatcherV2 (para no inicializar múltiples veces)
+_category_matcher_v2_instance = None
+
+def get_category_matcher():
+    """Retorna instancia singleton de CategoryMatcherV2"""
+    global _category_matcher_v2_instance
+    if _category_matcher_v2_instance is None:
+        print("🚀 Inicializando CategoryMatcherV2...")
+        _category_matcher_v2_instance = CategoryMatcherV2()
+    return _category_matcher_v2_instance
 
 API = "https://api.mercadolibre.com"
 HEADERS = {"Authorization": f"Bearer {ML_ACCESS_TOKEN}"} if ML_ACCESS_TOKEN else {}
@@ -779,16 +790,17 @@ Full JSON (truncated):
         print(f"⚠️ Error en ai_characteristics: {e}")
         return [], []
 
-# ---------- 8) Categoría (embeddings locales) ----------
+# ---------- 8) Categoría (CategoryMatcherV2: embeddings + IA) ----------
 def detect_category(amazon_json)->Tuple[str,str,float]:
     asin = amazon_json.get("asin") or amazon_json.get("ASIN") or ""
 
+    # Extraer título
     title = amazon_json.get("title") or \
         amazon_json.get("product_title") or \
-        amazon_json.get("attributes",{}).get("item_name",[{"value":""}])[0]["value"] \
-        if amazon_json.get("attributes",{}).get("item_name") else "Generic Product"
+        (amazon_json.get("attributes",{}).get("item_name",[{}])[0].get("value", "") \
+        if amazon_json.get("attributes",{}).get("item_name") else "Generic Product")
 
-    print("🧭 Detectando categoría (embeddings locales)…")
+    print("🧭 Detectando categoría con CategoryMatcherV2 (embeddings + IA)…")
 
     # 📌 Cache por ASIN
     CAT_CACHE_PATH = "storage/logs/category_cache.json"
@@ -805,23 +817,67 @@ def detect_category(amazon_json)->Tuple[str,str,float]:
         print(f"🧠 Cache encontrado → IA OFF ✅")
         return cat_id, cat_name, sim
 
-    # ✅ Nueva categorización → guardar en cache
+    # ✅ Nueva categorización con CategoryMatcherV2
     try:
-        res = match_category(title, asin)
-        cat_id  = res.get("matched_category_id", "CBT1157")
-        cat_name = res.get("matched_category_name", "Default")
-        sim     = float(res.get("similarity", 0.0))
+        # Construir product_data para CategoryMatcherV2
+        product_data = {
+            'title': title,
+            'brand': None,
+            'description': None,
+            'features': [],
+            'productType': None,
+            'browseClassification': None
+        }
 
-        print(f"🤖 Nueva categorización embeddings → IA ON")
+        # Extraer brand
+        attributes = amazon_json.get("attributes", {})
+        if attributes.get("brand_name"):
+            brand_list = attributes["brand_name"]
+            if brand_list and isinstance(brand_list, list):
+                product_data['brand'] = brand_list[0].get("value", "")
+
+        # Extraer description (de bullet_point)
+        if attributes.get("bullet_point"):
+            bullets = attributes["bullet_point"]
+            if bullets and isinstance(bullets, list):
+                product_data['features'] = [b.get("value", "") for b in bullets if b.get("value")]
+                product_data['description'] = " ".join(product_data['features'][:3])
+
+        # Extraer productType de Amazon (muy importante para CategoryMatcherV2)
+        if amazon_json.get("productTypes"):
+            product_types = amazon_json["productTypes"]
+            if product_types and isinstance(product_types, list) and len(product_types) > 0:
+                product_data['productType'] = product_types[0].get("productType", "")
+
+        # Extraer browseClassification si existe
+        if attributes.get("item_type_keyword"):
+            item_type = attributes["item_type_keyword"]
+            if item_type and isinstance(item_type, list):
+                product_data['browseClassification'] = item_type[0].get("value", "")
+
+        # Llamar a CategoryMatcherV2
+        matcher = get_category_matcher()
+        result = matcher.find_category(product_data, use_ai=True)
+
+        cat_id = result.get("category_id", "CBT1157")
+        cat_name = result.get("category_name", "Default")
+        sim = float(result.get("confidence", 0.0))
+
+        print(f"🤖 CategoryMatcherV2 → {cat_name} (confidence: {sim:.2f})")
+        print(f"   Método: {result.get('method', 'unknown')}")
+
+        # Guardar en cache
         cat_cache[asin] = {"id": cat_id, "name": cat_name, "sim": sim}
-        os.makedirs("logs", exist_ok=True)
+        os.makedirs("storage/logs", exist_ok=True)
         with open(CAT_CACHE_PATH, "w", encoding="utf-8") as f:
             json.dump(cat_cache, f, indent=2, ensure_ascii=False)
 
         return cat_id, cat_name, sim
 
     except Exception as e:
-        print(f"⚠️ CategoryMatcher error: {e}")
+        import traceback
+        print(f"⚠️ CategoryMatcherV2 error: {e}")
+        traceback.print_exc()
         return "CBT1157","Default",0.0
 
 # ---------- 9) Schema ML ----------

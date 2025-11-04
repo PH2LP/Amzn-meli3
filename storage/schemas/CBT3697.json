@@ -1,0 +1,1774 @@
+{
+  "MANUFACTURER": {
+    "id": "MANUFACTURER",
+    "name": "Manufacturer",
+    "value_type": "string",
+    "values": {
+      "Harman": "2425533",
+      "Lenovo": "7494",
+      "ShenZhen YuanZe Electronics": "10889439",
+      "HP": "49944",
+      "Sennheiser": "15371",
+      "Philips": "3",
+      "Jabra": "100028",
+      "Multilaser": "31163",
+      "Maxell": "58634",
+      "Audio-Technica": "16037",
+      "Skullcandy": "17492",
+      "Razer": "17587",
+      "Anker": "98385",
+      "Inova": "260751",
+      "Noga": "410979",
+      "Steren": "50341",
+      "Koss": "431018",
+      "Redragon": "275795",
+      "Logitech": "15788",
+      "Havit": "50458",
+      "Apple": "9344",
+      "Mighty Skins": "11237931",
+      "Klip Xtreme": "17661",
+      "Edifier": "15898",
+      "Genérica": "276243",
+      "Onikuma": "4811666",
+      "Dongguan Liesheng": "10624383"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "BRAND": {
+    "id": "BRAND",
+    "name": "Brand",
+    "value_type": "string",
+    "values": {
+      "AKG": "15635",
+      "Apple": "9344",
+      "Audio-Technica": "16037",
+      "Behringer": "3421",
+      "Beyerdynamic": "445700",
+      "Bose": "17760",
+      "Coloud Colors": "2509802",
+      "Genius": "7124",
+      "JBL": "17265",
+      "JVC": "2181",
+      "Koss": "431018",
+      "Marshall": "3994",
+      "Maxell": "58634",
+      "Numark": "9509",
+      "Panacom": "19328",
+      "Panasonic": "8",
+      "Philips": "3",
+      "Pioneer": "9838",
+      "RCA": "21980",
+      "Samson": "15123",
+      "Samsung": "206",
+      "Sennheiser": "15371",
+      "Shark": "20789",
+      "Shure": "15438",
+      "Skullcandy": "17492",
+      "Sony": "995",
+      "Stanton": "15232",
+      "Technics": "15742",
+      "UrbanEars": "437585",
+      "jWIN": "98580"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "LINE": {
+    "id": "LINE",
+    "name": "Line",
+    "value_type": "string",
+    "values": {
+      "Bluetooth": "7446666",
+      "TWS": "8736865",
+      "Cloud": "448157",
+      "Gamer": "126366",
+      "Gaming": "114459",
+      "Audio": "12472693",
+      "Hands-free": "19992735",
+      "Sport": "9979"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "MODEL": {
+    "id": "MODEL",
+    "name": "Model",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "ALPHANUMERIC_MODEL": {
+    "id": "ALPHANUMERIC_MODEL",
+    "name": "Alphanumeric model",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "COLOR": {
+    "id": "COLOR",
+    "name": "Color",
+    "value_type": "string",
+    "values": {
+      "Dark green": "52019",
+      "Turquoise": "283160",
+      "Water": "52022",
+      "Indigo": "283162",
+      "Lavender": "52036",
+      "Pink gum": "283163",
+      "Maroon": "51998",
+      "Nude": "52003",
+      "White": "52055",
+      "Navy blue": "283161",
+      "Cream": "52008",
+      "Pale pink": "52045",
+      "Cleat": "283153",
+      "Light orange": "283150",
+      "Blue": "52028",
+      "Light pink": "52043",
+      "Light coral": "283148",
+      "Coral": "283149",
+      "Heavenly": "52021",
+      "Blue steel": "52031",
+      "Khaki": "283156",
+      "Beige": "52001",
+      "Red": "51993",
+      "Terracotta": "51996",
+      "Gray": "283165",
+      "Violet": "52035",
+      "Light brown": "283154",
+      "Black": "52049",
+      "Dark brown": "283155",
+      "Silver": "52053",
+      "Dark violet": "52047",
+      "Pink": "51994",
+      "Yellow": "52007",
+      "Lime green": "283157",
+      "Dark gold": "52012",
+      "Light green": "52015",
+      "Dark orange": "283151",
+      "Oil blue": "52024",
+      "Dark grey": "52051",
+      "Chocolate": "283152",
+      "Green": "52014",
+      "Golden": "283164",
+      "Orange": "52000",
+      "Dark blue": "52033",
+      "Ochre": "52010",
+      "Moss green": "283158",
+      "Brown": "52005",
+      "Lilac": "52038",
+      "Fuchsia": "52042",
+      "Cyan": "338779",
+      "Light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "LIGHT_COLOR": {
+    "id": "LIGHT_COLOR",
+    "name": "Light color",
+    "value_type": "string",
+    "values": {
+      "Dark green": "52019",
+      "Turquoise": "283160",
+      "Water": "52022",
+      "Indigo": "283162",
+      "Lavender": "52036",
+      "Pink gum": "283163",
+      "Maroon": "51998",
+      "Nude": "52003",
+      "White": "52055",
+      "Navy blue": "283161",
+      "Cream": "52008",
+      "Pale pink": "52045",
+      "Cleat": "283153",
+      "Light orange": "283150",
+      "Blue": "52028",
+      "Light pink": "52043",
+      "Light coral": "283148",
+      "Coral": "283149",
+      "Heavenly": "52021",
+      "Blue steel": "52031",
+      "Khaki": "283156",
+      "Beige": "52001",
+      "Red": "51993",
+      "Terracotta": "51996",
+      "Gray": "283165",
+      "Violet": "52035",
+      "Light brown": "283154",
+      "Black": "52049",
+      "Dark brown": "283155",
+      "Silver": "52053",
+      "Dark violet": "52047",
+      "Pink": "51994",
+      "Yellow": "52007",
+      "Lime green": "283157",
+      "Dark gold": "52012",
+      "Light green": "52015",
+      "Dark orange": "283151",
+      "Oil blue": "52024",
+      "Dark grey": "52051",
+      "Chocolate": "283152",
+      "Green": "52014",
+      "Golden": "283164",
+      "Orange": "52000",
+      "Dark blue": "52033",
+      "Ochre": "52010",
+      "Moss green": "283158",
+      "Brown": "52005",
+      "Lilac": "52038",
+      "Fuchsia": "52042",
+      "Cyan": "338779",
+      "Light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "PAIRS_NUMBER": {
+    "id": "PAIRS_NUMBER",
+    "name": "Pairs number",
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "MAIN_COLOR": {
+    "id": "MAIN_COLOR",
+    "name": "Main color",
+    "value_type": "list",
+    "values": {
+      "Black": "2450295",
+      "Blue": "2450293",
+      "Red": "2450307",
+      "Violet": "2450311",
+      "Brown": "2450291",
+      "Green": "2450314",
+      "Orange": "2450327",
+      "Sky blue": "2450278",
+      "Pink": "2450312",
+      "Golden": "2450289",
+      "Silver": "2450303",
+      "Yellow": "2450296",
+      "Gray": "2450294",
+      "White": "2450308"
+    },
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "HEADPHONE_FORMAT": {
+    "id": "HEADPHONE_FORMAT",
+    "name": "Headphone format",
+    "value_type": "string",
+    "values": {
+      "Neckband": "182348",
+      "In-ear": "182351",
+      "Open-ear": "3602870",
+      "Clip-ear": "186823",
+      "Over-ear": "182354",
+      "Headset": "182358",
+      "On-ear": "7565468"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_WIRELESS": {
+    "id": "IS_WIRELESS",
+    "name": "Is wireless",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_BLUETOOTH": {
+    "id": "WITH_BLUETOOTH",
+    "name": "With Bluetooth",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_MICROPHONE": {
+    "id": "WITH_MICROPHONE",
+    "name": "With microphone",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_MONAURAL": {
+    "id": "IS_MONAURAL",
+    "name": "Is monaural",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_GAMER": {
+    "id": "IS_GAMER",
+    "name": "Is gamer",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_INFANT": {
+    "id": "IS_INFANT",
+    "name": "Is infant",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_LED_LIGHT": {
+    "id": "WITH_LED_LIGHT",
+    "name": "With LED light",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "id": "PACKAGE_HEIGHT",
+    "name": "Package height",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "id": "PACKAGE_WIDTH",
+    "name": "Package width",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "id": "PACKAGE_LENGTH",
+    "name": "Package length",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "id": "PACKAGE_WEIGHT",
+    "name": "Package weight",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "id": "GTIN",
+    "name": "Universal product code",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "id": "HAZMAT_TRANSPORTABILITY",
+    "name": "Hazmat transportability",
+    "value_type": "list",
+    "values": {
+      "Excepted": "13414677",
+      "Limited": "13414678",
+      "Exceeded": "13414679",
+      "Indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_NUMBER": {
+    "id": "ANATEL_HOMOLOGATION_NUMBER",
+    "name": "Anatel homologation number",
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "id": "EMPTY_GTIN_REASON",
+    "name": "Empty GTIN reason",
+    "value_type": "list",
+    "values": {
+      "The product is a handcrafted piece": "17055158",
+      "The product is a kit or pack": "17055159",
+      "The product does not have registered code": "17055160",
+      "Another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "GRADING": {
+    "id": "GRADING",
+    "name": "Grading",
+    "value_type": "list",
+    "values": {
+      "Excellent": "40108830",
+      "Good": "40108831",
+      "Acceptable": "40108832"
+    },
+    "allowed_units": [],
+    "tags": {
+      "used_hidden": true,
+      "conditional_required": true,
+      "new_hidden": true,
+      "open_box_hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "DETAILED_MODEL": {
+    "id": "DETAILED_MODEL",
+    "name": "Detailed model",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "INCLUDES_ACCESSORIES": {
+    "id": "INCLUDES_ACCESSORIES",
+    "name": "Includes accessories",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_LABEL": {
+    "id": "ANATEL_HOMOLOGATION_LABEL",
+    "name": "Anatel homologation label",
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "MEMORY_SIZE": {
+    "id": "MEMORY_SIZE",
+    "name": "Memory size",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "MB",
+      "GB"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WIRELESS_RANGE": {
+    "id": "WIRELESS_RANGE",
+    "name": "Wireless range",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "m",
+      "ft"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "DIAPHRAGM_UNIT": {
+    "id": "DIAPHRAGM_UNIT",
+    "name": "Diaphragm unit",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm",
+      "mm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IMPEDANCE": {
+    "id": "IMPEDANCE",
+    "name": "Impedance",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "KΩ",
+      "MΩ",
+      "Ω"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FREQUENCY_RESPONSE": {
+    "id": "FREQUENCY_RESPONSE",
+    "name": "Frequency response",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SENSITIVITY": {
+    "id": "SENSITIVITY",
+    "name": "Sensitivity",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "dB"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CABLE_LENGTH": {
+    "id": "CABLE_LENGTH",
+    "name": "Cable length",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HEADPHONE_MAX_BATTERY_LIFE": {
+    "id": "HEADPHONE_MAX_BATTERY_LIFE",
+    "name": "Headphone max battery life",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "days",
+      "h",
+      "m"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HEADPHONE_CHARGING_TIME": {
+    "id": "HEADPHONE_CHARGING_TIME",
+    "name": "Headphone charging time",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "days",
+      "h",
+      "m",
+      "months"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CASE_CHARGING_TIME": {
+    "id": "CASE_CHARGING_TIME",
+    "name": "Case charging time",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "days",
+      "h",
+      "m",
+      "months"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HEADPHONE_BATTERY_CAPACITY": {
+    "id": "HEADPHONE_BATTERY_CAPACITY",
+    "name": "Headphone battery capacity",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "Ah",
+      "mAh"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CHARGING_CASE_BATTERY_CAPACITY": {
+    "id": "CHARGING_CASE_BATTERY_CAPACITY",
+    "name": "Charging case battery capacity",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "Ah",
+      "mAh"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "INCLUDES_CHARGING_CASE": {
+    "id": "INCLUDES_CHARGING_CASE",
+    "name": "Includes charging case",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_WIRELESS_CHARGING": {
+    "id": "WITH_WIRELESS_CHARGING",
+    "name": "With wireless charging",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_TWS_TECHNOLOGY": {
+    "id": "WITH_TWS_TECHNOLOGY",
+    "name": "With TWS technology",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_PROXIMITY_SENSOR": {
+    "id": "WITH_PROXIMITY_SENSOR",
+    "name": "With proximity sensor",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_HANDS_FREE_MODE": {
+    "id": "WITH_HANDS_FREE_MODE",
+    "name": "With hands-free mode",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_MP3_PLAYER": {
+    "id": "WITH_MP3_PLAYER",
+    "name": "With MP3 player",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_FM_RADIO": {
+    "id": "WITH_FM_RADIO",
+    "name": "With FM radio",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_NOISE_CANCELLING": {
+    "id": "WITH_NOISE_CANCELLING",
+    "name": "With noise cancelling",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_WATER_RESISTANT": {
+    "id": "IS_WATER_RESISTANT",
+    "name": "Is water resistant",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_WATERPROOF": {
+    "id": "IS_WATERPROOF",
+    "name": "Is waterproof",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_DUST_RESISTANT": {
+    "id": "IS_DUST_RESISTANT",
+    "name": "Is dust resistant",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_DETACHABLE_CABLE": {
+    "id": "WITH_DETACHABLE_CABLE",
+    "name": "With detachable cable",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_DETACHABLE_MICROPHONE": {
+    "id": "WITH_DETACHABLE_MICROPHONE",
+    "name": "With detachable microphone",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_FLEXIBLE_MICROPHONE": {
+    "id": "WITH_FLEXIBLE_MICROPHONE",
+    "name": "With flexible microphone",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_INTEGRATED_VOICE_ASSISTANTS": {
+    "id": "WITH_INTEGRATED_VOICE_ASSISTANTS",
+    "name": "With integrated voice assistants",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MICROPHONES_NUMBER": {
+    "id": "MICROPHONES_NUMBER",
+    "name": "Microphones number",
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IP_RATING": {
+    "id": "IP_RATING",
+    "name": "IP rating",
+    "value_type": "string",
+    "values": {
+      "IPX4": "9809923",
+      "IP55": "9809924",
+      "IPX2": "9824416",
+      "IPX5": "9824297",
+      "IPX6": "10390262",
+      "IPX7": "9982303",
+      "IP54": "8875680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "INTEGRATED_VOICE_ASSISTANTS": {
+    "id": "INTEGRATED_VOICE_ASSISTANTS",
+    "name": "Integrated voice assistants",
+    "value_type": "string",
+    "values": {
+      "Siri": "9809928",
+      "Alexa": "9809929",
+      "Google Assistant": "9824364",
+      "Bixby": "9982300",
+      "Cortana": "18534190"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CONNECTOR_TYPES": {
+    "id": "CONNECTOR_TYPES",
+    "name": "Connector types",
+    "value_type": "string",
+    "values": {
+      "Micro-USB": "10787099",
+      "Mini jack": "8058616"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "BLUETOOTH_VERSION": {
+    "id": "BLUETOOTH_VERSION",
+    "name": "Bluetooth version",
+    "value_type": "string",
+    "values": {
+      "4.0": "6963667",
+      "5.0": "9809930",
+      "4.1": "6963668",
+      "4.2": "6963669",
+      "5.1": "9929865",
+      "5.2": "10127819",
+      "5.3": "13172815"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MICROPHONE_ORIENTATIONS": {
+    "id": "MICROPHONE_ORIENTATIONS",
+    "name": "Microphone orientations",
+    "value_type": "list",
+    "values": {
+      "Right": "8847354",
+      "Left": "8847355"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SUITABLE_USES": {
+    "id": "SUITABLE_USES",
+    "name": "Suitable uses",
+    "value_type": "string",
+    "values": {
+      "Professional": "8701147",
+      "Sport": "8701148",
+      "Entertainment": "19992751"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CONTROL_FUNCTIONS": {
+    "id": "CONTROL_FUNCTIONS",
+    "name": "Control functions",
+    "value_type": "string",
+    "values": {
+      "Play": "11559795",
+      "Volume control": "11559796",
+      "Song control": "11616279",
+      "Call control": "11588393",
+      "Mute": "11655376"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "COMPATIBLE_GAME_CONSOLES": {
+    "id": "COMPATIBLE_GAME_CONSOLES",
+    "name": "Compatible game consoles",
+    "value_type": "string",
+    "values": {
+      "Nintendo DS Lite": "923467",
+      "Nintendo 64": "923458",
+      "PlayStation 2": "923445",
+      "Sega Saturn": "923455",
+      "Wii mini": "923463",
+      "Sega Megadrive": "923454",
+      "Nintendo": "923459",
+      "NES": "923465",
+      "Nintendo DSi XL": "923468",
+      "Wii U": "923464",
+      "Xbox One": "923450",
+      "Super Nintendo": "923466",
+      "Nintendo 2DS": "923462",
+      "Sega Dreamcast": "923453",
+      "Nintendo Wii": "923457",
+      "PlayStation 4": "923447",
+      "PSP": "923449",
+      "Game Gear": "923456",
+      "PlayStation 1": "923444",
+      "Xbox 360": "923451",
+      "PlayStation Vita": "923448",
+      "Sega Genesis": "923452",
+      "PlayStation 3": "923446",
+      "Nintendo classic mini": "923460",
+      "Nintendo 3DS": "923461",
+      "Nintendo Switch": "8734293",
+      "Xbox Series S": "9614555",
+      "Xbox Series X": "8955493"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CHANNEL_SETUP": {
+    "id": "CHANNEL_SETUP",
+    "name": "Channel setup",
+    "value_type": "string",
+    "values": {
+      "7.1": "11559797",
+      "5.1": "11559798"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "ACCESSORIES_INCLUDED": {
+    "id": "ACCESSORIES_INCLUDED",
+    "name": "Accessories included",
+    "value_type": "string",
+    "values": {
+      "Adapter": "2296418",
+      "Cover": "8088177",
+      "Ear pads": "8752531",
+      "Manual": "8117352",
+      "USB-C Charging Cable": "9697497",
+      "Getting Started Guide": "8577417",
+      "Micro-USB charging cable": "10832364",
+      "Carrying case": "15953313",
+      "USB cable": "4402228",
+      "3.5 mm jack cable": "9691808",
+      "6.3 mm jack adapter": "9610692"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "id": "MPN",
+    "name": "MPN",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "id": "ITEM_CONDITION",
+    "name": "Item condition",
+    "value_type": "list",
+    "values": {
+      "New": "2230284",
+      "Refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "id": "IS_TOM_BRAND",
+    "name": "Is TOM brand",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "VALUE_ADDED_TAX": {
+    "id": "VALUE_ADDED_TAX",
+    "name": "Value added tax",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "id": "IMPORT_DUTY",
+    "name": "Import duty",
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "id": "SELLER_SKU",
+    "name": "SKU",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "id": "SELLER_PACKAGE_DATA_SOURCE",
+    "name": "Seller package data source",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "id": "SELLER_PACKAGE_WIDTH",
+    "name": "Seller package width",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "id": "SELLER_PACKAGE_LENGTH",
+    "name": "Seller package length",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "id": "SELLER_PACKAGE_HEIGHT",
+    "name": "Seller package height",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_TYPE": {
+    "id": "SELLER_PACKAGE_TYPE",
+    "name": "Seller package type",
+    "value_type": "list",
+    "values": {
+      "No additional packaging": "47115155",
+      "With additional packaging": "47115156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "id": "SELLER_PACKAGE_WEIGHT",
+    "name": "Seller package weight",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_FLAMMABLE": {
+    "id": "IS_FLAMMABLE",
+    "name": "Is flammable",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "id": "WITH_POSITIVE_IMPACT",
+    "name": "With positive impact",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_KIT": {
+    "id": "IS_KIT",
+    "name": "Is kit",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "id": "DESCRIPTIVE_TAGS",
+    "name": "Descriptive tags",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "id": "PRODUCT_CHEMICAL_FEATURES",
+    "name": "Product chemical features",
+    "value_type": "list",
+    "values": {
+      "Flammable": "7651070",
+      "Aerosol": "7651071",
+      "Oxidizer": "7651072",
+      "Corrosive": "7651073",
+      "Explosive": "7651074",
+      "Toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "id": "FOODS_AND_DRINKS",
+    "name": "Foods and drinks",
+    "value_type": "list",
+    "values": {
+      "For humans": "7575926",
+      "For animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "id": "MEDICINES",
+    "name": "Medicines",
+    "value_type": "list",
+    "values": {
+      "For humans with a medical prescription": "7575930",
+      "For humans without a medical prescription": "7575931",
+      "For animals with a medical prescription": "7575932",
+      "For animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "id": "BATTERIES_FEATURES",
+    "name": "Batteries features",
+    "value_type": "list",
+    "values": {
+      "Stand-alone lithium (loose or isolated)": "7575934",
+      "Lithium installed": "7575935",
+      "For cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "id": "SHIPMENT_PACKING",
+    "name": "Shipment packing",
+    "value_type": "list",
+    "values": {
+      "Bag": "7435891",
+      "Box": "7435892",
+      "Envelope": "7575937",
+      "Self-shipping": "7575939",
+      "EXB": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "id": "ADDITIONAL_INFO_REQUIRED",
+    "name": "Additional info required",
+    "value_type": "list",
+    "values": {
+      "Has IMEI": "7435893",
+      "Has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "id": "EXCLUDED_PLATFORMS",
+    "name": "Excluded platforms",
+    "value_type": "list",
+    "values": {
+      "Android": "9936777",
+      "iOS": "9936778",
+      "Desktop": "9936779",
+      "Mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "id": "IS_SUITABLE_FOR_SHIPMENT",
+    "name": "Is suitable for shipment",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "id": "PRODUCT_DATA_SOURCE",
+    "name": "Product data source",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "id": "LIMITED_MARKETPLACE_VISIBILITY_REASONS",
+    "name": "Limited Marketplace visibility reasons",
+    "value_type": "string",
+    "values": {
+      "Pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "id": "HAS_COMPATIBILITIES",
+    "name": "Has compatibilities",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "id": "CATALOG_TITLE",
+    "name": "Catalog title",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "id": "SEARCH_ENHANCEMENT_FIELDS",
+    "name": "Search enhancement fields",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "id": "PRODUCT_FEATURES",
+    "name": "Product features",
+    "value_type": "list",
+    "values": {
+      "Contains liquid": "7435885",
+      "Fragile": "7435883",
+      "With expiration": "7435888",
+      "Without expiration": "8847339",
+      "Health device": "7575925",
+      "Disinfectant and sanitizer": "7575917",
+      "MAPA": "7575924",
+      "Health and correlates": "7575923",
+      "Voluminous": "8721108",
+      "Unflyable": "10490116",
+      "No rotatable": "12928414",
+      "Folding": "41722098",
+      "Magnetic": "52092586",
+      "Can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "id": "IS_NEW_OFFER",
+    "name": "Is new offer",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "id": "SYI_PYMES_ID",
+    "name": "syi pymes id",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "id": "PACKAGE_DATA_SOURCE",
+    "name": "Package data source",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

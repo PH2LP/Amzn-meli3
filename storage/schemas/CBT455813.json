@@ -1,0 +1,831 @@
+{
+  "BRAND": {
+    "id": "BRAND",
+    "name": "Brand",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "MODEL": {
+    "id": "MODEL",
+    "name": "Model",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "UNITS_PER_PACKAGE": {
+    "id": "UNITS_PER_PACKAGE",
+    "name": "Units per package",
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "NET_WEIGHT": {
+    "id": "NET_WEIGHT",
+    "name": "Net weight",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "ct",
+      "g",
+      "kg",
+      "lb",
+      "mcg",
+      "mg",
+      "oz",
+      "t"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "GTIN": {
+    "id": "GTIN",
+    "name": "Universal product code",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "RPPTM_PRODUCT_INSCRIPTION_NUMBER": {
+    "id": "RPPTM_PRODUCT_INSCRIPTION_NUMBER",
+    "name": "RPPTM product inscription number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "MS_PRODUCT_REGISTRATION_NUMBER": {
+    "id": "MS_PRODUCT_REGISTRATION_NUMBER",
+    "name": "MS product registration number",
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANVISA_PRIOR_NOTIFICATION_COMMUNICATION_DOCUMENT_NUMBER": {
+    "id": "ANVISA_PRIOR_NOTIFICATION_COMMUNICATION_DOCUMENT_NUMBER",
+    "name": "Anvisa prior Notification/Communication document number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "DIGEMID_SANITARY_AUTHORIZATION_NUMBER": {
+    "id": "DIGEMID_SANITARY_AUTHORIZATION_NUMBER",
+    "name": "DIGEMID sanitary authorization number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "NSO_PRODUCT_REGISTRY_NUMBER": {
+    "id": "NSO_PRODUCT_REGISTRY_NUMBER",
+    "name": "NSO/product registry number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "RS_NSO_PRODUCT_NUMBER": {
+    "id": "RS_NSO_PRODUCT_NUMBER",
+    "name": "R.S/NSO product number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "COFEPRIS_PRODUCT_REGISTRY_NUMBER": {
+    "id": "COFEPRIS_PRODUCT_REGISTRY_NUMBER",
+    "name": "COFEPRIS product registry number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "OPERATION_NOTICE_NUMBER": {
+    "id": "OPERATION_NOTICE_NUMBER",
+    "name": "Operation notice number",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "id": "PACKAGE_HEIGHT",
+    "name": "Package height",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "id": "PACKAGE_WIDTH",
+    "name": "Package width",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "id": "PACKAGE_LENGTH",
+    "name": "Package length",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "id": "PACKAGE_WEIGHT",
+    "name": "Package weight",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "REGISTRATION_OR_SANITARY_NOTIFICATION_N": {
+    "id": "REGISTRATION_OR_SANITARY_NOTIFICATION_N",
+    "name": "Registration or Sanitary Notification N°",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VERTICAL_TAGS": {
+    "id": "VERTICAL_TAGS",
+    "name": "Vertical tags",
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ITEM_CONDITION": {
+    "id": "ITEM_CONDITION",
+    "name": "Item condition",
+    "value_type": "list",
+    "values": {
+      "New": "2230284"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MPN": {
+    "id": "MPN",
+    "name": "MPN",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "IS_HIGHLIGHT_BRAND": {
+    "id": "IS_HIGHLIGHT_BRAND",
+    "name": "Is highlight brand",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "id": "IS_TOM_BRAND",
+    "name": "Is TOM brand",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "VALUE_ADDED_TAX": {
+    "id": "VALUE_ADDED_TAX",
+    "name": "Value added tax",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "id": "IMPORT_DUTY",
+    "name": "Import duty",
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "id": "SELLER_SKU",
+    "name": "SKU",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "id": "SELLER_PACKAGE_DATA_SOURCE",
+    "name": "Seller package data source",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "id": "SELLER_PACKAGE_WIDTH",
+    "name": "Seller package width",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "id": "SELLER_PACKAGE_LENGTH",
+    "name": "Seller package length",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "id": "SELLER_PACKAGE_HEIGHT",
+    "name": "Seller package height",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_TYPE": {
+    "id": "SELLER_PACKAGE_TYPE",
+    "name": "Seller package type",
+    "value_type": "list",
+    "values": {
+      "No additional packaging": "47115155",
+      "With additional packaging": "47115156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "id": "SELLER_PACKAGE_WEIGHT",
+    "name": "Seller package weight",
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_FLAMMABLE": {
+    "id": "IS_FLAMMABLE",
+    "name": "Is flammable",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "id": "WITH_POSITIVE_IMPACT",
+    "name": "With positive impact",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "id": "HAZMAT_TRANSPORTABILITY",
+    "name": "Hazmat transportability",
+    "value_type": "list",
+    "values": {
+      "Excepted": "13414677",
+      "Limited": "13414678",
+      "Exceeded": "13414679",
+      "Indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_KIT": {
+    "id": "IS_KIT",
+    "name": "Is kit",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "id": "DESCRIPTIVE_TAGS",
+    "name": "Descriptive tags",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "id": "PRODUCT_CHEMICAL_FEATURES",
+    "name": "Product chemical features",
+    "value_type": "list",
+    "values": {
+      "Flammable": "7651070",
+      "Aerosol": "7651071",
+      "Oxidizer": "7651072",
+      "Corrosive": "7651073",
+      "Explosive": "7651074",
+      "Toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "id": "FOODS_AND_DRINKS",
+    "name": "Foods and drinks",
+    "value_type": "list",
+    "values": {
+      "For humans": "7575926",
+      "For animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "id": "MEDICINES",
+    "name": "Medicines",
+    "value_type": "list",
+    "values": {
+      "For humans with a medical prescription": "7575930",
+      "For humans without a medical prescription": "7575931",
+      "For animals with a medical prescription": "7575932",
+      "For animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "id": "BATTERIES_FEATURES",
+    "name": "Batteries features",
+    "value_type": "list",
+    "values": {
+      "Stand-alone lithium (loose or isolated)": "7575934",
+      "Lithium installed": "7575935",
+      "For cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "id": "SHIPMENT_PACKING",
+    "name": "Shipment packing",
+    "value_type": "list",
+    "values": {
+      "Bag": "7435891",
+      "Box": "7435892",
+      "Envelope": "7575937",
+      "Self-shipping": "7575939",
+      "EXB": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "id": "ADDITIONAL_INFO_REQUIRED",
+    "name": "Additional info required",
+    "value_type": "list",
+    "values": {
+      "Has IMEI": "7435893",
+      "Has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "id": "EXCLUDED_PLATFORMS",
+    "name": "Excluded platforms",
+    "value_type": "list",
+    "values": {
+      "Android": "9936777",
+      "iOS": "9936778",
+      "Desktop": "9936779",
+      "Mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "id": "IS_SUITABLE_FOR_SHIPMENT",
+    "name": "Is suitable for shipment",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "id": "PRODUCT_DATA_SOURCE",
+    "name": "Product data source",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "id": "LIMITED_MARKETPLACE_VISIBILITY_REASONS",
+    "name": "Limited Marketplace visibility reasons",
+    "value_type": "string",
+    "values": {
+      "Pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "id": "HAS_COMPATIBILITIES",
+    "name": "Has compatibilities",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "id": "CATALOG_TITLE",
+    "name": "Catalog title",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "id": "SEARCH_ENHANCEMENT_FIELDS",
+    "name": "Search enhancement fields",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "id": "PRODUCT_FEATURES",
+    "name": "Product features",
+    "value_type": "list",
+    "values": {
+      "Contains liquid": "7435885",
+      "Fragile": "7435883",
+      "With expiration": "7435888",
+      "Without expiration": "8847339",
+      "Health device": "7575925",
+      "Disinfectant and sanitizer": "7575917",
+      "MAPA": "7575924",
+      "Health and correlates": "7575923",
+      "Voluminous": "8721108",
+      "Unflyable": "10490116",
+      "No rotatable": "12928414",
+      "Folding": "41722098",
+      "Magnetic": "52092586",
+      "Can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "id": "IS_NEW_OFFER",
+    "name": "Is new offer",
+    "value_type": "boolean",
+    "values": {
+      "No": "242084",
+      "Yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "id": "SYI_PYMES_ID",
+    "name": "syi pymes id",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "id": "PACKAGE_DATA_SOURCE",
+    "name": "Package data source",
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

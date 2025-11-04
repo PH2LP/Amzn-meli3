@@ -91,7 +91,7 @@ class Config:
 
     # Flags
     DRY_RUN = False
-    SKIP_VALIDATION = False
+    SKIP_VALIDATION = True  # Validación IA desactivada por defecto
     FORCE_REGENERATE = False
 
     @classmethod
@@ -490,7 +490,7 @@ class DownloadPhase(PipelinePhase):
                     time.sleep(Config.RETRY_DELAY * attempt)  # Exponential backoff
 
                 self.log(asin, "Descargando desde Amazon SP-API...", "INFO")
-                get_product_data_from_asin(asin)
+                get_product_data_from_asin(asin, save_path=str(json_path))
 
                 if json_path.exists():
                     self.log(asin, "Descarga exitosa", "SUCCESS")
@@ -948,7 +948,8 @@ class Pipeline:
             for asin in results["failed"][:10]:  # Mostrar máximo 10
                 status = self.db.get_asin_status(asin)
                 if status:
-                    error = status.get("last_error", "Unknown")[:50]
+                    error = status.get("last_error") or "Unknown"
+                    error = str(error)[:50]  # Convertir a string y limitar a 50 chars
                     print(f"   • {asin}: {error}")
 
             if len(results["failed"]) > 10:
@@ -983,17 +984,25 @@ def main():
     import argparse
     parser = argparse.ArgumentParser(description="Pipeline Amazon → MercadoLibre CBT v2.0")
     parser.add_argument("--dry-run", action="store_true", help="Simular publicaciones sin enviar a ML")
-    parser.add_argument("--skip-validation", action="store_true", help="Omitir validación IA")
+    parser.add_argument("--enable-validation", action="store_true", help="Activar validación IA (está desactivada por defecto)")
     parser.add_argument("--force-regenerate", action="store_true", help="Forzar regeneración de archivos existentes")
     parser.add_argument("--skip-health-check", action="store_true", help="Saltar verificaciones de salud")
     parser.add_argument("--asin", type=str, help="Procesar solo un ASIN específico")
+    parser.add_argument("--asins-file", type=str, help="Archivo con lista de ASINs (default: resources/asins.txt)")
 
     args = parser.parse_args()
 
     # Configurar flags
     Config.DRY_RUN = args.dry_run
-    Config.SKIP_VALIDATION = args.skip_validation
+    # Si se pasa --enable-validation, activar (SKIP_VALIDATION = False)
+    if args.enable_validation:
+        Config.SKIP_VALIDATION = False
+    # De lo contrario, mantener el default de Config (True)
     Config.FORCE_REGENERATE = args.force_regenerate
+
+    # Configurar archivo de ASINs
+    if args.asins_file:
+        Config.ASINS_FILE = Path(args.asins_file)
 
     # Setup directories
     Config.setup_directories()
