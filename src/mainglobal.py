@@ -176,9 +176,15 @@ def fix_attributes_with_value_ids(cid: str, attributes: list) -> list:
                 })
                 fixed += 1
             else:
-                # No hay match → descartar este atributo
-                skipped += 1
-                print(f"⚠️ Atributo {aid} con valor '{value_name}' no encontrado en schema → descartado")
+                # No hay match en catálogo ML
+                # Para atributos críticos (BRAND, MODEL), NUNCA descartar → usar value_name
+                if aid in ["BRAND", "MODEL"]:
+                    fixed_attrs.append({"id": aid, "value_name": str(value_name)})
+                    print(f"⚠️ {aid} '{value_name}' no en catálogo ML → usando value_name (texto)")
+                else:
+                    # Otros atributos sí pueden descartarse
+                    skipped += 1
+                    print(f"⚠️ Atributo {aid} con valor '{value_name}' no encontrado en schema → descartado")
         else:
             # Atributo sin valores predefinidos pero tampoco es de texto libre → mantener
             fixed_attrs.append({"id": aid, "value_name": str(value_name)})
@@ -1200,9 +1206,21 @@ Devuelve SOLO un array JSON con los atributos rellenados.
     if not sites:
         sites = [{"site_id": "MLM", "logistic_type": "remote"}]  # fallback seguro
 
-    # 🔧 Agregar seller_custom_field (SKU = ASIN) a cada marketplace
+    # 🔧 Para CBT (Cross-Border Trade), FORZAR logistic_type="remote" en TODOS los sites
+    # (Aunque la cuenta tenga fulfillment, CBT siempre debe ser remote)
     for site in sites:
+        site["logistic_type"] = "remote"
         site["seller_custom_field"] = asin
+
+    # 🧹 Deduplicar sites por site_id (al forzar remote, pueden quedar duplicados)
+    seen_site_ids = set()
+    unique_sites = []
+    for site in sites:
+        sid = site.get("site_id")
+        if sid and sid not in seen_site_ids:
+            seen_site_ids.add(sid)
+            unique_sites.append(site)
+    sites = unique_sites
 
     # Asegurar imágenes
     pics = []
