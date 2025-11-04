@@ -149,26 +149,13 @@ def fix_missing_brand(mini_ml: dict, amazon_json: dict) -> dict:
                 break
 
     if brand:
-        # Asegurar que attributes existe
-        if 'attributes' not in mini_ml or not isinstance(mini_ml['attributes'], list):
-            mini_ml['attributes'] = []
+        # ✅ Modificar attributes_mapped en lugar de attributes
+        # (attributes se construye dinámicamente en publish_item)
+        if 'attributes_mapped' not in mini_ml:
+            mini_ml['attributes_mapped'] = {}
 
-        # Buscar si ya existe BRAND
-        brand_exists = False
-        for attr in mini_ml['attributes']:
-            if attr.get('id') == 'BRAND':
-                brand_exists = True
-                attr['value_name'] = brand
-                print(f"   ✅ BRAND actualizado: {brand}")
-                break
-
-        # Si no existe, agregarlo al principio (es importante)
-        if not brand_exists:
-            mini_ml['attributes'].insert(0, {
-                'id': 'BRAND',
-                'value_name': brand
-            })
-            print(f"   ✅ BRAND agregado: {brand}")
+        mini_ml['attributes_mapped']['BRAND'] = {'value_name': brand}
+        print(f"   ✅ BRAND agregado a attributes_mapped: {brand}")
     else:
         print(f"   ⚠️ No se pudo encontrar BRAND en Amazon JSON")
 
@@ -200,23 +187,12 @@ Si no tiene un color específico o es transparente, responde "No aplica"
         color = response.content[0].text.strip()
 
         if color and color != "No aplica":
-            # Buscar si ya existe COLOR
-            color_exists = False
-            for attr in mini_ml.get('attributes', []):
-                if attr.get('id') == 'COLOR':
-                    color_exists = True
-                    attr['value_name'] = color
-                    break
+            # ✅ Modificar attributes_mapped en lugar de attributes
+            if 'attributes_mapped' not in mini_ml:
+                mini_ml['attributes_mapped'] = {}
 
-            # Si no existe, agregarlo
-            if not color_exists:
-                if 'attributes' not in mini_ml:
-                    mini_ml['attributes'] = []
-                mini_ml['attributes'].append({
-                    'id': 'COLOR',
-                    'value_name': color
-                })
-                print(f"   ✅ COLOR detectado con IA: {color}")
+            mini_ml['attributes_mapped']['COLOR'] = {'value_name': color}
+            print(f"   ✅ COLOR detectado con IA y agregado a attributes_mapped: {color}")
 
     except Exception as e:
         print(f"   ⚠️ No se pudo detectar COLOR con IA: {e}")
