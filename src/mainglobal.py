@@ -176,9 +176,15 @@ def fix_attributes_with_value_ids(cid: str, attributes: list) -> list:
                 })
                 fixed += 1
             else:
-                # No hay match → descartar este atributo
-                skipped += 1
-                print(f"⚠️ Atributo {aid} con valor '{value_name}' no encontrado en schema → descartado")
+                # CRITICAL ATTRIBUTES: NEVER discard, use value_name instead
+                critical_attrs = ["BRAND", "MODEL", "MANUFACTURER", "COLOR"]
+                if aid in critical_attrs:
+                    fixed_attrs.append({"id": aid, "value_name": str(value_name)})
+                    print(f"✅ Atributo crítico {aid}='{value_name}' mantenido (sin value_id)")
+                else:
+                    # No hay match → descartar este atributo
+                    skipped += 1
+                    print(f"⚠️ Atributo {aid} con valor '{value_name}' no encontrado en schema → descartado")
         else:
             # Atributo sin valores predefinidos pero tampoco es de texto libre → mantener
             fixed_attrs.append({"id": aid, "value_name": str(value_name)})
@@ -1025,6 +1031,15 @@ def publish_item(asin_json):
         blacklist_filtered = pre_filter_count - len(attributes)
         if blacklist_filtered > 0:
             print(f"🧹 Filtrados {blacklist_filtered} atributos inválidos (blacklist)")
+
+        # ✅ GARANTIZAR QUE BRAND SIEMPRE ESTÉ PRESENTE
+        has_brand = any(a.get("id") == "BRAND" for a in attributes)
+        if not has_brand and brand:
+            print(f"✅ Agregando BRAND obligatorio: {brand}")
+            attributes.append({"id": "BRAND", "value_name": brand.title()})
+        elif not has_brand:
+            print("⚠️ Sin BRAND - usando Generic como fallback")
+            attributes.append({"id": "BRAND", "value_name": "Generic"})
 
         # 🔹 Sale terms, imágenes desde mini_ml
         sale_terms = [
