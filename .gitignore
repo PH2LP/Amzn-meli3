@@ -60,3 +60,4 @@ storage/logs/
 !README.md
 !REPORTE_FINAL.md
 !.gitignore
+storage/category_cache/
