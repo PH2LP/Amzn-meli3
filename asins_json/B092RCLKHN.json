@@ -1,0 +1,915 @@
+{
+  "asin": "B092RCLKHN",
+  "attributes": {
+    "has_multiple_battery_powered_components": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "resolution": [
+      {
+        "language_tag": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "grams",
+        "value": 37.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Easy-to-use running watch monitors heart rate (this is not a medical device) at the wrist and uses GPS to track how far, how fast and where you’ve run.Special Feature:Bluetooth.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Battery life: up to 2 weeks in smartwatch mode; up to 20 hours in GPS mode",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Plan your race day strategy with the PacePro feature (not compatible with on-device courses), which offers GPS-based pace guidance for a selected course or distance",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Run your best with helpful training tools, including race time predictions and finish time estimates",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Track all the ways you move with built-in activity profiles for running, cycling, track run, virtual run, pool swim, Pilates, HIIT, breathwork and more",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Tune in to your body with advanced wellness features, such as intensity minutes, fitness age, all-day respiration and more",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Customize your watch with free watch faces, data fields, apps and widgets from the Connect IQ Store (requires Garmin Connect app and Connect IQ app loaded on a compatible smartphone)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Take the guesswork out of training with suggested workouts of varying intensities based on your training history, fitness level and recovery time",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hazmat": [
+      {
+        "aspect": "proper_shipping_name",
+        "value": "LITHIUM ION BATTERIES CONTAINED IN EQUIPMENT",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "united_nations_regulatory_id",
+        "value": "UN3481",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "regulatory_packing_group",
+        "value": "II",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "transportation_regulatory_class",
+        "value": "9",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AU_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BR_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CA_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CN_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "DE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "EG_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ES_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "FR_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "GB_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IN_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IT_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "JP_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "MX_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "NL_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "PL_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SA_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SG_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "TR_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "US_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ZA_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "millimeters",
+          "value": 42.0
+        },
+        "length": {
+          "unit": "millimeters",
+          "value": 42.0
+        },
+        "height": {
+          "unit": "millimeters",
+          "value": 11.6
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "band": [
+      {
+        "color": [
+          {
+            "language_tag": "en_US",
+            "value": "black"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Garmin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43210000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "control_method": [
+      {
+        "value": "push_button",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "753759279608",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0753759279608",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00753759279608",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_with_vehicle_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Car",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "connectivity_protocol": [
+      {
+        "language_tag": "en_US",
+        "value": "Bluetooth",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 6.9
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 7.0
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 14.9
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "One Size",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supported_satellite_navigation_system": [
+      {
+        "value": "gps",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "glonass",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "galileo",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "010-02562-00",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Watch",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_lithium_ion_cells": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "battery": [
+      {
+        "cell_composition": [
+          {
+            "value": "alkaline"
+          }
+        ],
+        "weight": [
+          {
+            "unit": "grams",
+            "value": 5.0
+          }
+        ],
+        "average_life": [
+          {
+            "unit": "hours",
+            "value": 20.0
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Garmin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "operating_system": [
+      {
+        "language_tag": "en_US",
+        "value": "Android Wear",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lithium_battery": [
+      {
+        "energy_content": [
+          {
+            "unit": "watt_hours",
+            "value": 0.6
+          }
+        ],
+        "packaging": [
+          {
+            "value": "batteries_contained_in_equipment"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "010-02562-00",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "memory_storage_capacity": [
+      {
+        "unit": "MB",
+        "value": 32.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "num_batteries": [
+      {
+        "quantity": 1,
+        "type": "lithium_polymer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "lithium_ion",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "12v",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "nonstandard_battery",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "p76",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "california_proposition_65": [
+      {
+        "compliance_type": "chemical",
+        "chemical_names": [
+          "lead"
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "display": [
+      {
+        "size": [
+          {
+            "unit": "inches",
+            "value": 1.04
+          }
+        ],
+        "type": [
+          {
+            "language_tag": "en_US",
+            "value": "Sunlight-visible, transflective memory-in-pixel (MIP)"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Garmin Forerunner 55, GPS Running Watch with Daily Suggested Workouts, Up to 2 Weeks of Battery Life, Black - 010-02562-00",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 199.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "includes_rechargable_battery": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2021-06-02T00:00:00-00:00",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Bluetooth",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Forerunner 55; Power/Data Cable; Documentation",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "identification_number": "IPH-04162",
+        "registration_status": "has_fcc_id",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "has_color_screen": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "map_type": [
+      {
+        "language_tag": "en_US",
+        "value": "North America",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "GRFR55BL",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "running-gps-units",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "1 year limited warranty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "non_lithium_battery_packaging": [
+      {
+        "value": "batteries_contained_in_equipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.13,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width_height": [
+      {
+        "length": {
+          "unit": "inches",
+          "value": 1.65
+        },
+        "width": {
+          "unit": "inches",
+          "value": 1.65
+        },
+        "height": {
+          "unit": "inches",
+          "value": 0.46
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_shape": [
+      {
+        "language_tag": "en_US",
+        "value": "Round",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Bluetooth",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "human_interface_input": [
+      {
+        "value": "buttons",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_year": [
+      {
+        "value": 2021,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2021-06-02T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "Smartphone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Aluminum",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "mounting_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Wrist Mount",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "touch_screen_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Capacitive",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31Ra93nqGTS.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31Ra93nqGTS._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/518z0My1ZlS.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/317-Gl5je4S.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/317-Gl5je4S._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/514Hv9EyRuS.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/31HwhYgZ0US.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/31HwhYgZ0US._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51Qsd-AyKWS.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/31Lv5nysgoS.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/31Lv5nysgoS._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51nyOechpkS.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/31aeAy2NU6S.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/31aeAy2NU6S._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51mjqhePR3S.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/31JU7SqTEgS.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/31JU7SqTEgS._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51w0b3JTt4S.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/31B3748MfVS.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/31B3748MfVS._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/517eVOvN6IS.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/31sdkWAM4US.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/31sdkWAM4US._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51Aomdc7hqS.jpg",
+          "height": 1414,
+          "width": 1414
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51bxt3SonLS.jpg",
+          "height": 364,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51bxt3SonLS._SL75_.jpg",
+          "height": 55,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/81fyis1BFJS.jpg",
+          "height": 1207,
+          "width": 1656
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "GPS_OR_NAVIGATION_SYSTEM"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0955LZ85T"
+          ],
+          "type": "VARIATION"
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "617647011",
+          "title": "Running GPS Units",
+          "link": "https://www.amazon.com/gp/bestsellers/electronics/617647011",
+          "rank": 1
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "ce_display_on_website",
+          "title": "Electronics",
+          "link": "https://www.amazon.com/gp/bestsellers/electronics",
+          "rank": 442
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Garmin",
+      "browseClassification": {
+        "displayName": "Running GPS Units",
+        "classificationId": "617647011"
+      },
+      "color": "Black",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Garmin Forerunner 55, GPS Running Watch with Daily Suggested Workouts, Up to 2 Weeks of Battery Life, Black - 010-02562-00",
+      "manufacturer": "Garmin",
+      "memorabilia": false,
+      "modelNumber": "010-02562-00",
+      "packageQuantity": 1,
+      "partNumber": "010-02562-00",
+      "releaseDate": "2021-06-02",
+      "size": "One Size",
+      "style": "Watch",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "wireless_display_on_website",
+      "websiteDisplayGroupName": "Wireless"
+    }
+  ]
+}

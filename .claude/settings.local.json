@@ -77,7 +77,22 @@
       "Bash(gunzip:*)",
       "Bash(resources/cbt_categories_dump.json)",
       "Bash(ln:*)",
-      "Bash(else echo \"No database found\")"
+      "Bash(else echo \"No database found\")",
+      "Bash(pkill:*)",
+      "Bash(if [ -f .env ])",
+      "Bash(then grep ML_TOKEN .env)",
+      "Bash(else echo \"No .env file found\")",
+      "Bash(rm:*)",
+      "Bash(do echo '=== $(basename $f) ===')",
+      "Bash(jq:*)",
+      "Bash(for asin in B0DRW69H11 B0D3H3NKBN B0CLC6NBBX B0D1Z99167)",
+      "Bash(do echo \"=== $asin ===\")",
+      "Bash(ls:*)",
+      "Bash(if [ -f logs/pipeline_with_fix.log ])",
+      "Bash(then tail -100 logs/pipeline_with_fix.log)",
+      "Bash(else echo \"Log no existe aún\")",
+      "Bash(/tmp/mainglobal_old.py)",
+      "Bash(for asin in B0DRW69H11 B0D3H3NKBN B0CLC6NBBX)"
     ],
     "deny": [],
     "ask": []
