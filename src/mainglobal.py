@@ -1405,8 +1405,8 @@ Devuelve SOLO un array JSON con los atributos rellenados.
         pics = [{"source": "https://http2.mlstatic.com/D_NQ_NP_2X_664019-MLA54915512781_042023-F.webp"}]
 
     body["pictures"] = pics
-    # Para CBT (Cross Border Trade), NO especificar site_id para que se replique en todos los marketplaces
-    # El array sites_to_sell define automáticamente dónde se publica
+    # Para CBT (Cross Border Trade), especificar site_id='CBT' + sites_to_sell
+    body["site_id"] = "CBT"  # Requerido por ML API
     body["logistic_type"] = "remote"  # CBT siempre usa logística remota (cross-border)
     body["sites_to_sell"] = sites
 
@@ -1439,8 +1439,32 @@ Devuelve SOLO un array JSON con los atributos rellenados.
         try:
             res = http_post(f"{API}/global/items", body)
             item_id = res.get("id")
-            print(f"✅ Publicado → {item_id}")
-            break  # Éxito, salir del loop
+
+            # Verificar si hay errores en site_items (por país)
+            site_items = res.get("site_items", [])
+            has_errors = any(item.get("error") for item in site_items)
+
+            if not has_errors:
+                print(f"✅ Publicado → {item_id}")
+                break  # Éxito completo, salir del loop
+
+            # Si todos los países tienen error, tratarlo como falla
+            all_failed = all(item.get("error") for item in site_items)
+            if not all_failed:
+                print(f"✅ Publicado → {item_id} (con algunos errores por país)")
+                break  # Publicación parcial, salir del loop
+
+            # Todos fallaron - extraer errores para retry
+            error_messages = []
+            for item in site_items:
+                if item.get("error"):
+                    error_messages.append(json.dumps(item["error"]))
+            error_text = " | ".join(error_messages)
+
+            print(f"⚠️ Todos los países fallaron: {error_text[:200]}...")
+
+            # Crear RuntimeError artificial para activar retry logic
+            raise RuntimeError(f"All countries failed: {error_text}")
 
         except RuntimeError as e:
             error_text = str(e)
