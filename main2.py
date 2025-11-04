@@ -595,6 +595,56 @@ class ValidationPhase(PipelinePhase):
 class PublishPhase(PipelinePhase):
     """Fase de publicación en MercadoLibre CBT"""
 
+    def _find_alternative_category_without_gtin(self, asin: str, mini_ml: dict) -> Optional[str]:
+        """
+        Busca categoría alternativa compatible que NO requiera GTIN.
+        Usa el CategoryMatcher y verifica requisitos de cada categoría.
+        """
+        try:
+            from src.category_matcher import CategoryMatcher
+            import requests
+
+            matcher = CategoryMatcher()
+            product_desc = f"{mini_ml.get('brand', '')} {mini_ml.get('title_ai', '')}"
+
+            # Obtener top 5 categorías similares
+            candidates = matcher.find_best_category(product_desc, top_n=5)
+            self.log(asin, f"Evaluando {len(candidates)} categorías alternativas...", "INFO")
+
+            for cat_id, similarity in candidates:
+                try:
+                    # Obtener schema de categoría
+                    schema_url = f"https://api.mercadolibre.com/categories/{cat_id}/attributes"
+                    schema_resp = requests.get(schema_url, timeout=10)
+                    if schema_resp.status_code != 200:
+                        continue
+
+                    schema = schema_resp.json()
+
+                    # Verificar si GTIN es requerido
+                    gtin_required = False
+                    for attr in schema:
+                        if attr.get("id") == "GTIN":
+                            tags = attr.get("tags", {})
+                            if tags.get("required") or tags.get("conditional_required"):
+                                gtin_required = True
+                                break
+
+                    if not gtin_required:
+                        self.log(asin, f"✅ Categoría {cat_id} no requiere GTIN (sim: {similarity:.0%})", "INFO")
+                        return cat_id
+                    else:
+                        self.log(asin, f"⚠️ Categoría {cat_id} requiere GTIN (sim: {similarity:.0%})", "DEBUG")
+
+                except Exception as e:
+                    self.log(asin, f"Error evaluando {cat_id}: {e}", "DEBUG")
+                    continue
+
+        except Exception as e:
+            self.log(asin, f"Error buscando categoría alternativa: {e}", "ERROR")
+
+        return None
+
     def execute(self, asin: str) -> Optional[str]:
         """Publica producto en MercadoLibre CBT"""
         mini_path = Config.MINI_ML_DIR / f"{asin}_mini_ml.json"
@@ -664,6 +714,22 @@ class PublishPhase(PipelinePhase):
                     mini_ml["last_error"] = "GTIN_REUSED"
                     save_json_file(str(mini_path), mini_ml)
                     continue  # Reintentar
+
+                # Error 7810: GTIN requerido pero no disponible (categoría requiere GTIN)
+                if "7810" in error_str or ("missing_conditional_required" in error_str and "GTIN" in error_str):
+                    self.log(asin, "Categoría requiere GTIN pero no tenemos válido → Buscando categoría alternativa", "WARNING")
+                    # Buscar categoría alternativa que no requiera GTIN
+                    alternative_cat = self._find_alternative_category_without_gtin(asin, mini_ml)
+                    if alternative_cat:
+                        self.log(asin, f"Encontrada categoría alternativa: {alternative_cat}", "INFO")
+                        mini_ml["category_id"] = alternative_cat
+                        mini_ml["category_changed"] = True
+                        save_json_file(str(mini_path), mini_ml)
+                        continue  # Reintentar con nueva categoría
+                    else:
+                        self.log(asin, "No se encontró categoría alternativa → Abortando", "ERROR")
+                        self.db.update_asin_status(asin, Status.FAILED, "Category requires GTIN but none available")
+                        return None
 
                 # Error de categoría incorrecta
                 if "category" in error_str.lower() or "Title and photos did not match" in error_str:

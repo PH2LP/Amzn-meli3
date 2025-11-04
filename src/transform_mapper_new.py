@@ -360,10 +360,57 @@ def first_of(amazon_json, keys):
 
             return val
     return ""
+def detect_gtin_with_ai(amazon_json):
+    """
+    Usa OpenAI para detectar GTIN/UPC/EAN en el JSON de Amazon.
+    Fallback a búsqueda heurística si IA no está disponible.
+    """
+    if not OPENAI_API_KEY:
+        print("⚠️ OPENAI_API_KEY no disponible, usando búsqueda heurística")
+        matches = re.findall(r"\b\d{12,14}\b", json.dumps(amazon_json))
+        if matches:
+            return matches[0]
+        return None
+
+    try:
+        from openai import OpenAI
+        client = OpenAI(api_key=OPENAI_API_KEY)
+        prompt = f"""Analiza este JSON de Amazon y extrae el GTIN/UPC/EAN del producto.
+Responde SOLO con JSON: {{"gtin": "número de 12-14 dígitos"}}
+
+Si no encuentras GTIN, responde: {{"gtin": null}}
+
+JSON de Amazon:
+{json.dumps(amazon_json, ensure_ascii=False)[:8000]}"""
+
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            temperature=0,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        txt = resp.choices[0].message.content.strip()
+        m = re.search(r"\{.*\}", txt, re.S)
+        if m:
+            data = json.loads(m.group(0))
+            gtin = data.get("gtin") or data.get("upc") or data.get("ean")
+            if gtin and re.match(r"^\d{8,14}$", str(gtin)):
+                return str(gtin).strip()
+    except Exception as e:
+        print(f"⚠️ Error en detección IA de GTIN: {e}")
+
+    # Fallback heurístico
+    matches = re.findall(r"\b\d{12,14}\b", json.dumps(amazon_json))
+    if matches:
+        return matches[0]
+    return None
+
+
 def extract_gtins(amazon_json)->List[str]:
     """
     Extrae SOLO GTINs reales (UPC/EAN) del JSON de Amazon SP-API.
     NO extrae classificationId, unspsc_code, ni otros números.
+
+    Si no encuentra GTINs, usa IA como fallback.
     """
     out = []
 
@@ -397,6 +444,16 @@ def extract_gtins(amazon_json)->List[str]:
         if g not in seen and 12 <= len(g) <= 14:
             seen.add(g)
             clean.append(g)
+
+    # ✅ NUEVO: Si no se encontró GTIN → usar IA como fallback
+    if not clean:
+        print("⚠️ No se encontró GTIN en JSON → Intentando detectar con IA...")
+        ai_gtin = detect_gtin_with_ai(amazon_json)
+        if ai_gtin:
+            clean.append(ai_gtin)
+            print(f"✅ GTIN detectado con IA: {ai_gtin}")
+        else:
+            print("❌ IA no pudo detectar GTIN")
 
     return sorted(clean)
 
