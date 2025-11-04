@@ -77,6 +77,7 @@ class Config:
     OUTPUT_JSON_DIR = Path("outputs/json")
     LOGS_DIR = Path("storage/logs/pipeline")
     DB_PATH = Path("storage/pipeline_state.db")
+    GTIN_ISSUES_LOG = Path("storage/logs/gtin_issues.json")
 
     # Retry configuration
     MAX_DOWNLOAD_RETRIES = 3
@@ -284,6 +285,60 @@ class PipelineDB:
         conn.close()
 
         return stats
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# GTIN ISSUES LOGGING
+# ═══════════════════════════════════════════════════════════════════════════
+
+def log_gtin_issue(asin: str, gtin: str, category_id: str, error_code: str, error_message: str, mini_ml_data: dict = None):
+    """
+    Registra productos que no se pueden publicar por problemas con GTIN.
+
+    Args:
+        asin: El ASIN del producto
+        gtin: El GTIN que causó el problema (puede ser None)
+        category_id: Categoría en la que se intentó publicar
+        error_code: Código de error de MercadoLibre (ej: "3701", "7810")
+        error_message: Mensaje de error completo
+        mini_ml_data: Datos completos del mini_ml para referencia
+    """
+    from datetime import datetime
+
+    log_file = Config.GTIN_ISSUES_LOG
+
+    # Cargar log existente o crear nuevo
+    if log_file.exists():
+        with open(log_file, 'r', encoding='utf-8') as f:
+            try:
+                issues = json.load(f)
+            except json.JSONDecodeError:
+                issues = []
+    else:
+        issues = []
+
+    # Agregar nuevo issue
+    issue_entry = {
+        "asin": asin,
+        "gtin": gtin,
+        "category_id": category_id,
+        "category_name": mini_ml_data.get("category_name") if mini_ml_data else None,
+        "error_code": error_code,
+        "error_message": error_message,
+        "timestamp": datetime.now().isoformat(),
+        "product_title": mini_ml_data.get("title_ai") if mini_ml_data else None,
+        "brand": mini_ml_data.get("brand") if mini_ml_data else None,
+        "price": mini_ml_data.get("price") if mini_ml_data else None
+    }
+
+    issues.append(issue_entry)
+
+    # Guardar log actualizado
+    log_file.parent.mkdir(parents=True, exist_ok=True)
+    with open(log_file, 'w', encoding='utf-8') as f:
+        json.dump(issues, f, indent=2, ensure_ascii=False)
+
+    print(f"📝 Problema GTIN registrado: {asin} (error {error_code})")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -595,57 +650,6 @@ class ValidationPhase(PipelinePhase):
 class PublishPhase(PipelinePhase):
     """Fase de publicación en MercadoLibre CBT"""
 
-    def _find_alternative_category_without_gtin(self, asin: str, mini_ml: dict) -> Optional[str]:
-        """
-        Busca categoría alternativa compatible que NO requiera GTIN.
-        Usa el CategoryMatcher y verifica requisitos de cada categoría.
-        """
-        try:
-            from src.category_matcher import load_embeddings, find_top_k_categories
-            import requests
-
-            # Cargar embeddings
-            embeddings, texts, ids = load_embeddings()
-            product_desc = f"{mini_ml.get('brand', '')} {mini_ml.get('title_ai', '')}"
-
-            # Obtener top 5 categorías similares
-            candidates = find_top_k_categories(product_desc, embeddings, texts, ids, k=5)
-            self.log(asin, f"Evaluando {len(candidates)} categorías alternativas...", "INFO")
-
-            for cat_id, similarity in candidates:
-                try:
-                    # Obtener schema de categoría
-                    schema_url = f"https://api.mercadolibre.com/categories/{cat_id}/attributes"
-                    schema_resp = requests.get(schema_url, timeout=10)
-                    if schema_resp.status_code != 200:
-                        continue
-
-                    schema = schema_resp.json()
-
-                    # Verificar si GTIN es requerido
-                    gtin_required = False
-                    for attr in schema:
-                        if attr.get("id") == "GTIN":
-                            tags = attr.get("tags", {})
-                            if tags.get("required") or tags.get("conditional_required"):
-                                gtin_required = True
-                                break
-
-                    if not gtin_required:
-                        self.log(asin, f"✅ Categoría {cat_id} no requiere GTIN (sim: {similarity:.0%})", "INFO")
-                        return cat_id
-                    else:
-                        self.log(asin, f"⚠️ Categoría {cat_id} requiere GTIN (sim: {similarity:.0%})", "DEBUG")
-
-                except Exception as e:
-                    self.log(asin, f"Error evaluando {cat_id}: {e}", "DEBUG")
-                    continue
-
-        except Exception as e:
-            self.log(asin, f"Error buscando categoría alternativa: {e}", "ERROR")
-
-        return None
-
     def execute(self, asin: str) -> Optional[str]:
         """Publica producto en MercadoLibre CBT"""
         mini_path = Config.MINI_ML_DIR / f"{asin}_mini_ml.json"
@@ -707,30 +711,59 @@ class PublishPhase(PipelinePhase):
 
                 # Detectar errores específicos y aplicar estrategias
 
-                # Error de GTIN duplicado (código 3701)
+                # Error de GTIN duplicado (código 3701) - Intentar sin GTIN
                 if "3701" in error_str or "invalid_product_identifier" in error_str:
-                    self.log(asin, "GTIN duplicado detectado → Regenerando SIN GTIN", "WARNING")
                     mini_ml = load_json_file(str(mini_path))
+
+                    # Si ya intentamos sin GTIN y sigue fallando, registrar y abortar
+                    if mini_ml.get("force_no_gtin"):
+                        self.log(asin, "❌ GTIN duplicado y sin GTIN también rechazado → Guardando en log", "ERROR")
+
+                        log_gtin_issue(
+                            asin=asin,
+                            gtin=mini_ml.get("gtin"),
+                            category_id=mini_ml.get("category_id"),
+                            error_code="3701",
+                            error_message="GTIN duplicado - ya usado. Intentó sin GTIN pero también rechazado",
+                            mini_ml_data=mini_ml
+                        )
+
+                        self.db.update_asin_status(asin, Status.FAILED, "GTIN duplicated and no-GTIN also rejected")
+                        return None
+
+                    # Primer intento: marcar force_no_gtin y reintentar
+                    self.log(asin, "⚠️ GTIN duplicado → Reintentando SIN GTIN", "WARNING")
                     mini_ml["force_no_gtin"] = True
                     mini_ml["last_error"] = "GTIN_REUSED"
                     save_json_file(str(mini_path), mini_ml)
                     continue  # Reintentar
 
-                # Error 7810: GTIN requerido pero no disponible (categoría requiere GTIN)
+                # Error 7810: GTIN requerido pero no disponible - Intentar sin GTIN
                 if "7810" in error_str or ("missing_conditional_required" in error_str and "GTIN" in error_str):
-                    self.log(asin, "Categoría requiere GTIN pero no tenemos válido → Buscando categoría alternativa", "WARNING")
-                    # Buscar categoría alternativa que no requiera GTIN
-                    alternative_cat = self._find_alternative_category_without_gtin(asin, mini_ml)
-                    if alternative_cat:
-                        self.log(asin, f"Encontrada categoría alternativa: {alternative_cat}", "INFO")
-                        mini_ml["category_id"] = alternative_cat
-                        mini_ml["category_changed"] = True
-                        save_json_file(str(mini_path), mini_ml)
-                        continue  # Reintentar con nueva categoría
-                    else:
-                        self.log(asin, "No se encontró categoría alternativa → Abortando", "ERROR")
-                        self.db.update_asin_status(asin, Status.FAILED, "Category requires GTIN but none available")
+                    mini_ml = load_json_file(str(mini_path))
+
+                    # Si ya intentamos sin GTIN y sigue fallando, registrar y abortar
+                    if mini_ml.get("force_no_gtin"):
+                        self.log(asin, "❌ Categoría requiere GTIN y sin GTIN también rechazado → Guardando en log", "ERROR")
+
+                        log_gtin_issue(
+                            asin=asin,
+                            gtin=mini_ml.get("gtin"),
+                            category_id=mini_ml.get("category_id"),
+                            error_code="7810",
+                            error_message="Categoría requiere GTIN. Intentó sin GTIN pero también rechazado",
+                            mini_ml_data=mini_ml
+                        )
+
+                        self.db.update_asin_status(asin, Status.FAILED, "Category requires GTIN - no alternatives work")
                         return None
+
+                    # Primer intento: marcar force_no_gtin y reintentar
+                    self.log(asin, "⚠️ Categoría requiere GTIN → Reintentando SIN GTIN", "WARNING")
+                    mini_ml["force_no_gtin"] = True
+                    mini_ml["last_error"] = "GTIN_REQUIRED"
+                    save_json_file(str(mini_path), mini_ml)
+                    continue  # Reintentar
 
                 # Error de categoría incorrecta
                 if "category" in error_str.lower() or "Title and photos did not match" in error_str:

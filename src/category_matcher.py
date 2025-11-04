@@ -48,8 +48,23 @@ def load_embeddings():
     X = np.load(EMB_PATH)
     with open(TXT_PATH, "r", encoding="utf-8") as f:
         meta = json.load(f)
-    texts = [m.get("full_name", m.get("name", "")) for m in meta]
-    ids = [m.get("id") for m in meta]
+
+    # Handle both formats: list of dicts or list of [id, name] arrays
+    texts = []
+    ids = []
+    for m in meta:
+        if isinstance(m, list):
+            # Format: ["CBT123", "Category Name"]
+            ids.append(m[0])
+            texts.append(m[1] if len(m) > 1 else "")
+        elif isinstance(m, dict):
+            # Format: {"id": "CBT123", "name": "Category Name"}
+            ids.append(m.get("id"))
+            texts.append(m.get("full_name", m.get("name", "")))
+        else:
+            ids.append(None)
+            texts.append("")
+
     return X, texts, ids
 
 
@@ -67,7 +82,12 @@ def get_product_info(asin):
 
 def find_top_k_categories(query, embeddings, texts, ids, k=5):
     from openai import embeddings as emb_mod
-    emb = client.embeddings.create(model="text-embedding-3-small", input=query).data[0].embedding
+    # Match dimensions with stored embeddings (384)
+    emb = client.embeddings.create(
+        model="text-embedding-3-small",
+        input=query,
+        dimensions=embeddings.shape[1]  # Auto-detect from stored embeddings
+    ).data[0].embedding
     sims = cosine_similarity([emb], embeddings)[0]
     top_idx = np.argsort(sims)[::-1][:k]
     return [(ids[i], texts[i], float(sims[i])) for i in top_idx]
