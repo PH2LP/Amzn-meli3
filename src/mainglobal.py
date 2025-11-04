@@ -53,8 +53,101 @@ def http_get(url, params=None, extra_headers=None, timeout=30):
         raise RuntimeError(f"GET {url} → {r.status_code} {r.text}")
     return r.json()
 
-def autofill_required_attrs(cid: str, attributes: list) -> list:
-    """Consulta el schema oficial de la categoría y agrega los atributos obligatorios que falten."""
+def ai_extract_missing_fields(asin: str, amazon_json: dict, required_fields: list) -> dict:
+    """
+    Usa IA para extraer valores de campos requeridos faltantes del JSON completo de Amazon.
+
+    Args:
+        asin: ASIN del producto
+        amazon_json: JSON completo de Amazon con toda la información del producto
+        required_fields: Lista de campos requeridos con su schema info
+
+    Returns:
+        Dict con {attribute_id: extracted_value}
+    """
+    if not required_fields or not OPENAI_API_KEY:
+        return {}
+
+    from openai import OpenAI
+    client = OpenAI(api_key=OPENAI_API_KEY)
+
+    # Crear lista de campos a buscar
+    fields_to_find = []
+    for field in required_fields:
+        field_id = field.get("id", "")
+        field_name = field.get("name", "")
+        field_type = field.get("value_type", "string")
+        fields_to_find.append(f"- {field_id} ({field_name}): tipo {field_type}")
+
+    fields_text = "\n".join(fields_to_find)
+
+    # Truncar JSON si es muy largo (solo datos relevantes)
+    amazon_str = json.dumps(amazon_json, indent=2, ensure_ascii=False)
+    if len(amazon_str) > 8000:
+        # Priorizar atributos y dimensiones
+        compact = {
+            "title": amazon_json.get("title", ""),
+            "attributes": amazon_json.get("attributes", {}),
+            "dimensions": amazon_json.get("dimensions", {}),
+            "item_dimensions": amazon_json.get("item_dimensions", {}),
+            "package_dimensions": amazon_json.get("package_dimensions", {}),
+            "productTypes": amazon_json.get("productTypes", [])
+        }
+        amazon_str = json.dumps(compact, indent=2, ensure_ascii=False)[:8000]
+
+    prompt = f"""You are a data extraction expert. Extract the following required MercadoLibre attributes from this Amazon product JSON.
+
+Amazon Product JSON:
+{amazon_str}
+
+Required fields to extract:
+{fields_text}
+
+Instructions:
+- Search thoroughly in the JSON for each field
+- For HEIGHT/WIDTH/DEPTH: look in dimensions, item_dimensions, package_dimensions (convert to cm if needed)
+- For SIZE_GRID_ID: determine from age/size information (baby/kids/adult clothing)
+- Return ONLY valid values, not "Default" or placeholders
+- If you cannot find a field, return null for that field
+
+Return a JSON object with format:
+{{
+  "FIELD_ID": "extracted_value",
+  "FIELD_ID2": "extracted_value2"
+}}
+
+Return ONLY the JSON, no explanations."""
+
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.1,
+            max_tokens=500
+        )
+
+        result_text = response.choices[0].message.content.strip()
+
+        # Limpiar markdown si existe
+        if result_text.startswith("```"):
+            result_text = result_text.split("```")[1]
+            if result_text.startswith("json"):
+                result_text = result_text[4:]
+            result_text = result_text.strip()
+
+        extracted = json.loads(result_text)
+        print(f"🤖 IA extrajo {len(extracted)} campos faltantes del JSON de Amazon")
+        return extracted
+
+    except Exception as e:
+        print(f"⚠️ Error al extraer campos con IA: {e}")
+        return {}
+
+def autofill_required_attrs(cid: str, attributes: list, asin: str = None, amazon_json: dict = None) -> list:
+    """
+    Consulta el schema oficial de la categoría y agrega los atributos obligatorios que falten.
+    Si se pasa asin y amazon_json, usa IA para extraer valores faltantes.
+    """
     try:
         schema = http_get(f"https://api.mercadolibre.com/categories/{cid}/attributes")
     except Exception as e:
@@ -64,6 +157,8 @@ def autofill_required_attrs(cid: str, attributes: list) -> list:
     existing_ids = {a["id"] for a in attributes if "id" in a}
     added = 0
 
+    # Paso 1: Identificar campos requeridos faltantes
+    missing_required = []
     for field in schema:
         tags = field.get("tags", {})
         if not tags.get("required"):
@@ -71,25 +166,46 @@ def autofill_required_attrs(cid: str, attributes: list) -> list:
         aid = field["id"]
         if aid in existing_ids:
             continue
+        missing_required.append(field)
 
+    # Paso 2: Si hay campos faltantes y tenemos JSON de Amazon, usar IA
+    ai_extracted = {}
+    if missing_required and asin and amazon_json:
+        print(f"🔍 Detectados {len(missing_required)} campos requeridos faltantes, extrayendo con IA...")
+        ai_extracted = ai_extract_missing_fields(asin, amazon_json, missing_required)
+
+    # Paso 3: Agregar campos faltantes con valores extraídos por IA o defaults
+    for field in missing_required:
+        aid = field["id"]
         vals = field.get("values", [])
         val_id = val_name = None
-        if vals:
+
+        # Intentar usar valor extraído por IA
+        if aid in ai_extracted and ai_extracted[aid]:
+            val_name = str(ai_extracted[aid])
+            print(f"   ✅ {aid} = {val_name} (extraído por IA)")
+
+        # Si no, usar primer valor del schema si existe
+        elif vals:
             val_id = str(vals[0].get("id")) if vals[0].get("id") else None
             val_name = vals[0].get("name")
 
-        # Si el valor es nulo, aplicar defaults seguros
-        if aid == "IS_KIT" and not val_id:
+        # Defaults seguros para campos específicos
+        if aid == "IS_KIT" and not val_id and not val_name:
             val_id, val_name = "242084", "No"
-        if aid == "IS_COLLECTIBLE" and not val_id:
+        if aid == "IS_COLLECTIBLE" and not val_id and not val_name:
             val_id, val_name = "242084", "No"
 
-        attributes.append({
-            "id": aid,
-            "value_id": val_id,
-            "value_name": val_name or "Default"
-        })
-        added += 1
+        # Solo agregar si tenemos un valor válido (no "Default")
+        if val_id or (val_name and val_name != "Default"):
+            attributes.append({
+                "id": aid,
+                "value_id": val_id,
+                "value_name": val_name
+            })
+            added += 1
+        else:
+            print(f"   ⚠️ {aid}: No se pudo encontrar valor válido, omitiendo")
 
     if added:
         print(f"🧩 Se agregaron {added} atributos requeridos automáticamente para {cid}")
@@ -1065,7 +1181,18 @@ def publish_item(asin_json):
             return None  # Abortar publicación
 
         attributes = add_required_defaults(cid, attributes)
-        attributes = autofill_required_attrs(cid, attributes)
+
+        # Cargar JSON original de Amazon para extraer campos faltantes con IA
+        amazon_json = None
+        amazon_json_path = f"storage/asins_json/{asin}.json"
+        if os.path.exists(amazon_json_path):
+            try:
+                with open(amazon_json_path, "r", encoding="utf-8") as f:
+                    amazon_json = json.load(f)
+            except Exception as e:
+                print(f"⚠️ No se pudo cargar JSON de Amazon para {asin}: {e}")
+
+        attributes = autofill_required_attrs(cid, attributes, asin=asin, amazon_json=amazon_json)
 
         # 🧠 Completar atributos IA (solo usando el JSON transformado mini_ml)
         try:
