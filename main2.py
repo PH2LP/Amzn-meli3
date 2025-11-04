@@ -627,25 +627,47 @@ class PublishPhase(PipelinePhase):
                 if result is None:
                     raise Exception("Publicación abortada (dimensiones/imágenes inválidas)")
 
-                # Obtener item_id
+                # Obtener item_id (manejar respuestas CBT multi-país)
                 item_id = result.get("item_id") or result.get("id")
+                site_items = result.get("site_items", [])
 
-                if item_id:
-                    self.log(asin, f"Publicado exitosamente: {item_id}", "SUCCESS")
+                # Si no hay item_id directo, extraer de site_items (CBT multi-país)
+                if not item_id and site_items:
+                    successful_sites = [s for s in site_items if s.get("item_id")]
+                    if successful_sites:
+                        # Usar el primer item_id exitoso como referencia principal
+                        item_id = successful_sites[0].get("item_id")
+                        self.log(asin, f"Publicado exitosamente en {len(successful_sites)} países", "SUCCESS")
+                        self.log(asin, f"  → Item ID principal: {item_id}", "INFO")
 
-                    # Información adicional
-                    site_items = result.get("site_items", [])
+                        # Mostrar todos los item_ids
+                        for site in successful_sites:
+                            self.log(asin, f"  → {site['site_id']}: {site['item_id']}", "INFO")
+                    else:
+                        # Todos los países fallaron
+                        raise Exception(f"Publicación falló en todos los países: {result}")
+
+                # Si hay item_id pero también site_items, mostrar resumen
+                elif item_id and site_items:
                     successful = [s for s in site_items if s.get("item_id")]
                     failed = [s for s in site_items if s.get("error")]
 
+                    self.log(asin, f"Publicado exitosamente: {item_id}", "SUCCESS")
                     self.log(asin, f"  → Publicado en {len(successful)} países", "INFO")
                     if failed:
                         self.log(asin, f"  → {len(failed)} países con errores", "WARNING")
 
-                    self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
-                    return item_id
+                # Si hay item_id simple (publicación single-site)
+                elif item_id:
+                    self.log(asin, f"Publicado exitosamente: {item_id}", "SUCCESS")
+
+                # Si no hay item_id de ninguna forma
                 else:
                     raise Exception(f"Publicación sin ID: {result}")
+
+                # Guardar en BD
+                self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                return item_id
 
             except Exception as e:
                 error_str = str(e)
