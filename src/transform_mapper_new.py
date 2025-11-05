@@ -802,20 +802,20 @@ def detect_category(amazon_json)->Tuple[str,str,float]:
 
     print("🧭 Detectando categoría con CategoryMatcherV2 (embeddings + IA)…")
 
-    # 📌 Cache por ASIN
+    # 📌 Cache por ASIN - DESHABILITADO PERMANENTEMENTE
     CAT_CACHE_PATH = "storage/logs/category_cache.json"
     try:
         cat_cache = json.load(open(CAT_CACHE_PATH, "r", encoding="utf-8"))
     except:
         cat_cache = {}
 
-    # ✅ Cache encontrado → sin IA
-    if asin in cat_cache:
-        cat_id = cat_cache[asin]["id"]
-        cat_name = cat_cache[asin]["name"]
-        sim = cat_cache[asin]["sim"]
-        print(f"🧠 Cache encontrado → IA OFF ✅")
-        return cat_id, cat_name, sim
+    # ❌ CACHÉ DESHABILITADO - Siempre usar CategoryMatcherV2 con fix LEAF
+    # if asin in cat_cache:
+    #     cat_id = cat_cache[asin]["id"]
+    #     cat_name = cat_cache[asin]["name"]
+    #     sim = cat_cache[asin]["sim"]
+    #     print(f"🧠 Cache encontrado → IA OFF ✅")
+    #     return cat_id, cat_name, sim
 
     # ✅ Nueva categorización con CategoryMatcherV2
     try:

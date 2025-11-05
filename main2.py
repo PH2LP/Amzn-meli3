@@ -92,7 +92,7 @@ class Config:
     # Flags
     DRY_RUN = False
     SKIP_VALIDATION = True  # Validación IA desactivada por defecto
-    FORCE_REGENERATE = False
+    FORCE_REGENERATE = True  # SIEMPRE regenerar, NO usar caché
 
     @classmethod
     def setup_directories(cls):
@@ -998,7 +998,10 @@ def main():
     if args.enable_validation:
         Config.SKIP_VALIDATION = False
     # De lo contrario, mantener el default de Config (True)
-    Config.FORCE_REGENERATE = args.force_regenerate
+    # Solo sobrescribir FORCE_REGENERATE si se pasa el flag explícitamente
+    if args.force_regenerate:
+        Config.FORCE_REGENERATE = True
+    # De lo contrario, mantener el default de Config class (True)
 
     # Configurar archivo de ASINs
     if args.asins_file:

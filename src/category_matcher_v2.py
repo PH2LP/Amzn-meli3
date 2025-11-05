@@ -219,6 +219,12 @@ class EmbeddingMatcher:
         # Cliente OpenAI para identificación de tipo de producto
         self.openai_client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
+        # Token de MercadoLibre para verificar categorías
+        self.ml_token = os.getenv('ML_ACCESS_TOKEN')
+
+        # Cache de verificación de categorías leaf
+        self.leaf_cache = {}
+
         self._build_index()
 
     def _build_index(self):
@@ -511,8 +517,7 @@ IMPORTANTE: Responde SOLO las palabras clave, nada más:"""
 
             if 'building toy' in ai_keywords.lower() or 'playset' in ai_keywords.lower():
                 forced_categories.update({
-                    'CBT455425': 0.60,  # Building Toys
-                    'CBT1157': 0.59,    # Building Blocks & Figures
+                    'CBT455425': 0.90,  # Building Toys (PADRE - el filtro LEAF obtendrá sus hijos automáticamente)
                 })
                 print(f"   💡 Forzando inclusión de categorías Building Toys")
 
@@ -544,7 +549,140 @@ IMPORTANTE: Responde SOLO las palabras clave, nada más:"""
                         'forced': True  # Marcar como forzada
                     })
 
-        return results[:top_k]  # Mantener solo top_k después de agregar forzadas
+        # FILTRAR SOLO CATEGORÍAS LEAF antes de retornar
+        print(f"   🔍 Filtrando categorías para quedarse solo con LEAF (hojas)...")
+        results = self._filter_leaf_categories(results[:top_k])
+
+        return results[:top_k]  # Mantener solo top_k después de filtrar
+
+    def _is_leaf_category(self, cat_id: str) -> bool:
+        """
+        Verifica si una categoría es LEAF (hoja) consultando la API de MercadoLibre
+        Una categoría es leaf si NO tiene subcategorías (children_categories == 0)
+
+        Returns:
+            True si es leaf (puede publicar), False si es padre (tiene hijos)
+        """
+        # Verificar cache primero
+        if cat_id in self.leaf_cache:
+            return self.leaf_cache[cat_id]
+
+        try:
+            url = f"https://api.mercadolibre.com/categories/{cat_id}"
+            response = requests.get(url, timeout=5)
+
+            if response.status_code == 200:
+                data = response.json()
+                children = data.get('children_categories', [])
+                is_leaf = len(children) == 0
+
+                # Guardar en cache
+                self.leaf_cache[cat_id] = is_leaf
+
+                return is_leaf
+            else:
+                print(f"   ⚠️ Error verificando categoría {cat_id}: HTTP {response.status_code}")
+                # En caso de error, asumir que es leaf para no bloquear
+                return True
+
+        except Exception as e:
+            print(f"   ⚠️ Error verificando categoría {cat_id}: {e}")
+            # En caso de error, asumir que es leaf para no bloquear
+            return True
+
+    def _get_category_children(self, cat_id: str) -> List[str]:
+        """
+        Obtiene los IDs de las subcategorías (hijos) de una categoría
+
+        Returns:
+            Lista de IDs de subcategorías
+        """
+        try:
+            url = f"https://api.mercadolibre.com/categories/{cat_id}"
+            response = requests.get(url, timeout=5)
+
+            if response.status_code == 200:
+                data = response.json()
+                children = data.get('children_categories', [])
+                return [child['id'] for child in children]
+            else:
+                return []
+
+        except Exception as e:
+            print(f"   ⚠️ Error obteniendo hijos de {cat_id}: {e}")
+            return []
+
+    def _filter_leaf_categories(self, candidates: List[Dict]) -> List[Dict]:
+        """
+        Filtra candidatos para quedarse SOLO con categorías LEAF.
+        Si encuentra categorías PADRE con buena similitud, DESCIENDE a sus hijos.
+
+        Args:
+            candidates: Lista de candidatos de find_similar_categories
+
+        Returns:
+            Lista con categorías leaf (originales + hijos de padres)
+        """
+        leaf_candidates = []
+        parent_candidates = []
+        categories_db = self.database.get_all_categories()
+
+        for candidate in candidates:
+            cat_id = candidate['category_id']
+            is_leaf = self._is_leaf_category(cat_id)
+
+            if is_leaf:
+                leaf_candidates.append(candidate)
+            else:
+                parent_candidates.append(candidate)
+
+        # DESCENSO AUTOMÁTICO: Si hay categorías PADRE, obtener sus hijos
+        if parent_candidates:
+            print(f"   🌿 Encontradas {len(parent_candidates)} categorías PADRE (no-leaf)")
+
+            for parent in parent_candidates[:5]:  # Procesar top 5 padres
+                cat_id = parent['category_id']
+                cat_name = parent['category_data']['name']
+                parent_sim = parent['similarity_score']
+
+                print(f"      🔽 {cat_id} '{cat_name}' (sim: {parent_sim:.3f}) → Obteniendo hijos...")
+
+                # Obtener hijos
+                children_ids = self._get_category_children(cat_id)
+
+                if children_ids:
+                    print(f"         📁 {len(children_ids)} subcategorías encontradas")
+
+                    # Agregar hijos como candidatos con similitud heredada del padre
+                    # (levemente reducida para no sobrepasar las leaf originales)
+                    for child_id in children_ids:
+                        if child_id in categories_db:
+                            # Heredar similitud del padre, reducida en 0.02 (mínima penalización)
+                            child_sim = parent_sim - 0.02
+
+                            leaf_candidates.append({
+                                'category_id': child_id,
+                                'similarity_score': child_sim,
+                                'category_data': categories_db[child_id],
+                                'inherited_from': cat_id  # Marcar que viene de un padre
+                            })
+
+                            child_name = categories_db[child_id]['name']
+                            print(f"         ✅ Agregado hijo: {child_id} '{child_name}' (sim: {child_sim:.3f})")
+                else:
+                    print(f"         ⚠️ No se pudieron obtener hijos")
+
+        # Ordenar por similitud después de agregar hijos
+        leaf_candidates.sort(key=lambda x: x['similarity_score'], reverse=True)
+
+        if leaf_candidates:
+            print(f"   ✅ {len(leaf_candidates)} categorías LEAF válidas (originales + hijos de padres)")
+        else:
+            print(f"   ⚠️ NO se encontraron categorías leaf! Usando todas como fallback")
+            # Si no hay ninguna leaf, retornar todas (para evitar que el sistema se rompa)
+            return candidates
+
+        return leaf_candidates
 
     def _cosine_similarity(
         self,
