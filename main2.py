@@ -524,11 +524,25 @@ class TransformPhase(PipelinePhase):
             self.db.update_asin_status(asin, Status.FAILED, "Missing Amazon JSON")
             return False
 
-        # Si ya existe y no es force regenerate, skip
+        # Si ya existe, verificar si necesita retry por categoría bloqueada
         if mini_path.exists() and not Config.FORCE_REGENERATE:
-            self.log(asin, "Ya transformado, saltando...", "INFO")
-            self.db.update_asin_status(asin, Status.TRANSFORMED)
-            return True
+            # Leer mini_ml existente para verificar retry_blocked_sites
+            try:
+                existing_mini = load_json_file(str(mini_path))
+                retry_blocked = existing_mini.get("retry_blocked_sites", [])
+
+                if retry_blocked:
+                    self.log(asin, f"🔄 Detectado retry pendiente para países: {', '.join(retry_blocked)}", "WARNING")
+                    self.log(asin, "Regenerando con categoría alternativa...", "INFO")
+                    # Continuar para regenerar con categoría alternativa
+                else:
+                    self.log(asin, "Ya transformado, saltando...", "INFO")
+                    self.db.update_asin_status(asin, Status.TRANSFORMED)
+                    return True
+            except Exception as e:
+                # Si hay error leyendo, regenerar por seguridad
+                self.log(asin, f"Error leyendo mini_ml existente: {e}", "WARNING")
+                self.log(asin, "Regenerando por seguridad...", "INFO")
 
         max_retries = Config.MAX_TRANSFORM_RETRIES
 
