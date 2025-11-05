@@ -108,7 +108,19 @@
       "Bash(do sleep 10)",
       "Bash(if [ -f storage/logs/gtin_issues.json ])",
       "Bash(then cat storage/logs/gtin_issues.json)",
-      "Bash(else echo \"No GTIN issues log found\")"
+      "Bash(else echo \"No GTIN issues log found\")",
+      "Bash(cp:*)",
+      "Bash(pkill:*)",
+      "Bash(do sleep 15)",
+      "Bash(paste:*)",
+      "Bash(for asin in B0CYM126TT B0DRW8G3WK B0DCYZJBYD B0CHLBDJYP)",
+      "Bash(do)",
+      "Bash(wait tail -50 logs/main2_no_cache.log)",
+      "Bash(done echo \"✓ Proceso terminado\" tail -60 logs/main2_no_cache.log)",
+      "Bash(for asin in B0FM82B29X B0FPKPTLM6 B0DT9QX4DQ)",
+      "Bash(do echo '=== $asin ===')",
+      "Bash(if [ -f logs/main2_causes_detailed.log ])",
+      "Bash(then tail -100 logs/main2_causes_detailed.log)"
     ],
     "deny": [],
     "ask": []

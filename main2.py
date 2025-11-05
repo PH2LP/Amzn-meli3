@@ -765,6 +765,72 @@ class PublishPhase(PipelinePhase):
                     save_json_file(str(mini_path), mini_ml)
                     continue  # Reintentar
 
+                # Error de categoría bloqueada (item.not_allowed) - Publicaciones individuales
+                if result and "site_items" in result:
+                    # Detectar países con categoría bloqueada
+                    blocked_sites = []
+                    successful_sites = []
+
+                    for site_item in result.get("site_items", []):
+                        site_id = site_item.get("site_id")
+
+                        if site_item.get("error"):
+                            causes = site_item["error"].get("cause", [])
+                            for cause in causes:
+                                if cause.get("code") == "item.not_allowed":
+                                    blocked_sites.append(site_id)
+                                    break
+                        elif site_item.get("item_id"):
+                            successful_sites.append(site_id)
+
+                    # Si algunos países están bloqueados pero otros exitosos
+                    if blocked_sites and successful_sites:
+                        self.log(asin, f"🔄 Categoría bloqueada en {len(blocked_sites)} países, exitosa en {len(successful_sites)}", "WARNING")
+                        self.log(asin, f"   ✅ Exitosos: {', '.join(successful_sites)}", "INFO")
+                        self.log(asin, f"   🚫 Bloqueados: {', '.join(blocked_sites)}", "WARNING")
+
+                        # Cargar mini_ml para obtener categoría actual
+                        mini_ml = load_json_file(str(mini_path))
+                        current_category = mini_ml.get("category_id")
+
+                        # Intentar publicar en países bloqueados con categoría alternativa
+                        self.log(asin, f"🔄 Intentando categoría alternativa para países bloqueados...", "INFO")
+
+                        # Guardar categoría bloqueada
+                        blocked_categories = mini_ml.get("blocked_categories", [])
+                        if current_category not in blocked_categories:
+                            blocked_categories.append(current_category)
+
+                        mini_ml["blocked_categories"] = blocked_categories
+                        mini_ml["retry_blocked_sites"] = blocked_sites
+                        save_json_file(str(mini_path), mini_ml)
+
+                        # Regenerar con categoría alternativa
+                        self.log(asin, f"⚠️ Regenerando mini_ml excluyendo categoría {current_category}", "WARNING")
+                        mini_path.unlink()
+                        self.db.update_asin_status(asin, Status.DOWNLOADED)
+
+                        # Marcar item_id actual para no perder las publicaciones exitosas
+                        self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                        return item_id  # Retornar el ID del listing parcial exitoso
+
+                    # Si TODOS los países están bloqueados, regenerar completamente
+                    elif blocked_sites and not successful_sites:
+                        mini_ml = load_json_file(str(mini_path))
+                        current_category = mini_ml.get("category_id")
+
+                        blocked_categories = mini_ml.get("blocked_categories", [])
+                        if current_category not in blocked_categories:
+                            blocked_categories.append(current_category)
+
+                        mini_ml["blocked_categories"] = blocked_categories
+                        save_json_file(str(mini_path), mini_ml)
+
+                        self.log(asin, f"⚠️ Categoría {current_category} bloqueada en TODOS los países → Regenerando", "WARNING")
+                        mini_path.unlink()
+                        self.db.update_asin_status(asin, Status.DOWNLOADED)
+                        continue  # Reintentar con nueva categoría
+
                 # Error de categoría incorrecta
                 if "category" in error_str.lower() or "Title and photos did not match" in error_str:
                     self.log(asin, "Categoría incorrecta → Regenerando con nueva categoría", "WARNING")

@@ -1452,6 +1452,50 @@ Devuelve SOLO un array JSON con los atributos rellenados.
             all_failed = all(item.get("error") for item in site_items)
             if not all_failed:
                 print(f"✅ Publicado → {item_id} (con algunos errores por país)")
+
+                # Mostrar detalles de países exitosos y fallidos
+                success_countries = []
+                failed_countries = []
+                for item in site_items:
+                    site_id = item.get("site_id", "Unknown")
+                    if item.get("error"):
+                        error_obj = item["error"]
+                        error_msg = error_obj.get("message", "Unknown error")
+                        causes = error_obj.get("cause", [])
+
+                        # Extraer detalles de los causes
+                        cause_details = []
+                        for cause in causes:
+                            cause_msg = cause.get("message", "")
+                            cause_code = cause.get("code", "")
+                            if cause_msg:
+                                cause_details.append(f"{cause_code}: {cause_msg}")
+
+                        if cause_details:
+                            failed_countries.append({
+                                "site": site_id,
+                                "error": error_msg,
+                                "causes": cause_details
+                            })
+                        else:
+                            failed_countries.append({
+                                "site": site_id,
+                                "error": error_msg,
+                                "causes": []
+                            })
+                    else:
+                        success_countries.append(site_id)
+
+                if success_countries:
+                    print(f"   ✅ Países exitosos: {', '.join(success_countries)}")
+                if failed_countries:
+                    print(f"   ❌ Países fallidos:")
+                    for fc in failed_countries:
+                        print(f"      • {fc['site']}: {fc['error']}")
+                        if fc['causes']:
+                            for cause in fc['causes']:
+                                print(f"         → {cause}")
+
                 break  # Publicación parcial, salir del loop
 
             # Todos fallaron - extraer errores para retry

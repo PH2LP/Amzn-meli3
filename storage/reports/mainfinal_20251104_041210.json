@@ -1,0 +1,37 @@
+{
+  "timestamp": "2025-11-04T04:12:10.562848",
+  "elapsed_seconds": 136.5227608680725,
+  "success_rate": 0.0,
+  "results": {
+    "success": [],
+    "failed": [
+      "B0BGQLZ921",
+      "B0DRW69H11",
+      "B0CYM126TT",
+      "B0DRW8G3WK",
+      "B0BXSLRQH7",
+      "B0D3H3NKBN",
+      "B0DCYZJBYD",
+      "B0CHLBDJYP",
+      "B0CJQG4PMF",
+      "B0CLC6NBBX",
+      "B0D1Z99167",
+      "B081SRSNWW",
+      "B0BRNY9HZB"
+    ]
+  },
+  "statistics": {
+    "status_counts": {
+      "publish_failed": 13
+    },
+    "total": 13,
+    "top_categories": {
+      "Tools": 1,
+      "Skin Care": 1,
+      "Pellets": 1,
+      "Other": 1,
+      "Lights": 1
+    },
+    "avg_net_proceeds": 56.07
+  }
+}

@@ -1,9 +1,10 @@
 {
   "COLOR": [
     "color",
-    "attributes.color[0].value"
+    "attributes.variation_theme[0].name"
   ],
   "MATERIAL": [
-    "material"
+    "material",
+    "attributes.material[0].value"
   ]
 }

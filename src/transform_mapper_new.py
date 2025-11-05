@@ -12,6 +12,7 @@
 
 import os, sys, re, json, time, requests
 from typing import Dict, List, Any, Tuple
+from pathlib import Path
 
 # ---------- 0) Auto-activar venv ----------
 if sys.prefix == sys.base_prefix:
@@ -791,8 +792,9 @@ Full JSON (truncated):
         return [], []
 
 # ---------- 8) Categoría (CategoryMatcherV2: embeddings + IA) ----------
-def detect_category(amazon_json)->Tuple[str,str,float]:
+def detect_category(amazon_json, excluded_categories=None)->Tuple[str,str,float]:
     asin = amazon_json.get("asin") or amazon_json.get("ASIN") or ""
+    excluded_categories = excluded_categories or []
 
     # Extraer título
     title = amazon_json.get("title") or \
@@ -855,9 +857,9 @@ def detect_category(amazon_json)->Tuple[str,str,float]:
             if item_type and isinstance(item_type, list):
                 product_data['browseClassification'] = item_type[0].get("value", "")
 
-        # Llamar a CategoryMatcherV2
+        # Llamar a CategoryMatcherV2 con exclusión de categorías bloqueadas
         matcher = get_category_matcher()
-        result = matcher.find_category(product_data, use_ai=True)
+        result = matcher.find_category(product_data, use_ai=True, excluded_categories=excluded_categories)
 
         cat_id = result.get("category_id", "CBT1157")
         cat_name = result.get("category_name", "Default")
@@ -936,9 +938,24 @@ def is_suspicious_value(val: str) -> bool:
     return False
 
 # ---------- 10) Armado Mini-ML ----------
-def build_mini_ml(amazon_json: dict) -> dict:
+def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
     asin = amazon_json.get("asin") or amazon_json.get("ASIN") or ""
-    cat_id, cat_name, sim = detect_category(amazon_json)
+
+    # Leer categorías bloqueadas del mini_ml anterior si existe
+    if excluded_categories is None:
+        mini_path = Path("storage/logs/publish_ready") / f"{asin}_mini_ml.json"
+        if mini_path.exists():
+            try:
+                with open(mini_path, "r", encoding="utf-8") as f:
+                    old_mini = json.load(f)
+                    excluded_categories = old_mini.get("blocked_categories", [])
+                    if excluded_categories:
+                        print(f"🚫 Excluyendo categorías bloqueadas previas: {excluded_categories}")
+            except:
+                pass
+
+    excluded_categories = excluded_categories or []
+    cat_id, cat_name, sim = detect_category(amazon_json, excluded_categories)
 
     # ✅ Si la categoría ya está en caché → IA de equivalencias OFF
     CAT_CACHE_PATH = "storage/logs/category_cache.json"

@@ -999,7 +999,8 @@ class CategoryMatcherV2:
         product_data: Dict,
         top_k: int = 30,  # Aumentado de 10 a 30 para incluir más opciones
         min_confidence: float = 0.7,
-        use_ai: bool = True
+        use_ai: bool = True,
+        excluded_categories: List[str] = None  # Categorías a excluir (bloqueadas)
     ) -> Dict:
         """
         Encuentra la mejor categoría para un producto
@@ -1009,6 +1010,7 @@ class CategoryMatcherV2:
             top_k: Número de candidatos para IA (default: 10)
             min_confidence: Confianza mínima aceptable (default: 0.7)
             use_ai: Usar validación IA (default: True)
+            excluded_categories: Lista de categorías a excluir (default: None)
 
         Returns:
             {
@@ -1026,11 +1028,25 @@ class CategoryMatcherV2:
 
         # Fase 1: Similarity search con embeddings
         print(f"🔍 Fase 1: Buscando top {top_k} categorías similares...")
+        if excluded_categories:
+            print(f"   🚫 Excluyendo categorías bloqueadas: {excluded_categories}")
         phase1_start = time.time()
-        candidates = self.embedder.find_similar_categories(product_data, top_k)
+        candidates = self.embedder.find_similar_categories(product_data, top_k * 2)  # Buscar más para compensar filtrado
         phase1_time = (time.time() - phase1_start) * 1000
 
         if not candidates:
+            return self._empty_result()
+
+        # Filtrar categorías excluidas
+        if excluded_categories:
+            candidates = [c for c in candidates if c['category_id'] not in excluded_categories]
+            print(f"   🧹 Quedan {len(candidates)} candidatos después de filtrar categorías bloqueadas")
+
+        # Limitar a top_k
+        candidates = candidates[:top_k]
+
+        if not candidates:
+            print("❌ No quedan candidatos después de filtrar categorías bloqueadas")
             return self._empty_result()
 
         print(f"✅ Top {len(candidates)} candidatos encontrados (similarity: {candidates[0]['similarity_score']:.3f})")
