@@ -654,21 +654,41 @@ IMPORTANTE: Responde SOLO las palabras clave, nada más:"""
                     print(f"         📁 {len(children_ids)} subcategorías encontradas")
 
                     # Agregar hijos como candidatos con similitud heredada del padre
-                    # (levemente reducida para no sobrepasar las leaf originales)
+                    # IMPORTANTE: Solo agregar si el hijo es LEAF (0 hijos)
                     for child_id in children_ids:
                         if child_id in categories_db:
-                            # Heredar similitud del padre, reducida en 0.02 (mínima penalización)
-                            child_sim = parent_sim - 0.02
+                            # Verificar si este hijo es LEAF antes de agregarlo
+                            if self._is_leaf_category(child_id):
+                                # Heredar similitud del padre, reducida en 0.02 (mínima penalización)
+                                child_sim = parent_sim - 0.02
 
-                            leaf_candidates.append({
-                                'category_id': child_id,
-                                'similarity_score': child_sim,
-                                'category_data': categories_db[child_id],
-                                'inherited_from': cat_id  # Marcar que viene de un padre
-                            })
+                                leaf_candidates.append({
+                                    'category_id': child_id,
+                                    'similarity_score': child_sim,
+                                    'category_data': categories_db[child_id],
+                                    'inherited_from': cat_id  # Marcar que viene de un padre
+                                })
 
-                            child_name = categories_db[child_id]['name']
-                            print(f"         ✅ Agregado hijo: {child_id} '{child_name}' (sim: {child_sim:.3f})")
+                                child_name = categories_db[child_id]['name']
+                                print(f"         ✅ Agregado hijo LEAF: {child_id} '{child_name}' (sim: {child_sim:.3f})")
+                            else:
+                                # Si el hijo también es PADRE, descender recursivamente a sus hijos
+                                child_name = categories_db[child_id]['name']
+                                print(f"         ⚠️ Hijo {child_id} '{child_name}' es PADRE → descendiendo...")
+                                grandchildren_ids = self._get_category_children(child_id)
+                                if grandchildren_ids:
+                                    for grandchild_id in grandchildren_ids:
+                                        if grandchild_id in categories_db and self._is_leaf_category(grandchild_id):
+                                            # Heredar similitud del abuelo, con doble penalización
+                                            grandchild_sim = parent_sim - 0.04
+                                            leaf_candidates.append({
+                                                'category_id': grandchild_id,
+                                                'similarity_score': grandchild_sim,
+                                                'category_data': categories_db[grandchild_id],
+                                                'inherited_from': f"{cat_id} > {child_id}"
+                                            })
+                                            grandchild_name = categories_db[grandchild_id]['name']
+                                            print(f"            ✅ Agregado nieto LEAF: {grandchild_id} '{grandchild_name}' (sim: {grandchild_sim:.3f})")
                 else:
                     print(f"         ⚠️ No se pudieron obtener hijos")
 
