@@ -636,68 +636,166 @@ Bullets (opcionales): {bullets}"""
         return (base_title or "Producto")[:max_chars]
 
 def ai_desc_es(datos, mini_ml=None):
+    """
+    Genera descripción HTML optimizada para MercadoLibre Global Selling.
+    Usa el formato estructurado: intro + beneficios + cierre + specs.
+    """
     if not client:
         return ""
 
-    # 1) Descripción principal por IA
-    prompt = f"""Escribe SOLO el texto (sin explicaciones) de una descripción clara en español LATAM (3-5 párrafos).
-Incluye beneficios reales a partir de los datos. Sin HTML ni emojis.
-Datos: {json.dumps(datos, ensure_ascii=False)[:2000]}"""
+    # Construir datos completos del producto para el prompt
+    amazon_json = datos.get("full_json", {}) if isinstance(datos, dict) else {}
+
+    # Si no tenemos el JSON completo, construirlo desde datos y mini_ml
+    if not amazon_json:
+        amazon_json = {
+            "brand": datos.get("brand", ""),
+            "model": datos.get("model", ""),
+            "bullets": datos.get("bullets", []),
+            "attributes": {},
+            "summaries": []
+        }
+        if mini_ml:
+            amazon_json.update({
+                "brand": mini_ml.get("brand", ""),
+                "model": mini_ml.get("model", ""),
+                "main_characteristics": mini_ml.get("main_characteristics", []),
+                "second_characteristics": mini_ml.get("second_characteristics", []),
+                "package": mini_ml.get("package", {})
+            })
+
+    prompt = f"""Eres un copywriter experto en Mercado Libre Global Selling.
+Genera únicamente el valor de "description" en HTML válido (<p>, <ul>, <li>, <h3>).
+No inventes información. No uses emojis. Español neutro.
+
+Datos del producto desde Amazon:
+{json.dumps(amazon_json, ensure_ascii=False)[:15000]}
+
+🎯 OBJETIVO DEL TEXTO
+Impulsar la conversión con una descripción clara, persuasiva y útil para compradores
+de distintos países.
+
+📌 ESTRUCTURA OBLIGATORIA
+
+1️⃣ <p> Introducción emocional (4–6 líneas)
+   - Qué es el producto
+   - Para quién es
+   - Beneficio principal en la experiencia del usuario
+   - Evitar repetir el título tal cual
+
+2️⃣ <ul> Lista de beneficios/ventajas (4–8 bullets)
+   - Extraer desde bullet_points, features o specs del JSON
+   - Escribir en español natural, sin copiar literal
+
+3️⃣ <p> Cierre persuasivo (2–4 líneas)
+   - Facilita la decisión de compra: durabilidad, utilidad, experiencia
+
+4️⃣ <h3>Especificaciones técnicas</h3>
+   <ul>
+     - Solo incluir datos útiles: material, dimensiones, capacidad, compatibilidad,
+       contenido del paquete, modos de uso, etc.
+     - Unificar unidades (ej.: cm o pulgadas, NO ambas)
+     - No repetir marca y modelo si ya están visibles en la ficha
+   </ul>
+
+✅ SIEMPRE cumple esto
+- Mínimo 200 palabras
+- Optimizado para SEO interno: mencionar tipo de producto en forma natural
+- Eliminar frases redundantes tipo "del vendedor" o copias textuales de Amazon
+
+⛔ PROHIBICIONES (no mencionar nunca)
+- Amazon, ASIN, UPC, EAN, GTIN, SKU, códigos de producto
+- Precios, rankings, enlaces, promoción externa
+- Instrucciones de instalación del vendedor o políticas específicas de Amazon
+- Voltaje solo si el JSON lo indica y NO advertencias específicas por país
+- Mensajes de contacto directo
+
+5️⃣ Al final del contenido agregar EXACTAMENTE este bloque (sin modificaciones):
+
+<h3>🔎 Información importante para compras internacionales</h3>
+<ul>
+<li>Producto nuevo y original</li>
+<li>Envío desde EE.UU. con seguimiento</li>
+<li>Impuestos y aduana incluidos en el precio</li>
+<li>Compra protegida por Mercado Libre</li>
+<li>Garantía del vendedor: 30 días</li>
+<li>Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.</li>
+<li>Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)</li>
+<li>Medidas y peso pueden estar en sistema imperial</li>
+<li>Atención al cliente en español e inglés</li>
+</ul>
+<p>Somos ONEWORLD 🌎</p>
+
+<!--END_DESCRIPTION-->
+
+Devuelve SOLO el HTML de la descripción, sin explicaciones adicionales."""
 
     try:
         r = client.chat.completions.create(
             model=OPENAI_MODEL,
             temperature=0.3,
             messages=[
-                {"role": "system", "content": "Devuelve solo texto plano. Sin títulos ni listas vacías."},
+                {"role": "system", "content": "Eres un experto copywriter de e-commerce. Devuelve SOLO HTML válido optimizado para conversión. Sin explicaciones."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=600,
+            max_tokens=1500,
         )
         texto = (r.choices[0].message.content or "").strip()
-    except:
-        texto = ""
 
-    # 2) Mini-tabla de especificaciones (solo si hay datos)
-    try:
-        specs_lines = []
-        if mini_ml:
-            if mini_ml.get("brand"):
-                specs_lines.append(f"• Marca: {mini_ml['brand']}")
-            if mini_ml.get("model"):
-                specs_lines.append(f"• Modelo: {mini_ml['model']}")
-            if mini_ml.get("package"):
-                pkg = mini_ml["package"]
-                specs_lines.append(f"• Dimensiones del paquete: {pkg['length_cm']} x {pkg['width_cm']} x {pkg['height_cm']} cm")
-                specs_lines.append(f"• Peso del paquete: {pkg['weight_kg']} kg")
+        # Eliminar marcadores que pueda haber agregado la IA
+        texto = texto.replace("<!--END_DESCRIPTION-->", "")
+        texto = texto.replace("```html", "").replace("```", "").strip()
 
-            # Datos adicionales útiles si existen en mini_ml
-            if mini_ml.get("main_characteristics"):
-                for ch in mini_ml["main_characteristics"]:
-                    if isinstance(ch, dict) and ch.get("name") and ch.get("value_name"):
-                        val = str(ch["value_name"]).strip()
-                        # Filtrar marcadores de idioma y valores inválidos
-                        if val and val.lower() not in {"en_us", "en-us", "default", "null", "none", "n/a", "not specified"}:
-                            specs_lines.append(f"• {ch['name']}: {val}")
+        # Eliminar el bloque de información internacional si la IA ya lo agregó
+        import re
+        # Buscar y eliminar el bloque completo desde <h3>🔎 hasta </p> de "Somos ONEWORLD"
+        texto = re.sub(
+            r'<h3>🔎\s*Información importante[^<]*</h3>.*?<p>Somos ONEWORLD[^<]*</p>',
+            '',
+            texto,
+            flags=re.DOTALL | re.IGNORECASE
+        )
 
-        if specs_lines:
-            texto += "\n\n📌 **Especificaciones del producto**\n" + "\n".join(specs_lines)
+        # Agregar bloque final de información internacional (SIEMPRE, solo una vez)
+        footer_html = """
+<h3>🔎 Información importante para compras internacionales</h3>
+<ul>
+<li>Producto nuevo y original</li>
+<li>Envío desde EE.UU. con seguimiento</li>
+<li>Impuestos y aduana incluidos en el precio</li>
+<li>Compra protegida por Mercado Libre</li>
+<li>Garantía del vendedor: 30 días</li>
+<li>Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.</li>
+<li>Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)</li>
+<li>Medidas y peso pueden estar en sistema imperial</li>
+<li>Atención al cliente en español e inglés</li>
+</ul>
+<p>Somos ONEWORLD 🌎</p>
 
-    except Exception:
-        pass
+<!--END_DESCRIPTION-->"""
 
-    # 3) Bloque Global Selling (fijo)
-    texto += """
-\n\n🌍 **Información importante para compradores internacionales**
-• Producto completamente nuevo y original.
-• Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.  
-• En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.  
-• Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.  
-• Envío internacional asegurado con número de seguimiento.  
-• Soporte en español e inglés.  
-"""
+        texto += footer_html
+        return texto
 
-    return texto
+    except Exception as e:
+        print(f"⚠️ Error generando descripción con IA: {e}")
+        # Fallback básico con footer
+        return f"""<p>Producto de alta calidad.</p>
+<h3>🔎 Información importante para compras internacionales</h3>
+<ul>
+<li>Producto nuevo y original</li>
+<li>Envío desde EE.UU. con seguimiento</li>
+<li>Impuestos y aduana incluidos en el precio</li>
+<li>Compra protegida por Mercado Libre</li>
+<li>Garantía del vendedor: 30 días</li>
+<li>Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.</li>
+<li>Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)</li>
+<li>Medidas y peso pueden estar en sistema imperial</li>
+<li>Atención al cliente en español e inglés</li>
+</ul>
+<p>Somos ONEWORLD 🌎</p>
+
+<!--END_DESCRIPTION-->"""
 
 def ai_characteristics(amazon_json)->Tuple[List[dict], List[dict]]:
     """Extrae main/second characteristics con IA (robusto, JSON-only)."""
@@ -1002,11 +1100,12 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
         _save_cache(TITLE_CACHE_PATH, title_cache)
 
     # ==== DESCRIPCIÓN ====
-    # Preparar datos para descripción (siempre, no solo si falta en caché)
+    # Preparar datos para descripción con JSON completo de Amazon
     datos_desc = {
         "brand": brand,
         "model": model,
-        "bullets": bullets[:8]
+        "bullets": bullets[:8],
+        "full_json": amazon_json  # Incluir JSON completo para el nuevo prompt
     }
 
     if asin in desc_cache:
@@ -1015,11 +1114,11 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
         try:
             desc_es = ai_desc_es(datos_desc)
         except:
-            desc_es = f"{title_es}. Producto nuevo e importado desde EE.UU."
+            desc_es = f"<p>{title_es}. Producto nuevo e importado desde EE.UU.</p><!--END_DESCRIPTION-->"
 
         # Fallback final si está vacío
         if not desc_es or not isinstance(desc_es, str):
-            desc_es = f"{title_es}. Producto nuevo e importado desde EE.UU."
+            desc_es = f"<p>{title_es}. Producto nuevo e importado desde EE.UU.</p><!--END_DESCRIPTION-->"
 
         desc_cache[asin] = desc_es
         _save_cache(DESC_CACHE_PATH, desc_cache)
@@ -1311,17 +1410,22 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
             matched[aid] = {"value_name": str(val)}
 
 
-        # Ahora que tenemos todo, volver a generar descripción usando el mini_ml completo
-    desc_es = ai_desc_es(datos_desc, mini_ml={
-        "brand": brand,
-        "model": model,
-        "gtins": gtins,
-        "package": pkg,
-        "category_name": cat_name,
-        "category_id": cat_id,
-        "main_characteristics": main_ch,
-        "second_characteristics": second_ch
-})
+    # Ahora que tenemos todo, volver a generar descripción usando el mini_ml completo
+    # Solo si no estaba en caché
+    if asin not in desc_cache:
+        desc_es = ai_desc_es(datos_desc, mini_ml={
+            "brand": brand,
+            "model": model,
+            "gtins": gtins,
+            "package": pkg,
+            "category_name": cat_name,
+            "category_id": cat_id,
+            "main_characteristics": main_ch,
+            "second_characteristics": second_ch
+        })
+        # Actualizar caché con la versión final
+        desc_cache[asin] = desc_es
+        _save_cache(DESC_CACHE_PATH, desc_cache)
 
     # salida mini-ML (lo que MainGlobal puede “chupar” sin tokens)
     return {
