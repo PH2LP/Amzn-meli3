@@ -143,11 +143,14 @@ Instructions:
 - For SIZE_GRID_ID: determine from age/size information (baby/kids/adult clothing)
 - Return ONLY valid values, not "Default" or placeholders
 - If you cannot find a field, return null for that field
+- IMPORTANT: Return single string values, NOT arrays (e.g., "Unisex" not ["Unisex"])
+- IMPORTANT: Return boolean values as true/false, NOT as strings
 
 Return a JSON object with format:
 {{
   "FIELD_ID": "extracted_value",
-  "FIELD_ID2": "extracted_value2"
+  "FIELD_ID2": "extracted_value2",
+  "BOOLEAN_FIELD": true
 }}
 
 Return ONLY the JSON, no explanations."""
@@ -216,8 +219,55 @@ def autofill_required_attrs(cid: str, attributes: list, asin: str = None, amazon
 
         # Intentar usar valor extraído por IA
         if aid in ai_extracted and ai_extracted[aid]:
-            val_name = str(ai_extracted[aid])
-            print(f"   ✅ {aid} = {val_name} (extraído por IA)")
+            extracted_value = ai_extracted[aid]
+
+            # Si es una lista, extraer el primer elemento
+            if isinstance(extracted_value, list):
+                if len(extracted_value) > 0:
+                    extracted_value = extracted_value[0]
+                else:
+                    extracted_value = None
+
+            # Si es booleano, convertir a string apropiado para ML
+            if isinstance(extracted_value, bool):
+                # Para ML, los booleanos se manejan como strings "Yes"/"No" o value_ids
+                extracted_value = "Yes" if extracted_value else "No"
+
+            if extracted_value:
+                val_name = str(extracted_value).lower().strip()
+
+                # Mapeo de valores comunes a valores del schema de MercadoLibre
+                value_mappings = {
+                    # GENDER mappings
+                    "unisex": "gender neutral kid",
+                    "neutral": "gender neutral",
+                    "male": "man",
+                    "female": "woman",
+                    "boy": "boys",
+                    "girl": "girls",
+
+                    # BICYCLE_TYPE mappings
+                    "balance bike": "kids",
+                    "kids bike": "kids",
+                    "children's bike": "kids",
+                    "toddler bike": "kids",
+                    "mtb": "mountain bike",
+                    "city bike": "urban",
+                    "road bike": "route",
+
+                    # AGE_GROUP mappings
+                    "children": "kids",
+                    "child": "kids",
+                    "adult": "adults",
+                }
+
+                # Aplicar mapeo si existe
+                if val_name in value_mappings:
+                    mapped_value = value_mappings[val_name]
+                    print(f"   ✅ {aid} = {mapped_value} (extraído por IA, mapeado de '{val_name}')")
+                    val_name = mapped_value
+                else:
+                    print(f"   ✅ {aid} = {val_name} (extraído por IA)")
 
         # Si no, usar primer valor del schema si existe
         elif vals:
@@ -229,6 +279,10 @@ def autofill_required_attrs(cid: str, attributes: list, asin: str = None, amazon
             val_id, val_name = "242084", "No"
         if aid == "IS_COLLECTIBLE" and not val_id and not val_name:
             val_id, val_name = "242084", "No"
+        # Para balance bikes/kids bikes sin wheel size, usar 12" como default estándar
+        if aid == "WHEEL_SIZE" and not val_id and not val_name and cid in ["CBT12012", "CBT424974"]:
+            val_name = "12\""
+            print(f"   ℹ️ {aid} = {val_name} (default para kids bike)")
 
         # Solo agregar si tenemos un valor válido (no "Default")
         if val_id or (val_name and val_name != "Default"):
@@ -959,9 +1013,10 @@ def add_required_defaults(cid: str, attributes: list) -> list:
     return list(seen.values())
 
 # ============ Publicador principal ============
-def publish_item(asin_json):
+def publish_item(asin_json, excluded_sites=None):
     """
     asin_json puede venir de transform_mapper (mini_ml.json)
+    excluded_sites: lista de site_ids (ej: ['MCO', 'MLB']) a NO publicar (evita duplicados en retry)
     """
     # from uploader import upload_images_to_meli  # ← YA NO SE USA
 
@@ -1386,6 +1441,15 @@ Devuelve SOLO un array JSON con los atributos rellenados.
     sites = get_sites_to_sell(uid)
     if not sites:
         sites = [{"site_id": "MLM", "logistic_type": "remote"}]  # fallback seguro
+
+    # 🔧 Filtrar países excluidos (para evitar duplicados en retry)
+    if excluded_sites:
+        original_count = len(sites)
+        sites = [s for s in sites if s.get("site_id") not in excluded_sites]
+        print(f"🚫 {original_count - len(sites)} países excluidos (ya publicados): {', '.join(excluded_sites)}")
+        if not sites:
+            print("⚠️ ADVERTENCIA: Todos los países fueron excluidos. No hay nada que publicar.")
+            return None
 
     # 🔧 Agregar seller_custom_field (SKU = ASIN) a cada marketplace
     for site in sites:

@@ -82,7 +82,7 @@ class Config:
     # Retry configuration
     MAX_DOWNLOAD_RETRIES = 3
     MAX_TRANSFORM_RETRIES = 2
-    MAX_PUBLISH_RETRIES = 3
+    MAX_PUBLISH_RETRIES = 8  # Límite de 8 intentos con categorías alternativas
 
     # Delays (seconds)
     RETRY_DELAY = 5
@@ -513,8 +513,11 @@ class DownloadPhase(PipelinePhase):
 class TransformPhase(PipelinePhase):
     """Fase de transformación de Amazon a MercadoLibre"""
 
-    def execute(self, asin: str) -> bool:
-        """Transforma JSON de Amazon a mini_ml"""
+    def execute(self, asin: str, blocked_categories: Optional[List[str]] = None) -> bool:
+        """
+        Transforma JSON de Amazon a mini_ml
+        blocked_categories: Lista de categorías a excluir (para retry con alternativas)
+        """
         amazon_path = Config.AMAZON_JSON_DIR / f"{asin}.json"
         mini_path = Config.MINI_ML_DIR / f"{asin}_mini_ml.json"
 
@@ -560,7 +563,12 @@ class TransformPhase(PipelinePhase):
 
                 # Intentar transformación unificada con IA primero
                 self.log(asin, "Transformando con IA unificada...", "INFO")
-                mini_ml = build_mini_ml(amazon_json)
+
+                # Pasar excluded_categories para que elija una categoría alternativa si la principal está bloqueada
+                if blocked_categories:
+                    self.log(asin, f"🚫 Excluyendo categorías bloqueadas previas: {blocked_categories}", "INFO")
+
+                mini_ml = build_mini_ml(amazon_json, excluded_categories=blocked_categories)
 
                 if not mini_ml:
                     raise Exception("build_mini_ml retornó None")
@@ -679,6 +687,7 @@ class PublishPhase(PipelinePhase):
             return "DRY_RUN_ID"
 
         max_retries = Config.MAX_PUBLISH_RETRIES
+        successful_sites = []  # Trackear países donde ya tuvo éxito (evita duplicados)
 
         for attempt in range(1, max_retries + 1):
             try:
@@ -693,7 +702,8 @@ class PublishPhase(PipelinePhase):
                 mini_ml = load_json_file(str(mini_path))
 
                 self.log(asin, "Publicando en MercadoLibre CBT...", "INFO")
-                result = publish_item(mini_ml)
+                # Excluir países donde ya tuvo éxito para evitar duplicados
+                result = publish_item(mini_ml, excluded_sites=successful_sites if successful_sites else None)
 
                 # Verificar resultado
                 if result is None:
@@ -725,26 +735,53 @@ class PublishPhase(PipelinePhase):
                                     blocked_sites.append(site_id)
                                     break
 
-                    # Si hay países bloqueados, regenerar con categoría alternativa
+                    # Si hay países bloqueados pero también exitosos, intentar con otra categoría SOLO en países bloqueados
                     if blocked_sites and successful:
-                        self.log(asin, f"🔄 Categoría bloqueada en {len(blocked_sites)} países, exitosa en {len(successful)}", "WARNING")
+                        self.log(asin, f"✅ Publicación parcial exitosa en {len(successful)} países", "WARNING")
                         self.log(asin, f"   ✅ Exitosos: {', '.join([s.get('site_id') for s in successful])}", "INFO")
                         self.log(asin, f"   🚫 Bloqueados: {', '.join(blocked_sites)}", "WARNING")
 
-                        # Guardar categoría bloqueada para próximo intento
-                        current_category = mini_ml.get("category_id")
-                        blocked_categories = mini_ml.get("blocked_categories", [])
-                        if current_category not in blocked_categories:
-                            blocked_categories.append(current_category)
+                        # Guardar site_ids exitosos para excluirlos en próximo retry
+                        for site_item in successful:
+                            site_id = site_item.get("site_id")
+                            if site_id and site_id not in successful_sites:
+                                successful_sites.append(site_id)
 
-                        mini_ml["blocked_categories"] = blocked_categories
-                        mini_ml["retry_blocked_sites"] = blocked_sites
-                        save_json_file(str(mini_path), mini_ml)
+                        # Si aún hay países por intentar, regenerar con nueva categoría
+                        if attempt < max_retries:
+                            current_category = mini_ml.get("category_id")
+                            blocked_categories = mini_ml.get("blocked_categories", [])
+                            if current_category not in blocked_categories:
+                                blocked_categories.append(current_category)
 
-                        self.log(asin, f"⚠️ Categoría {current_category} guardada como bloqueada para retry futuro", "WARNING")
+                            self.log(asin, f"🔄 Categoría {current_category} bloqueada en {len(blocked_sites)} países, exitosa en {len(successful_sites)}", "WARNING")
+                            self.log(asin, f"🔄 Intentando categoría alternativa SOLO para países bloqueados: {', '.join(blocked_sites)}", "INFO")
 
-                    self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
-                    return item_id
+                            # Regenerar mini_ml con nueva categoría
+                            self.log(asin, f"🔄 Regenerando con categoría alternativa (intento {attempt + 1}/{max_retries})...", "INFO")
+                            transform_phase = TransformPhase(self.db)
+                            mini_ml_regenerated = transform_phase.execute(asin, blocked_categories=blocked_categories)
+
+                            if mini_ml_regenerated:
+                                self.log(asin, "✅ Mini ML regenerado con nueva categoría", "SUCCESS")
+                                continue  # Retry con nueva categoría, excluyendo países exitosos
+                            else:
+                                self.log(asin, "❌ No se pudo regenerar con categoría alternativa", "ERROR")
+                                # Si no puede regenerar, aceptar éxito parcial
+                                self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                                return item_id
+                        else:
+                            self.log(asin, f"⚠️ Alcanzado límite de reintentos ({max_retries}). Aceptando éxito parcial.", "WARNING")
+                            self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                            return item_id
+
+                    # Si todos los países tuvieron éxito, marcar como publicado
+                    if not blocked_sites:
+                        self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                        return item_id
+
+                    # Si todos los países fallaron por categoría bloqueada, intentar con otra categoría
+                    # (este caso se maneja abajo en el bloque de excepciones)
                 else:
                     raise Exception(f"Publicación sin ID: {result}")
 
@@ -808,79 +845,45 @@ class PublishPhase(PipelinePhase):
                     save_json_file(str(mini_path), mini_ml)
                     continue  # Reintentar
 
-                # Error de categoría bloqueada (item.not_allowed) - Publicaciones individuales
-                if result and "site_items" in result:
-                    # Detectar países con categoría bloqueada
-                    blocked_sites = []
-                    successful_sites = []
-
-                    for site_item in result.get("site_items", []):
-                        site_id = site_item.get("site_id")
-
-                        if site_item.get("error"):
-                            causes = site_item["error"].get("cause", [])
-                            for cause in causes:
-                                if cause.get("code") == "item.not_allowed":
-                                    blocked_sites.append(site_id)
-                                    break
-                        elif site_item.get("item_id"):
-                            successful_sites.append(site_id)
-
-                    # Si algunos países están bloqueados pero otros exitosos
-                    if blocked_sites and successful_sites:
-                        self.log(asin, f"🔄 Categoría bloqueada en {len(blocked_sites)} países, exitosa en {len(successful_sites)}", "WARNING")
-                        self.log(asin, f"   ✅ Exitosos: {', '.join(successful_sites)}", "INFO")
-                        self.log(asin, f"   🚫 Bloqueados: {', '.join(blocked_sites)}", "WARNING")
-
-                        # Cargar mini_ml para obtener categoría actual
-                        mini_ml = load_json_file(str(mini_path))
-                        current_category = mini_ml.get("category_id")
-
-                        # Intentar publicar en países bloqueados con categoría alternativa
-                        self.log(asin, f"🔄 Intentando categoría alternativa para países bloqueados...", "INFO")
-
-                        # Guardar categoría bloqueada
-                        blocked_categories = mini_ml.get("blocked_categories", [])
-                        if current_category not in blocked_categories:
-                            blocked_categories.append(current_category)
-
-                        mini_ml["blocked_categories"] = blocked_categories
-                        mini_ml["retry_blocked_sites"] = blocked_sites
-                        save_json_file(str(mini_path), mini_ml)
-
-                        # Regenerar con categoría alternativa
-                        self.log(asin, f"⚠️ Regenerando mini_ml excluyendo categoría {current_category}", "WARNING")
-                        mini_path.unlink()
-                        self.db.update_asin_status(asin, Status.DOWNLOADED)
-
-                        # Marcar item_id actual para no perder las publicaciones exitosas
-                        self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
-                        return item_id  # Retornar el ID del listing parcial exitoso
-
-                    # Si TODOS los países están bloqueados, regenerar completamente
-                    elif blocked_sites and not successful_sites:
-                        mini_ml = load_json_file(str(mini_path))
-                        current_category = mini_ml.get("category_id")
-
-                        blocked_categories = mini_ml.get("blocked_categories", [])
-                        if current_category not in blocked_categories:
-                            blocked_categories.append(current_category)
-
-                        mini_ml["blocked_categories"] = blocked_categories
-                        save_json_file(str(mini_path), mini_ml)
-
-                        self.log(asin, f"⚠️ Categoría {current_category} bloqueada en TODOS los países → Regenerando", "WARNING")
-                        mini_path.unlink()
-                        self.db.update_asin_status(asin, Status.DOWNLOADED)
-                        continue  # Reintentar con nueva categoría
 
                 # Error de categoría incorrecta
-                if "category" in error_str.lower() or "Title and photos did not match" in error_str:
-                    self.log(asin, "Categoría incorrecta → Regenerando con nueva categoría", "WARNING")
-                    # Eliminar mini_ml y marcar para regeneración
-                    mini_path.unlink()
-                    self.db.update_asin_status(asin, Status.DOWNLOADED)  # Volver a transformar
-                    return None
+                if "category" in error_str.lower() or "Title and photos did not match" in error_str or "All countries failed" in error_str:
+                    # Si ya hay países exitosos, NO borrar mini_ml sino continuar con categoría alternativa
+                    if successful_sites:
+                        self.log(asin, "🔄 Todos los países fallaron en retry, intentando con nueva categoría alternativa", "WARNING")
+
+                        # Agregar categoría actual a blocked_categories
+                        mini_ml = load_json_file(str(mini_path))
+                        current_category = mini_ml.get("category_id")
+                        blocked_categories = mini_ml.get("blocked_categories", [])
+                        if current_category and current_category not in blocked_categories:
+                            blocked_categories.append(current_category)
+
+                        # Regenerar con nueva categoría
+                        self.log(asin, f"🔄 Regenerando con categoría alternativa (intento {attempt + 1}/{max_retries})...", "INFO")
+                        transform_phase = TransformPhase(self.db)
+                        mini_ml_regenerated = transform_phase.execute(asin, blocked_categories=blocked_categories)
+
+                        if mini_ml_regenerated:
+                            self.log(asin, "✅ Mini ML regenerado con nueva categoría", "SUCCESS")
+                            continue  # Retry con nueva categoría, excluyendo países exitosos
+                        else:
+                            self.log(asin, "❌ No se pudo regenerar con categoría alternativa", "ERROR")
+                            # Si no puede regenerar, aceptar éxito parcial si hay países exitosos
+                            if successful_sites:
+                                self.log(asin, f"✅ Aceptando éxito parcial en {len(successful_sites)} países", "WARNING")
+                                self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                                return item_id
+                            else:
+                                self.db.update_asin_status(asin, Status.FAILED, "Cannot find alternative category")
+                                return None
+                    else:
+                        # Si no hay países exitosos (primer intento falló completamente), comportamiento original
+                        self.log(asin, "Categoría incorrecta → Regenerando con nueva categoría", "WARNING")
+                        # Eliminar mini_ml y marcar para regeneración
+                        mini_path.unlink()
+                        self.db.update_asin_status(asin, Status.DOWNLOADED)  # Volver a transformar
+                        return None
 
                 # Error de rate limiting
                 if "429" in error_str or "rate" in error_str.lower():

@@ -1094,10 +1094,46 @@ class CategoryMatcherV2:
         if not candidates:
             return self._empty_result()
 
-        # Filtrar categorías excluidas
+        # Filtrar categorías excluidas Y hacer boost a categorías hermanas
         if excluded_categories:
+            # Identificar padres de categorías bloqueadas
+            blocked_parents = set()
+            for cat_id in excluded_categories:
+                cat_data = self.database.get_category(cat_id)
+                if cat_data:
+                    # El padre está en path_from_root (penúltimo elemento)
+                    path = cat_data.get('path_from_root', [])
+                    if len(path) >= 2:
+                        parent_id = path[-2]['id']  # Penúltimo es el padre
+                        blocked_parents.add(parent_id)
+
+            print(f"   🔍 Padres de categorías bloqueadas: {blocked_parents}")
+
+            # Filtrar categorías bloqueadas
             candidates = [c for c in candidates if c['category_id'] not in excluded_categories]
             print(f"   🧹 Quedan {len(candidates)} candidatos después de filtrar categorías bloqueadas")
+
+            # Boost a categorías hermanas (mismo padre que la bloqueada)
+            if blocked_parents:
+                print(f"   ⬆️  Aplicando boost a categorías hermanas (mismo padre)...")
+                boosted_count = 0
+                for candidate in candidates:
+                    cat_data = candidate.get('category_data', {})
+                    # Extraer parent_id desde path_from_root
+                    path = cat_data.get('path_from_root', [])
+                    if len(path) >= 2:
+                        parent_id = path[-2]['id']
+                        if parent_id in blocked_parents:
+                            # Boost de +0.15 para categorías hermanas
+                            old_score = candidate['similarity_score']
+                            candidate['similarity_score'] = min(1.0, old_score + 0.15)
+                            print(f"      ✨ {candidate['category_id']} '{cat_data.get('name')}': {old_score:.3f} → {candidate['similarity_score']:.3f}")
+                            boosted_count += 1
+
+                print(f"   ✅ {boosted_count} categorías hermanas recibieron boost")
+
+                # Reordenar después del boost
+                candidates.sort(key=lambda x: x['similarity_score'], reverse=True)
 
         # Limitar a top_k
         candidates = candidates[:top_k]
