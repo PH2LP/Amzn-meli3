@@ -700,6 +700,35 @@ class PublishPhase(PipelinePhase):
                     if failed:
                         self.log(asin, f"  → {len(failed)} países con errores", "WARNING")
 
+                    # Detectar si hay categoría bloqueada en algunos países
+                    blocked_sites = []
+                    for site_item in failed:
+                        site_id = site_item.get("site_id")
+                        if site_item.get("error"):
+                            causes = site_item["error"].get("cause", [])
+                            for cause in causes:
+                                if cause.get("code") == "item.not_allowed":
+                                    blocked_sites.append(site_id)
+                                    break
+
+                    # Si hay países bloqueados, regenerar con categoría alternativa
+                    if blocked_sites and successful:
+                        self.log(asin, f"🔄 Categoría bloqueada en {len(blocked_sites)} países, exitosa en {len(successful)}", "WARNING")
+                        self.log(asin, f"   ✅ Exitosos: {', '.join([s.get('site_id') for s in successful])}", "INFO")
+                        self.log(asin, f"   🚫 Bloqueados: {', '.join(blocked_sites)}", "WARNING")
+
+                        # Guardar categoría bloqueada para próximo intento
+                        current_category = mini_ml.get("category_id")
+                        blocked_categories = mini_ml.get("blocked_categories", [])
+                        if current_category not in blocked_categories:
+                            blocked_categories.append(current_category)
+
+                        mini_ml["blocked_categories"] = blocked_categories
+                        mini_ml["retry_blocked_sites"] = blocked_sites
+                        save_json_file(str(mini_path), mini_ml)
+
+                        self.log(asin, f"⚠️ Categoría {current_category} guardada como bloqueada para retry futuro", "WARNING")
+
                     self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
                     return item_id
                 else:

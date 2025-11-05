@@ -120,7 +120,8 @@
       "Bash(for asin in B0FM82B29X B0FPKPTLM6 B0DT9QX4DQ)",
       "Bash(do echo '=== $asin ===')",
       "Bash(if [ -f logs/main2_causes_detailed.log ])",
-      "Bash(then tail -100 logs/main2_causes_detailed.log)"
+      "Bash(then tail -100 logs/main2_causes_detailed.log)",
+      "Bash(resources/asins.txt)"
     ],
     "deny": [],
     "ask": []
