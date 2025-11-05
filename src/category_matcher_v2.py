@@ -737,7 +737,9 @@ class AIValidator:
     def validate_and_select(
         self,
         product: Dict,
-        candidates: List[Dict]
+        candidates: List[Dict],
+        is_alternative: bool = False,
+        excluded_categories: List[str] = None
     ) -> Dict:
         """
         Valida candidatos y selecciona el mejor usando IA
@@ -745,6 +747,8 @@ class AIValidator:
         Args:
             product: Datos del producto
             candidates: Lista de categorías candidatas (de EmbeddingMatcher)
+            is_alternative: Si True, indica que se está buscando categoría alternativa
+            excluded_categories: Categorías que fueron excluidas (bloqueadas)
 
         Returns:
             {category_id, confidence, reasoning, alternative}
@@ -757,8 +761,10 @@ class AIValidator:
                 'method': 'none'
             }
 
+        excluded_categories = excluded_categories or []
+
         # Construir prompt
-        prompt = self._build_prompt(product, candidates)
+        prompt = self._build_prompt(product, candidates, is_alternative, excluded_categories)
 
         try:
             # Llamar a IA
@@ -773,11 +779,29 @@ class AIValidator:
             # Parsear respuesta
             result = json.loads(response.choices[0].message.content)
 
+            # Si es búsqueda alternativa y la IA retornó null, rechazar
+            if is_alternative and result.get('category_id') is None:
+                print("⚠️ IA rechazó todas las alternativas (ninguna es apropiada)")
+                return {
+                    'category_id': None,
+                    'confidence': 0.0,
+                    'reasoning': result.get('reasoning', 'IA rechazó alternativas - ninguna apropiada'),
+                    'method': 'rejected_alternative'
+                }
+
             # Validar que category_id esté en candidatos
             valid_ids = [c['category_id'] for c in candidates]
             if result['category_id'] not in valid_ids:
                 print(f"⚠️ IA retornó categoría inválida: {result['category_id']}")
-                # Usar primer candidato como fallback
+                # Si es alternativa, no usar fallback - mejor rechazar
+                if is_alternative:
+                    return {
+                        'category_id': None,
+                        'confidence': 0.0,
+                        'reasoning': 'IA retornó categoría no válida y es búsqueda alternativa',
+                        'method': 'rejected_alternative'
+                    }
+                # Usar primer candidato como fallback solo en búsqueda normal
                 result = {
                     'category_id': candidates[0]['category_id'],
                     'confidence': candidates[0]['similarity_score'],
@@ -785,7 +809,7 @@ class AIValidator:
                     'method': 'fallback'
                 }
             else:
-                result['method'] = 'ai_validated'
+                result['method'] = 'ai_validated_alternative' if is_alternative else 'ai_validated'
 
             return result
 
@@ -799,8 +823,16 @@ class AIValidator:
                 'method': 'fallback'
             }
 
-    def _build_prompt(self, product: Dict, candidates: List[Dict]) -> str:
+    def _build_prompt(
+        self,
+        product: Dict,
+        candidates: List[Dict],
+        is_alternative: bool = False,
+        excluded_categories: List[str] = None
+    ) -> str:
         """Construye prompt para la IA"""
+
+        excluded_categories = excluded_categories or []
 
         # Extraer hints de SP API si existen
         sp_hints = ""
@@ -808,6 +840,28 @@ class AIValidator:
             sp_hints += f"\n📦 Amazon ProductType: {product['productType']}"
         if product.get('browseClassification'):
             sp_hints += f"\n🏷️  Amazon Browse Category: {product['browseClassification']}"
+
+        # Formatear categorías excluidas si es alternativa
+        excluded_text = ""
+        if is_alternative and excluded_categories:
+            excluded_text = f"""
+╔══════════════════════════════════════════════════════════════╗
+║              ⚠️  BÚSQUEDA DE CATEGORÍA ALTERNATIVA          ║
+╚══════════════════════════════════════════════════════════════╝
+
+🚨 ATENCIÓN: Esta es una búsqueda de categoría ALTERNATIVA.
+
+Las siguientes categorías fueron BLOQUEADAS en algunos países:
+{chr(10).join(f'   ❌ {cat_id}' for cat_id in excluded_categories)}
+
+⚠️ REQUISITO CRÍTICO:
+   - La categoría alternativa DEBE ser semánticamente SIMILAR al producto
+   - Si NINGÚN candidato es apropiado, retorna null en category_id
+   - Es mejor NO publicar que publicar en categoría incorrecta
+   - Solo selecciona una alternativa si realmente tiene sentido para el producto
+   - Prioriza similitud semántica sobre score de embeddings
+
+"""
 
         # Formatear candidatos con más detalle
         candidates_text = ""
@@ -832,6 +886,7 @@ class AIValidator:
             candidates_text += "\n"
 
         prompt = f"""Eres un experto en categorización de productos para MercadoLibre con 10 años de experiencia.
+{excluded_text}
 
 ╔══════════════════════════════════════════════════════════════╗
 ║                    PRODUCTO A CATEGORIZAR                    ║
@@ -1031,7 +1086,9 @@ class CategoryMatcherV2:
         if excluded_categories:
             print(f"   🚫 Excluyendo categorías bloqueadas: {excluded_categories}")
         phase1_start = time.time()
-        candidates = self.embedder.find_similar_categories(product_data, top_k * 2)  # Buscar más para compensar filtrado
+        # Si hay categorías excluidas, buscar muchos más candidatos para compensar
+        search_multiplier = 4 if excluded_categories else 2
+        candidates = self.embedder.find_similar_categories(product_data, top_k * search_multiplier)
         phase1_time = (time.time() - phase1_start) * 1000
 
         if not candidates:
@@ -1051,12 +1108,29 @@ class CategoryMatcherV2:
 
         print(f"✅ Top {len(candidates)} candidatos encontrados (similarity: {candidates[0]['similarity_score']:.3f})")
 
+        # Mostrar top 5 candidatos para debugging
+        if excluded_categories:
+            print("   📋 Top 5 candidatos alternativos:")
+            for i, c in enumerate(candidates[:5], 1):
+                print(f"      {i}. {c['category_id']} - {c['category_data']['name']} (sim: {c['similarity_score']:.3f})")
+
         # Fase 2: Validación con IA (opcional)
         if use_ai:
             print("🤖 Fase 2: Validación con IA...")
             phase2_start = time.time()
-            ai_result = self.validator.validate_and_select(product_data, candidates)
+            ai_result = self.validator.validate_and_select(
+                product_data,
+                candidates,
+                is_alternative=bool(excluded_categories),
+                excluded_categories=excluded_categories or []
+            )
             phase2_time = (time.time() - phase2_start) * 1000
+
+            # Si la IA rechazó alternativa, retornar error
+            if ai_result.get('category_id') is None:
+                print(f"❌ No se encontró categoría alternativa apropiada")
+                print(f"   Razón: {ai_result.get('reasoning', 'N/A')}")
+                return self._empty_result()
 
             # Construir resultado final
             result = self._build_result(
