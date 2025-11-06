@@ -752,18 +752,20 @@ Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
         footer_text = """
 
 ════════════════════════════════════════════════════
-INFORMACIÓN IMPORTANTE PARA COMPRADORES INTERNACIONALES
+🔎 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 ════════════════════════════════════════════════════
 
-Producto completamente nuevo y original.
-Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.
-En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.
-Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.
-Envío internacional asegurado con número de seguimiento.
-Soporte en español e inglés.
+• Producto nuevo y original
+• Envío desde EE.UU. con seguimiento
+• Impuestos y aduana incluidos en el precio
+• Compra protegida por Mercado Libre
+• ⭐ Garantía del vendedor: 30 días
+• Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
+• Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
+• Medidas y peso pueden estar en sistema imperial
+• Atención al cliente en español e inglés
 
-Somos ONEWORLD 🌎
-Garantía del vendedor: 30 días"""
+Somos ONEWORLD 🌎"""
 
         texto += footer_text
         return texto
@@ -774,18 +776,20 @@ Garantía del vendedor: 30 días"""
         return """Producto de alta calidad.
 
 ════════════════════════════════════════════════════
-INFORMACIÓN IMPORTANTE PARA COMPRADORES INTERNACIONALES
+🔎 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 ════════════════════════════════════════════════════
 
-Producto completamente nuevo y original.
-Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.
-En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.
-Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.
-Envío internacional asegurado con número de seguimiento.
-Soporte en español e inglés.
+• Producto nuevo y original
+• Envío desde EE.UU. con seguimiento
+• Impuestos y aduana incluidos en el precio
+• Compra protegida por Mercado Libre
+• ⭐ Garantía del vendedor: 30 días
+• Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
+• Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
+• Medidas y peso pueden estar en sistema imperial
+• Atención al cliente en español e inglés
 
-Somos ONEWORLD 🌎
-Garantía del vendedor: 30 días"""
+Somos ONEWORLD 🌎"""
 
 def ai_characteristics(amazon_json)->Tuple[List[dict], List[dict]]:
     """Extrae main/second characteristics con IA (robusto, JSON-only)."""
