@@ -1,7 +1,43 @@
 {
-  "BRAND": {
+  "MANUFACTURER": {
     "value_type": "string",
     "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "BRAND": {
+    "value_type": "string",
+    "values": {
+      "abelha rainha": "428919",
+      "amodil": "250226",
+      "bath & body works": "23921",
+      "blanche": "2787041",
+      "buona vita": "428922",
+      "burt's bees": "2774652",
+      "carolina herrera": "23093",
+      "chanel": "14664",
+      "eos": "2187978",
+      "forever": "229248",
+      "givenchy": "23057",
+      "goicoechea": "428929",
+      "guerlain": "23255",
+      "imecap": "2786567",
+      "jequiti": "23512",
+      "joli": "428931",
+      "l'occitane": "23034",
+      "liftderma": "2786568",
+      "norma bustos": "2786725",
+      "o boticário": "23130",
+      "ocean white": "2786569",
+      "pond's": "5998108",
+      "racco": "23037",
+      "strivectin": "2786571",
+      "sweet": "428938",
+      "são luiz": "2786570",
+      "victoria's secret": "23179"
+    },
     "allowed_units": [],
     "tags": {
       "catalog_required": true,
@@ -12,128 +48,129 @@
   },
   "LINE": {
     "value_type": "string",
-    "values": {},
+    "values": {
+      "hydrapore": "1262694",
+      "liftactiv": "2601828",
+      "neovadiol": "2582981",
+      "pigmentclar": "2582996",
+      "revitalift": "2642730"
+    },
     "allowed_units": [],
     "tags": {},
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
-  "MODEL": {
+  "NAME": {
     "value_type": "string",
-    "values": {},
+    "values": {
+      "clarité": "6127976",
+      "beauty care": "3447497",
+      "active c 10": "5444919",
+      "effaclar k+": "3694777",
+      "k-ox eyes": "6966804"
+    },
     "allowed_units": [],
     "tags": {
+      "catalog_required": true,
       "required": true
     },
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
-  "LICENSE": {
-    "value_type": "string",
+  "SKIN_TYPE": {
+    "value_type": "list",
     "values": {
-      "star wars": "49550949",
-      "spider-man": "49550941",
-      "batman": "49550850",
-      "ninjago": "49605612",
-      "mario bros.": "49605614",
-      "spongebob squarepants": "49601770",
-      "halo mega": "49605615",
-      "iron man": "49573782",
-      "captain america": "49550858",
-      "stitch": "49550952",
-      "minecraft": "49550908",
-      "bluey": "49550854",
-      "stranger things": "49550953",
-      "naruto": "49550916",
-      "botanicals": "49605617",
-      "technic": "49605618",
-      "icons": "49605619",
-      "speed champions": "49605620",
-      "dc comics": "49550866",
-      "disney pixar": "49605621",
-      "disney movies": "49605623",
-      "scooby-doo": "49550935",
-      "back to the future delorean": "49605624",
-      "disney princess": "49605625",
-      "playmobil": "49605627",
-      "hot wheels": "49550895"
+      "dry": "415416",
+      "sensitive": "415418",
+      "combination": "415417",
+      "normal": "415414",
+      "oily": "415415",
+      "all skin type": "5250260",
+      "mature": "48310793",
+      "acne-prone": "3783074",
+      "normal to dry": "9332000",
+      "normal to oily": "20887721",
+      "normal to combination": "50224467",
+      "normal to sensitive": "15834480"
     },
     "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "read_only": true
+      "allow_variations": true,
+      "defines_picture": true
     },
-    "hierarchy": "PARENT_PK",
+    "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "PIECES_NUMBER": {
+  "SUGGESTED_AGE": {
+    "value_type": "string",
+    "values": {
+      "30+": "11727670",
+      "40+": "11727671",
+      "50+": "11727672",
+      "60+": "11727673",
+      "70+": "11727674"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "APPLICATION_MOMENT": {
+    "value_type": "list",
+    "values": {
+      "day": "2661131",
+      "day/night": "11727675",
+      "night": "2661132"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "SALE_FORMAT": {
+    "value_type": "list",
+    "values": {
+      "unit": "1359391",
+      "pack": "1359392"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "UNIT_VOLUME": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "fl oz",
+      "mL"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "UNIT_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "mg"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "UNITS_PER_PACK": {
     "value_type": "number",
     "values": {},
     "allowed_units": [],
     "tags": {
-      "allow_variations": true,
-      "defines_picture": true
+      "conditional_required": true
     },
     "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "CHARACTER_VERSION": {
-    "value_type": "string",
-    "values": {
-      "pikachu": "28463671",
-      "mario bros": "28463672"
-    },
-    "allowed_units": [],
-    "tags": {
-      "allow_variations": true,
-      "defines_picture": true
-    },
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "RECOMMENDED_CONSTRUCTIONS": {
-    "value_type": "string",
-    "values": {
-      "home": "9872828",
-      "mechanical workshop": "9872829"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "FILTRABLE_RECOMMENDED_AGE_GROUP": {
-    "value_type": "list",
-    "values": {
-      "0 - 2 years": "59569260",
-      "3 - 5 years": "59569261",
-      "6 - 8 years": "59569262",
-      "9 - 13 years": "59569263",
-      "+ 14 years": "59569264"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "PRESENTATION": {
-    "value_type": "string",
-    "values": {
-      "bucket": "5355755",
-      "box": "131493"
-    },
-    "allowed_units": [],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
   "PACKAGE_HEIGHT": {
@@ -208,80 +245,48 @@
     "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
-  "HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "DETAILED_MODEL": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "COLLECTION": {
+  "FRAGRANCE": {
     "value_type": "string",
     "values": {
-      "harry potter": "447711",
-      "star wars": "447715",
-      "transformers": "1006834"
+      "floral": "2295389",
+      "fruity": "115934",
+      "woody": "13816058",
+      "mentholated": "20222182"
     },
     "allowed_units": [],
     "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "TOY_MATERIALS": {
+  "FUNCTIONS": {
     "value_type": "string",
     "values": {
-      "plastic": "9872830"
+      "anti-acne": "7263140",
+      "anti-stains": "1180926",
+      "anti-wrinkles": "1180924",
+      "exfoliating": "1180928",
+      "moisturizing": "1180925",
+      "nutritive": "2840073",
+      "refreshing": "2840074",
+      "antibacterial": "48310808",
+      "antioxidant": "4531427",
+      "astringent": "13371131",
+      "soothing": "4344579",
+      "healing": "16552111",
+      "decongestive": "13372085",
+      "depigmenting": "13418555",
+      "make-up remover": "18078942",
+      "elasticity": "13617493",
+      "firmness": "13782178",
+      "moisturizer": "25823947",
+      "illuminator": "11815587",
+      "cleansing": "20634631",
+      "mattifying": "5475699",
+      "peeling": "13368238",
+      "repairing": "6009709",
+      "sebum regulator": "14035832",
+      "toning": "28009712",
+      "firming": "3725456"
     },
     "allowed_units": [],
     "tags": {
@@ -290,12 +295,22 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "PIECES_SHAPES": {
+  "INGREDIENT_PREFERENCES": {
     "value_type": "string",
     "values": {
-      "triangle": "9872831",
-      "block": "9872832",
-      "circle": "9872833"
+      "vitamin c": "48310817",
+      "silicone-free": "48310819",
+      "alcohol-free": "48310820",
+      "salicylic acid": "48310821",
+      "hyaluronic acid": "48384429",
+      "niacinamide": "48310822",
+      "retinol": "48310823",
+      "cbd": "48310824",
+      "gluten free": "48310825",
+      "activated charcoal": "48310826",
+      "benzoic acid": "48310827",
+      "peptides": "48310829",
+      "ceramides": "48310830"
     },
     "allowed_units": [],
     "tags": {
@@ -304,43 +319,7 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "TOY_COMPONENTS": {
-    "value_type": "string",
-    "values": {
-      "instructions guide": "11468267",
-      "wheels": "11468268",
-      "window": "11468269"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "MIN_RECOMMENDED_AGE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "MAX_RECOMMENDED_AGE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "IS_COLLECTIBLE": {
+  "IS_GLUTEN_FREE": {
     "value_type": "boolean",
     "values": {
       "no": "242084",
@@ -351,26 +330,7 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "CHARACTERS": {
-    "value_type": "string",
-    "values": {
-      "batman": "415868",
-      "captain america": "415865",
-      "boo": "2730939",
-      "spongebob": "2772762",
-      "krillin": "5263750",
-      "luke skywalker": "1234817",
-      "dovahkiin": "415870",
-      "josé carioca": "49550832"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "IS_MAGNETIC": {
+  "IS_HYPOALLERGENIC_PRODUCT": {
     "value_type": "boolean",
     "values": {
       "no": "242084",
@@ -381,68 +341,86 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "TOY_SAFETY_CERTIFICATE_NUMBER": {
-    "value_type": "string",
-    "values": {},
+  "APPLICATION_ZONES": {
+    "value_type": "list",
+    "values": {
+      "face": "2661668",
+      "neck": "6678766",
+      "eye contour": "2623822",
+      "décolleté": "11925225",
+      "forehead": "2201549",
+      "nose": "6021369",
+      "cheeks": "22957812"
+    },
     "allowed_units": [],
     "tags": {
-      "hidden": true
+      "multivalued": true
     },
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "GTIN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "conditional_required": true
+  "WITH_SUN_PROTECTION": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
     },
-    "hierarchy": "PRODUCT_IDENTIFIER",
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "INMETRO_CERTIFICATION_REGISTRATION_NUMBER": {
-    "value_type": "string",
+  "PRODUCT_FORMAT": {
+    "value_type": "list",
+    "values": {
+      "lotion": "450703",
+      "oil": "450707",
+      "gel": "450706",
+      "cream": "1214480",
+      "serum": "1214483",
+      "face mask": "15333597",
+      "toner": "16544970",
+      "exfoliant": "13370976",
+      "spray": "6809744",
+      "ampoules": "13625795",
+      "mist": "20610586",
+      "foam": "4312640",
+      "emulsion": "450704",
+      "aerosol": "22767860"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_PARABENS_FREE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_DERMATOLOGICALLY_TESTED": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SPF": {
+    "value_type": "number",
     "values": {},
     "allowed_units": [],
     "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "APPROVAL_CERTIFICATION_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "PRODUCT_AUTHORIZATION_RPIN_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SIC_ESTABLISHMENT_REGISTRY_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "REGISTRATION_LICENSE_ESTABLISHMENT_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "EMPTY_GTIN_REASON": {
@@ -462,14 +440,99 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "RECOMMENDED_AGE_GROUP": {
+  "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
     "values": {
-      "1-3 years": "49882295",
-      "3-6 years": "49882296",
-      "6-9 years": "50141496",
-      "9-12 years": "50141497",
-      "12+ years": "49882301"
+      "limited": "13414678",
+      "excepted": "13414677",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "155_98_RESOLUTION_FILE_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "MS_PRODUCT_REGISTRATION_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANVISA_PRIOR_NOTIFICATION_COMMUNICATION_DOCUMENT_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "ANVISA_PRODUCT_REGISTRATION_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "CONAMA_LICENSE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VERTICAL_TAGS": {
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WITH_EXPIRATION_DATE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
     },
     "allowed_units": [],
     "tags": {
@@ -477,26 +540,39 @@
       "read_only": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 1
+    "relevance": 2
   },
-  "TOYS_SAFETY_CERTIFICATIONS": {
-    "value_type": "string",
+  "SHELF_LIFE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_FRAGRANCE_FREE": {
+    "value_type": "boolean",
     "values": {
-      "inmetro": "11287596",
-      "ce": "11184161",
-      "kc": "11184162"
+      "no": "242084",
+      "yes": "242085"
     },
     "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "multivalued": true
+      "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "COLORS_NUMBER": {
-    "value_type": "number",
-    "values": {},
+  "IS_OIL_FREE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
     "allowed_units": [],
     "tags": {
       "hidden": true
@@ -504,63 +580,78 @@
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "TOY_ASSEMBLED_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
+  "WITH_HYALURONIC_ACID": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
     "tags": {
       "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "TOY_ASSEMBLED_HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
+  "WITH_COLOR": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
     "tags": {
       "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "TOY_ASSEMBLED_DEPTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
+  "IS_CRUELTY_FREE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
     "tags": {
       "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg",
-      "lb",
-      "oz"
-    ],
+  "IS_SUITABLE_FOR_EYE_CONTOUR": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_COMEDOGENIC": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_VEGAN": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
     "tags": {
       "hidden": true
     },
@@ -579,12 +670,9 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
+  "EXPIRATION_DATE": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true
@@ -592,16 +680,14 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
-  "IS_TOM_BRAND": {
-    "value_type": "boolean",
+  "ITEM_CONDITION": {
+    "value_type": "list",
     "values": {
-      "no": "242084",
-      "yes": "242085"
+      "new": "2230284"
     },
     "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "read_only": true
+      "hidden": true
     },
     "hierarchy": "ITEM",
     "relevance": 2
@@ -620,22 +706,29 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
-  "GIFTABLE": {
-    "value_type": "string",
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
     "values": {
-      "vppbasic": "54973163",
-      "vppfull": "54973164",
-      "cart": "54973165",
-      "checkout": "54973166"
+      "no": "242084",
+      "yes": "242085"
     },
     "allowed_units": [],
     "tags": {
       "hidden": true,
-      "multivalued": true,
       "read_only": true
     },
     "hierarchy": "ITEM",
     "relevance": 2
+  },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "VALUE_ADDED_TAX": {
     "value_type": "string",
@@ -786,22 +879,6 @@
       "read_only": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "HAZMAT_TRANSPORTABILITY": {
-    "value_type": "list",
-    "values": {
-      "excepted": "13414677",
-      "limited": "13414678",
-      "exceeded": "13414679",
-      "indeterminate": "13414680"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "IS_KIT": {
