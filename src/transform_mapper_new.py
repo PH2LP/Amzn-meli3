@@ -667,31 +667,36 @@ def ai_desc_es(datos, mini_ml=None):
     prompt = f"""Eres un copywriter experto en Mercado Libre Global Selling.
 Genera una descripción en TEXTO PLANO con formato usando SOLO saltos de línea y bullets •
 NO uses HTML, NO uses markdown. Solo texto plano formateado.
-No inventes información. Usa emojis ocasionales. Español neutro.
+No inventes información. Usa emojis estratégicamente. Español neutro LATAM.
 
 Datos del producto desde Amazon:
 {json.dumps(amazon_json, ensure_ascii=False)[:15000]}
 
 🎯 OBJETIVO
-Impulsar la conversión con una descripción clara, persuasiva y bien estructurada.
+Maximizar conversión con copy persuasivo, directo y escaneable.
 
 📌 ESTRUCTURA OBLIGATORIA (texto plano formateado)
 
-1️⃣ Introducción emocional (1-2 líneas)
-   Texto introductorio persuasivo...
+1️⃣ Introducción ultra-directa (1 FRASE, máx 15 palabras)
+   Enfoque en beneficio principal + diferenciador del producto.
+   ✅ Directo al punto, específico, sin palabras de relleno
+   ❌ NO usar: "Descubre", "Increíble", "Perfecto para ti"
 
 2️⃣ LÍNEA EN BLANCO
 
-3️⃣ Lista de beneficios (4-8 items)
-   • Primer beneficio
-   • Segundo beneficio
-   • Tercer beneficio
+3️⃣ Lista de beneficios (5-7 bullets CONCISOS)
+   Cada bullet: máximo 12 palabras, enfoque en valor específico
+   • Beneficio medible o característica clave del producto
+   • Segundo beneficio sin palabras genéricas de relleno
+   • Tercer beneficio claro y directo
    ...
 
 4️⃣ LÍNEA EN BLANCO
 
-5️⃣ Cierre persuasivo (1-2 líneas)
-   Texto de cierre...
+5️⃣ Cierre persuasivo (1 FRASE, máx 15 palabras)
+   Relacionado con compra segura, envío o garantía.
+   ✅ Compra con confianza, envío seguro, garantía incluida
+   ❌ NO usar: "No esperes más", "Transforma tu vida"
 
 6️⃣ LÍNEA EN BLANCO
 
@@ -705,40 +710,16 @@ Impulsar la conversión con una descripción clara, persuasiva y bien estructura
    • Capacidad: ...
    • Incluye: ...
 
-⚠️ IMPORTANTE:
-- NO mencionar garantías (se agregan después automáticamente)
-- Solo specs útiles: material, dimensiones, capacidad, contenido
-- Unificar unidades (cm o pulgadas, NO ambas)
-- USA SOLO saltos de línea y bullets • para formatear
-- NO uses HTML, NO uses markdown
+⚠️ REGLAS CRÍTICAS:
+- Intro: 1 frase corta y directa (máx 15 palabras)
+- Bullets: concisos, máx 12 palabras cada uno
+- Cierre: 1 frase relacionada con compra segura (máx 15 palabras)
+- NO mencionar garantías ni voltajes en specs
+- Unificar unidades: solo cm o solo pulgadas
+- Solo texto plano: bullets • y saltos de línea
 
-⛔ PROHIBICIONES
-- Amazon, ASIN, UPC, EAN, GTIN, SKU, códigos
-- Precios, rankings, enlaces externos
-- Voltaje específico por país
-- Mensajes de contacto directo
-- Garantías (se agregan automáticamente después)
-- HTML tags, markdown
-
-EJEMPLO:
-
-Descubre la máquina de café perfecta para tu hogar. Diseñada para quienes buscan calidad profesional sin salir de casa, combina potencia y elegancia en un diseño compacto.
-
-• Sistema de extracción de 20 bares para espresso de calidad barista
-• Vaporizador integrado para crear espuma de leche cremosa
-• Tanque de agua removible de gran capacidad
-• Fácil de limpiar con bandeja extraíble
-
-Con esta máquina transformarás tu rutina diaria de café en una experiencia excepcional. Inversión duradera para los verdaderos amantes del café.
-
-════════════════════════
-📦 ESPECIFICACIONES TÉCNICAS
-════════════════════════
-
-• Material: Acero inoxidable
-• Dimensiones: 32 x 15 x 32 cm
-• Capacidad: 1.3 litros
-• Incluye: Filtros, portafiltro, tamper, manual
+⛔ NO INCLUIR:
+Amazon, ASIN, códigos, precios, enlaces, HTML, markdown, "increíble", "perfecto", "descubre"
 
 Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
 
@@ -771,20 +752,18 @@ Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
         footer_text = """
 
 ════════════════════════════════════════════════════
-🔎 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
+INFORMACIÓN IMPORTANTE PARA COMPRADORES INTERNACIONALES
 ════════════════════════════════════════════════════
 
-• Producto nuevo y original
-• Envío desde EE.UU. con seguimiento
-• Impuestos y aduana incluidos en el precio
-• Compra protegida por Mercado Libre
-• ⭐ Garantía del vendedor: 30 días
-• Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
-• Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
-• Medidas y peso pueden estar en sistema imperial
-• Atención al cliente en español e inglés
+Producto completamente nuevo y original.
+Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.
+En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.
+Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.
+Envío internacional asegurado con número de seguimiento.
+Soporte en español e inglés.
 
-Somos ONEWORLD 🌎"""
+Somos ONEWORLD 🌎
+Garantía del vendedor: 30 días"""
 
         texto += footer_text
         return texto
@@ -795,20 +774,18 @@ Somos ONEWORLD 🌎"""
         return """Producto de alta calidad.
 
 ════════════════════════════════════════════════════
-🔎 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
+INFORMACIÓN IMPORTANTE PARA COMPRADORES INTERNACIONALES
 ════════════════════════════════════════════════════
 
-• Producto nuevo y original
-• Envío desde EE.UU. con seguimiento
-• Impuestos y aduana incluidos en el precio
-• Compra protegida por Mercado Libre
-• ⭐ Garantía del vendedor: 30 días
-• Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
-• Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
-• Medidas y peso pueden estar en sistema imperial
-• Atención al cliente en español e inglés
+Producto completamente nuevo y original.
+Pagamos impuestos en EE.UU. y podemos emitir factura desde EE.UU.
+En caso de productos eléctricos, tenga en cuenta que en EE.UU. se utiliza 110-120V.
+Si el producto incluye baterías, podrían ser removidas para cumplir normativas de transporte internacional.
+Envío internacional asegurado con número de seguimiento.
+Soporte en español e inglés.
 
-Somos ONEWORLD 🌎"""
+Somos ONEWORLD 🌎
+Garantía del vendedor: 30 días"""
 
 def ai_characteristics(amazon_json)->Tuple[List[dict], List[dict]]:
     """Extrae main/second characteristics con IA (robusto, JSON-only)."""
