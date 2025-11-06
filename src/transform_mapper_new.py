@@ -759,7 +759,7 @@ Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
 • Envío desde EE.UU. con seguimiento
 • Impuestos y aduana incluidos en el precio
 • Compra protegida por Mercado Libre
-• ⭐ Garantía del vendedor: 30 días
+• Garantía del vendedor: 30 días
 • Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
 • Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
 • Medidas y peso pueden estar en sistema imperial
@@ -783,7 +783,7 @@ Somos ONEWORLD 🌎"""
 • Envío desde EE.UU. con seguimiento
 • Impuestos y aduana incluidos en el precio
 • Compra protegida por Mercado Libre
-• ⭐ Garantía del vendedor: 30 días
+• Garantía del vendedor: 30 días
 • Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
 • Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
 • Medidas y peso pueden estar en sistema imperial
