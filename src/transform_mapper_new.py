@@ -673,53 +673,58 @@ Datos del producto desde Amazon:
 {json.dumps(amazon_json, ensure_ascii=False)[:15000]}
 
 🎯 OBJETIVO
-Maximizar conversión con copy persuasivo, directo y escaneable.
+Maximizar conversión con copy persuasivo, directo y escaneable siguiendo las mejores prácticas de MercadoLibre.
 
 📌 ESTRUCTURA OBLIGATORIA (texto plano formateado)
 
-1️⃣ Introducción ultra-directa (1 FRASE, máx 15 palabras)
-   Enfoque en beneficio principal + diferenciador del producto.
-   ✅ Directo al punto, específico, sin palabras de relleno
-   ❌ NO usar: "Descubre", "Increíble", "Perfecto para ti"
+1️⃣ PÁRRAFO INTRODUCTORIO (4-6 frases, ~50-80 palabras)
+   Expandir beneficio principal del producto en un párrafo fluido y persuasivo.
+   - Primera frase: Identifica el producto y su beneficio clave
+   - Segunda-tercera frase: Amplía características diferenciales
+   - Cuarta-quinta frase: Menciona casos de uso o valor agregado
+   - Sexta frase: Cierre del párrafo con gancho de compra
 
-2️⃣ LÍNEA EN BLANCO
+   ✅ Ejemplo: "La webcam 2K MELCAM transforma tus videollamadas con resolución nítida profesional. Cuenta con luz de anillo ajustable que garantiza iluminación óptima en cualquier ambiente. Su enfoque automático te mantiene siempre en el centro de la imagen mientras trabajas. La cubierta de privacidad integrada protege tu seguridad cuando no la usas. Compatible con todas las plataformas mediante conexión USB Plug & Play sin instalación."
 
-3️⃣ Lista de beneficios (5-7 bullets CONCISOS)
+   ❌ NO usar: "Descubre", "Increíble", "Perfecto para ti", "Transforma tu vida"
+
+2️⃣ UNA LÍNEA EN BLANCO
+
+3️⃣ Lista de beneficios clave (5-7 bullets CONCISOS)
    Cada bullet: máximo 12 palabras, enfoque en valor específico
    • Beneficio medible o característica clave del producto
    • Segundo beneficio sin palabras genéricas de relleno
    • Tercer beneficio claro y directo
    ...
 
-4️⃣ LÍNEA EN BLANCO
+4️⃣ UNA LÍNEA EN BLANCO
 
-5️⃣ Cierre persuasivo (1 FRASE, máx 15 palabras)
+5️⃣ Cierre persuasivo (1 frase corta, máx 12 palabras)
    Relacionado con compra segura, envío o garantía.
-   ✅ Compra con confianza, envío seguro, garantía incluida
-   ❌ NO usar: "No esperes más", "Transforma tu vida"
+   ✅ Compra segura y envío rápido garantizado
+   ❌ NO usar: "No esperes más", "Cómpralo ya"
 
-6️⃣ LÍNEA EN BLANCO
+6️⃣ DOS LÍNEAS EN BLANCO (saltos dobles \n\n)
 
 7️⃣ Especificaciones técnicas
-   ════════════════════════
-   📦 ESPECIFICACIONES TÉCNICAS
-   ════════════════════════
+   ESPECIFICACIONES TÉCNICAS
 
    • Material: ...
    • Dimensiones: ...
-   • Capacidad: ...
+   • Peso: ...
    • Incluye: ...
 
 ⚠️ REGLAS CRÍTICAS:
-- Intro: 1 frase corta y directa (máx 15 palabras)
+- Intro: PÁRRAFO de 4-6 frases (~50-80 palabras total)
 - Bullets: concisos, máx 12 palabras cada uno
-- Cierre: 1 frase relacionada con compra segura (máx 15 palabras)
+- Cierre: 1 frase corta (máx 12 palabras)
 - NO mencionar garantías ni voltajes en specs
 - Unificar unidades: solo cm o solo pulgadas
-- Solo texto plano: bullets • y saltos de línea
+- Solo texto plano: bullets • y saltos de línea simples \n
+- Espaciado: una línea entre secciones, dos líneas antes de ESPECIFICACIONES TÉCNICAS
 
 ⛔ NO INCLUIR:
-Amazon, ASIN, códigos, precios, enlaces, HTML, markdown, "increíble", "perfecto", "descubre"
+Amazon, ASIN, códigos, precios, enlaces, HTML, markdown, "increíble", "perfecto", "descubre", "transforma"
 
 Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
 
@@ -751,9 +756,7 @@ Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
         # Agregar bloque final de información internacional en texto plano (SIEMPRE, solo una vez)
         footer_text = """
 
-════════════════════════════════════════════════════
-🔎 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
-════════════════════════════════════════════════════
+INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 
 • Producto nuevo y original
 • Envío desde EE.UU. con seguimiento
@@ -775,9 +778,7 @@ Somos ONEWORLD 🌎"""
         # Fallback básico con footer en texto plano
         return """Producto de alta calidad.
 
-════════════════════════════════════════════════════
-🔎 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
-════════════════════════════════════════════════════
+INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 
 • Producto nuevo y original
 • Envío desde EE.UU. con seguimiento
