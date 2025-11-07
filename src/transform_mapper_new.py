@@ -706,11 +706,22 @@ Formato EXACTO (SIN líneas vacías entre bullets):
 • Característica 2: Beneficio corto en una línea
 • Característica 3: Beneficio corto en una línea
 
-REGLAS:
+Ejemplos correctos (ESPAÑOL + Title Case):
+• Diseño Vintage: Refleja tu estilo único con un acabado clásico
+• Silencioso Y Potente: Motor de alto rendimiento sin ruido excesivo
+• Batería De Litio: Más de 80 minutos de autonomía continua
+• Ideal Para Todo Tipo De Pelo: Eficaz en todo tipo de cabello y barba
+• Cuchillas Desmontables: Fácil limpieza y mantenimiento
+
+REGLAS CRÍTICAS:
 - Cada bullet: MÁXIMO 1 línea (80 caracteres)
 - Usar dos puntos (:) para separar característica de beneficio
 - SIN líneas vacías entre bullets
 - Texto conciso y directo
+- Característica SIEMPRE en ESPAÑOL (nunca en inglés)
+- Formato Title Case: Primera Letra De Cada Palabra En Mayúscula
+- NO TODO EN MAYÚSCULAS (ejemplo incorrecto: "VINTAGE DESIGN")
+- Formato final: "Característica En Español: descripción del beneficio"
 
 6. LÍNEA EN BLANCO
 
