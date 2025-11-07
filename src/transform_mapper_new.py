@@ -637,8 +637,9 @@ Bullets (opcionales): {bullets}"""
 
 def ai_desc_es(datos, mini_ml=None):
     """
-    Genera descripción HTML optimizada para MercadoLibre Global Selling.
-    Usa el formato estructurado: intro + beneficios + cierre + specs.
+    Genera descripción optimizada para MercadoLibre Global Selling.
+    Usa el formato estructurado: intro + beneficios + cierre + specs + footer.
+    Con post-procesamiento robusto para eliminar espacios extra y normalizar saltos de línea.
     """
     if not client:
         return ""
@@ -664,67 +665,91 @@ def ai_desc_es(datos, mini_ml=None):
                 "package": mini_ml.get("package", {})
             })
 
+    # Construir datos de producto para el prompt
+    product_data = json.dumps(amazon_json, ensure_ascii=False)[:15000]
+
     prompt = f"""Eres un copywriter experto en Mercado Libre Global Selling.
-Genera una descripción en TEXTO PLANO con formato usando SOLO saltos de línea y bullets •
-NO uses HTML, NO uses markdown. Solo texto plano formateado.
-No inventes información. Usa emojis estratégicamente. Español neutro LATAM.
+
+# ============================================================
+# GENERADOR DE DESCRIPCIÓN (INSTRUCCIONES BASE)
+# ============================================================
+# Estructura estándar para descripciones de Mercado Libre Global Selling.
+# Formato: texto plano (SIN HTML, SIN emojis, SIN markdown)
+# ============================================================
 
 Datos del producto desde Amazon:
-{json.dumps(amazon_json, ensure_ascii=False)[:15000]}
+{product_data}
 
-🎯 OBJETIVO
-Maximizar conversión con copy persuasivo, directo y escaneable siguiendo las mejores prácticas de MercadoLibre.
+ESTRUCTURA EXACTA A SEGUIR:
 
-📌 ESTRUCTURA OBLIGATORIA (texto plano formateado)
+1. TÍTULO CON TAGLINE (primera línea)
+Formato: MARCA MODELO – Tagline persuasivo corto
+Ejemplo: "GOZVRPUS TW-05 – Comunicación nítida y profesional"
+- Usar MAYÚSCULAS para marca y modelo
+- Guion largo (–) separando
+- Tagline: 3-5 palabras que describan el beneficio principal
+- NO repetir información del título del producto
 
-1️⃣ PÁRRAFO INTRODUCTORIO (4-6 frases, ~50-80 palabras)
-   Expandir beneficio principal del producto en un párrafo fluido y persuasivo.
-   - Primera frase: Identifica el producto y su beneficio clave
-   - Segunda-tercera frase: Amplía características diferenciales
-   - Cuarta-quinta frase: Menciona casos de uso o valor agregado
-   - Sexta frase: Cierre del párrafo con gancho de compra
+2. LÍNEA EN BLANCO
 
-   ✅ Ejemplo: "La webcam 2K MELCAM transforma tus videollamadas con resolución nítida profesional. Cuenta con luz de anillo ajustable que garantiza iluminación óptima en cualquier ambiente. Su enfoque automático te mantiene siempre en el centro de la imagen mientras trabajas. La cubierta de privacidad integrada protege tu seguridad cuando no la usas. Compatible con todas las plataformas mediante conexión USB Plug & Play sin instalación."
+3. PÁRRAFO INTRODUCTORIO (3-4 líneas)
+- Introducir el producto con su beneficio principal
+- Tono natural, comercial y humano
+- Mencionar para quién es ideal (profesionales, estudiantes, etc.)
+- Evitar: "Descubre", "Increíble", "Perfecto para ti"
 
-   ❌ NO usar: "Descubre", "Increíble", "Perfecto para ti", "Transforma tu vida"
+4. LÍNEA EN BLANCO
 
-2️⃣ UNA LÍNEA EN BLANCO
+5. BLOQUE DE CARACTERÍSTICAS (6-8 bullets COMPACTOS)
+Formato EXACTO (SIN líneas vacías entre bullets):
+• Característica 1 – Beneficio corto en una línea
+• Característica 2 – Beneficio corto en una línea
+• Característica 3 – Beneficio corto en una línea
 
-3️⃣ Lista de beneficios clave (5-7 bullets CONCISOS)
-   Cada bullet: máximo 12 palabras, enfoque en valor específico
-   • Beneficio medible o característica clave del producto
-   • Segundo beneficio sin palabras genéricas de relleno
-   • Tercer beneficio claro y directo
-   ...
+REGLAS:
+- Cada bullet: MÁXIMO 1 línea (80 caracteres)
+- Usar guion corto (–) para separar característica de beneficio
+- SIN líneas vacías entre bullets
+- Texto conciso y directo
 
-4️⃣ UNA LÍNEA EN BLANCO
+6. LÍNEA EN BLANCO
 
-5️⃣ Cierre persuasivo (1 frase corta, máx 12 palabras)
-   Relacionado con compra segura, envío o garantía.
-   ✅ Compra segura y envío rápido garantizado
-   ❌ NO usar: "No esperes más", "Cómpralo ya"
+7. PÁRRAFO FINAL (2-3 líneas)
+- Mensaje persuasivo breve
+- Resumir beneficios principales
+- Evitar: "No esperes más", "Cómpralo ya"
 
-6️⃣ DOS LÍNEAS EN BLANCO (saltos dobles \n\n)
+8. DOS LÍNEAS EN BLANCO
 
-7️⃣ Especificaciones técnicas
-   ESPECIFICACIONES TÉCNICAS
+9. ESPECIFICACIONES TÉCNICAS
+Formato EXACTO:
+══════════════════════════════════════════════════
+ESPECIFICACIONES TÉCNICAS
+══════════════════════════════════════════════════
+• Modelo: valor
+• Atributo: valor
+• Atributo: valor
 
-   • Material: ...
-   • Dimensiones: ...
-   • Peso: ...
-   • Incluye: ...
+REGLAS:
+- Separador: 50 caracteres de ═
+- SIN líneas vacías entre specs
+- Formato: "• Nombre: Valor"
+- Valores concisos (sin texto innecesario)
+- Incluir: modelo, dimensiones, peso, material, color, conectividad, etc.
+- Excluir: ASIN, SKU, GTIN, UPC, price, seller info
 
-⚠️ REGLAS CRÍTICAS:
-- Intro: PÁRRAFO de 4-6 frases (~50-80 palabras total)
-- Bullets: concisos, máx 12 palabras cada uno
-- Cierre: 1 frase corta (máx 12 palabras)
-- NO mencionar garantías ni voltajes en specs
-- Unificar unidades: solo cm o solo pulgadas
-- Solo texto plano: bullets • y saltos de línea simples \n
-- Espaciado: una línea entre secciones, dos líneas antes de ESPECIFICACIONES TÉCNICAS
+# REGLAS CRÍTICAS DE FORMATO
+- SIN emojis (ni 📦, ni 🔎, ni 🌎, ni ninguno)
+- SIN líneas vacías entre bullets
+- SIN líneas vacías entre specs
+- Separadores: solo ═ (50 caracteres)
+- Bullets: solo • (punto medio)
+- Guiones: – (guion largo) para separar conceptos
+- NO incluir el bloque de "INFORMACIÓN IMPORTANTE" (se agregará automáticamente)
 
 ⛔ NO INCLUIR:
-Amazon, ASIN, códigos, precios, enlaces, HTML, markdown, "increíble", "perfecto", "descubre", "transforma"
+Amazon, ASIN, códigos, precios, enlaces, HTML, markdown, emojis,
+frases genéricas ("increíble", "perfecto", "descubre")
 
 Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
 
@@ -733,34 +758,101 @@ Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
             model=OPENAI_MODEL,
             temperature=0.3,
             messages=[
-                {"role": "system", "content": "Eres un experto copywriter de e-commerce. Devuelve SOLO texto plano formateado con saltos de línea y bullets •. SIN HTML, SIN markdown, SIN explicaciones."},
+                {"role": "system", "content": "Eres un experto copywriter de e-commerce. Devuelve SOLO texto plano formateado con saltos de línea simples y bullets •. SIN HTML, SIN markdown, SIN símbolos decorativos, SIN explicaciones."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=1500,
         )
         texto = (r.choices[0].message.content or "").strip()
 
-        # Eliminar marcadores que pueda haber agregado la IA
-        texto = texto.replace("```", "").strip()
-
-        # Eliminar el bloque de información internacional si la IA ya lo agregó
+        # ============================================================
+        # POST-PROCESAMIENTO ROBUSTO (soluciona todos los problemas)
+        # ============================================================
         import re
-        # Buscar y eliminar cualquier versión del footer que agregue la IA
+
+        # 1. Eliminar marcadores de código que pueda haber agregado la IA
+        texto = texto.replace("```", "").replace("```text", "").replace("```plain", "")
+
+        # 2. Eliminar cualquier versión del footer que la IA haya agregado (con o sin separadores)
         texto = re.sub(
-            r'[═─]{10,}.*?INFORMACIÓN IMPORTANTE.*?ONEWORLD.*?🌎',
+            r'[═─]{5,}.*?INFORMACIÓN IMPORTANTE.*?ONEWORLD.*?🌎',
+            '',
+            texto,
+            flags=re.DOTALL | re.IGNORECASE
+        )
+        texto = re.sub(
+            r'INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES.*?ONEWORLD.*?🌎',
             '',
             texto,
             flags=re.DOTALL | re.IGNORECASE
         )
 
-        # Agregar bloque final de información internacional en texto plano (SIEMPRE, solo una vez)
+        # 3. Eliminar separadores decorativos que la IA pueda haber agregado (excepto los correctos)
+        # Mantener solo separadores de exactamente 50 caracteres ═
+        texto = re.sub(r'[═─]{51,}', '══════════════════════════════════════════════════', texto)
+        texto = re.sub(r'[═─]{5,49}', '', texto)
+
+        # 4. Eliminar TODOS los emojis (MercadoLibre los rechaza)
+        # Rango Unicode de emojis comunes
+        emoji_pattern = re.compile(
+            "["
+            "\U0001F600-\U0001F64F"  # emoticons
+            "\U0001F300-\U0001F5FF"  # símbolos y pictogramas
+            "\U0001F680-\U0001F6FF"  # transporte y símbolos de mapa
+            "\U0001F1E0-\U0001F1FF"  # banderas
+            "\U00002702-\U000027B0"
+            "\U000024C2-\U0001F251"
+            "]+", flags=re.UNICODE)
+        texto = emoji_pattern.sub('', texto)
+
+        # 5. Eliminar espacios al final de cada línea (problema principal)
+        texto = re.sub(r'[ \t]+$', '', texto, flags=re.MULTILINE)
+
+        # 6. Eliminar líneas que solo tienen espacios en blanco
+        texto = re.sub(r'^\s+$', '', texto, flags=re.MULTILINE)
+
+        # 7. Normalizar saltos múltiples: máximo 2 saltos consecutivos (\n\n = 1 línea vacía)
+        texto = re.sub(r'\n{3,}', '\n\n', texto)
+
+        # 8. Limpiar inicio y final
+        texto = texto.strip()
+
+        # 9. Forzar formato correcto de ESPECIFICACIONES TÉCNICAS
+        # Buscar "ESPECIFICACIONES TÉCNICAS" y asegurar que tenga separadores antes y después
+        separador = '══════════════════════════════════════════════════'
+        if 'ESPECIFICACIONES TÉCNICAS' in texto or 'ESPECIFICACIONES TECNICAS' in texto:
+            # Reemplazar cualquier variante sin separadores
+            texto = re.sub(
+                r'(\n\n)(ESPECIFICACIONES TÉ?CNICAS)(\n)',
+                f'\n\n{separador}\n\\2\n{separador}',
+                texto,
+                flags=re.IGNORECASE
+            )
+            # Si ya tiene un separador, no duplicar
+            texto = re.sub(
+                f'{separador}\n{separador}\nESPECIFICACIONES',
+                f'{separador}\nESPECIFICACIONES',
+                texto,
+                flags=re.IGNORECASE
+            )
+            # Eliminar línea vacía después del separador inferior de specs
+            texto = re.sub(
+                f'{separador}\n\n•',
+                f'{separador}\n•',
+                texto
+            )
+
+        # ============================================================
+        # AGREGAR FOOTER FIJO (idéntico para todos los productos)
+        # ============================================================
         footer_text = """
 
+══════════════════════════════════════════════════
 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
-
+══════════════════════════════════════════════════
 • Producto nuevo y original
 • Envío desde EE.UU. con seguimiento
-• Impuestos y aduana incluidos en el precio
+• Mercado Libre gestiona los impuestos y la aduana; el precio mostrado ya los incluye
 • Compra protegida por Mercado Libre
 • Garantía del vendedor: 30 días
 • Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
@@ -768,21 +860,22 @@ INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 • Medidas y peso pueden estar en sistema imperial
 • Atención al cliente en español e inglés
 
-Somos ONEWORLD 🌎"""
+Somos ONEWORLD"""
 
         texto += footer_text
         return texto
 
     except Exception as e:
         print(f"⚠️ Error generando descripción con IA: {e}")
-        # Fallback básico con footer en texto plano
+        # Fallback básico con footer limpio
         return """Producto de alta calidad.
 
+══════════════════════════════════════════════════
 INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
-
+══════════════════════════════════════════════════
 • Producto nuevo y original
 • Envío desde EE.UU. con seguimiento
-• Impuestos y aduana incluidos en el precio
+• Mercado Libre gestiona los impuestos y la aduana; el precio mostrado ya los incluye
 • Compra protegida por Mercado Libre
 • Garantía del vendedor: 30 días
 • Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
@@ -790,7 +883,7 @@ INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 • Medidas y peso pueden estar en sistema imperial
 • Atención al cliente en español e inglés
 
-Somos ONEWORLD 🌎"""
+Somos ONEWORLD"""
 
 def ai_characteristics(amazon_json)->Tuple[List[dict], List[dict]]:
     """Extrae main/second characteristics con IA (robusto, JSON-only)."""
