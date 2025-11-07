@@ -702,13 +702,13 @@ Ejemplo: "GOZVRPUS TW-05 – Comunicación nítida y profesional"
 
 5. BLOQUE DE CARACTERÍSTICAS (6-8 bullets COMPACTOS)
 Formato EXACTO (SIN líneas vacías entre bullets):
-• Característica 1 – Beneficio corto en una línea
-• Característica 2 – Beneficio corto en una línea
-• Característica 3 – Beneficio corto en una línea
+• Característica 1: Beneficio corto en una línea
+• Característica 2: Beneficio corto en una línea
+• Característica 3: Beneficio corto en una línea
 
 REGLAS:
 - Cada bullet: MÁXIMO 1 línea (80 caracteres)
-- Usar guion corto (–) para separar característica de beneficio
+- Usar dos puntos (:) para separar característica de beneficio
 - SIN líneas vacías entre bullets
 - Texto conciso y directo
 
@@ -744,7 +744,7 @@ REGLAS:
 - SIN líneas vacías entre specs
 - Separadores: solo ═ (50 caracteres)
 - Bullets: solo • (punto medio)
-- Guiones: – (guion largo) para separar conceptos
+- Dos puntos (:) para separar característica de beneficio en bullets
 - NO incluir el bloque de "INFORMACIÓN IMPORTANTE" (se agregará automáticamente)
 
 ⛔ NO INCLUIR:
