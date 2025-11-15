@@ -1,0 +1,167 @@
+# 🔍 Búsqueda de ASINs por Keyword
+
+Alternativa **GRATIS** a Helium 10 usando Amazon SP-API directamente.
+
+---
+
+## 🎯 ¿Para qué sirve?
+
+Te permite buscar productos en Amazon por palabra clave (keyword) y obtener una lista de ASINs, similar a lo que hace Helium 10 pero usando tu propia API de Amazon.
+
+**Ejemplo:**
+- Keyword: `"lego"`
+- Output: Lista de 500+ ASINs de productos de Lego en Amazon
+
+---
+
+## 🚀 Uso Rápido
+
+### Modo CLI (recomendado para automatización)
+
+```bash
+# Buscar 100 ASINs de "lego" (default)
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "lego"
+
+# Buscar 500 ASINs de "wireless keyboard"
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "wireless keyboard" 500
+
+# Guardar en archivo personalizado
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "gaming mouse" 200 "asins_gaming.txt"
+
+# Agregar al final de un archivo existente (en vez de reemplazar)
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "backpack" 300 --append
+```
+
+### Modo Interactivo
+
+```bash
+# Sin argumentos = modo interactivo con menú
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py
+```
+
+Te va a preguntar:
+1. Keyword a buscar
+2. Cantidad de ASINs deseados
+3. Si querés guardar y dónde
+
+---
+
+## 📊 Límites y Performance
+
+**Amazon SP-API Rate Limits:**
+- Máximo: 5 requests/segundo
+- Cada request devuelve: ~10 ASINs
+- Script usa: 1.67 requests/segundo (conservador)
+
+**Tiempos aproximados:**
+- 50 ASINs: ~3 segundos
+- 100 ASINs: ~6 segundos
+- 500 ASINs: ~30 segundos
+- 1000 ASINs: ~60 segundos
+
+**¿Es peligroso hacer muchos requests?**
+
+NO. El script tiene rate limiting incorporado y está **muy por debajo** del límite de Amazon. Podés buscar tranquilamente 500-1000 ASINs sin problemas.
+
+---
+
+## 📝 Ejemplos de Keywords
+
+```bash
+# Categorías amplias
+"lego"
+"kitchen tools"
+"office supplies"
+"pet toys"
+
+# Productos específicos
+"wireless keyboard"
+"mechanical pencils"
+"yoga mat"
+"camping tent"
+
+# Marcas
+"nike shoes"
+"sony headphones"
+"apple accessories"
+```
+
+---
+
+## 🔧 Opciones Avanzadas
+
+### Modificar velocidad de búsqueda
+
+Si querés ser más agresivo (más rápido pero más cercano al límite):
+
+Editar `scripts/tools/search_asins_by_keyword.py`, línea 107:
+```python
+time.sleep(0.6)  # Cambiar a 0.3 para duplicar velocidad
+```
+
+**Recomendación:** dejarlo en 0.6 (actual) es seguro y suficientemente rápido.
+
+---
+
+## 🎬 Flujo Completo: Keyword → Pipeline
+
+```bash
+# 1. Buscar ASINs de productos de camping
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "camping gear" 500
+
+# 2. Revisar los ASINs encontrados
+head -20 asins.txt
+
+# 3. Ejecutar el pipeline normal
+./venv/bin/python3 src/integrations/mainglobal.py
+
+# ¡Listo! Los 500 productos se descargan, procesan y publican automáticamente
+```
+
+---
+
+## ❓ FAQ
+
+**¿Cuántos ASINs puedo obtener en total?**
+
+Amazon suele devolver hasta ~1000 resultados por keyword. Si hay menos productos para esa keyword, simplemente devuelve menos.
+
+**¿Los ASINs están ordenados como en Amazon?**
+
+Sí, los ASINs vienen en el mismo orden que Amazon los rankea (generalmente por relevancia/popularidad).
+
+**¿Puedo buscar en otros marketplaces (México, Brasil)?**
+
+Sí, pero necesitarías modificar `MARKETPLACE_ID` en el script:
+- US: `ATVPDKIKX0DER`
+- México: `A1AM78C64UM0Y8`
+- Brasil: `A2Q3Y263D00KWC`
+
+**¿Qué pasa si me paso del rate limit?**
+
+El script detecta error 429 y espera automáticamente antes de reintentar.
+
+---
+
+## 🆚 vs Helium 10
+
+| Feature | Helium 10 | Este Script |
+|---------|-----------|-------------|
+| Costo | $97-299/mes | Gratis |
+| ASINs por búsqueda | Ilimitado | ~1000 |
+| Velocidad | Instantáneo | 30-60 seg para 500 ASINs |
+| Datos | Cache (minutos de retraso) | Directo de Amazon (real-time) |
+| Filtros avanzados | Sí (precio, BSR, etc) | No (solo keyword) |
+
+**Conclusión:** Para búsquedas simples por keyword, este script es más que suficiente y no necesitás pagar Helium 10.
+
+---
+
+## 📚 Recursos
+
+- Script: `scripts/tools/search_asins_by_keyword.py`
+- Amazon SP-API Docs: [Catalog Items API](https://developer-docs.amazon.com/sp-api/docs/catalog-items-api-v2022-04-01-reference)
+
+---
+
+🤖 Sistema creado para automatizar búsqueda de ASINs sin costos externos

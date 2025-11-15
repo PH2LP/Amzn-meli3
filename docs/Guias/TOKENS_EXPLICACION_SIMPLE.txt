@@ -1,0 +1,205 @@
+# 🔑 Tokens Automáticos - Explicación Simple
+
+## ¿Qué se instaló?
+
+Un sistema que **renueva automáticamente** los tokens de Amazon y MercadoLibre para que nunca expiren.
+
+---
+
+## 🟠 Amazon (Ya Funciona)
+
+**¿Qué hace?**
+- Genera un token cuando lo necesitas
+- Lo guarda por 55 minutos
+- Si lo vuelves a necesitar antes de 55 minutos, reutiliza el mismo
+
+**¿Tengo que hacer algo?**
+- **NO**. Ya está integrado en `amazon_api.py`
+- Tus scripts funcionan igual que antes, pero ahora no fallan por token expirado
+
+**¿Cómo lo veo funcionando?**
+Cuando uses cualquier script que llame a Amazon verás:
+
+Primera vez:
+```
+🔐 Generando nuevo access token de Amazon...
+✅ Token generado y cacheado (válido por 55 min)
+```
+
+Siguiente vez (antes de 55 min):
+```
+♻️ Usando token cacheado de Amazon (válido por 42 min más)
+```
+
+---
+
+## 🔵 MercadoLibre (Instalado Ahora)
+
+**¿Qué hace?**
+- Renueva el token **cada 5.5 horas** automáticamente
+- Corre en background (no lo ves, pero está ahí)
+- Actualiza el archivo `.env` con el nuevo token
+- Se inicia automáticamente cuando prendes la Mac
+
+**¿Tengo que hacer algo?**
+- **NO**. Ya quedó instalado como servicio
+- Cada vez que prendas la Mac, se inicia automáticamente
+- No necesitas ejecutar nada manualmente
+
+**¿Cómo sé que está funcionando?**
+
+Ver si está corriendo:
+```bash
+launchctl list | grep ml_token
+```
+
+Debería mostrar algo como:
+```
+-    126    com.revancha.ml_token_refresh
+```
+
+Ver el log en tiempo real:
+```bash
+tail -f logs/ml_token_refresh.log
+```
+
+Verás algo como:
+```
+[2025-11-08 14:26:08] ✅ Token renovado exitosamente
+[2025-11-08 14:26:08]    Próxima renovación en 5.5 horas
+[2025-11-08 14:26:08] ⏳ Esperando 5.5 horas hasta próxima renovación... (iteración #1)
+```
+
+---
+
+## 📅 Frecuencia de Renovación
+
+| Plataforma | Token dura | Se renueva | Método |
+|------------|------------|------------|--------|
+| Amazon | 1 hora | A los 55 min (automático cuando se usa) | Caché inteligente |
+| MercadoLibre | 6 horas | Cada 5.5 horas (siempre activo) | Loop en background |
+
+---
+
+## ❓ Preguntas Frecuentes
+
+### ¿Y si reinicio la Mac?
+
+**MercadoLibre**: Se inicia automáticamente al prender la Mac
+**Amazon**: Genera el token cuando lo necesites (no necesita estar corriendo)
+
+### ¿Cómo veo si el token de ML está actualizado?
+
+```bash
+grep "ML_ACCESS_TOKEN=" .env
+```
+
+Verás el token actual. Si ves que tiene fecha/hora reciente en el log, está actualizado.
+
+### ¿Y si falla la renovación?
+
+El servicio:
+1. Lo reintenta automáticamente
+2. Escribe el error en el log
+3. Sigue intentando cada 5.5 horas
+
+Puedes ver errores en:
+```bash
+tail -f logs/ml_token_refresh_stderr.log
+```
+
+### ¿Cómo detengo el servicio de ML?
+
+```bash
+launchctl unload ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+```
+
+Para iniciarlo de nuevo:
+```bash
+launchctl load ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+```
+
+### ¿Dónde están los archivos del sistema?
+
+```
+src/integrations/
+└── amazon_api.py                          ← Caché de Amazon integrado aquí
+
+scripts/auth/
+├── ml_token_loop.py                       ← Loop principal de ML
+├── ml_token_loop.sh                       ← Script de inicio
+└── install_ml_token_service.sh            ← Instalador
+
+~/Library/LaunchAgents/
+└── com.revancha.ml_token_refresh.plist    ← Servicio instalado (macOS)
+
+logs/
+├── ml_token_refresh.log                   ← Log principal de ML
+├── ml_token_refresh_stdout.log            ← Output estándar
+└── ml_token_refresh_stderr.log            ← Errores
+
+cache/
+└── amazon_token.json                      ← Token de Amazon cacheado
+```
+
+---
+
+## ✅ Resumen
+
+### Antes
+- Tokens expiraban cada hora (Amazon) y cada 6 horas (ML)
+- Tenías que renovarlos manualmente
+- Scripts fallaban cuando expiraban
+
+### Ahora
+- **Amazon**: Se renueva solo cuando lo usas (caché de 55 min)
+- **MercadoLibre**: Se renueva automáticamente cada 5.5 horas en background
+- **No necesitas hacer nada**
+- Los scripts nunca fallan por tokens expirados
+
+---
+
+## 🆘 Si Algo No Funciona
+
+1. **Verificar que el servicio de ML está corriendo**:
+   ```bash
+   launchctl list | grep ml_token
+   ```
+
+2. **Ver el log de ML**:
+   ```bash
+   tail -50 logs/ml_token_refresh.log
+   ```
+
+3. **Ver errores**:
+   ```bash
+   tail -50 logs/ml_token_refresh_stderr.log
+   ```
+
+4. **Reinstalar el servicio**:
+   ```bash
+   ./scripts/auth/install_ml_token_service.sh
+   ```
+
+5. **Ver caché de Amazon**:
+   ```bash
+   cat cache/amazon_token.json
+   ```
+
+---
+
+## 📚 Documentación Completa
+
+Para más detalles técnicos:
+```bash
+cat docs/TOKEN_AUTO_REFRESH_README.md
+```
+
+Para ver un resumen de la implementación:
+```bash
+cat SISTEMA_AUTO_REFRESH_IMPLEMENTADO.md
+```
+
+---
+
+**🎉 ¡Listo! Ya no tienes que preocuparte por los tokens nunca más.**

@@ -1,0 +1,84 @@
+# Configurar Google Drive para Backups Automáticos
+
+## Paso 1: Conectarte al VPS
+
+```bash
+ssh root@138.197.32.67
+# Contraseña: koqven-1regka-nyfXiw
+```
+
+## Paso 2: Iniciar configuración de rclone
+
+```bash
+rclone config
+```
+
+## Paso 3: Seguir estos pasos interactivos
+
+```
+n) New remote
+name> gdrive
+Storage> 18  (Google Drive)
+client_id> [ENTER - dejar vacío]
+client_secret> [ENTER - dejar vacío]
+scope> 1  (Full access)
+service_account_file> [ENTER - dejar vacío]
+Edit advanced config? n
+Use web browser to automatically authenticate? n
+
+# Te va a dar un LINK - COPIÁ ESE LINK
+```
+
+## Paso 4: Abrir el link en tu navegador
+
+1. Copiá el link que te dio rclone
+2. Abrilo en tu navegador (Chrome/Safari)
+3. Iniciá sesión con tu cuenta de Google
+4. Hacé click en "Allow"
+5. Te va a dar un CÓDIGO
+
+## Paso 5: Pegar el código
+
+1. Copiá TODO el código que te dio Google (empieza con `4/0A...`)
+2. Pegalo en la terminal del VPS donde dice "Enter verification code>"
+3. Presioná ENTER
+
+## Paso 6: Finalizar configuración
+
+```
+Configure this as a Shared Drive (Team Drive)? n
+Keep this "gdrive" remote? y
+Quit config? y
+```
+
+## Paso 7: Probar que funcione
+
+```bash
+# Crear un archivo de prueba
+echo "Backup test" > /tmp/test_backup.txt
+
+# Subirlo a Google Drive
+rclone copy /tmp/test_backup.txt gdrive:AMZ-ML-Backups/
+
+# Verificar que se subió
+rclone ls gdrive:AMZ-ML-Backups/
+```
+
+Si ves el archivo listado, ¡funciona!
+
+## Paso 8: Activar backups automáticos
+
+Los backups ya están configurados para subir automáticamente a Google Drive cada 6 horas. No necesitás hacer nada más.
+
+## Verificar backups
+
+Podés ver tus backups en:
+- Google Drive → Carpeta "AMZ-ML-Backups"
+- O desde terminal: `rclone ls gdrive:AMZ-ML-Backups/`
+
+## Solución de problemas
+
+Si algo falla:
+1. Verificá que iniciaste sesión con la cuenta correcta de Google
+2. Asegurate de hacer click en "Allow" cuando Google pide permisos
+3. Si el código no funciona, empezá de nuevo con `rclone config`

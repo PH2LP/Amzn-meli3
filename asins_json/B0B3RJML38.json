@@ -1,0 +1,641 @@
+{
+  "asin": "B0B3RJML38",
+  "attributes": {
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Usb",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "registration_status": "not_capable_emitting_rf_energy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 2.17,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "T102",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "RGB Rainbow Backlit Keyboard: The keyboard mouse combo is through rainbow backlit keyboard and RGB breathable backlit mouse, you can customize the keyboard backlight/brightness/speed. The glitter keyboard offers 3 illumination modes and 3 brightness levels to choose from. FN+PgUp/PgDn: Backlight brightness and speed adjustment; Fn+1: Adjust the backlight mode (Constant Light/Breathing/Heartbeat), can be turned off if not needed",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Metal Panel Keyboard & Ergonomic Design: This computer keyboard and mouse combo boasts an aluminum alloy brushed panel, ensuring durability and ruggedness. Engineered with ergonomic precision, the gaming keyboard and mouse offer a comfortable 7° angle, preventing hand fatigue. With a 2.0mm keystroke, they deliver lightning-fast trigger response and rebound speed, providing an unparalleled typing experience",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Phone Holder & Floating Keycaps: Featuring a practical phone and pen bracket, this membrane gaming keyboard ensures you have a convenient spot for your phone or pen during gaming or work. With keycap puller, you can effortlessly replace floating keycaps for easy cleaning. Plug and play, no setup, without the need for extra software or firmware",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Multimedia Keys & Anti-Ghosting: Featuring 12 multimedia combination keys at the top of the keyboard and a mouse with 4 adjustable DPI settings (1200-2400-4800-7200), this backlit wired keyboard and mouse set ensures seamless operation with 26 keys simultaneously. Experience lightning-fast response times during gaming and work tasks. In addition, with a lock/unlock WIN key to avoid accidental touches during gameplay, your gaming experience will be smoother than ever",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Wide Compatibility: AULA USB mouse and keyboard combo set is designed to work with a wide array of devices. It automatically enters sleep mode after 5 minutes of inactivity, and any key press will wake it up. Compatible with Windows 2000/2003/XP/Win 7/8/10 for gaming, it also supports PC, laptop.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 7.48
+        },
+        "length": {
+          "unit": "inches",
+          "value": 17.5
+        },
+        "height": {
+          "unit": "inches",
+          "value": 1.38
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Overall: Immerse yourself in the ultimate gaming experience with our RGB Gaming Keyboard and Mouse Combo. Personalize your setup with dynamic RGB customization, choosing from various illumination modes and brightness levels. The ergonomic design ensures silent and comfortable typing, ideal for late-night gaming or work without disturbing others. Features: 1. Mouse and Keyboard Combo Dynamic RGB Customization: Choose from 2 illumination modes and 3 brightness levels; 2. Silent & Comfortable Typing: 2.0mm keystroke ensures swift triggers and rebounds; Noise-free typing for late-night gaming or work; 3. Multimedia Excellence: 12 multimedia keys (FN+F1-F12) enhance gaming and productivity; 4. Anti-Ghosting: 26 keys operate simultaneously without conflict; 5. High Pricision Mouse: 4-adjustable DPI mouse (1200-2400-4800-7200) for precision. 6. Versatile Compatibility: Compatible with Windows 2000/2003/XP/Vista/Win7/Win8/Win10; Suitable for PC, laptop, Google TV, Smart TV, PS4, Xbox One.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "AULA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43210000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "control_method": [
+      {
+        "value": "touch",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "video-game-keyboards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.207
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 27.7876
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 45.593
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Personal",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Everyday Use",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Multimedia",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Business",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Education",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Photo Editing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Student",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Video Editing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Working",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Game Console",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "Full Size 104 Keys",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Year Manufacturer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "T102",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Modern",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black Keycaps + Silver Panel",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.161,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "AULA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "6948391222349",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "AU-KM001-T102",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_layout": [
+      {
+        "value": "qwerty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Backlit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Wrist Rest",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Ergonomic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Lightweight",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Water Resistant",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_backlighting_color_support": [
+      {
+        "value": "rgb",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "AULA Keyboard, T102 104 Keys Gaming Keyboard and Mouse Combo with RGB Backlit Number Pad, All-Metal Panel Waterproof Light Up PC Keyboard,USB Wired Computer Keyboards Gaming for Win XP/7/8/10 PC Gamer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Membrane",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 38.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Corded Electric",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2022-06-10T07:57:08.612Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "Windows 2000 / 2003 / XP / Win7 / Win8 / Win10. Support for PC, Laptop",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "movement_detection_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Optical",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Metal",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "ABS",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hand_orientation": [
+      {
+        "value": "Ambidextrous",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/71cd3Qs3fEL.jpg",
+          "height": 1000,
+          "width": 1500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41Gc+zGG+UL.jpg",
+          "height": 333,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41Gc+zGG+UL._SL75_.jpg",
+          "height": 50,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81khaqaTVaL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51qEoJy5wRL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51qEoJy5wRL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71Ik6rhU8+L.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51Ad2gpSzZL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51Ad2gpSzZL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71mZ97VpkPL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51HB1FUh-AL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51HB1FUh-AL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71No3wXU8YL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/518HLmjLveL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/518HLmjLveL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/81J8qMiOUtL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51mZ8R51J9L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51mZ8R51J9L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71mRc5UqhHL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51rZlhuOseL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51rZlhuOseL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/81l3DRNi3mL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51pbTJNW4CL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51pbTJNW4CL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/71jgD6vanDL.jpg",
+          "height": 1426,
+          "width": 1500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51gRd2hDOYL.jpg",
+          "height": 475,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51gRd2hDOYL._SL75_.jpg",
+          "height": 71,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "KEYBOARD_MOUSE_SET"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0CKRG7YQ2"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "402051011",
+          "title": "PC Gaming Keyboards",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/402051011",
+          "rank": 9
+        },
+        {
+          "classificationId": "6427815011",
+          "title": "PlayStation 4 Accessories",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/6427815011",
+          "rank": 22
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "video_games_display_on_website",
+          "title": "Video Games",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames",
+          "rank": 227
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "AULA",
+      "browseClassification": {
+        "displayName": "Gaming Keyboards",
+        "classificationId": "402051011"
+      },
+      "color": "Black Keycaps + Silver Panel",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "AULA Keyboard, T102 104 Keys Gaming Keyboard and Mouse Combo with RGB Backlit Number Pad, All-Metal Panel Waterproof Light Up PC Keyboard,USB Wired Computer Keyboards Gaming for Win XP/7/8/10 PC Gamer",
+      "manufacturer": "AULA",
+      "memorabilia": false,
+      "modelNumber": "AU-KM001-T102",
+      "packageQuantity": 1,
+      "partNumber": "T102",
+      "size": "Full Size 104 Keys",
+      "style": "Modern",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "ce_display_on_website",
+      "websiteDisplayGroupName": "CE"
+    }
+  ]
+}

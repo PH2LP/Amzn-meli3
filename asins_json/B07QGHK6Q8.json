@@ -1,0 +1,616 @@
+{
+  "asin": "B07QGHK6Q8",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "grams",
+        "value": 1000.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Brilliant color spectrum illumination - personalize five individual lighting Zones from a spectrum of over 16. 8 million colors. Change colors to match your setup, specific games, or to showcase your favorite colors. Synchronize lighting effects with other Logitech G devices using Logitech gaming software. Low light leak around each keycap means less more light comes through the lettering – and less leaks around the keycaps. This helps make the illumination of each key more brilliant, making it easier to find your keys in the dark.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Comfortable and durable - G213 Prodigy is a full-sized keyboard designed for gaming and productivity. The slim body is built for gamers of all levels, with a durable construction that repels liquids, crumbs and dirt for easy cleanup. An integrated Palm rest And adjustable feet Let you set your keyboard to the ideal position, so it's comfortable to use even during the longest gaming sessions.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Performance tuned with multi-key input - G213 brings together the best in tactile feel and performance with Keys built specifically for the way gamers play. Each key on the G213 is tuned to enhance the tactile experience, delivering ultra-quick, responsive feedback that is up to 4 times faster than standard keyboards. The anti-ghosting gaming Matrix is tuned for optimal gaming performance, keeping you in control when you press multiple gaming keys simultaneously.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Dedicated media controls - Control your background track without switching out of your game. G213 features dedicated media controls that can be used to play, pause and mute music and videos instantly. Adjust the volume, or skip to the next song with the touch of a button.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Customize with Logitech gaming software - Logitech gaming software lets you fully customize your G213 for added convenience and personalization. Set the RGB lighting, save time by assigning multiple functions to function (f1-f12) keys, and much more.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "millimeters",
+          "value": 452.0
+        },
+        "length": {
+          "unit": "millimeters",
+          "value": 218.0
+        },
+        "height": {
+          "unit": "millimeters",
+          "value": 33.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Logitech G",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43211706",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hardware_platform": [
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "total_usb_2_0_ports": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "097855151391",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0097855151391",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00097855151391",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 4.3561
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 25.75
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 48.26
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "920-009284",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Keyboard only",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_lithium_ion_cells": [
+      {
+        "value": 2,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "button_quantity": [
+      {
+        "value": 19,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pattern": [
+      {
+        "language_tag": "en_US",
+        "value": "Keyboard",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "battery": [
+      {
+        "cell_composition": [
+          {
+            "value": "lithium_ion"
+          }
+        ],
+        "weight": [
+          {
+            "unit": "grams",
+            "value": 0.28
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Logitech",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lithium_battery": [
+      {
+        "energy_content": [
+          {
+            "unit": "watt_hours",
+            "value": 4.5
+          }
+        ],
+        "weight": [
+          {
+            "unit": "grams",
+            "value": 0.84
+          }
+        ],
+        "packaging": [
+          {
+            "value": "batteries_contained_in_equipment"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "920-009284",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_layout": [
+      {
+        "value": "qwerty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "num_batteries": [
+      {
+        "quantity": 1,
+        "type": "lithium_ion",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Logitech G213 Prodigy Wired Gaming Keyboard, LIGHTSYNC RGB Backlit Keys, Spill-Resistant, Customizable Keys, Dedicated Multi-Media Keys – Black",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 59.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2020-03-02T08:00:01.000Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Wired",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "USB",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "USB Cable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "language": [
+      {
+        "type": "original",
+        "value": "english",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "switch_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Tactile",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "G213",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "video-game-keyboards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "2 Year Limited Hardware Warranty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.438,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width_height": [
+      {
+        "length": {
+          "unit": "inches",
+          "value": 8.58
+        },
+        "width": {
+          "unit": "inches",
+          "value": 17.8
+        },
+        "height": {
+          "unit": "inches",
+          "value": 1.3
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Lighting",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_backlighting_color_support": [
+      {
+        "value": "single_color",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Corded Electric",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2020-03-02T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "mechanical_keyboard_switch_model": [
+      {
+        "value": "logitech_romer_g_tactile",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hand_orientation": [
+      {
+        "language_tag": "en_US",
+        "value": "Ambidextrous",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/71y+Sl+qWwL.jpg",
+          "height": 2560,
+          "width": 2560
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41RE58GkOXL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41RE58GkOXL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71jYEvCzciL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51LtY8jImkL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51LtY8jImkL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/61QnnYMOcoL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/411LZcX3CCL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/411LZcX3CCL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/61NIjLGSF1L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41R23r0RaUL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41R23r0RaUL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/61JnwG+5d5L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41lePKaJabL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41lePKaJabL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/61dAFDD05RL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41igFOn6+EL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41igFOn6+EL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/614aoFbb-qL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41XQUaK42DL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41XQUaK42DL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "KEYBOARDS"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0C6KR97PD"
+          ],
+          "type": "VARIATION"
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "402051011",
+          "title": "PC Gaming Keyboards",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/402051011",
+          "rank": 11
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "video_games_display_on_website",
+          "title": "Video Games",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames",
+          "rank": 234
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Logitech G",
+      "browseClassification": {
+        "displayName": "Gaming Keyboards",
+        "classificationId": "402051011"
+      },
+      "color": "Black",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Logitech G213 Prodigy Wired Gaming Keyboard, LIGHTSYNC RGB Backlit Keys, Spill-Resistant, Customizable Keys, Dedicated Multi-Media Keys – Black",
+      "manufacturer": "Logitech",
+      "memorabilia": false,
+      "modelNumber": "920-009284",
+      "packageQuantity": 1,
+      "partNumber": "920-009284",
+      "releaseDate": "2020-03-02",
+      "style": "Keyboard only",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "pc_display_on_website",
+      "websiteDisplayGroupName": "Personal Computer"
+    }
+  ]
+}

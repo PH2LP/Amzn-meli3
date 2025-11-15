@@ -1,0 +1,612 @@
+{
+  "asin": "B00CXQ9GQ8",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.25,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "NSF",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Designed to optimize the water quality",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Improves machine performance and efficiency by preventing lime scale build up",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Cleaner water for better tasting coffee",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Quick and easy to install",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Timer lets you know when the unit is on",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 1.7
+        },
+        "length": {
+          "unit": "inches",
+          "value": 2.4
+        },
+        "height": {
+          "unit": "inches",
+          "value": 6.5
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "De'Longhi",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52141500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.12,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 4.3942
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 6.2992
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 17.8308
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "Pack of 1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "DLSC002",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Cup Machines 5513292811",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_dimensions": [
+      {
+        "width": {
+          "unit": "millimeters",
+          "value": 61.0
+        },
+        "length": {
+          "unit": "millimeters",
+          "value": 44.0
+        },
+        "height": {
+          "unit": "millimeters",
+          "value": 165.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "capacity": [
+      {
+        "unit": "liters",
+        "value": 0.5,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "DeLonghi America, Inc.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "8004399327252",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "DLSC002",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gpsr_safety_attestation": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "california_proposition_65": [
+      {
+        "compliance_type": "on_product_combined_cancer_reproductive",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Improves machine performance and extends life, optimizing water quality for better tasting coffee reducing limescale improved",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "De'Longhi Replacement Water Filter for Select Espresso Machines, DLSC002",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 19.95,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2012-08-20T15:53:10.309Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "De'Longhi",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "runtime": [
+      {
+        "unit": "minutes",
+        "value": 0.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-refrigerator-dispenser-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ghs": [
+      {
+        "classification": [
+          {
+            "class": "flammable"
+          },
+          {
+            "class": "explosive"
+          },
+          {
+            "class": "health_hazard"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fc_shelf_life": [
+      {
+        "unit": "days",
+        "value": 1000.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.118,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "customer_package_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Standard packaging",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "wattage": [
+      {
+        "unit": "watts",
+        "value": 0.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_shape": [
+      {
+        "language_tag": "en_US",
+        "value": "Basket",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2013-07-13T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "voltage": [
+      {
+        "unit": "volts",
+        "value": 0.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "centimeters",
+          "value": 6.0
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 8.0
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 20.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "language_tag": "en_US",
+        "value": "Hand Wash",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61UMDuFxynL.jpg",
+          "height": 1500,
+          "width": 1498
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/417cXEU2z0L.jpg",
+          "height": 500,
+          "width": 499
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/417cXEU2z0L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/711kCxm5+KL.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41KGt7SXvJL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41KGt7SXvJL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/715Y7g25x7L.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/414w+FApQ-L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/414w+FApQ-L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81MJTdl9BVL.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51Fsjn+jXsL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51Fsjn+jXsL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/81-xupRZLPL.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51jVYuW0Y-L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51jVYuW0Y-L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/81rtNUIm04L.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51Eu8zID9aL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51Eu8zID9aL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/81t7m3dKpzL.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41IHWDcSnOL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41IHWDcSnOL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/71lfkzBbZQL.jpg",
+          "height": 2560,
+          "width": 2558
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/413+4Actw2L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/413+4Actw2L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0FD91SD8X"
+          ],
+          "type": "VARIATION"
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741161",
+          "title": "In-Refrigerator Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741161",
+          "rank": 57
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 2095
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "De'Longhi",
+      "browseClassification": {
+        "displayName": "Water Filters",
+        "classificationId": "3741161"
+      },
+      "color": "White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "De'Longhi Replacement Water Filter for Select Espresso Machines, DLSC002",
+      "manufacturer": "DeLonghi America, Inc.",
+      "memorabilia": false,
+      "modelNumber": "DLSC002",
+      "packageQuantity": 1,
+      "partNumber": "DLSC002",
+      "releaseDate": "2013-07-13",
+      "size": "Pack of 1",
+      "style": "Cup Machines 5513292811",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "kitchen_display_on_website",
+      "websiteDisplayGroupName": "Kitchen"
+    }
+  ]
+}

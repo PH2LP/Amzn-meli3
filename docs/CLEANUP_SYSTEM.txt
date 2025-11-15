@@ -1,0 +1,197 @@
+# 🧹 Sistema de Limpieza Automática de Archivos JSON
+
+## ❓ ¿Por qué es necesario?
+
+Cuando publicas productos, el sistema guarda:
+- `asins_json/{ASIN}.json` - Datos completos de Amazon (~50 KB)
+- `storage/logs/publish_ready/{ASIN}_mini_ml.json` - Versión optimizada (~10 KB)
+
+**Con 50,000 productos:**
+- 50,000 × 50 KB = **2.5 GB de espacio**
+- 50,000 × 10 KB = **500 MB más**
+- **TOTAL: 3 GB innecesarios**
+
+## ✅ Solución Implementada
+
+### 1. **Base de Datos como fuente principal**
+Todos los datos se guardan en `storage/listings_database.db`:
+- Columna `mini_ml_data` contiene el JSON completo
+- Auto-answer usa DB primero
+
+### 2. **Auto-Download bajo demanda**
+Si auto-answer necesita un JSON que no existe:
+1. Lo descarga temporalmente de Amazon SP-API
+2. Responde la pregunta
+3. **Elimina el JSON inmediatamente**
+
+### 3. **Limpieza automática programada**
+Script que elimina JSONs de productos ya en DB
+
+---
+
+## 📝 Uso Manual
+
+### Ver qué se eliminaría (sin eliminar nada):
+```bash
+python3 scripts/cleanup/clean_old_json_files.py --dry-run
+```
+
+### Ejecutar limpieza manualmente:
+```bash
+python3 scripts/cleanup/clean_old_json_files.py
+```
+
+### Forzar limpieza sin confirmación:
+```bash
+python3 scripts/cleanup/clean_old_json_files.py --force
+```
+
+---
+
+## 🔄 Limpieza Automática (cada 24h)
+
+### Iniciar el loop de limpieza:
+```bash
+./scripts/cleanup/auto_cleanup_loop.sh
+```
+
+O en background:
+```bash
+nohup ./scripts/cleanup/auto_cleanup_loop.sh > logs/cleanup.log 2>&1 &
+```
+
+### Detener el loop:
+```bash
+pkill -f auto_cleanup_loop.sh
+```
+
+---
+
+## 🗓️ Cron Job (alternativa)
+
+Para ejecutar la limpieza cada noche a las 2 AM:
+
+```bash
+# Editar crontab
+crontab -e
+
+# Agregar esta línea:
+0 2 * * * cd /ruta/al/proyecto && python3 scripts/cleanup/clean_old_json_files.py --force >> logs/cleanup_cron.log 2>&1
+```
+
+---
+
+## 📊 Qué hace el script
+
+### 1. **Consulta la base de datos**
+```sql
+SELECT asin FROM listings WHERE mini_ml_data IS NOT NULL
+```
+
+### 2. **Busca archivos JSON**
+- `storage/asins_json/*.json`
+- `storage/logs/publish_ready/*_mini_ml.json`
+
+### 3. **Elimina solo si está en DB**
+- Si ASIN existe en DB → Eliminar JSON
+- Si ASIN NO existe en DB → Mantener JSON
+
+### 4. **Muestra resumen**
+```
+Archivos eliminados: 2,847
+Espacio liberado: 142 MB
+```
+
+---
+
+## ⚠️ Seguridad
+
+### ¿Es seguro eliminar los JSONs?
+
+✅ **SÍ**, porque:
+
+1. **Datos en DB**: Todo está en `listings_database.db`
+2. **Auto-download**: Si auto-answer necesita un JSON:
+   - Lo descarga de Amazon
+   - Responde la pregunta
+   - Lo elimina
+
+3. **Nunca elimina**:
+   - ASINs que NO están en DB
+   - La base de datos
+   - Configuraciones
+
+### ¿Qué pasa si borro la DB por accidente?
+
+❌ **NUNCA elimines `storage/listings_database.db`**
+
+Es el único archivo crítico. Si lo borras:
+- Pierdes la relación ASIN ↔ item_id
+- Pierdes los datos de auto-answer
+- Pierdes los precios y configuraciones
+
+**Backup recomendado:**
+```bash
+# Backup diario de la DB
+cp storage/listings_database.db storage/listings_database.db.backup.$(date +%Y%m%d)
+```
+
+---
+
+## 📈 Monitoreo
+
+### Ver espacio usado actualmente:
+```bash
+du -sh storage/asins_json/
+du -sh storage/logs/publish_ready/
+du -sh storage/listings_database.db
+```
+
+### Contar archivos:
+```bash
+ls storage/asins_json/*.json | wc -l
+ls storage/logs/publish_ready/*.json | wc -l
+```
+
+### Ver últimos archivos modificados:
+```bash
+ls -lht storage/asins_json/ | head -20
+```
+
+---
+
+## 🎯 Resumen
+
+**Flujo completo:**
+
+```
+1. Producto publicado → Guardado en DB ✅
+
+2. [24h después] Cleanup automático:
+   - Elimina asins_json/{ASIN}.json
+   - Elimina {ASIN}_mini_ml.json
+
+3. Pregunta llega → Auto-answer:
+   - Busca en DB (mini_ml_data) ✅
+   - Si no encuentra → Descarga temp de Amazon
+   - Responde
+   - Elimina temp
+```
+
+**Resultado:**
+- ✅ 3 GB de espacio liberado
+- ✅ Sistema funciona igual
+- ✅ Auto-answer más rápido (usa DB)
+- ✅ Limpieza automática cada 24h
+
+---
+
+## 🔧 Integración con Web UI
+
+Cuando tengas la interfaz web, podrás:
+
+- Ver espacio usado en disco
+- Ejecutar limpieza con un botón
+- Ver archivos a eliminar antes de confirmar
+- Programar limpiezas automáticas
+- Ver logs de limpieza en tiempo real

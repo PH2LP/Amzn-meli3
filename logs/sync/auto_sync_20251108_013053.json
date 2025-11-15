@@ -1,0 +1,48 @@
+{
+  "timestamp": "2025-11-08T01:30:53.764310",
+  "statistics": {
+    "total": 50,
+    "linked": 6,
+    "already_linked": 39,
+    "not_found": 5,
+    "errors": 0
+  },
+  "linked_items": [
+    {
+      "item_id": "CBT2985963612",
+      "asin": "B0012SNLJG",
+      "title": "Balón De Fútbol Americano Wilson Nfl Super Grip Wtf1795",
+      "timestamp": "2025-11-08T01:30:44.270048"
+    },
+    {
+      "item_id": "CBT2678006979",
+      "asin": "B0BFC7WQ6R",
+      "title": "Amazon Echo Spot - Reloj Despertador Inteligente Con Alexa",
+      "timestamp": "2025-11-08T01:30:44.468136"
+    },
+    {
+      "item_id": "CBT2985786978",
+      "asin": "B08141HYHG",
+      "title": "Logitech G733 Auriculares Gaming Inalámbricos Lilac",
+      "timestamp": "2025-11-08T01:30:44.859602"
+    },
+    {
+      "item_id": "CBT2985963642",
+      "asin": "B0FNLBY4R6",
+      "title": "Figuras Coleccionables Pop Mart Lil Peach Riot Loading",
+      "timestamp": "2025-11-08T01:30:45.044447"
+    },
+    {
+      "item_id": "CBT2985671070",
+      "asin": "B085T56B2X",
+      "title": "Garmin Approach Z82 - Medidor Láser Gps Para Golfistas",
+      "timestamp": "2025-11-08T01:30:45.301087"
+    },
+    {
+      "item_id": "CBT3004053096",
+      "asin": "B0F1G89QX3",
+      "title": "Cabezas De Cepillo De Repuesto Chinystyle Para Suri 10 Pack",
+      "timestamp": "2025-11-08T01:30:49.345129"
+    }
+  ]
+}

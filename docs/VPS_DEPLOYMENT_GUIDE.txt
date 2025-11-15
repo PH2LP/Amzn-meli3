@@ -1,0 +1,600 @@
+# 🚀 Guía Completa de Despliegue en DigitalOcean
+
+## 📋 Requisitos Previos
+
+- ✅ Cuenta de DigitalOcean activa
+- ✅ Credenciales listas:
+  - Amazon SP-API (LWA_CLIENT_ID, LWA_CLIENT_SECRET, REFRESH_TOKEN)
+  - MercadoLibre (ML_ACCESS_TOKEN)
+  - OpenAI (OPENAI_API_KEY)
+  - Telegram (opcional: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID)
+
+---
+
+## 🖥️ Paso 1: Crear Droplet en DigitalOcean
+
+### **1.1 Especificaciones Recomendadas:**
+
+```
+OS:        Ubuntu 24.04 LTS (x64)
+Plan:      Basic
+CPU:       Regular Intel ($12/mo)
+           - 2 GB RAM
+           - 1 CPU
+           - 50 GB SSD
+           - 2 TB Transfer
+Region:    New York 3 (o el más cercano)
+```
+
+### **1.2 Configuración Adicional:**
+
+- ✅ Enable IPv6
+- ✅ Add SSH Key (altamente recomendado)
+- ✅ Hostname: `amz-ml-production`
+
+### **1.3 Crear SSH Key (si no tienes):**
+
+En tu Mac:
+
+```bash
+# Generar SSH key
+ssh-keygen -t ed25519 -C "tu_email@example.com"
+
+# Ver la clave pública
+cat ~/.ssh/id_ed25519.pub
+
+# Copiar y pegar en DigitalOcean → Settings → Security → SSH Keys
+```
+
+---
+
+## 📦 Paso 2: Subir el Código al VPS
+
+### **Opción A: Usar Git (Recomendado)**
+
+```bash
+# 1. En tu Mac, asegurarte de que todo esté commiteado
+cd /Users/felipemelucci/Desktop/revancha
+git status
+
+# 2. Si hay cambios, commitear
+git add .
+git commit -m "Ready for VPS deployment"
+git push
+
+# 3. En el VPS, clonar el repo
+ssh root@tu-ip-del-droplet
+
+# Dentro del VPS:
+cd /opt
+git clone https://github.com/tu-usuario/tu-repo.git amz-ml-system
+cd amz-ml-system
+```
+
+### **Opción B: Usar SCP (Sin Git)**
+
+```bash
+# En tu Mac, comprimir el proyecto (excluyendo archivos pesados)
+cd /Users/felipemelucci/Desktop/revancha
+tar --exclude='venv' \
+    --exclude='storage/*.db' \
+    --exclude='cache' \
+    --exclude='asins_json' \
+    --exclude='.git' \
+    -czf amz-ml-system.tar.gz .
+
+# Subir al VPS
+scp amz-ml-system.tar.gz root@tu-ip-del-droplet:/opt/
+
+# Conectar al VPS y extraer
+ssh root@tu-ip-del-droplet
+cd /opt
+mkdir -p amz-ml-system
+tar -xzf amz-ml-system.tar.gz -C amz-ml-system
+cd amz-ml-system
+```
+
+---
+
+## ⚙️ Paso 3: Ejecutar Instalación Automática
+
+```bash
+# Dar permisos de ejecución
+chmod +x install_vps.sh
+
+# Ejecutar instalación (como root)
+sudo bash install_vps.sh
+```
+
+**Esto instalará:**
+- Python 3.11 + pip
+- Entorno virtual
+- Todas las dependencias de requirements.txt
+- Estructura de directorios necesaria
+- Template de .env
+
+---
+
+## 🔐 Paso 4: Configurar Credenciales
+
+```bash
+# Editar .env
+nano /opt/amz-ml-system/.env
+```
+
+**Pegar tus credenciales:**
+
+```bash
+# Amazon SP-API
+LWA_CLIENT_ID=amzn1.application-oa2-client.xxxxx
+LWA_CLIENT_SECRET=amzn1.oa2-cs.v1.xxxxx
+REFRESH_TOKEN=Atzr|xxxxx
+
+# MercadoLibre
+ML_ACCESS_TOKEN=APP_USR-xxxxx
+
+# OpenAI
+OPENAI_API_KEY=sk-proj-xxxxx
+
+# Telegram (opcional)
+TELEGRAM_BOT_TOKEN=123456789:xxxxx
+TELEGRAM_CHAT_ID=123456789
+```
+
+**Guardar:** `Ctrl+O → Enter → Ctrl+X`
+
+---
+
+## 🧪 Paso 5: Probar el Sistema
+
+```bash
+# Activar entorno virtual
+cd /opt/amz-ml-system
+source venv/bin/activate
+
+# Test de credenciales
+python3 -c "from dotenv import load_dotenv; import os; load_dotenv(); print('✅ .env cargado OK')"
+
+# Test de importaciones
+python3 -c "from src.integrations.amazon_api import get_amazon_access_token; print('✅ Amazon API OK')"
+
+# Test completo (sin publicar nada)
+python3 -c "from scripts.autonomous.autonomous_search_and_publish import AutonomousSystem; print('✅ Sistema cargado OK')"
+```
+
+---
+
+## 🚀 Paso 6: Configurar Servicios Automáticos (systemd)
+
+### **6.1 Crear servicio de pipeline:**
+
+```bash
+sudo nano /etc/systemd/system/amz-ml-pipeline.service
+```
+
+```ini
+[Unit]
+Description=AMZ-ML Autonomous Pipeline
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/amz-ml-system
+Environment="PATH=/opt/amz-ml-system/venv/bin:/usr/bin:/bin"
+ExecStart=/opt/amz-ml-system/venv/bin/python3 /opt/amz-ml-system/pipeline.py
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### **6.2 Crear servicio de auto-answer:**
+
+```bash
+sudo nano /etc/systemd/system/amz-ml-auto-answer.service
+```
+
+```ini
+[Unit]
+Description=AMZ-ML Auto Answer Questions
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/amz-ml-system
+Environment="PATH=/opt/amz-ml-system/venv/bin:/usr/bin:/bin"
+ExecStart=/opt/amz-ml-system/venv/bin/python3 /opt/amz-ml-system/scripts/tools/auto_answer_questions.py
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### **6.3 Crear servicio de backups:**
+
+```bash
+sudo nano /etc/systemd/system/amz-ml-backup.service
+```
+
+```ini
+[Unit]
+Description=AMZ-ML Backup Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/amz-ml-system
+ExecStart=/opt/amz-ml-system/scripts/backup/backup_loop.sh
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### **6.4 Activar todos los servicios:**
+
+```bash
+# Recargar systemd
+sudo systemctl daemon-reload
+
+# Habilitar para que se inicien al arrancar
+sudo systemctl enable amz-ml-pipeline
+sudo systemctl enable amz-ml-auto-answer
+sudo systemctl enable amz-ml-backup
+
+# Iniciar servicios
+sudo systemctl start amz-ml-pipeline
+sudo systemctl start amz-ml-auto-answer
+sudo systemctl start amz-ml-backup
+
+# Verificar estado
+sudo systemctl status amz-ml-pipeline
+sudo systemctl status amz-ml-auto-answer
+sudo systemctl status amz-ml-backup
+```
+
+---
+
+## 📊 Paso 7: Monitoreo en Tiempo Real
+
+### **Ver logs de pipeline:**
+
+```bash
+# Logs del sistema autónomo
+tail -f /opt/amz-ml-system/storage/autonomous_logs/autonomous_system.log
+
+# Logs del servicio systemd
+sudo journalctl -u amz-ml-pipeline -f
+```
+
+### **Ver logs de auto-answer:**
+
+```bash
+tail -f /opt/amz-ml-system/logs/auto_answer.log
+```
+
+### **Ver logs de backups:**
+
+```bash
+tail -f /opt/amz-ml-system/logs/backup.log
+```
+
+### **Monitorear todos los servicios:**
+
+```bash
+# Ver estado de todos los servicios
+sudo systemctl status amz-ml-*
+
+# Ver recursos del sistema
+htop
+```
+
+---
+
+## 🔒 Paso 8: Configurar Backups Remotos
+
+### **Opción A: Google Drive (15 GB gratis)**
+
+```bash
+# Instalar rclone
+curl https://rclone.org/install.sh | sudo bash
+
+# Configurar Google Drive
+rclone config
+
+# Seguir wizard:
+# n) New remote
+# name> gdrive
+# Storage> drive
+# (dejar todo en blanco hasta autorización)
+
+# Crear carpeta de backups
+rclone mkdir gdrive:AMZ-ML-Backups
+
+# Test
+rclone ls gdrive:AMZ-ML-Backups/
+```
+
+### **Opción B: Dropbox (2 GB gratis)**
+
+```bash
+# Instalar Dropbox-Uploader
+cd /opt
+git clone https://github.com/andreafabrizi/Dropbox-Uploader.git
+cd Dropbox-Uploader
+chmod +x dropbox_uploader.sh
+
+# Configurar (seguir instrucciones interactivas)
+./dropbox_uploader.sh
+
+# Crear symlink global
+ln -s /opt/Dropbox-Uploader/dropbox_uploader.sh /usr/local/bin/
+
+# Test
+dropbox_uploader.sh list
+```
+
+**Ver documentación completa:** `docs/BACKUP_SYSTEM.md`
+
+---
+
+## 🌐 Paso 9: Configurar Acceso Web (Opcional - Para Web UI Futura)
+
+```bash
+# Instalar nginx
+sudo apt install nginx -y
+
+# Crear configuración
+sudo nano /etc/nginx/sites-available/amz-ml
+```
+
+```nginx
+server {
+    listen 80;
+    server_name tu-ip-del-droplet;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+```bash
+# Activar configuración
+sudo ln -s /etc/nginx/sites-available/amz-ml /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl restart nginx
+
+# Abrir firewall
+sudo ufw allow 'Nginx Full'
+```
+
+---
+
+## ✅ Paso 10: Verificación Final
+
+### **Checklist de Verificación:**
+
+```bash
+# 1. Servicios corriendo
+sudo systemctl status amz-ml-pipeline    # Debe estar "active (running)"
+sudo systemctl status amz-ml-auto-answer # Debe estar "active (running)"
+sudo systemctl status amz-ml-backup      # Debe estar "active (running)"
+
+# 2. Pipeline generando ASINs
+tail -20 storage/autonomous_logs/autonomous_system.log
+# Debe mostrar: "✅ X ASINs finales listos para publicar"
+
+# 3. Base de datos creciendo
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings;"
+
+# 4. Backups funcionando
+ls -lh backups/*.tar.gz | head -5
+
+# 5. Auto-answer respondiendo
+tail -20 logs/auto_answer.log
+```
+
+---
+
+## 🛠️ Comandos Útiles
+
+### **Controlar servicios:**
+
+```bash
+# Reiniciar un servicio
+sudo systemctl restart amz-ml-pipeline
+
+# Detener un servicio
+sudo systemctl stop amz-ml-pipeline
+
+# Ver logs de un servicio
+sudo journalctl -u amz-ml-pipeline -f
+
+# Ver últimas 100 líneas de logs
+sudo journalctl -u amz-ml-pipeline -n 100
+```
+
+### **Ejecutar manualmente (sin systemd):**
+
+```bash
+# Activar venv
+cd /opt/amz-ml-system
+source venv/bin/activate
+
+# Ejecutar pipeline (foreground)
+python3 pipeline.py
+
+# Ejecutar en background con screen
+screen -S pipeline
+python3 pipeline.py
+# Presiona: Ctrl+A, luego D (para detach)
+
+# Volver a ver screen
+screen -r pipeline
+```
+
+### **Ver recursos del sistema:**
+
+```bash
+# Uso de CPU/RAM/Disco
+htop
+
+# Espacio en disco
+df -h
+
+# Tamaño de directorios
+du -sh storage/*
+du -sh backups/*
+```
+
+---
+
+## 🚨 Troubleshooting
+
+### **Problema: Servicio no inicia**
+
+```bash
+# Ver error completo
+sudo journalctl -u amz-ml-pipeline -n 50 --no-pager
+
+# Verificar permisos
+ls -la /opt/amz-ml-system/pipeline.py
+
+# Verificar Python path
+which python3
+/opt/amz-ml-system/venv/bin/python3 --version
+```
+
+### **Problema: "Module not found"**
+
+```bash
+# Reinstalar dependencias
+cd /opt/amz-ml-system
+source venv/bin/activate
+pip install -r requirements.txt --force-reinstall
+```
+
+### **Problema: Token de MercadoLibre expirado**
+
+```bash
+# Ver cuando expira
+python3 -c "
+from dotenv import load_dotenv
+import os, requests
+load_dotenv()
+token = os.getenv('ML_ACCESS_TOKEN')
+r = requests.get('https://api.mercadolibre.com/users/me', headers={'Authorization': f'Bearer {token}'})
+print(r.status_code, r.json())
+"
+
+# Si expiró, actualizar en .env
+nano /opt/amz-ml-system/.env
+# Cambiar ML_ACCESS_TOKEN por el nuevo
+
+# Reiniciar servicios
+sudo systemctl restart amz-ml-pipeline
+sudo systemctl restart amz-ml-auto-answer
+```
+
+### **Problema: Disco lleno**
+
+```bash
+# Ver qué ocupa espacio
+du -sh /opt/amz-ml-system/*
+
+# Limpiar JSONs viejos
+cd /opt/amz-ml-system
+python3 scripts/cleanup/clean_old_json_files.py --force
+
+# Limpiar backups viejos
+find backups/ -name "*.tar.gz" -mtime +7 -delete
+```
+
+---
+
+## 📈 Monitoreo de Performance
+
+### **Verificar publicaciones exitosas:**
+
+```bash
+# Total de productos en DB
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE item_id IS NOT NULL;"
+
+# Productos publicados hoy
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE date(created_at) = date('now');"
+
+# Últimas 10 publicaciones
+sqlite3 storage/listings_database.db "SELECT asin, item_id, country, created_at FROM listings ORDER BY created_at DESC LIMIT 10;"
+```
+
+### **Verificar auto-answer:**
+
+```bash
+# Ver estadísticas de respuestas
+grep -c "✅ Respuesta enviada" logs/auto_answer.log
+
+# Ver preguntas respondidas hoy
+grep "$(date +%Y-%m-%d)" logs/auto_answer.log | grep "✅ Respuesta enviada"
+```
+
+---
+
+## 🎯 Estimaciones de Capacidad
+
+Con el plan de $12/mo (2 GB RAM, 1 CPU, 50 GB SSD):
+
+- **Pipeline:** Puede procesar ~1,000 ASINs/día
+- **Publicaciones:** ~100-200 productos/día (con filtros de calidad)
+- **Base de datos:** Hasta 50,000 productos (~2 GB)
+- **Backups:** ~7 días de backups locales (~500 MB)
+- **Auto-answer:** Ilimitado (usa OpenAI API)
+
+Si necesitas más capacidad:
+
+```
+Plan $18/mo:
+- 4 GB RAM
+- 2 CPUs
+- 80 GB SSD
+- Puede procesar 2x más ASINs
+```
+
+---
+
+## ✅ Sistema Listo
+
+**El sistema ahora está:**
+
+- ✅ Ejecutándose 24/7 automáticamente
+- ✅ Buscando y publicando productos continuamente
+- ✅ Respondiendo preguntas de clientes automáticamente
+- ✅ Haciendo backups cada 6 horas
+- ✅ Reiniciándose automáticamente si falla
+- ✅ Limpiando archivos viejos para no llenar disco
+
+**Acceso remoto:**
+
+```bash
+# Conectar al VPS
+ssh root@tu-ip-del-droplet
+
+# Ver todo corriendo
+sudo systemctl status amz-ml-*
+
+# Ver logs en vivo
+tail -f storage/autonomous_logs/autonomous_system.log
+```
+
+**🎉 ¡Felicitaciones! Tu sistema está productivo.**

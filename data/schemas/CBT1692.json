@@ -1,0 +1,1260 @@
+{
+  "BRAND": {
+    "value_type": "string",
+    "values": {
+      "via tech": "3713750"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "LINE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "VERSION": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "COMPUTER_MOTHERBOARD_PLATFORM": {
+    "value_type": "list",
+    "values": {
+      "amd": "345498",
+      "intel": "345499"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CHIPSET": {
+    "value_type": "string",
+    "values": {
+      "mediatek helio g90t": "11518380",
+      "mediatek mt8163v/b": "7757436"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SOCKET": {
+    "value_type": "string",
+    "values": {
+      "am2": "345513",
+      "am1": "345516",
+      "am3+": "345514",
+      "am2+": "345512",
+      "fm2+": "345501",
+      "am3": "345515",
+      "lga 1700": "20180361",
+      "lga 1200": "17087098",
+      "lga 1151": "2788308",
+      "lga 2066": "17065836"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "multivalued": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "FORM_FACTOR": {
+    "value_type": "string",
+    "values": {
+      "atx": "116819",
+      "matx": "18059747",
+      "mini itx": "18990225",
+      "e-atx": "18990212",
+      "mini dtx": "25147775"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SUPPORTED_RAM_MEMORY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "ddr2": "345519",
+      "ddr4": "345521",
+      "ddr3": "345520"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MAX_SUPPORTED_RAM_MEMORY_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SUPPORTED_RAM_MEMORY_FORMAT": {
+    "value_type": "string",
+    "values": {
+      "dimm": "345522",
+      "sodimm": "345523"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RAM_MEMORY_SLOTS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MAX_VIDEO_RESOLUTION": {
+    "value_type": "string",
+    "values": {
+      "hd": "168331",
+      "full hd": "168332",
+      "4k": "169883",
+      "8k": "17863660",
+      "5k": "53169809",
+      "ultra hd": "25456285",
+      "2k": "15257053",
+      "wqxga": "55492463",
+      "qxga": "55492464",
+      "c4k": "55492465",
+      "quad hd": "55492466",
+      "xga": "55492467"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CONNECTIVITY": {
+    "value_type": "string",
+    "values": {
+      "usb-c": "2113108",
+      "displayport": "3330899",
+      "dvi-i": "7609635",
+      "dvi": "2270015",
+      "hdmi": "2270014",
+      "vga": "2270016"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PCI_EXPRESS_TYPE": {
+    "value_type": "string",
+    "values": {
+      "x1": "55492468",
+      "x2": "55492469",
+      "x4": "55492470",
+      "x8": "55492471",
+      "x16": "55492472"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PCI_EXPRESS_VERSION": {
+    "value_type": "string",
+    "values": {
+      "pcie 1.0": "55492473",
+      "pcie 2.0": "55492474",
+      "pcie 3.0": "55492475",
+      "pcie 4.0": "55492476",
+      "pcie 5.0": "55492477",
+      "pcie 6.0": "55492478"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PCI_EXPRESS_X16_QUANTITY": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RAM_MEMORY_CHANNELS": {
+    "value_type": "string",
+    "values": {
+      "single channel": "55492479",
+      "dual channel": "55492480",
+      "triple channel": "55492481",
+      "quad channel": "55492482"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_WIFI": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_BLUETOOTH": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_HEATSINK": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_BIOS_FLASHBACK": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_SUITABLE_FOR_OVERCLOCK": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "OPTIMIZED_FOR_AI": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MOTHERBOARD_TYPE": {
+    "value_type": "list",
+    "values": {
+      "notebooks": "55492483",
+      "desktop": "55492484",
+      "servers": "55492485",
+      "workstations": "55492486",
+      "embedded pcs": "55492487",
+      "industrial pcs": "55492488"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "mm",
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "mm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "mm",
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "M2_DATA_STORAGE_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "MB",
+      "TB"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "VRM_POWER_STAGES_DESIGN": {
+    "value_type": "string",
+    "values": {
+      "16+1+1": "55492489",
+      "14+2": "55492490",
+      "12+2": "55492491"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RAM_MEMORY_SPEED": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GHz",
+      "MHz"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "INCLUDES_ACCESSORIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ACCESSORIES_INCLUDED": {
+    "value_type": "string",
+    "values": {
+      "sata cables": "39662362",
+      "expansion card": "55492462"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SUPPORTED_RAM_MEMORY_SPEED": {
+    "value_type": "string",
+    "values": {
+      "2000": "2395608",
+      "2133": "2395609",
+      "2200": "2395610",
+      "2400": "2395611",
+      "2800": "2395612",
+      "3200": "2395613"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SUPPORTED_RAM_MEMORY_MODULES": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SUPPORTED_PROCESSORS": {
+    "value_type": "string",
+    "values": {
+      "intel core 10ª generación (comet lake)": "39662352",
+      "amd ryzen 1000 series (summit ridge)": "39662353"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "REAR_PANEL": {
+    "value_type": "string",
+    "values": {
+      "1 x lan (rj45) port(s)": "2395626",
+      "1 x optical s/pdif out": "2395627",
+      "1 x power esata": "2395628",
+      "1 x ps/2 keyboard/mouse": "2395629",
+      "1 rj-45 port": "2141061",
+      "2 x usb 3.1 gen 1": "2395631",
+      "3 jack connectors": "2395632",
+      "6 x audio jack(s)": "2395633",
+      "6 x usb 2.0": "2395634",
+      "6 x usb 3.0": "2395635",
+      "8 x usb 2.0": "2395636",
+      "8 x usb 3.0": "2395637"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FRONT_PANEL": {
+    "value_type": "string",
+    "values": {
+      "2 x usb 2.0": "2395638",
+      "4 x usb 2.0": "2395639",
+      "6 x usb 2.0": "2395640",
+      "2 x usb 3.0": "2395641",
+      "4 x usb 3.0": "2395642",
+      "6 x usb 3.0": "2395643"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SATA_PORTS": {
+    "value_type": "string",
+    "values": {
+      "2": "2395614",
+      "4": "2395615",
+      "6": "2395616",
+      "8": "2395617"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "LAN_PORT_TYPE": {
+    "value_type": "string",
+    "values": {
+      "atheros gbe lan chip (10/100/1000 mbit)": "2395618",
+      "gigabit lan controller(s)": "2395619",
+      "realtek® 8111e": "2395620",
+      "realtek® 8111g": "2395621",
+      "realtek® 8111gr": "2395622",
+      "realtek® rtl8111e": "2395623",
+      "realtek® rtl8111f": "2395624",
+      "realtek® rtl8112l": "2395625"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "INTERNAL_IO_CONECTORS": {
+    "value_type": "string",
+    "values": {
+      "1 x 24-pin atx": "2395644",
+      "1 x 4-pin atx": "2395645",
+      "1 x 8-pin atx": "2395646",
+      "1 x cd in connector": "2395647",
+      "1 chassis intrusion connector": "2395648",
+      "1 comb port connector": "2395649",
+      "1 x cpu fan connector": "2395650",
+      "1 floppy connector": "2395651",
+      "1 ide connector": "2395652",
+      "1 x spdif in/out connector": "2395653",
+      "1 x tpm_clr connector": "2395654",
+      "2 x usb 2.0": "2395655",
+      "3 x usb 2.0": "2395656",
+      "4 x conector sata2 3gb/s": "2395657",
+      "4 x sata 3gb/s": "2395658",
+      "4 x sata2 3gb/s": "2395659"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MAX_SHARED_MEMORY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "DIMENSIONS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_GAMER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "VALUE_ADDED_TAX": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_TYPE": {
+    "value_type": "list",
+    "values": {
+      "no additional packaging": "47115155",
+      "with additional packaging": "47115156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
+    "values": {
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_KIT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "flammable": "7651070",
+      "aerosol": "7651071",
+      "oxidizer": "7651072",
+      "corrosive": "7651073",
+      "explosive": "7651074",
+      "toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "value_type": "list",
+    "values": {
+      "for humans": "7575926",
+      "for animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "value_type": "list",
+    "values": {
+      "for humans with a medical prescription": "7575930",
+      "for humans without a medical prescription": "7575931",
+      "for animals with a medical prescription": "7575932",
+      "for animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "stand-alone lithium (loose or isolated)": "7575934",
+      "lithium installed": "7575935",
+      "for cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "value_type": "list",
+    "values": {
+      "bag": "7435891",
+      "box": "7435892",
+      "envelope": "7575937",
+      "self-shipping": "7575939",
+      "exb": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "value_type": "list",
+    "values": {
+      "has imei": "7435893",
+      "has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "value_type": "list",
+    "values": {
+      "android": "9936777",
+      "ios": "9936778",
+      "desktop": "9936779",
+      "mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "value_type": "string",
+    "values": {
+      "pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "contains liquid": "7435885",
+      "fragile": "7435883",
+      "with expiration": "7435888",
+      "without expiration": "8847339",
+      "health device": "7575925",
+      "disinfectant and sanitizer": "7575917",
+      "mapa": "7575924",
+      "health and correlates": "7575923",
+      "voluminous": "8721108",
+      "unflyable": "10490116",
+      "no rotatable": "12928414",
+      "folding": "41722098",
+      "magnetic": "52092586",
+      "can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

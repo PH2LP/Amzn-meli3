@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VPS Services Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a.active {
+            color: #0ea5e9;
+        }
+
+        /* System Status Banner */
+        .system-status {
+            background: #111;
+            border: 2px solid;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .system-status.ok {
+            border-color: #10b981;
+        }
+
+        .system-status.warning {
+            border-color: #f59e0b;
+        }
+
+        .system-status.error {
+            border-color: #ef4444;
+        }
+
+        .system-status-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .system-status-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .system-status-message {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: #333;
+            transform: translateY(-2px);
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .service-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .service-description {
+            font-size: 13px;
+            color: #888;
+            line-height: 1.5;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .status-indicator.active {
+            background: #10b981;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .status-indicator.inactive {
+            background: #ef4444;
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+        }
+
+        .status-indicator.cron {
+            background: #f59e0b;
+            box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        .status-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        .status-text.active {
+            color: #10b981;
+        }
+
+        .status-text.inactive {
+            color: #ef4444;
+        }
+
+        .status-text.cron {
+            color: #f59e0b;
+        }
+
+        .view-log-btn {
+            margin-top: 16px;
+            padding: 8px 16px;
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-log-btn:hover {
+            background: #2a2a2a;
+            border-color: #444;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #222;
+            border-top: 3px solid #0ea5e9;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .last-update {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            background: #1e1e1e;
+            border-radius: 4px;
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+        }
+
+        /* System Resources */
+        .system-resources {
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .resource-item {
+            text-align: center;
+        }
+
+        .resource-label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .resource-value {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .resource-bar {
+            width: 100%;
+            height: 8px;
+            background: #1e1e1e;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .resource-bar-fill {
+            height: 100%;
+            transition: width 0.3s;
+            border-radius: 4px;
+        }
+
+        .resource-bar-fill.low {
+            background: #10b981;
+        }
+
+        .resource-bar-fill.medium {
+            background: #f59e0b;
+        }
+
+        .resource-bar-fill.high {
+            background: #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🖥️ VPS Services</h1>
+            <div class="nav-links">
+                <a href="/" class="active">Dashboard</a>
+                <a href="/logs">Logs</a>
+            </div>
+        </header>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Cargando servicios...</p>
+        </div>
+
+        <div id="system-status" style="display: none;"></div>
+
+        <div id="system-resources" class="system-resources"></div>
+
+        <div id="services" class="services-grid" style="display: none;"></div>
+
+        <div class="last-update">
+            <span id="last-update-time">Actualizando...</span>
+        </div>
+    </div>
+
+    <script>
+        let updateInterval;
+
+        async function loadSystemStats() {
+            try {
+                const response = await fetch('/api/system/stats');
+                const stats = await response.json();
+
+                const resourcesContainer = document.getElementById('system-resources');
+
+                function getBarClass(percent) {
+                    if (percent < 60) return 'low';
+                    if (percent < 80) return 'medium';
+                    return 'high';
+                }
+
+                resourcesContainer.innerHTML = `
+                    <div class="resource-grid">
+                        <div class="resource-item">
+                            <div class="resource-label">💾 RAM</div>
+                            <div class="resource-value">${stats.ram_percent}%</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill ${getBarClass(stats.ram_percent)}" style="width: ${stats.ram_percent}%"></div>
+                            </div>
+                            <div class="resource-label" style="margin-top: 4px;">${stats.ram_used_mb} / ${stats.ram_total_mb} MB</div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-label">🔥 CPU</div>
+                            <div class="resource-value">${stats.cpu_percent}%</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill ${getBarClass(stats.cpu_percent)}" style="width: ${stats.cpu_percent}%"></div>
+                            </div>
+                            <div class="resource-label" style="margin-top: 4px;">Uso actual</div>
+                        </div>
+                        <div class="resource-item">
+                            <div class="resource-label">💿 Disco</div>
+                            <div class="resource-value">${stats.disk_percent}%</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill ${getBarClass(stats.disk_percent)}" style="width: ${stats.disk_percent}%"></div>
+                            </div>
+                            <div class="resource-label" style="margin-top: 4px;">${stats.disk_used} / ${stats.disk_total}</div>
+                        </div>
+                    </div>
+                `;
+
+                resourcesContainer.style.display = 'block';
+            } catch (error) {
+                console.error('Error loading system stats:', error);
+            }
+        }
+
+        async function loadServices() {
+            try {
+                const response = await fetch('/api/services/status');
+                const services = await response.json();
+
+                const container = document.getElementById('services');
+                const loading = document.getElementById('loading');
+                const systemStatus = document.getElementById('system-status');
+
+                // Calculate system status - separar servicios permanentes vs CRON
+                const permanentServices = services.filter(s => !s.is_cron);
+                const cronServices = services.filter(s => s.is_cron);
+
+                const totalPermanent = permanentServices.length;
+                const activePermanent = permanentServices.filter(s => s.running).length;
+                const inactivePermanent = totalPermanent - activePermanent;
+
+                const totalCron = cronServices.length;
+                const activeCron = cronServices.filter(s => s.running).length;
+
+                // Update system status banner - solo contar servicios permanentes como problemas
+                let statusClass, statusIcon, statusTitle, statusMessage;
+
+                if (inactivePermanent === 0) {
+                    statusClass = 'ok';
+                    statusIcon = '✅';
+                    statusTitle = 'Sistema Operativo';
+                    statusMessage = `${activePermanent}/${totalPermanent} servicios permanentes activos, ${totalCron} servicios CRON programados`;
+                } else if (inactivePermanent <= 1) {
+                    statusClass = 'warning';
+                    statusIcon = '⚠️';
+                    statusTitle = 'Atención Requerida';
+                    statusMessage = `${inactivePermanent} servicio permanente detenido. ${activePermanent}/${totalPermanent} activos`;
+                } else {
+                    statusClass = 'error';
+                    statusIcon = '❌';
+                    statusTitle = 'Problemas Detectados';
+                    statusMessage = `${inactivePermanent} servicios permanentes detenidos. Solo ${activePermanent}/${totalPermanent} activos`;
+                }
+
+                systemStatus.className = `system-status ${statusClass}`;
+                systemStatus.innerHTML = `
+                    <div class="system-status-icon">${statusIcon}</div>
+                    <div class="system-status-title">${statusTitle}</div>
+                    <div class="system-status-message">${statusMessage}</div>
+                `;
+
+                // Update services grid
+                container.innerHTML = '';
+
+                services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'service-card';
+
+                    let statusClass = service.running ? 'active' : 'inactive';
+                    let statusText = service.running ? '✅ Activo' : '❌ Detenido';
+
+                    if (service.is_cron) {
+                        statusClass = 'cron';  // Siempre mostrar como CRON (naranja)
+                        statusText = service.running ? '⏰ Ejecutándose ahora (CRON)' : '⏰ Programado (CRON)';
+                    }
+
+                    card.innerHTML = `
+                        <div class="service-header">
+                            <div>
+                                <div class="service-name">${service.name}</div>
+                                <div class="service-description">${service.description}</div>
+                                ${service.is_cron ? '<div class="badge">CRON JOB</div>' : ''}
+                            </div>
+                            <span class="status-indicator ${statusClass}"></span>
+                        </div>
+                        <div class="status-text ${statusClass}">${statusText}</div>
+                        <a href="/logs?service=${service.id}" class="view-log-btn">Ver Logs →</a>
+                    `;
+
+                    container.appendChild(card);
+                });
+
+                loading.style.display = 'none';
+                systemStatus.style.display = 'block';
+                container.style.display = 'grid';
+
+                // Update timestamp
+                const now = new Date();
+                document.getElementById('last-update-time').textContent =
+                    `Última actualización: ${now.toLocaleTimeString('es-ES')}`;
+
+            } catch (error) {
+                console.error('Error loading services:', error);
+                document.getElementById('loading').innerHTML =
+                    '<p style="color: #ef4444;">❌ Error cargando servicios</p>';
+            }
+        }
+
+        // Load on page load
+        loadServices();
+        loadSystemStats();
+
+        // Auto-refresh every 5 seconds
+        updateInterval = setInterval(() => {
+            loadServices();
+            loadSystemStats();
+        }, 5000);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            clearInterval(updateInterval);
+        });
+    </script>
+</body>
+</html>

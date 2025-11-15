@@ -1,0 +1,662 @@
+# 🧠 Cómo Funciona el Sistema de Precios Dinámicos
+
+Explicación completa y detallada del sistema automático de ajuste de precios para productos de catálogo en MercadoLibre.
+
+---
+
+## 📚 Índice
+
+1. [Conceptos Básicos](#conceptos-básicos)
+2. [Flujo Completo del Sistema](#flujo-completo-del-sistema)
+3. [Lógica de Decisión de Precios](#lógica-de-decisión-de-precios)
+4. [Arquitectura del Sistema](#arquitectura-del-sistema)
+5. [Ejemplos Paso a Paso](#ejemplos-paso-a-paso)
+6. [Componentes Técnicos](#componentes-técnicos)
+
+---
+
+## 📖 Conceptos Básicos
+
+### ¿Qué es un Producto de Catálogo en MercadoLibre?
+
+**Catálogo** = Múltiples vendedores venden el **mismo producto** (mismo UPC/EAN)
+
+```
+Producto: LEGO 77248 Speed Champions
+├─ Vendedor 1: $75.00
+├─ Vendedor 2: $69.00  ← BUYBOX (gana la compra)
+├─ Vendedor 3: $72.00
+└─ Vendedor 4 (tú): $77.58
+```
+
+**El problema:** Si tu precio es más alto, NO apareces en el buybox = NO vendes.
+
+**La solución:** Ajustar precio automáticamente para competir, pero sin perder dinero.
+
+---
+
+### ¿Qué es el Buybox?
+
+El **buybox** es el precio más bajo entre todos los vendedores del catálogo.
+
+```
+Buybox = MIN(precio_vendedor1, precio_vendedor2, ..., precio_vendedorN)
+```
+
+**MercadoLibre muestra primero el buybox al comprador.**
+
+Para aparecer en el buybox, necesitas:
+- Precio igual o menor al buybox actual
+- O bajar tu precio para ganarle
+
+---
+
+### Márgenes de Ganancia
+
+```
+Costo Real = Precio Amazon × 1.07  (incluye tax Florida 7%)
+
+Precio con Margen = Costo Real × (1 + Margen)
+
+Ejemplos:
+- Margen 45% (objetivo): $53.50 × 1.45 = $77.58
+- Margen 25% (mínimo):  $53.50 × 1.25 = $66.88
+- Margen 20%:           $53.50 × 1.20 = $64.20
+- Margen 0%:            $53.50 × 1.00 = $53.50 (pérdida)
+```
+
+**El sistema NUNCA baja del margen mínimo (25%)** para proteger tu rentabilidad.
+
+---
+
+## 🔄 Flujo Completo del Sistema
+
+### Fase 1: Publicación Inicial
+
+```
+1. main2.py procesa un ASIN
+   ├─ Consulta Amazon API
+   ├─ Costo: $50.00
+   ├─ Tax Florida 7%: $3.50
+   ├─ Costo Real: $53.50
+   └─ Precio publicado (45% margen): $77.58
+
+2. Se publica en MercadoLibre
+   ├─ Estado: NO catálogo (publicación independiente)
+   └─ Precio: $77.58
+
+3. Se guarda en la base de datos
+   ├─ costo_amazon: $50.00
+   ├─ precio_original: $77.58
+   ├─ precio_actual: $77.58
+   └─ es_catalogo: 0
+```
+
+---
+
+### Fase 2: MercadoLibre Asocia a Catálogo
+
+**MercadoLibre hace esto automáticamente** (puede tardar horas o días):
+
+```
+MercadoLibre analiza tu publicación:
+├─ Título: "LEGO 77248 Speed Champions Alpine F1..."
+├─ Atributos: Brand=LEGO, Model=77248
+├─ UPC/GTIN: 5702017583891
+└─ Busca en su catálogo si existe producto similar
+
+Si encuentra match:
+├─ Asocia tu publicación al catálogo
+├─ catalog_product_id: "MLM123456"
+└─ Tu publicación ahora compite con otros vendedores
+```
+
+**Tú NO haces nada**, ML lo hace solo.
+
+---
+
+### Fase 3: Monitor Detecta el Cambio
+
+El script `catalog_price_monitor.py` corre cada 6 horas:
+
+```python
+# Revisa cada producto publicado
+for producto in productos_publicados:
+    # Consulta ML API
+    item_data = api.get_item(item_id)
+
+    # ¿Tiene catalog_product_id?
+    if item_data.get("catalog_product_id"):
+        # ¡ES CATÁLOGO!
+
+        # Actualizar DB
+        db.update(asin, es_catalogo=1)
+
+        # Notificar
+        telegram.send("🏷️ Producto pasó a catálogo: {asin}")
+```
+
+**Resultado:**
+```
+Base de datos actualizada:
+├─ es_catalogo: 0 → 1
+└─ catalog_id: "MLM123456"
+
+Notificación Telegram enviada:
+"🏷️ Producto B0DHLFP4QN pasó a catálogo"
+```
+
+---
+
+### Fase 4: Ajuste Automático de Precio
+
+Una vez detectado como catálogo, el sistema ajusta el precio:
+
+```python
+# 1. Obtener buybox del catálogo
+buybox_price = ml_api.get_buybox_price(catalog_id)
+# buybox_price = $70.00
+
+# 2. Calcular precio mínimo permitido
+costo_real = $53.50
+precio_minimo = costo_real × 1.25 = $66.88  # 25% margen
+
+# 3. Decidir nuevo precio
+if buybox_price < precio_minimo:
+    # No es rentable competir
+    nuevo_precio = precio_original  # $77.58
+    razon = "No rentable, buybox muy bajo"
+else:
+    # Sí es rentable
+    nuevo_precio = buybox_price - 1  # $69.00
+    razon = "Competitivo con 29% margen"
+
+# 4. Actualizar en MercadoLibre
+ml_api.update_price(item_id, nuevo_precio)
+
+# 5. Guardar en DB
+db.update(asin, precio_actual=nuevo_precio)
+
+# 6. Notificar
+telegram.send("💰 Precio ajustado: $77.58 → $69.00")
+```
+
+---
+
+## 🤔 Lógica de Decisión de Precios
+
+### Árbol de Decisión
+
+```
+┌─────────────────────────────────────┐
+│ Producto detectado como catálogo   │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│ Consultar buybox price de ML       │
+│ buybox_price = $70.00              │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+┌─────────────────────────────────────┐
+│ Calcular precio mínimo (25%)       │
+│ precio_minimo = $66.88             │
+└─────────────────┬───────────────────┘
+                  │
+                  ▼
+         ┌────────┴────────┐
+         │                 │
+         ▼                 ▼
+    ¿buybox <          ¿buybox >=
+   precio_min?        precio_min?
+         │                 │
+         │ SÍ              │ SÍ
+         ▼                 ▼
+┌─────────────────┐  ┌─────────────────┐
+│ NO COMPETIR     │  │ COMPETIR        │
+│ precio_original │  │ buybox - $1     │
+│ $77.58          │  │ $69.00          │
+│                 │  │                 │
+│ Margen: 45%     │  │ Margen: 29%     │
+│ Pérdida: $0     │  │ Ganancia: OK    │
+└─────────────────┘  └─────────────────┘
+```
+
+### Casos Especiales
+
+#### Caso 1: Buybox muy bajo (no rentable)
+
+```
+Buybox: $60.00
+Precio mínimo: $66.88
+
+$60 < $66.88 → NO COMPETIR
+
+Decisión: Mantener $77.58
+Razón: Competir daría solo 12% margen (menos del 25%)
+Resultado: No vendes, pero tampoco pierdes plata
+```
+
+#### Caso 2: Buybox competitivo
+
+```
+Buybox: $70.00
+Precio mínimo: $66.88
+
+$70 > $66.88 → COMPETIR
+
+Decisión: Bajar a $69.00
+Razón: Ganas el buybox con 29% margen
+Resultado: Vendes y ganas bien
+```
+
+#### Caso 3: Buybox justo en el límite
+
+```
+Buybox: $66.88
+Precio mínimo: $66.88
+
+$66.88 = $66.88 → IGUALAR
+
+Decisión: Bajar a $66.88
+Razón: Empatas en buybox con margen exacto 25%
+Resultado: Compites al límite de rentabilidad
+```
+
+---
+
+## 🏗️ Arquitectura del Sistema
+
+### Componentes
+
+```
+┌──────────────────────────────────────────────────────┐
+│                    MONITOR LOOP                       │
+│  (catalog_price_monitor.py --loop)                   │
+│  Ejecuta cada 6 horas                                │
+└───────────────────┬──────────────────────────────────┘
+                    │
+                    ├─► 1. Detectar Catálogos
+                    │   (check_catalog_items.py)
+                    │   ├─ Consulta ML API
+                    │   ├─ Verifica catalog_product_id
+                    │   └─ Actualiza es_catalogo en DB
+                    │
+                    ├─► 2. Ajustar Precios
+                    │   (adjust_catalog_prices.py)
+                    │   ├─ Obtiene buybox de ML
+                    │   ├─ Calcula precio óptimo
+                    │   ├─ Actualiza en ML
+                    │   └─ Guarda en DB
+                    │
+                    └─► 3. Notificar
+                        (telegram_notifier.py)
+                        ├─ Nuevos catálogos
+                        ├─ Precios ajustados
+                        └─ Resumen de ejecución
+```
+
+### Base de Datos
+
+```sql
+-- Tabla: listings
+
+ASIN           | B0DHLFP4QN
+item_id        | CBT2688861965
+title          | LEGO 77248 Speed Champions...
+
+-- Datos de costo
+costo_amazon   | 50.00
+tax_florida    | 0.07
+
+-- Precios
+precio_original | 77.58  (margen 45%)
+precio_actual   | 69.00  (ajustado competitivamente)
+
+-- Control
+es_catalogo              | 1
+ultima_actualizacion_precio | 2025-11-08T13:45:23
+```
+
+---
+
+## 📊 Ejemplos Paso a Paso
+
+### Ejemplo 1: Producto Competitivo (Caso Ideal)
+
+**Día 1 - Publicación**
+```
+ASIN: B0DHLFP4QN (LEGO 77248)
+Amazon: $50.00
+Tax (7%): $3.50
+Costo Real: $53.50
+
+Precio calculado (45%): $77.58
+Estado: Publicado en ML
+Catálogo: NO
+```
+
+**Día 2 - ML lo asocia a catálogo**
+```
+10:00 AM - MercadoLibre hace matching automático
+├─ Detecta: UPC coincide con catálogo existente
+├─ Asocia: catalog_product_id = "MLM19384756"
+└─ Estado: Ahora compites con 8 vendedores
+
+12:00 PM - Monitor detecta el cambio
+├─ Consulta ML API
+├─ Encuentra: catalog_product_id presente
+├─ Actualiza DB: es_catalogo = 1
+└─ Notifica: "🏷️ B0DHLFP4QN pasó a catálogo"
+```
+
+**Día 2 - Primera revisión de precio**
+```
+12:01 PM - Sistema revisa buybox
+├─ Buybox actual: $70.00
+├─ Tu precio: $77.58
+├─ Precio mínimo (25%): $66.88
+└─ Decisión: $70 > $66.88 → COMPETIR
+
+12:02 PM - Ajuste de precio
+├─ Nuevo precio: $69.00 (buybox - 1)
+├─ Margen real: 29%
+├─ Actualiza en ML ✅
+├─ Actualiza DB ✅
+└─ Notifica: "💰 Precio $77.58 → $69.00 (29% margen)"
+
+Resultado:
+├─ Ahora TÚ eres el buybox
+├─ Probabilidad de venta: ALTA
+└─ Ganancia por unidad: $15.50
+```
+
+**Día 3 - Competidor responde**
+```
+6:00 PM - Siguiente revisión (6 horas después)
+├─ Buybox actual: $68.00 (otro vendedor bajó)
+├─ Tu precio: $69.00
+├─ Precio mínimo: $66.88
+└─ Decisión: $68 > $66.88 → COMPETIR
+
+6:01 PM - Re-ajuste
+├─ Nuevo precio: $67.00
+├─ Margen real: 25.2%
+├─ Actualiza en ML ✅
+└─ Notifica: "💰 Re-ajuste $69 → $67"
+
+Resultado:
+├─ Recuperaste el buybox
+├─ Aún con margen saludable
+└─ Ganancia por unidad: $13.50
+```
+
+**Día 4 - Guerra de precios**
+```
+12:00 AM - Revisión nocturna
+├─ Buybox actual: $60.00 (competidor agresivo)
+├─ Tu precio: $67.00
+├─ Precio mínimo: $66.88
+└─ Decisión: $60 < $66.88 → NO COMPETIR
+
+12:01 AM - Decisión protectora
+├─ Nuevo precio: $77.58 (vuelve a original)
+├─ Margen: 45%
+├─ Actualiza en ML ✅
+└─ Notifica: "🚨 No rentable, precio restaurado"
+
+Resultado:
+├─ Perdiste el buybox
+├─ Pero NO pierdes dinero
+└─ Esperas mejores condiciones
+```
+
+---
+
+### Ejemplo 2: Producto No Rentable desde el Inicio
+
+**Escenario:** Catálogo muy competido
+
+```
+ASIN: B00S1116J4
+Costo: $50.00
+Costo Real (+ tax): $53.50
+Precio publicado: $77.58
+
+Día 1 - Pasa a catálogo
+├─ Buybox: $58.00
+├─ Precio mínimo: $66.88
+└─ $58 < $66.88 → NO COMPETIR
+
+Decisión:
+├─ Mantiene $77.58
+└─ Notifica: "🚨 Catálogo no rentable"
+
+Comportamiento:
+├─ El sistema NO baja el precio
+├─ Mantiene margen 45%
+├─ Si nadie compra, no hay pérdidas
+└─ Si buybox sube, recalcula automáticamente
+```
+
+---
+
+## 🛠️ Componentes Técnicos
+
+### 1. Monitor Principal (`catalog_price_monitor.py`)
+
+**Responsabilidad:** Orquestador del sistema
+
+```python
+def run_monitor():
+    # 1. Detectar nuevos catálogos
+    catalogos_nuevos = check_and_mark_catalogs()
+
+    # 2. Ajustar precios
+    precios_ajustados, no_rentables = adjust_and_notify()
+
+    # 3. Notificar resumen
+    notify_summary(catalogos_nuevos, precios_ajustados, no_rentables)
+```
+
+**Ejecución:**
+- En loop: cada 6 horas
+- En background: con `nohup`
+- Logs en: `logs/catalog_monitor.log`
+
+---
+
+### 2. Detector de Catálogo (`check_catalog_items.py`)
+
+**Responsabilidad:** Identificar productos de catálogo
+
+```python
+def check_if_catalog(item_id):
+    # Consultar ML API
+    item = ml_api.get_item(item_id)
+
+    # Verificar si tiene catalog_product_id
+    if item.get("catalog_product_id"):
+        return {
+            "is_catalog": True,
+            "catalog_id": item["catalog_product_id"],
+            "price": item["price"]
+        }
+
+    return {"is_catalog": False}
+```
+
+**Flujo:**
+1. Lee todos los items de la DB
+2. Consulta ML uno por uno
+3. Actualiza `es_catalogo` si cambió
+4. Notifica nuevos catálogos
+
+---
+
+### 3. Ajustador de Precios (`adjust_catalog_prices.py`)
+
+**Responsabilidad:** Calcular y actualizar precios
+
+```python
+def adjust_catalog_prices():
+    productos = db.get_catalogos()
+
+    for producto in productos:
+        # Calcular precios
+        precios = calculate_prices(producto.costo_amazon)
+
+        # Obtener buybox
+        buybox = ml_api.get_buybox_price(producto.item_id)
+
+        # Decidir
+        if buybox < precios["precio_minimo"]:
+            nuevo_precio = precios["precio_original"]
+        else:
+            nuevo_precio = min(buybox - 1, precios["precio_original"])
+
+        # Actualizar
+        ml_api.update_price(producto.item_id, nuevo_precio)
+        db.update_precio_actual(producto.asin, nuevo_precio)
+```
+
+**Protecciones:**
+- ✅ Nunca baja del margen mínimo (25%)
+- ✅ Guarda histórico en DB
+- ✅ Notifica cada cambio
+- ✅ Maneja errores de ML API
+
+---
+
+### 4. Restaurador (`restore_original_prices.py`)
+
+**Responsabilidad:** Revertir precios
+
+```python
+def restore_original_prices():
+    productos = db.get_with_precio_original()
+
+    for producto in productos:
+        # Volver al precio original
+        ml_api.update_price(producto.item_id, producto.precio_original)
+        db.update_precio_actual(producto.asin, producto.precio_original)
+```
+
+**Uso:**
+- Después de promociones temporales
+- Resetear experimentos
+- Volver a estrategia conservadora
+
+---
+
+## 🔍 Monitoreo y Logs
+
+### Ver Estado en Tiempo Real
+
+```bash
+# Log del monitor
+tail -f logs/catalog_monitor.log
+
+# Estado en DB
+sqlite3 storage/listings_database.db "
+SELECT
+    asin,
+    precio_original,
+    precio_actual,
+    ROUND((precio_actual / precio_original - 1) * 100, 1) as cambio_pct,
+    es_catalogo
+FROM listings
+WHERE es_catalogo = 1
+ORDER BY ultima_actualizacion_precio DESC;
+"
+```
+
+### Ejemplo de Log
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔍 MONITOR DE PRECIOS DE CATÁLOGO
+   2025-11-08 18:00:00
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔍 Revisando 8 producto(s)...
+
+✅ NUEVO CATÁLOGO: B0DHLFP4QN
+   Catalog ID: MLM19384756
+   Precio: $77.58
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+💰 Ajustando precios de catálogo...
+
+📦 ASIN: B0DHLFP4QN
+   Item ID: CBT2688861965
+   💰 Costo real: $53.50
+   📊 Precio original (45%): $77.58
+   🚨 Precio mínimo (25%): $66.88
+   🏆 Buybox: $70.00
+   💡 Decisión: $69.00
+      Razón: Competitivo con 29% margen
+   ✅ Precio actualizado
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 RESUMEN:
+   🏷️  Nuevos catálogos: 1
+   💰 Precios ajustados: 1
+   🚨 No rentables: 0
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⏰ Próxima ejecución: 2025-11-09 00:00:00
+```
+
+---
+
+## 🎯 Resumen del Funcionamiento
+
+### Proceso Completo en 7 Pasos
+
+1. **Publicas producto** con `main2.py`
+   - Precio calculado con 45% margen
+   - Guardado en DB con `es_catalogo = 0`
+
+2. **MercadoLibre lo asocia a catálogo** (automático, 24-48h)
+   - Usa UPC/GTIN para matching
+   - Asocia `catalog_product_id`
+
+3. **Monitor detecta el cambio** (cada 6h)
+   - Consulta ML API
+   - Actualiza `es_catalogo = 1`
+   - Notifica por Telegram
+
+4. **Sistema obtiene buybox**
+   - Consulta precio más bajo del catálogo
+   - Ejemplo: $70.00
+
+5. **Calcula si es rentable competir**
+   - Precio mínimo = Costo × 1.25
+   - Si buybox > precio_mínimo → SÍ
+   - Si buybox < precio_mínimo → NO
+
+6. **Ajusta precio en ML**
+   - Si rentable: buybox - $1
+   - Si no rentable: mantiene original
+   - Actualiza en ML y DB
+
+7. **Notifica resultado**
+   - Telegram: cambio de precio
+   - Log: detalles completos
+   - DB: histórico guardado
+
+### Garantías del Sistema
+
+✅ **Nunca pierde dinero** (respeta margen 25%)
+✅ **Automático** (sin intervención manual)
+✅ **Reversible** (puede volver a precios originales)
+✅ **Auditable** (logs y DB completos)
+✅ **Notificado** (Telegram en tiempo real)
+
+---
+
+**ONE WORLD**
+Documentación técnica completa
+Hecho con Claude Code 🤖

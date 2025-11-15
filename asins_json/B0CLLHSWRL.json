@@ -1,0 +1,961 @@
+{
+  "asin": "B0CLLHSWRL",
+  "attributes": {
+    "has_multiple_battery_powered_components": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "grams",
+        "value": 1500.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Multi-Device Connection: AULA F99 wireless mechanical keyboard provides three connection methods, including BT5.0, 2.4GHz wireless mode, and USB wired mode. It can be connected to up to five devices at the same time, and switch between them easily by FN and key combination keys. No limits about your keyboard connection to meet the needs of work, gaming, and study",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Hot-swappable Custom Keyboard: The switches and keycaps can be freely replaced(keycap/switch puller are included in the package).This customizable keyboard with hot-swap PCB allows users to replace 3 pins/5 pins switches easily without soldering issue. F99 mechanical keyboards equipped with pre-lubed linear switches, bring smooth typing feeling and pleasant typing sound, provide fast response for exciting game",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Mechanical Gaming Keyboard: F99 is a premium mechanical keyboard for both work and game. With 16 RGB lighting effect to adds a great atmosphere to the game room. Keys support macro customization, which allows macro recording and editing, customize key function and 16.8 million light colors, and supports cool music rhythm lighting effects with driver. N-key rollover, keyboard can respond to multiple key presses at the same time, which is helpful in very exciting real-time games",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Advanced Structure and PCB Single Key Slotting: This computer keyboard features a advanced structure, extended integrated silicone pad, and PCB single key slotting, better optimizes resilience and stability, making the hand feel softer and more elastic. Five layers of filling silencer fills the gap between the PCB, the positioning plate and the shaft,effectively counteracting the cavity noise sound of the shaft hitting the positioning plate, and providing a solid feel",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "PBT Keycaps and 8000mAh Battery: 99 keys 96% layout compact keyboard can save more desktop space while keep necessary arrow keys and number area for games and work. The rechargeable keyboard built-in 8000mAh large capcacity battery to provide more power and longer battery life. Double shot PBT keycaps, made from two colors material molded into each others, make the keycaps characters maintain the vibrance and saturation, clear and not fade",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hazmat": [
+      {
+        "aspect": "proper_shipping_name",
+        "value": "LITHIUM ION BATTERIES CONTAINED IN EQUIPMENT",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "united_nations_regulatory_id",
+        "value": "UN3481",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "regulatory_packing_group",
+        "value": "II",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "transportation_regulatory_class",
+        "value": "9",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AU_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BR_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CA_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CN_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "DE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "EG_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ES_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "FR_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "GB_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IN_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IT_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "JP_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "MX_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "NL_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "PL_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SA_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SE_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SG_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "TR_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "US_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ZA_SmallLithiumIonBatteryInEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ships_globally": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "centimeters",
+          "value": 4.25
+        },
+        "length": {
+          "unit": "centimeters",
+          "value": 14.67
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 39.06
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "<br> <b>💖💖 Product Specifications:💖💖 </b> <br><br>♣♣ Product Names: F99 Tri-mode Wireless Custom Mechanical Keyboard<br><br>♣♣ Brand: AULA<br><br>♣♣ Model: F99<br><br>♣♣ Color: Black Grey<br><br>♣♣ Material: Plastic<br><br>♣♣ Connection Method: BT5.0,2.4GHz wireless, USB C wired<br><br>♣♣ Cable Length: 1.8m<br><br>♣♣ Number Of Keys: 99<br><br>♣♣ Key Stroke: 3.6mm<br><br>♣♣ Keystroke Force: 53±3g<br><br>♣♣ Key Life Times: 60 Million Times<br><br>♣♣ Rated Voltage: DC 3.7V<br><br>♣♣ Rated Current:830mA<br><br>♣♣ Types Of Lighting Effects: 16 Kinds<br><br>♣♣ Switch Type: Pre-lubed linear switches<br><br>♣♣ System Support: Mac OS, Windows 7/8/10/Vista, iOS, Android<br><br>♣♣ Applicable Equipment: Ps4/ Ps5/ Xbox/ Pc/ Mac/ Laptop/ Tablet/ Notebook/ Desktop Computer<br><br>♣♣ Keyboard Size: 390×146×42mm<br><br>♣♣ Product Weight: 1183g<br><br> <b>💖💖 Packing List:💖💖 </b> <br><br>♣♣ Custom Keyboard ×1;<br><br>♣♣ Switches Puller ×1;<br><br>♣♣ Keys Puller ×1;<br><br>♣♣ Switches Puller ×1;<br><br>♣♣ 2 Extra Grey Switches ×1;<br><br>♣♣ English Manual ×1;<br> <br> <b>💖💖 Product Features:💖💖 </b> <br><br>♣♣ 1. Tri-mode Connection: BT5.0, 2.4GHz, Type C wired;<br><br>♣♣ 2. 16.8 million cool RGB backlight, 16 kinds of lighting modes adjustable, support software custom;<br><br>♣♣ 3. Hot swappable pcb keyboard, support 3 pins/5 pins switches;<br><br>♣♣ 4. Pre-lubed linear switches, smooth, quiet, fast;<br><br>♣♣ 5. High quality advanced structure,PCB Single Key Slotting;<br><br>♣♣ 6. PBT Keycaps;<br><br>♣♣ 7. Rechargeable, 8000mAh high capacity battery;<br><br>♣♣ 8. 99 key 96% compact layout with numpad<br>",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "AULA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43211706",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hardware_platform": [
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "total_usb_2_0_ports": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.207
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 18.0086
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 41.6052
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Everyday Use",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Education",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Business",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Multimedia",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Personal",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Photo Editing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Programming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Student",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Video Editing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "SUN24527-C972",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Contemporary",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_lithium_ion_cells": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "water_resistance_level": [
+      {
+        "value": "water_repellent",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "button_quantity": [
+      {
+        "value": 99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "battery": [
+      {
+        "cell_composition": [
+          {
+            "value": "lithium_ion"
+          }
+        ],
+        "weight": [
+          {
+            "unit": "grams",
+            "value": 73.0
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "AULA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "theme": [
+      {
+        "language_tag": "en_US",
+        "value": "Hot Swappable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Rainbow",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lithium_battery": [
+      {
+        "energy_content": [
+          {
+            "unit": "watt_hours",
+            "value": 15.0
+          }
+        ],
+        "packaging": [
+          {
+            "value": "batteries_contained_in_equipment"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "Grey+White - Graywood Switch",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_battery_or_cell": [
+      {
+        "value": "battery",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_layout": [
+      {
+        "value": "qwerty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "num_batteries": [
+      {
+        "quantity": 2,
+        "type": "a",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "lithium_polymer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "aa",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 2,
+        "type": "lithium_ion",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "nonstandard_battery",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_has_product_identifier_exemption": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "AULA F99 Wireless Mechanical Keyboard,Tri-Mode BT5.0/2.4GHz/USB-C Hot Swappable Custom Keyboard,Pre-lubed Linear Switches,RGB Backlit Computer Gaming Keyboards for PC/Tablet/PS/Xbox",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 79.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2023-10-23T06:34:49.169Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "BT5.0",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "USB-C",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "2.4GHz",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Keycap Puller",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "USB Cable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "User Manual",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Extra 2 Grey Pre-lubed Linear Switches",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "identification_number": "2BBY9-F99",
+        "registration_status": "has_fcc_id",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "language": [
+      {
+        "type": "manual",
+        "value": "english",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "switch_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Linear",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "F99",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "video-game-keyboards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "6 Months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "battery_installation_device_type": [
+      {
+        "value": "installed_in_vessel",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black&Grey&White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.451,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width_height": [
+      {
+        "length": {
+          "unit": "inches",
+          "value": 15.35
+        },
+        "width": {
+          "unit": "inches",
+          "value": 5.75
+        },
+        "height": {
+          "unit": "inches",
+          "value": 1.65
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Backlit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Hot-Swappable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Rechargeable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Integrated Stand",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Programmable Keys",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_backlighting_color_support": [
+      {
+        "value": "rgb",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Mechanical",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Battery Powered",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Gaming Console",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Laptop",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Smartphone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Tablet",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hand_orientation": [
+      {
+        "language_tag": "en_US",
+        "value": "Ambidextrous",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61dle1FTC9L.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41Y-gsl1xKL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41Y-gsl1xKL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/61GleNTVFOL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/416tdmwqSuL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/416tdmwqSuL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71gIKXG9jHL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/511GvHj2rAL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/511GvHj2rAL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71kMlC7o6oL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51fT3fgKJLL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51fT3fgKJLL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71cbTfa1F0L.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51UqtJMJFcL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51UqtJMJFcL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71eMryluCJL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/519k1SnDytL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/519k1SnDytL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71-Jpa11paL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51k2uEqeFeL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51k2uEqeFeL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/61S+mut2aJL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41JyjbV4JkL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41JyjbV4JkL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/71sE5+EPFBL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51aT7OO7DmL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51aT7OO7DmL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "KEYBOARDS"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0CSDJK975"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "402051011",
+          "title": "PC Gaming Keyboards",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/402051011",
+          "rank": 4
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "video_games_display_on_website",
+          "title": "Video Games",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames",
+          "rank": 115
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "AULA",
+      "browseClassification": {
+        "displayName": "Gaming Keyboards",
+        "classificationId": "402051011"
+      },
+      "color": "Black&Grey&White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "AULA F99 Wireless Mechanical Keyboard,Tri-Mode BT5.0/2.4GHz/USB-C Hot Swappable Custom Keyboard,Pre-lubed Linear Switches,RGB Backlit Computer Gaming Keyboards for PC/Tablet/PS/Xbox",
+      "manufacturer": "AULA",
+      "memorabilia": false,
+      "modelNumber": "Grey+White - Graywood Switch",
+      "packageQuantity": 1,
+      "partNumber": "SUN24527-C972",
+      "style": "Contemporary",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "pc_accessory_display_on_website",
+      "websiteDisplayGroupName": "PC Accessory"
+    }
+  ]
+}

@@ -1,0 +1,282 @@
+# 🚫 Sistema de Filtrado de Marcas Prohibidas
+
+Protección automática contra publicación de productos de marcas restringidas por MercadoLibre.
+
+---
+
+## 🎯 ¿Qué hace?
+
+Bloquea automáticamente la publicación de productos de marcas que:
+- Están prohibidas por MercadoLibre
+- Tienen restricciones de propiedad intelectual
+- Requieren autorización especial del fabricante
+
+---
+
+## 📋 Lista de Marcas Bloqueadas
+
+Actualmente bloqueadas (actualizado 2025-11-08):
+
+- ✅ Adidas
+- ✅ Biotherm
+- ✅ Carolina Herrera
+- ✅ Converse
+- ✅ It Cosmetics
+- ✅ Kérastase
+- ✅ Kiehl's
+- ✅ Jean Paul Gaultier
+- ✅ Lancôme
+- ✅ Nike
+- ✅ Nina Ricci
+- ✅ Paco Rabanne
+- ✅ Ralph Lauren
+- ✅ Urban Decay
+
+---
+
+## ⚙️ ¿Cómo Funciona?
+
+### 1. Verificación Automática en Pipeline
+
+Cada vez que el pipeline intenta publicar un producto:
+
+```
+1. Extrae la marca del producto (campo "brand")
+2. Compara con la lista de marcas prohibidas
+3. Si coincide → Bloquea y saltea el producto
+4. Si no coincide → Continúa con la publicación normal
+```
+
+### 2. Detección Inteligente
+
+El sistema detecta variaciones:
+
+- **Match exacto**: "Nike" = bloqueado
+- **Match parcial**: "Nike Pro" = bloqueado (contiene "Nike")
+- **Case insensitive**: "NIKE", "nike", "Nike" = todos bloqueados
+
+---
+
+## 🚀 Uso
+
+### Automático (Recomendado)
+
+El filtro está **integrado automáticamente** en el pipeline principal. No necesitás hacer nada.
+
+```bash
+# Ejecutar pipeline normal
+./venv/bin/python3 src/integrations/mainglobal.py
+
+# Si encuentra un producto Nike:
+# 🚫 PRODUCTO BLOQUEADO - Marca prohibida: Nike
+#    ASIN: B0ABC123
+#    Marca coincide con: Nike
+#    ⏭️  Saltando publicación de este producto
+```
+
+### Test Manual
+
+Para probar el sistema de filtrado:
+
+```bash
+./venv/bin/python3 src/filters/brand_filter.py
+```
+
+---
+
+## 📊 Ejemplo de Salida
+
+```
+🔄 Procesando B0NIKE123...
+📦 Usando JSON transformado (mini_ml) para B0NIKE123
+
+🚫 PRODUCTO BLOQUEADO - Marca prohibida: Nike
+   ASIN: B0NIKE123
+   Marca coincide con: Nike
+   ⏭️  Saltando publicación de este producto
+
+✅ Producto omitido automáticamente
+```
+
+---
+
+## 🔧 Agregar/Modificar Marcas Prohibidas
+
+### Agregar nueva marca
+
+1. Editar `config/blocked_brands.json`:
+
+```json
+{
+  "blocked_brands": [
+    "Adidas",
+    "Nike",
+    "Puma"  ← Nueva marca
+  ],
+  "updated": "2025-11-08"
+}
+```
+
+2. Guardar archivo
+3. ✅ Ya está activo (no requiere restart)
+
+### Eliminar marca de la lista
+
+1. Editar `config/blocked_brands.json`
+2. Eliminar la línea de la marca
+3. Guardar
+
+**Importante**: Usá comillas dobles `"`, no comillas simples `'`
+
+---
+
+## 🧪 Testing
+
+### Probar si una marca está bloqueada
+
+```bash
+# Ejecutar test del módulo
+./venv/bin/python3 src/filters/brand_filter.py
+```
+
+### Verificar manualmente desde Python
+
+```python
+from src.filters.brand_filter import is_brand_blocked
+
+# Test
+result = is_brand_blocked("Nike")
+print(result)
+# {'is_blocked': True, 'brand': 'Nike', 'matched_brand': 'Nike'}
+
+result = is_brand_blocked("LEGO")
+print(result)
+# {'is_blocked': False, 'brand': 'LEGO', 'matched_brand': None}
+```
+
+---
+
+## 📈 Estadísticas
+
+Para ver cuántos productos fueron bloqueados:
+
+```bash
+# Ver logs del pipeline
+grep "PRODUCTO BLOQUEADO" logs/*.log
+
+# Contar bloqueados por marca
+grep "Marca coincide con" logs/*.log | sort | uniq -c
+```
+
+---
+
+## ❓ FAQ
+
+**¿Qué pasa con los productos bloqueados?**
+
+Se saltean automáticamente. No se publican, no generan errores, simplemente el pipeline continúa con el siguiente producto.
+
+**¿Puedo publicar productos Nike si tengo autorización?**
+
+Sí, simplemente eliminá "Nike" de `config/blocked_brands.json`.
+
+**¿El filtro verifica variantes (colores, tamaños)?**
+
+Sí, el filtro se aplica a la marca base. Si "Nike" está bloqueado, todas las variantes de Nike se bloquean también.
+
+**¿Funciona para todos los marketplaces (México, Brasil)?**
+
+Sí, el filtro es global. Si una marca está bloqueada, no se publica en ningún país.
+
+**¿Qué pasa si Amazon no provee la marca?**
+
+Si el campo "brand" está vacío, el producto se considera "sin marca" y NO se bloquea (pasa el filtro).
+
+**¿Puedo usar wildcards o regex?**
+
+Actualmente no. El sistema solo soporta strings exactos o parciales. Si necesitás regex, podés modificar `src/filters/brand_filter.py`.
+
+---
+
+## 🔍 Dónde se aplica el filtro
+
+```
+Pipeline de publicación:
+  1. Descargar ASIN de Amazon          ← No filtrado aún
+  2. Transformar a formato ML          ← No filtrado aún
+  3. Encontrar categoría CBT           ← No filtrado aún
+  4. Preparar para publicación (mini_ml)
+  5. → FILTRO DE MARCAS ←              ✅ SE APLICA AQUÍ
+  6. Publicar en MercadoLibre          ← Solo si pasó filtro
+```
+
+**Resultado**: Se ahorra el request de publicación a MercadoLibre, pero ya se procesó el producto (descarga de Amazon, transformación, categorización).
+
+---
+
+## 💡 Mejora Futura Posible
+
+Si querés ahorrar más tiempo/tokens, podés mover el filtro más arriba en el pipeline:
+
+**Opción A: Filtrar después de descargar de Amazon**
+- Ahorra: procesamiento, IA, categorización
+- Requiere: leer el JSON de Amazon directamente
+
+**Opción B: Filtrar desde la búsqueda de ASINs**
+- Ahorra: descarga de Amazon también
+- Requiere: consulta adicional a Amazon API para obtener marca
+
+Por ahora está al final porque es el punto más seguro (ya tenemos todos los datos procesados).
+
+---
+
+## 📁 Archivos del Sistema
+
+```
+config/
+  blocked_brands.json               # Lista de marcas prohibidas (editable)
+
+src/
+  filters/
+    brand_filter.py                 # Motor de filtrado de marcas
+    __init__.py
+
+  integrations/
+    mainglobal.py                   # Integración del filtro (línea 1098-1106)
+```
+
+---
+
+## 🎬 Ejemplo Completo
+
+```bash
+# Buscar productos Nike (para demostración)
+./search_asins.sh "nike shoes" 10
+
+# Ejecutar pipeline
+./venv/bin/python3 src/integrations/mainglobal.py
+
+# Salida esperada:
+# 📦 Procesando B0NIKE001...
+# 🚫 PRODUCTO BLOQUEADO - Marca prohibida: Nike
+#    ⏭️  Saltando publicación
+#
+# 📦 Procesando B0NIKE002...
+# 🚫 PRODUCTO BLOQUEADO - Marca prohibida: Nike
+#    ⏭️  Saltando publicación
+#
+# ... todos los Nike bloqueados automáticamente
+```
+
+---
+
+## ⚖️ Legal
+
+Este filtro es una herramienta de prevención. Es responsabilidad del usuario:
+- Mantener la lista actualizada según políticas de MercadoLibre
+- Verificar restricciones de propiedad intelectual en su país
+- Obtener autorizaciones necesarias para vender marcas específicas
+
+---
+
+🤖 Sistema de protección automática contra marcas restringidas

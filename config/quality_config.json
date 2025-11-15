@@ -1,0 +1,102 @@
+{
+  "comment": "Configuración de análisis de calidad de productos",
+  "version": "1.0",
+  "last_updated": "2025-11-08",
+
+  "thresholds": {
+    "excellent_rating": 4.5,
+    "good_rating": 4.0,
+    "min_rating": 3.5,
+
+    "high_reviews": 1000,
+    "medium_reviews": 100,
+    "min_reviews": 10,
+
+    "top_bsr": 10000,
+    "good_bsr": 50000,
+    "medium_bsr": 100000,
+
+    "min_price": 10,
+    "max_price": 300,
+    "optimal_min_price": 20,
+    "optimal_max_price": 150
+  },
+
+  "weights": {
+    "rating": 0.20,
+    "reviews": 0.25,
+    "bsr": 0.45,
+    "price": 0.10
+  },
+
+  "publication_rules": {
+    "publish_all": {
+      "min_avg_score": 85,
+      "min_excellent_ratio": 0.5,
+      "percentage": 0.60,
+      "max_count": 60,
+      "description": "Publicar 60% (hasta 60) - Keywords EXCELENTES con alta demanda"
+    },
+    "publish_most": {
+      "min_avg_score": 65,
+      "min_good_ratio": 0.6,
+      "percentage": 0.50,
+      "max_count": 35,
+      "description": "Publicar 50% (hasta 35) - Keywords MUY BUENAS"
+    },
+    "publish_some": {
+      "min_avg_score": 50,
+      "percentage": 0.40,
+      "max_count": 25,
+      "description": "Publicar 40% (hasta 25) - Keywords REGULARES"
+    },
+    "publish_few": {
+      "min_avg_score": 35,
+      "percentage": 0.25,
+      "max_count": 15,
+      "description": "Publicar 25% (hasta 15) - Keywords de BAJA calidad"
+    },
+    "skip": {
+      "max_avg_score": 34,
+      "description": "NO publicar - Keyword muy baja calidad"
+    }
+  },
+
+  "quality_tiers": {
+    "EXCELLENT": {
+      "min_score": 90,
+      "description": "Productos premium con alta demanda"
+    },
+    "GOOD": {
+      "min_score": 70,
+      "description": "Buenos productos con demanda constante"
+    },
+    "REGULAR": {
+      "min_score": 50,
+      "description": "Productos regulares"
+    },
+    "LOW": {
+      "min_score": 30,
+      "description": "Productos de baja calidad/demanda"
+    },
+    "VERY_LOW": {
+      "min_score": 0,
+      "description": "Productos de muy baja calidad - Evitar"
+    }
+  },
+
+  "sample_size": {
+    "default": 20,
+    "min": 10,
+    "max": 50,
+    "description": "Cantidad de productos a analizar para determinar calidad de keyword"
+  },
+
+  "notes": {
+    "rating": "Score basado en estrellas (4.5+ = excelente, 4.0+ = bueno, 3.5+ = mínimo)",
+    "reviews": "Score basado en cantidad de reviews (1000+ = muy vendido, 100+ = vendido)",
+    "bsr": "Score basado en Best Seller Rank (menor = mejor, <10k = top seller)",
+    "price": "Score basado en rango de precio ($20-$150 = óptimo)",
+    "weights": "Pesos para calcular score total (suman 1.0)"
+  }
+}

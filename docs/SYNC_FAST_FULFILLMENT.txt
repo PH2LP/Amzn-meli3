@@ -1,0 +1,298 @@
+# 🔄 Sync con Fast Fulfillment Filter
+
+## 📋 Resumen
+
+`sync_amazon_ml.py` **ya está usando el filtro de Fast Fulfillment automáticamente** a través de `get_prime_offers_batch_optimized()`.
+
+Cuando ejecutes sync, pausará automáticamente productos que:
+- ❌ Entren en backorder (>7 días)
+- ❌ Tarden >24h en salir del almacén
+- ❌ Pierdan Prime
+- ❌ No tengan fecha de disponibilidad
+
+---
+
+## 🔧 Cómo Funciona
+
+### Flujo de Sync:
+
+```
+1. Obtener listings de BD
+   ↓
+2. get_prime_offers_batch_optimized(asins)  ← FILTRO APLICADO AQUÍ
+   ↓
+3. Para cada listing:
+   Si prime_offer = None:
+     → PAUSAR en ML (stock=0)
+     → Notificar por Telegram
+   Si prime_offer != None:
+     → Actualizar precio si cambió
+     → Mantener activo
+```
+
+---
+
+## ✅ Integración Automática
+
+### Código de sync (línea 637):
+```python
+prime_offer_cache = get_prime_offers_batch_optimized(asins, batch_size=20, show_progress=True)
+```
+
+### Esta función YA incluye el filtro:
+- ✅ `availabilityType = "NOW"` + `maximumHours ≤ 24`
+- ✅ `availabilityType = "FUTURE_WITH_DATE"` + `días ≤ 7`
+- ❌ Rechaza backorders largos
+- ❌ Rechaza productos sin fecha
+
+---
+
+## 📊 Casos de Uso
+
+### Caso 1: Producto entra en backorder
+```
+Estado anterior:
+  • Prime: ✅
+  • availabilityType: NOW
+  • maximumHours: 0
+
+Estado actual:
+  • Prime: ✅
+  • availabilityType: FUTURE_WITH_DATE
+  • availableDate: 2025-12-01 (18 días)
+
+Acción de sync:
+  ❌ PAUSA en MercadoLibre
+  📱 Notificación Telegram: "Pausado: Disponible en 18 días (>7d)"
+  📝 Log: "Producto pausado - razón: backorder largo"
+```
+
+---
+
+### Caso 2: Producto tarda en salir del almacén
+```
+Estado anterior:
+  • Prime: ✅
+  • availabilityType: NOW
+  • maximumHours: 0
+
+Estado actual:
+  • Prime: ✅
+  • availabilityType: NOW
+  • maximumHours: 72
+
+Acción de sync:
+  ❌ PAUSA en MercadoLibre
+  📱 Notificación: "Pausado: MaxHours=72h (3.0d) >24h"
+  📝 Log: "Producto pausado - razón: warehouse delay"
+```
+
+---
+
+### Caso 3: Producto pierde Prime
+```
+Estado anterior:
+  • Prime: ✅
+  • FBA: ✅
+
+Estado actual:
+  • Prime: ❌
+  • FBA: ❌
+
+Acción de sync:
+  ❌ PAUSA en MercadoLibre
+  📱 Notificación: "Pausado: Sin oferta Prime activa"
+  📝 Log: "Producto pausado - razón: no prime"
+```
+
+---
+
+### Caso 4: Producto sigue disponible
+```
+Estado anterior:
+  • Prime: ✅
+  • availabilityType: NOW
+  • maximumHours: 0
+  • Precio: $19.99
+
+Estado actual:
+  • Prime: ✅
+  • availabilityType: NOW
+  • maximumHours: 0
+  • Precio: $21.99
+
+Acción de sync:
+  ✅ MANTIENE ACTIVO en MercadoLibre
+  💰 ACTUALIZA PRECIO: $19.99 → $21.99
+  📝 Log: "Precio actualizado exitosamente"
+```
+
+---
+
+## 🎯 Estadísticas de Sync
+
+Cuando ejecutes `sync_amazon_ml.py`, verás:
+
+```
+📊 RESUMEN DE SINCRONIZACIÓN
+================================================================================
+Total procesados:       150
+Publicaciones pausadas: 23   ← Incluye productos sin fast fulfillment
+Precios actualizados:   47
+Sin cambios:            75
+Errores:                5
+```
+
+**Razones de pausa incluirán:**
+- "Pausado: Disponible en 18 días (>7d)"
+- "Pausado: MaxHours=72h (3.0d) >24h"
+- "Pausado: Sin fecha de disponibilidad (FUTURE_WITHOUT_DATE)"
+- "Pausado: Sin oferta Prime activa"
+
+---
+
+## 📝 Logs Detallados
+
+### Ejemplo de producto pausado por backorder:
+```
+🔄 Sincronizando: B0XXXXXX
+   ML Item ID: CBT1234567890
+   Título: Producto Ejemplo...
+   Precio actual ML: $29.99 USD
+   📡 Verificando datos Prime (desde cache batch)...
+   ⚠️ PRODUCTO RECHAZADO POR FILTROS
+   📋 Razón: Disponible en 15 días (>7d)
+   ⏸️ ACCIÓN: Pausar publicación
+   📦 Poniendo stock en 0 (sin disponibilidad)...
+   ✅ Stock actualizado a 0 exitosamente
+   ✅ Publicación pausada exitosamente
+```
+
+---
+
+## 🔧 Configuración
+
+### Ajustar límites del filtro:
+
+Si quieres cambiar los criterios, edita `src/integrations/amazon_pricing.py`:
+
+```python
+# Líneas 18-19
+MAX_WAREHOUSE_HOURS = 24  # Cambiar a 12 (más estricto) o 36 (más flexible)
+MAX_BACKORDER_DAYS = 7    # Cambiar a 3 (estricto) o 14 (flexible)
+```
+
+**Nota:** Cualquier cambio aquí afectará TANTO a `main2.py` como a `sync_amazon_ml.py`
+
+---
+
+## ⏰ Frecuencia de Ejecución
+
+### Cron Job actual:
+```bash
+0 9 */3 * * cd /path && ./venv/bin/python3 sync_amazon_ml.py >> logs/sync_amazon_ml.log 2>&1
+```
+
+**Ejecuta cada 3 días a las 9:00 AM**
+
+### Si quieres mayor frecuencia:
+```bash
+# Cada 2 días
+0 9 */2 * * cd /path && ./venv/bin/python3 sync_amazon_ml.py >> logs/sync_amazon_ml.log 2>&1
+
+# Cada día
+0 9 * * * cd /path && ./venv/bin/python3 sync_amazon_ml.py >> logs/sync_amazon_ml.log 2>&1
+
+# Dos veces al día (9am y 9pm)
+0 9,21 * * * cd /path && ./venv/bin/python3 sync_amazon_ml.py >> logs/sync_amazon_ml.log 2>&1
+```
+
+---
+
+## 📱 Notificaciones Telegram
+
+### Mensajes que recibirás:
+
+**Producto pausado:**
+```
+⏸️ CBT1234567890 → B0XXXXXX
+Pausado: Disponible en 18 días (>7d)
+
+Producto Ejemplo...
+```
+
+**Precio actualizado:**
+```
+💰 CBT1234567890 → B0XXXXXX
+Precio: $29.99 → $32.49 USD
+Países: MLM, MLB, MLC
+
+Producto Ejemplo...
+```
+
+---
+
+## 🧪 Testing
+
+### Test manual:
+```bash
+python3 test_sync_fast_fulfillment.py
+```
+
+### Ejecución de sync en producción:
+```bash
+# Ejecutar sync manualmente
+python3 scripts/tools/sync_amazon_ml.py
+
+# Ver logs en tiempo real
+tail -f logs/sync_amazon_ml.log
+
+# Ver último resultado JSON
+cat logs/sync/sync_*.json | tail -1 | jq
+```
+
+---
+
+## ❓ FAQ
+
+**P: ¿Necesito modificar sync_amazon_ml.py?**
+R: No, ya está usando el filtro automáticamente.
+
+**P: ¿Qué pasa si un producto vuelve a estar disponible?**
+R: En el próximo sync, se reactivará automáticamente (stock 0 → 10).
+
+**P: ¿Puedo ver qué productos se pausaron?**
+R: Sí, en `logs/sync/sync_TIMESTAMP.json` hay un log completo.
+
+**P: ¿El filtro afecta productos ya publicados?**
+R: Sí, sync verifica TODOS los productos publicados cada vez que se ejecuta.
+
+**P: ¿Y si quiero que un producto específico NO se pause?**
+R: Actualmente no hay whitelist. Tendrías que aumentar los límites globalmente o modificar el código.
+
+---
+
+## ✅ Checklist de Verificación
+
+- [x] sync usa `get_prime_offers_batch_optimized()`
+- [x] Filtro fast fulfillment integrado
+- [x] Mensajes de pausa mejorados con razón específica
+- [x] Notificaciones Telegram incluyen razón
+- [x] Logs JSON incluyen información detallada
+- [x] Tests pasando
+- [x] Documentación actualizada
+
+---
+
+## 🎯 Resumen
+
+✅ **sync_amazon_ml.py ya está listo**
+
+Cuando ejecutes sync:
+- Pausará productos con backorder >7d
+- Pausará productos con maxHours >24h
+- Pausará productos sin Prime
+- Mantendrá activos solo productos con fast fulfillment
+- Notificará por Telegram con razones claras
+
+**No se requiere acción adicional** - el filtro ya está activo.

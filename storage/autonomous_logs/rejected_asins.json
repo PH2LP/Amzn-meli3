@@ -1,0 +1,4071 @@
+[
+  {
+    "asin": "B014EUQOGK",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B004N627KS",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B079JLY5M5",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0B4ZWZ89X",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D2X8GBZ2",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CZM2FB6R",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D2X7DCG5",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0C3VNNS4Y",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CT4Q7Y2V",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CLLHSWRL",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DDT75R2R",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BKW3LB2B",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09KZGY5TK",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F3HPQML2",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F9WSVP6G",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B00QXT5T3U",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D7CXDQC7",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D9M75HS5",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B07WV5WN7B",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F8VYDRDP",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09W2SV2JD",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BTNY72VD",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D2X9NM1V",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B08CFPXPB7",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CBPNWCVS",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0FH7V1TRN",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09PN96SB8",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B072JX77X6",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DD5Q6XX9",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BL2ND2GC",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0FG6JNWBS",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BT4DP7SC",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09S1FYRLZ",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CS68QV83",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DQXPPCMK",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B01AROOL12",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0C7QMD44R",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B00BT35BPG",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BDMLY69R",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0C7KFZ5TL",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B089KV4YYX",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B08CK6MXTD",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DLBD36HL",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DRP6JJ7F",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B01GXYLAAA",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BL2RSCG9",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DP3CTHR7",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B07TS6R1SF",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09ZQ4QW15",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DPMDNY8C",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BML42L6X",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B083QQQDF1",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B098785CL3",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DK8WN5B7",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B01LZTBKBG",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0B8NH1VT7",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0871PQ5YY",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B07FLKYRFB",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CQ31VFT4",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F62JCHBF",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F32PBQ7J",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F4KJGKYX",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B096T3JL9M",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DPB3ZZLW",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CDX5XGLK",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DBZGH5XM",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CDX5XGLK",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B072N471V4",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D9H4QNF3",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0C7Z527WB",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BLYKTL78",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CZ6SMBR4",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BWNBYWJZ",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F2MNWCB6",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BKZXSQDH",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BKZXSQDH",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F36RKWDH",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0D7H2FXG5",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B08TR5TKTJ",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DMSX2SZQ",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09P33RWFJ",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09WDJNBT1",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0BNTHFFNG",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09KC6PSR9",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DX791FXY",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0C23G7P2K",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DK6R6HXP",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0CN8FQNMH",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DM7Y6CFD",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B08L8BP9KK",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B09TKH352V",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F1N6W82V",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0F3HQ4KWX",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DP4NL1NY",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B0DFWLNQB3",
+    "reason": "Error: cannot import name 'get_product_info' from 'integrations.amazon_api' (/Users/felipemelucci/Desktop/revancha/src/integrations/amazon_api.py)"
+  },
+  {
+    "asin": "B014EUQOGK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B004N627KS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B079JLY5M5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0B4ZWZ89X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X8GBZ2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X7DCG5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZM2FB6R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C3VNNS4Y",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CT4Q7Y2V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CLLHSWRL",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DDT75R2R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKW3LB2B",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09KZGY5TK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HPQML2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F9WSVP6G",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B00QXT5T3U",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D7CXDQC7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D9M75HS5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07WV5WN7B",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0F8VYDRDP",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09W2SV2JD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BTNY72VD",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0D2X9NM1V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08CFPXPB7",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0CBPNWCVS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0FH7V1TRN",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B09PN96SB8",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B072JX77X6",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DD5Q6XX9",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BL2ND2GC",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0FG6JNWBS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BT4DP7SC",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09S1FYRLZ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CS68QV83",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DQXPPCMK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01AROOL12",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7QMD44R",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B00BT35BPG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BDMLY69R",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0C7KFZ5TL",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B089KV4YYX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08CK6MXTD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DLBD36HL",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DRP6JJ7F",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01GXYLAAA",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BL2RSCG9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DP3CTHR7",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B07TS6R1SF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09ZQ4QW15",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPMDNY8C",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BML42L6X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B083QQQDF1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B098785CL3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK8WN5B7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01LZTBKBG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B083QQQDF1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07FLKYRFB",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0B8NH1VT7",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0F62JCHBF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F32PBQ7J",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CQ31VFT4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F4KJGKYX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B096T3JL9M",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DN67GQD1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPB3ZZLW",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DN67GQD1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DBZGH5XM",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B072N471V4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D9H4QNF3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7Z527WB",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BLYKTL78",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BWNBYWJZ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZ6SMBR4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BVRSSKYJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F2MNWCB6",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BVRSSKYJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F36RKWDH",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08TR5TKTJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D7H2FXG5",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DMSX2SZQ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09WDJNBT1",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BNTHFFNG",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B09KC6PSR9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09P33RWFJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK6R6HXP",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C23G7P2K",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK6R6HXP",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CN8FQNMH",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DM7Y6CFD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08L8BP9KK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09TKH352V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F1N6W82V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DP4NL1NY",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HQ4KWX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DFWLNQB3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B014EUQOGK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B004N627KS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B079JLY5M5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0B4ZWZ89X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X8GBZ2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X7DCG5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZM2FB6R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C3VNNS4Y",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CT4Q7Y2V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CLLHSWRL",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DDT75R2R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKW3LB2B",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B09KZGY5TK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HPQML2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F9WSVP6G",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B00QXT5T3U",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D7CXDQC7",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0D9M75HS5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07WV5WN7B",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F8VYDRDP",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09W2SV2JD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BTNY72VD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X9NM1V",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B08CFPXPB7",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0CBPNWCVS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0FH7V1TRN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09PN96SB8",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B072JX77X6",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DD5Q6XX9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BL2ND2GC",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0FG6JNWBS",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BT4DP7SC",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09S1FYRLZ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CS68QV83",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DQXPPCMK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01AROOL12",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7QMD44R",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B00BT35BPG",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BDMLY69R",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0C7KFZ5TL",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B089KV4YYX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08CK6MXTD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DLBD36HL",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DRP6JJ7F",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01GXYLAAA",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BL2RSCG9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DP3CTHR7",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B07TS6R1SF",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B09ZQ4QW15",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPMDNY8C",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BML42L6X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B083QQQDF1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B098785CL3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK8WN5B7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01LZTBKBG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0B8NH1VT7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0871PQ5YY",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B07FLKYRFB",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CQ31VFT4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F62JCHBF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F32PBQ7J",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0F4KJGKYX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B096T3JL9M",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPB3ZZLW",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CDX5XGLK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DN67GQD1",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DBZGH5XM",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B072N471V4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D9H4QNF3",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0C7Z527WB",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0BLYKTL78",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BWNBYWJZ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZ6SMBR4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BVRSSKYJ",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0F2MNWCB6",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKZXSQDH",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F36RKWDH",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0D7H2FXG5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08TR5TKTJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DMSX2SZQ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09P33RWFJ",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B09WDJNBT1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BNTHFFNG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09KC6PSR9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DX791FXY",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0C23G7P2K",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK6R6HXP",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0CN8FQNMH",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DM7Y6CFD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08L8BP9KK",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B09TKH352V",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0F1N6W82V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DP4NL1NY",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HQ4KWX",
+    "reason": "Error: ❌ Error HTTP 429: {\n  \"errors\": [\n    {\n      \"code\": \"QuotaExceeded\",\n      \"message\": \"You exceeded your quota for the requested resource.\",\n      \"details\": \"\"\n    }\n  ]\n}"
+  },
+  {
+    "asin": "B0DFWLNQB3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B014EUQOGK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B004N627KS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B079JLY5M5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0B4ZWZ89X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X8GBZ2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZM2FB6R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X7DCG5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C3VNNS4Y",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CT4Q7Y2V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CLLHSWRL",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DDT75R2R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKW3LB2B",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HPQML2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09KZGY5TK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F9WSVP6G",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B00QXT5T3U",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D7CXDQC7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D9M75HS5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07WV5WN7B",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09W2SV2JD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08CFPXPB7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F8VYDRDP",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BTNY72VD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X9NM1V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CBPNWCVS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0FH7V1TRN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09PN96SB8",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B072JX77X6",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DD5Q6XX9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BL2ND2GC",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0FG6JNWBS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BT4DP7SC",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09S1FYRLZ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CS68QV83",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DQXPPCMK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7QMD44R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01AROOL12",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BDMLY69R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B00BT35BPG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7KFZ5TL",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08CK6MXTD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B089KV4YYX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DRP6JJ7F",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01GXYLAAA",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DLBD36HL",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BL2RSCG9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DP3CTHR7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07TS6R1SF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09ZQ4QW15",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPMDNY8C",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BML42L6X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B083QQQDF1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B098785CL3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK8WN5B7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B01LZTBKBG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0B8NH1VT7",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0871PQ5YY",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07FLKYRFB",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CQ31VFT4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F62JCHBF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F32PBQ7J",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F4KJGKYX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B096T3JL9M",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPB3ZZLW",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CDX5XGLK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DN67GQD1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DBZGH5XM",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B072N471V4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D9H4QNF3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7Z527WB",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BLYKTL78",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BWNBYWJZ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZ6SMBR4",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BVRSSKYJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F2MNWCB6",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKZXSQDH",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F36RKWDH",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D7H2FXG5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08TR5TKTJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DMSX2SZQ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09P33RWFJ",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09WDJNBT1",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BNTHFFNG",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09KC6PSR9",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DX791FXY",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C23G7P2K",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DK6R6HXP",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CN8FQNMH",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DM7Y6CFD",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08L8BP9KK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09TKH352V",
+    "reason": "Error: [Errno 32] Broken pipe"
+  },
+  {
+    "asin": "B0F1N6W82V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DP4NL1NY",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HQ4KWX",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DFWLNQB3",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B014EUQOGK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B004N627KS",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B079JLY5M5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0B4ZWZ89X",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X8GBZ2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X7DCG5",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CZM2FB6R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0C3VNNS4Y",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CT4Q7Y2V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CLLHSWRL",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0DDT75R2R",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKW3LB2B",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HPQML2",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B09KZGY5TK",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0F9WSVP6G",
+    "reason": "Datos insuficientes (título: False, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CZM2FB6R",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0C3VNNS4Y",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0F3HPQML2",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B09KZGY5TK",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CLLHSWRL",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B0DDT75R2R",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKW3LB2B",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B0F9WSVP6G",
+    "reason": "Baja calidad promedio de keyword (score: 55.0)",
+    "product": ""
+  },
+  {
+    "asin": "B09JG7KRC7",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0D14N2QZF",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B08LNFPZLB",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0FJL64Y65",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B08CFPXPB7",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0D7CXDQC7",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0D3CZYCH2",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B09P33RWFJ",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0DK8WN5B7",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0CP8QTRFZ",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0CBS6HDFS",
+    "reason": "Keyword restringida: hat",
+    "product": ""
+  },
+  {
+    "asin": "B07JJGCSHR",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0D3KTJ6DN",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0F2MNWCB6",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0CQJV4BW3",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0D2VKMP9S",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B07ZWK2TQT",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DLBD36HL",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B08B5WHYTT",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0FG6JNWBS",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B01AROOL12",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BT4DP7SC",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07WS7KSGT",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DT43NNNF",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DL6LV7Q6",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09FLPDMKN",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0F36RKWDH",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37L2DRC",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09ZXNSWGM",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0C9DQPTLM",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B098LG3N6R",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DWTT6Z7H",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BL2RSCG9",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B083QQQDF1",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DBZGH5XM",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B08Z6X4NK3",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07QBPDWLS",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09TW35H1Z",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0CT4Q7Y2V",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07QGHK6Q8",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09N6VYHTX",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0B4ZWZ89X",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0C7QMD44R",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07TVK8WJP",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DHRMZSTM",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B08T9L3YK8",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09TKH352V",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B003ELVLKU",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DXTV9BGJ",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0CS68QV83",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0B2DP88SD",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BWNBYWJZ",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0CQ2MSP2B",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07W6ZTMWP",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0B5LFWGKP",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0CYZHC69C",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09KC6PSR9",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B075GZVD4T",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07D34L57F",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0D2X9NM1V",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0B3RJML38",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH9TPJ3V",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0B6G2XWTL",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07TS6R1SF",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BLYKTL78",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B08PBVDQKG",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B08PBVDQKG",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0F37LY1FN",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DPWX3WTL",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0C9ZJHQHM",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0C1VJ57KL",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B00ZYLMQH0",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B07WJ5D3H4",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B003NREDC8",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B072JW9LT8",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0DL6L189W",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BXNGJ2LD",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B09F5YBH6Z",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BT15X781",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B0BKVY4WKT",
+    "reason": "Baja calidad promedio de keyword (score: 54.4)",
+    "product": ""
+  },
+  {
+    "asin": "B00K5CN370",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07GBJWCY9",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0959JT4PV",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07CYVDSF4",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPGLH8PK",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CN3V6TTS",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08QBJTHM6",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F14YGCBP",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B09NMHFTVG",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08G1ZB4ZZ",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DYL5M84X",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B09YPMMVJ8",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DYL4HYS7",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0BS42P6ZC",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPGMC8B8",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F14T9J5V",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08LX7SYK4",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0B6FSZ3VL",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B003Y004BI",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08QB2RHQV",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B004U073S8",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B089VTHMJH",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0058Z33L0",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08QB1QMJ5",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DR6DK4KB",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F2JM5BQT",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D6YQN1V6",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B00MURUOJ8",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DYKVMG42",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08WV3DW85",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07GXHQLX1",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0C5X6B7CN",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F151MDGW",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07GP4NP86",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPGLMQGZ",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F18P3SWM",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DVJ6JRYQ",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CSKN2MK1",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPGKQ452",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CRXK7WVM",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DYL93C8J",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0C9TTNPW6",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B007QXSE7A",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0BX4B736K",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07KCDC1V2",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPHSYNL4",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F1BZVQL1",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DJMM27S9",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CGYSJSNN",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPGHXS96",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B098YPZPXV",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B00CBMSNW2",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07FKF9F13",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B00EP9E4E0",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CS68WBDF",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DVTHHYSW",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08S22J84V",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DPHRY1N6",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B004U068ES",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0C4PHTQYJ",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0B3451TBW",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08QBM6C8M",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08QBZRKJW",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07XKDLPY3",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DSLWJMPP",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CT6384WM",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D1YDGS2Y",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F7TBM1BM",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B079QJTH57",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0B578LY22",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B09NR8TBL8",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B010RWDJOY",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0BQ6J117K",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07KD91JZ7",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D2DKRHQC",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DWFTF5CK",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08CZYQ2ZG",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D2RRC2NP",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CMPC2FBN",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07KD8N2WR",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B00K5DXSZ6",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D7N2JWL1",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07YW3R9MQ",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D1YG74K7",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F2MW79NT",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08PKK39MY",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0CQGS72QF",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D966BQWL",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B00632243U",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08TR7Y16H",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B086CCM86Z",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DSJZLLBL",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B09QD2QR6P",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0DYG6SXZL",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0F7TGT1LF",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B07MGC4Y25",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0D1YFJ2S2",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08NK9LYJL",
+    "reason": "Error: [Errno 32] Broken pipe"
+  },
+  {
+    "asin": "B087QWDBYZ",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B08MQSDDXD",
+    "reason": "Marca prohibida: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0BXGFFSL1",
+    "reason": "Keyword restringida: hat",
+    "product": ""
+  },
+  {
+    "asin": "B08GHX9G5L",
+    "reason": "Datos insuficientes (título: True, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B083XJJ5QZ",
+    "reason": "Tipo de producto irrelevante: Sticker",
+    "product": ""
+  },
+  {
+    "asin": "B079DLTG9F",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B076DD5JNS",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0D39V5SQG",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B08K7HFMX4",
+    "reason": "Tipo de producto irrelevante: CD",
+    "product": ""
+  },
+  {
+    "asin": "B08HXM7VZ2",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0B15LHF3K",
+    "reason": "Tipo de producto irrelevante: CD",
+    "product": ""
+  },
+  {
+    "asin": "B0CJ9YX7DG",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B07TBG7WM9",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0B8PDHRWY",
+    "reason": "Tipo de producto irrelevante: CD",
+    "product": ""
+  },
+  {
+    "asin": "B0866S3D82",
+    "reason": "Datos insuficientes (título: True, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B085TFF7M1",
+    "reason": "Keyword restringida: hat",
+    "product": ""
+  },
+  {
+    "asin": "B0DN9P3KW5",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0C3242SWL",
+    "reason": "Keyword irrelevante: album",
+    "product": ""
+  },
+  {
+    "asin": "B075JR53K5",
+    "reason": "Tipo de producto irrelevante: Sticker",
+    "product": ""
+  },
+  {
+    "asin": "B07FTPX71F",
+    "reason": "Keyword restringida: hat",
+    "product": ""
+  },
+  {
+    "asin": "B0DGFBCH38",
+    "reason": "Keyword restringida: coat",
+    "product": ""
+  },
+  {
+    "asin": "B0829KDY9X",
+    "reason": "Datos insuficientes (título: True, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B08WZ5TF9H",
+    "reason": "Keyword irrelevante: album",
+    "product": ""
+  },
+  {
+    "asin": "B0000DCW2V",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0CG6RXMNV",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07C2Z21X5",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B00L3W2QJ2",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B09JZRWRJN",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B09HXZQ7BM",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07QF1KXPQ",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0DYD56G2Y",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0CG19FGQ5",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07H3QVZQ2",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07X5W6QB1",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0BTTV6CT1",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0C5PM5YH6",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0CG19QXWD",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B06Y5RTN1T",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0FLSPG85G",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B016UCNP3A",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0DD5G9QGJ",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07VPMX7Q5",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0F8MZVFBJ",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0D92VDW76",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0CH1QCDPS",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0CFSBSRMY",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B09MSS677L",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0DJWV4BQ1",
+    "reason": "Keyword prohibida: food",
+    "product": ""
+  },
+  {
+    "asin": "B07M8YV12G",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B07P1ZFBRS",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0BZJVFFNM",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B003SD32IS",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "1784729868",
+    "reason": "Datos insuficientes (título: True, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B074PYKW14",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B00O6FU8TI",
+    "reason": "Datos insuficientes (título: True, marca: False)",
+    "product": ""
+  },
+  {
+    "asin": "B00N9UHFZG",
+    "reason": "Keyword restringida: hat",
+    "product": ""
+  },
+  {
+    "asin": "B0DQ9N9VB8",
+    "reason": "Keyword prohibida: food",
+    "product": ""
+  },
+  {
+    "asin": "B07GFXHN3X",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0DKTRJZ69",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0CVQQ2WCV",
+    "reason": "Categoría prohibida: Vitamins",
+    "product": ""
+  },
+  {
+    "asin": "B0768QPPZC",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B01MQERON0",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B07NJN39RC",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0DKTPXHVB",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0DCZG76K4",
+    "reason": "Keyword prohibida: supplement",
+    "product": ""
+  },
+  {
+    "asin": "B00NGQVJMS",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0B2X85VVM",
+    "reason": "Categoría prohibida: Vitamins",
+    "product": ""
+  },
+  {
+    "asin": "B07HJVHKVY",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B004DP8JU6",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07XG1G8KP",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B01KZGZPUS",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B08BJP4HDH",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B084NWXVQS",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07DT8CMMJ",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B09ZLT1Q6P",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B00PQKRRXC",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0CRJT1YK9",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0C4Z6SKCS",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B00FN6GOPG",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B01LB1J9BW",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B073CVZ9GZ",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0721BFMTQ",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B00522VKWI",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B004DPF6TS",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B007ZZSOH4",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B072MQ5BV2",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B072K54HQX",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B000UYG5PK",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B00UT43YN2",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B0F9LVDLYD",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B096LBTFPS",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B000000BH5",
+    "reason": "No seleccionado (solo top 105 por calidad)",
+    "product": ""
+  },
+  {
+    "asin": "B07F88P35C",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B000RZFBKW",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B09Q3NN37M",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B001EUL2DO",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B009DF8PIC",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0D6GM9ZXW",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0BW37CL27",
+    "reason": "Keyword restringida: coat",
+    "product": ""
+  },
+  {
+    "asin": "B07RNNMZW3",
+    "reason": "Keyword restringida: jacket",
+    "product": ""
+  },
+  {
+    "asin": "B07JQMZJLY",
+    "reason": "Keyword restringida: skirt",
+    "product": ""
+  },
+  {
+    "asin": "B081DY9881",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B06XGMSDCP",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0C2CJ5RTC",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0DJ6R4KFR",
+    "reason": "Keyword restringida: pants",
+    "product": ""
+  },
+  {
+    "asin": "B098Q27YQB",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0DS4PX1GC",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B07ZQFCXPV",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0F8C16NLB",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0725Z9LSB",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0885WBR4X",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0F181FDYF",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0F677XPXN",
+    "reason": "Keyword restringida: skirt",
+    "product": ""
+  },
+  {
+    "asin": "B0DFW48HQN",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0941R4S5L",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0BYZBKJNH",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0DZX2KY1L",
+    "reason": "Keyword restringida: skirt",
+    "product": ""
+  },
+  {
+    "asin": "B07MW3G6D1",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0BZNBQQXP",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0DXSPW38V",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0FBW3XT5D",
+    "reason": "Keyword restringida: suit",
+    "product": ""
+  },
+  {
+    "asin": "B0DXPV4PZ3",
+    "reason": "Keyword restringida: coat",
+    "product": ""
+  },
+  {
+    "asin": "B0DPWJN25L",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B012U82368",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0DHV4TLVF",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0BVHNMK1C",
+    "reason": "Keyword restringida: jacket",
+    "product": ""
+  },
+  {
+    "asin": "B0F4R7MJHK",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0CTGS4ZW2",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0DSPWJMLW",
+    "reason": "Keyword restringida: shorts",
+    "product": ""
+  },
+  {
+    "asin": "B0DYV9FYDT",
+    "reason": "Keyword restringida: shorts",
+    "product": ""
+  },
+  {
+    "asin": "B00GCHGF9K",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0F865NPZM",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0F21ZVZG3",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B07KTCGTMX",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B00KX5A7NW",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B08XTFQSH1",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0DT5XK3T8",
+    "reason": "Keyword restringida: skirt",
+    "product": ""
+  },
+  {
+    "asin": "B0DTP744B6",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B07FLP3PD2",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B00120MXNY",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0000AY702",
+    "reason": "Keyword restringida: coat",
+    "product": ""
+  },
+  {
+    "asin": "B0DTP4YH92",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B08SJ4JQWD",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0FQ2N8V2N",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0FP14ZN6W",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B083NXK8TB",
+    "reason": "Keyword restringida: shirt",
+    "product": ""
+  },
+  {
+    "asin": "B0FQ9WBCRF",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0CY2PZBW8",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B07C7SN81Q",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B0CPX75KR2",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B08DJ49X9V",
+    "reason": "Categoría restringida: Shoes",
+    "product": ""
+  },
+  {
+    "asin": "B0CNX93BY8",
+    "reason": "Keyword restringida: tie",
+    "product": ""
+  },
+  {
+    "asin": "B01CSJ866K",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0DZD9S5GC",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08SHN3TZP",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B099FK2DMZ",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B01N0W1YIK",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08BRCT4JH",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0C7BKZ883",
+    "reason": "Marca prohibida detectada: nike",
+    "product": ""
+  },
+  {
+    "asin": "B0BXGFFSL1",
+    "reason": "Keyword restringida: hat",
+    "product": ""
+  },
+  {
+    "asin": "B08G84P8ZX",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BLRJ4R8F",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B06XZTZ7GB",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B015NBTNHQ",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CJ31XCBD",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08CCKVS59",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B09SVSBVP1",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07RJZMC49",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07DWM9WNM",
+    "reason": "Keyword restringida: bra",
+    "product": ""
+  },
+  {
+    "asin": "B0815627ZC",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08M94BTYC",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0D8ZXPN38",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08CS1F4F1",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07W7SZJ25",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CQR99BG2",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08376JQLJ",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0751N2Y78",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B078W4XP77",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BPX6DNRG",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0F6CJD2ZY",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B07NPTCNSG",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B00ADBY98A",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08NHSPCR6",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B016CL2DE6",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07J215RPT",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07Z36FP7L",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CQMJPDVL",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0B4BK92GK",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BJ6NBYJG",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B091B4SWR7",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07SM57QTM",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BS9G1MQ3",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0C2CGBSZT",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07QN9NPKN",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07G29RCBD",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08TQPTPCK",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B074473Z6T",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BLTDRYS4",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CB96BYRT",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BSJ46KY9",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B01JPOLKDW",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0DT7PJKZ5",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07KWSCN32",
+    "reason": "Keyword irrelevante: music",
+    "product": ""
+  },
+  {
+    "asin": "B00CD8AFFW",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07CCM5X58",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08B13JGN4",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0BK2Z5QGC",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0FC2QN2W2",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07BDQQVN2",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08PNQTYV2",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0F6Y73GWJ",
+    "reason": "Keyword restringida: cap",
+    "product": ""
+  },
+  {
+    "asin": "B0FJF6RSXW",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08H5TB2K1",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0888FPFGK",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B09WXZV2T2",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CL12F612",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08YKGZF7P",
+    "reason": "Tipo de producto irrelevante: Movie",
+    "product": ""
+  },
+  {
+    "asin": "B0769G51R7",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0DYD4Q9W7",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0DKFGJDCN",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0F2QZGDLL",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0CBJ46QZX",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07JBLRT2L",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0C7NNDG21",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0DMDJBCDP",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B08374PJD2",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B07XK8Z18L",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0FRMS6ZNY",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0DBMX259B",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B0C8171GTK",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B01550MWHI",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B01B1YYKSG",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  },
+  {
+    "asin": "B085LQNTHT",
+    "reason": "Tipo de producto irrelevante: Book",
+    "product": ""
+  }
+]

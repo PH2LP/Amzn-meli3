@@ -1,0 +1,598 @@
+{
+  "asin": "B00UB38V2A",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.6,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "NSF 53 – Reduces contaminants with health effects",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "set_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Single Item Set",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "everydrop Water Filter 4 is the only filter approved by: Whirlpool, Maytag, Amana, KitchenAid and Jenn Air brands",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "NSF certified to reduce 31 contaminants including lead, pesticides and pharmaceuticals",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "For clean, fresh-tasting water, replace your everydrop Water Filter every 6 months.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Warning: Damage caused by a non-genuine everydrop Water Filter is not covered under Whirlpool Corporation's warranty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Check your previous filter number to confirm compatibility with your refrigerator",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 8.0
+        },
+        "length": {
+          "unit": "inches",
+          "value": 2.5
+        },
+        "height": {
+          "unit": "inches",
+          "value": 2.5
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "EveryDrop by Whirlpool",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52141500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.8,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "883049362403",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0883049362403",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00883049362403",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.7912
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 7.493
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 23.495
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "EDR4RXD1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "master_packs_per_layer_quantity": [
+      {
+        "value": 30,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "master_pack_layers_per_pallet_quantity": [
+      {
+        "value": 15,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 9.38
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "capacity": [
+      {
+        "unit": "cubic_feet",
+        "value": 23.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Whirlpool",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "EDR4RXD1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gpsr_safety_attestation": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Reduces 99% of lead, removes up to 31 contaminants, improves water taste and odor, NSF 42 and NSF 53 certified, easy twist-in installation,",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "everydrop® by Whirlpool Ice and Water Refrigerator Filter 4, EDR4RXD1, Single-Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 59.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2008-10-20T12:17:08-00:00",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "registration_status": "not_capable_emitting_rf_energy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "EDR4RXD1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-refrigerator-dispenser-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ghs": [
+      {
+        "classification": [
+          {
+            "class": "amzn_specific_no_label_with_warning"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fc_shelf_life": [
+      {
+        "unit": "days",
+        "value": 1000.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pesticide_marking": [
+      {
+        "marking_type": "epa_registration_number",
+        "registration_status": "fifra_not_considered_pesticide",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Green",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "configuration": [
+      {
+        "language_tag": "en_US",
+        "value": "Full-Sized Side-by-Side",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.322,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2019-07-05T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.5
+        },
+        "width": {
+          "unit": "inches",
+          "value": 9.38
+        },
+        "height": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "language_tag": "en_US",
+        "value": "Hand Wash",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/317IAqOtFtL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/317IAqOtFtL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51KWC1huK6L.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/21Qi-F2fCuL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/21Qi-F2fCuL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41sCG4QNXfL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/31AQNGkYJuL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/31AQNGkYJuL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41kPHj4pBDL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/418cxTfDojL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/418cxTfDojL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/519T7-sqXdL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/317V0KUE0+L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/317V0KUE0+L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/518DSy3103L.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41DnUjPNNqL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41DnUjPNNqL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51KK0VbpKrL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41iTCVc4MyL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41iTCVc4MyL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51TRgkRmcVL.jpg",
+          "height": 1000,
+          "width": 1000
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0FJLZ3ZWW"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741161",
+          "title": "In-Refrigerator Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741161",
+          "rank": 7
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 43
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "EveryDrop by Whirlpool",
+      "browseClassification": {
+        "displayName": "Water Filters",
+        "classificationId": "3741161"
+      },
+      "color": "Green",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "everydrop® by Whirlpool Ice and Water Refrigerator Filter 4, EDR4RXD1, Single-Pack",
+      "manufacturer": "Whirlpool",
+      "memorabilia": false,
+      "modelNumber": "EDR4RXD1",
+      "packageQuantity": 1,
+      "partNumber": "EDR4RXD1",
+      "releaseDate": "2019-07-05",
+      "size": "1 Count (Pack of 1)",
+      "style": "Water Filter",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "major_appliances_display_on_website",
+      "websiteDisplayGroupName": "Major Appliances"
+    }
+  ]
+}

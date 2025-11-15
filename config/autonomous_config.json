@@ -1,0 +1,87 @@
+{
+  "comment": "Configuración del sistema autónomo de búsqueda y publicación",
+  "version": "1.0",
+  "last_updated": "2025-11-08",
+
+  "autonomous_mode": {
+    "enabled": true,
+    "cycle_delay_minutes": 0,
+    "max_publications_per_cycle": 50,
+    "max_publications_per_day": 500,
+    "max_total_publications": 50000,
+    "retry_failed_asins": false,
+    "remove_duplicates": true,
+    "check_already_published": true,
+    "target_publications_per_keyword": 60,
+    "comment_target": "Objetivo de publicaciones finales por keyword (se ajusta según calidad)"
+  },
+
+  "keyword_discovery": {
+    "enabled": true,
+    "auto_refresh_enabled": true,
+    "refresh_interval_days": 3,
+    "discovery_depth": 2,
+    "min_search_volume": 50,
+    "comment": "Auto-descubrimiento de keywords cada 3 días usando DataForSEO"
+  },
+
+  "search_settings": {
+    "initial_search_pages": 100,
+    "comment_pages": "Buscar 100 páginas = ~1000 ASINs. Pool grande de Prime (~840) para no perder productos importantes con BSR alto. Tiempo: ~60 min/keyword",
+    "default_max_asins": 100,
+    "search_timeout_seconds": 120,
+    "rate_limit_delay_seconds": 1.5,
+    "max_retries_per_keyword": 3,
+    "enable_bsr_ranking": true,
+    "max_asins_to_process_after_ranking": 100,
+    "comment_flujo": "FLUJO OPTIMIZADO: 1) Buscar 1000 ASINs, 2) Filtrar Prime (~840), 3) BSR de 840 Prime, 4) Top 100 Prime mejor BSR, 5) Filtros marca/categoría, 6) Publicar 15-60. Tiempo: ~60min/keyword, ~24 keywords/día, ~960 pub/día. 50K en 52 días."
+  },
+
+  "publication_settings": {
+    "use_existing_pipeline": false,
+    "comment_use_pipeline": "Deshabilitado - pipeline.py maneja la publicación por separado",
+    "pipeline_script": "src/integrations/mainglobal.py",
+    "asins_file": "asins.txt",
+    "append_to_asins_file": false,
+    "clear_asins_file_before_cycle": true,
+    "wait_for_pipeline_completion": false,
+    "pipeline_timeout_minutes": 180,
+    "comment_timeout": "180 min (3 horas) para 100 ASINs @ ~1 min/ASIN. Incluye margen para AI, retries, rate limits"
+  },
+
+  "filtering": {
+    "enable_brand_blacklist": true,
+    "brand_blacklist_file": "config/brand_blacklist.json",
+    "skip_already_published": true,
+    "filter_by_category": true,
+    "filter_by_keywords": true,
+    "min_price_usd": 5,
+    "max_price_usd": 500
+  },
+
+  "logging": {
+    "log_level": "INFO",
+    "log_file": "storage/autonomous_logs/autonomous_system.log",
+    "metrics_file": "storage/autonomous_logs/metrics.json",
+    "save_rejected_asins": true,
+    "rejected_asins_file": "storage/autonomous_logs/rejected_asins.json",
+    "daily_report": true,
+    "daily_report_file": "storage/autonomous_logs/daily_report_{date}.json"
+  },
+
+  "safety": {
+    "max_consecutive_errors": 10,
+    "pause_on_token_error": true,
+    "emergency_stop_file": "storage/STOP_AUTONOMOUS",
+    "health_check_interval_minutes": 5,
+    "auto_restart_on_crash": true
+  },
+
+  "notifications": {
+    "enabled": false,
+    "telegram_bot_token": "",
+    "telegram_chat_id": "",
+    "notify_on_errors": true,
+    "notify_on_daily_summary": true
+  }
+}

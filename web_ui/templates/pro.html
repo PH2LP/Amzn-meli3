@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZ → ML - Pro Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div x-data="proMode()" x-init="init()" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        ⚙️ Configuración Avanzada
+                    </h1>
+                    <div class="flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-gray-900">Simple</a>
+                        <a href="/pro" class="text-blue-600 font-semibold">Pro</a>
+                        <a href="/test" class="text-gray-600 hover:text-gray-900">🧪 Test</a>
+                        <a href="/logs" class="text-gray-600 hover:text-gray-900">Logs</a>
+                        <a href="/docs" class="text-gray-600 hover:text-gray-900">📖 Docs</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+            <!-- Pricing Section -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="text-2xl mr-3">💰</span>
+                    Configuración de Precios
+                </h2>
+
+                <!-- Info Box -->
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                    <p class="text-sm text-blue-800">
+                        <strong>💡 Cómo funciona:</strong> Precio Amazon + Markup + Tax Florida = Precio MercadoLibre
+                    </p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Markup -->
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <label class="block text-base font-semibold text-gray-900 mb-3">
+                            📈 Markup (Ganancia)
+                        </label>
+                        <input
+                            type="number"
+                            x-model="config.pricing.markup"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-lg font-semibold"
+                            placeholder="500"
+                        >
+                        <div class="mt-3 space-y-2">
+                            <p class="text-sm text-gray-700">
+                                <strong>Formato:</strong> Porcentaje de ganancia sobre el costo
+                            </p>
+                            <div class="bg-green-50 border border-green-200 rounded p-3">
+                                <p class="text-sm text-green-800 font-mono">
+                                    <strong>Ejemplo con 500%:</strong><br>
+                                    Producto Amazon: $10 USD<br>
+                                    + Markup 500%: $50 USD (10 × 5)<br>
+                                    + Tax Florida 7%: $0.70 USD<br>
+                                    = <strong>Precio ML: $60.70 USD</strong>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Otros parámetros en grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Default Price -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Precio Mínimo (USD)
+                            </label>
+                            <input
+                                type="number"
+                                x-model="config.pricing.default_price"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                placeholder="1000"
+                            >
+                            <p class="text-xs text-gray-500 mt-1">Si no hay precio Amazon</p>
+                        </div>
+
+                        <!-- Default Quantity -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Stock Inicial
+                            </label>
+                            <input
+                                type="number"
+                                x-model="config.pricing.default_quantity"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                placeholder="100"
+                            >
+                            <p class="text-xs text-gray-500 mt-1">Al publicar productos</p>
+                        </div>
+
+                        <!-- Florida Tax -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Tax Florida (%)
+                            </label>
+                            <input
+                                type="number"
+                                x-model="config.pricing.florida_tax"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                placeholder="7"
+                            >
+                            <p class="text-xs text-gray-500 mt-1">Impuesto aplicado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="mt-6 flex justify-end">
+                    <button
+                        @click="savePricing()"
+                        :disabled="saving"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    >
+                        <span x-show="!saving">💾 Guardar Pricing</span>
+                        <span x-show="saving">⏳ Guardando...</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Info: Sistema Autónomo -->
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border-2 border-blue-200 p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                    <span class="text-2xl mr-3">🤖</span>
+                    Sistema Autónomo (Producción)
+                </h2>
+
+                <div class="space-y-4">
+                    <!-- Status -->
+                    <div class="bg-white rounded-lg p-4 border border-blue-200">
+                        <p class="text-sm text-gray-800 mb-3">
+                            ✅ Sistema <strong>auto-optimizado</strong> con análisis de calidad por IA
+                        </p>
+
+                        <!-- Flujo simplificado -->
+                        <div class="flex items-center space-x-2 text-sm text-gray-700 mb-2">
+                            <span class="bg-blue-100 px-2 py-1 rounded font-mono">1000 ASINs</span>
+                            <span>→</span>
+                            <span class="bg-yellow-100 px-2 py-1 rounded font-mono">Filtros</span>
+                            <span>→</span>
+                            <span class="bg-green-100 px-2 py-1 rounded font-mono">Prime (~840)</span>
+                            <span>→</span>
+                            <span class="bg-purple-100 px-2 py-1 rounded font-mono">BSR Sort</span>
+                            <span>→</span>
+                            <span class="bg-orange-100 px-2 py-1 rounded font-mono">Score IA</span>
+                            <span>→</span>
+                            <span class="bg-red-100 px-2 py-1 rounded font-semibold">Publica Top N</span>
+                        </div>
+
+                        <p class="text-xs text-gray-600 mt-2">
+                            <strong>Score decide automáticamente:</strong> 15-100 productos según calidad de keyword
+                        </p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="flex space-x-3">
+                        <a href="/test" class="flex-1 bg-white border-2 border-blue-300 text-blue-700 px-4 py-3 rounded-lg hover:bg-blue-50 transition-colors text-center font-semibold">
+                            🧪 Test Keywords (Manual)
+                        </a>
+                        <a href="/docs" class="flex-1 bg-white border-2 border-gray-300 text-gray-700 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors text-center font-semibold">
+                            📖 Ver Documentación
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Success/Error Messages -->
+            <div x-show="message" class="fixed bottom-4 right-4 z-50">
+                <div
+                    class="px-6 py-4 rounded-lg shadow-lg"
+                    :class="messageType === 'success' ? 'bg-green-500' : 'bg-red-500'"
+                >
+                    <p class="text-white font-medium" x-text="message"></p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function proMode() {
+            return {
+                config: {
+                    pricing: {
+                        markup: 500,
+                        markup_percent: 50,
+                        default_price: 1000,
+                        default_quantity: 100,
+                        florida_tax: 7
+                    },
+                    autonomous: {
+                        keywords_per_cycle: 1,
+                        asins_per_keyword: 150
+                    }
+                },
+                saving: false,
+                message: '',
+                messageType: 'success',
+
+                async init() {
+                    await this.loadConfig();
+                },
+
+                async loadConfig() {
+                    try {
+                        const response = await fetch('/api/config');
+                        const data = await response.json();
+
+                        if (data.pricing) {
+                            this.config.pricing = data.pricing;
+                        }
+
+                        if (data.autonomous) {
+                            this.config.autonomous.keywords_per_cycle = data.autonomous.keywords_per_cycle || 1;
+                            this.config.autonomous.asins_per_keyword = data.autonomous.search?.top_n_bsr || 150;
+                        }
+                    } catch (error) {
+                        console.error('Error loading config:', error);
+                    }
+                },
+
+                async savePricing() {
+                    this.saving = true;
+
+                    try {
+                        const response = await fetch('/api/config/pricing', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.config.pricing)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            this.showMessage('✅ Pricing actualizado. Pipeline reiniciado.', 'success');
+                        } else {
+                            this.showMessage('❌ Error: ' + result.message, 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error saving pricing:', error);
+                        this.showMessage('❌ Error al guardar', 'error');
+                    }
+
+                    this.saving = false;
+                },
+
+                async saveAutonomous() {
+                    this.saving = true;
+
+                    try {
+                        const response = await fetch('/api/config/autonomous', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(this.config.autonomous)
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            this.showMessage('✅ Configuración actualizada. Pipeline reiniciado.', 'success');
+                        } else {
+                            this.showMessage('❌ Error: ' + result.message, 'error');
+                        }
+                    } catch (error) {
+                        console.error('Error saving autonomous config:', error);
+                        this.showMessage('❌ Error al guardar', 'error');
+                    }
+
+                    this.saving = false;
+                },
+
+                showMessage(msg, type) {
+                    this.message = msg;
+                    this.messageType = type;
+
+                    setTimeout(() => {
+                        this.message = '';
+                    }, 3000);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

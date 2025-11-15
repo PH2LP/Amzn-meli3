@@ -1,0 +1,1420 @@
+{
+  "MANUFACTURER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "BRAND": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "CHARACTER": {
+    "value_type": "string",
+    "values": {
+      "belle": "482749",
+      "betty boop": "482757",
+      "angelina ballerina": "482751",
+      "ariel": "482755",
+      "aurora": "482756",
+      "dolly": "482750",
+      "madeline": "482754",
+      "rapunzel": "482748",
+      "barbie": "482752",
+      "mulan": "4364143",
+      "ken": "482753",
+      "elsa": "482747",
+      "lilo": "482759",
+      "baby alive": "13021749",
+      "labubu": "44037618",
+      "moana": "2419550",
+      "ksimerito": "28453357",
+      "nancy": "2698354",
+      "pinypon": "7236268",
+      "the little mermaid": "507442",
+      "gabby": "23691182",
+      "sonny angel": "49553361",
+      "frankie stein": "4194910",
+      "draculaura": "2543334",
+      "clawdeen wolf": "2588952",
+      "deuce gorgon": "2770830",
+      "lagoona blue": "2567274",
+      "cleo de nile": "49553363",
+      "ghoulia yelps": "2689102",
+      "operetta": "2807627",
+      "spectra vondergeist": "2689117",
+      "abbey bominable": "2667198",
+      "twilight sparkle": "2429604",
+      "applejack": "2429600",
+      "fluttershy": "2429613",
+      "rarity": "2429603",
+      "rainbow dash": "2429612",
+      "pinkie foot": "2429606",
+      "anna": "2429639",
+      "kristoff": "2429642",
+      "sven": "4662148",
+      "ladybug": "2733026",
+      "cat noir": "49553368",
+      "tikki": "16094579",
+      "plagg": "46050835",
+      "luka": "48306999",
+      "alya césaire": "49553369",
+      "chloé bourgeois": "49553370",
+      "master fu": "49553371",
+      "hawk moth": "49553372",
+      "rena rouge": "49553373",
+      "maui": "2429677",
+      "hei hei": "49553374",
+      "pua": "49553375",
+      "lilo pelekai": "49553376",
+      "nani pelekai": "49553377",
+      "turma da monica": "49550825",
+      "mônica": "49550798",
+      "chico bento": "49550765",
+      "cebolinha": "49550764",
+      "magali": "2987887",
+      "luluca": "11322565",
+      "enaldinho": "15331059",
+      "beauty and the beast": "7007044",
+      "little mermaid": "49553379",
+      "tiana": "2429673",
+      "blanca nieves": "11702596",
+      "jasmine": "6570867",
+      "pocahontas": "507443",
+      "frozen": "503956",
+      "anna (frozen)": "49553381",
+      "olaf": "3750005",
+      "0": "49553386",
+      "bambi": "507441",
+      "lady and the tramp": "49553383",
+      "jessie": "2782503",
+      "maggie simpson": "11737492",
+      "miraculous": "7582434",
+      "julieta": "49553384",
+      "l.o.l. surprise!": "8822246",
+      "cry babies": "13445270",
+      "strawberry shortcake": "49553385",
+      "sleeping beauty": "49553387",
+      "joy": "49550833",
+      "sadness": "16349778",
+      "anger": "49550834",
+      "fear": "49550836",
+      "disgust": "49550837",
+      "miraculous: las aventuras de ladybug": "50471978",
+      "cinderella": "2429667",
+      "stitch": "4959202"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "CHARACTER_VERSION": {
+    "value_type": "string",
+    "values": {
+      "dancer": "7386871",
+      "fashionista": "7386872"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "ALPHANUMERIC_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "LICENSE": {
+    "value_type": "string",
+    "values": {
+      "baby alive": "49553389",
+      "labubu": "49553390",
+      "ksimerito": "49553391",
+      "nancy": "49553392",
+      "barbie": "46296836",
+      "the little mermaid": "49553393",
+      "gabby": "49553394",
+      "sonny angel": "49553395",
+      "rapunzel": "49553396",
+      "beauty and the beast": "49553397",
+      "moana": "49550911",
+      "frozen": "49550878",
+      "bambi": "49553398",
+      "lady and the tramp": "49553399",
+      "l.o.l. surprise!": "49553412",
+      "cry babies": "49553402",
+      "strawberry shortcake": "49553403",
+      "0": "49553404",
+      "trolls": "49550968",
+      "little mommy": "49553405",
+      "polly pocket": "49553406",
+      "monster high": "49553407",
+      "dreamworks dragons": "49550874",
+      "p.lushes pets": "49553409",
+      "gabby's dollhouse": "49553410",
+      "l.o.l.": "49553411",
+      "bratz": "49553413",
+      "little tikes": "49553414",
+      "num noms": "49553415",
+      "poopsie": "49553416",
+      "slime surprise": "49553417",
+      "miniverse": "49553418",
+      "rainbow high": "49553419",
+      "baby born": "49553420",
+      "mermaze mermaidz": "49553421",
+      "dream ella": "49553422",
+      "story dream machine": "49553423",
+      "crazy fast": "49553425",
+      "big adventures": "49553426",
+      "bluey": "49550854",
+      "beast lab": "49553427",
+      "cookeez makery": "49553428",
+      "magic mixies pixlings": "49553429",
+      "bluey and bingo": "49553430",
+      "toy story": "49550966",
+      "my little pony": "49553431",
+      "american girl": "49553432",
+      "peppa pig": "49553433",
+      "cocomelon": "49550864",
+      "furby": "49553434",
+      "paw patrol": "49550922",
+      "dora the explorer": "49553435",
+      "the lion king": "49553436",
+      "masha and the bear": "49553437"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "PRODUCT_TYPE": {
+    "value_type": "list",
+    "values": {
+      "doll": "46381294",
+      "reborn baby": "46381295",
+      "baby": "46381296"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MIN_RECOMMENDED_AGE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_ACCESSORIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_ARTICULATED": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RELEASE_YEAR": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MATERIALS": {
+    "value_type": "string",
+    "values": {
+      "fabric": "2469707",
+      "plastic": "2748302",
+      "porcelain": "3926393",
+      "wood": "2431881"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CHARACTER_GENDER": {
+    "value_type": "list",
+    "values": {
+      "male": "11208052",
+      "female": "11208053",
+      "gender neutral": "46381360"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ACCESSORIES_INCLUDED": {
+    "value_type": "string",
+    "values": {
+      "comb": "3926363",
+      "pacifier": "4945479"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_COLLECTIBLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "TOY_SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RECOMMENDED_AGE_GROUP": {
+    "value_type": "list",
+    "values": {
+      "1-3 years": "49882295",
+      "3-6 years": "49882296",
+      "6-12 years": "49882298",
+      "12+ years": "49882301"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
+    "values": {
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "INMETRO_CERTIFICATION_REGISTRATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "APPROVAL_CERTIFICATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "PRODUCT_AUTHORIZATION_RPIN_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SIC_ESTABLISHMENT_REGISTRY_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "REGISTRATION_LICENSE_ESTABLISHMENT_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "DOLLS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FILTRABLE_CHARACTER": {
+    "value_type": "string",
+    "values": {
+      "belle": "55043420",
+      "betty boop": "55043421",
+      "angelina ballerina": "55043422",
+      "ariel": "55043423",
+      "aurora": "55043424",
+      "dolly": "55043425",
+      "madeline": "55043426",
+      "rapunzel": "55043427",
+      "barbie": "55043428",
+      "mulan": "55043429",
+      "ken": "55043430",
+      "elsa": "55043431",
+      "lilo": "55043432",
+      "baby alive": "60099689",
+      "labubu": "55043434",
+      "moana": "55043435",
+      "ksimerito": "55043436",
+      "nancy": "55043437",
+      "pinypon": "55043438",
+      "the little mermaid": "55043439",
+      "gabby": "55043440",
+      "sonny angel": "55043441",
+      "frankie stein": "55043442",
+      "draculaura": "55043443",
+      "clawdeen wolf": "55043444",
+      "deuce gorgon": "55043445",
+      "lagoona blue": "55043446",
+      "cleo de nile": "55043447",
+      "ghoulia yelps": "55043448",
+      "operetta": "55043449",
+      "spectra vondergeist": "55043450",
+      "abbey bominable": "55043451",
+      "twilight sparkle": "55043452",
+      "applejack": "55043453",
+      "fluttershy": "55043454",
+      "rarity": "55043456",
+      "rainbow dash": "55043457",
+      "pinkie foot": "55043458",
+      "anna": "55043459",
+      "kristoff": "55043460",
+      "sven": "55043462",
+      "ladybug": "55043464",
+      "cat noir": "55043465",
+      "tikki": "55043466",
+      "plagg": "55043467",
+      "luka": "55043468",
+      "alya césaire": "55043469",
+      "chloé bourgeois": "55043470",
+      "master fu": "55043471",
+      "hawk moth": "55043472",
+      "rena rouge": "55043473",
+      "maui": "55043474",
+      "hei hei": "55043475",
+      "pua": "55043476",
+      "lilo pelekai": "55043477",
+      "nani pelekai": "55043478",
+      "turma da monica": "55043479",
+      "mônica": "55043480",
+      "chico bento": "55043481",
+      "cebolinha": "55043482",
+      "magali": "55043483",
+      "luluca": "55043484",
+      "enaldinho": "55043485",
+      "beauty and the beast": "55043486",
+      "little mermaid": "55043487",
+      "tiana": "55043488",
+      "blanca nieves": "55043489",
+      "jasmine": "55043490",
+      "pocahontas": "55043491",
+      "frozen": "55043492",
+      "anna (frozen)": "55043493",
+      "olaf": "55043494",
+      "0": "55043505",
+      "bambi": "55043496",
+      "lady and the tramp": "55043497",
+      "jessie": "55043498",
+      "maggie simpson": "55043499",
+      "miraculous": "55043500",
+      "julieta": "55043501",
+      "l.o.l. surprise!": "55043502",
+      "cry babies": "60099695",
+      "strawberry shortcake": "55043504",
+      "sleeping beauty": "55043506",
+      "joy": "55043507",
+      "sadness": "55043508",
+      "anger": "55043509",
+      "fear": "55043510",
+      "disgust": "55043511",
+      "miraculous: las aventuras de ladybug": "55043512",
+      "cinderella": "55043513",
+      "stitch": "55043837",
+      "other": "58467861",
+      "minnie": "59172901",
+      "reborn baby dolls": "60099684",
+      "bratz": "60099686",
+      "nenuco": "60099687",
+      "polly pocket": "60099688",
+      "sylvanian families": "60099690",
+      "masha and the bear": "60099693",
+      "peppa pig": "60099697",
+      "rainbow high": "60099700",
+      "tiny": "60099702",
+      "emily vick": "60099705"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MAX_RECOMMENDED_AGE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "days",
+      "months",
+      "years"
+    ],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_SOUND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_TWIN_DOLL": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SAFETY_CERTIFICATIONS": {
+    "value_type": "string",
+    "values": {
+      "inmetro": "11287596"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HAIR_TYPE": {
+    "value_type": "string",
+    "values": {
+      "curly": "10314284",
+      "straight": "2132686"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "EYES_COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HAIR_COLOR": {
+    "value_type": "string",
+    "values": {
+      "blond": "339458",
+      "brown": "372639"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SKIN_COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FUNCTIONS": {
+    "value_type": "string",
+    "values": {
+      "cries": "11208054",
+      "speaks": "11208055"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FRAGRANCE": {
+    "value_type": "string",
+    "values": {
+      "strawberry": "11208057",
+      "pineapple": "11208058"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CELL_BATTERY_SIZE": {
+    "value_type": "string",
+    "values": {
+      "aaa": "6073399",
+      "aa": "6073398",
+      "cr2034": "507455"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284",
+      "refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_HIGHLIGHT_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "GIFTABLE": {
+    "value_type": "string",
+    "values": {
+      "vppbasic": "54973163",
+      "vppfull": "54973164",
+      "cart": "54973165",
+      "checkout": "54973166"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "VALUE_ADDED_TAX": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_TYPE": {
+    "value_type": "list",
+    "values": {
+      "no additional packaging": "47115155",
+      "with additional packaging": "47115156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_KIT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "flammable": "7651070",
+      "aerosol": "7651071",
+      "oxidizer": "7651072",
+      "corrosive": "7651073",
+      "explosive": "7651074",
+      "toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "value_type": "list",
+    "values": {
+      "for humans": "7575926",
+      "for animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "value_type": "list",
+    "values": {
+      "for humans with a medical prescription": "7575930",
+      "for humans without a medical prescription": "7575931",
+      "for animals with a medical prescription": "7575932",
+      "for animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "stand-alone lithium (loose or isolated)": "7575934",
+      "lithium installed": "7575935",
+      "for cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "value_type": "list",
+    "values": {
+      "bag": "7435891",
+      "box": "7435892",
+      "envelope": "7575937",
+      "self-shipping": "7575939",
+      "exb": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "value_type": "list",
+    "values": {
+      "has imei": "7435893",
+      "has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "value_type": "list",
+    "values": {
+      "android": "9936777",
+      "ios": "9936778",
+      "desktop": "9936779",
+      "mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "value_type": "string",
+    "values": {
+      "pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "contains liquid": "7435885",
+      "fragile": "7435883",
+      "with expiration": "7435888",
+      "without expiration": "8847339",
+      "health device": "7575925",
+      "disinfectant and sanitizer": "7575917",
+      "mapa": "7575924",
+      "health and correlates": "7575923",
+      "voluminous": "8721108",
+      "unflyable": "10490116",
+      "no rotatable": "12928414",
+      "folding": "41722098",
+      "magnetic": "52092586",
+      "can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

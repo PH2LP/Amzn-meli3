@@ -1,0 +1,525 @@
+# 🎯 Sistema Completo de Selección y Filtrado
+
+## 📋 RESUMEN
+
+Este documento explica el **flujo completo** desde que el sistema encuentra una keyword hasta que publica productos en MercadoLibre, con todos los filtros y criterios de selección aplicados.
+
+---
+
+## 🔄 FLUJO COMPLETO (60 min por keyword)
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    KEYWORD: "wireless keyboard"              │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 1: BÚSQUEDA EN AMAZON (5 min)                         │
+├─────────────────────────────────────────────────────────────┤
+│  • Buscar 100 páginas (10 ASINs por página)                 │
+│  • API: Amazon Product Advertising API                       │
+│  • Sin filtros, solo extraer ASINs                           │
+│  • Rate limit: 1 request/segundo                             │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+                      📦 1000 ASINs
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 2: FILTRO PRIME (27 min) ⭐ FILTRO CRÍTICO            │
+├─────────────────────────────────────────────────────────────┤
+│  • API: Amazon SP-API Product Pricing v0                    │
+│  • Para cada ASIN: get_prime_offer(asin)                    │
+│  • Delay: 0.15s por request                                  │
+│  • Backoff: 1s → 2s → 4s en rate limits                     │
+│  • Tiempo real: 1.64s/ASIN (incluye backoffs)               │
+│                                                              │
+│  ✅ CRITERIOS:                                               │
+│     • is_prime = True                                        │
+│     • price > 0 (tiene precio válido)                        │
+│     • price >= $5 USD (mínimo rentable)                      │
+│     • price <= $500 USD (máximo razonable)                   │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+              📦 840 Prime ASINs (~84%)
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 3: BSR RANKING (28 min)                               │
+├─────────────────────────────────────────────────────────────┤
+│  • API: Amazon Product Advertising API (ItemLookup)         │
+│  • Para cada Prime ASIN: obtener BSR                         │
+│  • Delay: 2s por request                                     │
+│  • Solo de ASINs Prime (ya filtrados)                        │
+│  • Ordenar de menor a mayor BSR                              │
+│                                                              │
+│  ℹ️  BSR más bajo = más ventas = mejor producto             │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+        📦 840 Prime ordenados por BSR
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 4: TOP 100 PRIME (instantáneo)                        │
+├─────────────────────────────────────────────────────────────┤
+│  • Seleccionar top 100 con mejor BSR                         │
+│  • Ya todos son Prime                                        │
+│  • Ya están ordenados por popularidad                        │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+            📦 100 Prime Top BSR
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 5: FILTRO DE DUPLICADOS (1 min)                       │
+├─────────────────────────────────────────────────────────────┤
+│  • Verificar en listings_database.db                         │
+│  • SQL: SELECT asin FROM listings WHERE asin IN (...)       │
+│  • Excluir ASINs ya publicados                               │
+│                                                              │
+│  ✅ CRITERIOS:                                               │
+│     • ASIN no existe en DB                                   │
+│     • ASIN no fue publicado antes (evita duplicados)         │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+      📦 80-100 ASINs (sin duplicados)
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 6: FILTRO DE MARCAS (1 min)                           │
+├─────────────────────────────────────────────────────────────┤
+│  • Verificar contra brand_blacklist.json                     │
+│  • Extraer marca del título del producto                     │
+│  • Excluir marcas prohibidas/problemáticas                   │
+│                                                              │
+│  ❌ MARCAS EXCLUIDAS (ejemplos):                             │
+│     • Apple, Samsung, Sony (marcas grandes)                  │
+│     • AmazonBasics (genéricos Amazon)                        │
+│     • Marcas con derechos estrictos                          │
+│     • ~50 marcas en blacklist                                │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+        📦 40-60 ASINs aprobados
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 7: EXTRACCIÓN COMPLETA (2 min)                        │
+├─────────────────────────────────────────────────────────────┤
+│  • Amazon SP-API: Catalog Items v20220401                   │
+│  • Para cada ASIN aprobado: datos completos                  │
+│  • Título, descripción, atributos, imágenes, etc.           │
+│  • Guardar en storage/asins_json/{ASIN}.json                │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+      📦 40-60 productos completos
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 8: CATEGORIZACIÓN ML (2 min)                          │
+├─────────────────────────────────────────────────────────────┤
+│  • Buscar categoría en MercadoLibre                          │
+│  • Método: Híbrido (reglas + AI)                             │
+│  • 1. Búsqueda por keywords en categorías ML                 │
+│  • 2. Si falla: OpenAI analiza título y atributos           │
+│  • 3. Validar que categoría acepta producto                  │
+│                                                              │
+│  ✅ CRITERIOS:                                               │
+│     • Categoría válida encontrada                            │
+│     • Categoría acepta listing_type = gold_special           │
+│     • Atributos requeridos disponibles                       │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+        📦 35-55 categorizados
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 9: TRANSFORMACIÓN (2 min)                             │
+├─────────────────────────────────────────────────────────────┤
+│  • Convertir datos Amazon → formato MercadoLibre            │
+│  • Traducir título y descripción al español                  │
+│  • Mapear atributos Amazon → ML                              │
+│  • Calcular precio con markup (1.5x - 2.5x)                 │
+│  • Optimizar imágenes (orden, calidad)                       │
+│                                                              │
+│  📝 TRANSFORMACIONES:                                        │
+│     • Título: Traducido, optimizado, keywords                │
+│     • Precio: Amazon × markup + envío                        │
+│     • Descripción: Template profesional en español           │
+│     • Atributos: Mapeados según schema ML                    │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+    📦 35-55 listos para publicar
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 10: VALIDACIÓN FINAL (1 min)                          │
+├─────────────────────────────────────────────────────────────┤
+│  • Verificar que todos los campos requeridos estén           │
+│  • Validar formato de imágenes                               │
+│  • Validar precio dentro de rango                            │
+│  • Validar atributos según schema de categoría               │
+│                                                              │
+│  ✅ CRITERIOS:                                               │
+│     • title presente (3-60 caracteres)                       │
+│     • category_id válido                                     │
+│     • price > 0                                              │
+│     • pictures >= 1 imagen                                   │
+│     • Atributos obligatorios completos                       │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+      📦 30-50 100% válidos
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 11: PUBLICACIÓN ML (3 min)                            │
+├─────────────────────────────────────────────────────────────┤
+│  • API: MercadoLibre POST /items                            │
+│  • Publicar uno por uno con rate limit                       │
+│  • Guardar item_id en database                               │
+│  • Manejar errores de validación de ML                       │
+│                                                              │
+│  📊 RESULTADOS TÍPICOS:                                      │
+│     • Publicados: 15-40 (promedio ~30)                       │
+│     • Rechazados: 5-15                                       │
+│     • Errores: 0-5                                           │
+│                                                              │
+│  ❌ RECHAZOS COMUNES:                                        │
+│     • Producto ya existe en ML                               │
+│     • Atributos inválidos                                    │
+│     • Precio fuera de rango de categoría                     │
+│     • GTIN no válido                                         │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+        ✅ 15-40 publicados
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  FASE 12: GUARDAR EN DB (instantáneo)                       │
+├─────────────────────────────────────────────────────────────┤
+│  • Insertar en listings_database.db:                         │
+│     - asin                                                   │
+│     - item_id (ML)                                           │
+│     - title                                                  │
+│     - price                                                  │
+│     - country                                                │
+│     - status                                                 │
+│     - published_at                                           │
+│  • Marcar keyword como procesada                             │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+              ✅ COMPLETADO
+```
+
+---
+
+## 📊 EMBUDO DE CONVERSIÓN
+
+```
+KEYWORD: "wireless keyboard"
+├─ 1000 ASINs iniciales (búsqueda)
+│
+├─ 840 Prime (84%) ✅ FILTRO PRIME
+│  └─ 160 no-Prime excluidos
+│
+├─ 840 ordenados BSR ✅ RANKING
+│
+├─ 100 top BSR ✅ SELECCIÓN
+│  └─ 740 BSR bajo descartados
+│
+├─ 80-100 sin duplicados (80-100%) ✅ DUPLICADOS
+│  └─ 0-20 ya publicados excluidos
+│
+├─ 40-60 marcas válidas (50%) ✅ MARCAS
+│  └─ 40-50 marcas prohibidas excluidas
+│
+├─ 35-55 categorizados (87%) ✅ CATEGORÍAS
+│  └─ 5 sin categoría descartados
+│
+├─ 35-55 transformados (100%) ✅ TRANSFORMACIÓN
+│
+├─ 30-50 válidos (88%) ✅ VALIDACIÓN
+│  └─ 5 inválidos descartados
+│
+└─ 15-40 publicados (50%) ✅ PUBLICACIÓN
+   └─ 15-25 rechazados por ML
+
+═══════════════════════════════════════════
+CONVERSIÓN TOTAL: 1.5% - 4%
+(15-40 publicados de 1000 iniciales)
+═══════════════════════════════════════════
+```
+
+---
+
+## ⚙️ CRITERIOS DE FILTRADO DETALLADOS
+
+### 1️⃣ Filtro Prime (84% pasan)
+
+```python
+def is_valid_prime(offer):
+    return (
+        offer.get("is_prime") == True and
+        offer.get("price", 0) > 0 and
+        offer.get("price", 0) >= 5 and      # Mínimo $5
+        offer.get("price", 0) <= 500        # Máximo $500
+    )
+```
+
+**Por qué Prime:**
+- Disponibilidad garantizada
+- Envío rápido a Argentina
+- Productos confiables
+- Fotos de calidad
+- Descripciones completas
+
+**Por qué precio 5-500:**
+- < $5: No rentable con envío
+- > $500: Riesgo alto, difícil venta
+
+---
+
+### 2️⃣ Top 100 BSR (12% seleccionados de Prime)
+
+```python
+def select_top_bsr(prime_asins, limit=100):
+    sorted_asins = sorted(
+        prime_asins,
+        key=lambda x: x.get("bsr", float("inf"))
+    )
+    return sorted_asins[:limit]
+```
+
+**Por qué top 100:**
+- Productos con más ventas
+- Más populares = más demanda
+- Mejor ratio publicados/aprobados
+- Reviews y ratings altos
+
+---
+
+### 3️⃣ Filtro Duplicados (80-100% pasan)
+
+```python
+def is_duplicate(asin):
+    cursor.execute(
+        "SELECT 1 FROM listings WHERE asin = ? LIMIT 1",
+        (asin,)
+    )
+    return cursor.fetchone() is not None
+```
+
+**Por qué importante:**
+- MercadoLibre rechaza duplicados
+- Ahorra procesamiento
+- Mantiene catálogo limpio
+
+---
+
+### 4️⃣ Filtro Marcas (~50% pasan)
+
+```python
+def is_brand_allowed(title, brand_blacklist):
+    brand = extract_brand(title)
+    return brand.lower() not in [
+        b.lower() for b in brand_blacklist
+    ]
+```
+
+**Marcas excluidas (ejemplos):**
+
+```json
+{
+  "blacklist": [
+    "Apple", "Samsung", "Sony", "LG", "Microsoft",
+    "AmazonBasics", "Amazon Essentials",
+    "Nike", "Adidas", "Puma",
+    "Bose", "JBL", "Beats",
+    "Canon", "Nikon", "GoPro",
+    "...otras 30+ marcas"
+  ]
+}
+```
+
+**Por qué:**
+- Derechos de marca estrictos
+- Riesgo de reclamos
+- ML puede rechazar/suspender cuenta
+- Marcas grandes controlan distribución
+
+---
+
+### 5️⃣ Categorización ML (87% pasan)
+
+```python
+def find_ml_category(product):
+    # 1. Búsqueda por keywords
+    category = search_by_keywords(product.title)
+
+    if not category:
+        # 2. IA analiza producto
+        category = ai_categorize(product)
+
+    # 3. Validar categoría
+    if validate_category(category, product):
+        return category
+
+    return None
+```
+
+**Criterios validación:**
+- Categoría existe en ML
+- Acepta `listing_type = gold_special`
+- Atributos requeridos están disponibles
+- Categoría permite envío internacional
+
+---
+
+### 6️⃣ Validación Final (88% pasan)
+
+```python
+def validate_listing(listing):
+    required_fields = [
+        "title",        # 3-60 caracteres
+        "category_id",  # Válido en ML
+        "price",        # > 0
+        "currency_id",  # "ARS"
+        "pictures",     # >= 1 imagen
+        "attributes"    # Según schema
+    ]
+
+    for field in required_fields:
+        if not listing.get(field):
+            return False
+
+    return True
+```
+
+---
+
+### 7️⃣ Publicación ML (~50% de válidos se publican)
+
+**Rechazos comunes de MercadoLibre:**
+
+```
+❌ "item.title: ya existe un item con este título"
+   → Producto duplicado (mismo título)
+
+❌ "item.attributes: GTIN inválido"
+   → Código de barras no coincide
+
+❌ "item.price: fuera de rango para categoría"
+   → Precio muy alto/bajo para categoría
+
+❌ "item.pictures: imagen no válida"
+   → URL caída o formato incorrecto
+
+❌ "item.attributes: BRAND es obligatorio"
+   → Falta atributo requerido
+```
+
+---
+
+## 📈 MÉTRICAS DE RENDIMIENTO
+
+### Por Keyword (60 min)
+```
+Entrada:    1000 ASINs
+Prime:       840 ASINs (84%)
+Top 100:     100 ASINs (12% del total)
+Marcas OK:    50 ASINs (5% del total)
+Publicados:   30 ASINs (3% del total) ← PROMEDIO
+```
+
+### Por Día (24 keywords)
+```
+Entrada:    24,000 ASINs buscados
+Prime:      20,160 ASINs filtrados
+Procesados:  2,400 ASINs top
+Publicados:    960 productos ← PRODUCTIVIDAD
+```
+
+### Conversión Global
+```
+1000 ASINs iniciales
+  ↓
+30 publicados
+  ↓
+3% conversión total
+```
+
+**Por qué 3% es bueno:**
+- Filtros estrictos garantizan calidad
+- Prime = disponibilidad
+- Top BSR = productos probados
+- Marcas válidas = sin riesgos legales
+- Sin duplicados = catálogo limpio
+
+---
+
+## 🎯 OPTIMIZACIONES APLICADAS
+
+### ✅ Prime ANTES de BSR
+- **Antes:** Buscar BSR de 1000 → Filtrar Prime → 420 con BSR
+- **Ahora:** Filtrar Prime 840 → Buscar BSR solo de 840
+- **Ahorro:** 160 requests de BSR innecesarios
+
+### ✅ Top 100 después de BSR
+- **Antes:** BSR de 840 → Procesar 840 → Publicar algunos
+- **Ahora:** BSR de 840 → Top 100 → Procesar 100
+- **Ahorro:** Procesamiento de 740 productos menos populares
+
+### ✅ Duplicados temprano
+- **Antes:** Procesar todo → Duplicados al final
+- **Ahora:** Duplicados después de Top 100
+- **Ahorro:** No procesar duplicados conocidos
+
+### ✅ Backoff inteligente
+- **Antes:** Delay fijo, rate limits frecuentes
+- **Ahora:** Backoff exponencial (1s→2s→4s)
+- **Resultado:** Manejo automático de límites
+
+---
+
+## 📁 ARCHIVOS DEL SISTEMA
+
+### Configuración
+- `config/autonomous_config.json` - Config de 100 páginas
+- `config/brand_blacklist.json` - Marcas prohibidas
+
+### Scripts principales
+- `scripts/autonomous/autonomous_search_and_publish.py` - Orquestador
+- `scripts/tools/search_asins_by_keyword.py` - Búsqueda Amazon
+- `src/integrations/amazon_pricing.py` - Filtro Prime
+- `src/integrations/amazon_api.py` - BSR y datos completos
+- `src/pipeline/transform_mapper_new.py` - Transformación Amazon→ML
+- `src/integrations/mainglobal.py` - Publicación en ML
+
+### Datos
+- `storage/listings_database.db` - ASINs publicados
+- `storage/asins_json/*.json` - Productos completos
+- `storage/logs/publish_ready/*_mini_ml.json` - Listos para publicar
+
+---
+
+## 🎯 RESULTADO FINAL
+
+```
+╔═══════════════════════════════════════════════════════╗
+║  SISTEMA DE SELECCIÓN Y FILTRADO COMPLETO            ║
+╠═══════════════════════════════════════════════════════╣
+║                                                       ║
+║  📥 Entrada:     1000 ASINs/keyword                   ║
+║  ⭐ Filtrados:    840 Prime (84%)                     ║
+║  🎯 Procesados:   100 top BSR                         ║
+║  ✅ Publicados:    30 productos (~3%)                 ║
+║                                                       ║
+║  ⏱️  Tiempo:      60 min/keyword                      ║
+║  📈 Velocidad:    24 keywords/día                     ║
+║  📦 Output:       960 productos/día                   ║
+║                                                       ║
+║  🎯 50,000 publicaciones en 52 días                   ║
+║                                                       ║
+╚═══════════════════════════════════════════════════════╝
+```
+
+**El sistema maximiza calidad sobre cantidad:**
+- Solo Prime (disponibilidad)
+- Solo top BSR (popularidad)
+- Solo marcas seguras (sin riesgo)
+- Sin duplicados (catálogo limpio)
+- Categorización precisa (menos rechazos)
+
+---
+
+**Fecha:** 2025-11-09
+**Versión:** 1.0
+**Estado:** ✅ Producción

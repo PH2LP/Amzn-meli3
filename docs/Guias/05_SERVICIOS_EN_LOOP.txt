@@ -1,0 +1,767 @@
+# 🔄 Servicios en Loop - Guía Completa de Activación
+
+**Última actualización:** Enero 2025
+**Versión:** 1.0
+
+---
+
+## 📋 Índice
+
+1. [Resumen de Servicios](#resumen-de-servicios)
+2. [Configuración Inicial](#configuración-inicial)
+3. [Servicios Automáticos (LaunchAgent)](#servicios-automáticos-launchagent)
+4. [Servicios Manuales (Background)](#servicios-manuales-background)
+5. [Activar Todos los Servicios](#activar-todos-los-servicios)
+6. [Monitoreo y Control](#monitoreo-y-control)
+7. [Troubleshooting](#troubleshooting)
+
+---
+
+## 🎯 Resumen de Servicios
+
+### Servicios Críticos ⚠️
+
+Estos servicios DEBEN estar siempre activos para el funcionamiento correcto del sistema:
+
+| Servicio | Frecuencia | Propósito | Método |
+|----------|-----------|-----------|--------|
+| **Token MercadoLibre** | Cada 5.5h | Renovar token ML automáticamente | LaunchAgent |
+| **Sincronización Amazon-ML** | Cada 6h | Actualizar precios y stock | Background |
+| **Monitor de Publicaciones** | Continuo | Detectar productos en catálogo | Background |
+
+### Servicios Opcionales 💡
+
+Estos servicios mejoran la experiencia pero no son críticos:
+
+| Servicios | Frecuencia | Propósito | Método |
+|----------|-----------|-----------|--------|
+| **Auto-respuestas** | Cada 1 min | Contestar preguntas automáticamente | Background |
+| **Corrección de Fotos** | Cada 30 min | Arreglar fotos pausadas con IA | Background |
+| **Ajuste de Precios** | Cada 6h | Optimizar precios de catálogo | Background |
+| **Sync ML → BD** | Cada 1h | Sincronizar base de datos | Background |
+| **Notificaciones Telegram** | Cada 1-5 min | Alertas de ventas y eventos | Background |
+
+---
+
+## ⚙️ Configuración Inicial
+
+### Requisitos Previos
+
+```bash
+# 1. Verificar que el .env tiene todas las credenciales
+cat .env | grep -E "(ML_|AMAZON_|OPENAI_|TELEGRAM_)"
+
+# 2. Verificar que el venv está activado
+source venv/bin/activate
+
+# 3. Verificar que la BD existe
+ls -lh storage/listings_database.db
+
+# 4. Verificar que hay productos publicados
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE item_id IS NOT NULL;"
+```
+
+---
+
+## 🤖 Servicios Automáticos (LaunchAgent)
+
+### 1. Token MercadoLibre Auto-Refresh
+
+**¿Por qué es crítico?**
+Los tokens de MercadoLibre expiran cada 6 horas. Sin este servicio, todas las operaciones fallarán con error 401.
+
+#### Instalación
+
+```bash
+# Instalar servicio (se ejecuta automáticamente al iniciar el sistema)
+./scripts/auth/install_ml_token_service.sh
+```
+
+#### Verificar que Está Corriendo
+
+```bash
+# Ver status del servicio
+launchctl list | grep ml_token
+
+# Debe mostrar algo como:
+# -	126	com.revancha.ml_token_refresh
+
+# Ver logs
+tail -f logs/ml_token_refresh.log
+```
+
+#### Características
+
+- ✅ Se inicia automáticamente al arrancar el sistema
+- ✅ Se reinicia automáticamente si falla
+- ✅ Renueva el token cada 5.5 horas (antes de que expire)
+- ✅ Actualiza el archivo `.env` automáticamente
+- ✅ Logs en `logs/ml_token_refresh.log`
+
+#### Controlar el Servicio
+
+```bash
+# Detener
+launchctl unload ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+
+# Iniciar
+launchctl load ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+
+# Reiniciar
+launchctl unload ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+launchctl load ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+
+# Desinstalar completamente
+rm ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+launchctl unload ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+```
+
+---
+
+## 🔧 Servicios Manuales (Background)
+
+Estos servicios se ejecutan con `nohup` en background y persisten hasta que se detengan manualmente.
+
+### 2. Sincronización Amazon → MercadoLibre
+
+**¿Para qué sirve?**
+Monitorea Amazon cada 6 horas y actualiza MercadoLibre automáticamente:
+- Precio cambió → Actualiza precio en ML
+- Sin stock → Pausa publicación (stock=0)
+- Con stock → Reactiva publicación (stock=10)
+
+#### Activar
+
+```bash
+# Iniciar en background
+nohup ./scripts/tools/sync_amazon_ml_loop.sh > /dev/null 2>&1 &
+
+# Guardar el PID (proceso ID) para detenerlo después
+echo $! > /tmp/sync_loop.pid
+```
+
+#### Logs
+
+```bash
+# Ver actividad
+tail -f logs/sync_amazon_ml_loop.log
+
+# Ver última sincronización
+tail -50 logs/sync_amazon_ml.log
+```
+
+#### Detener
+
+```bash
+# Método 1: Usar el PID guardado
+kill $(cat /tmp/sync_loop.pid)
+
+# Método 2: Buscar y matar el proceso
+pkill -f sync_amazon_ml_loop.sh
+```
+
+---
+
+### 3. Monitor de Productos en Catálogo
+
+**¿Para qué sirve?**
+Detecta automáticamente cuando MercadoLibre asocia tus productos a su catálogo (buybox).
+
+#### Activar
+
+```bash
+# Iniciar en background
+nohup ./scripts/tools/monitor_catalog_loop.sh > /dev/null 2>&1 &
+```
+
+#### Logs
+
+```bash
+tail -f logs/catalog_monitor.log
+```
+
+#### Detener
+
+```bash
+pkill -f monitor_catalog_loop.sh
+```
+
+---
+
+### 4. Ajuste Automático de Precios de Catálogo
+
+**¿Para qué sirve?**
+Una vez que tus productos están en catálogo, este servicio optimiza precios automáticamente:
+- Tienes buybox → Sube precio
+- NO tienes buybox → Baja precio
+- Siempre respeta margen mínimo del 25%
+
+#### Activar
+
+```bash
+# Iniciar en background
+nohup ./scripts/tools/auto_adjust_catalog_prices_loop.sh > /dev/null 2>&1 &
+```
+
+#### Logs
+
+```bash
+tail -f logs/auto_adjust_prices.log
+tail -f logs/price_adjustment.log
+```
+
+#### Detener
+
+```bash
+pkill -f auto_adjust_catalog_prices_loop.sh
+```
+
+---
+
+### 5. Sync MercadoLibre → Base de Datos
+
+**¿Para qué sirve?**
+Sincroniza todos los datos de tus publicaciones de ML a la base de datos local cada 1 hora.
+
+#### Activar
+
+```bash
+# Iniciar en background
+nohup ./scripts/tools/auto_sync_loop.sh > /dev/null 2>&1 &
+```
+
+#### Logs
+
+```bash
+tail -f logs/auto_sync_loop.log
+```
+
+#### Detener
+
+```bash
+pkill -f auto_sync_loop.sh
+```
+
+---
+
+### 6. Corrección Automática de Fotos Pausadas
+
+**¿Para qué sirve?**
+MercadoLibre pausa fotos que tienen texto o fondos complejos. Este servicio las detecta y corrige automáticamente usando IA (rembg).
+
+#### Activar
+
+```bash
+# Iniciar en background
+nohup ./scripts/tools/fix_paused_pictures_loop.sh > /dev/null 2>&1 &
+```
+
+#### Logs
+
+```bash
+tail -f logs/fix_paused_pictures_loop.log
+tail -f logs/fix_paused_pictures.log
+```
+
+#### Detener
+
+```bash
+pkill -f fix_paused_pictures_loop.sh
+```
+
+---
+
+### 7. Auto-respuesta de Preguntas
+
+**¿Para qué sirve?**
+Responde preguntas de clientes automáticamente usando:
+1. Templates predefinidos (0 tokens - GRATIS)
+2. Caché de respuestas similares (0 tokens)
+3. IA para preguntas específicas (~150 tokens)
+
+#### Configuración Previa
+
+```bash
+# Verificar que existen los archivos de configuración
+ls -la docs/questions/
+
+# Debe contener:
+# - preguntas_custom (preguntas genéricas)
+# - saludo (saludo y despedida personalizados)
+```
+
+#### Activar
+
+```bash
+# Iniciar en background
+nohup ./venv/bin/python3 scripts/tools/auto_answer_questions.py > logs/auto_answer.log 2>&1 &
+
+# O con el loop wrapper si existe
+# nohup ./scripts/tools/auto_responder_loop.sh > /dev/null 2>&1 &
+```
+
+#### Logs
+
+```bash
+tail -f logs/auto_answer.log
+```
+
+#### Detener
+
+```bash
+pkill -f auto_answer_questions.py
+# O si usaste el wrapper:
+# pkill -f auto_responder_loop.sh
+```
+
+---
+
+### 8. Notificaciones de Telegram
+
+**¿Para qué sirve?**
+Envía alertas por Telegram sobre:
+- 🎉 Ventas nuevas (con info de Amazon para comprar)
+- ❓ Preguntas sin responder
+- 💰 Cambios de precio
+- ⏸️ Productos pausados
+- 🚨 Errores críticos
+
+#### Configuración Previa
+
+```bash
+# Verificar credenciales de Telegram en .env
+cat .env | grep TELEGRAM
+
+# Debe tener:
+# TELEGRAM_BOT_TOKEN=...
+# TELEGRAM_CHAT_ID=...
+# TELEGRAM_NOTIFICATIONS_ENABLED=true
+```
+
+#### Activar
+
+```bash
+# Monitor de ventas (cada 5 minutos)
+nohup ./venv/bin/python3 scripts/tools/telegram_sales_notifier.py > logs/telegram_sales.log 2>&1 &
+
+# Si existe el loop wrapper:
+# nohup ./scripts/tools/sales_monitor_loop.sh > /dev/null 2>&1 &
+```
+
+#### Logs
+
+```bash
+tail -f logs/telegram_sales.log
+```
+
+#### Detener
+
+```bash
+pkill -f telegram_sales_notifier.py
+# O: pkill -f sales_monitor_loop.sh
+```
+
+---
+
+## 🚀 Activar Todos los Servicios
+
+### Script de Inicio Completo
+
+Guarda este script como `start_all_services.sh`:
+
+```bash
+#!/bin/bash
+# ============================================================
+# ACTIVAR TODOS LOS SERVICIOS DEL SISTEMA
+# ============================================================
+
+cd "$(dirname "$0")"
+
+echo "🚀 Iniciando todos los servicios del sistema..."
+echo ""
+
+# 1. Token MercadoLibre (LaunchAgent - debe estar instalado previamente)
+echo "1️⃣ Verificando servicio de tokens ML..."
+if launchctl list | grep -q "ml_token"; then
+    echo "   ✅ Servicio de tokens activo"
+else
+    echo "   ⚠️  Servicio no instalado. Ejecutar:"
+    echo "      ./scripts/auth/install_ml_token_service.sh"
+fi
+echo ""
+
+# 2. Sincronización Amazon → ML (cada 6h)
+echo "2️⃣ Iniciando sincronización Amazon-ML..."
+if pgrep -f "sync_amazon_ml_loop" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./scripts/tools/sync_amazon_ml_loop.sh > /dev/null 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+# 3. Monitor de catálogo (cada 30 min)
+echo "3️⃣ Iniciando monitor de catálogo..."
+if pgrep -f "monitor_catalog_loop" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./scripts/tools/monitor_catalog_loop.sh > /dev/null 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+# 4. Ajuste automático de precios (cada 6h)
+echo "4️⃣ Iniciando ajuste de precios..."
+if pgrep -f "auto_adjust_catalog_prices_loop" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./scripts/tools/auto_adjust_catalog_prices_loop.sh > /dev/null 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+# 5. Sync ML → BD (cada 1h)
+echo "5️⃣ Iniciando sync ML → BD..."
+if pgrep -f "auto_sync_loop" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./scripts/tools/auto_sync_loop.sh > /dev/null 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+# 6. Corrección de fotos (cada 30 min)
+echo "6️⃣ Iniciando corrección de fotos..."
+if pgrep -f "fix_paused_pictures_loop" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./scripts/tools/fix_paused_pictures_loop.sh > /dev/null 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+# 7. Auto-respuesta (cada 1 min)
+echo "7️⃣ Iniciando auto-respuesta..."
+if pgrep -f "auto_answer_questions" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./venv/bin/python3 scripts/tools/auto_answer_questions.py > logs/auto_answer.log 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+# 8. Notificaciones Telegram (cada 5 min)
+echo "8️⃣ Iniciando notificaciones Telegram..."
+if pgrep -f "telegram_sales_notifier" > /dev/null; then
+    echo "   ⚠️  Ya está corriendo"
+else
+    nohup ./venv/bin/python3 scripts/tools/telegram_sales_notifier.py > logs/telegram_sales.log 2>&1 &
+    echo "   ✅ Iniciado (PID: $!)"
+fi
+echo ""
+
+echo "════════════════════════════════════════════════════════════"
+echo "✅ TODOS LOS SERVICIOS INICIADOS"
+echo "════════════════════════════════════════════════════════════"
+echo ""
+echo "📊 Ver estado:"
+echo "   ps aux | grep -E '(loop|sync|telegram|answer|monitor)' | grep -v grep"
+echo ""
+echo "📝 Ver logs:"
+echo "   tail -f logs/*.log"
+echo ""
+echo "🛑 Detener todos:"
+echo "   ./stop_all_services.sh"
+echo ""
+```
+
+### Script de Detención Completo
+
+Guarda este script como `stop_all_services.sh`:
+
+```bash
+#!/bin/bash
+# ============================================================
+# DETENER TODOS LOS SERVICIOS DEL SISTEMA
+# ============================================================
+
+echo "🛑 Deteniendo todos los servicios del sistema..."
+echo ""
+
+# Detener todos los loops
+pkill -f sync_amazon_ml_loop.sh
+pkill -f monitor_catalog_loop.sh
+pkill -f auto_adjust_catalog_prices_loop.sh
+pkill -f auto_sync_loop.sh
+pkill -f fix_paused_pictures_loop.sh
+pkill -f auto_answer_questions.py
+pkill -f telegram_sales_notifier.py
+
+echo "✅ Todos los servicios detenidos"
+echo ""
+echo "ℹ️  El servicio de tokens ML (LaunchAgent) sigue corriendo"
+echo "   Para detenerlo:"
+echo "   launchctl unload ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist"
+echo ""
+```
+
+### Hacer los Scripts Ejecutables
+
+```bash
+chmod +x start_all_services.sh
+chmod +x stop_all_services.sh
+```
+
+### Uso
+
+```bash
+# Iniciar todo
+./start_all_services.sh
+
+# Detener todo
+./stop_all_services.sh
+```
+
+---
+
+## 👀 Monitoreo y Control
+
+### Ver Todos los Servicios Activos
+
+```bash
+# Ver procesos en ejecución
+ps aux | grep -E "(loop|sync|telegram|answer|monitor|adjust)" | grep -v grep
+
+# Formato más limpio
+ps aux | grep -E "(loop|sync|telegram|answer|monitor|adjust)" | grep -v grep | awk '{print $2, $11, $12, $13}'
+```
+
+### Ver Logs en Tiempo Real
+
+```bash
+# Ver todos los logs juntos
+tail -f logs/*.log
+
+# Ver solo logs de loops
+tail -f logs/*loop*.log
+
+# Ver log específico
+tail -f logs/sync_amazon_ml_loop.log
+```
+
+### Verificar Estado de Cada Servicio
+
+```bash
+# Script de verificación completa
+cat << 'EOF' > check_services_status.sh
+#!/bin/bash
+
+echo "════════════════════════════════════════════════════════════"
+echo "📊 ESTADO DE SERVICIOS"
+echo "════════════════════════════════════════════════════════════"
+echo ""
+
+check_service() {
+    local name=$1
+    local pattern=$2
+
+    if pgrep -f "$pattern" > /dev/null; then
+        echo "✅ $name - ACTIVO"
+    else
+        echo "❌ $name - INACTIVO"
+    fi
+}
+
+# LaunchAgent
+echo "🤖 SERVICIOS AUTOMÁTICOS:"
+if launchctl list | grep -q "ml_token"; then
+    echo "✅ Token MercadoLibre - ACTIVO (LaunchAgent)"
+else
+    echo "❌ Token MercadoLibre - INACTIVO (LaunchAgent)"
+fi
+echo ""
+
+# Background services
+echo "🔄 SERVICIOS EN BACKGROUND:"
+check_service "Sync Amazon-ML      " "sync_amazon_ml_loop"
+check_service "Monitor Catálogo    " "monitor_catalog_loop"
+check_service "Ajuste de Precios   " "auto_adjust_catalog_prices_loop"
+check_service "Sync ML → BD        " "auto_sync_loop"
+check_service "Corrección de Fotos " "fix_paused_pictures_loop"
+check_service "Auto-respuestas     " "auto_answer_questions"
+check_service "Notificaciones TG   " "telegram_sales_notifier"
+echo ""
+
+echo "════════════════════════════════════════════════════════════"
+EOF
+
+chmod +x check_services_status.sh
+./check_services_status.sh
+```
+
+---
+
+## 🐛 Troubleshooting
+
+### Servicio No Inicia
+
+```bash
+# 1. Verificar que el script existe
+ls -la scripts/tools/[nombre_del_loop].sh
+
+# 2. Verificar permisos de ejecución
+chmod +x scripts/tools/[nombre_del_loop].sh
+
+# 3. Ejecutar manualmente para ver errores
+./scripts/tools/[nombre_del_loop].sh
+
+# 4. Verificar que el venv existe
+ls -la venv/bin/python3
+
+# 5. Verificar que las dependencias están instaladas
+./venv/bin/pip list
+```
+
+### Servicio Se Detiene Solo
+
+```bash
+# Ver últimas líneas del log para identificar error
+tail -100 logs/[nombre_del_servicio].log
+
+# Errores comunes:
+# - Token expirado: Verificar servicio de tokens
+# - Credenciales faltantes: Verificar .env
+# - BD no existe: Crear con publicaciones primero
+```
+
+### Token MercadoLibre Sigue Expirando
+
+```bash
+# Verificar que el LaunchAgent está corriendo
+launchctl list | grep ml_token
+
+# Ver logs del servicio
+tail -50 logs/ml_token_refresh.log
+
+# Reinstalar el servicio
+./scripts/auth/install_ml_token_service.sh
+
+# Verificar que el .env tiene las credenciales correctas
+cat .env | grep "ML_REFRESH_TOKEN"
+```
+
+### Demasiados Procesos en Background
+
+```bash
+# Ver todos los procesos del sistema
+ps aux | grep -E "(loop|python3)" | grep revancha
+
+# Matar duplicados
+pkill -f "sync_amazon_ml_loop"  # Mata TODOS los procesos con ese nombre
+
+# Reiniciar limpio
+./stop_all_services.sh
+sleep 5
+./start_all_services.sh
+```
+
+### Logs Muy Grandes
+
+```bash
+# Ver tamaño de logs
+du -sh logs/*.log
+
+# Limpiar logs antiguos (guardar backup primero)
+mkdir -p logs/backup
+cp logs/*.log logs/backup/
+echo "" > logs/sync_amazon_ml_loop.log  # Vaciar log específico
+
+# O limpiar todos
+for log in logs/*.log; do
+    cp "$log" "logs/backup/$(basename $log).$(date +%Y%m%d)"
+    echo "" > "$log"
+done
+```
+
+---
+
+## 📊 Resumen de Frecuencias
+
+| Servicio | Intervalo | Consumo API | Criticidad |
+|----------|-----------|-------------|------------|
+| Token ML | 5.5 horas | 1 llamada | 🔴 CRÍTICO |
+| Sync Amazon-ML | 6 horas | ~5 por producto | 🔴 CRÍTICO |
+| Monitor Catálogo | 30 minutos | ~2 por producto | 🟡 IMPORTANTE |
+| Ajuste Precios | 6 horas | ~3 por producto | 🟡 IMPORTANTE |
+| Sync ML → BD | 1 hora | ~1 por producto | 🟢 OPCIONAL |
+| Fotos | 30 minutos | ~2 por foto | 🟢 OPCIONAL |
+| Auto-respuestas | 1 minuto | 0-150 tokens | 🟢 OPCIONAL |
+| Telegram | 5 minutos | ~1 llamada | 🟢 OPCIONAL |
+
+---
+
+## 🎯 Configuración Recomendada
+
+### Para Empezar (Mínimo)
+
+```bash
+# Solo lo esencial
+./scripts/auth/install_ml_token_service.sh
+nohup ./scripts/tools/sync_amazon_ml_loop.sh > /dev/null 2>&1 &
+```
+
+### Para Uso Normal
+
+```bash
+# Tokens + Sync + Monitor
+./scripts/auth/install_ml_token_service.sh
+nohup ./scripts/tools/sync_amazon_ml_loop.sh > /dev/null 2>&1 &
+nohup ./scripts/tools/monitor_catalog_loop.sh > /dev/null 2>&1 &
+nohup ./scripts/tools/auto_adjust_catalog_prices_loop.sh > /dev/null 2>&1 &
+```
+
+### Para Uso Completo (Recomendado)
+
+```bash
+# Todo activado
+./start_all_services.sh
+```
+
+---
+
+## 📝 Notas Importantes
+
+1. **LaunchAgent vs Background**
+   - LaunchAgent: Persiste entre reinicios del sistema (solo Token ML)
+   - Background (nohup): Se detiene al reiniciar, debes reactivar manualmente
+
+2. **Consumo de Recursos**
+   - Todos los loops son muy livianos (~1-5 MB RAM cada uno)
+   - No afectan el rendimiento del sistema
+   - Los logs crecen ~1-10 MB por día según actividad
+
+3. **Límites de API**
+   - MercadoLibre: 10,000 llamadas/día (suficiente)
+   - Amazon: 10 llamadas/segundo (suficiente)
+   - OpenAI: Según tu plan (auto-respuestas optimizadas para minimizar uso)
+
+4. **Persistencia**
+   - Los servicios de background NO persisten entre reinicios
+   - Debes crear scripts de inicio automático o usar cron/systemd
+   - Para 24/7, migrar a VPS (ver [80_MIGRACION_VPS.md](80_MIGRACION_VPS.md))
+
+---
+
+## 🔗 Referencias
+
+- [Token Auto-Refresh](70_TOKENS_AUTOMATICOS.md)
+- [Sincronización](30_SINCRONIZACION.md)
+- [Precios Dinámicos](20_PRECIOS_DINAMICOS.md)
+- [Auto-respuestas](50_AUTO_RESPUESTA.md)
+- [Corrección de Fotos](40_CORRECCION_FOTOS.md)
+- [Notificaciones Telegram](60_NOTIFICACIONES_TELEGRAM.md)
+
+---
+
+**Sistema completamente documentado.**
+Todos los servicios listos para operar 24/7.

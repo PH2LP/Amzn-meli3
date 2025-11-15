@@ -1,0 +1,607 @@
+{
+  "asin": "B098LG3N6R",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "grams",
+        "value": 510.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Mini portable 60% compact layout: MK-BOX is a 68 keys mechanical keyboard have cute small size, but with separate arrow keys and F1-F12, Fn function keys you need, can use it for gaming or work while saving space.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Mechanical red switch: characterized for being linear and smoother, slight key sound has no paragraph sense with minimal resistance, but fast action without a tactile bump feel which makes it easier to tap the keyboard.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Classic charming blue LED backlit: Customize multiple illuminated LED light effects, supports about 16 backlight modes, press Fn + Ins can control it, FN + ←/→ control backlight speed, FN + ↑/↓ control backlight brightness.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Full anti-ghosting keyboard: all 68 keys are no conflict, black grey red mash up design, ergonomic suspension double-color injection keycap, double kickstand feet adjustable typing angle and detachable usb cable, both practical and beautiful.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Extensive compatibility: MageGee MK-Box mechanical keyboards use USB 2.0 connector making it compatible with Windows (2000, XP, ME, Vista, 7, 8), Linux and Mac, plug and play, no drivers or software required.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "centimeters",
+          "value": 10.1
+        },
+        "length": {
+          "unit": "centimeters",
+          "value": 30.8
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 3.9
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "60 percent keyboard",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "MageGee",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43211706",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hardware_platform": [
+      {
+        "language_tag": "en_US",
+        "value": "Laptop",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "total_usb_2_0_ports": [
+      {
+        "value": 0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.0
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 12.8
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 33.5
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Multimedia",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "C6-OA6W-8VPX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Modern,Classic,Casual,Standard,Ultimate",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "button_quantity": [
+      {
+        "value": 68,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "MageGee",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "MKBox",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_layout": [
+      {
+        "value": "qwerty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "MageGee Portable 60% Mechanical Gaming Keyboard, MK-Box LED Backlit Compact 68 Keys Mini Wired Office Keyboard with Red Switch for Windows Laptop PC Mac - Black/Grey",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 29.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2021-07-03T16:33:51.786Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "USB",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "USB Cable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "switch_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Linear",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "MK BOX Gray Black",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "video-game-keyboards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black/Red Switch",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.67,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "series_number": [
+      {
+        "value": 8,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width_height": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 30.8
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 10.1
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 3.9
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Portable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Backlit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Trackpad",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Ergonomic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_backlighting_color_support": [
+      {
+        "value": "single_color",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Mechanical, Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "language_tag": "en_US",
+        "value": "USB Powered",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "Laptop",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Acrylonitrile Butadiene Styrene",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hand_orientation": [
+      {
+        "language_tag": "en_US",
+        "value": "Ambidextrous",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61meQuPPc-L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/418J49WWtFL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/418J49WWtFL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/716OymjtYxL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41q4PqgDGAL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41q4PqgDGAL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71D5-6MAgdL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51KY-+evj5L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51KY-+evj5L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71dbC4jh2uL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41l2gFzrSCL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41l2gFzrSCL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/71hBgrVElUL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41BfgMzbU7L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41BfgMzbU7L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71GYqXaew+L.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41r7H69KJxL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41r7H69KJxL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71GeJmedNBL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41bz-b6EYJL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41bz-b6EYJL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/71-izCmsvrL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41rCV5fh7iL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41rCV5fh7iL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/61cFGwO8sEL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/41JS-bbZEiL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/41JS-bbZEiL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "KEYBOARDS"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B09B9NK6VL"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "402051011",
+          "title": "PC Gaming Keyboards",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/402051011",
+          "rank": 10
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "video_games_display_on_website",
+          "title": "Video Games",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames",
+          "rank": 230
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "MageGee",
+      "browseClassification": {
+        "displayName": "Gaming Keyboards",
+        "classificationId": "402051011"
+      },
+      "color": "Black/Red Switch",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "MageGee Portable 60% Mechanical Gaming Keyboard, MK-Box LED Backlit Compact 68 Keys Mini Wired Office Keyboard with Red Switch for Windows Laptop PC Mac - Black/Grey",
+      "manufacturer": "MageGee",
+      "memorabilia": false,
+      "modelNumber": "MKBox",
+      "packageQuantity": 1,
+      "partNumber": "C6-OA6W-8VPX",
+      "style": "Modern,Classic,Casual,Standard,Ultimate",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "pc_accessory_display_on_website",
+      "websiteDisplayGroupName": "PC Accessory"
+    }
+  ]
+}

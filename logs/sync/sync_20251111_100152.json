@@ -1,0 +1,236 @@
+{
+  "timestamp": "2025-11-11T10:01:52.044930",
+  "statistics": {
+    "total": 16,
+    "paused": 0,
+    "price_updated": 0,
+    "no_change": 1,
+    "errors": 15
+  },
+  "changes": [
+    {
+      "item_id": "CBT3019130650",
+      "asin": "B00004SU18",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 17.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2697148803",
+      "asin": "B000W0TTJQ",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 48.94,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2697234945",
+      "asin": "B000AST3AK",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 38.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3018752282",
+      "asin": "B0D8MFM6BK",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 53.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3018630202",
+      "asin": "B00UB441HS",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 52.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3018617136",
+      "asin": "B002JAKRAM",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 40.35,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3018642480",
+      "asin": "B004Q6D02E",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 30.63,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2697062551",
+      "asin": "B07RSZSYNC",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 26.88,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2697021607",
+      "asin": "B09HR7L313",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 45.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3018718054",
+      "asin": "B00VBP8QPO",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 52.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3008178490",
+      "asin": "B0DRW88QG9",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 36.46,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2688861965",
+      "asin": "B0DHLFP4QN",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 21.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3008163812",
+      "asin": "B0DJ19VGDD",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 23.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2687265755",
+      "asin": "B0FJXZV4TR",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 34.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2687275223",
+      "asin": "B00S1116J4",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 179.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2687198849",
+      "asin": "B002Y1N6K4",
+      "action": "price_update_failed",
+      "success": false,
+      "message": "Error al actualizar precio",
+      "amazon_status": {
+        "available": true,
+        "price": 84.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    }
+  ]
+}

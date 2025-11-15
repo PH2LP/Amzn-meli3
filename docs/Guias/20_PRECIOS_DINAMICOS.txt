@@ -1,0 +1,552 @@
+# 🎯 Sistema de Precios Dinámicos Inteligente para Catálogo
+
+## 📋 Resumen Ejecutivo
+
+Sistema automatizado que **ajusta precios hacia arriba y hacia abajo** para:
+- ✅ Ganar el buybox cuando no lo tienes
+- ✅ Maximizar ganancias cuando ya lo tienes
+- ✅ Mantener rentabilidad en todo momento
+
+---
+
+## 🔧 Cómo Funciona
+
+### **Lógica de Decisión Automática**
+
+El script analiza tu situación en el catálogo y decide la mejor estrategia:
+
+#### **CASO 1: Ya tienes el buybox 🏆**
+
+**Estrategia:** SUBIR GRADUALMENTE
+
+```
+Situación:
+  - Tu precio: $70
+  - Buybox actual: $70 (tuyo)
+  - Precio original (45%): $80
+  - Precio mínimo (25%): $60
+
+Decisión:
+  → SUBE a $72 (+$2)
+
+Razón:
+  Ya tienes el buybox, puedes vender más caro
+  y seguir ganando hasta que aparezca competencia
+```
+
+**Beneficio:**
+- Maximiza tus ganancias gradualmente
+- No pierdes el buybox de golpe
+- Llegas al precio óptimo (45% markup)
+
+---
+
+#### **CASO 2: NO tienes el buybox ❌**
+
+**Estrategia:** BAJAR PARA GANAR
+
+```
+Situación:
+  - Tu precio: $75
+  - Buybox actual: $72 (competidor)
+  - Precio mínimo (25%): $60
+
+Decisión:
+  → BAJA a $71 (buybox - $1)
+
+Razón:
+  Necesitas ganar el buybox para vender
+  $71 > $60 (mantiene margen rentable)
+```
+
+**Beneficio:**
+- Ganas el buybox
+- Empiezas a vender
+- Mantienes rentabilidad
+
+---
+
+#### **CASO 3: Competidor demasiado barato 💸**
+
+**Estrategia:** NO COMPETIR
+
+```
+Situación:
+  - Tu precio: $70
+  - Buybox actual: $55 (competidor)
+  - Precio mínimo (25%): $60
+
+Decisión:
+  → SUBE a $80 (precio original)
+
+Razón:
+  $54 (para ganar) < $60 (mínimo rentable)
+  No es rentable competir, esperar mejor momento
+```
+
+**Beneficio:**
+- No vendes a pérdida
+- Cuando competidor se quede sin stock, tendrás el buybox
+- Proteges tu margen
+
+---
+
+## 🔄 Ciclo de Vida Completo
+
+### **Ejemplo Real: Producto LEGO Bonsai**
+
+**Configuración:**
+- Costo Amazon: $50
+- Precio mínimo (25%): $62.50
+- Precio original (45%): $72.50
+
+---
+
+### **📅 DÍA 1: Aparece competencia**
+
+```
+Estado inicial:
+  - Tu precio: $72.50
+  - Competidor: $70.00
+  - Buybox: Competidor ❌
+
+Script ejecuta:
+  → BAJA a $69.00
+  → Razón: "Bajar: ganar buybox manteniendo margen"
+
+Resultado:
+  ✅ Ahora tienes el buybox
+  ✅ Empiezas a vender a $69
+```
+
+---
+
+### **📅 DÍA 2: Ya tienes el buybox**
+
+```
+Estado:
+  - Tu precio: $69.00
+  - Buybox: Tuyo ✅
+  - Competidor: $70.00 (sin stock o no visible)
+
+Script ejecuta:
+  → SUBE a $71.00 (+$2)
+  → Razón: "Subir gradualmente: ya tenemos buybox"
+
+Resultado:
+  ✅ Sigues con el buybox
+  ✅ Ganas $2 más por venta
+```
+
+---
+
+### **📅 DÍA 3: Continúa la subida**
+
+```
+Estado:
+  - Tu precio: $71.00
+  - Buybox: Tuyo ✅
+
+Script ejecuta:
+  → SUBE a $72.50 (precio original alcanzado)
+  → Razón: "Subir gradualmente: ya tenemos buybox"
+
+Resultado:
+  ✅ Llegaste al precio óptimo
+  ✅ Máximo margen de ganancia (45%)
+```
+
+---
+
+### **📅 DÍA 4: Precio óptimo alcanzado**
+
+```
+Estado:
+  - Tu precio: $72.50
+  - Buybox: Tuyo ✅
+
+Script ejecuta:
+  → MANTIENE $72.50
+  → Razón: "Mantener: ya en precio óptimo con buybox"
+
+Resultado:
+  ✅ No cambia nada
+  ✅ Máxima rentabilidad
+```
+
+---
+
+### **📅 DÍA 5: Nuevo competidor más agresivo**
+
+```
+Estado:
+  - Tu precio: $72.50
+  - Nuevo competidor: $68.00
+  - Buybox: Competidor ❌
+
+Script ejecuta:
+  → BAJA a $67.00
+  → Razón: "Bajar: ganar buybox manteniendo margen"
+
+Resultado:
+  ✅ Recuperas el buybox
+  ✅ Sigues rentable ($67 > $62.50 mínimo)
+```
+
+---
+
+### **📅 DÍA 6: Competidor se queda sin stock**
+
+```
+Estado:
+  - Tu precio: $67.00
+  - Buybox: Tuyo ✅
+  - Sin otros competidores
+
+Script ejecuta:
+  → SUBE a $69.00 (+$2)
+  → Y seguirá subiendo hasta $72.50
+
+Resultado:
+  ✅ Recuperas margen gradualmente
+  ✅ Vuelves al precio óptimo
+```
+
+---
+
+## ⚙️ Configuración
+
+### **Variables Principales**
+
+Ubicación: `scripts/tools/adjust_catalog_prices.py`
+
+```python
+PRICE_MARKUP = 45        # Margen objetivo (%) - Tu precio ideal
+MARGEN_MINIMO = 25       # Margen mínimo (%) - No bajar de aquí
+TAX_FLORIDA = 7          # Impuesto (%)
+
+# Incremento de subida (línea 261):
+precio_tentativo = min(our_price + 2, precios["precio_original"])
+#                                  ^
+#                                  |
+#                        Cambiar este valor para subir más/menos rápido
+```
+
+### **Ajustes Recomendados**
+
+**Conservador (subida lenta):**
+```python
+precio_tentativo = min(our_price + 1, precios["precio_original"])
+# Sube $1 por ejecución
+```
+
+**Agresivo (subida rápida):**
+```python
+precio_tentativo = min(our_price + 5, precios["precio_original"])
+# Sube $5 por ejecución
+```
+
+**Muy agresivo (subida inmediata):**
+```python
+nuevo_precio = precios["precio_original"]
+# Sube directo al precio original si tienes buybox
+```
+
+---
+
+## 🚀 Uso
+
+### **Ejecutar Manualmente**
+
+```bash
+# Ver qué haría sin cambiar nada (recomendado primero)
+python3 scripts/tools/adjust_catalog_prices.py --dry-run
+
+# Ejecutar y actualizar precios
+python3 scripts/tools/adjust_catalog_prices.py
+
+# Solo un producto específico
+python3 scripts/tools/adjust_catalog_prices.py --asin B0DRW8G3WK
+```
+
+### **Automatizar con Cron**
+
+Ejecutar cada 6 horas:
+
+```bash
+0 */6 * * * cd /ruta/revancha && /ruta/venv/bin/python3 scripts/tools/adjust_catalog_prices.py >> logs/price_adjustment.log 2>&1
+```
+
+Ejecutar diariamente a las 2 AM:
+
+```bash
+0 2 * * * cd /ruta/revancha && /ruta/venv/bin/python3 scripts/tools/adjust_catalog_prices.py >> logs/price_adjustment.log 2>&1
+```
+
+---
+
+## 📊 Matriz de Decisiones Completa
+
+| Tu Precio | Buybox | Competidor | Acción | Nuevo Precio |
+|-----------|--------|------------|--------|--------------|
+| $70 | Tuyo ✅ | - | SUBE +$2 | $72 |
+| $72 | Tuyo ✅ | - | SUBE +$2 | $74 |
+| $80 | Tuyo ✅ | - | MANTIENE | $80 (óptimo) |
+| $75 | Otro ❌ | $72 | BAJA | $71 (gana buybox) |
+| $70 | Otro ❌ | $55 | SUBE | $80 (no rentable) |
+| $50 | Tuyo ✅ | - | SUBE | $80 (muy bajo) |
+
+---
+
+## 🎯 Beneficios del Sistema
+
+### **Maximización Automática de Ganancias**
+
+```
+Sin sistema:
+  Precio fijo: $70
+  Margen: 30%
+
+Con sistema:
+  Empieza: $70 (gana buybox)
+  Sube a: $72, $74, $76, $78, $80
+  Margen final: 45%
+
+  → +15% más de ganancia sin perder ventas
+```
+
+### **Competencia Inteligente**
+
+```
+Competidor a $72:
+  → Bajas a $71 (ganas)
+
+Competidor se va:
+  → Subes gradualmente a $80
+
+Competidor muy barato ($50):
+  → Mantienes $80 (no compites a pérdida)
+```
+
+### **Protección de Margen**
+
+```
+Nunca baja del 25% de margen:
+
+  Costo real: $50
+  Mínimo: $62.50
+
+  Competidor a $60:
+    → NO baja a $59
+    → Sube a $80 (precio original)
+    → Espera mejor momento
+```
+
+---
+
+## 🔍 Monitoreo
+
+### **Ver Estado Actual**
+
+```bash
+# Ver qué productos están en catálogo
+python3 scripts/tools/check_catalog_items.py
+
+# Ver qué cambios haría (sin ejecutar)
+python3 scripts/tools/adjust_catalog_prices.py --dry-run
+```
+
+### **Revisar Historial**
+
+```bash
+# Ver últimas ejecuciones
+tail -100 logs/price_adjustment.log
+
+# Buscar productos específicos
+grep "B0DRW8G3WK" logs/price_adjustment.log
+```
+
+### **Verificar en Base de Datos**
+
+```bash
+sqlite3 storage/listings_database.db "
+  SELECT
+    asin,
+    precio_original,
+    precio_actual,
+    es_catalogo,
+    ultima_actualizacion_precio
+  FROM listings
+  WHERE es_catalogo = 1
+  ORDER BY ultima_actualizacion_precio DESC
+  LIMIT 10;
+"
+```
+
+---
+
+## ⚠️ Consideraciones Importantes
+
+### **1. Frecuencia de Ejecución**
+
+**Recomendado:** 2-4 veces por día
+
+**Razón:**
+- Subir muy rápido puede hacer que pierdas buybox
+- Subir muy lento deja dinero sobre la mesa
+- 6 horas es un buen balance
+
+### **2. Productos Sin Competencia**
+
+Si tu producto es único en catálogo:
+- El script sube inmediatamente al precio original
+- No hay buybox que ganar
+- Maximizas ganancia desde el inicio
+
+### **3. Productos de Alta Rotación**
+
+Para productos que venden mucho:
+- Considera subir más lento (+$1 en vez de +$2)
+- Mantener buybox es más importante
+- Pequeñas pérdidas de margen se compensan con volumen
+
+### **4. Productos de Baja Rotación**
+
+Para productos que venden poco:
+- Considera subir más rápido (+$5 o directo)
+- Volumen bajo = priorizar margen
+- Buybox menos crítico
+
+---
+
+## 🐛 Troubleshooting
+
+### **Problema: Precios no se actualizan**
+
+```bash
+# Verificar que el script se ejecuta
+python3 scripts/tools/adjust_catalog_prices.py --dry-run
+
+# Verificar token de ML
+echo $ML_ACCESS_TOKEN
+
+# Verificar permisos de base de datos
+ls -la storage/listings_database.db
+```
+
+### **Problema: "No hay productos de catálogo"**
+
+```bash
+# Verificar que productos están marcados como catálogo
+python3 scripts/tools/check_catalog_items.py
+
+# Actualizar manualmente si es necesario
+sqlite3 storage/listings_database.db "
+  UPDATE listings
+  SET es_catalogo = 1
+  WHERE item_id = 'CBT2881118766';
+"
+```
+
+### **Problema: Precios suben/bajan demasiado rápido**
+
+Editar línea 261 en `adjust_catalog_prices.py`:
+
+```python
+# Más lento (cambiar de +2 a +1)
+precio_tentativo = min(our_price + 1, precios["precio_original"])
+
+# Más rápido (cambiar de +2 a +5)
+precio_tentativo = min(our_price + 5, precios["precio_original"])
+```
+
+---
+
+## 📈 Métricas de Éxito
+
+### **Indicadores Clave**
+
+**Tasa de Buybox:**
+```
+Objetivo: > 80% del tiempo
+Métrica: % de productos con buybox
+```
+
+**Margen Promedio:**
+```
+Objetivo: 35-45%
+Métrica: (precio_actual - costo_real) / costo_real
+```
+
+**Rotación de Precios:**
+```
+Objetivo: 1-2 cambios por semana por producto
+Métrica: Cambios en ultima_actualizacion_precio
+```
+
+---
+
+## 🎓 Mejores Prácticas
+
+### **✅ DO:**
+- Ejecutar 2-4 veces por día
+- Revisar logs semanalmente
+- Ajustar márgenes por categoría
+- Monitorear productos de alto valor
+
+### **❌ DON'T:**
+- Ejecutar cada hora (muy frecuente)
+- Bajar margen mínimo por debajo del 20%
+- Ignorar productos sin stock
+- Desactivar el sistema sin revisar
+
+---
+
+## 🔮 Futuras Mejoras
+
+### **En Roadmap:**
+
+1. **Análisis de Velocidad de Venta**
+   - Subir más rápido si vendes mucho
+   - Subir más lento si ventas caen
+
+2. **Detección de Temporada**
+   - Precios más altos en temporada alta
+   - Más agresivo en temporada baja
+
+3. **Machine Learning**
+   - Predecir mejor momento para subir
+   - Aprender patrones de competidores
+
+4. **Alertas Automáticas**
+   - Notificar cuando pierdes buybox
+   - Alertar si competidor muy agresivo
+
+---
+
+## 📞 Soporte
+
+Si tenés dudas o problemas:
+
+1. Revisar este documento
+2. Revisar logs: `logs/price_adjustment.log`
+3. Ejecutar con `--dry-run` para ver qué haría
+4. Verificar base de datos con queries SQL
+
+---
+
+## 🎉 Conclusión
+
+Este sistema automáticamente:
+
+✅ **Gana el buybox** cuando no lo tienes
+✅ **Maximiza ganancias** cuando lo tienes
+✅ **Protege tu margen** en todo momento
+✅ **Se adapta** a la competencia automáticamente
+
+**Resultado:** Más ventas + Mayor margen = Más ganancias 💰
+
+---
+
+*Última actualización: 2025-01-08*
+*Versión: 2.0 - Sistema Inteligente con Subida/Bajada*

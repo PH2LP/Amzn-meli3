@@ -1,0 +1,246 @@
+# 🔍 Sistema de Detección de Duplicados
+
+Sistema inteligente que previene reprocesar y republicar productos que ya están en MercadoLibre.
+
+---
+
+## 🎯 ¿Qué Detecta?
+
+### 1. **Duplicados por ASIN** ✅
+Si el mismo ASIN ya fue publicado, lo saltea automáticamente.
+
+**Ejemplo:**
+- Procesaste `B0DJ19VGDD` (Orquídea LEGO)
+- Lo intentás publicar de nuevo
+- ✅ Sistema lo detecta y lo omite
+
+### 2. **Duplicados por GTIN/UPC** ✅
+Si otro ASIN tiene el mismo código de barras (mismo producto físico), lo detecta.
+
+**Ejemplo:**
+- `B081SRSNWW`: Teclado Logitech K380 Negro (UPC: 097855143730)
+- `B07VKPGC3M`: Teclado Logitech K380 Blanco (UPC: 097855143730)
+- ⚠️ Mismo UPC = mismo producto base, diferente color
+- ✅ Sistema lo detecta y te avisa
+
+---
+
+## 🚀 Uso del Pipeline Inteligente
+
+### Opción A: Pipeline Automático (Recomendado)
+
+```bash
+./venv/bin/python3 run_pipeline_smart.py
+```
+
+**Este script hace:**
+
+1. Lee `asins.txt`
+2. Verifica cada ASIN contra la base de datos
+3. Filtra duplicados automáticamente
+4. Te muestra un resumen:
+   ```
+   📊 RESUMEN
+   Total ASINs: 100
+   ✅ Nuevos: 87
+   ⏭️  Duplicados: 13
+   ```
+5. Te pregunta si querés continuar
+6. Ejecuta el pipeline normal **solo con los productos nuevos**
+
+**Ventajas:**
+- Ahorra tiempo (no reprocesa productos ya publicados)
+- Ahorra tokens de OpenAI (no consulta IA para productos duplicados)
+- Evita errores de MercadoLibre por duplicados
+
+### Opción B: Verificación Manual
+
+```bash
+# Ver qué ASINs son duplicados sin ejecutar nada
+./venv/bin/python3 src/pipeline/duplicate_checker.py
+```
+
+Esto analiza los primeros 10 ASINs de `asins.txt` y te muestra cuáles son nuevos y cuáles duplicados.
+
+---
+
+## 📊 Verificar ASINs Publicados
+
+```bash
+# Ver todos los ASINs publicados
+sqlite3 storage/listings_database.db "SELECT asin, item_id, title FROM listings ORDER BY date_published DESC LIMIT 20;"
+
+# Contar productos publicados
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE item_id IS NOT NULL;"
+
+# Ver productos publicados hoy
+sqlite3 storage/listings_database.db "SELECT asin, title FROM listings WHERE date(date_published) = date('now');"
+```
+
+---
+
+## 🔍 Cómo Funciona Internamente
+
+### Base de Datos: `storage/listings_database.db`
+
+Cada vez que publicás un producto exitosamente, se guarda:
+
+```
+asin        → B0DJ19VGDD
+gtin        → 5702017415482 (código de barras UPC/EAN)
+item_id     → CBT3008163812 (ID de MercadoLibre)
+title       → LEGO Botanicals Orquídea...
+date_published → 2025-11-08T13:04:19
+```
+
+### Verificación en 2 pasos:
+
+1. **Check por ASIN**: `SELECT * FROM listings WHERE asin = 'B0DJ19VGDD'`
+   - Si existe → Duplicado exacto
+   - Si no existe → Continuar a paso 2
+
+2. **Check por GTIN**: `SELECT * FROM listings WHERE gtin = '5702017415482'`
+   - Si existe → Mismo producto, ASIN diferente (variante/color/distribuidor)
+   - Si no existe → Producto nuevo ✅
+
+---
+
+## 🎬 Flujo Completo Recomendado
+
+```bash
+# 1. Buscar ASINs por keyword
+./search_asins.sh "lego star wars" 500
+
+# 2. Ejecutar pipeline inteligente (con detección de duplicados)
+./venv/bin/python3 run_pipeline_smart.py
+
+# Salida esperada:
+# 📂 Leídos 500 ASINs desde asins.txt
+# 🔍 Verificando 500 ASINs contra la base de datos...
+#
+# ✅ B0ABC123: Nuevo producto
+# ⏭️  B0DEF456: Ya publicado → CBT3008123456
+# ✅ B0GHI789: Nuevo producto
+# ...
+#
+# 📊 RESUMEN
+# Total ASINs: 500
+# ✅ Nuevos: 437
+# ⏭️  Duplicados: 63
+#
+# ¿Querés continuar con el pipeline? [s/n]: s
+#
+# 🚀 INICIANDO PIPELINE COMPLETO
+# [Procesa solo los 437 ASINs nuevos]
+```
+
+---
+
+## 📈 Beneficios
+
+**Antes (sin detección de duplicados):**
+- 100 ASINs en `asins.txt`
+- 30 ya publicados
+- Pipeline procesa los 100 → desperdicia ~15 minutos y tokens
+- MercadoLibre rechaza los 30 duplicados → errores innecesarios
+
+**Ahora (con detección de duplicados):**
+- 100 ASINs en `asins.txt`
+- Sistema detecta 30 duplicados automáticamente
+- Pipeline procesa solo 70 ASINs nuevos → ahorra ~15 minutos
+- 0 errores por duplicados en MercadoLibre
+
+**Ahorro estimado:**
+- ⏱️ Tiempo: ~30% menos
+- 💰 Tokens: ~30% menos
+- ❌ Errores: ~90% menos
+
+---
+
+## ⚙️ Configuración Avanzada
+
+### Deshabilitar verificación de duplicados (no recomendado)
+
+Si por alguna razón querés procesar todos los ASINs sin filtrar:
+
+```bash
+# Usar el pipeline original sin verificación
+./venv/bin/python3 src/integrations/mainglobal.py
+```
+
+### Limpiar base de datos (testing)
+
+```bash
+# ⚠️ CUIDADO: Esto borra TODOS los registros
+sqlite3 storage/listings_database.db "DELETE FROM listings;"
+```
+
+---
+
+## 🧪 Testing
+
+### Probar con ASINs de prueba
+
+```bash
+# Crear archivo de prueba
+echo "B0DJ19VGDD
+B0NEW12345
+B0ANOTHER1" > asins_test.txt
+
+# Copiar temporalmente
+cp asins.txt asins_backup.txt
+cp asins_test.txt asins.txt
+
+# Probar detección
+./venv/bin/python3 src/pipeline/duplicate_checker.py
+
+# Restaurar
+mv asins_backup.txt asins.txt
+```
+
+---
+
+## 📚 Archivos del Sistema
+
+```
+src/
+  pipeline/
+    duplicate_checker.py          # Motor de detección de duplicados
+
+scripts/
+  tools/
+    save_listing_data.py          # Funciones de BD (check_asin_exists, check_gtin_exists)
+
+storage/
+  listings_database.db            # Base de datos SQLite con todos los productos publicados
+
+run_pipeline_smart.py             # Pipeline inteligente (wrapper recomendado)
+```
+
+---
+
+## ❓ FAQ
+
+**¿Qué pasa si borro `listings_database.db`?**
+
+Se pierde el historial de productos publicados y el sistema no podrá detectar duplicados. La BD se recrea automáticamente vacía.
+
+**¿Puedo editar la BD manualmente?**
+
+Sí, es SQLite estándar. Usá cualquier cliente SQL o `sqlite3` desde terminal.
+
+**¿El GTIN siempre está disponible?**
+
+No, algunos productos de Amazon no tienen GTIN. En ese caso solo se verifica por ASIN.
+
+**¿Qué pasa si cambio el precio de un producto ya publicado?**
+
+El sistema de duplicados solo previene **crear nuevos listings**. Para actualizar precios de productos existentes, usá el sistema de precios dinámicos (ver `PRECIOS_DINAMICOS.md`).
+
+**¿Funciona para todos los marketplaces (México, Brasil, etc)?**
+
+Sí, la detección es independiente del marketplace. Un producto publicado en México se detecta como duplicado aunque lo intentes publicar en Brasil.
+
+---
+
+🤖 Sistema automático de prevención de duplicados integrado al pipeline

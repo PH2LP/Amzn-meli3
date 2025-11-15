@@ -1,0 +1,400 @@
+# 🎨 Web UI - Features y Diseño
+
+## 🎯 Objetivo
+
+Interfaz web simple y elegante para controlar el sistema AMZ→ML desde cualquier dispositivo.
+
+---
+
+## 📱 3 Modos de Vista
+
+### **1. Modo Simple (Default)**
+
+Vista minimalista estilo iOS con toggles on/off:
+
+```
+┌─────────────────────────────────────────┐
+│  AMZ → ML Control Panel                 │
+├─────────────────────────────────────────┤
+│                                          │
+│  🤖 Sistema Autónomo         [ON ] 🟢   │
+│     Busca y publica productos            │
+│                                          │
+│  💬 Auto Responder          [ON ] 🟢   │
+│     Responde preguntas clientes          │
+│                                          │
+│  💾 Backups                 [ON ] 🟢   │
+│     Backups cada 6 horas                 │
+│                                          │
+│  📊 Pricing Dinámico        [OFF] ⚫   │
+│     Actualiza precios automáticamente    │
+│                                          │
+├─────────────────────────────────────────┤
+│  📈 Estadísticas Rápidas                │
+│                                          │
+│  Productos publicados:  8,342            │
+│  Últimas 24h:           156              │
+│  Preguntas respondidas: 423              │
+│  Último backup:         Hace 2 horas     │
+│                                          │
+└─────────────────────────────────────────┘
+```
+
+---
+
+### **2. Modo Pro (Configuración Avanzada)**
+
+Configuraciones detalladas del sistema:
+
+```
+┌─────────────────────────────────────────┐
+│  ⚙️  Configuración Avanzada              │
+├─────────────────────────────────────────┤
+│                                          │
+│  💰 PRICING & MARKUP                     │
+│  ├─ Markup Global:        [500] %       │
+│  ├─ Precio Mínimo:        [$1000]       │
+│  ├─ Precio Máximo:        [$999999]     │
+│  ├─ Stock Default:        [100]         │
+│  └─ Tax Florida:          [7] %         │
+│                                          │
+│  🤖 SISTEMA AUTÓNOMO                     │
+│  ├─ Keywords por ciclo:   [1]           │
+│  ├─ ASINs por keyword:    [150]         │
+│  ├─ Delay entre ciclos:   [60] min      │
+│  └─ Países activos:       □ AR □ MX     │
+│                                          │
+│  🔍 FILTROS DE PRODUCTOS                 │
+│  ├─ Filtrar Prime:        [✓]           │
+│  ├─ Filtrar por BSR:      [✓]           │
+│  ├─ Marcas prohibidas:    [Editar...]   │
+│  └─ Categorías block:     [Editar...]   │
+│                                          │
+│  💬 AUTO-RESPONDER                       │
+│  ├─ Respuesta automática: [✓]           │
+│  ├─ Delay respuesta:      [30] min      │
+│  ├─ Usar templates:       [✓]           │
+│  └─ Usar AI (OpenAI):     [✓]           │
+│                                          │
+│  💾 BACKUPS                               │
+│  ├─ Frecuencia:           [6] horas     │
+│  ├─ Google Drive:         [✓]           │
+│  ├─ Dropbox:              [✓]           │
+│  └─ Mantener local:       [7] días      │
+│                                          │
+│  [💾 Guardar Cambios]                    │
+│                                          │
+└─────────────────────────────────────────┘
+```
+
+**Campos editables:**
+
+#### **💰 Pricing:**
+- `PRICE_MARKUP` (500%) - Markup/ganancia en %
+- `PRICE_MARKUP_PERCENT` (50%) - Para net proceeds
+- `DEFAULT_PRICE` ($1000) - Precio fallback
+- `DEFAULT_QUANTITY` (100) - Stock default
+- `FLORIDA_TAX_PERCENT` (7%) - Tax Florida
+
+#### **🤖 Autónomo:**
+- Keywords por ciclo
+- ASINs por keyword
+- Enable BSR ranking
+- Enable Prime filter
+- Países target (AR, MX, CL, etc.)
+
+#### **🔍 Filtros:**
+- Brand blacklist (textarea)
+- Categorías bloqueadas
+- Keywords irrelevantes
+- Product types prohibidos
+
+#### **💬 Auto-answer:**
+- Enable/disable
+- Delay entre respuestas
+- Usar templates (0 tokens)
+- Usar AI (cuando no hay template)
+
+#### **💾 Backups:**
+- Frecuencia (horas)
+- Destinos (Google Drive, Dropbox, S3)
+- Retención local (días)
+
+---
+
+### **3. Modo Logs (Monitoreo)**
+
+Logs en tiempo real con streaming:
+
+```
+┌─────────────────────────────────────────┐
+│  📝 Logs en Tiempo Real                 │
+├─────────────────────────────────────────┤
+│                                          │
+│  Filtros: [Sistema Autónomo ▼]          │
+│           □ Errors  □ Warnings  ☑ All   │
+│                                          │
+│  ┌────────────────────────────────────┐ │
+│  │ [14:23:45] 🔄 CICLO #42            │ │
+│  │ [14:23:46] 🔍 Keyword: backpacks  │ │
+│  │ [14:24:12] ✅ 422 ASINs encontr.  │ │
+│  │ [14:24:15] 🔥 Filtrando marcas... │ │
+│  │ [14:25:01] ✅ 418 ASINs permitid. │ │
+│  │ [14:25:03] 📊 Analizando calidad  │ │
+│  │ [14:25:45] ⭐ EXCELENTE keyword   │ │
+│  │ [14:26:10] 📊 Ordenando por BSR   │ │
+│  │ [14:30:22] ✅ 150 ASINs finales   │ │
+│  │ [14:30:22] 💾 Guardados en asins  │ │
+│  │ [14:30:25] 🚀 Iniciando public... │ │
+│  │                                    │ │
+│  └────────────────────────────────────┘ │
+│                                          │
+│  [⏸️ Pausar] [⬇️ Descargar] [🔄 Refr.]  │
+│                                          │
+└─────────────────────────────────────────┘
+```
+
+**Opciones de logs:**
+- Sistema Autónomo
+- Auto Responder
+- Main2 (Publicaciones)
+- Backups
+- Pricing Updates
+- Sistema (General)
+
+**Filtros:**
+- All / Errors only / Warnings only
+- Última hora / 24h / 7 días
+
+---
+
+## 🛠️ Stack Técnico
+
+### **Backend:**
+```python
+Flask==3.0.0           # Web framework
+Flask-SocketIO==5.3.5  # WebSocket para logs en vivo
+psutil==5.9.6          # Control de procesos
+```
+
+### **Frontend:**
+```javascript
+Alpine.js (15KB)       # Reactivity
+Tailwind CSS (CDN)     # Styling
+Socket.IO (client)     # Real-time logs
+```
+
+---
+
+## 📡 API Endpoints
+
+### **Control de Servicios:**
+```python
+POST /api/services/pipeline/start
+POST /api/services/pipeline/stop
+POST /api/services/pipeline/restart
+GET  /api/services/pipeline/status
+
+POST /api/services/auto-answer/start
+POST /api/services/auto-answer/stop
+GET  /api/services/auto-answer/status
+
+POST /api/services/backup/start
+POST /api/services/backup/stop
+GET  /api/services/backup/status
+```
+
+### **Configuración:**
+```python
+GET  /api/config                    # Obtener toda la config
+POST /api/config/pricing            # Actualizar pricing
+POST /api/config/autonomous         # Actualizar autónomo
+POST /api/config/filters            # Actualizar filtros
+POST /api/config/auto-answer        # Actualizar auto-answer
+POST /api/config/backups            # Actualizar backups
+```
+
+### **Estadísticas:**
+```python
+GET /api/stats/products             # Total productos
+GET /api/stats/questions            # Preguntas respondidas
+GET /api/stats/backups              # Último backup
+GET /api/stats/performance          # CPU, RAM, Disco
+```
+
+### **Logs:**
+```python
+GET  /api/logs/autonomous?hours=24  # Logs sistema autónomo
+GET  /api/logs/auto-answer?hours=24
+GET  /api/logs/main2?hours=24
+WS   /api/logs/stream               # Stream en tiempo real
+```
+
+---
+
+## 🎨 Diseño UI
+
+### **Colores (Modo Claro):**
+```
+Background:  #FFFFFF
+Text:        #1F2937
+Accent:      #3B82F6 (blue)
+Success:     #10B981 (green)
+Warning:     #F59E0B (amber)
+Error:       #EF4444 (red)
+```
+
+### **Colores (Modo Oscuro):**
+```
+Background:  #1F2937
+Text:        #F9FAFB
+Accent:      #60A5FA (light blue)
+Success:     #34D399 (light green)
+Warning:     #FBBF24 (light amber)
+Error:       #F87171 (light red)
+```
+
+### **Toggle Switch (iOS Style):**
+```css
+/* OFF state */
+background: #E5E7EB (gray)
+circle: white
+
+/* ON state */
+background: #10B981 (green)
+circle: white + shadow
+```
+
+---
+
+## 🔐 Autenticación (Opcional - Fase 2)
+
+```python
+Flask-HTTPAuth==4.8.0
+
+# Simple HTTP Basic Auth
+USERNAME = os.getenv('WEB_UI_USERNAME', 'admin')
+PASSWORD = os.getenv('WEB_UI_PASSWORD', 'tu_password')
+```
+
+---
+
+## 📱 Responsive Design
+
+- **Desktop:** 3 columnas (Simple | Stats | Logs)
+- **Tablet:** 2 columnas (Main | Sidebar)
+- **Mobile:** 1 columna (Stack vertical)
+
+---
+
+## 🚀 Deployment
+
+### **Desarrollo:**
+```bash
+cd /opt/amz-ml-system
+source venv/bin/activate
+python3 web_ui/app.py
+# http://localhost:5000
+```
+
+### **Producción (con nginx):**
+```nginx
+server {
+    listen 80;
+    server_name tu-ip-del-vps;
+
+    location / {
+        proxy_pass http://127.0.0.1:5000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /socket.io {
+        proxy_pass http://127.0.0.1:5000/socket.io;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+    }
+}
+```
+
+### **Systemd Service:**
+```ini
+[Unit]
+Description=AMZ-ML Web UI
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/amz-ml-system
+Environment="PATH=/opt/amz-ml-system/venv/bin"
+ExecStart=/opt/amz-ml-system/venv/bin/python3 /opt/amz-ml-system/web_ui/app.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+
+## ✅ Funcionalidades Clave
+
+### **Modo Simple:**
+- [x] Toggle ON/OFF para cada servicio
+- [x] Estadísticas en tiempo real
+- [x] Indicadores de estado (🟢 🟡 🔴)
+
+### **Modo Pro:**
+- [x] Editar PRICE_MARKUP (%)
+- [x] Editar PRICE_MARKUP_PERCENT (%)
+- [x] Editar DEFAULT_PRICE ($)
+- [x] Editar DEFAULT_QUANTITY (stock)
+- [x] Editar FLORIDA_TAX_PERCENT (%)
+- [x] Configurar keywords por ciclo
+- [x] Configurar ASINs por keyword
+- [x] Editar brand blacklist
+- [x] Configurar países target
+- [x] Configurar frecuencia backups
+- [x] Guardar cambios → Actualiza .env + config JSONs
+
+### **Modo Logs:**
+- [x] Stream en tiempo real (WebSocket)
+- [x] Filtros por servicio
+- [x] Filtros por nivel (Error/Warning/All)
+- [x] Descargar logs
+- [x] Auto-scroll
+
+---
+
+## 🎯 Prioridad de Implementación
+
+### **Fase 1: MVP (Esencial)**
+1. Modo Simple con toggles
+2. Control básico servicios (start/stop/restart)
+3. Estadísticas básicas
+
+### **Fase 2: Configuración**
+1. Modo Pro con campos editables
+2. Guardar config en .env
+3. Reiniciar servicios al guardar
+
+### **Fase 3: Logs**
+1. Logs en tiempo real
+2. Filtros básicos
+3. Descargar logs
+
+### **Fase 4: Polish**
+1. Modo oscuro
+2. Autenticación
+3. Notificaciones push
+4. Mobile optimization
+
+---
+
+**Total estimado:** ~3-4 horas para Fase 1+2 (lo esencial)
+
+**Implementar después de verificar que el VPS funciona correctamente** ✅

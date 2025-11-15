@@ -1,0 +1,44 @@
+# Archivos Activos del Proyecto
+
+## Script Principal
+- **main2.py** - Pipeline completo Amazon → MercadoLibre CBT
+
+## Módulos Core (src/)
+- **category_matcher_v2.py** - Detección híbrida de categorías (embeddings + AI)
+- **transform_mapper_new.py** - Transformación y mapeo de productos
+- **mainglobal.py** - Publicación multi-país en MercadoLibre
+- **amazon_api.py** - Descarga de productos desde Amazon SP-API
+- **unified_transformer.py** - Transformación unificada
+- **ai_validators.py** - Validación con IA
+- **smart_categorizer.py** - Categorización inteligente
+
+## Utilidades (utils/)
+- **auto_refresh_token.py** - Renovación automática token MercadoLibre
+- **auto_refresh_token_amzn.py** - Renovación automática token Amazon
+
+## Datos Esenciales
+- **resources/asins.txt** - Lista de ASINs a procesar
+- **resources/data/cbt_categories_meta.json** - Metadata de categorías (513KB)
+- **storage/category_cache/** - Embeddings y base de datos de categorías (17MB)
+
+## Archivos Archivados
+Los siguientes archivos fueron movidos a `archive/old_scripts_raiz/`:
+- ai_hybrid_categorizer.py
+- answer_specific_question.py
+- auto_answer_questions.py
+- find_category_with_ai_ml_hybrid.py
+- fix_categories_manual.py
+- fix_categories.py
+- generate_product_characteristics.py
+- main.py (versión vieja)
+- sync_amazon_ml.py
+
+## Cómo Restaurar
+Si necesitas recuperar algún archivo archivado:
+```bash
+mv archive/old_scripts_raiz/NOMBRE_ARCHIVO.py .
+```
+
+## Versión del Sistema
+- Commit actual: 9c9ade3 (v2.0 con descripciones optimizadas)
+- Branch: main2-production-success

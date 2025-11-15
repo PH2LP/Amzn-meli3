@@ -1,0 +1,57 @@
+{
+  "comment": "Configuración TEST - Solo 100 ASINs, 1 ciclo",
+  "version": "1.0-test",
+  "last_updated": "2025-11-11",
+
+  "autonomous_mode": {
+    "enabled": true,
+    "cycle_delay_minutes": 5,
+    "max_publications_per_cycle": 50,
+    "max_publications_per_day": 100,
+    "target_publications_per_keyword": 30
+  },
+
+  "search_settings": {
+    "initial_search_pages": 10,
+    "comment_pages": "TEST: Solo 10 páginas = ~100 ASINs",
+    "default_max_asins": 100,
+    "search_timeout_seconds": 120,
+    "rate_limit_delay_seconds": 0.6,
+    "enable_bsr_ranking": true,
+    "max_asins_to_process_after_ranking": 50
+  },
+
+  "publication_settings": {
+    "use_existing_pipeline": true,
+    "pipeline_script": "src/integrations/mainglobal.py",
+    "asins_file": "asins.txt",
+    "append_to_asins_file": false,
+    "clear_asins_file_before_cycle": true,
+    "wait_for_pipeline_completion": true,
+    "pipeline_timeout_minutes": 60
+  },
+
+  "filtering": {
+    "enable_brand_blacklist": true,
+    "brand_blacklist_file": "config/brand_blacklist.json",
+    "skip_already_published": true,
+    "filter_by_category": true,
+    "filter_by_keywords": true,
+    "min_price_usd": 5,
+    "max_price_usd": 500
+  },
+
+  "logging": {
+    "log_level": "INFO",
+    "log_file": "storage/autonomous_logs/test_autonomous.log",
+    "metrics_file": "storage/autonomous_logs/test_metrics.json",
+    "save_rejected_asins": true,
+    "rejected_asins_file": "storage/autonomous_logs/test_rejected_asins.json"
+  },
+
+  "safety": {
+    "max_consecutive_errors": 5,
+    "pause_on_token_error": true,
+    "emergency_stop_file": "storage/STOP_AUTONOMOUS"
+  }
+}

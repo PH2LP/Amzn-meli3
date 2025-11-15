@@ -1,0 +1,550 @@
+{
+  "asin": "B009PCI2JU",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.4,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "NSF 53 – Reduces contaminants with health effects",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "GE GUARANTEED FIT: Compatible with select GE french-door refrigerators",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "PREMIUM FILTRATION: GE Genuine RPWFE Filter is certified to reduce chlorine-resistant cysts, lead, select pharmaceuticals and 50 other impurities (Impurities not necessarily found in all users’ water)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "PHARMACEUTICALS REDUCTION: Reduces select pharmaceuticals, including ibuprofen, progesterone, atenolol, trimethoprim & fluoxetine (Impurities not necessarily in all users’ water)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "BUY WITH CONFIDENCE: Genuine filters, certified to NSF/ANSI Drinking Water Treatment standards, improve the quality of your water and meet requirements of independent and accredited organizations. The same cannot be said of counterfeit and deceptively labeled products",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "EASY FILTER REPLACEMENT: No tools or water-turnoff required to replace cartridge inside refrigerator",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "SIX-MONTH FILTER LIFE: For best filtration results, filter cartridge should be replaced every six months or 300 gallons (Replace sooner if flow rate noticeably declines)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 1.62
+        },
+        "length": {
+          "unit": "inches",
+          "value": 1.62
+        },
+        "height": {
+          "unit": "inches",
+          "value": 9.75
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "GE",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52141500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "pounds",
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "084691808497",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0084691808497",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00084691808497",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.1
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 12.6
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 27.7
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "RPWFE",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Pack of 1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "GE Appliances",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "RPWFE",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "california_proposition_65": [
+      {
+        "compliance_type": "food",
+        "chemical_names": [
+          "lead"
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Certified to reduce chlorine-resistant cysts, lead, select pharmaceuticals and 50 other impurities",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "GE RPWFE Refrigerator Water Filter, Genuine Replacement Filter, Certified to Reduce Lead, Sulfur, and 50+ Other Impurities, Replace Every 6 Months for Best Results, Pack of 1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 54.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2012-10-11T23:22:43.439Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Replacement RPWFE Refrigerator Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "registration_status": "not_capable_emitting_rf_energy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "RPWFE",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-refrigerator-dispenser-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ghs": [
+      {
+        "classification": [
+          {
+            "class": "amzn_specific_no_label_with_warning"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Limited one year warranty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pesticide_marking": [
+      {
+        "marking_type": "epa_registration_number",
+        "registration_status": "fifra_not_considered_pesticide",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "marking_type": "epa_establishment_number",
+        "registration_status": "fifra_registration_required",
+        "certifying_agent": {
+          "language_tag": "en_US"
+        },
+        "certification_number": "90013-FL-1\n",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "SIZE_NAME",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.222,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "customer_package_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Standard Packaging",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 1.62
+        },
+        "width": {
+          "unit": "inches",
+          "value": 1.62
+        },
+        "height": {
+          "unit": "inches",
+          "value": 9.75
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "language_tag": "en_US",
+        "value": "Replace every 6 months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/319P4iuozKL.jpg",
+          "height": 500,
+          "width": 480
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/319P4iuozKL._SL75_.jpg",
+          "height": 75,
+          "width": 72
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61F7FBgjzpL.jpg",
+          "height": 2500,
+          "width": 2400
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51k5tLga+jL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51k5tLga+jL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71L1A7cbN5L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/410H6knpC2L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/410H6knpC2L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/61buMeYyTwL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51wSEyhixfL.jpg",
+          "height": 679,
+          "width": 679
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51wSEyhixfL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/519jUYAKPVL.jpg",
+          "height": 500,
+          "width": 480
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/519jUYAKPVL._SL75_.jpg",
+          "height": 75,
+          "width": 72
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/817h2mqBG7L.jpg",
+          "height": 2500,
+          "width": 2400
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51u6MIJv30L.jpg",
+          "height": 600,
+          "width": 970
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51u6MIJv30L._SL75_.jpg",
+          "height": 46,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41-O2WLM4EL.jpg",
+          "height": 500,
+          "width": 480
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41-O2WLM4EL._SL75_.jpg",
+          "height": 75,
+          "width": 72
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71OZ5ZwJC5L.jpg",
+          "height": 2560,
+          "width": 2458
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741161",
+          "title": "In-Refrigerator Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741161",
+          "rank": 3
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 15
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "GE",
+      "browseClassification": {
+        "displayName": "Water Filters",
+        "classificationId": "3741161"
+      },
+      "color": "White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "GE RPWFE Refrigerator Water Filter, Genuine Replacement Filter, Certified to Reduce Lead, Sulfur, and 50+ Other Impurities, Replace Every 6 Months for Best Results, Pack of 1",
+      "manufacturer": "GE Appliances",
+      "memorabilia": false,
+      "modelNumber": "RPWFE",
+      "packageQuantity": 1,
+      "partNumber": "RPWFE",
+      "size": "1 Count (Pack of 1)",
+      "style": "Pack of 1",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "major_appliances_display_on_website",
+      "websiteDisplayGroupName": "Major Appliances"
+    }
+  ]
+}

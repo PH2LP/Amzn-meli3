@@ -1,0 +1,297 @@
+# 🔒 Sistema de Backups Automáticos
+
+## ❓ ¿Por qué necesitas backups?
+
+Si DigitalOcean falla, te hackean, o borras algo por error:
+- ❌ Pierdes 50,000 publicaciones
+- ❌ Pierdes la relación ASIN ↔ item_id
+- ❌ Pierdes configuraciones
+- ❌ **Pérdida total: semanas de trabajo**
+
+**Solución: Backups automáticos cada 6 horas a múltiples destinos**
+
+---
+
+## 🎯 Archivos Críticos a Respaldar
+
+### **1. Base de Datos (MÁS IMPORTANTE)**
+```
+storage/listings_database.db  (~50 MB con 50K productos)
+storage/pipeline_state.db      (~5 MB)
+```
+
+### **2. Configuraciones**
+```
+.env                   (credenciales)
+config/               (configuraciones)
+docs/questions/       (templates auto-answer)
+```
+
+### **3. Logs importantes (opcional)**
+```
+storage/autonomous_logs/*.log  (últimos 7 días)
+```
+
+---
+
+## 🚀 Opción 1: Google Drive (GRATIS y FÁCIL)
+
+### **Instalación (5 minutos):**
+
+```bash
+# 1. Instalar rclone
+curl https://rclone.org/install.sh | sudo bash
+
+# 2. Configurar Google Drive
+rclone config
+
+# Seguir estos pasos:
+n) New remote
+name> gdrive
+Storage> drive  (Google Drive)
+client_id> (dejar vacío, presiona Enter)
+client_secret> (dejar vacío, presiona Enter)
+scope> 1  (Full access)
+# Te abrirá un navegador para autorizar
+# Copiar el código y pegarlo
+
+# 3. Test
+rclone lsd gdrive:
+# Deberías ver tus carpetas de Google Drive
+
+# 4. Crear carpeta para backups
+rclone mkdir gdrive:AMZ-ML-Backups
+```
+
+### **Uso:**
+El script `auto_backup_db.sh` detectará rclone automáticamente y subirá a Google Drive.
+
+**Ventajas:**
+- ✅ 15 GB gratis
+- ✅ Accesible desde cualquier dispositivo
+- ✅ Fácil de configurar
+- ✅ Confiable
+
+---
+
+## 🚀 Opción 2: Dropbox (GRATIS y FÁCIL)
+
+### **Instalación (5 minutos):**
+
+```bash
+# 1. Descargar Dropbox-Uploader
+cd /opt
+git clone https://github.com/andreafabrizi/Dropbox-Uploader.git
+cd Dropbox-Uploader
+chmod +x dropbox_uploader.sh
+
+# 2. Configurar
+./dropbox_uploader.sh
+
+# Te pedirá crear una app en Dropbox:
+# 1. Ve a: https://www.dropbox.com/developers/apps
+# 2. Create App → Scoped access → Full Dropbox
+# 3. Copiar App key y App secret
+# 4. Pegarlos en el script
+
+# 3. Crear symlink global
+ln -s /opt/Dropbox-Uploader/dropbox_uploader.sh /usr/local/bin/
+
+# 4. Test
+dropbox_uploader.sh list
+```
+
+**Ventajas:**
+- ✅ 2 GB gratis (suficiente para DBs)
+- ✅ Muy fácil de usar
+- ✅ Script simple
+
+---
+
+## 🚀 Opción 3: AWS S3 (PAGO pero confiable)
+
+### **Instalación:**
+
+```bash
+# 1. Instalar AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+# 2. Configurar credenciales
+aws configure
+# AWS Access Key ID: tu_key
+# AWS Secret Access Key: tu_secret
+# Default region: us-east-1
+# Output format: json
+
+# 3. Crear bucket
+aws s3 mb s3://amz-ml-backups
+
+# 4. Test
+aws s3 ls
+```
+
+**Costo:**
+- ~$0.50/mes por 50 GB
+- Muy barato y ultra confiable
+
+---
+
+## 🚀 Opción 4: Otro servidor tuyo (si tienes)
+
+Si tienes otro servidor o VPS:
+
+```bash
+# En el servidor de backups, crear usuario
+useradd -m backupuser
+mkdir -p /home/backupuser/backups
+chown backupuser:backupuser /home/backupuser/backups
+
+# En DigitalOcean, crear SSH key
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/backup_key
+ssh-copy-id -i ~/.ssh/backup_key backupuser@tu-otro-servidor.com
+
+# Descomentar estas líneas en auto_backup_db.sh:
+# scp -i ~/.ssh/backup_key $BACKUP_FILE backupuser@tu-otro-servidor.com:/home/backupuser/backups/
+```
+
+---
+
+## ⚙️ Configurar Backups Automáticos
+
+### **Opción A: systemd service (recomendado)**
+
+```bash
+# Crear servicio
+sudo nano /etc/systemd/system/amz-ml-backup.service
+```
+
+```ini
+[Unit]
+Description=AMZ-ML Backup Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/amz-ml-system
+ExecStart=/opt/amz-ml-system/scripts/backup/backup_loop.sh
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+```
+
+```bash
+# Activar
+sudo systemctl enable amz-ml-backup
+sudo systemctl start amz-ml-backup
+
+# Ver status
+sudo systemctl status amz-ml-backup
+
+# Ver logs
+sudo journalctl -u amz-ml-backup -f
+```
+
+### **Opción B: cron job (alternativa)**
+
+```bash
+# Editar crontab
+crontab -e
+
+# Agregar (cada 6 horas)
+0 */6 * * * cd /opt/amz-ml-system && ./scripts/backup/auto_backup_db.sh >> logs/backup.log 2>&1
+```
+
+---
+
+## 🔄 Restaurar desde Backup
+
+### **Desde Google Drive:**
+
+```bash
+# Listar backups
+rclone ls gdrive:AMZ-ML-Backups/
+
+# Descargar el más reciente
+rclone copy gdrive:AMZ-ML-Backups/backup_20250115_120000_FULL.tar.gz .
+
+# Extraer
+tar -xzf backup_20250115_120000_FULL.tar.gz
+
+# Restaurar DB
+cp backups/*_listings.db storage/listings_database.db
+cp backups/*_pipeline.db storage/pipeline_state.db
+
+# Restaurar configs
+tar -xzf backups/*_config.tar.gz
+```
+
+### **Desde Dropbox:**
+
+```bash
+# Listar
+dropbox_uploader.sh list /backups
+
+# Descargar
+dropbox_uploader.sh download /backups/backup_20250115_120000_FULL.tar.gz .
+
+# Restaurar (igual que arriba)
+```
+
+---
+
+## 📊 Monitoreo de Backups
+
+### **Ver últimos backups:**
+
+```bash
+ls -lht backups/*.tar.gz | head -10
+```
+
+### **Verificar que se están subiendo:**
+
+```bash
+# Google Drive
+rclone ls gdrive:AMZ-ML-Backups/ | tail -10
+
+# Dropbox
+dropbox_uploader.sh list /backups | tail -10
+```
+
+### **Ver logs del servicio:**
+
+```bash
+tail -f logs/backup.log
+# O
+sudo journalctl -u amz-ml-backup -f
+```
+
+---
+
+## 🎯 Recomendación Final
+
+**Setup ideal (redundancia):**
+
+1. **Google Drive** (gratis, 15 GB)
+2. **Dropbox** (gratis, 2 GB)
+3. **Local en el VPS** (últimos 7 días)
+
+**Total: 3 copias diferentes**
+
+Si uno falla, tienes 2 más. Configurar los 3 toma 15 minutos.
+
+---
+
+## ✅ Checklist de Seguridad
+
+- [ ] Backups automáticos configurados
+- [ ] Probado restauración una vez
+- [ ] Verificar que se suben a destinos remotos
+- [ ] Notificaciones si falla (opcional)
+- [ ] Backup de .env en lugar seguro (NO en GitHub)
+
+**Con esto, tus datos están 100% seguros** 🔒

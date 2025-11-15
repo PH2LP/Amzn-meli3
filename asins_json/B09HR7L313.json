@@ -1,0 +1,522 @@
+{
+  "asin": "B09HR7L313",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 1.4,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "NSF 401 – Reduces 1 or more of 15 emerging contaminants",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "set_name": [
+      {
+        "language_tag": "en_US",
+        "value": "2 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "FRESH FILTERED WATER: Samsung water filters reduce contaminants, giving your family fresh tasting water; Use with your Samsung French Door or Side by Side Refrigerator",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "REDUCES CONTAMINANTS: Samsung’s ultra-high-grade carbon block reduces 99% of potentially harmful contaminants",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GENUINE SAMSUNG FILTERS: Samsung filters are designed to work with your refrigerator to avoid the risk of flooding while giving you clean, filtered water; Use our Authentication Tag to make sure your filter is a genuine Samsung filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "LONG LASTING USE: Samsung refrigerator water filters offer long-lasting use and easy installation; It is recommended to replace your water filter every 6 months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "AVOID WATER DAMAGE: Only Samsung filters are guaranteed to perform correctly with your refrigerator, avoiding the risk of water damage to your fridge and your home",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 2.3
+        },
+        "length": {
+          "unit": "inches",
+          "value": 2.3
+        },
+        "height": {
+          "unit": "inches",
+          "value": 8.2
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52141500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "pounds",
+        "value": 1.4,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "887276429359",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0887276429359",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00887276429359",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 16.6878
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 17.7038
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 30.988
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "Pack of 2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "HAF-QIN-2P",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "2 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pattern": [
+      {
+        "language_tag": "en_US",
+        "value": "Filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "HAF-QIN-2P/EXP",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Reduces Contaminants",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "SAMSUNG Genuine Filters for Refrigerator Water and Ice, Carbon Block Filtration for Clear Drinking Water, HAF-QIN-2P, 2 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 89.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2021-10-04T19:06:58.877Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Water Filer 2P",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "registration_status": "not_capable_emitting_rf_energy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "HAF-QIN-2P",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-refrigerator-dispenser-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 2,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ghs": [
+      {
+        "classification": [
+          {
+            "class": "amzn_specific_no_label_with_warning"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "1 year manufacturer",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.862,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.3
+        },
+        "width": {
+          "unit": "inches",
+          "value": 2.3
+        },
+        "height": {
+          "unit": "inches",
+          "value": 8.2
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "language_tag": "en_US",
+        "value": "Hand Wash",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 2.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41gOeh8LSYL.jpg",
+          "height": 500,
+          "width": 498
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41gOeh8LSYL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61xkUsZuycL.jpg",
+          "height": 1637,
+          "width": 1632
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/31DiS1HLO9L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/31DiS1HLO9L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/61dgzKuWG2L.jpg",
+          "height": 1601,
+          "width": 1600
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/414sQnDzjqL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/414sQnDzjqL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/61BjTenvs2L.jpg",
+          "height": 1601,
+          "width": 1600
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41OhKbadGLL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41OhKbadGLL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71KUvlG79SL.jpg",
+          "height": 1601,
+          "width": 1600
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41ts6OGSD4L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41ts6OGSD4L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/61uGUzxgYiL.jpg",
+          "height": 1601,
+          "width": 1600
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41UyzDV41uL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41UyzDV41uL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/61yM4wVbSSL.jpg",
+          "height": 1601,
+          "width": 1600
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0DP4KNGWM"
+          ],
+          "type": "VARIATION"
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741161",
+          "title": "In-Refrigerator Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741161",
+          "rank": 8
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 92
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Samsung",
+      "browseClassification": {
+        "displayName": "Water Filters",
+        "classificationId": "3741161"
+      },
+      "color": "White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "SAMSUNG Genuine Filters for Refrigerator Water and Ice, Carbon Block Filtration for Clear Drinking Water, HAF-QIN-2P, 2 Pack",
+      "manufacturer": "Samsung",
+      "memorabilia": false,
+      "modelNumber": "HAF-QIN-2P/EXP",
+      "packageQuantity": 1,
+      "partNumber": "HAF-QIN-2P",
+      "size": "Pack of 2",
+      "style": "2 Pack",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "major_appliances_display_on_website",
+      "websiteDisplayGroupName": "Major Appliances"
+    }
+  ]
+}

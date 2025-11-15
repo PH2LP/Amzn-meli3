@@ -1,0 +1,493 @@
+{
+  "asin": "B07TVK8WJP",
+  "attributes": {
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Wired",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "language": [
+      {
+        "type": "unknown",
+        "value": "english",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.25,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "ULTIMATE GAMING BUNDLE – The RX250 has everything you need to level up your gaming setup. This all-in-one bundle includes a responsive gaming keyboard, precision mouse, immersive headset, and a durable mouse pad. A complete keyboard and mouse combo designed for seamless compatibility with PS5, PlayStation 4, Xbox Series X/S, Xbox One, Steam Deck, ROG ALLY, laptops, desktop PCs (Win 7+), and Mac, it’s perfect for gamers and professionals looking for seamless performance on multiple platforms.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GAMING KEYBOARD – The RX250-K is a full-size 104-key wired membrane keyboard built for gaming and productivity. It delivers smooth performance across platforms, featuring 19-key rollover, Anti-Ghosting, and plug-and-play compatibility with consoles and PCs. Customise your RGB backlighting with multiple modes, and enjoy ergonomic comfort with foldable, anti-slip feet. Rated for 8 million keystrokes and equipped with spill-resistant drainage, this keyboard is designed for durability.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GAMING MOUSE – The RX250-M is a lightweight (90g) ambidextrous mouse, perfect for left- and right-handed gamers. With 4 adjustable DPI levels (1200, 1600, 2400, 3200), you can easily switch settings on the fly with the DPI button. Built for durability, each switch is rated for up to 1 million clicks. The auto-rotating RGB lighting adds vibrant flair to your setup, and the included RX250 Mousepad ensures smooth, precise movements with its anti-skid rubber base and high-density cloth surface.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GAMING HEADSET – The RX250-H stereo headset delivers deep bass and crisp highs for an immersive gaming experience. Its lightweight aluminium frame and suspended headband ensure a comfortable fit, while the soft cushioned ear cups provide maximum comfort and noise isolation during long gaming sessions. The foldable microphone, with 120-degree rotation, reduces background noise for clear communication, and can easily be flipped up when not in use. In-line controls offer quick access to volume adjustments for convenience.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "ABOUT ORZLY – Orzly is a London-based technology accessories brand, created by a passionate team of consumer tech enthusiasts. We pride ourselves on meticulous product design and development, ensuring every detail, from functionality to packaging, delivers a premium experience. Our products offer not only great performance but also a thoughtful unboxing and giftable presentation. With a commitment to quality, we back every product with a one-year replacement warranty.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Elevate your gaming with the Orzly 4 in 1 PC Gaming bundle! <p>4-In-1 Orzly Gaming bundle: Orzly PC Gaming kit features a customizable wired Gaming Keyboard and Mouse combo, a high-quality stereo gaming headset equipped with a microphone and a large mouse pad <p>RX250-M: wired Gaming mouse with Rainbow RGB lighting, Adjustable DPI (800 - 3,200 DPI) optical sensor, comfortable ambidextrous design and precise scrolling wheel <p>RX250-K: wired membrane gaming Keyboard with multi-coloured LED backlighting, anti-ghosting with 19 key rollover, smooth keystrokes allowing for rapid action in silence, media control keys, gaming Mode function keys, and adjustable legs for wrist comfort <p>RX250-H: wired Gaming headset with stereo sound for deep bass and crisp highs, soft earpads for prolonged sessions, foldable Microphone with volume cord controls, and a versatile 3.5 mm audio jack <p>Orzly mouse Pad: large (DIMENSIONS 287 x 244 x 3mm) surface area for any DPI setting, natural rubber base to prevent slipping, rigorously tested for durability and reliability, anti-fray cloth, and easy to roll up and take with you",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Orzly",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43211700",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "video-game-keyboards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 11.9
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 19.6
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 46.4
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "RX250",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.2714,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Orzly",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "5060498275491",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "PCSTARTERPACK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_layout": [
+      {
+        "value": "qwerty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Backlit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Foldable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming Keyboard and Mouse and Mouse pad and Gaming Headset, Wired LED RGB Backlight Bundle for PC Gamers and Xbox and PS4 Users - 4 in 1 Edition Hornet RX-250",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 59.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Corded Electric",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2019-07-11T07:00:00.000Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming Console",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "movement_detection_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Optical",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Rubber",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/71S-pQNQyIL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51zeAc9myDL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/51zeAc9myDL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71OkZ34-9VL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51m80IZLkgL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51m80IZLkgL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71pLlQy5HPL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51aOwlhAzTL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/51aOwlhAzTL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71zrtsyzztL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51CtZqEaXHL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51CtZqEaXHL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/61wyMzznhHL.jpg",
+          "height": 1500,
+          "width": 1273
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41r3dx9wbQL.jpg",
+          "height": 500,
+          "width": 424
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41r3dx9wbQL._SL75_.jpg",
+          "height": 75,
+          "width": 64
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71aY4A38WSL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51e8XhH4aIL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51e8XhH4aIL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71lJlEOeL9L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51hPW8uMiCL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51hPW8uMiCL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/71wMDuy9ODL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51M9AHAz3aL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/51M9AHAz3aL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/71FzPlyuT9L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51iGeFDteEL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51iGeFDteEL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "KEYBOARD_MOUSE_SET"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B08P3Q5GDS"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "402051011",
+          "title": "PC Gaming Keyboards",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/402051011",
+          "rank": 16
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "video_games_display_on_website",
+          "title": "Video Games",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames",
+          "rank": 284
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Orzly",
+      "browseClassification": {
+        "displayName": "Gaming Keyboards",
+        "classificationId": "402051011"
+      },
+      "color": "Black",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Gaming Keyboard and Mouse and Mouse pad and Gaming Headset, Wired LED RGB Backlight Bundle for PC Gamers and Xbox and PS4 Users - 4 in 1 Edition Hornet RX-250",
+      "manufacturer": "Orzly",
+      "memorabilia": false,
+      "modelNumber": "PCSTARTERPACK",
+      "packageQuantity": 1,
+      "partNumber": "RX250",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "ce_display_on_website",
+      "websiteDisplayGroupName": "CE"
+    }
+  ]
+}

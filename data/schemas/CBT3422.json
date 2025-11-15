@@ -1,0 +1,1631 @@
+{
+  "BRAND": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "MANUFACTURER": {
+    "value_type": "string",
+    "values": {
+      "bandai": "415859",
+      "banpresto": "1064281",
+      "disney": "33243",
+      "funko": "415856",
+      "genda": "415852",
+      "good smile company": "1064298",
+      "hasbro": "1006823",
+      "hot toys": "415861",
+      "intek": "767550",
+      "jakks pacific": "415855",
+      "jazwares": "1016263",
+      "kenner": "134666",
+      "lego": "1249447",
+      "mattel": "1006861",
+      "mcfarlane toys": "415860",
+      "mezco toyz": "2220734",
+      "neca": "415847",
+      "playskool": "115716",
+      "royal bobbles": "415857",
+      "spin master": "764365",
+      "sunny": "928609",
+      "toybiz": "415863"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "LINE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "COLLECTION": {
+    "value_type": "string",
+    "values": {
+      "breaking bad": "447712",
+      "dragon ball z": "7403787",
+      "harry potter": "447711",
+      "star wars": "447715",
+      "suicide squad": "447714",
+      "the walking dead": "447713"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "CHARACTER": {
+    "value_type": "string",
+    "values": {
+      "batman": "415868",
+      "captain america": "49550761",
+      "the incredibles": "5278288",
+      "boo": "2730939",
+      "spongebob": "2772762",
+      "krillin": "5263750",
+      "luke skywalker": "1234817",
+      "dovahkiin": "415870",
+      "josé carioca": "49550832",
+      "doctor strange": "4625063",
+      "toy story": "507427",
+      "spidey and his amazing friends": "49550811",
+      "beetlejuice": "4668859",
+      "blanca nieves": "11702596",
+      "snoopy": "7007458",
+      "scooby-doo": "23187965",
+      "death note": "37309301",
+      "pocahontas": "507443",
+      "trunks": "4604226",
+      "bucky barnes": "16200528",
+      "lisa simpson": "7544940",
+      "fear": "49550836",
+      "simba": "4120939",
+      "tiana": "2429673",
+      "chewbacca": "2570254",
+      "turma da monica": "49550825",
+      "pluto": "507423",
+      "lotso": "18095422",
+      "star wars": "930464",
+      "x-men": "2787854",
+      "gamora": "14330869",
+      "cebolinha": "49550764",
+      "profesor x": "49550805",
+      "frozen": "503956",
+      "lightyear": "49550786",
+      "power rangers": "2663188",
+      "gohan": "4120950",
+      "zelda": "5216191",
+      "baby yoda": "10177462",
+      "iron man": "7199374",
+      "spy x family": "30433071",
+      "vision": "49550828",
+      "101 dalmatians": "6802487",
+      "hulk": "415866",
+      "mickey mouse": "49550793",
+      "dinosaur": "3818360",
+      "leia organa": "13751238",
+      "daisy": "5470888",
+      "maggie simpson": "11737492",
+      "lucca": "15647657",
+      "jurassic world": "4541011",
+      "elsa": "482747",
+      "demon slayer": "16909932",
+      "sebastian": "49550809",
+      "c-3po": "49550760",
+      "spider man": "3336905",
+      "luluca": "11322565",
+      "lando calrissian": "5351059",
+      "obi-wan kenobi": "2570314",
+      "zurg": "3715613",
+      "neon genesis evangelion": "36543092",
+      "spiderman": "49550810",
+      "deadpool": "3640328",
+      "jasmine": "6570867",
+      "wacky races": "49550767",
+      "cinderella": "2429667",
+      "thor": "2932775",
+      "flanders": "49550775",
+      "stitch": "4959202",
+      "bleach": "49550757",
+      "palpatine": "49550800",
+      "sullivan": "9894178",
+      "jean grey": "13719477",
+      "bambi": "507441",
+      "tokyo revengers": "33111953",
+      "bullseye": "50467495",
+      "transformers": "2707837",
+      "lilo (lilo & stitch)": "49550787",
+      "pj masks": "3410166",
+      "street fighter": "8044352",
+      "r2-d2": "3181613",
+      "maria clara": "11309426",
+      "edna moda": "49550773",
+      "bulma": "5111101",
+      "attack on titan": "24205769",
+      "olaf": "3750005",
+      "sulley": "5340013",
+      "uncle scrooge": "49550823",
+      "game of thrones": "13244922",
+      "pinocchio": "49550801",
+      "merida": "2429670",
+      "ben 10": "5568837",
+      "naruto": "3525966",
+      "sadness": "16349778",
+      "minecraft": "503953",
+      "the flash": "9936771",
+      "king kong": "4226053",
+      "freezer": "13218499",
+      "chucky": "3652565",
+      "lightning mcqueen": "3356998",
+      "the child": "11324656",
+      "yu-gi-oh!": "49550831",
+      "scar": "13713257",
+      "optimus prime": "1061964",
+      "darth vader": "49550769",
+      "woody": "518231",
+      "tarzan": "29206184",
+      "pleakley": "49550802",
+      "harry potter": "415873",
+      "disney villains": "49550827",
+      "the lion king": "6233904",
+      "pennywise": "4662061",
+      "minnie mouse": "49550796",
+      "beyblade": "49550755",
+      "kylo ren": "1088492",
+      "han solo": "20916909",
+      "wolverine": "415874",
+      "mônica": "49550798",
+      "guardians of the galaxy": "16159622",
+      "princess raya": "49550803",
+      "piccolo": "5263796",
+      "ant-man": "2570295",
+      "sam wilson": "16261784",
+      "jujutsu kaisen": "24539700",
+      "chip 'n' dale": "49550822",
+      "the joker": "7544943",
+      "princess leia": "7294970",
+      "marge simpson": "4428199",
+      "chainsaw man": "35427530",
+      "inuyasha": "13423340",
+      "nemo": "507425",
+      "buzz lightyear": "518230",
+      "dory": "507426",
+      "vegeta": "4604228",
+      "my hero academia": "18374858",
+      "cars": "4233476",
+      "entrenando a tu dragón": "49550766",
+      "avatar": "23172965",
+      "groot": "49550778",
+      "disney princesses": "15171666",
+      "godzilla": "4571543",
+      "moana": "2419550",
+      "disgust": "49550837",
+      "loki": "3623775",
+      "magali": "2987887",
+      "homero simpson": "49550783",
+      "flounder": "49550788",
+      "avengers": "5678954",
+      "magneto": "4202272",
+      "cruella devil": "49550768",
+      "superman": "415867",
+      "captain marvel": "49550762",
+      "thanos": "3134456",
+      "silver surfer": "49550815",
+      "donald duck": "7294840",
+      "dumbo": "507440",
+      "dr. jumba": "49550772",
+      "tinker bell": "5678946",
+      "anna (frozen)": "49553381",
+      "aquaman": "3218078",
+      "enaldinho": "15331059",
+      "fullmetal alchemist": "47233345",
+      "sleeping beauty": "49553387",
+      "goku": "415872",
+      "venom": "49550826",
+      "jabba the hutt": "18097362",
+      "harley quinn": "3657610",
+      "marie": "6884218",
+      "black clover": "49550756",
+      "chico bento": "49550765",
+      "android 18": "4120952",
+      "wandavision": "49550829",
+      "stranger things": "43969775",
+      "joy": "49550833",
+      "milhouse": "18097561",
+      "goofy": "16203790",
+      "mike wazowski": "49550794",
+      "the simpsons": "930399",
+      "wonder woman": "8201666",
+      "sonic": "518233",
+      "bart simpson": "7544938",
+      "grogu": "13130244",
+      "majin buu": "5263768",
+      "star trek": "5873811",
+      "baby shark": "7323832",
+      "aladdin": "2588934",
+      "bluey": "14732222",
+      "mortal kombat": "17155030",
+      "peter pan": "24631348",
+      "lady and the tramp": "49553383",
+      "wicked": "49550830",
+      "anger": "49550834",
+      "yoda": "7544942",
+      "rocket": "5183246",
+      "jessie": "2782503",
+      "dragon ball": "930462",
+      "tom and jerry": "49550824",
+      "bumblebee": "1016248",
+      "scarlet witch": "1088488",
+      "mufasa": "13528417"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "CHARACTER_VERSION": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "ALPHANUMERIC_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "LICENSE": {
+    "value_type": "string",
+    "values": {
+      "101 dalmatians": "49550842",
+      "aladdin": "49550844",
+      "avatar": "49550845",
+      "avengers": "49550846",
+      "baby shark": "49550848",
+      "banpresto": "49550849",
+      "batman": "49550850",
+      "beetlejuice": "49550851",
+      "ben 10": "49550852",
+      "beyblade": "49550853",
+      "bluey": "49550854",
+      "spongebob": "49550855",
+      "snow white": "49550856",
+      "buzz lightyear": "49550857",
+      "captain america": "49550858",
+      "cars": "49550859",
+      "cat noir": "49550860",
+      "ichiban kuji": "49550861",
+      "chucky": "49550862",
+      "cinderella": "49550863",
+      "cocomelon": "49550864",
+      "how to train your dragon": "49550865",
+      "dc comics": "49550866",
+      "deadpool": "49550867",
+      "death note": "49550868",
+      "demon slayer": "49550869",
+      "digimon": "49550870",
+      "disney": "47945827",
+      "disney's encanto": "49550872",
+      "inside out": "49550873",
+      "dreamworks dragons": "49550874",
+      "dragon ball": "49310597",
+      "dumbo": "49550876",
+      "fortnite": "49550877",
+      "frozen": "49550878",
+      "gabby's dollhouse": "49550879",
+      "game of thrones": "49550880",
+      "ghostforce": "49550881",
+      "g.i. joe": "49550884",
+      "godzilla": "49550885",
+      "godzilla x kong": "49550887",
+      "goo jit zu": "49550889",
+      "guardians of the galaxy": "49550890",
+      "hanna-barbera": "49550891",
+      "harry potter": "49550892",
+      "ant-man": "49550894",
+      "hot wheels": "49550895",
+      "hulk": "49550896",
+      "jurassic world": "49550915",
+      "justice league": "49550898",
+      "kwami": "49550899",
+      "ladybug": "49550900",
+      "lightyear": "49550901",
+      "flounder": "49550903",
+      "lucca": "49550904",
+      "mario kart": "49550905",
+      "marvel": "49550906",
+      "mickey mouse": "49550907",
+      "minecraft": "49550908",
+      "minions": "49550909",
+      "miraculous": "49550910",
+      "moana": "49550911",
+      "monsters, inc.": "49550912",
+      "mortal kombat": "49550913",
+      "mufasa": "49550914",
+      "naruto": "49550916",
+      "nemo": "49550917",
+      "nintendo": "49550918",
+      "one piece": "49550919",
+      "the incredibles": "49550920",
+      "donald duck": "49550921",
+      "paw patrol": "49550922",
+      "pixar": "49550924",
+      "pj masks": "49550925",
+      "pocahontas": "49550927",
+      "pokémon": "49550928",
+      "disney princesses": "49550929",
+      "fantastic four": "49550931",
+      "the lion king": "49550933",
+      "squid game": "49550944",
+      "scooby-doo": "49550935",
+      "sebastian": "49550936",
+      "shrek": "49550937",
+      "snoopy": "49550938",
+      "sonic": "49550939",
+      "sonic the hedgehog": "49550940",
+      "spider-man": "49550941",
+      "sports": "49550942",
+      "spy x family": "49550943",
+      "star trek": "49550945",
+      "star trek universe": "49550946",
+      "star wars": "49550949",
+      "stitch": "49550952",
+      "stranger things": "49550953",
+      "street fighter": "49550954",
+      "super mario": "49550955",
+      "tamagotchi": "49550956",
+      "tarzan": "49550957",
+      "teenage mutant ninja turtles": "49550965",
+      "the child": "49550959",
+      "the legend of zelda": "49550960",
+      "the simpsons": "49550961",
+      "the walking dead": "49550962",
+      "thomas & friends": "49550963",
+      "tom and jerry": "49550964",
+      "toy story": "49550966",
+      "transformers": "49550967",
+      "trolls": "49550968",
+      "venom (eddie brock)": "49550969",
+      "disney villains": "49550970",
+      "villainous": "49550971",
+      "wicked": "49550972",
+      "wolverine": "49550973",
+      "x-men": "49550975",
+      "yu-gi-oh!": "49550976",
+      "zelda": "49550979"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "ACTION_FIGURE_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "POWER_SUPPLY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "battery": "4491927",
+      "cell battery": "1176674"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "BATTERY_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "Ah",
+      "mAh"
+    ],
+    "tags": {
+      "conditional_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MIN_RECOMMENDED_AGE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "mm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "DEPTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "mm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "mm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MATERIALS": {
+    "value_type": "string",
+    "values": {
+      "abs": "2511571",
+      "cotton": "466793",
+      "fabric": "2469707",
+      "metal": "112648",
+      "metal resin": "20208805",
+      "pvc": "2697958",
+      "plastic": "2748302",
+      "resin": "415878",
+      "rubber": "2395698",
+      "silicone": "2466987",
+      "vinyl": "2441708",
+      "wood": "2431881"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_ARTICULATED": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_ACCESSORIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_BOBBLEHEAD": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_CELL_BATTERIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_REMOTE_CONTROL": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_COLLECTIBLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "TOY_SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "oz"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RECOMMENDED_AGE_GROUP": {
+    "value_type": "list",
+    "values": {
+      "1-3 years": "49882295",
+      "3-6 years": "49882296",
+      "6-12 years": "49882298",
+      "12+ years": "49882301"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
+    "values": {
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "INMETRO_CERTIFICATION_REGISTRATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "APPROVAL_CERTIFICATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SIC_ESTABLISHMENT_REGISTRY_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "REGISTRATION_LICENSE_ESTABLISHMENT_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "PRODUCT_AUTHORIZATION_RPIN_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "AGID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "WITH_LIGHTS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_SOUND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FILTRABLE_CHARACTER": {
+    "value_type": "string",
+    "values": {
+      "batman": "55043779",
+      "captain america": "55043780",
+      "the incredibles": "55043781",
+      "boo": "55043782",
+      "spongebob": "55043783",
+      "krillin": "55043784",
+      "luke skywalker": "55043785",
+      "dovahkiin": "55043786",
+      "josé carioca": "55043787",
+      "doctor strange": "55043788",
+      "toy story": "55043789",
+      "spidey and his amazing friends": "55043790",
+      "beetlejuice": "55043791",
+      "blanca nieves": "55043489",
+      "snoopy": "55043792",
+      "scooby-doo": "55043793",
+      "death note": "55043794",
+      "pocahontas": "55043491",
+      "trunks": "55043795",
+      "bucky barnes": "55043796",
+      "lisa simpson": "55043797",
+      "fear": "55043510",
+      "simba": "55043798",
+      "tiana": "55043488",
+      "chewbacca": "55043799",
+      "turma da monica": "55043479",
+      "pluto": "55043800",
+      "lotso": "55043801",
+      "star wars": "55043802",
+      "x-men": "55043803",
+      "gamora": "55043804",
+      "cebolinha": "55043482",
+      "profesor x": "55043805",
+      "frozen": "55043492",
+      "lightyear": "55043807",
+      "power rangers": "55043808",
+      "gohan": "55043809",
+      "zelda": "55043810",
+      "baby yoda": "55043811",
+      "iron man": "55043812",
+      "spy x family": "55043813",
+      "vision": "55043814",
+      "101 dalmatians": "55043815",
+      "hulk": "55043816",
+      "mickey mouse": "55043817",
+      "dinosaur": "55043818",
+      "leia organa": "55043819",
+      "daisy": "55043820",
+      "maggie simpson": "55043499",
+      "lucca": "55043821",
+      "jurassic world": "55043822",
+      "elsa": "55043431",
+      "demon slayer": "55043823",
+      "sebastian": "55043824",
+      "c-3po": "55043825",
+      "spider-man": "55043826",
+      "luluca": "55043484",
+      "lando calrissian": "55043827",
+      "obi-wan kenobi": "55043828",
+      "zurg": "55043829",
+      "neon genesis evangelion": "55043830",
+      "deadpool": "55043832",
+      "jasmine": "55043490",
+      "wacky races": "55043833",
+      "cinderella": "55043513",
+      "thor": "55043835",
+      "flanders": "55043836",
+      "stitch": "55043837",
+      "bleach": "55043838",
+      "palpatine": "55043839",
+      "sullivan": "55043840",
+      "jean grey": "55043841",
+      "bambi": "55043496",
+      "tokyo revengers": "55043842",
+      "bullseye": "55043843",
+      "transformers": "55043844",
+      "lilo (lilo & stitch)": "55043845",
+      "pj masks": "55043846",
+      "street fighter": "55043847",
+      "r2-d2": "55043848",
+      "maria clara": "55043849",
+      "edna moda": "55043850",
+      "bulma": "55043851",
+      "attack on titan": "55043852",
+      "olaf": "55043494",
+      "sulley": "55043854",
+      "uncle scrooge": "55043855",
+      "game of thrones": "55043856",
+      "pinocchio": "55043857",
+      "merida": "55043858",
+      "ben 10": "55043859",
+      "naruto": "55043860",
+      "sadness": "55043508",
+      "minecraft": "55043861",
+      "the flash": "55043862",
+      "king kong": "55043863",
+      "freezer": "55043864",
+      "chucky": "55043865",
+      "lightning mcqueen": "55043866",
+      "the child": "55043867",
+      "yu-gi-oh!": "55043868",
+      "scar": "55043869",
+      "optimus prime": "55043870",
+      "darth vader": "55043871",
+      "woody": "55043872",
+      "tarzan": "55043874",
+      "pleakley": "55043875",
+      "harry potter": "55043876",
+      "disney villains": "55043877",
+      "the lion king": "55043878",
+      "pennywise": "55043879",
+      "minnie": "59172901",
+      "beyblade": "55043881",
+      "kylo ren": "55043882",
+      "han solo": "55043883",
+      "wolverine": "55043884",
+      "mônica": "55043480",
+      "guardians of the galaxy": "55043885",
+      "princess raya": "55043886",
+      "piccolo": "55043887",
+      "ant-man": "55043888",
+      "sam wilson": "55043889",
+      "jujutsu kaisen": "55043890",
+      "chip 'n' dale": "55043891",
+      "the joker": "55043892",
+      "princess leia": "55043893",
+      "marge simpson": "55043894",
+      "chainsaw man": "55043895",
+      "inuyasha": "55043896",
+      "nemo": "55043897",
+      "buzz lightyear": "55043898",
+      "dory": "55043899",
+      "vegeta": "55043900",
+      "my hero academia": "55043902",
+      "cars": "55043903",
+      "avatar": "55043905",
+      "groot": "55043906",
+      "disney princesses": "55043907",
+      "godzilla": "55043908",
+      "moana": "55043435",
+      "disgust": "55043511",
+      "loki": "55043909",
+      "magali": "55043483",
+      "homero simpson": "55043910",
+      "flounder": "55043911",
+      "avengers": "55043912",
+      "magneto": "55043913",
+      "cruella devil": "55043914",
+      "superman": "55043915",
+      "captain marvel": "55043916",
+      "thanos": "55043917",
+      "silver surfer": "55043918",
+      "donald duck": "55043919",
+      "dumbo": "55043920",
+      "dr. jumba": "55043921",
+      "tinker bell": "55043922",
+      "anna (frozen)": "55043493",
+      "aquaman": "55043923",
+      "enaldinho": "55043485",
+      "fullmetal alchemist": "55043924",
+      "sleeping beauty": "55043925",
+      "goku": "55043926",
+      "venom": "55043927",
+      "jabba the hutt": "55043928",
+      "harley quinn": "55043929",
+      "marie": "55043930",
+      "black clover": "55043931",
+      "chico bento": "55043481",
+      "android 18": "55043932",
+      "wandavision": "55043933",
+      "stranger things": "55043934",
+      "joy": "55043507",
+      "milhouse": "55043935",
+      "goofy": "55043936",
+      "mike wazowski": "55043937",
+      "the simpsons": "55043938",
+      "wonder woman": "55043939",
+      "sonic": "55043940",
+      "bart simpson": "55043941",
+      "grogu": "55043942",
+      "majin buu": "55043943",
+      "star trek": "55043944",
+      "baby shark": "55043945",
+      "aladdin": "55043946",
+      "bluey": "55043947",
+      "mortal kombat": "55043948",
+      "peter pan": "55043949",
+      "lady and the tramp": "55043497",
+      "wicked": "55043950",
+      "anger": "55043509",
+      "yoda": "55043951",
+      "rocket": "55043952",
+      "jessie": "55043498",
+      "dragon ball": "55043953",
+      "tom and jerry": "55043954",
+      "bumblebee": "55043955",
+      "scarlet witch": "55043956",
+      "mufasa": "55043957",
+      "other": "58467861",
+      "toothless": "59173570",
+      "dummy 13": "62484423",
+      "one piece": "62484424",
+      "italian brainrot": "62484425",
+      "pokémon": "62484426",
+      "fantastic four": "62484427",
+      "super mario": "62484428"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "WITH_INTERCHANGEABLE_PIECES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "ACCESSORIES_INCLUDED": {
+    "value_type": "string",
+    "values": {
+      "blade": "6011355",
+      "escudo": "5665479",
+      "arm": "6538809",
+      "base": "9014692",
+      "interchangeable hands": "11372587"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "CELL_BATTERY_SIZE": {
+    "value_type": "string",
+    "values": {
+      "aaa": "6073399",
+      "cr2034": "507455",
+      "aa": "6073398"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "SCALE": {
+    "value_type": "string",
+    "values": {
+      "1:6": "5344793",
+      "1:8": "3580337",
+      "1:18": "7403788"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "ARTICULATION_POINTS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284",
+      "refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_HIGHLIGHT_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "GIFTABLE": {
+    "value_type": "string",
+    "values": {
+      "vppbasic": "54973163",
+      "vppfull": "54973164",
+      "cart": "54973165",
+      "checkout": "54973166"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "VALUE_ADDED_TAX": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_TYPE": {
+    "value_type": "list",
+    "values": {
+      "no additional packaging": "47115155",
+      "with additional packaging": "47115156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_KIT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "flammable": "7651070",
+      "aerosol": "7651071",
+      "oxidizer": "7651072",
+      "corrosive": "7651073",
+      "explosive": "7651074",
+      "toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "value_type": "list",
+    "values": {
+      "for humans": "7575926",
+      "for animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "value_type": "list",
+    "values": {
+      "for humans with a medical prescription": "7575930",
+      "for humans without a medical prescription": "7575931",
+      "for animals with a medical prescription": "7575932",
+      "for animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "stand-alone lithium (loose or isolated)": "7575934",
+      "lithium installed": "7575935",
+      "for cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "value_type": "list",
+    "values": {
+      "bag": "7435891",
+      "box": "7435892",
+      "envelope": "7575937",
+      "self-shipping": "7575939",
+      "exb": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "value_type": "list",
+    "values": {
+      "has imei": "7435893",
+      "has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "value_type": "list",
+    "values": {
+      "android": "9936777",
+      "ios": "9936778",
+      "desktop": "9936779",
+      "mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "value_type": "string",
+    "values": {
+      "pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "contains liquid": "7435885",
+      "fragile": "7435883",
+      "with expiration": "7435888",
+      "without expiration": "8847339",
+      "health device": "7575925",
+      "disinfectant and sanitizer": "7575917",
+      "mapa": "7575924",
+      "health and correlates": "7575923",
+      "voluminous": "8721108",
+      "unflyable": "10490116",
+      "no rotatable": "12928414",
+      "folding": "41722098",
+      "magnetic": "52092586",
+      "can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

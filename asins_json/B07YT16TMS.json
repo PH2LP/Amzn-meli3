@@ -1,0 +1,431 @@
+{
+  "asin": "B07YT16TMS",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.62,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "WQA Certified against NSF/ANSI 42, 53, 401 & 372 standards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "set_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Brita Pitcher Compatible",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "COMPATIBILITY: These replacement carbon water filters are compatible with Amazon Basics and Brita pitchers and dispensers, excluding Brita Stream. They also serve as a Brita water filter replacement cartridge to fit your preferred filtration system",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "WQA CERTIFIED: Our replacement water filters are WQA certified against NSF 42, 53, 401 & 372 standards to reduce 9 contaminants including chlorine taste & odor, zinc, copper, cadmium, mercury, benzene, atenolol, linuron, & trimethoprim in filtered water pitchers for delicious filtered water. *Note: packaging may not yet match these updated contaminant claims*",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "REDUCE WASTE & SAVE: Replace 300 single-use bottles with each Amazon Basics and Brita pitcher water filter cartridge, suitable for your water filter for fridge, new apartment essentials, college apartment essentials, and sustainable hydration",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "EUROPEAN ORIGIN: Manufactured in Europe, our water pitcher filter, Brita filter replacement, for sink tap water upholds quality standards as part of home and apartment essentials",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "FRESH TASTE: Multi-stage filtered H2O system delivers fresh, great tasting output. Each Brita water pitcher filter replacement lasts 40 gallons or two months and is steam treated to ensure highest hygiene standards and provide superior protection",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "length": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "height": {
+          "unit": "inches",
+          "value": 4.72
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Amazon Basics",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "40161502",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "812501012204",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0812501012204",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00812501012204",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 6.1976
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 13.6953
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 17.8
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "3 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "1038346",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "capacity": [
+      {
+        "unit": "gallons",
+        "value": 40.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Amazon",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "1038346",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Reduces contaminants for fresher, cleaner-tasting water and helps reduce plastic waste",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Amazon Basics Replacement Water Filters for Water Pitchers, BPA-Free, WQA & NSF Certified, Compatible with Brita Water Pitchers & Drinking Water Filter Systems, 6 Month Filter Supply, 3-Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 12.49,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2020-10-06T00:00:00-00:00",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacture_year": [
+      {
+        "value": 2024,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "3 replacement water filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Amazon Basics Water Filters for Water Pitchers, Compatible with Brita - 3 Count",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-pitcher-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pesticide_marking": [
+      {
+        "marking_type": "epa_establishment_number",
+        "registration_status": "fifra_not_considered_pesticide",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.34,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "width": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "height": {
+          "unit": "inches",
+          "value": 4.72
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "language_tag": "en_US",
+        "value": "Hand Wash",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 3.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/310YLTQXnJL.jpg",
+          "height": 354,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/310YLTQXnJL._SL75_.jpg",
+          "height": 53,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61ErlyNL8wL.jpg",
+          "height": 1812,
+          "width": 2560
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/411YVLjHhRL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/411YVLjHhRL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/61PSdOnGORL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41RGeu4K+4L.jpg",
+          "height": 398,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41RGeu4K+4L._SL75_.jpg",
+          "height": 60,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71ozPOULnBL.jpg",
+          "height": 2036,
+          "width": 2560
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B07YT1LN5Y"
+          ],
+          "type": "VARIATION"
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741121",
+          "title": "Replacement Pitcher Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741121",
+          "rank": 4
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 70
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Amazon Basics",
+      "browseClassification": {
+        "displayName": "Replacement Pitcher Water Filters",
+        "classificationId": "3741121"
+      },
+      "color": "White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Amazon Basics Replacement Water Filters for Water Pitchers, BPA-Free, WQA & NSF Certified, Compatible with Brita Water Pitchers & Drinking Water Filter Systems, 6 Month Filter Supply, 3-Pack",
+      "manufacturer": "Amazon",
+      "memorabilia": false,
+      "modelNumber": "1038346",
+      "packageQuantity": 1,
+      "partNumber": "1038346",
+      "size": "3 Count (Pack of 1)",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "kitchen_display_on_website",
+      "websiteDisplayGroupName": "Kitchen"
+    }
+  ]
+}

@@ -1,0 +1,584 @@
+{
+  "asin": "B07WWB1MLN",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.32,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "WQA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "set_name": [
+      {
+        "language_tag": "en_US",
+        "value": "4-Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Powerful filtration: Reduces 2x MORE chemical & physical substances than Brita's leading pitcher filter*; PUR water filters are NSF certified to reduce chlorine, mercury, copper and zinc that cause bad taste and odor in your drinking water",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Long lasting, 8-month value: PUR Water Pitchers & PUR filters are engineered for up to 40 gallons of cleaner water filtration or 2 months of regular use. Save up to $75 per month versus bottled water.**",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Better tasting water: Only Genuine PUR pitcher and water filter replacement cartridges are certified to reduce 20+ chemical and physical substances when paired with your PUR pitcher or dispenser system",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Easy to install: PUR's LockFit design quickly and easily locks your water filter cartridge into place in your PUR or Beautiful by PUR pitcher and dispenser system, preventing unfiltered water from mixing with filtered water",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "A brand you can trust: PUR believes that everyone deserves cleaner, better-tasting drinking water; it has been developing innovative, superior water filtration systems and technologies for over 35 years",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "scent": [
+      {
+        "language_tag": "en_US",
+        "value": "x",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 2.0
+        },
+        "length": {
+          "unit": "inches",
+          "value": 2.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 6.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "PUR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "40161502",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "328785002973",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0328785002973",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00328785002973",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 6.7056
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 16.4084
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 25.7093125
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "4 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "PPF900Z4M",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "4 PACK",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pattern": [
+      {
+        "language_tag": "en_US",
+        "value": "Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "PUR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "PPF900Z4M",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gpsr_safety_attestation": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Reduces Chlorine",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "PUR Water Pitcher & Dispenser Replacement Filter 4-Pack, Genuine PUR Water Filter, 2-in-1 Powerful and Faster Filtration, 8-Month Value, Blue (PPF900Z4)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 20.84,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2019-08-22T20:37:09.119Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "4 Replacement Filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "registration_status": "not_capable_emitting_rf_energy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Water Pitcher Replacement Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "team_name": [
+      {
+        "language_tag": "en_US",
+        "value": "x",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "pitcher-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 4,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fc_shelf_life": [
+      {
+        "unit": "days",
+        "value": 900.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Manufacturer Warranty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Blue",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "STYLE_NAME",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.5518,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.0
+        },
+        "width": {
+          "unit": "inches",
+          "value": 2.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 6.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "care_instructions": [
+      {
+        "language_tag": "en_US",
+        "value": "Hand Wash",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 4.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/71CJXj7UUjL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41XuYatXGhL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41XuYatXGhL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81O86kbg14L.jpg",
+          "height": 2400,
+          "width": 2400
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51AZUmc14zL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51AZUmc14zL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71YduFLf2gL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41bFDUuMI2L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41bFDUuMI2L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71hSexQ7JGL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41yW9ZX6bYL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41yW9ZX6bYL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/81n5+ovgGuL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51VXHnpLR4L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51VXHnpLR4L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71A3wwf2ZUL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51jZVVWnDCL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51jZVVWnDCL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71racoB6aVL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51IlM2P+SWL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51IlM2P+SWL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/717kPcxH1xL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41fpOHq7zFL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41fpOHq7zFL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/618aoi4ZJ4L.jpg",
+          "height": 1200,
+          "width": 1200
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/419baB2P-YL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/419baB2P-YL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0BG4VPSQB"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "style"
+            ],
+            "theme": "STYLE_NAME"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [],
+      "displayGroupRanks": []
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "PUR",
+      "browseClassification": {
+        "displayName": "Pitcher Water Filters",
+        "classificationId": "3741101"
+      },
+      "color": "Blue",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "PUR Water Pitcher & Dispenser Replacement Filter 4-Pack, Genuine PUR Water Filter, 2-in-1 Powerful and Faster Filtration, 8-Month Value, Blue (PPF900Z4)",
+      "manufacturer": "PUR",
+      "memorabilia": false,
+      "modelNumber": "PPF900Z4M",
+      "packageQuantity": 1,
+      "partNumber": "PPF900Z4M",
+      "size": "4 Count (Pack of 1)",
+      "style": "4 PACK",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "kitchen_display_on_website",
+      "websiteDisplayGroupName": "Kitchen"
+    }
+  ]
+}

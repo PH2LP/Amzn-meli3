@@ -1,0 +1,21 @@
+{
+  "timestamp": "2025-11-08T01:37:09.650340",
+  "statistics": {
+    "total": 961,
+    "linked": 2,
+    "not_found": 15,
+    "errors": 944
+  },
+  "linked_items": [
+    {
+      "item_id": "CBT2987490196",
+      "asin": "B07VVK39F7",
+      "title": "Purificador De Aire Levoit Core 300 Para Alergias Y Mascotas"
+    },
+    {
+      "item_id": "CBT2678085839",
+      "asin": "B0DZHGGBGN",
+      "title": "Gafas De Conducción Nocturna Each Cool Ecnvog21"
+    }
+  ]
+}

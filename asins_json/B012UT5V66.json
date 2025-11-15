@@ -1,0 +1,671 @@
+{
+  "asin": "B012UT5V66",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 2.6,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "WQA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "REPLACEMENT WATER FILTER: This sediment and carbon block filter replacement is specifically for the Brondell Circle Under Sink Water Filter (sold separately); It is designed for easy installation, providing great-tasting water for up to 6 Months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "AN EXTRA BOOST FROM CARBON: The carbon-based block filtration reduces cloudiness and helps trap unwanted components; Reverse osmosis membrane technology combines with 3-stage carbon filtration to filter water that’s not just safer, but tastier, too",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "CLEAR BENEFITS: The sediment filter reduces rust, sand, and particulates; A carbon block pre-filter reduces VOCs, chlorine, and soluble contaminants; The carbon post-filter further reduces VOCs & lingering contaminants, along with chlorine taste & smell",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "SIMPLE DIY INSTALLATION: The replacement filter can be installed in just a few minutes with a quick and easy twist and seal installation; The change indicator lets you know when a new filter is needed; Includes filter indicator replacement battery",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "We design hygiene products that help protect our planet’s essential resources. From water-saving showers and air purifiers to bidets that help reduce toilet paper and energy use, we’re helping you live more sustainably and it feels better already.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hazmat": [
+      {
+        "aspect": "proper_shipping_name",
+        "value": "LITHIUM METAL BATTERIES",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "united_nations_regulatory_id",
+        "value": "UN3090",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "regulatory_packing_group",
+        "value": "II",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "transportation_regulatory_class",
+        "value": "9",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AE_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AU_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BE_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BR_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CA_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CN_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "DE_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "EG_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ES_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "FR_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "GB_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IE_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IN_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IT_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "JP_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "MX_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "NL_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "PL_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SA_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SE_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SG_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "TR_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "US_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ZA_SmallLithiumMetalBatteryStandalone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "centimeters",
+          "value": 20.96
+        },
+        "length": {
+          "unit": "centimeters",
+          "value": 6.98
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 28.58
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Reverse osmosis membrane technology combines with 3-stage carbon filtration to deliver drinking water that’s not just safer, but tastier, too. This filter replacement set is designed for use with the Circle Reverse Osmosis Under Sink Water Filtration System, which features Gold Seal Certification by the Water Quality Association (WQA) for reduction of 64 contaminants, including lead, chlorine, chloramines, industrial chemicals, cysts, and more. To keep your system running at its best, replace your carbon filter set every 6 months. Your purchase also includes a battery replacement for your faucet’s filter change indicator.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Brondell",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52151500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "pounds",
+        "value": 3.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "819911013609",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0819911013609",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00819911013609",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 9.2
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 27.556406896551728
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 30.921082758620692
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "3 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "RF-20",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_dimensions": [
+      {
+        "length": {
+          "unit": "inches",
+          "value": 2.75
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Brondell",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "RF-20",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Removes Pollutants",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Brondell RF-20 Water Filter Replacement for Circle, Sediment and Carbon Block, Under Sink Reverse Osmosis Filtration System, Lasts 6 Months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 74.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2015-07-29T01:04:45.299Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Sediment and Carbon Block",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-undersink-water-filtration-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Limited lifetime - manufacturer.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pesticide_marking": [
+      {
+        "marking_type": "epa_establishment_number",
+        "registration_status": "fifra_not_considered_pesticide",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "White",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.3525,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "customer_package_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Standard Packaging",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.75
+        },
+        "width": {
+          "unit": "inches",
+          "value": 8.25
+        },
+        "height": {
+          "unit": "inches",
+          "value": 11.25
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Carbon",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/81MXoNidLlL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41UQE8ZFAbL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41UQE8ZFAbL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51-xUjEAqIL.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/31Jlej2SmLL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/31Jlej2SmLL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/61ppPTufX4L.jpg",
+          "height": 1500,
+          "width": 1500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41ISoi+f9rL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41ISoi+f9rL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71RQquT1HzL.jpg",
+          "height": 2000,
+          "width": 2000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41Wq7PN8GPL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41Wq7PN8GPL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51vqv5NolKL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41DUcUqHWDL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41DUcUqHWDL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/81atzd0kmoL.jpg",
+          "height": 2500,
+          "width": 2501
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51qFQx2YmaL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51qFQx2YmaL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/71ob0DZT6WL.jpg",
+          "height": 981,
+          "width": 1500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/4149k0w+3AL.jpg",
+          "height": 327,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/4149k0w+3AL._SL75_.jpg",
+          "height": 49,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/612ty2WA9wL.jpg",
+          "height": 1500,
+          "width": 830
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41rZoPsFYvL.jpg",
+          "height": 500,
+          "width": 277
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41rZoPsFYvL._SL75_.jpg",
+          "height": 75,
+          "width": 42
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/71IGYh+Aq1L.jpg",
+          "height": 1500,
+          "width": 1271
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51uN1JADYZL.jpg",
+          "height": 500,
+          "width": 424
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/51uN1JADYZL._SL75_.jpg",
+          "height": 75,
+          "width": 64
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741151",
+          "title": "Replacement Under-Sink Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741151",
+          "rank": 20
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 3379
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Brondell",
+      "browseClassification": {
+        "displayName": "Replacement Under-Sink Water Filters",
+        "classificationId": "3741151"
+      },
+      "color": "White",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Brondell RF-20 Water Filter Replacement for Circle, Sediment and Carbon Block, Under Sink Reverse Osmosis Filtration System, Lasts 6 Months",
+      "manufacturer": "Brondell",
+      "memorabilia": false,
+      "modelNumber": "RF-20",
+      "packageQuantity": 1,
+      "partNumber": "RF-20",
+      "size": "3 Count (Pack of 1)",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "kitchen_display_on_website",
+      "websiteDisplayGroupName": "Kitchen"
+    }
+  ]
+}

@@ -1,0 +1,641 @@
+# 📚 GUÍA COMPLETA - Sistema Amazon → MercadoLibre
+
+**Versión:** 2.0
+**Última actualización:** 2025-11-09
+
+---
+
+## 📖 ÍNDICE
+
+1. [Inicio Rápido](#inicio-rápido)
+2. [Sistema Autónomo](#sistema-autónomo)
+3. [Búsqueda de Productos](#búsqueda-de-productos)
+4. [Precios Dinámicos](#precios-dinámicos)
+5. [Sincronización](#sincronización)
+6. [Corrección de Fotos](#corrección-de-fotos)
+7. [Tokens Automáticos](#tokens-automáticos)
+8. [Servicios en Loop](#servicios-en-loop)
+9. [Filtros y Seguridad](#filtros-y-seguridad)
+10. [Troubleshooting](#troubleshooting)
+
+---
+
+## 🚀 INICIO RÁPIDO
+
+### Comandos Esenciales
+
+```bash
+# Instalar servicio de tokens (una sola vez)
+./scripts/auth/install_ml_token_service.sh
+
+# Iniciar sistema autónomo
+./start_autonomous.sh
+
+# Activar todos los servicios
+./start_all_services.sh
+
+# Verificar estado
+./check_services_status.sh
+```
+
+### Publicar un Producto Manualmente
+
+```bash
+# 1. Agregar ASIN
+echo "B0CYM126TT" > asins.txt
+
+# 2. Publicar
+./venv/bin/python3 src/integrations/mainglobal.py
+
+# 3. Verificar
+sqlite3 storage/listings_database.db "SELECT * FROM listings ORDER BY rowid DESC LIMIT 1;"
+```
+
+---
+
+## 🤖 SISTEMA AUTÓNOMO
+
+### ¿Qué hace?
+
+El sistema autónomo es el **cerebro** del sistema. Funciona 24/7 sin intervención:
+
+1. Lee 7,028 keywords ordenadas por popularidad (DataForSEO)
+2. Busca productos en Amazon para cada keyword
+3. Ordena por BSR (Best Seller Rank - más vendidos primero)
+4. Analiza calidad y decide cuántos publicar (15-60 por keyword)
+5. Publica automáticamente en MercadoLibre
+6. Continúa hasta alcanzar 50,000 publicaciones
+
+### Iniciar Sistema Autónomo
+
+```bash
+# Modo PRODUCCIÓN (publica productos reales)
+./start_autonomous.sh
+
+# Modo TEST (simula sin publicar)
+./start_autonomous.sh --dry-run
+
+# Test de 1 ciclo (procesa solo 1 keyword)
+./venv/bin/python3 scripts/autonomous/autonomous_search_and_publish.py --max-cycles 1
+```
+
+### Monitorear Progreso
+
+```bash
+# Ver logs en tiempo real
+tail -f storage/autonomous_logs/autonomous_system.log
+
+# Ver estadísticas
+./venv/bin/python3 scripts/autonomous/fetch_popular_keywords.py --stats
+
+# Output esperado:
+# ============================================================
+# 📊 ESTADÍSTICAS DE PROGRESO
+# ============================================================
+# Keywords totales:     7,028
+# Keywords procesadas:  142
+# Keywords pendientes:  6,886
+# Publicaciones:        3,580 / 50,000
+# Progreso:             7.2%
+# ============================================================
+```
+
+### Detener Sistema
+
+```bash
+# Método 1: Script de stop
+./stop_autonomous.sh
+
+# Método 2: Emergency stop file
+touch storage/STOP_AUTONOMOUS
+
+# Método 3: Kill process
+kill $(cat storage/autonomous.pid)
+```
+
+### Configuración del Sistema Autónomo
+
+**Archivo:** `config/autonomous_config.json`
+
+```json
+{
+  "autonomous_mode": {
+    "max_publications_per_cycle": 50,
+    "max_publications_per_day": 500,
+    "max_total_publications": 50000,
+    "cycle_delay_minutes": 30
+  }
+}
+```
+
+**Archivo:** `config/quality_config.json`
+
+```json
+{
+  "publication_rules": {
+    "publish_all": {
+      "min_avg_score": 85,
+      "max_count": 60,
+      "description": "EXCELLENT - publicar hasta 60 ASINs"
+    },
+    "publish_most": {
+      "min_avg_score": 65,
+      "max_count": 35,
+      "description": "VERY GOOD - publicar hasta 35 ASINs"
+    },
+    "publish_some": {
+      "min_avg_score": 50,
+      "max_count": 25,
+      "description": "REGULAR - publicar hasta 25 ASINs"
+    },
+    "publish_few": {
+      "min_avg_score": 35,
+      "max_count": 15,
+      "description": "LOW - publicar hasta 15 ASINs"
+    }
+  }
+}
+```
+
+### Proyecciones
+
+Con 7,028 keywords:
+
+| Tier Calidad | Score | ASINs/Keyword | % Keywords | Publicaciones |
+|--------------|-------|---------------|------------|---------------|
+| EXCELLENT    | 85+   | 40            | 15%        | 42,168        |
+| VERY GOOD    | 65-84 | 25            | 35%        | 61,490        |
+| REGULAR      | 50-64 | 20            | 40%        | 56,224        |
+| LOW          | 35-49 | 13            | 10%        | 9,136         |
+| **TOTAL**    |       | **~24**       | **100%**   | **~169,018**  |
+
+---
+
+## 🔍 BÚSQUEDA DE PRODUCTOS
+
+### Alternativa GRATIS a Helium 10
+
+```bash
+# Buscar 500 ASINs, guardar top 50 por BSR
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "wireless keyboard" 500 50
+
+# Con BSR ranking (más vendidos primero)
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "lego" 1000 100 lego_top100.txt
+
+# Agregar al archivo existente (append)
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py "gaming mouse" 200 --append
+```
+
+### Modo Interactivo
+
+```bash
+# Sin argumentos = modo interactivo
+./venv/bin/python3 scripts/tools/search_asins_by_keyword.py
+```
+
+### Cómo Funciona el BSR
+
+**BSR (Best Seller Rank):**
+- BSR bajo = más vendido (ej: BSR 47 es mejor que BSR 1,000)
+- El script ordena automáticamente por BSR
+- Solo guarda los top N productos más vendidos
+
+**Ejemplo:**
+```
+Búsqueda: "wireless earbuds" (500 ASINs)
+Resultados con BSR:
+  1. B09NY9MMS3 - BSR: 47       ← Top vendedor
+  2. B09KZ6TBNY - BSR: 151
+  3. B085S61L6K - BSR: 322
+  ...
+  500. B001BO0L1W - BSR: 19,807  ← Menos vendido
+```
+
+### Tiempos de Búsqueda
+
+- 50 ASINs: ~10 segundos
+- 100 ASINs: ~20 segundos
+- 500 ASINs: ~2 minutos
+- 1000 ASINs: ~4 minutos
+
+---
+
+## 💰 PRECIOS DINÁMICOS
+
+### ¿Qué hace?
+
+El sistema ajusta precios automáticamente para:
+- **Ganar el buybox** (cajita de compra de ML)
+- **Maximizar ganancias** cuando ya tenés el buybox
+- **Proteger margen mínimo** (25% por default)
+
+### Cómo Funciona
+
+```
+Para cada producto en catálogo (cada 30 min):
+
+1. ¿Tenés el buybox?
+   │
+   ├─ SÍ → Subir precio +2%
+   │        (Maximizar ganancia manteniendo buybox)
+   │
+   └─ NO → ¿Cuánto cuesta el competidor más barato?
+           │
+           ├─ Competidor muy barato (<25% margen)
+           │  → NO bajar precio (proteger margen)
+           │
+           └─ Competidor razonable
+              → Bajar a 1% menos que él
+                (Ganar buybox con margen aceptable)
+```
+
+### Activar Sistema
+
+```bash
+# Iniciar monitor automático
+nohup ./scripts/tools/monitor_catalog_loop.sh > /dev/null 2>&1 &
+
+# Verificar que está activo
+ps aux | grep monitor_catalog
+```
+
+### Comandos Manuales
+
+```bash
+# Ver productos en catálogo
+./venv/bin/python3 scripts/tools/check_catalog_items.py
+
+# Simular ajuste (sin cambiar nada)
+./venv/bin/python3 scripts/tools/adjust_catalog_prices.py --dry-run
+
+# Ejecutar ajuste real
+./venv/bin/python3 scripts/tools/adjust_catalog_prices.py
+```
+
+### Configuración
+
+**Archivo:** `.env`
+
+```bash
+# Margen inicial al publicar
+PRICE_MARKUP=45              # 45% de ganancia
+
+# Margen mínimo a proteger
+MARGEN_MINIMO=25             # Nunca bajar de 25%
+```
+
+### Ejemplo Real
+
+```
+Producto: Teclado Logitech K380
+Amazon: $29.99
+
+┌─────────────────────────────────────────────────────────────┐
+│ CICLO 1 (Publicación inicial)                              │
+├─────────────────────────────────────────────────────────────┤
+│ Precio Amazon: $29.99                                       │
+│ Markup: +45%                                                │
+│ Precio ML: $43.48                                           │
+│ ¿Buybox?: NO (competidor vende a $40.00)                   │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ CICLO 2 (30 min después - ajuste automático)               │
+├─────────────────────────────────────────────────────────────┤
+│ Detecta: NO tenés buybox                                    │
+│ Competidor: $40.00                                          │
+│ Acción: Bajar a $39.60 (-1% del competidor)                │
+│ Margen: 32% (OK - mayor a 25%)                             │
+│ ✅ Precio actualizado                                       │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ CICLO 3 (30 min después)                                   │
+├─────────────────────────────────────────────────────────────┤
+│ Detecta: ¡Ahora SÍ tenés buybox!                           │
+│ Acción: Subir precio +2% → $40.39                          │
+│ Margen: 34.6%                                               │
+│ ✅ Maximizando ganancia                                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔄 SINCRONIZACIÓN
+
+### ¿Qué hace?
+
+Sincroniza automáticamente:
+- **Precios** de Amazon → MercadoLibre (cada 6h)
+- **Stock** de Amazon → MercadoLibre (pausa si stock=0)
+
+### Activar Sincronización
+
+```bash
+# Iniciar loop automático
+nohup ./scripts/tools/sync_amazon_ml_loop.sh > /dev/null 2>&1 &
+
+# Verificar que está activo
+ps aux | grep sync_amazon_ml
+```
+
+### Ejecución Manual
+
+```bash
+# Sincronizar una vez
+./venv/bin/python3 scripts/tools/sync_amazon_ml.py
+
+# Ver últimos cambios
+tail -50 logs/sync_amazon_ml.log
+```
+
+### Configuración
+
+**Frecuencia:** Editar `scripts/tools/sync_amazon_ml_loop.sh`
+
+```bash
+# Cambiar 6 horas a 3 horas
+sleep 10800  # 3 * 60 * 60 = 10800 segundos
+```
+
+---
+
+## 🖼️ CORRECCIÓN DE FOTOS
+
+### ¿Qué hace?
+
+Detecta y corrige automáticamente publicaciones pausadas por problemas de fotos:
+- Descarga foto original de Amazon
+- Sube a ImgBB (hosting gratuito)
+- Actualiza publicación con nueva URL
+- Reactiva publicación
+
+### Activar Sistema
+
+```bash
+# Configurar API key de ImgBB (gratis)
+echo "IMGBB_API_KEY=tu_api_key" >> .env
+
+# Iniciar loop automático
+./scripts/tools/setup_picture_fixer.sh
+```
+
+### Ejecución Manual
+
+```bash
+# Corregir fotos pausadas una vez
+./venv/bin/python3 scripts/tools/fix_paused_pictures.py
+
+# Ver log
+tail -50 logs/fix_paused_pictures.log
+```
+
+---
+
+## 🔑 TOKENS AUTOMÁTICOS
+
+### Sistema de Auto-Renovación
+
+**Amazon:**
+- Caché inteligente on-demand
+- Se renueva automáticamente cuando expira
+- No requiere configuración adicional
+
+**MercadoLibre:**
+- LaunchAgent que corre cada 5.5 horas
+- Renueva token automáticamente
+- Persiste entre reinicios del sistema
+
+### Instalación (Una sola vez)
+
+```bash
+# Instalar servicio de ML token
+./scripts/auth/install_ml_token_service.sh
+
+# Verificar instalación
+launchctl list | grep ml_token
+
+# Ver log
+tail -f logs/ml_token_refresh.log
+```
+
+### Verificar Tokens
+
+```bash
+# Token Amazon (caché)
+cat cache/amazon_token.json
+
+# Token ML (en .env)
+grep ML_ACCESS_TOKEN .env
+
+# Servicio ML activo
+launchctl list | grep ml_token
+```
+
+---
+
+## 🔄 SERVICIOS EN LOOP
+
+### Activar Todos los Servicios
+
+```bash
+# Un solo comando para TODO
+./start_all_services.sh
+
+# Verificar estado
+./check_services_status.sh
+
+# Detener todo
+./stop_all_services.sh
+```
+
+### Servicios Disponibles
+
+1. **Token ML Refresh** - Auto-renovación de tokens (LaunchAgent)
+2. **Sync Amazon-ML** - Sincronización cada 6h
+3. **Monitor Catálogo** - Precios dinámicos cada 30 min
+4. **Auto Adjust Prices** - Ajuste de precios
+5. **Fix Paused Pictures** - Corrección de fotos cada 30 min
+6. **Auto Responder** - Respuestas automáticas cada 1 min
+
+### Servicios Individuales
+
+```bash
+# Sincronización (cada 6h)
+nohup ./scripts/tools/sync_amazon_ml_loop.sh > /dev/null 2>&1 &
+
+# Monitor de catálogo (cada 30 min)
+nohup ./scripts/tools/monitor_catalog_loop.sh > /dev/null 2>&1 &
+
+# Corrección de fotos (cada 30 min)
+nohup ./scripts/tools/fix_paused_pictures_loop.sh > /dev/null 2>&1 &
+```
+
+---
+
+## 🛡️ FILTROS Y SEGURIDAD
+
+### Detección de Duplicados
+
+**¿Qué previene?**
+- Reprocesar ASINs ya publicados
+- Desperdiciar tokens de OpenAI
+- Errores de MercadoLibre por duplicados
+
+**Uso:**
+```bash
+# Pipeline inteligente (con detección automática)
+./venv/bin/python3 run_pipeline_smart.py
+
+# Verificar duplicados sin ejecutar
+./venv/bin/python3 src/pipeline/duplicate_checker.py
+```
+
+**Cómo funciona:**
+1. Verifica ASIN en base de datos
+2. Verifica GTIN/UPC (código de barras)
+3. Si ya existe → Saltea automáticamente
+
+### Marcas Prohibidas
+
+**Marcas bloqueadas automáticamente:**
+- Adidas, Nike, Converse
+- Ralph Lauren, Carolina Herrera
+- Lancôme, Kiehl's, Urban Decay
+- Y más...
+
+**Editar lista:**
+
+Archivo: `config/blocked_brands.json`
+
+```json
+{
+  "blocked_brands": [
+    "Nike",
+    "Adidas",
+    "Tu Marca Aquí"
+  ],
+  "updated": "2025-11-09"
+}
+```
+
+**Uso:**
+- Automático (integrado en pipeline)
+- No requiere configuración adicional
+- Solo agrega/quita marcas del JSON
+
+---
+
+## 🆘 TROUBLESHOOTING
+
+### Error: "Token expirado (401)"
+
+```bash
+# Verificar servicio de tokens
+launchctl list | grep ml_token
+
+# Ver log
+tail -50 logs/ml_token_refresh.log
+
+# Reinstalar servicio
+./scripts/auth/install_ml_token_service.sh
+```
+
+### Sistema autónomo no encuentra keywords
+
+```bash
+# Verificar archivo existe
+ls -lh config/master_keywords.json
+
+# Ver estadísticas
+./venv/bin/python3 scripts/autonomous/fetch_popular_keywords.py --stats
+
+# Si no existe, ejecutar discovery ($5-6 costo)
+./venv/bin/python3 scripts/autonomous/fetch_popular_keywords.py --fetch --depth 2
+```
+
+### Errores de categoría
+
+```bash
+# Ver últimos errores
+tail -100 logs/main2.log | grep ERROR
+
+# Regenerar schemas de ML
+./scripts/tools/regenerate_all_schemas.sh
+```
+
+### Base de datos corrupta
+
+```bash
+# Backup
+cp storage/listings_database.db storage/listings_database.db.backup
+
+# Verificar integridad
+sqlite3 storage/listings_database.db "PRAGMA integrity_check;"
+```
+
+### Servicios no están activos
+
+```bash
+# Ver procesos activos
+ps aux | grep -E "(loop|sync|monitor)" | grep -v grep
+
+# Reiniciar todos los servicios
+./stop_all_services.sh
+./start_all_services.sh
+```
+
+---
+
+## 📁 ARCHIVOS IMPORTANTES
+
+```
+📂 /Users/felipemelucci/Desktop/revancha/
+│
+├── COMO_USAR.md                         # Guía rápida de uso
+├── REPORTE_VERIFICACION_SISTEMA.md      # Estado del sistema
+│
+├── .env                                 # Credenciales y config
+├── asins.txt                            # ASINs a publicar
+│
+├── config/
+│   ├── master_keywords.json             # 7,028 keywords listas
+│   ├── autonomous_config.json           # Config sistema autónomo
+│   ├── quality_config.json              # Límites de publicación
+│   └── blocked_brands.json              # Marcas prohibidas
+│
+├── storage/
+│   ├── listings_database.db             # Base de datos principal
+│   ├── pipeline_state.db                # Estado del pipeline
+│   └── autonomous_logs/                 # Logs del sistema autónomo
+│
+├── logs/                                # Logs de todos los módulos
+│
+├── scripts/
+│   ├── autonomous/                      # Sistema autónomo
+│   ├── tools/                           # Herramientas
+│   └── auth/                            # Tokens automáticos
+│
+└── src/
+    ├── integrations/
+    │   └── mainglobal.py                # Pipeline principal
+    ├── pipeline/                        # Transformación y categorías
+    └── filters/                         # Duplicados y marcas
+
+```
+
+---
+
+## 🎯 CHECKLIST DE PRODUCCIÓN
+
+- [ ] `.env` configurado con todas las credenciales
+- [ ] Servicio de tokens ML instalado
+- [ ] Keywords descubiertas (7,028 listas)
+- [ ] `MARGEN_MINIMO=25` agregado al .env
+- [ ] Sistema autónomo iniciado
+- [ ] Todos los servicios activos
+- [ ] Monitoreo configurado (logs, Telegram)
+
+---
+
+**Sistema completo y documentado - Listo para 169,000+ publicaciones automáticas** 🚀

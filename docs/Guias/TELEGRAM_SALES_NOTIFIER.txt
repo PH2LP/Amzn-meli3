@@ -1,0 +1,318 @@
+# 🔔 Sistema de Notificaciones de Ventas por Telegram
+
+Sistema automatizado que te notifica inmediatamente cuando hay una venta en MercadoLibre, con toda la información necesaria para comprar el producto en Amazon.
+
+---
+
+## ⚡ Inicio Rápido
+
+### 1. Crear Bot de Telegram
+
+1. Abre Telegram y busca [@BotFather](https://t.me/BotFather)
+2. Envía el comando `/newbot`
+3. Sigue las instrucciones para crear tu bot
+4. Guarda el **token** que te da (ej: `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
+
+### 2. Obtener tu Chat ID
+
+1. Busca [@userinfobot](https://t.me/userinfobot) en Telegram
+2. Envía `/start`
+3. El bot te responderá con tu **Chat ID** (ej: `987654321`)
+
+### 3. Configurar Credenciales
+
+Edita el archivo `.env` y agrega:
+
+```bash
+# Telegram
+TELEGRAM_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
+TELEGRAM_CHAT_ID=987654321
+```
+
+### 4. Ejecutar el Notificador
+
+**Opción A: Ejecutar una vez (manual)**
+```bash
+python3 scripts/tools/telegram_sales_notifier.py
+```
+
+**Opción B: Ejecutar en loop continuo (recomendado)**
+```bash
+./scripts/tools/telegram_notifier_loop.sh
+```
+
+---
+
+## 📱 Formato de la Notificación
+
+Cuando hay una venta, recibirás un mensaje por Telegram con:
+
+```
+🎉 ¡NUEVA VENTA EN MERCADOLIBRE! 🎉
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📦 PRODUCTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Título: [Nombre del producto]
+• Marca: [Marca]
+• Modelo: [Modelo]
+• Cantidad: 1
+• Precio unitario: $XX.XX
+• Total: $XX.XX
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🛒 COMPRAR EN AMAZON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• ASIN: B0XXXXXXXXX
+• Link: [Comprar en Amazon]
+
+⚠️ Comprar 1 unidad(es)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 COMPRADOR
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Usuario: [nickname]
+• Ubicación: [Ciudad, Estado, País]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 ORDEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• ID Orden: 123456789
+• ID MercadoLibre: MLM123456789
+
+🔗 Link ML: [Ver publicación]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✅ Proceder a comprar en Amazon y marcar como enviado en ML.
+```
+
+---
+
+## 🔄 Flujo de Trabajo
+
+1. **Cliente compra en MercadoLibre**
+   - El sistema detecta la venta automáticamente
+
+2. **Recibes notificación en Telegram**
+   - Con link directo a Amazon
+   - ASIN copiable
+   - Cantidad exacta a comprar
+
+3. **Compras en Amazon**
+   - Haz clic en el link de Amazon
+   - Compra la cantidad indicada
+   - Envía a la dirección del comprador
+
+4. **Marcas como enviado en ML**
+   - Entra a MercadoLibre
+   - Marca la orden como enviada
+   - Agrega tracking number de Amazon
+
+---
+
+## 🔧 Funcionalidades
+
+### ✅ Detección Automática
+- Revisa ventas cada 60 segundos
+- Solo notifica ventas nuevas (no duplica)
+- Filtra solo órdenes pagadas/confirmadas
+
+### ✅ Información Completa
+- Link directo a Amazon con ASIN
+- Cantidad exacta a comprar
+- Datos del comprador y ubicación
+- Links a publicación de ML y orden
+
+### ✅ Registro de Notificaciones
+- Guarda historial de ventas notificadas
+- Previene notificaciones duplicadas
+- Logs detallados en `storage/logs/sales/`
+
+### ✅ Formato Optimizado
+- Mensaje HTML con formato bonito
+- Links clicables
+- ASINs copiables con un toque
+- Emojis para mejor lectura
+
+---
+
+## 📊 Monitoreo
+
+### Ver logs en tiempo real
+
+```bash
+tail -f logs/telegram_notifier_loop.log
+```
+
+### Ver historial de ventas notificadas
+
+```bash
+cat storage/logs/sales_notified.json
+```
+
+### Ver estadísticas de verificación
+
+```bash
+ls -lh storage/logs/sales/
+```
+
+---
+
+## ⚠️ Solución de Problemas
+
+### Error: "Missing Telegram credentials"
+
+```bash
+# Verifica que .env tenga las credenciales
+grep TELEGRAM .env
+```
+
+Debe mostrar:
+```
+TELEGRAM_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
+TELEGRAM_CHAT_ID=987654321
+```
+
+### Error: "Could not get user_id"
+
+Verifica que el token de MercadoLibre esté válido:
+```bash
+python3 scripts/auth/refresh_ml_token.py
+```
+
+### No recibo notificaciones
+
+1. **Verifica que el bot esté corriendo:**
+   ```bash
+   ps aux | grep telegram_notifier
+   ```
+
+2. **Verifica que haya ventas pendientes:**
+   ```bash
+   python3 scripts/tools/telegram_sales_notifier.py
+   ```
+
+3. **Verifica que el bot de Telegram funcione:**
+   - Envía un mensaje a tu bot
+   - Verifica que responda
+
+### Bot no encuentra el ASIN
+
+Esto significa que el producto vendido no está en la base de datos. Ejecuta:
+
+```bash
+python3 scripts/tools/save_listing_data.py
+```
+
+---
+
+## 🔐 Seguridad
+
+- El bot **SOLO** envía mensajes a tu Chat ID configurado
+- Las credenciales se guardan en `.env` (no compartir)
+- Los tokens de Telegram no tienen acceso a otras funciones
+- El sistema no almacena datos sensibles del comprador
+
+---
+
+## 🚀 Ejecución en Producción
+
+### Opción 1: Screen (recomendado)
+
+```bash
+# Crear sesión de screen
+screen -S telegram_notifier
+
+# Ejecutar el notificador
+./scripts/tools/telegram_notifier_loop.sh
+
+# Desconectar (Ctrl+A, luego D)
+# El proceso sigue corriendo en background
+
+# Reconectar después
+screen -r telegram_notifier
+```
+
+### Opción 2: Cron Job
+
+Ejecutar cada minuto:
+
+```bash
+crontab -e
+```
+
+Agregar:
+```
+* * * * * cd /ruta/a/revancha && ./venv/bin/python3 scripts/tools/telegram_sales_notifier.py >> logs/telegram_notifier_cron.log 2>&1
+```
+
+### Opción 3: Systemd Service (Linux)
+
+Crear `/etc/systemd/system/telegram-notifier.service`:
+
+```ini
+[Unit]
+Description=Telegram Sales Notifier
+After=network.target
+
+[Service]
+Type=simple
+User=tu_usuario
+WorkingDirectory=/ruta/a/revancha
+ExecStart=/ruta/a/revancha/scripts/tools/telegram_notifier_loop.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Habilitar:
+```bash
+sudo systemctl enable telegram-notifier
+sudo systemctl start telegram-notifier
+```
+
+---
+
+## 📝 Configuración Avanzada
+
+### Cambiar intervalo de verificación
+
+Edita `scripts/tools/telegram_notifier_loop.sh`:
+
+```bash
+# Cambiar de 60 a 30 segundos
+sleep 30
+```
+
+### Limitar órdenes revisadas
+
+Edita `scripts/tools/telegram_sales_notifier.py` línea 120:
+
+```python
+# Cambiar de 50 a 100 órdenes
+orders = get_ml_orders(user_id, limit=100)
+```
+
+### Notificar ventas antiguas
+
+Elimina el archivo de ventas notificadas:
+
+```bash
+rm storage/logs/sales_notified.json
+```
+
+**⚠️ Cuidado:** Esto notificará TODAS las ventas existentes.
+
+---
+
+## 📞 Soporte
+
+- Ver logs: `logs/telegram_notifier_loop.log`
+- Ver estadísticas: `storage/logs/sales/`
+- Consultar base de datos: `sqlite3 storage/listings_database.db`
+
+---
+
+**Última actualización:** Noviembre 2025
+**Versión:** 1.0

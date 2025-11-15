@@ -1,0 +1,624 @@
+{
+  "asin": "B071NFVVNG",
+  "attributes": {
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.56,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "NSF 401 – Reduces 1 or more of 15 emerging contaminants",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "set_name": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "FRESH FILTERED WATER: Samsung water filters reduce contaminants, giving your family fresh tasting water",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "REDUCES CONTAMINANTS: Samsung’s ultra-high-grade carbon block reduces 99% of potentially harmful contaminants",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "GENUINE SAMSUNG FILTERS: Samsung filters are designed to work with your refrigerator to avoid the risk of flooding while giving you clean, filtered water",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "TO AUTHENTICATE: Use Authentication Tag to make sure your filter is a genuine Samsung filter; 1. Detach Authentication Tag from filter; 2. Place Tag over the back of provided magnet; 3) Green stripes will appear if it’s an authentic Samsung water filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "LONG LASTING USE: Samsung refrigerator water filters offer long-lasting use and easy installation; It is recommended to replace your water filter every 6 months",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "AVOID WATER DAMAGE: Only Samsung filters are guaranteed to perform correctly with your refrigerator, avoiding the risk of water damage to your fridge and your home",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "FRIDGE COMPATIBILITY: Compatible with any Samsung refrigerator that requires a SQUARE filter. If your current filter is round, this filter will not fit.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "length": {
+          "unit": "inches",
+          "value": 8.267
+        },
+        "height": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52141500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "is_expiration_dated_product": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.77,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "887276193212",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0887276193212",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "00887276193212",
+        "type": "gtin",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "package_level": [
+      {
+        "value": "unit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.7
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 7.3
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 23.9
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "Pack of 1",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "HAF-QIN/EXP",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pattern": [
+      {
+        "language_tag": "en_US",
+        "value": "Filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "capacity": [
+      {
+        "unit": "kilograms",
+        "value": 0.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "HAF-QIN/EXP",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "unknown",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "gpsr_safety_attestation": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Reduces Sediment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "SAMSUNG Genuine Filter for Refrigerator Water and Ice, Carbon Block Filtration, Reduces 99% of Harmful Contaminants for Clean, Clear Drinking Water, 6-Month Life, HAF-QIN/EXP, 1 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 49.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2017-04-25T22:51:22.563Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "Genuine Samsung Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "registration_status": "not_capable_emitting_rf_energy",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "DA97-17376B",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-refrigerator-dispenser-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "ghs": [
+      {
+        "classification": [
+          {
+            "class": "amzn_specific_no_label_with_warning"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Whites",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "STYLE_NAME",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.35,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "customer_package_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Standard Packaging",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "uvp_list_price": [
+      {
+        "currency": "USD",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "street_date": [
+      {
+        "value": "2017-09-20T00:00:01Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "voltage": [
+      {
+        "unit": "volts",
+        "value": 0.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "width": {
+          "unit": "inches",
+          "value": 8.27
+        },
+        "height": {
+          "unit": "inches",
+          "value": 2.36
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Carbon",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31-9keSVAgL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/31-9keSVAgL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41p7zRQewWL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/31BADo+vQDL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/31BADo+vQDL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41vX814+l5L.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/31o9G4XWtSL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/31o9G4XWtSL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41Wy9-rsi8L.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/31GrBlrZAML.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/31GrBlrZAML._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/51hp6CKkC8L.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/31aFJaXkGNL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/31aFJaXkGNL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/41pDDXZ+ePL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/31oRbL4g9rL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/31oRbL4g9rL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/41Z1bpjf1RL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/316nbVrSWtL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/316nbVrSWtL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/51aMm3B35qL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/31ihx8KwWWL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/31ihx8KwWWL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT07",
+          "link": "https://m.media-amazon.com/images/I/41d2vJXFxBL.jpg",
+          "height": 1000,
+          "width": 1000
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/01lIA4Uc6wL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/01lIA4Uc6wL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT08",
+          "link": "https://m.media-amazon.com/images/I/1163glapwIL.jpg",
+          "height": 1000,
+          "width": 1000
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0FWX3C8L9"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "style"
+            ],
+            "theme": "STYLE_NAME"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741161",
+          "title": "In-Refrigerator Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741161",
+          "rank": 4
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 18
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Samsung",
+      "browseClassification": {
+        "displayName": "Water Filters",
+        "classificationId": "3741161"
+      },
+      "color": "Whites",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "SAMSUNG Genuine Filter for Refrigerator Water and Ice, Carbon Block Filtration, Reduces 99% of Harmful Contaminants for Clean, Clear Drinking Water, 6-Month Life, HAF-QIN/EXP, 1 Pack",
+      "manufacturer": "Samsung",
+      "memorabilia": false,
+      "modelNumber": "HAF-QIN/EXP",
+      "packageQuantity": 1,
+      "partNumber": "HAF-QIN/EXP",
+      "releaseDate": "2017-09-20",
+      "size": "Pack of 1",
+      "style": "1 Pack",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "major_appliances_display_on_website",
+      "websiteDisplayGroupName": "Major Appliances"
+    }
+  ]
+}

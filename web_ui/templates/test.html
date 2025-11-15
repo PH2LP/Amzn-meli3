@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZ → ML - Test Keywords</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div x-data="testMode()" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        🧪 Test Keywords (Safe Mode)
+                    </h1>
+                    <div class="flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-gray-900">Simple</a>
+                        <a href="/pro" class="text-gray-600 hover:text-gray-900">Pro</a>
+                        <a href="/test" class="text-blue-600 font-semibold">Test</a>
+                        <a href="/logs" class="text-gray-600 hover:text-gray-900">Logs</a>
+                        <a href="/docs" class="text-gray-600 hover:text-gray-900">📖 Docs</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+            <!-- Info Box -->
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <div class="flex items-start">
+                    <span class="text-2xl mr-3">ℹ️</span>
+                    <div>
+                        <h3 class="font-semibold text-blue-900 mb-1">Modo Seguro - Solo Testing</h3>
+                        <ul class="text-sm text-blue-800 space-y-1">
+                            <li>✅ Busca ASINs para la keyword</li>
+                            <li>✅ Filtra marcas prohibidas (DVD, ropa, etc.)</li>
+                            <li>✅ Filtra Prime (opcional)</li>
+                            <li>✅ Ordena por BSR</li>
+                            <li>✅ VOS decidís cuántos ASINs (ej: lego → 300)</li>
+                            <li>❌ NO usa "score" - cantidad manual</li>
+                            <li>❌ NO publica en MercadoLibre</li>
+                            <li>❌ NO interfiere con el sistema principal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Form -->
+            <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">🔍 Probar Keyword</h2>
+
+                <div class="space-y-4">
+                    <!-- Keyword Input -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Keyword a probar
+                        </label>
+                        <input
+                            type="text"
+                            x-model="keyword"
+                            @keyup.enter="runTest()"
+                            placeholder="Ej: backpacks, water bottles, headphones"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg"
+                        >
+                        <p class="text-xs text-gray-500 mt-1">Presiona Enter o click en "Probar"</p>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Páginas a buscar
+                            </label>
+                            <input
+                                type="number"
+                                x-model="pages"
+                                min="1"
+                                max="100"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Top N por BSR
+                            </label>
+                            <input
+                                type="number"
+                                x-model="topN"
+                                min="10"
+                                max="500"
+                                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            >
+                        </div>
+
+                        <div class="flex items-end">
+                            <label class="flex items-center space-x-2">
+                                <input
+                                    type="checkbox"
+                                    x-model="onlyPrime"
+                                    class="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+                                >
+                                <span class="text-sm text-gray-700">Solo Prime</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Run Button -->
+                    <div>
+                        <button
+                            @click="runTest()"
+                            :disabled="running || !keyword"
+                            class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold text-lg"
+                        >
+                            <span x-show="!running">🚀 Probar Keyword (Safe Mode)</span>
+                            <span x-show="running">⏳ Ejecutando... <span x-text="progress"></span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process Log (shown while running) -->
+            <div x-show="running" class="bg-gray-900 rounded-lg shadow-sm p-6 mb-6">
+                <h3 class="text-lg font-semibold text-green-400 mb-4">📋 Proceso en tiempo real</h3>
+                <div
+                    x-ref="processLog"
+                    class="font-mono text-sm text-green-400 whitespace-pre-wrap overflow-auto h-[400px] space-y-1"
+                >
+                    <div x-text="processLog || 'Iniciando...'"></div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div x-show="results" class="space-y-6">
+
+                <!-- Summary -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">📊 Resumen</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <div class="text-3xl font-bold text-gray-900" x-text="results?.total_found || 0"></div>
+                            <div class="text-sm text-gray-600">ASINs Encontrados</div>
+                        </div>
+
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <div class="text-3xl font-bold text-green-600" x-text="results?.after_filters || 0"></div>
+                            <div class="text-sm text-gray-600">Después de Filtros</div>
+                        </div>
+
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <div class="text-3xl font-bold text-blue-600" x-text="results?.final_count || 0"></div>
+                            <div class="text-sm text-gray-600">Top Seleccionados</div>
+                        </div>
+                    </div>
+
+                    <div x-show="results?.final_count > 0" class="mt-4 p-4 bg-green-50 rounded-lg">
+                        <p class="text-green-800 mb-3">
+                            ✅ <strong x-text="results?.final_count"></strong> ASINs listos.
+                        </p>
+                        <button
+                            @click="uploadAsins()"
+                            :disabled="uploading"
+                            class="w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:ring-4 focus:ring-green-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold"
+                        >
+                            <span x-show="!uploading">📤 Subir ASINs al Sistema (asins.txt)</span>
+                            <span x-show="uploading">⏳ Subiendo...</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Top ASINs -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">🏆 Top ASINs por BSR</h3>
+
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">#</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">ASIN</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">BSR</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Título</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">Precio</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <template x-for="(asin, index) in results?.top_asins || []" :key="asin.asin">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-4 py-3 text-sm text-gray-900" x-text="index + 1"></td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <a :href="'https://amazon.com/dp/' + asin.asin" target="_blank" class="text-blue-600 hover:underline font-mono" x-text="asin.asin"></a>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm">
+                                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs font-semibold" x-text="'#' + (asin.bsr || 'N/A')"></span>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm text-gray-900 max-w-md truncate" x-text="asin.title || 'N/A'"></td>
+                                        <td class="px-4 py-3 text-sm text-gray-900 font-semibold" x-text="asin.price ? '$' + asin.price : 'N/A'"></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Rejected ASINs -->
+                <div x-show="results?.rejected?.length > 0" class="bg-white rounded-lg shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">❌ ASINs Rechazados</h3>
+
+                    <div class="space-y-2 max-h-64 overflow-y-auto">
+                        <template x-for="rejected in results?.rejected || []" :key="rejected.asin">
+                            <div class="flex justify-between items-center p-3 bg-red-50 rounded-lg">
+                                <span class="text-sm font-mono text-gray-900" x-text="rejected.asin"></span>
+                                <span class="text-xs text-red-600" x-text="rejected.reason"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Error -->
+            <div x-show="error" class="bg-red-50 border border-red-200 rounded-lg p-4">
+                <div class="flex items-start">
+                    <span class="text-2xl mr-3">❌</span>
+                    <div>
+                        <h3 class="font-semibold text-red-900 mb-1">Error</h3>
+                        <p class="text-sm text-red-800" x-text="error"></p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        function testMode() {
+            return {
+                keyword: '',
+                pages: 50,
+                topN: 100,
+                onlyPrime: true,
+                running: false,
+                progress: '',
+                processLog: '',
+                results: null,
+                error: null,
+                uploading: false,
+                logInterval: null,
+                testJobId: null,
+
+                async runTest() {
+                    if (!this.keyword || this.running) return;
+
+                    this.running = true;
+                    this.progress = 'Iniciando...';
+                    this.processLog = '🚀 Iniciando test...\n';
+                    this.results = null;
+                    this.error = null;
+
+                    try {
+                        // Iniciar el test (async)
+                        const response = await fetch('/api/test/keyword/start', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                keyword: this.keyword,
+                                pages: this.pages,
+                                top_n: this.topN,
+                                only_prime: this.onlyPrime
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Error al iniciar test');
+                        }
+
+                        const data = await response.json();
+                        this.testJobId = data.job_id;
+
+                        // Polling para obtener progreso
+                        this.logInterval = setInterval(async () => {
+                            await this.checkProgress();
+                        }, 2000);  // Cada 2 segundos
+
+                    } catch (err) {
+                        console.error('Error:', err);
+                        this.error = err.message;
+                        this.running = false;
+                    }
+                },
+
+                async checkProgress() {
+                    try {
+                        const response = await fetch(`/api/test/keyword/status/${this.testJobId}`);
+                        const data = await response.json();
+
+                        // Actualizar log
+                        if (data.log) {
+                            this.processLog = data.log;
+
+                            // Auto-scroll
+                            this.$nextTick(() => {
+                                const container = this.$refs.processLog;
+                                if (container) {
+                                    container.scrollTop = container.scrollHeight;
+                                }
+                            });
+                        }
+
+                        // Si terminó
+                        if (data.completed) {
+                            clearInterval(this.logInterval);
+                            this.running = false;
+
+                            if (data.success) {
+                                this.results = data.results;
+                                this.progress = 'Completado ✅';
+                            } else {
+                                this.error = data.error || 'Error desconocido';
+                            }
+                        }
+
+                    } catch (err) {
+                        console.error('Error checking progress:', err);
+                    }
+                },
+
+                async uploadAsins() {
+                    if (!this.results || this.uploading) return;
+
+                    this.uploading = true;
+
+                    try {
+                        const response = await fetch('/api/test/keyword/upload', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                asins: this.results.all_asins || this.results.top_asins.map(a => a.asin)
+                            })
+                        });
+
+                        const data = await response.json();
+
+                        if (data.success) {
+                            alert(`✅ ${data.count} ASINs agregados a asins.txt\n\nEl sistema los publicará automáticamente.`);
+                        } else {
+                            alert(`❌ Error: ${data.message}`);
+                        }
+
+                    } catch (err) {
+                        console.error('Error uploading:', err);
+                        alert(`❌ Error: ${err.message}`);
+                    }
+
+                    this.uploading = false;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

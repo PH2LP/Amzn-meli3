@@ -1,0 +1,8 @@
+{
+  "auto_approve": true,
+  "auto_retry": true,
+  "max_iterations": 100,
+  "confirm_commands": false,
+  "confirm_file_edits": false,
+  "confirm_file_creates": false
+}

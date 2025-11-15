@@ -1,0 +1,90 @@
+# 🔍 Sistema de Notificaciones de Búsqueda
+
+Sistema de notificaciones de Telegram para mantenerte informado del progreso de búsqueda de ASINs **sin spam**.
+
+## 📋 Características
+
+✅ **Resúmenes concisos** - Sin enviar 1000 mensajes
+✅ **Fases claras** - Búsqueda → Filtrado → Prime → BSR
+✅ **Métricas útiles** - Ratios, calidad, ASINs finales
+✅ **Mismo bot** - Usa el bot de publicaciones por defecto
+
+## 📊 Ejemplo de Flujo
+
+Cuando ejecutas una búsqueda, recibirás **5-6 mensajes** en total:
+
+```
+🔍 Buscando: organizer storage bins
+📊 Objetivo: ~1000 ASINs Prime
+
+🔎 Búsqueda: 847 ASINs
+   100 páginas
+
+🔄 Filtrado: 612 ASINs
+   72% aprobadas
+
+⭐ Prime: 523 ASINs
+   85% con Prime
+
+📊 BSR: 150 ASINs
+   Top 150 por ventas
+
+✅ Búsqueda completada: organizer storage bins
+
+📊 Resumen:
+   🔎 Encontrados: 847 ASINs
+   ✅ Marcas OK: 612 (72%)
+   ⭐ Con Prime: 523 (85%)
+   🎯 Seleccionados: 150 (18%)
+
+✨ Calidad: VERY_HIGH
+```
+
+## ⚙️ Configuración
+
+Por defecto usa el **mismo bot que publicaciones**. Si quieres un bot separado:
+
+```bash
+# En .env
+TELEGRAM_SEARCH_ENABLED=true
+TELEGRAM_SEARCH_BOT_TOKEN=tu_token_bot
+TELEGRAM_SEARCH_CHAT_ID=tu_chat_id
+```
+
+## 🧪 Probar Notificaciones
+
+```bash
+# Test básico
+python3 scripts/tools/telegram_search_notifier.py
+
+# Simulación completa de búsqueda
+python3 test_search_notifications.py
+```
+
+## 📝 Integración
+
+El sistema está integrado automáticamente en:
+
+- ✅ `autonomous_search_and_publish.py` - Sistema autónomo
+- ✅ Búsqueda de keywords
+- ✅ Filtrado de marcas
+- ✅ Filtrado de Prime
+- ✅ Ranking por BSR
+
+## 🔇 Notificaciones Silenciosas
+
+Las notificaciones de progreso (fases) son **silenciosas** - no hacen ruido.
+Solo el resumen final hace sonido.
+
+## 📦 Qué NO Notifica
+
+❌ Cada ASIN individual (sería spam)
+❌ Cada request a Amazon API
+❌ Delays entre batches
+❌ Logs técnicos internos
+
+## ✨ Resumen
+
+- **Antes**: 0 notificaciones, no sabías el progreso
+- **Ahora**: 5-6 mensajes concisos con toda la info
+- **Ideal**: Sabes qué está pasando sin spam

@@ -1,0 +1,261 @@
+# ⚡ VPS Quick Reference Card
+
+Comandos más usados para administrar el sistema en DigitalOcean.
+
+---
+
+## 🔌 Conectar al VPS
+
+```bash
+ssh root@tu-ip-del-droplet
+```
+
+---
+
+## 📊 Ver Estado del Sistema
+
+```bash
+# Ver todos los servicios
+sudo systemctl status amz-ml-*
+
+# Ver recursos (CPU, RAM, disco)
+htop
+
+# Espacio en disco
+df -h
+```
+
+---
+
+## 📝 Ver Logs en Vivo
+
+```bash
+# Pipeline (sistema autónomo)
+tail -f /opt/amz-ml-system/storage/autonomous_logs/autonomous_system.log
+
+# Auto-responder de preguntas
+tail -f /opt/amz-ml-system/logs/auto_answer.log
+
+# Backups
+tail -f /opt/amz-ml-system/logs/backup.log
+
+# Systemd logs (más detallados)
+sudo journalctl -u amz-ml-pipeline -f
+```
+
+---
+
+## 🔄 Controlar Servicios
+
+```bash
+# Reiniciar un servicio
+sudo systemctl restart amz-ml-pipeline
+sudo systemctl restart amz-ml-auto-answer
+
+# Detener un servicio
+sudo systemctl stop amz-ml-pipeline
+
+# Iniciar un servicio
+sudo systemctl start amz-ml-pipeline
+
+# Ver estado de un servicio
+sudo systemctl status amz-ml-pipeline
+```
+
+---
+
+## 🗄️ Consultar Base de Datos
+
+```bash
+cd /opt/amz-ml-system
+
+# Total de productos publicados
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE item_id IS NOT NULL;"
+
+# Publicaciones de hoy
+sqlite3 storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE date(created_at) = date('now');"
+
+# Últimas 10 publicaciones
+sqlite3 storage/listings_database.db "SELECT asin, item_id, country, created_at FROM listings ORDER BY created_at DESC LIMIT 10;"
+
+# Ver productos por país
+sqlite3 storage/listings_database.db "SELECT country, COUNT(*) FROM listings GROUP BY country;"
+```
+
+---
+
+## 🧹 Limpiar Espacio
+
+```bash
+cd /opt/amz-ml-system
+
+# Limpiar JSONs de ASINs ya en DB
+python3 scripts/cleanup/clean_old_json_files.py --force
+
+# Limpiar backups viejos (>7 días)
+find backups/ -name "*.tar.gz" -mtime +7 -delete
+
+# Ver qué ocupa más espacio
+du -sh storage/*
+du -sh backups/*
+```
+
+---
+
+## 🔐 Actualizar Credenciales
+
+```bash
+# Editar .env
+nano /opt/amz-ml-system/.env
+
+# Después de guardar, reiniciar servicios
+sudo systemctl restart amz-ml-pipeline
+sudo systemctl restart amz-ml-auto-answer
+```
+
+---
+
+## 🔄 Actualizar Código
+
+### Si usas Git:
+
+```bash
+cd /opt/amz-ml-system
+git pull
+
+# Reiniciar servicios
+sudo systemctl restart amz-ml-pipeline
+sudo systemctl restart amz-ml-auto-answer
+```
+
+### Si usas SCP:
+
+```bash
+# En tu Mac
+cd /Users/felipemelucci/Desktop/revancha
+tar --exclude='venv' --exclude='storage/*.db' --exclude='cache' -czf update.tar.gz .
+scp update.tar.gz root@tu-ip-del-droplet:/opt/
+
+# En el VPS
+cd /opt/amz-ml-system
+tar -xzf /opt/update.tar.gz
+sudo systemctl restart amz-ml-pipeline
+sudo systemctl restart amz-ml-auto-answer
+```
+
+---
+
+## 📦 Gestionar Backups
+
+```bash
+# Ver backups locales
+ls -lh /opt/amz-ml-system/backups/*.tar.gz
+
+# Ver backups en Google Drive (si configurado)
+rclone ls gdrive:AMZ-ML-Backups/
+
+# Ver backups en Dropbox (si configurado)
+dropbox_uploader.sh list /backups
+
+# Descargar un backup
+rclone copy gdrive:AMZ-ML-Backups/backup_20250115_120000_FULL.tar.gz .
+
+# Restaurar desde backup
+cd /opt/amz-ml-system
+tar -xzf backup_20250115_120000_FULL.tar.gz
+# Seguir instrucciones en docs/BACKUP_SYSTEM.md
+```
+
+---
+
+## 🚨 Troubleshooting Rápido
+
+### Servicio caído:
+
+```bash
+# Ver por qué falló
+sudo journalctl -u amz-ml-pipeline -n 50 --no-pager
+
+# Reiniciar
+sudo systemctl restart amz-ml-pipeline
+```
+
+### Token expirado:
+
+```bash
+# Actualizar token en .env
+nano /opt/amz-ml-system/.env
+
+# Reiniciar servicios
+sudo systemctl restart amz-ml-*
+```
+
+### Disco lleno:
+
+```bash
+# Ver espacio usado
+df -h
+
+# Limpiar archivos temporales
+cd /opt/amz-ml-system
+python3 scripts/cleanup/clean_old_json_files.py --force
+find backups/ -name "*.tar.gz" -mtime +7 -delete
+```
+
+### Performance lenta:
+
+```bash
+# Ver uso de recursos
+htop
+
+# Ver procesos Python
+ps aux | grep python3
+
+# Reiniciar todos los servicios
+sudo systemctl restart amz-ml-*
+```
+
+---
+
+## 📈 Verificar que Todo Funciona
+
+```bash
+# Checklist rápido
+echo "1. Servicios:"
+sudo systemctl status amz-ml-pipeline | grep "active (running)"
+sudo systemctl status amz-ml-auto-answer | grep "active (running)"
+sudo systemctl status amz-ml-backup | grep "active (running)"
+
+echo -e "\n2. Publicaciones hoy:"
+sqlite3 /opt/amz-ml-system/storage/listings_database.db "SELECT COUNT(*) FROM listings WHERE date(created_at) = date('now');"
+
+echo -e "\n3. Último backup:"
+ls -lht /opt/amz-ml-system/backups/*.tar.gz | head -1
+
+echo -e "\n4. Espacio en disco:"
+df -h | grep /dev/vda1
+
+echo -e "\n✅ Todo OK"
+```
+
+---
+
+## 🔗 Enlaces Útiles
+
+- **Documentación completa:** `/opt/amz-ml-system/docs/VPS_DEPLOYMENT_GUIDE.md`
+- **Sistema de backups:** `/opt/amz-ml-system/docs/BACKUP_SYSTEM.md`
+- **Configuración autónoma:** `/opt/amz-ml-system/config/autonomous_config.json`
+- **Logs:** `/opt/amz-ml-system/storage/autonomous_logs/`
+
+---
+
+## 💾 Guardar Esta Referencia en Tu Mac
+
+```bash
+# Descargar del VPS a tu Mac
+scp root@tu-ip-del-droplet:/opt/amz-ml-system/docs/VPS_QUICK_REFERENCE.md ~/Desktop/
+```
+
+---
+
+**⚡ Con estos comandos puedes administrar todo el sistema fácilmente**

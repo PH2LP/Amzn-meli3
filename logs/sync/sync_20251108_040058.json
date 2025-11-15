@@ -1,0 +1,56 @@
+{
+  "timestamp": "2025-11-08T04:00:58.544252",
+  "statistics": {
+    "total": 3,
+    "paused": 0,
+    "price_updated": 1,
+    "no_change": 2,
+    "errors": 0
+  },
+  "changes": [
+    {
+      "item_id": "CBT2687265755",
+      "asin": "B0FJXZV4TR",
+      "action": "price_updated",
+      "success": true,
+      "message": "Precio actualizado: $44.54 → $34.99 USD",
+      "amazon_status": {
+        "available": true,
+        "price": 24.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      },
+      "old_price": 44.54,
+      "new_price": 34.99
+    },
+    {
+      "item_id": "CBT2687275223",
+      "asin": "B00S1116J4",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 98.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2687198849",
+      "asin": "B002Y1N6K4",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 84.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    }
+  ]
+}

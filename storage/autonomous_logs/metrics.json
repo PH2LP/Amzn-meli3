@@ -1,0 +1,29 @@
+{
+  "last_updated": "2025-11-14T09:07:11.627951",
+  "uptime_minutes": 25,
+  "cycle_count": 1,
+  "total_asins_searched": 270,
+  "total_asins_published": 0,
+  "total_asins_rejected": 0,
+  "consecutive_errors": 0,
+  "keyword_stats": {
+    "total_keywords": 7024,
+    "enabled_keywords": 7024,
+    "disabled_keywords": 0,
+    "total_asins_found": 5433,
+    "avg_success_rate": 0.0,
+    "strategy": "by_search_volume"
+  },
+  "filter_stats": {
+    "total_checked": 401,
+    "total_rejected": 37,
+    "total_allowed": 364,
+    "rejection_rate": 9.23,
+    "rejection_reasons": {
+      "brand": 0,
+      "category": 6,
+      "keyword": 29,
+      "missing_data": 2
+    }
+  }
+}

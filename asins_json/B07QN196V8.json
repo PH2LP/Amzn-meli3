@@ -1,0 +1,392 @@
+{
+  "asin": "B07QN196V8",
+  "attributes": {
+    "external_testing_certification": [
+      {
+        "value": "NSF",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "set_name": [
+      {
+        "language_tag": "en_US",
+        "value": "2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Filter for use with: Whole House Sediment Filter (AO-WH-PREV or AO-WH-PRE). Use only certified, genuine A. O. Smith replacement filters for continued contaminant removal and system performance.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Longer lasting appliances - whole house filter system designed to reduce sediment from every tap.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "5 micron filtration - reduces sediment smaller than the human eye can see. NSF Certified to Standard 42 for removal of particulate class V.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Replacements made easy - no plumber necessary. Replace filter every 6 months.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Includes 2-pack of replacement sediment filters.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "length": {
+          "unit": "inches",
+          "value": 17.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "AO Smith",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "40161502",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.5,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "843336017478",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0843336017478",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-undersink-water-filtration-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 6.2
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 12.5984
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 25.334039999999995
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "2 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "AO-WH-PREV-R2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_display_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 2.5
+        },
+        "length": {
+          "unit": "inches",
+          "value": 5.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 9.75
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.309,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "AO Smith",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "AO-WH-PREV-R2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Reduces Sediment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "AO Smith 2.5\"x10\" 5 Micron Sediment Water Filter Replacement Cartridge - 2 Pack - For Whole House Filtration Systems - AO-WH-PREV-R2",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 19.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_depth_width_height": [
+      {
+        "depth": {
+          "unit": "inches",
+          "value": 2.5
+        },
+        "width": {
+          "unit": "inches",
+          "value": 5.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 10.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2019-04-11T18:35:38.236Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 2.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/71Rnho3pg4L.jpg",
+          "height": 2400,
+          "width": 2400
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41wCS0Nzy0L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41wCS0Nzy0L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81JOr3KllFL.jpg",
+          "height": 2400,
+          "width": 2400
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41YDDuamGHL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41YDDuamGHL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/712sxIAyOZL.jpg",
+          "height": 2400,
+          "width": 2400
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41ZAZzG+SyL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41ZAZzG+SyL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/81Ynng-hoZL.jpg",
+          "height": 2400,
+          "width": 2400
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41L0q7qqMrL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41L0q7qqMrL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741151",
+          "title": "Replacement Under-Sink Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741151",
+          "rank": 31
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 5077
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "AO Smith",
+      "browseClassification": {
+        "displayName": "Replacement Under-Sink Water Filters",
+        "classificationId": "3741151"
+      },
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "AO Smith 2.5\"x10\" 5 Micron Sediment Water Filter Replacement Cartridge - 2 Pack - For Whole House Filtration Systems - AO-WH-PREV-R2",
+      "manufacturer": "AO Smith",
+      "memorabilia": false,
+      "modelNumber": "AO-WH-PREV-R2",
+      "partNumber": "AO-WH-PREV-R2",
+      "size": "2 Count (Pack of 1)",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "home_improvement_display_on_website",
+      "websiteDisplayGroupName": "Home Improvement"
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+# ✅ Sistema de Renovación Automática de Tokens - IMPLEMENTADO
+
+## 🎯 Objetivo Cumplido
+
+Implementación completa de un sistema automático que renueva los tokens de Amazon y MercadoLibre sin intervención manual.
+
+---
+
+## 📦 Lo que se Implementó
+
+### 🟠 Amazon SP-API: Caché Inteligente On-Demand
+
+**Archivo modificado**: `src/integrations/amazon_api.py`
+
+**Cómo funciona**:
+1. Cuando cualquier script llama `get_amazon_access_token()`:
+   - Verifica si existe un token en `cache/amazon_token.json`
+   - Si el token tiene menos de 55 minutos → lo reutiliza
+   - Si no existe o expiró → genera uno nuevo automáticamente y lo guarda
+
+2. **Ventajas**:
+   - ✅ Cero procesos en background (no consume recursos cuando no se usa)
+   - ✅ Eficiente (reutiliza tokens válidos)
+   - ✅ Completamente automático
+   - ✅ Transparente (scripts existentes funcionan sin cambios)
+
+**Ejemplo de uso**:
+```python
+from src.integrations.amazon_api import get_product_data_from_asin
+
+# Primera vez: genera token y lo cachea (55 min)
+data = get_product_data_from_asin("B0CYM126TT")
+
+# Siguientes llamadas: reutiliza el token cacheado
+data2 = get_product_data_from_asin("B0DRW8G3WK")  # ♻️ Usa caché
+```
+
+**Output**:
+```
+🔐 Generando nuevo access token de Amazon...
+✅ Token generado y cacheado (válido por 55 min)
+```
+
+Siguiente llamada:
+```
+♻️ Usando token cacheado de Amazon (válido por 42 min más)
+```
+
+---
+
+### 🔵 MercadoLibre: Loop Automático Continuo
+
+**Archivos creados**:
+```
+scripts/auth/
+├── ml_token_loop.py                      # Script principal del loop
+├── ml_token_loop.sh                       # Wrapper bash
+├── com.revancha.ml_token_refresh.plist    # Configuración LaunchAgent (macOS)
+├── install_ml_token_service.sh            # Instalador automático
+└── auto_refresh_token.py                  # Script manual legacy (mantenido)
+
+docs/
+└── TOKEN_AUTO_REFRESH_README.md           # Documentación completa
+
+root/
+└── INSTALAR_TOKEN_AUTO_REFRESH.sh         # Instalador interactivo
+```
+
+**Cómo funciona**:
+1. Loop continuo que se ejecuta cada 5.5 horas (tokens de ML duran 6 horas)
+2. Renueva el token automáticamente usando la API de ML
+3. Actualiza el archivo `.env` con el nuevo token
+4. Se ejecuta como servicio del sistema (LaunchAgent en macOS)
+5. Logs completos de cada renovación
+
+**Ventajas**:
+- ✅ Siempre activo (necesario porque ML puede recibir ventas/preguntas 24/7)
+- ✅ Auto-recuperable (se reinicia si falla)
+- ✅ Persistente (se ejecuta al iniciar el sistema)
+- ✅ Actualiza .env automáticamente
+- ✅ Logs detallados
+
+**Instalación**:
+```bash
+./INSTALAR_TOKEN_AUTO_REFRESH.sh
+```
+
+O manual:
+```bash
+./scripts/auth/install_ml_token_service.sh
+```
+
+**Verificar status**:
+```bash
+launchctl list | grep ml_token
+```
+
+**Ver logs**:
+```bash
+tail -f logs/ml_token_refresh.log
+```
+
+**Output del log**:
+```
+[2025-11-08 14:26:07] 🚀 Iniciando loop automático de renovación ML Token
+[2025-11-08 14:26:07]    Intervalo: 5.5 horas (19800.0 segundos)
+[2025-11-08 14:26:07] 🔄 Renovando access token de MercadoLibre...
+[2025-11-08 14:26:08] ✅ Token renovado exitosamente
+[2025-11-08 14:26:08]    Access token: APP_USR-1758699366225963-110815-aca30aed...
+[2025-11-08 14:26:08]    Próxima renovación en 5.5 horas
+[2025-11-08 14:26:08] ⏳ Esperando 5.5 horas hasta próxima renovación... (iteración #1)
+```
+
+---
+
+## 🧪 Pruebas Realizadas
+
+### ✅ Test 1: Amazon Caché
+
+```bash
+python3 -c "from src.integrations.amazon_api import get_amazon_access_token; ..."
+```
+
+**Resultado**:
+```
+🧪 Test 1: Generando primer token de Amazon...
+🔐 Generando nuevo access token de Amazon...
+✅ Token generado y cacheado (válido por 55 min)
+
+🧪 Test 2: Intentando obtener token nuevamente (debería usar caché)...
+♻️ Usando token cacheado de Amazon (válido por 54 min más)
+
+✅ ÉXITO: Ambos tokens son iguales (caché funcionando correctamente)
+```
+
+### ✅ Test 2: MercadoLibre Loop
+
+```bash
+python3 scripts/auth/ml_token_loop.py
+```
+
+**Resultado**:
+```
+🚀 Loop de ML iniciado con PID: 59389
+✅ Loop corriendo correctamente
+[2025-11-08 14:26:08] ✅ Token renovado exitosamente
+```
+
+**Verificación en .env**:
+```bash
+grep "ML_ACCESS_TOKEN=" .env
+# ML_ACCESS_TOKEN=APP_USR-1758699366225963-110815-aca30aeda463aaea3f262d6d9ad71b40-2629793984
+```
+✅ Token actualizado correctamente
+
+---
+
+## 📋 Resumen de Frecuencias
+
+| Token | Duración Real | Renovación | Método |
+|-------|---------------|------------|--------|
+| **Amazon SP-API** | 1 hora (3600 seg) | A los 55 min | Caché on-demand |
+| **MercadoLibre** | 6 horas | Cada 5.5 horas | Loop continuo |
+
+---
+
+## 🚀 Uso
+
+### Para Amazon
+
+**No requiere acción**. Simplemente usa tus scripts normalmente:
+
+```python
+# En cualquier script
+from src.integrations.amazon_api import get_product_data_from_asin
+data = get_product_data_from_asin("B0CYM126TT")
+# El token se renueva automáticamente si es necesario
+```
+
+### Para MercadoLibre
+
+**Opción 1: Instalación como servicio (RECOMENDADO)**
+```bash
+# Solo una vez:
+./INSTALAR_TOKEN_AUTO_REFRESH.sh
+
+# Ya no necesitas hacer nada más, el servicio corre automáticamente
+```
+
+**Opción 2: Ejecutar manualmente**
+```bash
+# En una terminal:
+./scripts/auth/ml_token_loop.sh
+
+# O en background:
+nohup ./scripts/auth/ml_token_loop.sh > /dev/null 2>&1 &
+```
+
+---
+
+## 📊 Comandos Útiles
+
+### Amazon
+
+```bash
+# Ver cache actual
+cat cache/amazon_token.json
+
+# Ver edad del token
+ls -lh cache/amazon_token.json
+```
+
+### MercadoLibre
+
+```bash
+# Ver status del servicio
+launchctl list | grep ml_token
+
+# Ver logs en tiempo real
+tail -f logs/ml_token_refresh.log
+
+# Detener servicio
+launchctl unload ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+
+# Iniciar servicio
+launchctl load ~/Library/LaunchAgents/com.revancha.ml_token_refresh.plist
+
+# Verificar token actual en .env
+grep "ML_ACCESS_TOKEN=" .env
+```
+
+---
+
+## 📚 Documentación
+
+Documentación completa disponible en:
+```bash
+cat docs/TOKEN_AUTO_REFRESH_README.md
+```
+
+Incluye:
+- Cómo funciona cada sistema
+- Instalación paso a paso
+- Troubleshooting
+- Comandos útiles
+- Explicación de logs
+
+---
+
+## 🎉 Resultado Final
+
+### Antes
+- ❌ Tenías que renovar tokens manualmente cada hora (Amazon) y cada 6 horas (ML)
+- ❌ Scripts fallaban cuando los tokens expiraban
+- ❌ Tenías que recordar ejecutar scripts de renovación
+
+### Ahora
+- ✅ **Amazon**: Se renueva automáticamente cuando usas la API (caché de 55 min)
+- ✅ **MercadoLibre**: Se renueva automáticamente cada 5.5 horas (loop continuo)
+- ✅ **Cero intervención manual**
+- ✅ **Logs completos** para monitorear
+- ✅ **Auto-recuperable** si algo falla
+- ✅ **Persistente** (se ejecuta al iniciar el sistema)
+
+**Nunca más tendrás que preocuparte por los tokens. Todo es automático.**

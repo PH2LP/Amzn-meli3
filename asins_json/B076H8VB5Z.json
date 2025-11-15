@@ -1,0 +1,410 @@
+{
+  "asin": "B076H8VB5Z",
+  "attributes": {
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_weight": [
+      {
+        "unit": "pounds",
+        "value": 0.4,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "external_testing_certification": [
+      {
+        "value": "WQA",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "ANSI",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "NSF",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Genuine Samsung Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Delivers clean, clear water that looks and tastes great and protects the components of your refrigerator from potential sediment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Uses revolutionized technology for water filtration, most of the impurities that water has are filtered away",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "All Samsung water filters, use a high grade carbon block, that removes over 99% of numerous potentially harmful contaminants which may be present in your water",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "DA29-00003A - DA29-00003B",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "length": {
+          "unit": "inches",
+          "value": 3.0
+        },
+        "height": {
+          "unit": "inches",
+          "value": 5.0
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "DA29-00003F Aqua-Pure Plus Refrigerator Water Filter",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "52141500",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "externally_assigned_product_identifier": [
+      {
+        "value": "682318020514",
+        "type": "upc",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "value": "0682318020514",
+        "type": "ean",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "replacement-refrigerator-dispenser-water-filters",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 8.4074
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 8.509
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 18.0086
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "size": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Count (Pack of 1)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "part_number": [
+      {
+        "value": "DA29-00003F",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "pesticide_marking": [
+      {
+        "marking_type": "epa_registration_number",
+        "registration_status": "fifra_not_considered_pesticide",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "contains_liquid_contents": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 0.34,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "POTABLE_WATER_FILTER",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_benefit": [
+      {
+        "language_tag": "en_US",
+        "value": "Removes over 99% of harmful contaminants, reduces chlorine, taste, and odor, delivering clean, clear, and great-tasting water using a high-grade carbon block.",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "Samsung Products DA29-00003F Aqua-Pure Plus Refrigerator Water Filter 1 Pack",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 29.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2017-10-16T07:00:00.000Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Carbon",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacture_year": [
+      {
+        "value": 2022,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unit_count": [
+      {
+        "type": {
+          "language_tag": "en_US",
+          "value": "Count"
+        },
+        "value": 1.0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/81xHHkezUUL.jpg",
+          "height": 2560,
+          "width": 1923
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41tgtKBwp5L.jpg",
+          "height": 500,
+          "width": 376
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41tgtKBwp5L._SL75_.jpg",
+          "height": 75,
+          "width": 56
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/81lm43WaYwL.jpg",
+          "height": 2560,
+          "width": 1707
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41YX1+Vkk3L.jpg",
+          "height": 500,
+          "width": 333
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/41YX1+Vkk3L._SL75_.jpg",
+          "height": 75,
+          "width": 50
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/81foPPQI8QL.jpg",
+          "height": 2400,
+          "width": 1600
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/416rQIvqWcL.jpg",
+          "height": 500,
+          "width": 333
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/416rQIvqWcL._SL75_.jpg",
+          "height": 75,
+          "width": 50
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71qor+cnafL.jpg",
+          "height": 2560,
+          "width": 997
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41R45SryKhL.jpg",
+          "height": 500,
+          "width": 195
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41R45SryKhL._SL75_.jpg",
+          "height": 75,
+          "width": 29
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/81rGmM-nB5L.jpg",
+          "height": 2560,
+          "width": 1259
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/416hjMnmrhL.jpg",
+          "height": 500,
+          "width": 246
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/416hjMnmrhL._SL75_.jpg",
+          "height": 75,
+          "width": 37
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "POTABLE_WATER_FILTER"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": []
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "3741161",
+          "title": "In-Refrigerator Water Filters",
+          "link": "https://www.amazon.com/gp/bestsellers/hi/3741161",
+          "rank": 163
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "home_improvement_display_on_website",
+          "title": "Tools & Home Improvement",
+          "link": "https://www.amazon.com/gp/bestsellers/hi",
+          "rank": 10563
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "Samsung",
+      "browseClassification": {
+        "displayName": "Water Filters",
+        "classificationId": "3741161"
+      },
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "Samsung Products DA29-00003F Aqua-Pure Plus Refrigerator Water Filter 1 Pack",
+      "manufacturer": "Samsung",
+      "memorabilia": false,
+      "modelNumber": "POTABLE_WATER_FILTER",
+      "packageQuantity": 1,
+      "partNumber": "DA29-00003F",
+      "size": "1 Count (Pack of 1)",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "major_appliances_display_on_website",
+      "websiteDisplayGroupName": "Major Appliances"
+    }
+  ]
+}

@@ -1,0 +1,838 @@
+{
+  "asin": "B0DPWX3WTL",
+  "attributes": {
+    "connectivity_technology": [
+      {
+        "language_tag": "en_US",
+        "value": "Bluetooth",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "2.4ghz Wireless",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "USB-C",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "included_components": [
+      {
+        "language_tag": "en_US",
+        "value": "User Manual",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Extra Switches",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Keycap & Switch Puller",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Detachable USB-A to USB-C cable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "fcc_radio_frequency_emission_compliance": [
+      {
+        "identification_number": "2A5D2-S80",
+        "registration_status": "has_fcc_id",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "language": [
+      {
+        "type": "manual",
+        "value": "english",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "skip_offer": [
+      {
+        "value": false,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "switch_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Linear",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_name": [
+      {
+        "language_tag": "en_US",
+        "value": "F75 MAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "bullet_point": [
+      {
+        "language_tag": "en_US",
+        "value": "Compact Size, Function Core: With 80 programmable keys and a customizable screen, the F75 Max upgrades from its successful predecessor EPOMAKER X Aula F75 with equal reliability and incredible new functions. Revel in the convenience the volume knob offers and enjoy the Gif-showing screen that makes Backlight customization fun and easy. With connectivity, battery monitor and indicator lights combined in one, the F75 Max keyboard with TFT smart display will be your inseparable helper and productivity booster in gaming and life",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Stylish and Ergonomic: Say goodbye to wrist strain and finger fatigue, as this Cherry-profile keyboard becomes your ergonomic assistant in browsing the digital world. With the 2cm-low front height and a 2-stage adjustable kickstand, typing angle can be as high or low as your comfort calls for. The Gasket-Mount structure separates F75 Max’s PCB from its shell to rid the harsh bottom-out, while the flex-cut PC plate gives it extra flexibility for soft and soothing typing",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Satisfying Creamy Sound: Indulge in the creamy smooth melody of F75 MAX, composed by the rhythmic thud of every keystroke. Factory-lubed and tuned, the stabilizers and linear switches sound as incredible as they feel, with the right amount of creamy and thocky combined. Full of foams and silicone sandwiched between plate, PCB and bottom case, noise caused by echo within the keyboard is eliminated, while the IXPE switch pad and PET pad highlight the mellow switch sound that’s rich and pleasant",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Versatile Gaming Keyboard: Game in style with this anti-ghosting keyboard that performs stably without double chattering or mistype in Bluetooth, 2.4Ghz wireless and cable mode, with 1000hz polling rate in USB and 2.4G modes. Its support of NKRO allows gamers to input multiple keys simultaneously, handy in FPS and Rhythm Games, while its compatibility with Android, Windows, Mac and Linux is valuable for programmers and clerks in the office",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Custom Keyboard with Compatibility: As personalization being our core branding, our F75 Max isn’t shy in the realm of customization. With south-facing per-key LEDs and light diffusers on the Reaper switches, the RGB Backlight shines brightly with pre-set dynamic effect, adjustable in color and style via software, screen and shortcut. The hot-swappable F75 MAX comes with plate-mount stabilizers but is compatible with 3/5-pin mechanical switches and screw-in stabilizers for experimenting typing feel and sound, while the software offers key remapping and macro editing for efficiency and accessibility",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hazmat": [
+      {
+        "aspect": "proper_shipping_name",
+        "value": "LITHIUM ION BATTERIES PACKED WITH EQUIPMENT",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "united_nations_regulatory_id",
+        "value": "UN3481",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "regulatory_packing_group",
+        "value": "II",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "transportation_regulatory_class",
+        "value": "9",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AE_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "AU_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BE_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "BR_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CA_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "CN_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "DE_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "EG_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ES_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "FR_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "GB_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IE_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IN_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "IT_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "JP_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "MX_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "NL_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "PL_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SA_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SE_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "SG_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "TR_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "US_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "aspect": "exception",
+        "value": "ZA_SmallLithiumIonBatteryWithEquipment",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_quantity": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_dimensions": [
+      {
+        "width": {
+          "unit": "inches",
+          "value": 1.69
+        },
+        "length": {
+          "unit": "inches",
+          "value": 5.62
+        },
+        "height": {
+          "unit": "inches",
+          "value": 12.87
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_description": [
+      {
+        "language_tag": "en_US",
+        "value": "<br>Specifications: <br>Brand: EPOMAKER X AULA <br>Model: F75 MAX <br>Layout: 75% ANSI US Layout <br>Number of Keys: 80 keys, 1 Metal Knob and 1 TFT Screen <br>Battery: 4000mAh <br>Battery Life: 30.5 hours with Backlight on, and 80 hours with Backlight off. <br>Connectivity: Type-C Cable, 2.4GHz, Bluetooth 5.0 <br>Compatibility: Mac/WIN/Android/Linux <br>Keyboard Dimensions: 32.8*14.3*4.4cm <br>Keyboard Weight: 0.96kg <br>Front Height: 2cm <br>Case Material: ABS Plastic <br>Plate Material: PC Plate <br>Flex-Cut: Partial Flex-Cut <br>Stabilizers: Plate-Mount Stabilizer. (Compatible with Screw-in Stabilizer) <br>Mounting Structure: Gasket-Mount <br>Sound Dampening: 5 layers: Sandwich Pad, IXPE Switch Pad, PET Sound-Enhancement pad, Bottom Foam and Bottom Silicone. <br>Keycaps Profile: Cherry Profile <br>Keycaps Material: PBT Plastic <br>Keycaps Manufacturing Technique: Double-Shot <br>Switch: 5-pin Pre-Lubed Mechanical Switch <br>Hot swappable: Yes, with 3/5-pin Mechanical Switches <br>RGB: South-Facing, Per-Key RGB <br>Polling Rate: 1000Hz (USB, 2.4Ghz), 125Hz (Bluetooth 5.0) <br>Latency: 3ms (USB), 7ms (2.4Ghz wireless), 18ms (Bluetooth 5.0) <br>Anti-Ghosting: N-Key Rollover <br> <br>Switch Specs <br>LEOBOG Reaper Mechanical Switch <br>Switch Type: Regular Linear Switch with 5 pins <br>Trigger Force: 45±3 gf <br>Bottom-out Force: 55±3 gf <br>Pre-Travel: 1.8±0.3mm <br>Total Travel: 3.6±0.3mm <br>Stem Material: POM <br>Top Material: PC <br>Base Material: Nylon <br>Light Diffuser: Yes, the Reaper Switch has Light Diffuser <br>Factory Lubed: Yes, the Reaper Switch is pre-lubed in the factory <br>Life Spans: 5,000,000",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "brand": [
+      {
+        "language_tag": "en_US",
+        "value": "EPOMAKER",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "unspsc_code": [
+      {
+        "value": "43211706",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hardware_platform": [
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "total_usb_2_0_ports": [
+      {
+        "value": 0,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_type_keyword": [
+      {
+        "value": "video-game-keyboards",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_items": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_dimensions": [
+      {
+        "length": {
+          "unit": "centimeters",
+          "value": 5.2
+        },
+        "width": {
+          "unit": "centimeters",
+          "value": 18.0
+        },
+        "height": {
+          "unit": "centimeters",
+          "value": 36.6
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "recommended_uses_for_product": [
+      {
+        "language_tag": "en_US",
+        "value": "Business",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Education",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Everyday Use",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Multimedia",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Personal",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Programming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Student",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "warranty_description": [
+      {
+        "language_tag": "en_US",
+        "value": "1 Year Warranty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "style": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compliance_media": [
+      {
+        "source_location": "http://DummyComplianceMediaLocation.pdf",
+        "content_type": "user_manual",
+        "content_language": "en_US",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_lithium_ion_cells": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "color": [
+      {
+        "language_tag": "en_US",
+        "value": "Black Gradient",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "water_resistance_level": [
+      {
+        "value": "not_water_resistant",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "variation_theme": [
+      {
+        "name": "COLOR",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "button_quantity": [
+      {
+        "value": 80,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_package_weight": [
+      {
+        "unit": "kilograms",
+        "value": 1.3,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_length_width_height": [
+      {
+        "length": {
+          "unit": "inches",
+          "value": 5.62
+        },
+        "width": {
+          "unit": "inches",
+          "value": 1.69
+        },
+        "height": {
+          "unit": "inches",
+          "value": 12.87
+        },
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "manufacturer": [
+      {
+        "language_tag": "en_US",
+        "value": "EPOMAKER",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "number_of_batteries": [
+      {
+        "value": 1,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "lithium_battery": [
+      {
+        "energy_content": [
+          {
+            "unit": "watt_hours",
+            "value": 10.0
+          }
+        ],
+        "packaging": [
+          {
+            "value": "batteries_contained_in_equipment"
+          }
+        ],
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "model_number": [
+      {
+        "value": "F75 MAX",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_dg_hz_regulation": [
+      {
+        "value": "not_applicable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_layout": [
+      {
+        "value": "qwerty",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "num_batteries": [
+      {
+        "quantity": 1,
+        "type": "d",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "quantity": 1,
+        "type": "lithium_ion",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "special_feature": [
+      {
+        "language_tag": "en_US",
+        "value": "Backlit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Colorful Smart Display Screen",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Hot-Swappable",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Pre-lubed Cream Switches",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "16.8 Million RGB Backlit",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "supplier_declared_has_product_identifier_exemption": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_backlighting_color_support": [
+      {
+        "value": "rgb",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "item_name": [
+      {
+        "language_tag": "en_US",
+        "value": "EPOMAKER X Aula F75 MAX Wireless Mechanical Keyboard with TFT Screen and Knob, Gasket Gaming Keyboard in 75% Layout, Hot Swappable, RGB Backlight, for PC/Mac/Linux (Black Gradient)",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "keyboard_description": [
+      {
+        "language_tag": "en_US",
+        "value": "Mechanical",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "list_price": [
+      {
+        "currency": "USD",
+        "value": 82.99,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_required": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "power_source_type": [
+      {
+        "language_tag": "en_US",
+        "value": "Battery Powered with USB Power option",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "product_site_launch_date": [
+      {
+        "value": "2025-01-06T22:40:56.247Z",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "compatible_devices": [
+      {
+        "language_tag": "en_US",
+        "value": "Gaming Console",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Laptop",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "PC",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Smartphone",
+        "marketplace_id": "ATVPDKIKX0DER"
+      },
+      {
+        "language_tag": "en_US",
+        "value": "Tablet",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "material": [
+      {
+        "language_tag": "en_US",
+        "value": "Plastic",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "batteries_included": [
+      {
+        "value": true,
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ],
+    "hand_orientation": [
+      {
+        "language_tag": "en_US",
+        "value": "Ambidextrous",
+        "marketplace_id": "ATVPDKIKX0DER"
+      }
+    ]
+  },
+  "images": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "images": [
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/61yPM8dmZKL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41MswnulN-L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "MAIN",
+          "link": "https://m.media-amazon.com/images/I/41MswnulN-L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/71OgkQhSYTL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51VmVOIv+0L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT01",
+          "link": "https://m.media-amazon.com/images/I/51VmVOIv+0L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/71ywW44p8nL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41Ub3Pvjn0L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT02",
+          "link": "https://m.media-amazon.com/images/I/41Ub3Pvjn0L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/71OpMezS9mL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41iOkgXrhQL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT03",
+          "link": "https://m.media-amazon.com/images/I/41iOkgXrhQL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/81CMCOkIQkL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51PEjucF-wL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT04",
+          "link": "https://m.media-amazon.com/images/I/51PEjucF-wL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/71VVSQK+aQL.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51xAHNY4-SL.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT05",
+          "link": "https://m.media-amazon.com/images/I/51xAHNY4-SL._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/81z5idt9V8L.jpg",
+          "height": 1600,
+          "width": 1600
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41XxyWKh1+L.jpg",
+          "height": 500,
+          "width": 500
+        },
+        {
+          "variant": "PT06",
+          "link": "https://m.media-amazon.com/images/I/41XxyWKh1+L._SL75_.jpg",
+          "height": 75,
+          "width": 75
+        }
+      ]
+    }
+  ],
+  "productTypes": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "productType": "KEYBOARDS"
+    }
+  ],
+  "relationships": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "relationships": [
+        {
+          "parentAsins": [
+            "B0DPWWYBCR"
+          ],
+          "type": "VARIATION",
+          "variationTheme": {
+            "attributes": [
+              "color"
+            ],
+            "theme": "COLOR"
+          }
+        }
+      ]
+    }
+  ],
+  "salesRanks": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "classificationRanks": [
+        {
+          "classificationId": "402051011",
+          "title": "PC Gaming Keyboards",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames/402051011",
+          "rank": 33
+        }
+      ],
+      "displayGroupRanks": [
+        {
+          "websiteDisplayGroup": "video_games_display_on_website",
+          "title": "Video Games",
+          "link": "https://www.amazon.com/gp/bestsellers/videogames",
+          "rank": 436
+        }
+      ]
+    }
+  ],
+  "summaries": [
+    {
+      "marketplaceId": "ATVPDKIKX0DER",
+      "adultProduct": false,
+      "autographed": false,
+      "brand": "EPOMAKER",
+      "browseClassification": {
+        "displayName": "Gaming Keyboards",
+        "classificationId": "402051011"
+      },
+      "color": "Black Gradient",
+      "itemClassification": "BASE_PRODUCT",
+      "itemName": "EPOMAKER X Aula F75 MAX Wireless Mechanical Keyboard with TFT Screen and Knob, Gasket Gaming Keyboard in 75% Layout, Hot Swappable, RGB Backlight, for PC/Mac/Linux (Black Gradient)",
+      "manufacturer": "EPOMAKER",
+      "memorabilia": false,
+      "modelNumber": "F75 MAX",
+      "packageQuantity": 1,
+      "style": "Gaming",
+      "tradeInEligible": false,
+      "websiteDisplayGroup": "pc_accessory_display_on_website",
+      "websiteDisplayGroupName": "PC Accessory"
+    }
+  ]
+}

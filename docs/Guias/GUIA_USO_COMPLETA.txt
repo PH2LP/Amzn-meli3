@@ -1,0 +1,408 @@
+# 📘 Guía de Uso Completa - Amazon → MercadoLibre Pipeline
+
+Guía completa para usar todos los módulos del sistema de sincronización Amazon → MercadoLibre.
+
+---
+
+## 📋 Tabla de Contenidos
+
+1. [Pipeline Principal (main2.py)](#1-pipeline-principal-main2py)
+2. [Sistema de Respuestas Automáticas](#2-sistema-de-respuestas-automáticas)
+3. [Sincronización Amazon-ML](#3-sincronización-amazon-ml)
+4. [Scripts de Autenticación](#4-scripts-de-autenticación)
+5. [Estructura del Proyecto](#5-estructura-del-proyecto)
+
+---
+
+## 1. Pipeline Principal (main2.py)
+
+### 🎯 Descripción
+Pipeline principal que transforma productos de Amazon en publicaciones de MercadoLibre usando IA y embeddings.
+
+### 🚀 Uso Básico
+
+```bash
+# Procesar todos los ASINs en data/asins.txt
+python3 main2.py
+
+# Procesar un ASIN específico
+python3 main2.py --asin B0F2MJ5H6V
+
+# Simulación sin publicar (dry-run)
+python3 main2.py --dry-run
+
+# Con validación IA activada
+python3 main2.py --enable-validation
+
+# Forzar regeneración de archivos existentes
+python3 main2.py --force-regenerate
+
+# Saltar verificaciones de salud
+python3 main2.py --skip-health-check
+```
+
+### 📝 Opciones Disponibles
+
+| Opción | Descripción |
+|--------|-------------|
+| `--asin ASIN` | Procesar solo un ASIN específico |
+| `--asins-file FILE` | Archivo con lista de ASINs (default: data/asins.txt) |
+| `--dry-run` | Simular publicaciones sin enviar a ML |
+| `--enable-validation` | Activar validación IA (desactivada por defecto) |
+| `--force-regenerate` | Forzar regeneración de archivos existentes |
+| `--skip-health-check` | Saltar verificaciones de salud |
+
+### 📂 Archivos de Entrada
+
+- **data/asins.txt**: Lista de ASINs a procesar (uno por línea)
+
+### 📤 Archivos de Salida
+
+- **storage/asins_json/**: JSONs descargados de Amazon
+- **storage/logs/publish_ready/**: JSONs transformados listos para publicar
+- **storage/logs/pipeline/**: Reportes de ejecución
+- **storage/pipeline_state.db**: Base de datos de estado
+
+### 🔍 Monitorear Ejecución en Vivo
+
+```bash
+# En otra terminal
+tail -f storage/logs/pipeline/report_YYYYMMDD_HHMMSS.json
+```
+
+### ⚡ Características Principales
+
+- **Detección Inteligente de Categorías**: Embeddings + IA (CategoryMatcherV2)
+- **Sistema de Reintentos**: Hasta 8 intentos con categorías alternativas
+- **Publicación Multi-País**: MLC, MLM, MCO, MLB, MLA
+- **Descripciones Optimizadas**: Title Case, sin emojis, formato profesional
+- **Validación Automática**: Checks de completitud y consistencia
+
+---
+
+## 2. Sistema de Respuestas Automáticas
+
+### 🎯 Descripción
+Sistema que responde automáticamente preguntas de clientes en MercadoLibre usando:
+- Templates predefinidos (0 tokens)
+- Cache de respuestas similares (0 tokens)
+- IA solo cuando es necesario (~150 tokens)
+
+### 🚀 Ejecución Manual (Una Vez)
+
+```bash
+python3 scripts/tools/auto_answer_questions.py
+```
+
+### 🔄 Ejecución Continua (Loop)
+
+```bash
+# Ejecutar en background
+./scripts/tools/auto_responder_loop.sh
+
+# Ver output en vivo
+tail -f logs/auto_answer.log
+```
+
+### ⏱️ Funcionamiento
+
+- Revisa preguntas cada **60 segundos**
+- Responde automáticamente usando templates o IA
+- Guarda respuestas en cache para reutilización
+- Log detallado de cada respuesta enviada
+
+### 📊 Ahorro de Tokens
+
+- **Templates genéricos**: 0 tokens (95% de preguntas)
+- **Cache de respuestas**: 0 tokens
+- **IA solo cuando necesario**: ~150 tokens (5% de preguntas)
+
+### 📝 Templates Disponibles
+
+El sistema incluye 20+ templates genéricos en español e inglés para:
+- Preguntas sobre stock/disponibilidad
+- Consultas de envío
+- Preguntas de precio
+- Garantías y devoluciones
+- Características del producto
+
+**Ubicación**: `docs/questions/generic_qa.json`
+
+### 🛠️ Configuración
+
+Edita los mensajes de saludo/despedida en:
+```python
+# scripts/tools/auto_answer_questions.py
+CUSTOM_GREETING = "¡Hola! Gracias por tu consulta."
+CUSTOM_FAREWELL = "¡Saludos!"
+```
+
+### 📁 Base de Datos
+
+- **storage/listings_database.db**: Información de productos y cache de respuestas
+
+---
+
+## 3. Sincronización Amazon-ML
+
+### 🎯 Descripción
+Sincroniza automáticamente productos de Amazon con MercadoLibre, actualizando:
+- Stock/disponibilidad
+- Precios
+- Características del producto
+
+### 🚀 Ejecución Manual
+
+```bash
+python3 scripts/tools/sync_amazon_ml.py
+```
+
+### ⏰ Configurar Cron Job (Automático)
+
+```bash
+# Ejecutar script de configuración
+./scripts/tools/setup_sync_cron.sh
+
+# El cron job se ejecutará:
+# - Cada 3 días
+# - A las 9:00 AM
+# - Logs en: logs/sync/sync_cron.log
+```
+
+### 📋 Verificar Cron Job Instalado
+
+```bash
+crontab -l | grep sync_amazon_ml
+```
+
+### 🔧 Personalizar Frecuencia
+
+Edita `scripts/tools/setup_sync_cron.sh`:
+
+```bash
+# Línea 44 - Cambiar frecuencia
+# Formato: MIN HOUR DAY MONTH WEEKDAY
+
+# Cada día a las 9:00 AM
+CRON_LINE="0 9 * * * cd $PROJECT_DIR && ..."
+
+# Cada 12 horas
+CRON_LINE="0 */12 * * * cd $PROJECT_DIR && ..."
+
+# Cada lunes a las 10:00 AM
+CRON_LINE="0 10 * * 1 cd $PROJECT_DIR && ..."
+```
+
+### 📊 Logs
+
+```bash
+# Ver logs de sincronización
+tail -f logs/sync/sync_cron.log
+
+# Ver último sync
+tail -50 logs/sync/sync_cron.log
+```
+
+### 📘 Documentación Adicional
+
+Ver: `docs/QUICKSTART_SYNC.md` y `docs/SYNC_AMAZON_ML_README.md`
+
+---
+
+## 4. Scripts de Autenticación
+
+### 🔐 Renovación de Tokens
+
+Los tokens se renuevan automáticamente, pero también puedes hacerlo manualmente:
+
+#### MercadoLibre
+
+```bash
+python3 scripts/auth/auto_refresh_token.py
+```
+
+#### Amazon SP-API
+
+```bash
+python3 scripts/auth/auto_refresh_token_amzn.py
+```
+
+### 🔑 Configuración de Credenciales
+
+Todas las credenciales se configuran en `.env`:
+
+```env
+# MercadoLibre
+ML_CLIENT_ID=tu_client_id
+ML_CLIENT_SECRET=tu_client_secret
+ML_REFRESH_TOKEN=tu_refresh_token
+
+# Amazon SP-API
+SP_API_REFRESH_TOKEN=tu_refresh_token
+LWA_CLIENT_ID=tu_client_id
+LWA_CLIENT_SECRET=tu_client_secret
+
+# OpenAI (para IA)
+OPENAI_API_KEY=tu_api_key
+```
+
+---
+
+## 5. Estructura del Proyecto
+
+### 📁 Directorio Raíz
+
+```
+revancha/
+├── main2.py                    # ⭐ Script principal del pipeline
+├── .env                        # Credenciales (NO commitear)
+├── requirements.txt            # Dependencias Python
+│
+├── src/                        # Código fuente
+│   ├── pipeline/               # Lógica core
+│   ├── integrations/           # APIs externas
+│   └── utils/                  # Utilidades
+│
+├── data/                       # Datos y recursos
+│   ├── asins.txt               # Lista de ASINs
+│   ├── categories/             # Categorías ML
+│   └── schemas/                # Schemas CBT
+│
+├── scripts/                    # Scripts auxiliares
+│   ├── auth/                   # Renovación de tokens
+│   └── tools/                  # Herramientas
+│
+├── storage/                    # Bases de datos
+│   ├── listings_database.db    # Productos y cache
+│   ├── pipeline_state.db       # Estado del pipeline
+│   ├── asins_json/             # JSONs de Amazon
+│   └── logs/                   # Logs de ejecución
+│
+├── docs/                       # Documentación
+└── logs/                       # Logs generales
+```
+
+### 🗂️ Archivos Importantes
+
+| Archivo | Descripción |
+|---------|-------------|
+| `main2.py` | Pipeline principal |
+| `data/asins.txt` | Lista de ASINs a procesar |
+| `.env` | Credenciales (PRIVADO) |
+| `storage/pipeline_state.db` | Estado del pipeline |
+| `storage/listings_database.db` | Cache y productos |
+
+---
+
+## 🚀 Flujo de Trabajo Típico
+
+### 1. Agregar Productos Nuevos
+
+```bash
+# 1. Editar lista de ASINs
+nano data/asins.txt
+
+# 2. Agregar ASINs (uno por línea)
+B0F2MJ5H6V
+B07LBQR3QY
+
+# 3. Ejecutar pipeline
+python3 main2.py
+```
+
+### 2. Monitorear Sistema
+
+```bash
+# Ver logs del pipeline
+tail -f storage/logs/pipeline/report_*.json
+
+# Ver respuestas automáticas
+tail -f logs/auto_answer.log
+
+# Ver sincronización
+tail -f logs/sync/sync_cron.log
+```
+
+### 3. Configuración Inicial
+
+```bash
+# 1. Configurar credenciales
+cp .env.example .env
+nano .env
+
+# 2. Instalar dependencias
+pip install -r requirements.txt
+
+# 3. Configurar auto-responder (opcional)
+./scripts/tools/auto_responder_loop.sh &
+
+# 4. Configurar sincronización (opcional)
+./scripts/tools/setup_sync_cron.sh
+```
+
+---
+
+## ⚠️ Solución de Problemas
+
+### Pipeline no encuentra archivos
+
+```bash
+# Verificar rutas
+python3 main2.py --help
+
+# Debería mostrar: data/asins.txt
+```
+
+### Error de imports
+
+```bash
+# Verificar estructura de carpetas
+ls -la src/pipeline/
+ls -la src/integrations/
+
+# Reinstalar dependencias
+pip install -r requirements.txt
+```
+
+### Tokens expirados
+
+```bash
+# Renovar token ML
+python3 scripts/auth/auto_refresh_token.py
+
+# Renovar token Amazon
+python3 scripts/auth/auto_refresh_token_amzn.py
+```
+
+### Auto-responder no funciona
+
+```bash
+# Verificar que existe la base de datos
+ls -lh storage/listings_database.db
+
+# Ejecutar manualmente para ver errores
+python3 scripts/tools/auto_answer_questions.py
+```
+
+---
+
+## 📞 Soporte
+
+- **Documentación adicional**: Ver carpeta `docs/`
+- **Logs**: Revisar `storage/logs/` y `logs/`
+- **Estado del sistema**: Verificar `storage/pipeline_state.db`
+
+---
+
+## 🎯 Mejores Prácticas
+
+1. **Siempre usa dry-run primero**: `python3 main2.py --dry-run`
+2. **Revisa logs regularmente**: `tail -f storage/logs/pipeline/*.json`
+3. **Mantén credenciales seguras**: Nunca commitear `.env`
+4. **Usa el sistema de reintentos**: El pipeline intenta hasta 8 veces
+5. **Monitorea respuestas automáticas**: Verifica que sean apropiadas
+
+---
+
+**Última actualización**: Noviembre 2025
+**Versión del sistema**: v2.0 - Estructura Modular

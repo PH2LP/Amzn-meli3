@@ -1,0 +1,522 @@
+# 🌩️ Plan de Migración a VPS - Guía Completa
+
+**IMPORTANTE:** Este documento es para **FUTURO**, cuando el sistema esté completo y listo para producción 24/7.
+
+---
+
+## 📌 Contexto
+
+### ¿Por qué migrar a VPS?
+
+**AHORA:**
+- Todo corre en la Mac de Felipe
+- Si se apaga la Mac, todo deja de funcionar
+- No hay backups automáticos en la nube
+- Depende de tener la Mac prendida 24/7
+
+**DESPUÉS (con VPS):**
+- Todo corre en un servidor en la nube 24/7
+- Nunca se apaga
+- Mac puede estar apagada o viajando
+- Backups automáticos
+- Internet más rápido (datacenter)
+
+---
+
+## 🎯 Cuándo Migrar
+
+**Migrar cuando:**
+- ✅ El sistema esté funcionando perfectamente en local
+- ✅ Tengas productos publicados exitosamente
+- ✅ El sync funcione correctamente
+- ✅ El auto-responder esté probado
+- ✅ Las notificaciones de Telegram funcionen
+- ✅ Todo el código esté en GitHub
+- ✅ Estés listo para invertir $6/mes
+
+**NO migrar si:**
+- ❌ Todavía hay bugs en el código
+- ❌ Estás haciendo cambios frecuentes
+- ❌ No has probado el sistema completo
+- ❌ Prefieres desarrollo local por ahora
+
+---
+
+## 💰 Costos Estimados
+
+### Opción Recomendada: DigitalOcean
+- **Plan:** Basic Droplet
+- **Specs:** 1 CPU, 1GB RAM, 25GB SSD, 1TB transfer
+- **Costo:** $6/mes ($0.009/hora)
+- **Backups:** +$1.20/mes (opcional pero recomendado)
+- **Total:** ~$7/mes
+
+### Alternativas:
+- **Linode/Akamai:** $5/mes (similar specs)
+- **Vultr:** $6/mes (similar specs)
+- **Hetzner:** €4/mes (~$4.30, pero en Europa)
+
+---
+
+## 📋 Checklist Pre-Migración
+
+Antes de empezar la migración, verificar:
+
+### 1. Código y Configuración
+- [ ] Todo el código está en GitHub (repositorio privado)
+- [ ] El archivo `.env` tiene todas las credenciales actualizadas
+- [ ] `requirements.txt` tiene todas las dependencias
+- [ ] Los scripts shell tienen permisos de ejecución
+- [ ] No hay rutas absolutas hardcodeadas (usar rutas relativas)
+
+### 2. Funcionalidades Probadas
+- [ ] Pipeline principal (`main2.py`) funciona correctamente
+- [ ] Auto-responder responde preguntas correctamente
+- [ ] Sync de Amazon-ML funciona sin errores
+- [ ] Notificaciones de Telegram llegan correctamente
+- [ ] Base de datos SQLite no está corrupta
+
+### 3. Documentación
+- [ ] README.md está actualizado
+- [ ] Documentación de cada módulo existe
+- [ ] Variables de entorno documentadas
+- [ ] Comandos de uso documentados
+
+### 4. Credenciales Necesarias
+- [ ] MercadoLibre Access Token válido
+- [ ] Amazon SP-API credentials
+- [ ] Telegram Bot Token
+- [ ] Telegram Chat ID
+- [ ] OpenAI API Key (si aplica)
+
+---
+
+## 🚀 Plan de Migración en 3 Fases
+
+### **FASE 1: Preparación (Felipe hace - 10 minutos)**
+
+#### Paso 1.1: Crear Cuenta DigitalOcean
+1. Ir a https://www.digitalocean.com
+2. Click "Sign Up"
+3. Ingresar email y contraseña
+4. Verificar email
+5. Agregar método de pago (tarjeta de crédito)
+6. **Bonus:** Aplicar código promocional para $200 de crédito gratis (60 días)
+
+#### Paso 1.2: Crear el Droplet (VPS)
+1. Click en "Create" → "Droplets"
+2. Elegir configuración:
+   ```
+   Distribución: Ubuntu 22.04 LTS (x64)
+   Plan: Basic
+   CPU: Regular - $6/mes
+   Datacenter: New York 1 (o el más cercano)
+   Autenticación: Password (elegir contraseña fuerte)
+   Hostname: revancha-prod
+   ```
+3. **OPCIONAL:** Habilitar backups (+$1.20/mes)
+4. Click "Create Droplet"
+5. Esperar 60 segundos
+6. **COPIAR LA IP:** Ej: `159.89.123.45`
+7. **Guardar la contraseña** que elegiste
+
+#### Paso 1.3: Proporcionar Datos
+Compartir con Claude:
+- IP del VPS: `159.89.123.45`
+- Contraseña: `********` (o mejor, configurar SSH key)
+
+---
+
+### **FASE 2: Deploy Automático (Claude hace - 10 minutos)**
+
+Una vez con la IP, Claude ejecutará el script de deploy automático.
+
+#### Paso 2.1: Verificar Conexión
+```bash
+# Desde la Mac de Felipe
+ssh root@159.89.123.45
+
+# Si es la primera vez, pregunta:
+# "Are you sure you want to continue connecting?"
+# Responder: yes
+
+# Pedir contraseña
+# Escribir la contraseña del VPS
+```
+
+#### Paso 2.2: Ejecutar Deploy Automático
+```bash
+# Claude ejecutará (o Felipe copia y pega):
+./scripts/vps/deploy_to_vps.sh 159.89.123.45
+
+# Este script hará AUTOMÁTICAMENTE:
+# ✅ Actualizar el sistema
+# ✅ Instalar Python, Git, Screen
+# ✅ Clonar el repositorio
+# ✅ Crear entorno virtual
+# ✅ Instalar dependencias
+# ✅ Copiar archivo .env
+# ✅ Configurar permisos
+# ✅ Crear directorios necesarios
+```
+
+#### Paso 2.3: Iniciar Servicios
+```bash
+# Claude ejecutará:
+./scripts/vps/start_services.sh
+
+# Este script iniciará:
+# ✅ Auto-responder (screen session)
+# ✅ Telegram notifier (screen session)
+# ✅ Cron job para sync (cada 3 días)
+```
+
+---
+
+### **FASE 3: Verificación (Claude + Felipe - 5 minutos)**
+
+#### Paso 3.1: Verificar Servicios
+```bash
+# Conectar al VPS
+ssh root@159.89.123.45
+
+# Ver sesiones de screen activas
+screen -ls
+
+# Output esperado:
+# There are screens on:
+#   12345.responder   (Detached)
+#   12346.telegram    (Detached)
+```
+
+#### Paso 3.2: Verificar Logs
+```bash
+# Ver log de auto-responder
+tail -f /root/revancha/logs/auto_answer.log
+
+# Ver log de Telegram
+tail -f /root/revancha/logs/telegram_notifier_loop.log
+
+# Ver cron jobs
+crontab -l
+```
+
+#### Paso 3.3: Pruebas Funcionales
+- [ ] Auto-responder: Hacer una pregunta en MercadoLibre y verificar respuesta
+- [ ] Telegram: Verificar que lleguen notificaciones (si hay ventas)
+- [ ] Sync: Ejecutar manualmente y verificar que funcione
+
+---
+
+## 📚 Scripts que Crearemos para el Deploy
+
+### 1. `scripts/vps/deploy_to_vps.sh`
+Script principal de deploy que:
+- Configura el VPS desde cero
+- Instala todas las dependencias
+- Clona el repositorio
+- Copia credenciales
+- Configura entorno
+
+### 2. `scripts/vps/start_services.sh`
+Inicia todos los servicios:
+- Auto-responder en screen
+- Telegram notifier en screen
+- Configura cron jobs
+
+### 3. `scripts/vps/monitor.sh`
+Monitorea el estado del sistema:
+- Verifica que los servicios estén corriendo
+- Muestra uso de CPU/RAM
+- Muestra últimas líneas de logs
+
+### 4. `scripts/vps/update.sh`
+Actualiza el código en el VPS:
+- Hace `git pull`
+- Reinstala dependencias si es necesario
+- Reinicia servicios
+
+### 5. `scripts/vps/backup.sh`
+Crea backup de la base de datos y configuración:
+- Exporta SQLite database
+- Copia archivos importantes
+- Guarda en directorio de backups
+
+---
+
+## 🔧 Administración Post-Migración
+
+### Conectarse al VPS
+```bash
+ssh root@159.89.123.45
+```
+
+### Ver Estado de Servicios
+```bash
+# Listar sesiones de screen
+screen -ls
+
+# Conectarse a una sesión
+screen -r responder
+
+# Salir sin cerrar (Ctrl+A, luego D)
+```
+
+### Ver Logs en Tiempo Real
+```bash
+# Auto-responder
+tail -f logs/auto_answer.log
+
+# Telegram notifier
+tail -f logs/telegram_notifier_loop.log
+
+# Sync
+tail -f logs/sync_cron.log
+```
+
+### Actualizar Código
+```bash
+# Desde la Mac, actualizar el repo
+git push
+
+# Conectarse al VPS
+ssh root@159.89.123.45
+
+# Ejecutar script de actualización
+cd /root/revancha
+./scripts/vps/update.sh
+```
+
+### Reiniciar un Servicio
+```bash
+# Conectarse a la sesión
+screen -r responder
+
+# Detener (Ctrl+C)
+
+# Reiniciar
+./scripts/tools/auto_responder_loop.sh
+
+# Salir (Ctrl+A, D)
+```
+
+### Ver Uso de Recursos
+```bash
+# CPU y memoria
+htop
+
+# Espacio en disco
+df -h
+
+# Procesos de Python
+ps aux | grep python
+```
+
+---
+
+## 🚨 Troubleshooting Común
+
+### Problema: No puedo conectarme por SSH
+**Solución:**
+```bash
+# Verificar que la IP es correcta
+ping 159.89.123.45
+
+# Verificar que el firewall no bloquea SSH
+# Ir al panel de DigitalOcean → Networking → Firewalls
+```
+
+### Problema: Script no corre en screen
+**Solución:**
+```bash
+# Verificar que screen está instalado
+screen --version
+
+# Matar sesión vieja y crear nueva
+screen -X -S responder quit
+screen -S responder
+./scripts/tools/auto_responder_loop.sh
+```
+
+### Problema: Dependencias no se instalan
+**Solución:**
+```bash
+# Verificar versión de Python
+python3 --version  # Debe ser 3.10+
+
+# Reinstalar desde cero
+rm -rf venv
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### Problema: No hay espacio en disco
+**Solución:**
+```bash
+# Ver qué ocupa espacio
+du -sh /root/revancha/*
+
+# Limpiar logs viejos
+find logs/ -type f -mtime +30 -delete
+
+# Limpiar cache de pip
+rm -rf ~/.cache/pip
+```
+
+---
+
+## 📊 Monitoreo y Mantenimiento
+
+### Tareas Diarias (Automáticas)
+- ✅ Auto-responder revisa preguntas cada minuto
+- ✅ Telegram notifier revisa ventas cada 60 segundos
+- ✅ Sistema operativo actualiza paquetes automáticamente
+
+### Tareas Semanales (Manuales recomendadas)
+- [ ] Revisar logs para detectar errores
+- [ ] Verificar uso de disco
+- [ ] Revisar que todos los servicios estén corriendo
+
+### Tareas Mensuales (Manuales recomendadas)
+- [ ] Backup manual de la base de datos
+- [ ] Actualizar dependencias de Python
+- [ ] Revisar costos en DigitalOcean
+
+---
+
+## 💾 Estrategia de Backups
+
+### Backup Automático (DigitalOcean)
+Si habilitas backups (+$1.20/mes):
+- Se crea snapshot semanal automático
+- Se guardan últimas 4 semanas
+- Puedes restaurar el VPS completo
+
+### Backup Manual de Base de Datos
+```bash
+# Conectarse al VPS
+ssh root@159.89.123.45
+
+# Ejecutar script de backup
+./scripts/vps/backup.sh
+
+# Esto crea:
+# backups/listings_database_20251107.db
+# backups/env_backup_20251107.txt (sin credenciales sensibles)
+```
+
+### Descargar Backup a tu Mac
+```bash
+# Desde tu Mac
+scp root@159.89.123.45:/root/revancha/backups/*.db ~/Downloads/
+```
+
+---
+
+## 🔐 Seguridad Recomendada
+
+### 1. Configurar SSH Key (En vez de contraseña)
+```bash
+# En tu Mac, generar key
+ssh-keygen -t ed25519
+
+# Copiar al VPS
+ssh-copy-id root@159.89.123.45
+
+# Deshabilitar login por contraseña
+# (solo después de verificar que SSH key funciona)
+```
+
+### 2. Crear Usuario No-Root
+```bash
+# Conectarse al VPS
+ssh root@159.89.123.45
+
+# Crear usuario
+adduser felipe
+
+# Darle permisos sudo
+usermod -aG sudo felipe
+
+# Usar ese usuario en vez de root
+```
+
+### 3. Configurar Firewall
+```bash
+# Permitir solo SSH y HTTP/HTTPS
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw enable
+```
+
+---
+
+## 📝 Checklist Final de Verificación
+
+Después del deploy, verificar:
+
+### Servicios Corriendo
+- [ ] `screen -ls` muestra 2 sesiones activas
+- [ ] Auto-responder está respondiendo preguntas
+- [ ] Telegram notifier envía notificaciones
+- [ ] Cron job está configurado (`crontab -l`)
+
+### Logs Sin Errores
+- [ ] `logs/auto_answer.log` sin errores críticos
+- [ ] `logs/telegram_notifier_loop.log` sin errores críticos
+- [ ] `logs/sync_cron.log` (cuando se ejecute) funciona
+
+### Base de Datos
+- [ ] `storage/listings_database.db` existe y no está corrupta
+- [ ] Tiene los productos publicados
+
+### Conectividad
+- [ ] APIs de MercadoLibre responden
+- [ ] APIs de Amazon responden
+- [ ] Telegram bot responde
+
+---
+
+## 🎯 Resultado Final
+
+Después de la migración tendrás:
+
+```
+┌────────────────────────────────────────────────────┐
+│ VPS en DigitalOcean (159.89.123.45)               │
+│ ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ │
+│                                                    │
+│ Corriendo 24/7:                                    │
+│  ✅ Auto-responder                                 │
+│  ✅ Telegram notifier                              │
+│  ✅ Sync cada 3 días                               │
+│                                                    │
+│ Tu Mac puede:                                      │
+│  💤 Apagarse                                       │
+│  ✈️ Viajar contigo                                 │
+│  🏖️ Estar de vacaciones                            │
+│                                                    │
+│ Y todo sigue funcionando 🎉                        │
+└────────────────────────────────────────────────────┘
+```
+
+---
+
+## 📞 Soporte Durante la Migración
+
+Si algo sale mal:
+1. Revisar logs en el VPS
+2. Consultar sección de Troubleshooting
+3. Verificar que credenciales sean correctas
+4. En último caso: destruir droplet y crear uno nuevo (solo perdés $0.05)
+
+---
+
+**Fecha de creación:** Noviembre 2025
+**Última actualización:** Pendiente de migración
+**Estado:** Documento de planificación - NO ejecutar aún
+
+**Cuando estés listo, busca este documento y seguimos los pasos juntos.** 🚀

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs - VPS Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            background: #0a0a0a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #222;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a.active {
+            color: #0ea5e9;
+        }
+
+        .log-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .log-selector button {
+            padding: 10px 20px;
+            background: #111;
+            border: 1px solid #222;
+            border-radius: 8px;
+            color: #888;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .log-selector button:hover {
+            border-color: #444;
+            color: #fff;
+        }
+
+        .log-selector button.active {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+            color: #fff;
+        }
+
+        .log-container {
+            background: #000;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .log-content {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #ddd;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .log-content:empty::before {
+            content: 'Selecciona un servicio para ver sus logs...';
+            color: #666;
+            font-style: italic;
+        }
+
+        .auto-scroll-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #888;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .auto-scroll-toggle input {
+            cursor: pointer;
+        }
+
+        .loading-indicator {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .spinner-small {
+            border: 2px solid #222;
+            border-top: 2px solid #0ea5e9;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Syntax highlighting for logs */
+        .log-content {
+            color: #ddd;
+        }
+
+        .log-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .log-content::-webkit-scrollbar-track {
+            background: #111;
+        }
+
+        .log-content::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .log-content::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
+        .log-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .refresh-btn {
+            padding: 8px 16px;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .refresh-btn:hover {
+            background: #1e1e1e;
+            border-color: #444;
+        }
+
+        .last-update-logs {
+            font-size: 11px;
+            color: #666;
+            margin-right: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📄 Logs</h1>
+            <div class="nav-links">
+                <a href="/">Dashboard</a>
+                <a href="/logs" class="active">Logs</a>
+            </div>
+        </header>
+
+        <div class="log-selector" id="log-selector"></div>
+
+        <div class="log-header">
+            <div class="auto-scroll-toggle">
+                <input type="checkbox" id="auto-scroll" checked>
+                <label for="auto-scroll">Auto-scroll</label>
+            </div>
+            <div>
+                <span class="last-update-logs" id="last-update">Actualizado: -</span>
+                <button class="refresh-btn" onclick="loadCurrentLog()">🔄 Refrescar</button>
+            </div>
+        </div>
+
+        <div class="log-container">
+            <div class="log-content" id="log-content">
+                Selecciona un servicio para ver sus logs...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLog = null;
+        let updateInterval = null;
+
+        const logServices = [
+            { id: 'auto_answer', name: '🤖 Auto Answer' },
+            { id: 'auto_sync', name: '🔄 Auto Sync' },
+            { id: 'sync_amazon_ml', name: '⚡ Sync Amazon→ML' },
+            { id: 'token_refresh', name: '🔑 Token Refresh' },
+            { id: 'telegram_sales', name: '💰 Telegram Sales' },
+            { id: 'web_ui', name: '🌐 Web UI' },
+            { id: 'autonomous', name: '🔍 Búsqueda Autónoma' },
+            { id: 'publication', name: '📤 Publicación' }
+        ];
+
+        // Create log selector buttons
+        const selector = document.getElementById('log-selector');
+        logServices.forEach(service => {
+            const btn = document.createElement('button');
+            btn.textContent = service.name;
+            btn.onclick = () => selectLog(service.id);
+            btn.dataset.logId = service.id;
+            selector.appendChild(btn);
+        });
+
+        // Check URL params for pre-selected service
+        const urlParams = new URLSearchParams(window.location.search);
+        const preSelectedService = urlParams.get('service');
+
+        if (preSelectedService) {
+            selectLog(preSelectedService);
+        }
+
+        function selectLog(logId) {
+            currentLog = logId;
+
+            // Update active button
+            document.querySelectorAll('.log-selector button').forEach(btn => {
+                if (btn.dataset.logId === logId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Load log
+            loadCurrentLog();
+
+            // Set up auto-refresh
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+            updateInterval = setInterval(loadCurrentLog, 3000);
+        }
+
+        async function loadCurrentLog() {
+            if (!currentLog) return;
+
+            try {
+                const response = await fetch(`/api/logs/${currentLog}`);
+                const data = await response.json();
+
+                const logContent = document.getElementById('log-content');
+
+                if (data.success) {
+                    logContent.textContent = data.content;
+
+                    // Auto-scroll to bottom if enabled
+                    const autoScroll = document.getElementById('auto-scroll').checked;
+                    if (autoScroll) {
+                        logContent.parentElement.scrollTop = logContent.parentElement.scrollHeight;
+                    }
+                } else {
+                    logContent.textContent = `Error: ${data.content}`;
+                }
+
+                // Update timestamp
+                const now = new Date();
+                document.getElementById('last-update').textContent =
+                    `Actualizado: ${now.toLocaleTimeString('es-ES')}`;
+
+            } catch (error) {
+                console.error('Error loading log:', error);
+                document.getElementById('log-content').textContent =
+                    `Error cargando log: ${error.message}`;
+            }
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+        });
+    </script>
+</body>
+</html>

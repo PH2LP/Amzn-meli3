@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMZ → ML - Documentación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <div x-data="{ activeTab: 'overview' }" class="min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">
+                        📖 Documentación del Sistema
+                    </h1>
+                    <div class="flex space-x-4">
+                        <a href="/" class="text-gray-600 hover:text-gray-900">Simple</a>
+                        <a href="/pro" class="text-gray-600 hover:text-gray-900">Pro</a>
+                        <a href="/test" class="text-gray-600 hover:text-gray-900">🧪 Test</a>
+                        <a href="/logs" class="text-gray-600 hover:text-gray-900">Logs</a>
+                        <a href="/docs" class="text-blue-600 font-semibold">📖 Docs</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+
+            <!-- Tabs -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="border-b border-gray-200">
+                    <nav class="flex space-x-8 px-6" aria-label="Tabs">
+                        <button
+                            @click="activeTab = 'overview'"
+                            :class="activeTab === 'overview' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                        >
+                            🎯 Resumen
+                        </button>
+                        <button
+                            @click="activeTab = 'autonomous'"
+                            :class="activeTab === 'autonomous' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                        >
+                            🤖 Sistema Autónomo
+                        </button>
+                        <button
+                            @click="activeTab = 'test'"
+                            :class="activeTab === 'test' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                        >
+                            🧪 Test Mode
+                        </button>
+                        <button
+                            @click="activeTab = 'pricing'"
+                            :class="activeTab === 'pricing' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                        >
+                            💰 Pricing
+                        </button>
+                        <button
+                            @click="activeTab = 'logs'"
+                            :class="activeTab === 'logs' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                            class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
+                        >
+                            📝 Logs & Monitoring
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="space-y-6">
+
+                <!-- Overview Tab -->
+                <div x-show="activeTab === 'overview'" class="space-y-6">
+
+                    <!-- What is this -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">🚀 ¿Qué es esto?</h2>
+                        <p class="text-gray-700 mb-4">
+                            Sistema <strong>100% automático</strong> que busca productos en Amazon y los publica en MercadoLibre con precio optimizado.
+                        </p>
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-blue-200">
+                            <div class="text-center">
+                                <div class="flex justify-center items-center space-x-4 text-4xl mb-4">
+                                    <span>🛍️ Amazon</span>
+                                    <span class="text-2xl">→</span>
+                                    <span>🤖 IA</span>
+                                    <span class="text-2xl">→</span>
+                                    <span>💰 MercadoLibre</span>
+                                </div>
+                                <p class="text-gray-700 font-semibold">
+                                    Sin intervención manual. 24/7. Auto-optimizado.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- How it works -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">⚙️ ¿Cómo funciona?</h2>
+
+                        <div class="space-y-4">
+                            <!-- Step 1 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    1
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 mb-1">Búsqueda en Amazon</h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Busca ~1000 ASINs por keyword usando Amazon Product Advertising API
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    2
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 mb-1">Filtros Inteligentes</h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Descarta: categorías prohibidas (DVD, ropa), marcas prohibidas, productos sin Prime
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    3
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 mb-1">Ordenamiento BSR</h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Ordena todos los productos Prime por Best Seller Rank (BSR) - menor = más vendido
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    4
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 mb-1">Análisis de Calidad (IA)</h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Toma 20 productos random, analiza calidad con IA, genera score 0-100
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-xl">
+                                    5
+                                </div>
+                                <div class="flex-1">
+                                    <h3 class="font-semibold text-gray-900 mb-1">Publicación Automática</h3>
+                                    <p class="text-gray-600 text-sm">
+                                        Score decide cuántos publicar (15-100). Publica top N de la lista ordenada por BSR
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Features -->
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">✨ Características Principales</h2>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="text-2xl">✅</span>
+                                    <h3 class="font-semibold text-green-900">100% Automático</h3>
+                                </div>
+                                <p class="text-sm text-green-800">Corre 24/7 sin intervención manual</p>
+                            </div>
+
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="text-2xl">🤖</span>
+                                    <h3 class="font-semibold text-blue-900">IA Optimizada</h3>
+                                </div>
+                                <p class="text-sm text-blue-800">Analiza calidad y decide cuántos publicar</p>
+                            </div>
+
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="text-2xl">📊</span>
+                                    <h3 class="font-semibold text-purple-900">BSR Ranking</h3>
+                                </div>
+                                <p class="text-sm text-purple-800">Solo publica los más vendidos (mejor BSR)</p>
+                            </div>
+
+                            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                <div class="flex items-center space-x-2 mb-2">
+                                    <span class="text-2xl">⚡</span>
+                                    <h3 class="font-semibold text-yellow-900">Prime Only</h3>
+                                </div>
+                                <p class="text-sm text-yellow-800">Solo productos con Amazon Prime</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Autonomous System Tab -->
+                <div x-show="activeTab === 'autonomous'" class="space-y-6">
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">🤖 Sistema Autónomo (Producción)</h2>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+                            <p class="text-sm text-blue-800">
+                                <strong>💡 Importante:</strong> Este sistema está <strong>auto-optimizado</strong>. No requiere configuración manual.
+                            </p>
+                        </div>
+
+                        <!-- Flujo Detallado -->
+                        <h3 class="font-semibold text-gray-900 mb-3">📋 Flujo Completo:</h3>
+
+                        <div class="space-y-3 mb-6">
+                            <div class="border-l-4 border-blue-500 pl-4 py-2">
+                                <p class="font-semibold text-gray-900">1. Búsqueda (100 páginas)</p>
+                                <p class="text-sm text-gray-600">Busca ~1000 ASINs en Amazon por keyword</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">⏱️ ~5-10 min</p>
+                            </div>
+
+                            <div class="border-l-4 border-yellow-500 pl-4 py-2">
+                                <p class="font-semibold text-gray-900">2. Filtro: Categorías/Marcas</p>
+                                <p class="text-sm text-gray-600">Descarta: DVD, movies, ropa, marcas prohibidas</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Batch API: 20 ASINs/llamada (~389 quedan)</p>
+                            </div>
+
+                            <div class="border-l-4 border-green-500 pl-4 py-2">
+                                <p class="font-semibold text-gray-900">3. Filtro: Amazon Prime</p>
+                                <p class="text-sm text-gray-600">Solo productos con Prime y precio válido</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Batch API optimizado (~259 Prime, ~67% ratio)</p>
+                            </div>
+
+                            <div class="border-l-4 border-purple-500 pl-4 py-2">
+                                <p class="font-semibold text-gray-900">4. Ordenamiento BSR</p>
+                                <p class="text-sm text-gray-600">Ordena TODOS los Prime por Best Seller Rank</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">⏱️ ~8-13 min (259 × 2s/ASIN)</p>
+                            </div>
+
+                            <div class="border-l-4 border-orange-500 pl-4 py-2">
+                                <p class="font-semibold text-gray-900">5. Análisis IA (Score)</p>
+                                <p class="text-sm text-gray-600">Toma 20 random, analiza calidad, genera score 0-100</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">EXCELLENT (90+) → 100 productos | GOOD (70-89) → 60 | FAIR (50-69) → 30 | POOR (<50) → 15</p>
+                            </div>
+
+                            <div class="border-l-4 border-red-500 pl-4 py-2">
+                                <p class="font-semibold text-gray-900">6. Publicación</p>
+                                <p class="text-sm text-gray-600">Publica top N (según score) de la lista ordenada por BSR</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Categorización IA + Validaciones + MercadoLibre API</p>
+                            </div>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-900 mb-3">📊 Performance Típico:</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                                <div>
+                                    <div class="text-2xl font-bold text-blue-600">~60 min</div>
+                                    <div class="text-xs text-gray-600">Por keyword</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-green-600">15-100</div>
+                                    <div class="text-xs text-gray-600">Publicaciones/keyword</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-purple-600">~24</div>
+                                    <div class="text-xs text-gray-600">Keywords/día</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-orange-600">~960</div>
+                                    <div class="text-xs text-gray-600">Publicaciones/día</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Test Mode Tab -->
+                <div x-show="activeTab === 'test'" class="space-y-6">
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">🧪 Test Mode (Manual)</h2>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6">
+                            <p class="text-sm text-yellow-800">
+                                <strong>⚠️ Diferencias con Sistema Autónomo:</strong> Test Mode NO usa score de IA. VOS decidís cuántos ASINs querés.
+                            </p>
+                        </div>
+
+                        <!-- Comparison -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div class="border-2 border-blue-300 rounded-lg p-4">
+                                <h3 class="font-semibold text-blue-900 mb-3 text-center">🤖 Sistema Autónomo</h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-green-600 mr-2">✅</span>
+                                        <span>IA decide cuántos (15-100)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-600 mr-2">✅</span>
+                                        <span>Análisis de calidad (score)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-600 mr-2">✅</span>
+                                        <span>Publica automáticamente</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-green-600 mr-2">✅</span>
+                                        <span>Corre 24/7</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="border-2 border-yellow-300 rounded-lg p-4">
+                                <h3 class="font-semibold text-yellow-900 mb-3 text-center">🧪 Test Mode</h3>
+                                <ul class="space-y-2 text-sm">
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">🎯</span>
+                                        <span>VOS decidís cuántos (ej: 300)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-red-600 mr-2">❌</span>
+                                        <span>NO usa score de IA</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-red-600 mr-2">❌</span>
+                                        <span>NO publica nada</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-600 mr-2">🧪</span>
+                                        <span>Solo testing/exploración</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- When to use -->
+                        <h3 class="font-semibold text-gray-900 mb-3">🎯 ¿Cuándo usar Test Mode?</h3>
+
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                <p class="font-semibold text-blue-900 mb-1">✅ Probar nueva keyword</p>
+                                <p class="text-sm text-blue-800">Antes de agregar al sistema, verificar que tenga buenos productos</p>
+                            </div>
+
+                            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                <p class="font-semibold text-green-900 mb-1">✅ Explorar categorías</p>
+                                <p class="text-sm text-green-800">Ver qué tipo de productos hay en una keyword (ej: "lego" → 300 ASINs)</p>
+                            </div>
+
+                            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                <p class="font-semibold text-purple-900 mb-1">✅ Testear sin publicar</p>
+                                <p class="text-sm text-purple-800">Ver resultados sin riesgo - nada se publica en MercadoLibre</p>
+                            </div>
+                        </div>
+
+                        <!-- Example -->
+                        <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                            <h3 class="font-semibold text-gray-900 mb-3">💡 Ejemplo: Test "lego"</h3>
+                            <div class="bg-white border border-gray-200 rounded p-3 font-mono text-sm">
+                                <p class="text-gray-700">Keyword: <span class="font-bold">lego</span></p>
+                                <p class="text-gray-700">Páginas: <span class="font-bold">100</span></p>
+                                <p class="text-gray-700">Top N: <span class="font-bold">300</span> ← VOS decidís</p>
+                                <p class="text-gray-700">Solo Prime: <span class="font-bold">✅</span></p>
+                                <hr class="my-2">
+                                <p class="text-green-700">Resultado: 300 productos LEGO ordenados por BSR</p>
+                                <p class="text-red-700">NO publica nada - solo muestra resultados</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pricing Tab -->
+                <div x-show="activeTab === 'pricing'" class="space-y-6">
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">💰 Sistema de Pricing</h2>
+
+                        <!-- Formula -->
+                        <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-6 border-2 border-green-300 mb-6">
+                            <h3 class="font-semibold text-gray-900 mb-4 text-center text-xl">📐 Fórmula de Precio</h3>
+                            <div class="bg-white rounded-lg p-4 font-mono text-center">
+                                <div class="text-lg text-gray-800 space-y-2">
+                                    <p><strong>Precio MercadoLibre</strong> =</p>
+                                    <p class="text-blue-600">Precio Amazon</p>
+                                    <p>+</p>
+                                    <p class="text-green-600">(Precio Amazon × Markup / 100)</p>
+                                    <p>+</p>
+                                    <p class="text-orange-600">((Total) × Tax Florida / 100)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Example Calculation -->
+                        <h3 class="font-semibold text-gray-900 mb-3">💡 Ejemplo con Markup 500%</h3>
+
+                        <div class="bg-gray-50 rounded-lg p-6 border border-gray-300">
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Precio Amazon:</span>
+                                    <span class="font-bold text-xl">$10.00 USD</span>
+                                </div>
+
+                                <hr class="border-gray-300">
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Markup (500%):</span>
+                                    <span class="font-semibold text-green-600">+ $50.00 USD</span>
+                                </div>
+
+                                <div class="flex justify-between items-center text-sm">
+                                    <span class="text-gray-600 italic">Subtotal:</span>
+                                    <span class="text-gray-600">$60.00 USD</span>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Tax Florida (7%):</span>
+                                    <span class="font-semibold text-orange-600">+ $4.20 USD</span>
+                                </div>
+
+                                <hr class="border-gray-400">
+
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-900 font-bold text-lg">Precio Final ML:</span>
+                                    <span class="font-bold text-2xl text-blue-600">$64.20 USD</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Parameters -->
+                        <div class="mt-6">
+                            <h3 class="font-semibold text-gray-900 mb-3">⚙️ Parámetros Configurables</h3>
+
+                            <div class="space-y-3">
+                                <div class="border-l-4 border-green-500 pl-4 py-2 bg-gray-50">
+                                    <p class="font-semibold text-gray-900">PRICE_MARKUP (500)</p>
+                                    <p class="text-sm text-gray-600">Porcentaje de ganancia sobre el costo. 500 = 5x ganancia</p>
+                                </div>
+
+                                <div class="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50">
+                                    <p class="font-semibold text-gray-900">DEFAULT_PRICE (1000)</p>
+                                    <p class="text-sm text-gray-600">Precio fallback si Amazon no retorna precio</p>
+                                </div>
+
+                                <div class="border-l-4 border-purple-500 pl-4 py-2 bg-gray-50">
+                                    <p class="font-semibold text-gray-900">DEFAULT_QUANTITY (100)</p>
+                                    <p class="text-sm text-gray-600">Stock inicial al publicar productos</p>
+                                </div>
+
+                                <div class="border-l-4 border-orange-500 pl-4 py-2 bg-gray-50">
+                                    <p class="font-semibold text-gray-900">FLORIDA_TAX_PERCENT (7)</p>
+                                    <p class="text-sm text-gray-600">Impuesto de Florida aplicado al subtotal</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit Config -->
+                        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <p class="text-sm text-blue-800 mb-3">
+                                🔧 <strong>Para cambiar estos valores:</strong> Ve a <a href="/pro" class="underline font-semibold">Pro Mode</a>
+                            </p>
+                            <a href="/pro" class="inline-block bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold">
+                                ⚙️ Ir a Pro Mode
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Logs & Monitoring Tab -->
+                <div x-show="activeTab === 'logs'" class="space-y-6">
+
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4">📝 Logs & Monitoring en Tiempo Real</h2>
+
+                        <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6">
+                            <p class="text-sm text-green-800">
+                                <strong>✅ Nuevo:</strong> Visualización de logs en tiempo real con auto-refresh cada 3 segundos.
+                            </p>
+                        </div>
+
+                        <!-- Servicios Monitoreables -->
+                        <h3 class="font-semibold text-gray-900 mb-3">🔍 Servicios que puedes monitorear:</h3>
+
+                        <div class="space-y-3 mb-6">
+                            <div class="border-l-4 border-blue-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">🤖 Sistema Autónomo</p>
+                                <p class="text-sm text-gray-600">Ve en tiempo real: búsquedas, filtros, publicaciones, scores</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Actualización: Cada 3 segundos</p>
+                            </div>
+
+                            <div class="border-l-4 border-purple-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">⚙️ Pipeline (systemd)</p>
+                                <p class="text-sm text-gray-600">Logs del sistema completo vía journalctl</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Últimas 200 líneas</p>
+                            </div>
+
+                            <div class="border-l-4 border-green-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">💬 Auto Responder</p>
+                                <p class="text-sm text-gray-600">Respuestas automáticas a preguntas de clientes</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Plantillas + Cache + AI</p>
+                            </div>
+
+                            <div class="border-l-4 border-yellow-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">🔔 Telegram Sales</p>
+                                <p class="text-sm text-gray-600">Notificaciones de ventas cada 60 segundos</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Monitoreo de órdenes nuevas</p>
+                            </div>
+
+                            <div class="border-l-4 border-orange-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">🔄 Auto Sync ML→DB</p>
+                                <p class="text-sm text-gray-600">Sincronización automática cada 1 hora</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Vincula productos ML con base de datos local</p>
+                            </div>
+
+                            <div class="border-l-4 border-red-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">🔑 Token Refresh</p>
+                                <p class="text-sm text-gray-600">Renovación automática de tokens ML cada 5.5h</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Siempre activo - No puede desactivarse</p>
+                            </div>
+
+                            <div class="border-l-4 border-gray-500 pl-4 py-2 bg-gray-50">
+                                <p class="font-semibold text-gray-900">🧹 Auto Cleanup</p>
+                                <p class="text-sm text-gray-600">Limpieza automática de archivos temporales</p>
+                                <p class="text-xs text-gray-500 font-mono mt-1">Siempre activo - Mantiene el sistema limpio</p>
+                            </div>
+                        </div>
+
+                        <!-- Cómo usar -->
+                        <div class="bg-blue-50 rounded-lg p-6">
+                            <h3 class="font-semibold text-gray-900 mb-3">💡 Cómo usar la página de Logs:</h3>
+                            <ol class="list-decimal list-inside space-y-2 text-sm text-gray-700">
+                                <li>Ve a la pestaña <strong>"Logs"</strong> en el menú superior</li>
+                                <li>Selecciona el servicio que quieres monitorear del dropdown</li>
+                                <li>Los logs se actualizan automáticamente cada 3 segundos</li>
+                                <li>Usa auto-scroll para seguir el proceso en tiempo real</li>
+                                <li>Click en "🔄 Refrescar" para forzar actualización inmediata</li>
+                            </ol>
+                        </div>
+
+                        <!-- Que verás -->
+                        <div class="mt-6 bg-gray-50 rounded-lg p-6">
+                            <h3 class="font-semibold text-gray-900 mb-3">👀 Qué verás en los logs del Pipeline:</h3>
+                            <div class="bg-gray-900 rounded-lg p-4 font-mono text-xs text-green-400 whitespace-pre-wrap">
+🤖 SISTEMA AUTÓNOMO - CICLO #1
+════════════════════════════════════════
+
+📊 Buscando productos para keyword: "backpacks"
+📥 Descargando página 1/50... ✅ 10 ASINs encontrados
+📥 Descargando página 2/50... ✅ 10 ASINs encontrados
+...
+✅ Total ASINs encontrados: 309
+
+🚀 PUBLICANDO EN MERCADOLIBRE
+────────────────────────────────────────
+[1/100] B0ABC123XY: Publicando...
+✅ Publicado: CBT2699340347 - $45.99
+[2/100] B0DEF456ZW: Publicando...
+✅ Publicado: CBT2699340348 - $67.50
+...
+
+📊 RESUMEN DEL CICLO:
+   ASINs encontrados:    309
+   Publicaciones reales: 73
+   Quality Score:        90.4/100
+
+⏰ Próximo ciclo en 30 minutos...
+                            </div>
+                        </div>
+
+                        <!-- Link -->
+                        <div class="mt-6 bg-green-50 border border-green-200 rounded-lg p-4">
+                            <p class="text-sm text-green-800 mb-3">
+                                📝 <strong>Ir a la página de Logs:</strong>
+                            </p>
+                            <a href="/logs" class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors font-semibold">
+                                📝 Ver Logs en Tiempo Real
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>

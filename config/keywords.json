@@ -1,0 +1,425 @@
+{
+  "comment": "Keywords seguras para búsqueda automática - EXCLUYE ropa, alimentos, medicamentos",
+  "version": "1.0",
+  "last_updated": "2025-11-08",
+  "strategy": "round_robin_by_priority",
+  "keywords": [
+    {
+      "keyword": "wireless keyboard",
+      "category": "electronics",
+      "priority": 10,
+      "max_asins_per_search": 500,
+      "enabled": true,
+      "last_searched": "2025-11-08T17:13:47.779653",
+      "total_asins_found": 540,
+      "success_rate": 0.18,
+      "comment": "Busca TODOS los ASINs posibles (500 = 50 páginas), luego ordena por BSR y toma los top 100 más vendidos"
+    },
+    {
+      "keyword": "bluetooth headphones",
+      "category": "electronics",
+      "priority": 10,
+      "max_asins_per_search": 100,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "phone case",
+      "category": "electronics",
+      "priority": 9,
+      "max_asins_per_search": 80,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "usb cable",
+      "category": "electronics",
+      "priority": 9,
+      "max_asins_per_search": 80,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "phone charger",
+      "category": "electronics",
+      "priority": 9,
+      "max_asins_per_search": 80,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "wireless mouse",
+      "category": "electronics",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "yoga mat",
+      "category": "sports",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "resistance bands",
+      "category": "sports",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "water bottle",
+      "category": "sports",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "dumbbell",
+      "category": "sports",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "led lights",
+      "category": "home",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "storage organizer",
+      "category": "home",
+      "priority": 6,
+      "max_asins_per_search": 40,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "kitchen knife",
+      "category": "home",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "cutting board",
+      "category": "home",
+      "priority": 6,
+      "max_asins_per_search": 40,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "desk lamp",
+      "category": "home",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "dog toys",
+      "category": "pet",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "cat toys",
+      "category": "pet",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "pet bed",
+      "category": "pet",
+      "priority": 6,
+      "max_asins_per_search": 40,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "pet collar",
+      "category": "pet",
+      "priority": 6,
+      "max_asins_per_search": 40,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "screwdriver set",
+      "category": "tools",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "drill bits",
+      "category": "tools",
+      "priority": 6,
+      "max_asins_per_search": 40,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "tape measure",
+      "category": "tools",
+      "priority": 5,
+      "max_asins_per_search": 30,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "flashlight",
+      "category": "tools",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "backpack",
+      "category": "bags",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "laptop bag",
+      "category": "bags",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "sunglasses",
+      "category": "accessories",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "watch",
+      "category": "accessories",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "phone holder",
+      "category": "accessories",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "car phone mount",
+      "category": "automotive",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "car charger",
+      "category": "automotive",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "bike accessories",
+      "category": "sports",
+      "priority": 6,
+      "max_asins_per_search": 40,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "gaming mouse",
+      "category": "electronics",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "webcam",
+      "category": "electronics",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "microphone",
+      "category": "electronics",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "speaker bluetooth",
+      "category": "electronics",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "portable charger",
+      "category": "electronics",
+      "priority": 9,
+      "max_asins_per_search": 80,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "power bank",
+      "category": "electronics",
+      "priority": 9,
+      "max_asins_per_search": 80,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "hdmi cable",
+      "category": "electronics",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "screen protector",
+      "category": "electronics",
+      "priority": 8,
+      "max_asins_per_search": 60,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    },
+    {
+      "keyword": "smart watch band",
+      "category": "accessories",
+      "priority": 7,
+      "max_asins_per_search": 50,
+      "enabled": true,
+      "last_searched": null,
+      "total_asins_found": 0,
+      "success_rate": 0
+    }
+  ],
+  "excluded_categories": [
+    "Clothing",
+    "Apparel",
+    "Shoes",
+    "Food",
+    "Grocery",
+    "Health",
+    "Supplements",
+    "Medicine",
+    "Beauty (active ingredients)"
+  ],
+  "notes": {
+    "priority_scale": "1-10, donde 10 es más rentable/vendible",
+    "strategy": "Rotación por prioridad - empieza con prioridad 10, luego 9, etc",
+    "safety": "Todas las keywords excluyen ropa, alimentos, medicamentos y cosméticos activos"
+  }
+}
