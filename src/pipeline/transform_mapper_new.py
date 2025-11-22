@@ -337,19 +337,32 @@ def compute_price(base, tax=0.0) -> Dict[str, float]:
     Calcula el precio final para ML usando net_proceeds.
 
     Fórmula:
-    1. costo_total = precio_base + tax (lo que el seller paga)
+    1. costo_total = precio_base + tax + 3pl_fee (lo que el seller paga)
     2. net_proceeds = costo_total * (1 + markup) (lo que el seller quiere ganar)
 
     ML se encarga automáticamente de:
     - Agregar comisiones
     - Agregar shipping costs
     - Calcular el precio final que ve el comprador
+
+    TAX_EXEMPT: Si es True, NO se suma el tax al costo (para sellers con excepción de impuestos)
     """
-    cost = round(base + tax, 2)
+    # Costo del 3PL (almacenamiento y fulfillment) - configurable en .env
+    THREE_PL_FEE = float(os.getenv("THREE_PL_FEE", "4.0"))
+
+    # Verificar si el seller tiene excepción de tax
+    TAX_EXEMPT = os.getenv("TAX_EXEMPT", "false").lower() == "true"
+
+    # Si hay excepción de tax, no sumar el tax al costo
+    tax_to_add = 0.0 if TAX_EXEMPT else tax
+
+    cost = round(base + tax_to_add + THREE_PL_FEE, 2)
     net_proceeds = round(cost * (1.0 + MARKUP_PCT), 2)
     return {
         "base_usd": round(base, 2),
         "tax_usd": round(tax, 2),
+        "tax_exempt": TAX_EXEMPT,
+        "3pl_fee_usd": THREE_PL_FEE,
         "cost_usd": cost,
         "markup_pct": int(MARKUP_PCT * 100),
         "net_proceeds_usd": net_proceeds
@@ -649,19 +662,761 @@ def ask_gpt_equivalences(category_id, missing, amazon_json, cache: dict):
         print(f"⚠️ IA equivalences error: {e}")
         return {}
 
+def _get_brand_protection_level(brand_name, product_title=""):
+    """
+    Determina el nivel de protección que requiere una marca.
+
+    Returns:
+        str: Nivel de protección
+            - "safe": Marca no requiere protección especial (usar normalmente)
+            - "original": Marca conocida - verificar si es producto original
+            - "always_compatible": SIEMPRE usar lenguaje de compatibilidad (lujo/entretenimiento)
+    """
+    if not brand_name:
+        return "safe"
+
+    # Cargar clasificación de marcas
+    try:
+        brands_path = "config/protected_brands.json"
+        if os.path.exists(brands_path):
+            with open(brands_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+                # Marcas de lujo - SIEMPRE compatibilidad (riesgo MUY alto)
+                luxury = [b.lower() for b in data.get("luxury_brands", [])]
+                if brand_name.lower() in luxury:
+                    return "always_compatible"
+
+                # Marcas de entretenimiento - SIEMPRE compatibilidad (licencias estrictas)
+                entertainment = [b.lower() for b in data.get("entertainment_brands", [])]
+                if brand_name.lower() in entertainment:
+                    return "always_compatible"
+
+                # Marcas de moda - preferir compatibilidad
+                fashion = [b.lower() for b in data.get("fashion_brands", [])]
+                if brand_name.lower() in fashion:
+                    return "always_compatible"
+
+                # Marcas conocidas - evaluar si es original
+                known = [b.lower() for b in data.get("known_major_brands", [])]
+                if brand_name.lower() in known:
+                    return "original"
+        else:
+            # Fallback básico
+            known = ["xbox", "playstation", "sony", "nintendo", "apple", "iphone",
+                    "ipad", "macbook", "airpods", "samsung", "galaxy", "microsoft",
+                    "lego", "canon", "nikon", "logitech", "razer"]
+            if brand_name.lower() in known:
+                return "original"
+    except:
+        pass
+
+    return "safe"
+
+
+def _detect_target_brand(product_title, bullets):
+    """
+    Detecta si el producto es un accesorio PARA una marca conocida (Xbox, PlayStation, Nintendo, Apple, etc.)
+    aunque la marca del fabricante sea genérica (PowerA, Anker, etc.)
+
+    Returns:
+        str or None: Nombre de la marca objetivo si se detecta (ej: "Xbox", "iPhone"), None si no aplica
+    """
+    if not product_title:
+        return None
+
+    title_lower = product_title.lower()
+
+    # Manejar bullets que pueden ser strings o dicts
+    bullets_list = []
+    if bullets:
+        for b in bullets:
+            if isinstance(b, str):
+                bullets_list.append(b)
+            elif isinstance(b, dict):
+                bullets_list.append(b.get("value", ""))
+
+    bullets_text = " ".join(bullets_list).lower() if bullets_list else ""
+    combined_text = f"{title_lower} {bullets_text}"
+
+    # Patrones que indican "para" una marca conocida
+    for_patterns = [
+        " for ", " para ", "compatible with", "compatible con", "works with",
+        "funciona con", "designed for", "diseñado para"
+    ]
+
+    is_accessory_for = any(pattern in combined_text for pattern in for_patterns)
+
+    if not is_accessory_for:
+        return None
+
+    # Detectar marcas objetivo en orden de prioridad
+    target_brands = {
+        # Gaming consoles
+        "xbox series x": "Xbox Series X/S",
+        "xbox series s": "Xbox Series X/S",
+        "xbox series": "Xbox Series X/S",
+        "xbox one": "Xbox One",
+        "xbox": "Xbox",
+        "playstation 5": "PlayStation 5",
+        "playstation 4": "PlayStation 4",
+        "ps5": "PlayStation 5",
+        "ps4": "PlayStation 4",
+        "playstation": "PlayStation",
+        "nintendo switch": "Nintendo Switch",
+        "switch oled": "Nintendo Switch OLED",
+        "nintendo": "Nintendo",
+
+        # Apple devices
+        "iphone 15": "iPhone 15",
+        "iphone 14": "iPhone 14",
+        "iphone 13": "iPhone 13",
+        "iphone": "iPhone",
+        "ipad pro": "iPad Pro",
+        "ipad": "iPad",
+        "macbook pro": "MacBook Pro",
+        "macbook air": "MacBook Air",
+        "macbook": "MacBook",
+        "airpods pro": "AirPods Pro",
+        "airpods": "AirPods",
+        "apple watch": "Apple Watch",
+
+        # Other major brands
+        "samsung galaxy": "Samsung Galaxy",
+        "galaxy s24": "Samsung Galaxy S24",
+        "galaxy s23": "Samsung Galaxy S23",
+        "steam deck": "Steam Deck",
+        "gopro": "GoPro",
+        "oculus quest": "Meta Quest",
+        "meta quest": "Meta Quest"
+    }
+
+    # Buscar en orden de especificidad (más específico primero)
+    for brand_key, brand_display in sorted(target_brands.items(), key=lambda x: len(x[0]), reverse=True):
+        if brand_key in combined_text:
+            return brand_display
+
+    return None
+
+
+def _is_original_product(brand_name, product_title, bullets):
+    """
+    Determina si el producto es ORIGINAL de la marca o un accesorio/compatible.
+
+    Heurística:
+    - Si el título contiene "compatible", "para", "accesorio" → NO es original
+    - Si contiene palabras del producto (controlador, funda, cable, etc.) → probablemente NO es original
+    - Si es un producto electrónico de la marca en el título → probablemente SÍ es original
+
+    Returns:
+        bool: True si el producto parece ser original de la marca
+    """
+    if not brand_name or not product_title:
+        return False
+
+    title_lower = product_title.lower()
+    brand_lower = brand_name.lower()
+
+    # ESTRATEGIA CONSERVADORA: Para evitar problemas con ML Brasil y otros mercados
+    # Solo consideramos "original" si es un dispositivo PRINCIPAL de la marca
+    # NUNCA consideramos accesorios como originales (incluso si dicen "oficial")
+    # Esto es más seguro porque evita problemas de "distribuidor no autorizado"
+
+    # Palabras que SIEMPRE indican accesorio (no pueden ser originales)
+    always_accessory_keywords = [
+        "compatible", "para", "accesorio", "accesorios", "replacement", "reemplazo",
+        "genérico", "generico", "alternativo", "aftermarket", "third party",
+        "funda", "case", "cover", "protector", "cable", "cargador", "charger",
+        "adaptador", "adapter", "soporte", "holder", "mount", "correa", "strap",
+        "repuesto", "spare", "skin", "sticker", "calcomanía",
+        "cristal templado", "pantalla", "screen protector", "stylus", "lapiz", "lápiz"
+    ]
+
+    if any(keyword in title_lower for keyword in always_accessory_keywords):
+        return False
+
+    # Para gaming: verificar productos principales vs accesorios
+    if brand_lower in ["xbox", "playstation", "nintendo", "sony"]:
+        # Productos principales (consolas, etc.)
+        main_products = [
+            "console", "consola",
+            # Modelos específicos de consolas
+            "playstation 5", "playstation 4", "ps5", "ps4", "ps3",
+            "xbox series x", "xbox series s", "xbox one",
+            "nintendo switch", "switch oled"
+        ]
+        if any(prod in title_lower for prod in main_products):
+            return True
+
+        # Accesorios gaming (sin "oficial" ya se filtraron arriba)
+        gaming_accessories = [
+            "controlador", "controller", "mando", "gamepad", "joystick",
+            "auriculares", "headset", "audífonos", "audifonos",
+            "micrófono", "microfono", "webcam",
+            "teclado", "keyboard", "ratón", "raton", "mouse",
+            "batería", "bateria", "battery", "pila",
+            "memoria", "memory card", "tarjeta de memoria",
+            "volante", "steering wheel", "pedales"
+        ]
+        if any(acc in title_lower for acc in gaming_accessories):
+            return False
+
+    # Para Apple
+    if brand_lower in ["apple", "iphone", "ipad", "macbook", "airpods"]:
+        # Solo si es el dispositivo principal
+        main_products = ["iphone", "ipad", "macbook", "airpods", "apple watch"]
+        if any(prod in title_lower for prod in main_products):
+            # Verificar que no sea accesorio
+            if not any(acc in title_lower for acc in ["funda", "case", "cargador", "cable"]):
+                return True
+
+    # Para LEGO - sets oficiales suelen tener número de modelo de 5 dígitos
+    if brand_lower == "lego":
+        # Si tiene "building kit", "set", "pieces", probablemente es original
+        lego_keywords = ["building kit", "set", "pieces", "piezas", "bloques"]
+        if any(keyword in title_lower for keyword in lego_keywords):
+            # Verificar que no sea accesorio genérico
+            if not any(acc in title_lower for acc in ["compatible", "storage", "organizador", "caja"]):
+                return True
+
+    # Para marcas de electrónica (Sony, Samsung, etc.) - detectar productos principales
+    electronics_brands = {
+        "sony": ["wh-1000xm", "wh-ch", "wf-1000xm", "srs-", "bravia", "playstation", "alpha", "cybershot"],
+        "samsung": ["galaxy s", "galaxy z", "galaxy note", "galaxy a", "galaxy tab", "qled", "the frame"],
+        "bose": ["quietcomfort", "soundlink", "noise cancelling", "frames"],
+        "jbl": ["flip", "charge", "xtreme", "partybox", "tune"],
+        "canon": ["eos", "powershot", "pixma", "imageclass"],
+        "nikon": ["d850", "z9", "z6", "coolpix"],
+        "logitech": ["mx master", "mx keys", "g pro", "g502", "streamcam"],
+        "razer": ["blade", "deathadder", "blackwidow", "kraken", "viper"]
+    }
+
+    if brand_lower in electronics_brands:
+        model_patterns = electronics_brands[brand_lower]
+        # Si el título contiene el modelo/serie del producto, probablemente es original
+        if any(pattern in title_lower for pattern in model_patterns):
+            # Y tiene palabras de dispositivo principal
+            main_device_words = ["headphone", "speaker", "camera", "laptop", "mouse", "keyboard",
+                               "monitor", "auricular", "altavoz", "cámara", "ratón", "teclado", "inalámbrico", "wireless"]
+            if any(word in title_lower for word in main_device_words):
+                return True
+
+    # Para productos que explícitamente dicen ser oficiales/originales
+    if any(word in title_lower for word in ["oficial", "official", "original", "authentic", "genuine"]):
+        return True
+
+    # Por defecto, asumir que NO es original (más seguro)
+    return False
+
+
+def _load_brand_generic_mapping():
+    """Carga el mapeo de marcas a términos genéricos para CBT."""
+    try:
+        mapping_path = "config/brand_generic_terms.json"
+        if os.path.exists(mapping_path):
+            with open(mapping_path, "r", encoding="utf-8") as f:
+                return json.load(f)
+    except Exception as e:
+        qprint(f"⚠️ Error cargando brand_generic_terms.json: {e}")
+
+    # Fallback básico
+    return {
+        "brand_to_generic_device": {
+            "Nintendo": "Consola Portátil",
+            "Switch": "Consola Portátil",
+            "PlayStation": "Consola de Videojuegos",
+            "PS5": "Consola de Videojuegos",
+            "Xbox": "Consola de Videojuegos",
+            "iPhone": "Smartphone",
+            "iPad": "Tablet",
+            "Apple": "Dispositivo"
+        }
+    }
+
+
+def _detect_accessory_type(product_title, bullets):
+    """
+    Detecta el tipo de accesorio para usar el término genérico correcto.
+
+    Returns:
+        dict: {
+            "type": str,  # Tipo de accesorio (charging_dock, controller, case, etc.)
+            "features": dict  # Características detectadas (ports, power, material, etc.)
+        }
+    """
+    title_lower = product_title.lower() if product_title else ""
+    bullets_text = " ".join(bullets).lower() if bullets else ""
+    combined = f"{title_lower} {bullets_text}"
+
+    mapping = _load_brand_generic_mapping()
+    patterns = mapping.get("accessory_patterns", {})
+
+    # Detectar tipo de accesorio
+    for acc_type, pattern_info in patterns.items():
+        keywords = pattern_info.get("keywords", [])
+        if any(kw in combined for kw in keywords):
+            # Extraer características relevantes
+            features = {}
+
+            # Detectar número de puertos
+            import re
+            port_match = re.search(r'(\d+)[\s-]?(port|puerto)', combined)
+            if port_match:
+                features["ports"] = f"{port_match.group(1)} Puertos"
+
+            # Detectar potencia de carga
+            power_match = re.search(r'(\d+)w\b', combined)
+            if power_match:
+                features["power"] = f"{power_match.group(1)}W"
+
+            # Detectar longitud de cable
+            length_match = re.search(r'(\d+\.?\d*)\s*(m|metro|ft|feet)', combined)
+            if length_match:
+                length = length_match.group(1)
+                unit = "m" if "m" in length_match.group(2) or "metro" in length_match.group(2) else "ft"
+                features["length"] = f"{length}{unit}"
+
+            # Detectar material
+            materials = {
+                "silicona": "Silicona",
+                "silicone": "Silicona",
+                "tpu": "TPU",
+                "leather": "Cuero",
+                "piel": "Cuero",
+                "metal": "Metal",
+                "aluminum": "Aluminio",
+                "aluminio": "Aluminio",
+                "plastic": "Plástico",
+                "plastico": "Plástico"
+            }
+            for mat_key, mat_display in materials.items():
+                if mat_key in combined:
+                    features["material"] = mat_display
+                    break
+
+            # Detectar características especiales
+            if "wireless" in combined or "inalámbrico" in combined or "inalambrico" in combined:
+                features["wireless"] = "Inalámbrico"
+
+            if "bluetooth" in combined:
+                features["bluetooth"] = "Bluetooth"
+
+            if "magnetic" in combined or "magnético" in combined or "magnetico" in combined:
+                features["magnetic"] = "Magnético"
+
+            if "360" in combined:
+                features["degrees"] = "360"
+
+            if "rechargeable" in combined or "recargable" in combined:
+                features["rechargeable"] = "Recargable"
+
+            return {
+                "type": acc_type,
+                "generic_term": pattern_info.get("generic_term", "Accesorio"),
+                "features": features
+            }
+
+    # Si no se detecta tipo específico, retornar genérico
+    return {
+        "type": "unknown",
+        "generic_term": "Accesorio",
+        "features": {}
+    }
+
+
+def _remove_brand_from_title_cbt(title, protected_brands):
+    """
+    Elimina COMPLETAMENTE cualquier mención de marcas protegidas del título.
+
+    Esta función es CRÍTICA para CBT - las marcas NO deben aparecer en títulos
+    de productos que no son originales.
+
+    Args:
+        title: Título a limpiar
+        protected_brands: Lista de marcas protegidas a remover
+
+    Returns:
+        str: Título sin marcas protegidas
+    """
+    if not title:
+        return ""
+
+    title_clean = title
+
+    # Cargar frases prohibidas
+    mapping = _load_brand_generic_mapping()
+    forbidden_phrases = mapping.get("strict_cbt_rules", {}).get("forbidden_title_phrases", [])
+
+    # Eliminar frases prohibidas completas primero
+    for phrase in forbidden_phrases:
+        # Case insensitive replace
+        pattern = re.compile(re.escape(phrase), re.IGNORECASE)
+        title_clean = pattern.sub("", title_clean)
+
+    # Eliminar marcas individuales
+    for brand in protected_brands:
+        if not brand:
+            continue
+
+        # Crear patrón que capture la marca con límites de palabra
+        pattern = re.compile(r'\b' + re.escape(brand) + r'\b', re.IGNORECASE)
+        title_clean = pattern.sub("", title_clean)
+
+    # Limpiar espacios múltiples y guiones sueltos
+    title_clean = re.sub(r'\s+', ' ', title_clean)
+    title_clean = re.sub(r'\s*-\s*-\s*', ' - ', title_clean)  # Dobles guiones
+    title_clean = re.sub(r'^\s*-\s*', '', title_clean)  # Guion al inicio
+    title_clean = re.sub(r'\s*-\s*$', '', title_clean)  # Guion al final
+    title_clean = title_clean.strip()
+
+    return title_clean
+
+
+def _build_generic_title_cbt(base_title, brand, model, bullets, detected_brands, max_chars=60):
+    """
+    Construye un título genérico siguiendo las reglas ESTRICTAS de CBT.
+
+    NO menciona marcas protegidas en el título.
+    Usa términos genéricos descriptivos.
+
+    Args:
+        base_title: Título original de Amazon
+        brand: Marca del fabricante
+        model: Modelo del producto
+        bullets: Bullet points del producto
+        detected_brands: Lista de marcas protegidas detectadas
+        max_chars: Máximo de caracteres
+
+    Returns:
+        str: Título genérico optimizado para CBT
+    """
+    # Detectar tipo de accesorio y características
+    accessory_info = _detect_accessory_type(base_title, bullets)
+    generic_term = accessory_info["generic_term"]
+    features = accessory_info["features"]
+
+    # Construir título base con el término genérico
+    title_parts = [generic_term]
+    added_terms = {generic_term.lower()}  # Track para evitar duplicados
+
+    # Función auxiliar para agregar sin duplicar
+    def add_if_unique(term):
+        term_lower = term.lower()
+        # Evitar duplicados completos o palabras que ya están en el título
+        if term_lower not in added_terms:
+            # Verificar si alguna palabra clave ya existe
+            words_in_term = set(term_lower.split())
+            if not words_in_term.intersection(added_terms):
+                title_parts.append(term)
+                added_terms.add(term_lower)
+                added_terms.update(words_in_term)
+                return True
+        return False
+
+    # Agregar características en orden de importancia
+    # Verificar que el término genérico no incluya ya "Inalámbrico" o "Bluetooth"
+    if "wireless" in features and "inalámbrico" not in generic_term.lower():
+        add_if_unique(features["wireless"])
+
+    if "bluetooth" in features and "bluetooth" not in generic_term.lower():
+        add_if_unique(features["bluetooth"])
+
+    if "power" in features:
+        add_if_unique(features["power"])
+
+    if "ports" in features:
+        add_if_unique(features["ports"])
+
+    if "length" in features:
+        add_if_unique(features["length"])
+
+    if "material" in features:
+        add_if_unique(features["material"])
+
+    if "magnetic" in features:
+        add_if_unique(features["magnetic"])
+
+    if "degrees" in features:
+        add_if_unique(features["degrees"] + "°")
+
+    if "rechargeable" in features:
+        add_if_unique(features["rechargeable"])
+
+    # Agregar "Genérico" o "Universal" al final
+    if accessory_info["type"] != "unknown":
+        add_if_unique("Universal")
+
+    # Construir título final
+    title = " ".join(title_parts)
+
+    # Si es muy corto, agregar información del título original (sin marcas)
+    # Pero traducida al español
+    if len(title) < 30 and base_title:
+        clean_base = _remove_brand_from_title_cbt(base_title, detected_brands + [brand])
+        if clean_base:
+            # Diccionario de traducción de palabras comunes en inglés
+            translations = {
+                "controller": "Control",
+                "controllers": "Controles",
+                "charging": "Carga",
+                "dock": "Base",
+                "station": "Estación",
+                "charger": "Cargador",
+                "cable": "Cable",
+                "adapter": "Adaptador",
+                "case": "Funda",
+                "cover": "Protector",
+                "screen": "Pantalla",
+                "protector": "Protector",
+                "mount": "Soporte",
+                "stand": "Base",
+                "holder": "Soporte",
+                "wireless": "Inalámbrico",
+                "bluetooth": "Bluetooth",
+                "fast": "Rápida",
+                "quick": "Rápida",
+                "magnetic": "Magnético",
+                "portable": "Portátil",
+                "pack": "Pack",
+                "set": "Set",
+                "led": "LED",
+                "oled": "OLED",
+                "usb": "USB",
+                "type": "Tipo",
+                "port": "Puerto",
+                "ports": "Puertos",
+                "for": "para",
+                "with": "con",
+                "and": "y",
+                "joycon": "",  # Eliminar completamente
+                "joycons": "",
+                "joy-con": "",
+                "joy-cons": ""
+            }
+
+            # Extraer palabras relevantes del título limpio y traducirlas
+            words = clean_base.split()
+            for word in words[:8]:  # Revisar hasta 8 palabras
+                word_clean = word.lower().strip(',:;-')
+                # Traducir si está en el diccionario
+                word_spanish = translations.get(word_clean, word)
+                word_spanish_lower = word_spanish.lower()
+
+                # Solo agregar si no está ya en el título y es relevante (más de 2 chars)
+                if len(word_spanish_lower) > 2 and word_spanish_lower not in title.lower():
+                    # Verificar que agregando esta palabra no excedemos max_chars
+                    test_title = f"{title} {word_spanish}"
+                    if len(test_title) <= max_chars:
+                        title = test_title
+                        added_terms.add(word_spanish_lower)
+                    else:
+                        break
+
+    # Truncar si es necesario
+    if len(title) > max_chars:
+        title = title[:max_chars].rsplit(' ', 1)[0].rstrip(',-')
+
+    return title.strip()
+
+
 def ai_title_es(base_title, brand, model, bullets, max_chars=60):
     """
     Genera títulos optimizados para MercadoLibre Global Selling.
     Diseñado con mejores prácticas de copywriting y SEO de marketplace.
     Sistema inteligente que decide cuándo incluir el número de modelo.
+    PROTECCIÓN INTELIGENTE: Detecta si el producto es original o accesorio.
     """
     if not client:
         return _smart_truncate(base_title or "Producto", max_chars)
+
+    # Convertir bullets a lista si es necesario
+    if isinstance(bullets, str):
+        bullets = [bullets]
+    elif not isinstance(bullets, list):
+        bullets = []
+
+    # ============================================================
+    # REGLAS CBT ESTRICTAS: Para accesorios de marcas protegidas
+    # NO usar la marca en el título - usar términos genéricos
+    # ============================================================
+
+    # Cargar lista de marcas protegidas del blacklist
+    protected_brands = []
+    try:
+        blacklist_path = "config/brand_blacklist.json"
+        if os.path.exists(blacklist_path):
+            with open(blacklist_path, "r", encoding="utf-8") as f:
+                blacklist_data = json.load(f)
+                protected_brands = [b.lower() for b in blacklist_data.get("blacklisted_brands", [])]
+    except:
+        pass
+
+    # Detectar si es un accesorio para marca protegida
+    target_brand = _detect_target_brand(base_title, bullets)
+    brand_lower = brand.lower() if brand else ""
+    target_brand_lower = target_brand.lower() if target_brand else ""
+
+    # Caso 1: La marca del producto o la marca objetivo está en la lista de protegidas
+    # Y el producto es un accesorio (no original)
+
+    # Verificar si la marca del fabricante o la marca objetivo están protegidas
+    is_brand_protected = False
+
+    # Check si la marca del fabricante está en la lista
+    if brand_lower in protected_brands:
+        is_brand_protected = True
+
+    # Check si la marca objetivo (o alguna palabra de ella) está en la lista
+    if target_brand:
+        # Verificar si alguna palabra de target_brand está en protected_brands
+        target_words = target_brand_lower.split()
+        for word in target_words:
+            if word in protected_brands:
+                is_brand_protected = True
+                break
+
+    # Verificar si es accesorio (no producto original)
+    is_accessory = not _is_original_product(brand, base_title, bullets)
+
+    if is_brand_protected and is_accessory:
+        # MODO CBT ESTRICTO: Usar IA pero sin mencionar marcas protegidas
+        qprint(f"🛡️ CBT STRICT MODE: Accesorio para marca protegida detectado ({target_brand or brand})")
+        qprint(f"   Generando título genérico sin mencionar la marca...")
+
+        # NO usar la función _build_generic_title_cbt() porque genera títulos raros
+        # En su lugar, usar la IA normal pero reemplazando la marca por "Genérica"
+        # y limpiando el título base de marcas protegidas
+
+        # Detectar todas las marcas que necesitamos eliminar
+        brands_to_remove = [brand]
+        if target_brand:
+            brands_to_remove.append(target_brand)
+            # También agregar variantes de la marca
+            if "nintendo" in target_brand_lower:
+                brands_to_remove.extend(["Nintendo", "Switch", "Nintendo Switch", "JoyCon", "Joy-Con"])
+            elif "playstation" in target_brand_lower or "ps5" in target_brand_lower:
+                brands_to_remove.extend(["PlayStation", "PS5", "PS4", "Sony"])
+            elif "xbox" in target_brand_lower:
+                brands_to_remove.extend(["Xbox", "Microsoft"])
+            elif "iphone" in target_brand_lower or "apple" in target_brand_lower:
+                brands_to_remove.extend(["Apple", "iPhone", "iPad", "AirPods"])
+
+        # Limpiar el título base eliminando marcas
+        clean_title = _remove_brand_from_title_cbt(base_title, brands_to_remove)
+
+        # Llamar a la IA con marca "Genérica" para que genere un título natural
+        # sin mencionar marcas protegidas
+        qprint(f"   Título limpio: {clean_title}")
+        # Continuar con el flujo normal pero sin brand_instruction especial
+        # La IA generará un título genérico basado en el título limpio
+        brand = "Genérica"  # Reemplazar marca por "Genérica"
+
+    # ============================================================
+    # Casos regulares: Productos originales o marcas no protegidas
+    # Usar el sistema de IA normal
+    # ============================================================
+
+    # Determinar nivel de protección de la marca
+    protection_level = _get_brand_protection_level(brand, base_title)
 
     # Determinar si el modelo es relevante para el comprador
     model_is_relevant = _is_model_searchable(brand, model, base_title)
 
     # Prompt diseñado por experto en copywriting MercadoLibre
+    brand_instruction = ""
+
+    if protection_level == "always_compatible":
+        # Marcas de lujo/entretenimiento - usar descripción genérica
+        brand_instruction = f"""
+⚠️ CRÍTICO - MARCA DE ALTO RIESGO:
+La marca "{brand}" requiere MÁXIMA PRECAUCIÓN (lujo/entretenimiento/moda).
+
+REGLAS OBLIGATORIAS:
+1. SIEMPRE usar lenguaje descriptivo genérico
+2. NUNCA usar "{brand}" en el título
+3. Describir el producto por sus características, no por la marca
+
+EJEMPLOS CORRECTOS:
+✅ "Reloj Cronógrafo Estilo Deportivo Acero Inoxidable"
+✅ "Bolso Tote Piel Sintética Negro Diseño Clásico"
+✅ "Figura Coleccionable Superhéroe 15cm Articulada"
+"""
+
+    elif protection_level == "original":
+        # Marcas conocidas - verificar si es original
+        is_original = _is_original_product(brand, base_title, bullets)
+
+        if is_original:
+            # Producto ORIGINAL - usar marca normalmente
+            brand_instruction = f"""
+✅ PRODUCTO ORIGINAL DETECTADO:
+El producto parece ser ORIGINAL de "{brand}".
+
+REGLAS:
+1. Usar la marca normalmente al inicio del título
+2. Enfatizar que es ORIGINAL/NUEVO
+3. Incluir modelo si es relevante
+4. NO usar palabras como "compatible" (confunde al comprador)
+
+EJEMPLOS CORRECTOS:
+✅ "{brand} Lego Icons 10314 Floristería 2870 Piezas Adultos"
+✅ "{brand} WH-1000XM5 Audífonos Noise Cancelling Negro"
+✅ "{brand} Series X Console 1TB Negro Nueva Generación"
+"""
+        else:
+            # Accesorio - esto debería haberse capturado arriba, pero por seguridad
+            brand_instruction = f"""
+⚠️ ACCESORIO DETECTADO - USAR TÉRMINOS GENÉRICOS
+Este es un ACCESORIO, NO es un producto original.
+REGLAS OBLIGATORIAS:
+1. NO mencionar la marca objetivo en el título (ejemplo: NO poner "Nintendo", "PlayStation", "Apple")
+2. Usar términos genéricos descriptivos (Cargador, Cable, Funda, Control, Base, etc.)
+3. Describir características físicas (color, material, tamaño, conectores)
+4. La compatibilidad con marcas se mencionará SOLO en la descripción, NUNCA en el título
+
+EJEMPLOS CORRECTOS:
+✅ "Base Cargadora Magnética USB-C Negro Universal"
+✅ "Cable HDMI 2m Alta Velocidad 4K Trenzado"
+✅ "Control Inalámbrico Bluetooth Negro Ergonómico"
+✅ "Funda Protectora Silicona Transparente Antigolpes"
+
+EJEMPLOS INCORRECTOS (PROHIBIDOS):
+❌ "Charging Dock for Nintendo Switch"
+❌ "Cable para iPhone"
+❌ "Control tipo Xbox"
+❌ "Funda compatible con PlayStation"
+"""
+
+    else:
+        # Marca segura - verificar si es accesorio de marca conocida
+        if target_brand:
+            # Esto también debería haberse capturado arriba
+            brand_instruction = f"""
+⚠️ ACCESORIO DETECTADO - USAR TÉRMINOS GENÉRICOS
+Este es un ACCESORIO, NO es un producto original.
+REGLAS OBLIGATORIAS:
+1. NO mencionar la marca objetivo en el título (ejemplo: NO poner "{target_brand}")
+2. Usar términos genéricos descriptivos (Cargador, Cable, Funda, Control, Base, etc.)
+3. Describir características físicas (color, material, tamaño, conectores)
+4. La compatibilidad con "{target_brand}" se mencionará SOLO en la descripción, NUNCA en el título
+
+EJEMPLOS CORRECTOS:
+✅ "Base Cargadora Magnética USB-C Negro Universal"
+✅ "Cable USB 2m Carga Rápida Trenzado Nylon"
+✅ "Control Inalámbrico Bluetooth Negro Ergonómico"
+
+EJEMPLOS INCORRECTOS (PROHIBIDOS):
+❌ "Charging Dock for {target_brand}"
+❌ "Cable para {target_brand}"
+❌ "Control compatible {target_brand}"
+"""
+        else:
+            # Marca segura normal - usar normalmente
+            brand_instruction = f"""
+Marca: {brand}
+Esta marca es segura. Usa la marca normalmente al inicio del título.
+"""
+
     model_instruction = ""
     if model_is_relevant and model:
         model_instruction = f"""
@@ -674,13 +1429,29 @@ NO lo incluyas en el título. Prioriza atributos visuales y funcionales."""
 
     prompt = f"""Eres un experto copywriter de MercadoLibre Global Selling. Crea un título de producto optimizado para conversión y búsqueda.
 
+{brand_instruction}
+
 REGLAS ESTRICTAS:
 1. Máximo {max_chars} caracteres (CRÍTICO: los primeros 45 son los más importantes)
-2. Estructura: Marca + [Modelo si relevante] + Tipo de Producto + Atributos Clave + Beneficio
+2. Estructura para productos ORIGINALES: Marca + [Modelo] + Tipo + Atributos + Beneficio
+   Estructura para ACCESORIOS: Tipo de Producto + Características + Color + Material
 3. SIEMPRE incluye: color, tamaño, material, género (hombre/mujer), característica principal
 4. Lenguaje: Natural, comercial, orientado al beneficio del comprador
 5. Sin emojis, sin HTML, sin comillas, sin puntos finales
 6. Español LATAM neutro y profesional
+7. ⚠️ CRÍTICO - PROHIBIDO ABSOLUTO (Violaciones causan suspensión ML):
+   - NUNCA incluir links, URLs, sitios web, dominios (.com, .net, etc.)
+   - NUNCA incluir emails (usuario@dominio.com)
+   - NUNCA incluir teléfonos (+54, 011, WhatsApp, etc.)
+   - NUNCA incluir referencias a Amazon, tiendas externas, redes sociales
+   - NUNCA incluir palabras como: "visita", "contacta", "llama", "escribe"
+   - NUNCA usar palabras prohibidas para marcas: "tipo", "similar", "igual", "estilo" (solo en contexto de marca)
+   - Ejemplo prohibido: "Controlador tipo Xbox", "Similar a Apple", "Igual que Samsung"
+8. ⚠️ CRÍTICO PARA ACCESORIOS - NO MENCIONAR MARCAS EN EL TÍTULO:
+   - Si el producto es un accesorio (cable, cargador, funda, control genérico, base, etc.)
+   - NO menciones marcas conocidas como Nintendo, PlayStation, Xbox, Apple, Samsung, etc.
+   - Usa términos genéricos descriptivos solamente
+   - La compatibilidad se menciona SOLO en la descripción
 {model_instruction}
 
 DATOS DEL PRODUCTO:
@@ -701,6 +1472,19 @@ EJEMPLOS DE BUENOS TÍTULOS SIN MODELO (cuando es código técnico):
 - "Perfume Chanel N°5 Mujer 100ml Eau de Parfum Original"
 - "Mochila North Face 40L Impermeable Senderismo Camping"
 
+EJEMPLOS CORRECTOS PARA ACCESORIOS (sin mencionar marca compatible):
+- "Base Cargadora Magnética USB-C Negro Doble Posición"
+- "Cable USB 2m Carga Rápida 3A Trenzado Nylon Negro"
+- "Control Inalámbrico Bluetooth Ergonómico Negro Vibración"
+- "Funda Protectora Silicona Transparente Antigolpes"
+- "Cargador Pared 20W USB-C Compacto Carga Rápida"
+
+EJEMPLOS INCORRECTOS PARA ACCESORIOS (NUNCA hacer esto):
+- "Base Cargadora para Nintendo Switch" ❌
+- "Cable compatible iPhone" ❌
+- "Control tipo Xbox" ❌
+- "Funda PlayStation 5" ❌
+
 RESPONDE ÚNICAMENTE CON EL TÍTULO OPTIMIZADO (sin explicaciones, sin comillas):"""
 
     try:
@@ -714,6 +1498,9 @@ RESPONDE ÚNICAMENTE CON EL TÍTULO OPTIMIZADO (sin explicaciones, sin comillas)
             max_tokens=100,
         )
         t = (r.choices[0].message.content or "").strip().replace("\n", " ").strip('"').strip("'")
+
+        # ⚠️ CRÍTICO: Eliminar cualquier link o URL (MercadoLibre los prohíbe)
+        t = _remove_links_and_urls(t)
 
         # Truncado inteligente por palabras
         return _smart_truncate(t, max_chars) if t else _smart_truncate(base_title or "Producto", max_chars)
@@ -808,6 +1595,90 @@ def _is_model_searchable(brand, model, title):
     return len(model_upper) <= 10 and not any(c in model_upper for c in ["_", "/"])
 
 
+def _remove_links_and_urls(text):
+    """
+    Elimina TODOS los links, URLs, emails, teléfonos y referencias prohibidas del texto.
+    MercadoLibre prohíbe en títulos y descripciones:
+    - Links y URLs de cualquier tipo
+    - Emails y teléfonos
+    - Referencias a sitios externos
+    - Información de contacto (WhatsApp, Telegram, etc.)
+
+    Elimina:
+    - URLs completas: http://example.com, https://amazon.com
+    - URLs sin protocolo: www.example.com, amazon.com
+    - Dominios: .com, .net, .org, etc.
+    - Emails: usuario@dominio.com
+    - Teléfonos: +54 11 1234-5678, (011) 1234-5678
+    - Palabras como: "link", "url", "website", "email", "teléfono", "WhatsApp"
+    - Referencias a Amazon: "amazon.com", "amzn.to"
+    """
+    if not text:
+        return text
+
+    import re
+
+    # 1. Eliminar URLs completas con protocolo
+    text = re.sub(r'https?://[^\s]+', '', text, flags=re.IGNORECASE)
+    text = re.sub(r'ftp://[^\s]+', '', text, flags=re.IGNORECASE)
+
+    # 2. Eliminar URLs sin protocolo (www.example.com)
+    text = re.sub(r'www\.[^\s]+', '', text, flags=re.IGNORECASE)
+
+    # 3. Eliminar dominios con doble extensión (.com.ar, .com.br, .com.mx)
+    text = re.sub(r'\b\w+\.com\.(ar|br|mx|es|co|uk|au)\b', '', text, flags=re.IGNORECASE)
+
+    # 4. Eliminar dominios comunes (.com, .net, etc.)
+    text = re.sub(r'\b\w+\.(com|net|org|edu|gov|co|io|ai|app|store|shop|online|info|site|web|es|mx|ar|br)\b', '', text, flags=re.IGNORECASE)
+
+    # 5. Eliminar referencias a Amazon específicamente
+    text = re.sub(r'\b(amazon|amzn)\.(com|to|es|mx|com\.br|com\.ar)\b', '', text, flags=re.IGNORECASE)
+
+    # 6. Eliminar emails (usuario@dominio.com) - completo incluyendo @ sobrante
+    text = re.sub(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', '', text)
+    text = re.sub(r'\b\w+@', '', text)  # Eliminar cualquier palabra seguida de @
+
+    # 7. Eliminar teléfonos con prefijos internacionales
+    text = re.sub(r'\+?\d{1,4}[\s\-]?\(?\d{1,4}\)?[\s\-]?\d{1,4}[\s\-]?\d{1,9}', '', text)
+
+    # 8. Eliminar teléfonos formato (011) 1234-5678
+    text = re.sub(r'\(\d{2,4}\)\s*\d{4,8}[-\s]?\d{0,4}', '', text)
+
+    # 9. Eliminar palabras relacionadas con links
+    link_words = r'\b(link|url|website|sitio\s*web|página\s*web|web\s*site|click\s*here|haz\s*clic|visita|visit)\b'
+    text = re.sub(link_words, '', text, flags=re.IGNORECASE)
+
+    # 10. Eliminar palabras relacionadas con contacto
+    contact_words = r'\b(email|e-mail|correo|teléfono|telefono|phone|celular|whatsapp|telegram|instagram|facebook|twitter|contacto|contact|llamar|call)\b'
+    text = re.sub(contact_words, '', text, flags=re.IGNORECASE)
+
+    # 11. Eliminar @ y # que puedan quedar de redes sociales
+    text = re.sub(r'[@#]\w*', '', text)
+
+    # 12. Eliminar palabras prohibidas de ML para marcas ("tipo X", "similar a X", "igual que X")
+    # Esto previene infracciones de uso impropio de marcas
+    text = re.sub(r'\btipo\s+[A-Z][\w\s]{2,15}\b', '', text)  # "tipo Xbox"
+    text = re.sub(r'\bsimilar\s+(a|to)\s+[A-Z][\w\s]{2,15}\b', '', text, flags=re.IGNORECASE)  # "similar a Apple"
+    text = re.sub(r'\bigual\s+(que|a|to)\s+[A-Z][\w\s]{2,15}\b', '', text, flags=re.IGNORECASE)  # "igual que Samsung"
+    text = re.sub(r'\bcomo\s+[A-Z][\w\s]{2,15}\b', '', text)  # "como iPhone"
+    text = re.sub(r'\bsuch\s+as\s+[A-Z][\w\s]{2,15}\b', '', text, flags=re.IGNORECASE)  # "such as Xbox"
+    text = re.sub(r'\bestilo\s+[A-Z][\w\s]{2,15}\b', '', text)  # "estilo Apple" (cuando menciona marca)
+
+    # 13. Limpiar espacios múltiples resultantes
+    text = re.sub(r'\s+', ' ', text)
+
+    # 14. Limpiar puntuación duplicada
+    text = re.sub(r'[,;.]{2,}', '.', text)
+
+    # 15. Limpiar espacios al inicio y final
+    text = text.strip()
+
+    # 16. Limpiar puntuación al inicio
+    text = re.sub(r'^[,;.\s]+', '', text)
+
+    return text
+
+
 def _smart_truncate(text, max_chars):
     """
     Trunca texto de forma inteligente respetando palabras completas.
@@ -826,11 +1697,80 @@ def _smart_truncate(text, max_chars):
         # Si no hay espacio cercano, cortar en el límite y limpiar
         return truncated.rstrip(' ,;.')
 
+def _add_cbt_compatibility_note(description, product_title, brand, bullets):
+    """
+    Agrega nota de compatibilidad CBT al FINAL de una descripción ya generada.
+
+    Esta función NO modifica la descripción original, solo agrega al final
+    la sección de compatibilidad si detecta que es un accesorio de marca protegida.
+
+    Args:
+        description: Descripción ya generada (texto completo)
+        product_title: Título del producto
+        brand: Marca del fabricante
+        bullets: Bullets del producto
+
+    Returns:
+        str: Descripción con nota de compatibilidad agregada (si aplica)
+    """
+    if not description:
+        return description
+
+    # Detectar marca objetivo
+    target_brand = _detect_target_brand(product_title, bullets)
+
+    # Verificar si es marca protegida
+    protected_brands = []
+    try:
+        blacklist_path = "config/brand_blacklist.json"
+        if os.path.exists(blacklist_path):
+            with open(blacklist_path, "r", encoding="utf-8") as f:
+                blacklist_data = json.load(f)
+                protected_brands = [b.lower() for b in blacklist_data.get("blacklisted_brands", [])]
+    except:
+        pass
+
+    brand_lower = brand.lower() if brand else ""
+
+    # Check si es marca protegida
+    is_brand_protected = False
+    detected_brand = None
+
+    if brand_lower in protected_brands:
+        is_brand_protected = True
+        detected_brand = brand
+
+    if target_brand:
+        target_words = target_brand.lower().split()
+        for word in target_words:
+            if word in protected_brands:
+                is_brand_protected = True
+                detected_brand = target_brand
+                break
+
+    # Verificar si es accesorio
+    is_accessory = not _is_original_product(brand, product_title, bullets)
+
+    # Solo agregar nota si es accesorio de marca protegida
+    if is_brand_protected and is_accessory and detected_brand:
+        # Agregar nota de compatibilidad AL PRINCIPIO
+        compatibility_note = f"""COMPATIBILIDAD
+Compatible con dispositivos de la línea {detected_brand}.
+Este es un producto genérico y no es fabricado por {detected_brand.split()[0]}.
+
+"""
+
+        return compatibility_note + description.strip()
+
+    return description
+
+
 def ai_desc_es(datos, mini_ml=None):
     """
     Genera descripción optimizada para MercadoLibre Global Selling.
     Usa el formato estructurado: intro + beneficios + cierre + specs + footer.
     Con post-procesamiento robusto para eliminar espacios extra y normalizar saltos de línea.
+    PROTECCIÓN: Maneja marcas registradas usando lenguaje de compatibilidad.
     """
     if not client:
         return ""
@@ -856,10 +1796,102 @@ def ai_desc_es(datos, mini_ml=None):
                 "package": mini_ml.get("package", {})
             })
 
+    # Verificar nivel de protección de la marca
+    brand = datos.get("brand", "") or (mini_ml.get("brand", "") if mini_ml else "")
+    protection_level = _get_brand_protection_level(brand, amazon_json.get("title", ""))
+
     # Construir datos de producto para el prompt
     product_data = json.dumps(amazon_json, ensure_ascii=False)[:15000]
 
+    # Instrucción de protección de marca si aplica
+    brand_warning = ""
+
+    if protection_level == "always_compatible":
+        # Marcas de alto riesgo - SIEMPRE compatibilidad
+        brand_warning = f"""
+⚠️ CRÍTICO - MARCA DE ALTO RIESGO:
+La marca "{brand}" es de ALTO RIESGO (lujo/entretenimiento/moda).
+
+REGLAS OBLIGATORIAS:
+1. NUNCA presentes el producto como si fuera fabricado por "{brand}"
+2. Usa descripciones genéricas sin mencionar la marca directamente
+3. Si DEBES mencionar compatibilidad, usa: "Compatible con productos estilo...", "Inspirado en..."
+4. Enfócate en características del producto, NO en la marca
+
+EJEMPLOS CORRECTOS:
+✅ "Este reloj deportivo presenta diseño elegante en acero..."
+✅ "Bolso de diseño clásico con acabado premium..."
+✅ "Figura coleccionable articulada de 15cm con..."
+"""
+
+    elif protection_level == "original":
+        # Marcas conocidas - evaluar si es original
+        is_original = _is_original_product(brand, amazon_json.get("title", ""),
+                                          amazon_json.get("attributes", {}).get("bullet_point", []))
+
+        if is_original:
+            # Producto ORIGINAL
+            brand_warning = f"""
+✅ PRODUCTO ORIGINAL:
+Este producto parece ser ORIGINAL de "{brand}".
+
+REGLAS:
+1. Usa la marca normalmente en la descripción
+2. Enfatiza que es producto ORIGINAL/NUEVO de la marca
+3. Menciona garantía oficial si aplica
+4. NO uses lenguaje de compatibilidad (el producto ES de la marca)
+
+EJEMPLO:
+✅ "{brand} presenta este producto original con todas las características premium que esperas..."
+"""
+        else:
+            # Producto COMPATIBLE/ACCESORIO
+            # Detectar marca objetivo para accesorios
+            base_title = amazon_json.get("title", "")
+            bullets = amazon_json.get("attributes", {}).get("bullet_point", [])
+            target_brand = _detect_target_brand(base_title, bullets)
+
+            # Usar la marca detectada o la marca del fabricante
+            compat_brand = target_brand if target_brand else brand
+
+            brand_warning = f"""
+⚠️ ACCESORIO/COMPATIBLE - REGLAS CRÍTICAS CBT:
+Este producto es un accesorio compatible con "{compat_brand}".
+
+ESTRUCTURA OBLIGATORIA DE LA DESCRIPCIÓN:
+
+1. PRIMERA LÍNEA (título con tagline):
+   Formato EXACTO: "Producto compatible con {compat_brand} – Tagline breve"
+
+   EJEMPLOS CORRECTOS:
+   ✅ "Producto compatible con Nintendo Switch – Carga hasta 4 controles simultáneamente"
+   ✅ "Producto compatible con PlayStation 5 – Control inalámbrico de alta precisión"
+   ✅ "Producto compatible con iPhone 14/15 – Cable USB-C de carga rápida 20W"
+
+   EJEMPLOS INCORRECTOS:
+   ❌ "PURBHE NSC01 – Carga rápida..." (NO empezar con marca del fabricante)
+   ❌ "Cargador para JoyCon..." (NO omitir la compatibilidad al inicio)
+
+2. RESTO DE LA DESCRIPCIÓN:
+   - Describe QUÉ es el producto y sus características
+   - Menciona beneficios y especificaciones
+   - NO vuelvas a repetir la marca protegida en el cuerpo
+
+REGLAS ABSOLUTAS:
+1. SIEMPRE empezar con "Producto compatible con {compat_brand}"
+2. NO presentar el producto como si fuera fabricado por "{compat_brand}"
+3. La marca solo aparece en la primera línea para indicar compatibilidad
+4. El resto de la descripción es sobre el producto genérico
+
+EJEMPLOS INCORRECTOS (PROHIBIDOS):
+❌ Empezar con marca del fabricante: "PURBHE NSC01 – ..."
+❌ No mencionar compatibilidad al inicio: "Cargador rápido para..."
+❌ Presentarlo como original: "Nintendo Switch JoyCon Charger..."
+"""
+
     prompt = f"""Eres un copywriter experto en Mercado Libre Global Selling.
+
+{brand_warning}
 
 # ============================================================
 # GENERADOR DE DESCRIPCIÓN (INSTRUCCIONES BASE)
@@ -874,6 +1906,12 @@ Datos del producto desde Amazon:
 ESTRUCTURA EXACTA A SEGUIR:
 
 1. TÍTULO CON TAGLINE (primera línea)
+
+⚠️ SI ES ACCESORIO/COMPATIBLE (según instrucciones arriba):
+Formato OBLIGATORIO: "Producto compatible con [MARCA] – Tagline persuasivo corto"
+Ejemplo: "Producto compatible con Nintendo Switch – Carga hasta 4 controles simultáneamente"
+
+⚠️ SI ES PRODUCTO ORIGINAL:
 Formato: MARCA MODELO – Tagline persuasivo corto
 Ejemplo: "GOZVRPUS TW-05 – Comunicación nítida y profesional"
 - Usar MAYÚSCULAS para marca y modelo
@@ -952,6 +1990,18 @@ REGLAS:
 ⛔ NO INCLUIR:
 Amazon, ASIN, códigos, precios, enlaces, HTML, markdown, emojis,
 frases genéricas ("increíble", "perfecto", "descubre")
+
+⚠️ CRÍTICO - PROHIBIDO ABSOLUTO (violaciones causan suspensión de MercadoLibre):
+- NUNCA incluir links o URLs (http://, https://, www., ftp://)
+- NUNCA incluir dominios (.com, .net, .org, .io, .es, .mx, .ar, .br)
+- NUNCA incluir emails (usuario@dominio.com, info@tienda.com)
+- NUNCA incluir teléfonos (+54 11 1234-5678, WhatsApp, celular, llamar)
+- NUNCA mencionar redes sociales (Instagram, Facebook, Twitter, Telegram)
+- NUNCA mencionar "Amazon", "amazon.com", "amzn.to" u otras tiendas
+- NUNCA usar palabras: "visita", "contacta", "llama", "escribe", "link", "email"
+- NUNCA incluir @ o # seguido de texto (redes sociales)
+- NUNCA usar para marcas: "tipo", "similar a", "igual que", "como", "such as"
+  Ejemplo prohibido: "Este controlador tipo Xbox", "Similar a productos Apple"
 
 Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
 
@@ -1065,6 +2115,15 @@ INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 Somos ONEWORLD"""
 
         texto += footer_text
+
+        # ⚠️ CRÍTICO: Eliminar cualquier link o URL (MercadoLibre los prohíbe)
+        texto = _remove_links_and_urls(texto)
+
+        # Agregar nota de compatibilidad CBT si aplica (AL PRINCIPIO, antes del footer)
+        product_title = amazon_json.get("title", "")
+        bullets_raw = amazon_json.get("attributes", {}).get("bullet_point", [])
+        texto = _add_cbt_compatibility_note(texto, product_title, brand, bullets_raw)
+
         return texto
 
     except Exception as e:
@@ -1458,9 +2517,12 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
     price = compute_price(base_price, tax)
 
     if tax > 0:
-        qprint(f"💰 Precio: ${base_price} + tax ${tax} = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
+        if price.get('tax_exempt'):
+            qprint(f"💰 Precio: ${base_price} + tax ${tax} (EXENTO) + 3PL $4.00 = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
+        else:
+            qprint(f"💰 Precio: ${base_price} + tax ${tax} + 3PL $4.00 = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
     else:
-        qprint(f"💰 Precio: ${base_price} (sin tax) → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
+        qprint(f"💰 Precio: ${base_price} (sin tax) + 3PL $4.00 = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
 
     # ================== IMÁGENES (Amazon → mini_ml imágenes con metadata) ==================
     # Usamos extract_images (una por variante, ordenada, hi-res)
