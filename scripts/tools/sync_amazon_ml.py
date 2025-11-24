@@ -415,25 +415,34 @@ def update_listing_stock_in_db(item_id, stock):
 
 def calculate_new_ml_price(amazon_price_usd):
     """
-    Calcula el nuevo precio de ML con la fórmula correcta:
-    (Amazon + Tax 7% + 3PL $4) × (1 + Markup 30%)
+    Calcula el nuevo precio de ML para sincronización.
+
+    Fórmula: (Amazon + Tax 7% + $4 USD) × (1 + Markup 30%)
+
+    Ejemplo con Amazon = $35.99:
+    - Tax 7%: $35.99 × 0.07 = $2.52
+    - 3PL Fee: $4.00
+    - Costo: $35.99 + $2.52 + $4.00 = $42.51
+    - Markup 30%: $42.51 × 1.30 = $55.26 USD
 
     DEBE coincidir con compute_price() de transform_mapper_new.py
     """
-    # Obtener configuración
-    THREE_PL_FEE = float(os.getenv("THREE_PL_FEE", "4.0"))
-    TAX_EXEMPT = os.getenv("TAX_EXEMPT", "false").lower() == "true"
-    FLORIDA_TAX_PERCENT = float(os.getenv("FLORIDA_TAX_PERCENT", "7"))
-    MARKUP_PCT = float(os.getenv("PRICE_MARKUP", "30")) / 100.0  # PRICE_MARKUP, no PRICE_MARKUP_PERCENT
+    # Paso 1: Precio base de Amazon
+    base_price = amazon_price_usd
 
-    # Calcular tax si no estamos exentos
-    tax = 0.0 if TAX_EXEMPT else round(amazon_price_usd * (FLORIDA_TAX_PERCENT / 100.0), 2)
+    # Paso 2: Agregar tax 7%
+    TAX_PERCENT = 7.0
+    tax_amount = round(base_price * (TAX_PERCENT / 100.0), 2)
 
-    # Costo total = Amazon + Tax + 3PL
-    cost = round(amazon_price_usd + tax + THREE_PL_FEE, 2)
+    # Paso 3: Agregar 3PL fee $4 USD
+    THREE_PL_FEE = 4.0
 
-    # Precio final = Costo × (1 + Markup)
-    final_price = round(cost * (1.0 + MARKUP_PCT), 2)
+    # Paso 4: Costo total = Amazon + Tax 7% + $4 USD
+    total_cost = round(base_price + tax_amount + THREE_PL_FEE, 2)
+
+    # Paso 5: Agregar markup 30%
+    MARKUP_PERCENT = 30.0
+    final_price = round(total_cost * (1.0 + MARKUP_PERCENT / 100.0), 2)
 
     return final_price
 
