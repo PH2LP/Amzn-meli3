@@ -415,10 +415,27 @@ def update_listing_stock_in_db(item_id, stock):
 
 def calculate_new_ml_price(amazon_price_usd):
     """
-    Calcula el nuevo precio de ML aplicando el markup configurado.
+    Calcula el nuevo precio de ML con la fórmula correcta:
+    (Amazon + Tax 7% + 3PL $4) × (1 + Markup 30%)
+
+    DEBE coincidir con compute_price() de transform_mapper_new.py
     """
-    markup_multiplier = 1 + (PRICE_MARKUP_PERCENT / 100)
-    return round(amazon_price_usd * markup_multiplier, 2)
+    # Obtener configuración
+    THREE_PL_FEE = float(os.getenv("THREE_PL_FEE", "4.0"))
+    TAX_EXEMPT = os.getenv("TAX_EXEMPT", "false").lower() == "true"
+    FLORIDA_TAX_PERCENT = float(os.getenv("FLORIDA_TAX_PERCENT", "7"))
+    MARKUP_PCT = float(os.getenv("PRICE_MARKUP", "30")) / 100.0  # PRICE_MARKUP, no PRICE_MARKUP_PERCENT
+
+    # Calcular tax si no estamos exentos
+    tax = 0.0 if TAX_EXEMPT else round(amazon_price_usd * (FLORIDA_TAX_PERCENT / 100.0), 2)
+
+    # Costo total = Amazon + Tax + 3PL
+    cost = round(amazon_price_usd + tax + THREE_PL_FEE, 2)
+
+    # Precio final = Costo × (1 + Markup)
+    final_price = round(cost * (1.0 + MARKUP_PCT), 2)
+
+    return final_price
 
 
 def sync_one_listing(listing, prime_offer_cache, changes_log):
