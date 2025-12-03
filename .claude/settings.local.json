@@ -287,7 +287,12 @@
       "Bash(else echo \"Script not found\")",
       "Bash(./install_cron.sh:*)",
       "Bash(git checkout:*)",
-      "Bash(git switch:*)"
+      "Bash(git switch:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(if grep -q \"^KEYWORDS_FILE=\" .env)",
+      "Bash(.env)",
+      "Bash(git pull:*)"
     ],
     "deny": [],
     "ask": []

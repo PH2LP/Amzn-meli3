@@ -1,30 +1,11 @@
 {
   "BRAND": {
     "value_type": "string",
-    "values": {
-      "acer": "15903",
-      "dr. hank": "2785927",
-      "forceline": "2611660",
-      "gotec": "2785928",
-      "msi": "16215",
-      "plugeplay": "2785929",
-      "positivo": "13346",
-      "samsung": "206"
-    },
+    "values": {},
     "allowed_units": [],
     "tags": {
       "catalog_required": true,
       "required": true
-    },
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
-  "LINE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
     },
     "hierarchy": "PARENT_PK",
     "relevance": 1
@@ -36,16 +17,6 @@
     "tags": {
       "catalog_required": true,
       "required": true
-    },
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
-  "ALPHANUMERIC_MODEL": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
     },
     "hierarchy": "PARENT_PK",
     "relevance": 1
@@ -113,74 +84,62 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "DETAILED_MODEL": {
-    "value_type": "string",
-    "values": {},
+  "MAIN_COLOR": {
+    "value_type": "list",
+    "values": {
+      "black": "2450295",
+      "blue": "2450293",
+      "red": "2450307",
+      "violet": "2450311",
+      "brown": "2450291",
+      "green": "2450314",
+      "orange": "2450327",
+      "sky blue": "2450278",
+      "pink": "2450312",
+      "golden": "2450289",
+      "silver": "2450303",
+      "yellow": "2450296",
+      "gray": "2450294",
+      "white": "2450308"
+    },
     "allowed_units": [],
     "tags": {
-      "hidden": true,
       "variation_attribute": true
     },
     "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
-  "MAX_VIDEO_RESOLUTION": {
+  "HEARING_PROTECTOR_TYPE": {
     "value_type": "string",
     "values": {
-      "1080p": "5516041",
-      "2160p": "40936514",
-      "1440p": "19882244"
+      "helmet mounted": "3825257",
+      "muff": "3825255",
+      "plug": "3825256"
     },
     "allowed_units": [],
     "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "MAX_VIDEO_RESOLUTION_TYPE": {
+  "RECOMMENDED_USE": {
     "value_type": "string",
     "values": {
-      "4k": "11691131",
-      "full hd": "11672125",
-      "2k": "11768916"
+      "motorcycling": "20345553",
+      "hunting": "7356394",
+      "industry": "19990786"
     },
     "allowed_units": [],
     "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "CAMERA_IMAGE_RESOLUTION": {
+  "SOUND_ATTENUATION_LEVEL": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
-      "Mpx"
+      "dB"
     ],
     "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_MICROPHONE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INTERFACES": {
-    "value_type": "string",
-    "values": {
-      "wi-fi": "2511537",
-      "usb 3.0": "1118306",
-      "usb 1.1": "102762",
-      "usb 2.0": "102761"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -216,21 +175,6 @@
       "required": true,
       "variation_attribute": true,
       "catalog_listing_required": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "FUNCTIONS": {
-    "value_type": "string",
-    "values": {
-      "light correction": "11695015",
-      "automatic tracking": "67155917",
-      "noise reduction": "11683459",
-      "white balance": "11740834"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
     },
     "hierarchy": "FAMILY",
     "relevance": 1
@@ -271,6 +215,39 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "WITH_CORD": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_ADJUSTABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_ELECTRONIC": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "GTIN": {
     "value_type": "string",
     "values": {},
@@ -283,59 +260,6 @@
       "conditional_required": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 1
-  },
-  "MAX_FRAMES_PER_SECOND": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "FPS"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "PRODUCT_LIFE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ZOOM": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "x"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "WEBCAM_LENS_TYPE": {
-    "value_type": "string",
-    "values": {
-      "glass": "19359189",
-      "plastic": "19366054"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "EMPTY_GTIN_REASON": {
@@ -355,256 +279,16 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "ACCESSORIES_INCLUDED": {
-    "value_type": "string",
-    "values": {
-      "tripod": "3602945",
-      "remote control": "2296420"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "SENSOR_TYPE": {
-    "value_type": "string",
-    "values": {
-      "cmos": "11350719",
-      "ccd": "11350720"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_LED_LIGHT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "DEPTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg",
-      "lb",
-      "mg",
-      "oz"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "FOCUS_TYPE": {
+  "ITEM_CONDITION": {
     "value_type": "list",
     "values": {
-      "automatic": "2693867",
-      "manual": "2693868"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "CONNECTOR_SPEED": {
-    "value_type": "string",
-    "values": {
-      "usb 2.0": "67155946",
-      "usb 3.0": "67155947"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "CONNECTOR_TYPE": {
-    "value_type": "string",
-    "values": {
-      "usb-c": "2113108",
-      "usb-a": "2113106"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "MIN_OPERATING_SYSTEMS_REQUIRED": {
-    "value_type": "string",
-    "values": {
-      "windows 7": "3211255",
-      "mac": "10946826"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "RECOMMENDED_DEVICES": {
-    "value_type": "string",
-    "values": {
-      "notebook": "11350713",
-      "desktop pc": "11350714"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "COMPATIBLE_APPLICATIONS": {
-    "value_type": "string",
-    "values": {
-      "facetime": "11697151",
-      "google hangouts": "11697150",
-      "google meet": "11350716",
-      "microsoft teams": "11679618",
-      "skype": "2390185",
-      "slack": "11710139",
-      "slobs": "12925918",
-      "zoom": "11350715"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "VISION_ANGLE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "°"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "IS_PLUG_AND_PLAY": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
+      "new": "2230284"
     },
     "allowed_units": [],
     "tags": {
       "hidden": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_HANDS_FREE_MODE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_NFC": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_LENS_COVER": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "CABLE_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
+    "hierarchy": "ITEM",
     "relevance": 2
   },
   "MPN": {
@@ -617,18 +301,6 @@
       "variation_attribute": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {
