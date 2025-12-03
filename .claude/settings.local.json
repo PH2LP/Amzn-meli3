@@ -286,7 +286,8 @@
       "Bash(then head -20 deploy_with_password.sh)",
       "Bash(else echo \"Script not found\")",
       "Bash(./install_cron.sh:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(git switch:*)"
     ],
     "deny": [],
     "ask": []
