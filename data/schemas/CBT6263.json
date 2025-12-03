@@ -1,33 +1,7 @@
 {
-  "MANUFACTURER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
   "BRAND": {
     "value_type": "string",
-    "values": {
-      "beboncool": "923430",
-      "bowink": "923429",
-      "dragonbest": "923420",
-      "family": "923419",
-      "genius": "7124",
-      "ipega": "923427",
-      "logitech": "15788",
-      "mocute": "923424",
-      "nes": "923423",
-      "nintendo": "9565",
-      "noganet": "15795",
-      "olja": "923426",
-      "razer": "17587",
-      "sega": "9551",
-      "steelseries": "17766",
-      "szky": "923425",
-      "thrustmaster": "923428"
-    },
+    "values": {},
     "allowed_units": [],
     "tags": {
       "catalog_required": true,
@@ -44,14 +18,6 @@
       "catalog_required": true,
       "required": true
     },
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
-  "VERSION": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
@@ -118,24 +84,93 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "SALE_FORMAT": {
-    "value_type": "list",
+  "MOUSE_COLOR": {
+    "value_type": "string",
     "values": {
-      "unit": "1359391",
-      "pack": "1359392"
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "KEYBOARD_LANGUAGE": {
+    "value_type": "string",
+    "values": {
+      "latin american spanish": "9014133",
+      "brazilian portuguese": "9014134",
+      "spanish spain": "9017815",
+      "us english": "9014135",
+      "uk english": "9014136"
     },
     "allowed_units": [],
     "tags": {},
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "UNITS_PER_PACK": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "conditional_required": true
+  "LAYOUT": {
+    "value_type": "string",
+    "values": {
+      "azerty": "110992",
+      "qwerty": "110991",
+      "fgğiod": "3347649",
+      "qwertz": "110993"
     },
+    "allowed_units": [],
+    "tags": {},
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
@@ -168,11 +203,300 @@
     "value_type": "string",
     "values": {},
     "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true
-    },
+    "tags": {},
     "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "KEYBOARD_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MOUSE_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "KEYBOARD_BACKLIGHTING_COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MOUSE_BACKLIGHTING_COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "KEYBOARD_SWITCH_TYPE": {
+    "value_type": "string",
+    "values": {
+      "cherry mx red": "9014124",
+      "cherry mx green": "9014125",
+      "cherry mx blue": "9014126",
+      "cherry mx black": "9014127"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MOUSE_SENSOR_TYPE": {
+    "value_type": "string",
+    "values": {
+      "optical": "9014128",
+      "laser": "9014129"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SENSOR_TECHNOLOGY": {
+    "value_type": "string",
+    "values": {
+      "pixart 3360": "11376603",
+      "pixart 3327": "11376605",
+      "pixart 3212": "8892419",
+      "pixart 3168": "11376609"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MOUSE_SENSOR_RESOLUTION": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "dpi",
+      "lpi",
+      "ppi",
+      "ppp"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_MOUSE_PAD": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_HEADPHONES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_SPEAKERS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_BATTERY": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_WIRELESS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_RECHARGEABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_GAMER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_ONE_HANDED_KEYBOARD": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
   "PACKAGE_HEIGHT": {
@@ -247,121 +571,25 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "COMPATIBLE_DEVICES": {
-    "value_type": "string",
-    "values": {
-      "playstation 2": "10946188",
-      "playstation 3": "10946189",
-      "playstation 4": "10946190",
-      "playstation 5": "10946191",
-      "xbox": "10946192",
-      "xbox 360": "4636339",
-      "xbox series s": "10946193",
-      "xbox series x": "10946194",
-      "xbox one": "10946195",
-      "xbox one s": "10946196",
-      "xbox one e": "10946197",
-      "xbox one x": "10946198",
-      "nintendo switch": "10946199",
-      "nintendo switch lite": "10946200",
-      "wii": "10946201",
-      "wii u": "10946202",
-      "iphone": "10187555",
-      "ipad": "9023839",
-      "ipod": "10192277",
-      "smartphones": "2295744",
-      "computers": "8867968",
-      "tablets": "168366"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "IS_WIRELESS": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_MOVEMENT_SENSOR": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_VIBRATION": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_BLUETOOTH": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_CELL_BATTERIES": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "GTIN": {
-    "value_type": "string",
+  "PRODUCT_LIFE": {
+    "value_type": "number_unit",
     "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "conditional_required": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
-  "HAZMAT_TRANSPORTABILITY": {
-    "value_type": "list",
-    "values": {
-      "excepted": "13414677",
-      "limited": "13414678",
-      "exceeded": "13414679",
-      "indeterminate": "13414680"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
+  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
     "hierarchy": "ITEM",
     "relevance": 1
   },
@@ -392,6 +620,16 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "MANUFACTURER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "ALPHANUMERIC_MODELS": {
     "value_type": "string",
     "values": {},
@@ -399,20 +637,6 @@
     "tags": {
       "hidden": true,
       "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_ACCESSORIES": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
     },
     "hierarchy": "FAMILY",
     "relevance": 1
@@ -425,83 +649,307 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "CELL_BATTERY_TYPE": {
+  "KEYBOARD_ARCHITECTURE": {
     "value_type": "string",
     "values": {
-      "aaa": "6178423",
-      "aa": "6178424"
+      "mechanical": "9014137",
+      "opto-mechanical": "9014138",
+      "membrane": "9014139"
     },
     "allowed_units": [],
-    "tags": {},
+    "tags": {
+      "hidden": true
+    },
     "hierarchy": "FAMILY",
-    "relevance": 1
+    "relevance": 2
   },
-  "BATTERY_VOLTAGE": {
+  "KEYBOARD_INTERFACE": {
     "value_type": "string",
+    "values": {
+      "usb 3.0": "9014140",
+      "usb 2.0": "9014141",
+      "ps/2": "9014142"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "mm",
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "mm",
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_DEPTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "mm",
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_WIRELESS_RANGE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "m"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_CABLE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm",
+      "m"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "KEYBOARD_KEYS_NUMBER": {
+    "value_type": "number",
     "values": {},
     "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "POWER_SUPPLY_TYPES": {
-    "value_type": "string",
-    "values": {
-      "battery": "4491927",
-      "manual operation": "49605648",
-      "cell battery": "1176674",
-      "battery/manual operation": "53615776",
-      "battery/cell battery": "53603541",
-      "manual operation/cell battery": "53615778",
-      "battery/manual operation/cell battery": "53615780"
-    },
-    "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "multivalued": true
+      "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "ACCESSORIES_INCLUDED": {
-    "value_type": "string",
-    "values": {
-      "charger": "3877589",
-      "case": "111199",
-      "wire": "411379",
-      "usb receiver": "8615809"
-    },
+  "KEYBOARD_PROGRAMMABLE_KEYS_NUMBER": {
+    "value_type": "number",
+    "values": {},
     "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "multivalued": true
+      "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "INPUT_CONNECTORS": {
-    "value_type": "string",
+  "WITH_KEYBOARD_BLUETOOTH_CONNECTION": {
+    "value_type": "boolean",
     "values": {
-      "3.5 mm jack": "7742961",
-      "mini jack": "6778118",
-      "usb": "102303",
-      "usb-c": "6778102"
+      "no": "242084",
+      "yes": "242085"
     },
     "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "multivalued": true
+      "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "OUTPUT_CONNECTORS": {
+  "WITH_WRIST_REST": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_ANTI_GHOST_KEYS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_INTERFACE": {
     "value_type": "string",
     "values": {
-      "3.5 mm jack": "7742961",
-      "mini jack": "6778118",
-      "usb": "102303",
-      "usb-c": "6778102"
+      "usb 3.0": "9014144",
+      "usb 2.0": "9014145",
+      "ps/2": "9014146"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "mm",
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "mm",
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_DEPTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "mm",
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_WIRELESS_RANGE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "m"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_CABLE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm",
+      "m"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MOUSE_BUTTONS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_MOUSE_BLUETOOTH_CONNECTION": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_SPLASH_RESISTANT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "COMPATIBLE_GAME_CONSOLES": {
+    "value_type": "string",
+    "values": {
+      "playstation 4": "923447",
+      "xbox 360": "923451",
+      "xbox one": "923450"
     },
     "allowed_units": [],
     "tags": {
@@ -514,9 +962,9 @@
   "COMPATIBLE_OPERATING_SYSTEMS": {
     "value_type": "string",
     "values": {
-      "ios": "189046",
-      "android": "168370",
-      "windows": "4804541"
+      "windows 7": "3211255",
+      "windows 8": "3211254",
+      "windows 9": "9014150"
     },
     "allowed_units": [],
     "tags": {
@@ -524,140 +972,6 @@
       "multivalued": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_TOUCHPAD": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_SPEAKERPHONE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_SHARE_BUTTON": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_LIGHT_BAR": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_ERGONOMIC_DESIGN": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "CABLE_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "mm",
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "mm",
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "mm",
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "MPN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "variation_attribute": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   },
   "ITEM_CONDITION": {
@@ -673,18 +987,16 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
-  "IS_TOM_BRAND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true,
-      "read_only": true
+      "multivalued": true,
+      "variation_attribute": true
     },
-    "hierarchy": "ITEM",
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {
@@ -836,6 +1148,22 @@
       "read_only": true
     },
     "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
+    "values": {
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
     "relevance": 2
   },
   "IS_KIT": {

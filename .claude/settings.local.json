@@ -294,7 +294,10 @@
       "Bash(.env)",
       "Bash(git pull:*)",
       "Bash(git log:*)",
-      "Bash(git remote:*)"
+      "Bash(git remote:*)",
+      "Bash(if cat storage/logs/publish_ready/B0D9WB36MF_mini_ml.json)",
+      "Bash(then echo \"✅ CORRECTO - Tiene indicador de accesorio\")",
+      "Bash(else echo \"❌ ERROR - Falta indicador de accesorio\")"
     ],
     "deny": [],
     "ask": []

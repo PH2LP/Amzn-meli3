@@ -683,6 +683,25 @@ REGLAS ESTRICTAS:
 6. Español LATAM neutro y profesional
 {model_instruction}
 
+⚠️ CRÍTICO - DETECCIÓN DE ACCESORIOS (para evitar suspensión en MercadoLibre):
+- Analiza si este producto es un ACCESORIO/COMPATIBLE o el PRODUCTO ORIGINAL
+- Indicadores de accesorio: "case", "cover", "keyboard", "charger", "cable", "dock", "adapter", "stand", "mount", "holder", "protector", "strap", "band", "for [device]", "compatible"
+
+SI ES ACCESORIO:
+- DEBE incluir "PARA" o "Compatible con" para indicar que es PARA otro dispositivo
+- Formato: [Tipo Accesorio] + "PARA" + [Dispositivo Compatible]
+- Ejemplos correctos:
+  * "Teclado Bluetooth PARA iPad 10ma Gen Retroiluminado"
+  * "Base Cargadora PARA Nintendo Switch Dock USB-C"
+  * "Funda Protectora PARA iPhone 14 Pro Silicona"
+  * "Cable USB-C PARA MacBook Pro Carga Rápida"
+- ❌ NUNCA: "iPad Teclado Bluetooth" (suspendido por ML)
+- ✅ SIEMPRE: "Teclado Bluetooth PARA iPad"
+
+SI ES PRODUCTO ORIGINAL:
+- Formato directo: Marca + Modelo + Tipo + Atributos
+- Ejemplos: "iPad Pro 11 256GB", "Nintendo Switch OLED 64GB"
+
 DATOS DEL PRODUCTO:
 Título original: {base_title}
 Marca: {brand}

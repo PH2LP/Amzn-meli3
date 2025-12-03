@@ -1,43 +1,6 @@
 {
-  "MANUFACTURER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
   "BRAND": {
     "value_type": "string",
-    "values": {
-      "beboncool": "923430",
-      "bowink": "923429",
-      "dragonbest": "923420",
-      "family": "923419",
-      "genius": "7124",
-      "ipega": "923427",
-      "logitech": "15788",
-      "mocute": "923424",
-      "nes": "923423",
-      "nintendo": "9565",
-      "noganet": "15795",
-      "olja": "923426",
-      "razer": "17587",
-      "sega": "9551",
-      "steelseries": "17766",
-      "szky": "923425",
-      "thrustmaster": "923428"
-    },
-    "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "required": true
-    },
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
-  "MODEL": {
-    "value_type": "string",
     "values": {},
     "allowed_units": [],
     "tags": {
@@ -47,132 +10,18 @@
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
-  "VERSION": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "PARENT_PK",
-    "relevance": 1
-  },
-  "COLOR": {
+  "COMPATIBLE_DEVICES": {
     "value_type": "string",
     "values": {
-      "dark green": "52019",
-      "turquoise": "283160",
-      "water": "52022",
-      "indigo": "283162",
-      "lavender": "52036",
-      "pink gum": "283163",
-      "maroon": "51998",
-      "nude": "52003",
-      "white": "52055",
-      "navy blue": "283161",
-      "cream": "52008",
-      "pale pink": "52045",
-      "cleat": "283153",
-      "light orange": "283150",
-      "blue": "52028",
-      "light pink": "52043",
-      "light coral": "283148",
-      "coral": "283149",
-      "heavenly": "52021",
-      "blue steel": "52031",
-      "khaki": "283156",
-      "beige": "52001",
-      "red": "51993",
-      "terracotta": "51996",
-      "gray": "283165",
-      "violet": "52035",
-      "light brown": "283154",
-      "black": "52049",
-      "dark brown": "283155",
-      "silver": "52053",
-      "dark violet": "52047",
-      "pink": "51994",
-      "yellow": "52007",
-      "lime green": "283157",
-      "dark gold": "52012",
-      "light green": "52015",
-      "dark orange": "283151",
-      "oil blue": "52024",
-      "dark grey": "52051",
-      "chocolate": "283152",
-      "green": "52014",
-      "golden": "283164",
-      "orange": "52000",
-      "dark blue": "52033",
-      "ochre": "52010",
-      "moss green": "283158",
-      "brown": "52005",
-      "lilac": "52038",
-      "fuchsia": "52042",
-      "cyan": "338779",
-      "light blue": "52029"
+      "iphone x": "3918637",
+      "samsung s9": "3918638",
+      "huawei g8": "3918639"
     },
     "allowed_units": [],
     "tags": {
-      "allow_variations": true,
-      "defines_picture": true
+      "multivalued": true
     },
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "SALE_FORMAT": {
-    "value_type": "list",
-    "values": {
-      "unit": "1359391",
-      "pack": "1359392"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "UNITS_PER_PACK": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "conditional_required": true
-    },
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "MAIN_COLOR": {
-    "value_type": "list",
-    "values": {
-      "black": "2450295",
-      "blue": "2450293",
-      "red": "2450307",
-      "violet": "2450311",
-      "brown": "2450291",
-      "green": "2450314",
-      "orange": "2450327",
-      "sky blue": "2450278",
-      "pink": "2450312",
-      "golden": "2450289",
-      "silver": "2450303",
-      "yellow": "2450296",
-      "gray": "2450294",
-      "white": "2450308"
-    },
-    "allowed_units": [],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "DETAILED_MODEL": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "PACKAGE_HEIGHT": {
@@ -247,94 +96,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "COMPATIBLE_DEVICES": {
-    "value_type": "string",
-    "values": {
-      "playstation 2": "10946188",
-      "playstation 3": "10946189",
-      "playstation 4": "10946190",
-      "playstation 5": "10946191",
-      "xbox": "10946192",
-      "xbox 360": "4636339",
-      "xbox series s": "10946193",
-      "xbox series x": "10946194",
-      "xbox one": "10946195",
-      "xbox one s": "10946196",
-      "xbox one e": "10946197",
-      "xbox one x": "10946198",
-      "nintendo switch": "10946199",
-      "nintendo switch lite": "10946200",
-      "wii": "10946201",
-      "wii u": "10946202",
-      "iphone": "10187555",
-      "ipad": "9023839",
-      "ipod": "10192277",
-      "smartphones": "2295744",
-      "computers": "8867968",
-      "tablets": "168366"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "IS_WIRELESS": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_MOVEMENT_SENSOR": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_VIBRATION": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "WITH_BLUETOOTH": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_CELL_BATTERIES": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "GTIN": {
     "value_type": "string",
     "values": {},
@@ -349,32 +110,6 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
-  "HAZMAT_TRANSPORTABILITY": {
-    "value_type": "list",
-    "values": {
-      "excepted": "13414677",
-      "limited": "13414678",
-      "exceeded": "13414679",
-      "indeterminate": "13414680"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ANATEL_HOMOLOGATION_NUMBER": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "EMPTY_GTIN_REASON": {
     "value_type": "list",
     "values": {
@@ -386,24 +121,12 @@
     "allowed_units": [],
     "tags": {
       "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
+      "variation_attribute": true
     },
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "ALPHANUMERIC_MODELS": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_ACCESSORIES": {
+  "IS_FLAMMABLE": {
     "value_type": "boolean",
     "values": {
       "no": "242084",
@@ -415,237 +138,18 @@
       "read_only": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 1
+    "relevance": 2
   },
-  "ANATEL_HOMOLOGATION_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284"
+    },
     "allowed_units": [],
-    "tags": {},
+    "tags": {
+      "hidden": true
+    },
     "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "CELL_BATTERY_TYPE": {
-    "value_type": "string",
-    "values": {
-      "aaa": "6178423",
-      "aa": "6178424"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "BATTERY_VOLTAGE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "POWER_SUPPLY_TYPES": {
-    "value_type": "string",
-    "values": {
-      "battery": "4491927",
-      "manual operation": "49605648",
-      "cell battery": "1176674",
-      "battery/manual operation": "53615776",
-      "battery/cell battery": "53603541",
-      "manual operation/cell battery": "53615778",
-      "battery/manual operation/cell battery": "53615780"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "ACCESSORIES_INCLUDED": {
-    "value_type": "string",
-    "values": {
-      "charger": "3877589",
-      "case": "111199",
-      "wire": "411379",
-      "usb receiver": "8615809"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "INPUT_CONNECTORS": {
-    "value_type": "string",
-    "values": {
-      "3.5 mm jack": "7742961",
-      "mini jack": "6778118",
-      "usb": "102303",
-      "usb-c": "6778102"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "OUTPUT_CONNECTORS": {
-    "value_type": "string",
-    "values": {
-      "3.5 mm jack": "7742961",
-      "mini jack": "6778118",
-      "usb": "102303",
-      "usb-c": "6778102"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "COMPATIBLE_OPERATING_SYSTEMS": {
-    "value_type": "string",
-    "values": {
-      "ios": "189046",
-      "android": "168370",
-      "windows": "4804541"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_TOUCHPAD": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_SPEAKERPHONE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_SHARE_BUTTON": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_LIGHT_BAR": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_ERGONOMIC_DESIGN": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "CABLE_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "mm",
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "mm",
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "mm",
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "MPN": {
@@ -660,32 +164,15 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true
     },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "IS_TOM_BRAND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
   },
   "VALUE_ADDED_TAX": {
     "value_type": "string",
@@ -810,7 +297,7 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "IS_FLAMMABLE": {
+  "WITH_POSITIVE_IMPACT": {
     "value_type": "boolean",
     "values": {
       "no": "242084",
@@ -824,18 +311,20 @@
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
     "values": {
-      "no": "242084",
-      "yes": "242085"
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
     },
     "allowed_units": [],
     "tags": {
       "hidden": true,
       "read_only": true
     },
-    "hierarchy": "FAMILY",
+    "hierarchy": "ITEM",
     "relevance": 2
   },
   "IS_KIT": {
