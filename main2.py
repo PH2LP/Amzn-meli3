@@ -660,6 +660,7 @@ class PublishPhase(PipelinePhase):
 
         max_retries = Config.MAX_PUBLISH_RETRIES
         successful_sites = []  # Trackear países donde ya tuvo éxito (evita duplicados)
+        item_id = None  # Inicializar antes del loop
 
         for attempt in range(1, max_retries + 1):
             try:
@@ -1168,11 +1169,11 @@ class Pipeline:
 
             if result["partial_success"]:
                 if result["max_retries_reached"]:
-                    print(f"⚠ {result['item_id']} (parcial, intentos agotados)")
+                    print(f"⚠ {result.get('item_id', 'N/A')} (parcial, intentos agotados)")
                 else:
-                    print(f"⚠ {result['item_id']} (parcial)")
+                    print(f"⚠ {result.get('item_id', 'N/A')} (parcial)")
             else:
-                print(f"✓ {result['item_id']}")
+                print(f"✓ {result.get('item_id', 'N/A')}")
 
             print(f"      ✅ Publicado en: {countries_str}")
             if result["countries_failed"]:
