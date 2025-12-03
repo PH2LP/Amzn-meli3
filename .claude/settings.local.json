@@ -292,7 +292,9 @@
       "Bash(mv:*)",
       "Bash(if grep -q \"^KEYWORDS_FILE=\" .env)",
       "Bash(.env)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(git log:*)",
+      "Bash(git remote:*)"
     ],
     "deny": [],
     "ask": []

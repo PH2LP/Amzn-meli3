@@ -55,9 +55,31 @@ REQUIREMENTS:
    - Use generic categories like: CBT1157 (LEGO/Building), CBT455414 (Headphones), CBT29890 (Nail Polish), etc.
    - Base the decision on product type, not brand
 
-2. **Title**: Create Spanish title (max 60 chars) following format:
-   - Brand + Product Type + Key Feature
-   - Example: "LEGO Icons 10314 Set de Construcción para Adultos"
+2. **Title**: Create Spanish title (max 60 chars) following STRICT format rules:
+
+   **CRITICAL - ACCESSORY DETECTION:**
+   - First determine if this is an ACCESSORY/COMPATIBLE product OR the ORIGINAL product
+   - Accessory indicators: "case", "cover", "charger", "cable", "adapter", "stand", "dock", "base", "keyboard for", "compatible", "replacement", "holder", "mount", "protector", "screen protector", "stylus", "strap", "band"
+
+   **IF ACCESSORY/COMPATIBLE:**
+   - MUST include "PARA" or "Compatible con" to clearly indicate it's FOR another device
+   - Format: [Accessory Type] + "PARA" + [Compatible Device/Brand]
+   - Examples:
+     * "Base Cargadora PARA Nintendo Switch Dock Original"
+     * "Teclado Retroiluminado PARA iPad 5ta Gen"
+     * "Funda Protectora PARA iPhone 14 Pro Max Silicona"
+     * "Cable USB-C PARA MacBook Pro Carga Rápida"
+   - NEVER: "Nintendo Switch Base Cargadora" (suspended by ML!)
+   - ALWAYS: "Base Cargadora PARA Nintendo Switch"
+
+   **IF ORIGINAL PRODUCT:**
+   - Use direct format: Brand + Product Type + Model/Feature
+   - Examples:
+     * "iPad Pro 11 Pulgadas 256GB WiFi Space Gray"
+     * "Nintendo Switch Console OLED 64GB Neon"
+     * "LEGO Icons 10314 Set de Construcción"
+
+   **Key Rule:** If the product is meant to be USED WITH another device/brand, it MUST say "PARA" or "Compatible con"
 
 3. **Description**: Generate Spanish description (3-4 paragraphs) with:
    - Product benefits and features
