@@ -167,36 +167,59 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
         if not title:
             return {"is_official": False, "brand": None, "reasoning": "No title"}
 
-        prompt = f"""Analyze this product title and determine if it's an OFFICIAL product from a major brand, or a THIRD-PARTY accessory.
+        prompt = f"""Analyze this product title and determine if it's an OFFICIAL product from the DEVICE'S brand, or a THIRD-PARTY accessory.
 
 Product title: "{title}"
 
-OFFICIAL products are:
-- Manufactured directly by the brand mentioned (Apple, Sony, Microsoft, Samsung, etc.)
-- The BRAND NAME appears at the START of the title
-- Examples:
-  * "Apple iPad Pro" → OFFICIAL Apple
-  * "Sony PlayStation 5" → OFFICIAL Sony
-  * "Razer DeathAdder Mouse" → OFFICIAL Razer
-  * "Apple MagSafe Charger for iPhone" → OFFICIAL Apple (Apple makes MagSafe)
+⚠️ CRITICAL CONTEXT:
+We're evaluating if logos from the DEVICE's brand (Apple, Sony, Microsoft, etc.) should be allowed in photos.
+Focus on the DEVICE brand mentioned (iPad, PlayStation, Xbox, etc.), NOT the accessory manufacturer.
 
-THIRD-PARTY accessories are:
-- Made by another company FOR/COMPATIBLE with a brand's product
-- Brand name appears AFTER "for" or "compatible" (not at start)
-- Generic accessories with compatibility claims
+OFFICIAL products (logo allowed):
+- Product manufactured by the SAME brand as the device it's for
 - Examples:
-  * "Case for iPad" → THIRD-PARTY (no brand at start)
-  * "Base para PS5" → THIRD-PARTY (no Sony at start)
-  * "Compatible with MacBook" → THIRD-PARTY (no Apple at start)
-  * "Funda estilo Apple" → THIRD-PARTY (says "estilo", not made by Apple)
+  * "Apple MagSafe Charger for iPhone" → OFFICIAL (Apple makes iPhone)
+  * "Sony DualSense Controller for PS5" → OFFICIAL (Sony makes PlayStation)
+  * "Apple Smart Keyboard for iPad" → OFFICIAL (Apple makes iPad)
+  * "Microsoft Xbox Controller" → OFFICIAL (Microsoft makes Xbox)
 
-KEY RULE: If a major brand name (Apple, Sony, Microsoft, etc.) appears at the BEGINNING
-of the title, it's almost always OFFICIAL, even if it says "for" something else.
+THIRD-PARTY accessories (logo NOT allowed):
+- Product from DIFFERENT brand than the device
+- Examples:
+  * "Logitech Keyboard for iPad" → THIRD-PARTY (Logitech ≠ Apple)
+  * "Anker Charger for iPhone" → THIRD-PARTY (Anker ≠ Apple)
+  * "Spigen Case for iPhone" → THIRD-PARTY (Spigen ≠ Apple)
+  * "JSAUX Dock for Nintendo Switch" → THIRD-PARTY (JSAUX ≠ Nintendo)
+  * "Case for iPad" → THIRD-PARTY (no Apple brand at start)
+
+DETECTION LOGIC:
+1. Check if specific device is mentioned (iPad, iPhone, PS5, Xbox, Switch, etc.)
+2. If YES:
+   a. Identify device brand: iPad/iPhone → Apple, PS5 → Sony, Xbox → Microsoft, Switch → Nintendo
+   b. Identify product manufacturer (brand at start)
+   c. If manufacturer = device brand → OFFICIAL
+   d. If manufacturer ≠ device brand → THIRD-PARTY
+3. If NO specific device mentioned:
+   a. Check if major brand (Apple, Samsung, Sony, etc.) at start
+   b. If YES → OFFICIAL (standalone product from that brand)
+   c. If NO → THIRD-PARTY
+
+EXAMPLES FOR STANDALONE PRODUCTS:
+- "Samsung Fast Charging Cable Type-C" → OFFICIAL (Samsung brand, no specific device)
+- "Apple Lightning to USB Cable" → OFFICIAL (Apple brand, no specific device)
+- "Sony Wireless Headphones" → OFFICIAL (Sony brand, no specific device)
+
+SPECIAL CASE - Brand = Device Name:
+- "Nintendo Switch Pro Controller" → OFFICIAL (Nintendo makes Switch)
+- "PlayStation 5 DualSense Controller" → OFFICIAL (Sony makes PlayStation)
+- "Xbox Series X Wireless Controller" → OFFICIAL (Microsoft makes Xbox)
+
+NOTE: If the brand at the start matches the device brand, it's OFFICIAL even if the title structure is unusual.
 
 Respond in JSON:
 {{
   "is_official": true/false,
-  "brand": "brand name if official (lowercase), or null",
+  "brand": "device brand (apple/sony/microsoft/etc) if official, or null",
   "reasoning": "brief explanation why"
 }}"""
 
