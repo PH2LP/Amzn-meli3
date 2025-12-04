@@ -73,3 +73,4 @@ asins_json/*.json
 !README.md
 !REPORTE_FINAL.md
 !.gitignore
+asins_with_deleted_pictures/

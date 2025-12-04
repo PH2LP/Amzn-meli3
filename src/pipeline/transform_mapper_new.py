@@ -16,12 +16,12 @@ from pathlib import Path
 
 # Logo filter para remover imágenes con marcas
 try:
-    from .logo_filter import filter_product_images
+    from .logo_filter import LogoFilter
     LOGO_FILTER_AVAILABLE = True
+    LOGO_FILTER_INSTANCE = None
 except ImportError:
     LOGO_FILTER_AVAILABLE = False
-    def filter_product_images(images, title=""):
-        return images  # Fallback: retorna todas si no está disponible
+    LogoFilter = None
 
 # ---------- 0) Auto-activar venv ----------
 if sys.prefix == sys.base_prefix:
@@ -1528,15 +1528,20 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
 
     if is_accessory and LOGO_FILTER_AVAILABLE and images:
         try:
+            global LOGO_FILTER_INSTANCE
+            if LOGO_FILTER_INSTANCE is None:
+                LOGO_FILTER_INSTANCE = LogoFilter()
+
             qprint(f"🔍 Filtrando logos en imágenes (producto accesorio)...")
-            filtered_images = filter_product_images(images, title_es)
+            result = LOGO_FILTER_INSTANCE.filter_images(images, title_es, asin)
 
             original_count = len(images)
-            filtered_count = len(filtered_images)
+            filtered_count = result['kept_count']
 
             if filtered_count < original_count:
-                qprint(f"   Eliminadas {original_count - filtered_count} imágenes con logos (quedan {filtered_count})")
-                images = filtered_images
+                qprint(f"   Eliminadas {result['removed_count']} imágenes con logos (quedan {filtered_count})")
+                qprint(f"   📄 Reporte guardado en: asins_with_deleted_pictures/{asin}.json")
+                images = result['filtered_images']
             else:
                 qprint(f"   Sin logos detectados - manteniendo todas las imágenes")
         except Exception as e:

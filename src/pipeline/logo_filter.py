@@ -150,7 +150,7 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
                 "error": str(e)
             }
 
-    def filter_images(self, images: List[Dict], product_title: str = "") -> Dict:
+    def filter_images(self, images: List[Dict], product_title: str = "", asin: str = "") -> Dict:
         """
         Filtra lista de imágenes eliminando las que contienen logos.
 
@@ -205,12 +205,56 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
             filtered = [images[0]]
             analysis_details[0]['forced_keep'] = True
 
+        # Guardar reporte si se eliminaron imágenes
+        if len(removed) > 0 and asin:
+            self._save_deletion_report(asin, product_title, removed, analysis_details)
+
         return {
             "filtered_images": filtered,
             "removed_count": len(removed),
             "kept_count": len(filtered),
             "analysis_details": analysis_details
         }
+
+    def _save_deletion_report(self, asin: str, title: str, removed_images: List, analysis: List):
+        """Guarda reporte de imágenes eliminadas"""
+        import json
+        from datetime import datetime
+        from pathlib import Path
+
+        report_dir = Path("asins_with_deleted_pictures")
+        report_dir.mkdir(exist_ok=True)
+
+        report_file = report_dir / f"{asin}.json"
+
+        # Crear reporte
+        report = {
+            "asin": asin,
+            "title": title,
+            "timestamp": datetime.now().isoformat(),
+            "total_images": len(analysis),
+            "images_removed": len(removed_images),
+            "images_kept": len(analysis) - len(removed_images),
+            "removed_images": [
+                {
+                    "index": detail["index"],
+                    "url": detail["url"],
+                    "logos_detected": detail["logos"],
+                    "reasoning": detail["reasoning"],
+                    "confidence": detail["confidence"]
+                }
+                for detail in analysis if detail.get("should_remove", False)
+            ]
+        }
+
+        # Guardar reporte
+        with open(report_file, 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+
+        # Agregar a lista maestra
+        master_list = report_dir / "asins_list.txt"
+        with open(master_list, 'a') as f:
+            f.write(f"{asin}\n")
 
 
 # Función helper para uso directo
