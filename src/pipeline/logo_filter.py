@@ -154,6 +154,9 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
         """
         Extrae marcas del título que deberían estar permitidas en las fotos.
 
+        SOLO permite logos si la marca es el FABRICANTE del producto, NO si es
+        solo compatible/para esa marca.
+
         Args:
             title: Título del producto
 
@@ -165,13 +168,25 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
 
         title_lower = title.lower()
 
-        # Marcas comunes a detectar
+        # Detectar si es accesorio de terceros (compatibilidad, no producto oficial)
+        compatibility_indicators = [
+            " para ", " for ", " compatible ", " compatível ",
+            " fits ", " works with ", " designed for ",
+            " caso ", " funda ", " case ", " cover ", " protector ",
+            " cable ", " charger ", " dock ", " stand ", " mount ", " holder ",
+            " adapter ", " adaptador ", " base "
+        ]
+
+        # Si tiene indicadores de compatibilidad, es accesorio third-party
+        is_third_party = any(indicator in title_lower for indicator in compatibility_indicators)
+
+        # Marcas comunes y sus keywords
         brand_keywords = {
             "apple": ["apple"],
             "samsung": ["samsung"],
-            "sony": ["sony", "playstation", "ps5", "ps4", "psvr"],
+            "sony": ["sony", "playstation"],
             "microsoft": ["microsoft", "xbox"],
-            "nintendo": ["nintendo", "switch"],
+            "nintendo": ["nintendo"],
             "logitech": ["logitech"],
             "razer": ["razer"],
             "corsair": ["corsair"],
@@ -181,12 +196,18 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
             "msi": ["msi"],
             "gigabyte": ["gigabyte"],
             "meta": ["meta", "oculus"],
-            "valve": ["valve", "steam deck"],
-            "google": ["google", "pixel"],
-            "amazon": ["amazon", "kindle", "fire"],
+            "valve": ["valve"],
+            "google": ["google"],
+            "amazon": ["amazon branded"],  # Solo si dice "Amazon" como fabricante
         }
 
         allowed = []
+
+        # Si es third-party, NO permitir ninguna marca
+        if is_third_party:
+            return []
+
+        # Si NO es third-party, verificar qué marcas están mencionadas como fabricante
         for brand, keywords in brand_keywords.items():
             if any(kw in title_lower for kw in keywords):
                 allowed.append(brand)
