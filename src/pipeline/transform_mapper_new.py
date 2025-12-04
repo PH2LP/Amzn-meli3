@@ -14,6 +14,15 @@ import os, sys, re, json, time, requests
 from typing import Dict, List, Any, Tuple
 from pathlib import Path
 
+# Logo filter para remover imágenes con marcas
+try:
+    from .logo_filter import filter_product_images
+    LOGO_FILTER_AVAILABLE = True
+except ImportError:
+    LOGO_FILTER_AVAILABLE = False
+    def filter_product_images(images, title=""):
+        return images  # Fallback: retorna todas si no está disponible
+
 # ---------- 0) Auto-activar venv ----------
 if sys.prefix == sys.base_prefix:
     vpy = os.path.join(os.path.dirname(__file__), "venv", "bin", "python")
@@ -1510,6 +1519,28 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
                     "order": idx
                 })
         images = enriched
+
+    # ================== FILTRADO DE LOGOS (solo para accesorios) ==================
+    # Detectar si es accesorio basado en título
+    title_lower = title_es.lower() if title_es else ""
+    accessory_keywords = ["para ", "compatible", "case", "funda", "cover", "cable", "charger", "dock", "adapter", "stand", "mount", "holder", "protector"]
+    is_accessory = any(kw in title_lower for kw in accessory_keywords)
+
+    if is_accessory and LOGO_FILTER_AVAILABLE and images:
+        try:
+            qprint(f"🔍 Filtrando logos en imágenes (producto accesorio)...")
+            filtered_images = filter_product_images(images, title_es)
+
+            original_count = len(images)
+            filtered_count = len(filtered_images)
+
+            if filtered_count < original_count:
+                qprint(f"   Eliminadas {original_count - filtered_count} imágenes con logos (quedan {filtered_count})")
+                images = filtered_images
+            else:
+                qprint(f"   Sin logos detectados - manteniendo todas las imágenes")
+        except Exception as e:
+            qprint(f"⚠️  Error filtrando logos: {str(e)[:60]} - manteniendo todas las imágenes")
     # ==============================================================================
     # gtin
     gtins = extract_gtins(amazon_json)
