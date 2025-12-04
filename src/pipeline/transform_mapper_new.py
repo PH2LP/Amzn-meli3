@@ -1532,7 +1532,13 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
             if LOGO_FILTER_INSTANCE is None:
                 LOGO_FILTER_INSTANCE = LogoFilter()
 
-            qprint(f"🔍 Filtrando logos en imágenes (producto accesorio)...")
+            # Extraer marcas permitidas para mostrar en log
+            allowed_brands = LOGO_FILTER_INSTANCE._extract_allowed_brands(title_es)
+            if allowed_brands:
+                qprint(f"🔍 Filtrando logos (permitiendo: {', '.join(allowed_brands)})...")
+            else:
+                qprint(f"🔍 Filtrando logos en imágenes (producto accesorio)...")
+
             result = LOGO_FILTER_INSTANCE.filter_images(images, title_es, asin)
 
             original_count = len(images)
@@ -1543,7 +1549,7 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
                 qprint(f"   📄 Reporte guardado en: asins_with_deleted_pictures/{asin}.json")
                 images = result['filtered_images']
             else:
-                qprint(f"   Sin logos detectados - manteniendo todas las imágenes")
+                qprint(f"   Sin logos prohibidos - manteniendo todas las imágenes")
         except Exception as e:
             qprint(f"⚠️  Error filtrando logos: {str(e)[:60]} - manteniendo todas las imágenes")
     # ==============================================================================

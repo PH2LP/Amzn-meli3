@@ -150,6 +150,49 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
                 "error": str(e)
             }
 
+    def _extract_allowed_brands(self, title: str) -> List[str]:
+        """
+        Extrae marcas del título que deberían estar permitidas en las fotos.
+
+        Args:
+            title: Título del producto
+
+        Returns:
+            Lista de marcas permitidas (lowercase)
+        """
+        if not title:
+            return []
+
+        title_lower = title.lower()
+
+        # Marcas comunes a detectar
+        brand_keywords = {
+            "apple": ["apple"],
+            "samsung": ["samsung"],
+            "sony": ["sony", "playstation", "ps5", "ps4", "psvr"],
+            "microsoft": ["microsoft", "xbox"],
+            "nintendo": ["nintendo", "switch"],
+            "logitech": ["logitech"],
+            "razer": ["razer"],
+            "corsair": ["corsair"],
+            "hyperx": ["hyperx"],
+            "steelseries": ["steelseries"],
+            "asus": ["asus", "rog"],
+            "msi": ["msi"],
+            "gigabyte": ["gigabyte"],
+            "meta": ["meta", "oculus"],
+            "valve": ["valve", "steam deck"],
+            "google": ["google", "pixel"],
+            "amazon": ["amazon", "kindle", "fire"],
+        }
+
+        allowed = []
+        for brand, keywords in brand_keywords.items():
+            if any(kw in title_lower for kw in keywords):
+                allowed.append(brand)
+
+        return allowed
+
     def filter_images(self, images: List[Dict], product_title: str = "", asin: str = "") -> Dict:
         """
         Filtra lista de imágenes eliminando las que contienen logos.
@@ -172,6 +215,9 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
                 "analysis_details": []
             }
 
+        # Extraer marcas permitidas del título
+        allowed_brands = self._extract_allowed_brands(product_title)
+
         filtered = []
         removed = []
         analysis_details = []
@@ -186,16 +232,33 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
             # Analizar imagen
             analysis = self.analyze_image(url)
 
+            # Filtrar logos: solo eliminar si NO están en la whitelist
+            logos_detected = analysis['logos_detected']
+            forbidden_logos = []
+
+            for logo in logos_detected:
+                brand = logo.get('brand', '').lower()
+                # Verificar si el logo detectado está en marcas permitidas
+                is_allowed = any(allowed in brand for allowed in allowed_brands)
+
+                if not is_allowed:
+                    forbidden_logos.append(logo)
+
+            # Decidir si eliminar basado en logos NO permitidos
+            should_remove = len(forbidden_logos) > 0
+
             analysis_details.append({
                 "index": i,
                 "url": url[:60],
-                "should_remove": analysis['should_remove'],
-                "logos": [l.get('brand') for l in analysis['logos_detected']],
+                "should_remove": should_remove,
+                "logos": [l.get('brand') for l in logos_detected],
+                "forbidden_logos": [l.get('brand') for l in forbidden_logos],
+                "allowed_brands": allowed_brands,
                 "reasoning": analysis['reasoning'],
                 "confidence": analysis['confidence']
             })
 
-            if analysis['should_remove']:
+            if should_remove:
                 removed.append(img)
             else:
                 filtered.append(img)
