@@ -150,69 +150,109 @@ Only recommend "remove" if should_flag=true for ANY logo with confidence >= 0.75
                 "error": str(e)
             }
 
-    def _extract_allowed_brands(self, title: str) -> List[str]:
+    def _is_official_product_ai(self, title: str) -> Dict:
         """
-        Extrae marcas del título que deberían estar permitidas en las fotos.
-
-        SOLO permite logos si la marca es el FABRICANTE del producto, NO si es
-        solo compatible/para esa marca.
+        Usa IA para detectar si el producto es oficial de alguna marca.
 
         Args:
             title: Título del producto
 
         Returns:
-            Lista de marcas permitidas (lowercase)
+            Dict con {
+                "is_official": bool,
+                "brand": str (si es oficial),
+                "reasoning": str
+            }
+        """
+        if not title:
+            return {"is_official": False, "brand": None, "reasoning": "No title"}
+
+        prompt = f"""Analyze this product title and determine if it's an OFFICIAL product from a major brand, or a THIRD-PARTY accessory.
+
+Product title: "{title}"
+
+OFFICIAL products are:
+- Manufactured directly by the brand mentioned (Apple, Sony, Microsoft, Samsung, etc.)
+- The BRAND NAME appears at the START of the title
+- Examples:
+  * "Apple iPad Pro" → OFFICIAL Apple
+  * "Sony PlayStation 5" → OFFICIAL Sony
+  * "Razer DeathAdder Mouse" → OFFICIAL Razer
+  * "Apple MagSafe Charger for iPhone" → OFFICIAL Apple (Apple makes MagSafe)
+
+THIRD-PARTY accessories are:
+- Made by another company FOR/COMPATIBLE with a brand's product
+- Brand name appears AFTER "for" or "compatible" (not at start)
+- Generic accessories with compatibility claims
+- Examples:
+  * "Case for iPad" → THIRD-PARTY (no brand at start)
+  * "Base para PS5" → THIRD-PARTY (no Sony at start)
+  * "Compatible with MacBook" → THIRD-PARTY (no Apple at start)
+  * "Funda estilo Apple" → THIRD-PARTY (says "estilo", not made by Apple)
+
+KEY RULE: If a major brand name (Apple, Sony, Microsoft, etc.) appears at the BEGINNING
+of the title, it's almost always OFFICIAL, even if it says "for" something else.
+
+Respond in JSON:
+{{
+  "is_official": true/false,
+  "brand": "brand name if official (lowercase), or null",
+  "reasoning": "brief explanation why"
+}}"""
+
+        try:
+            response = self.client.chat.completions.create(
+                model="gpt-4o-mini",  # Más barato y rápido para clasificación
+                messages=[
+                    {"role": "user", "content": prompt}
+                ],
+                max_tokens=150,
+                temperature=0.1
+            )
+
+            result_text = response.choices[0].message.content.strip()
+
+            # Extraer JSON
+            json_match = re.search(r'\{.*\}', result_text, re.DOTALL)
+            if json_match:
+                analysis = json.loads(json_match.group(0))
+                return {
+                    "is_official": analysis.get("is_official", False),
+                    "brand": analysis.get("brand"),
+                    "reasoning": analysis.get("reasoning", "")
+                }
+            else:
+                return {"is_official": False, "brand": None, "reasoning": "Parse error"}
+
+        except Exception as e:
+            # Fallback: usar método keyword si IA falla
+            return {"is_official": False, "brand": None, "reasoning": f"AI error: {str(e)[:50]}"}
+
+    def _extract_allowed_brands(self, title: str) -> List[str]:
+        """
+        Extrae marcas del título que deberían estar permitidas en las fotos.
+
+        Usa IA para detectar si es producto oficial de la marca.
+
+        Args:
+            title: Título del producto
+
+        Returns:
+            Lista de marcas permitidas (lowercase), vacía si es third-party
         """
         if not title:
             return []
 
-        title_lower = title.lower()
+        # Usar IA para detectar si es producto oficial
+        ai_result = self._is_official_product_ai(title)
 
-        # Detectar si es accesorio de terceros (compatibilidad, no producto oficial)
-        compatibility_indicators = [
-            " para ", " for ", " compatible ", " compatível ",
-            " fits ", " works with ", " designed for ",
-            " caso ", " funda ", " case ", " cover ", " protector ",
-            " cable ", " charger ", " dock ", " stand ", " mount ", " holder ",
-            " adapter ", " adaptador ", " base "
-        ]
-
-        # Si tiene indicadores de compatibilidad, es accesorio third-party
-        is_third_party = any(indicator in title_lower for indicator in compatibility_indicators)
-
-        # Marcas comunes y sus keywords
-        brand_keywords = {
-            "apple": ["apple"],
-            "samsung": ["samsung"],
-            "sony": ["sony", "playstation"],
-            "microsoft": ["microsoft", "xbox"],
-            "nintendo": ["nintendo"],
-            "logitech": ["logitech"],
-            "razer": ["razer"],
-            "corsair": ["corsair"],
-            "hyperx": ["hyperx"],
-            "steelseries": ["steelseries"],
-            "asus": ["asus", "rog"],
-            "msi": ["msi"],
-            "gigabyte": ["gigabyte"],
-            "meta": ["meta", "oculus"],
-            "valve": ["valve"],
-            "google": ["google"],
-            "amazon": ["amazon branded"],  # Solo si dice "Amazon" como fabricante
-        }
-
-        allowed = []
-
-        # Si es third-party, NO permitir ninguna marca
-        if is_third_party:
+        if ai_result["is_official"] and ai_result["brand"]:
+            # Normalizar nombre de marca a lowercase
+            brand = ai_result["brand"].lower()
+            return [brand]
+        else:
+            # No es producto oficial, no permitir ninguna marca
             return []
-
-        # Si NO es third-party, verificar qué marcas están mencionadas como fabricante
-        for brand, keywords in brand_keywords.items():
-            if any(kw in title_lower for kw in keywords):
-                allowed.append(brand)
-
-        return allowed
 
     def filter_images(self, images: List[Dict], product_title: str = "", asin: str = "") -> Dict:
         """
