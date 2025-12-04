@@ -692,22 +692,36 @@ REGLAS ESTRICTAS:
 6. Español LATAM neutro y profesional
 {model_instruction}
 
-⚠️ CRÍTICO - DETECCIÓN DE ACCESORIOS (para evitar suspensión en MercadoLibre):
-- Analiza si este producto es un ACCESORIO/COMPATIBLE o el PRODUCTO ORIGINAL
-- Indicadores de accesorio: "case", "cover", "keyboard", "charger", "cable", "dock", "adapter", "stand", "mount", "holder", "protector", "strap", "band", "for [device]", "compatible"
+⚠️ CRÍTICO - DETECCIÓN DE PRODUCTOS OFICIALES vs ACCESORIOS:
 
-SI ES ACCESORIO:
-- DEBE incluir "PARA" o "Compatible con" para indicar que es PARA otro dispositivo
-- Formato: [Tipo Accesorio] + "PARA" + [Dispositivo Compatible]
+PASO 1: Determinar si es producto oficial de la marca o accesorio third-party
+- Verifica si la MARCA del producto coincide con la marca del dispositivo compatible
+- Analiza el título original y las características
+
+CASO A: PRODUCTO OFICIAL de la marca
+Ejemplos: Apple Magic Keyboard, Sony DualSense Controller, Samsung Smart Cover
+- La MARCA del producto (Apple, Sony, Samsung) coincide con el dispositivo (iPad, PlayStation, Galaxy)
+- Formato: [Marca] [Modelo] [Tipo de Producto] + Atributos
 - Ejemplos correctos:
-  * "Teclado Bluetooth PARA iPad 10ma Gen Retroiluminado"
-  * "Base Cargadora PARA Nintendo Switch Dock USB-C"
-  * "Funda Protectora PARA iPhone 14 Pro Silicona"
-  * "Cable USB-C PARA MacBook Pro Carga Rápida"
-- ❌ NUNCA: "iPad Teclado Bluetooth" (suspendido por ML)
-- ✅ SIEMPRE: "Teclado Bluetooth PARA iPad"
+  * "Apple Magic Keyboard iPad Pro 13 Español Trackpad Negro"
+  * "Sony DualSense Controller PS5 Blanco Inalámbrico"
+  * "Apple USB-C Lightning Cable 1m Carga Rápida Original"
+- ✅ NO uses "PARA" si es producto oficial de la marca
 
-SI ES PRODUCTO ORIGINAL:
+CASO B: ACCESORIO THIRD-PARTY (otra marca para dispositivo de otra marca)
+Ejemplos: Logitech keyboard for iPad, Anker charger for iPhone
+- La MARCA del producto NO coincide con el dispositivo compatible
+- Formato: [Tipo Accesorio] [Marca Fabricante] PARA [Dispositivo Compatible] + Atributos
+- Ejemplos correctos:
+  * "Teclado Bluetooth Logitech PARA iPad 10ma Gen Retroiluminado"
+  * "Base Cargadora PARA Nintendo Switch Dock USB-C"
+  * "Funda Protectora PARA iPhone 14 Pro Silicona Negro"
+  * "Cable USB-C Anker PARA MacBook Pro Carga Rápida 2m"
+- ✅ SIEMPRE usa "PARA" en accesorios third-party
+- ❌ NUNCA: "iPad Teclado Bluetooth" (ambiguo, puede ser suspendido)
+
+CASO C: PRODUCTO ORIGINAL (no es accesorio)
+- Dispositivo standalone: iPad, PlayStation, Nintendo Switch, MacBook
 - Formato directo: Marca + Modelo + Tipo + Atributos
 - Ejemplos: "iPad Pro 11 256GB", "Nintendo Switch OLED 64GB"
 
