@@ -580,24 +580,20 @@ PASO 6 - PLANEAR LA RESPUESTA:
 - ¿Hay algo POSITIVO que destacar?
 </thinking>
 
-AHORA RESPONDE CON ESTE FORMATO EXACTO:
+AHORA GENERA TU RESPUESTA EN ESTE FORMATO:
 
-<answer>
-[Escribe aquí tu respuesta de 2-5 líneas, tono amigable, sin saludos ni despedidas]
-</answer>
+INSTRUCCIONES PARA CADA TAG:
+- <answer> = Tu respuesta de 2-5 líneas, tono amigable, SIN saludos ni despedidas
+- <confidence> = Solo el número de 0 a 100
+- <key_points> = Puntos clave que usaste para responder
 
-<confidence>
-[Número de 0 a 100]
-</confidence>
+FORMATO (escribe TODO entre los tags, NO dejes tags vacíos):
 
-<key_points>
-[Puntos clave]
-</key_points>
+<answer></answer>
 
-IMPORTANTE:
-- Escribe la respuesta DENTRO de los tags
-- NO dejes los tags vacíos
-- Empieza directo con la respuesta a la pregunta
+<confidence></confidence>
+
+<key_points></key_points>
 
 ═══════════════════════════════════════════════════════════════
 
