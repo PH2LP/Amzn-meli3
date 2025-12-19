@@ -537,10 +537,10 @@ def send_telegram_notification_once(
     Evita duplicados cuando múltiples workers corren en paralelo.
 
     Args:
-        question_id: ID de la pregunta (único)
+        question_id: ID de la pregunta (único) para cache
         notification_type: Tipo de notificación ("product", "critical", "low_confidence")
         notification_func: Función a llamar para notificar (notify_product_request o notify_technical_question)
-        **kwargs: Argumentos para pasar a notification_func
+        **kwargs: Argumentos para pasar a notification_func (debe incluir question_id también)
 
     Returns:
         True si se envió la notificación, False si ya estaba notificada
@@ -551,8 +551,12 @@ def send_telegram_notification_once(
     cache_file = Path(__file__).parent.parent.parent / "storage" / "notified_questions.json"
     lock_file = Path(__file__).parent.parent.parent / "storage" / "notified_questions.lock"
 
-    # Crear key única para esta pregunta
+    # Crear key única para esta pregunta (usar el question_id del cache)
     question_cache_key = str(question_id) if question_id else f"temp_{datetime.now().strftime('%Y%m%d%H%M%S%f')}"
+
+    # Agregar question_id a kwargs si no está (para las funciones de notificación)
+    if 'question_id' not in kwargs:
+        kwargs['question_id'] = question_id or 0
 
     # 🔒 USAR FILE LOCK para evitar race conditions entre workers
     lock_file.parent.mkdir(parents=True, exist_ok=True)
@@ -797,7 +801,6 @@ def answer_with_v2_and_notify(
                     question_id=question_id,
                     notification_type="product_search",
                     notification_func=notify_product_request,
-                    question_id=question_id or 0,
                     question_text=question,
                     customer_nickname=customer_nickname or "Cliente",
                     extracted_keywords=result_v2.get("metadata", {}).get("product_searched", ""),
@@ -814,7 +817,6 @@ def answer_with_v2_and_notify(
                     question_id=question_id,
                     notification_type="critical_question",
                     notification_func=notify_technical_question,
-                    question_id=question_id or 0,
                     question_text=question,
                     asin=asin,
                     item_title=item_title or f"ASIN: {asin}",
@@ -831,7 +833,6 @@ def answer_with_v2_and_notify(
                     question_id=question_id,
                     notification_type="low_confidence",
                     notification_func=notify_technical_question,
-                    question_id=question_id or 0,
                     question_text=question,
                     asin=asin,
                     item_title=item_title or f"ASIN: {asin}",
@@ -1477,7 +1478,6 @@ def answer_question(asin, question, question_translated=None, item_title=None, c
                 question_id=question_id,
                 notification_type="product_search",
                 notification_func=notify_product_request,
-                question_id=question_id or f"pending_{datetime.now().strftime('%Y%m%d%H%M%S')}",
                 question_text=question,
                 customer_nickname=customer_nickname or "unknown",
                 extracted_keywords=keywords,
@@ -1518,7 +1518,6 @@ def answer_question(asin, question, question_translated=None, item_title=None, c
             question_id=question_id,
             notification_type="critical_question",
             notification_func=notify_technical_question,
-            question_id=question_id or f"technical_{datetime.now().strftime('%Y%m%d%H%M%S')}",
             question_text=question,
             asin=asin,
             item_title=item_title,
@@ -1571,7 +1570,6 @@ def answer_question(asin, question, question_translated=None, item_title=None, c
                 question_id=question_id,
                 notification_type="missing_feature",
                 notification_func=notify_technical_question,
-                question_id=question_id or f"feature_{datetime.now().strftime('%Y%m%d%H%M%S')}",
                 question_text=question,
                 asin=asin,
                 item_title=item_title,
