@@ -144,6 +144,11 @@ def check_amazon_product_status_from_cache(asin, prime_offer_cache):
         result["buyable"] = True
         result["available"] = True
         result["status"] = "active"
+        # Agregar datos de ShippingTime para debugging
+        result["availability_type"] = prime_offer.get("availability_type")
+        result["maximum_hours"] = prime_offer.get("maximum_hours")
+        result["available_date"] = prime_offer.get("available_date")
+        result["fulfillment_validation"] = prime_offer.get("fulfillment_validation")
     else:
         # No hay oferta Prime = producto no disponible para nosotros
         result["status"] = "no_prime"
@@ -192,12 +197,16 @@ def pause_ml_listing(item_id, site_items=None, price_usd=None):
     "sin stock" en MercadoLibre, evitando ventas cuando no hay disponibilidad
     en Amazon.
 
+    IMPORTANTE: A diferencia de los precios, el stock en CBT NO puede actualizarse
+    por país usando site_listings. Solo se puede actualizar el stock global, y ML
+    lo propaga automáticamente a todos los países.
+
     Nota: El status "paused" en la API no oculta el producto del sitio web.
     Solo setting stock=0 previene ventas de productos no disponibles.
 
     Args:
         item_id: CBT item ID global
-        site_items: JSON string o lista con info de países (no usado)
+        site_items: JSON string o lista con info de países (no usado para stock)
         price_usd: Precio actual del producto en USD (no usado)
 
     Returns:
@@ -206,6 +215,7 @@ def pause_ml_listing(item_id, site_items=None, price_usd=None):
     url = f"{ML_API}/global/items/{item_id}"
 
     # Para productos CBT globales, ponemos stock en 0
+    # Esto se propaga automáticamente a todos los países
     body = {"available_quantity": 0}
 
     print(f"   📦 Poniendo stock en 0 (sin disponibilidad)...")
@@ -213,6 +223,7 @@ def pause_ml_listing(item_id, site_items=None, price_usd=None):
 
     if result is not None:
         print(f"   ✅ Stock actualizado a 0 exitosamente")
+        print(f"   ℹ️  La propagación a todos los países puede tardar unos minutos")
 
         # Actualizar en BD
         try:
@@ -226,15 +237,20 @@ def pause_ml_listing(item_id, site_items=None, price_usd=None):
         return False
 
 
-def reactivate_ml_listing(item_id, quantity=10):
+def reactivate_ml_listing(item_id, site_items=None, quantity=10):
     """
     Reactiva una publicación CBT en MercadoLibre poniendo stock > 0.
 
     Cuando un producto vuelve a estar disponible en Amazon después de
     haber estado sin stock, esta función restaura el inventario en ML.
 
+    IMPORTANTE: A diferencia de los precios, el stock en CBT NO puede actualizarse
+    por país usando site_listings. Solo se puede actualizar el stock global, y ML
+    lo propaga automáticamente a todos los países.
+
     Args:
         item_id: CBT item ID global
+        site_items: JSON string o lista con info de países (no usado para stock)
         quantity: Cantidad de stock a establecer (default: 10)
 
     Returns:
@@ -243,6 +259,7 @@ def reactivate_ml_listing(item_id, quantity=10):
     url = f"{ML_API}/global/items/{item_id}"
 
     # Poner stock disponible
+    # Esto se propaga automáticamente a todos los países
     body = {"available_quantity": quantity}
 
     print(f"   ♻️ Reactivando producto (stock: {quantity})...")
@@ -250,6 +267,7 @@ def reactivate_ml_listing(item_id, quantity=10):
 
     if result is not None:
         print(f"   ✅ Producto reactivado exitosamente")
+        print(f"   ℹ️  La propagación a todos los países puede tardar unos minutos")
 
         # Actualizar en BD
         try:
@@ -290,52 +308,67 @@ def update_ml_price(item_id, new_price_usd, site_items=None):
             site_items_list = None
 
         if site_items_list:
-            print(f"   🌍 Actualizando precio por país usando site_listings...")
+            print(f"   🌍 Actualizando precio por país (individual)...")
 
-            # Construir array de site_listings con listing_item_id
-            site_listings = []
+            # Filtrar países válidos
+            valid_countries = []
             for site_item in site_items_list:
-                # Solo incluir países que tienen item_id Y que NO tienen error
-                # Esto excluye MLM fulfillment y otros que no soportan net_proceeds
                 has_item_id = site_item.get("item_id") is not None
                 has_error = site_item.get("error") is not None
 
                 if has_item_id and not has_error:
-                    site_listings.append({
-                        "logistic_type": site_item.get("logistic_type", "remote"),
-                        "listing_item_id": site_item.get("item_id"),
-                        "net_proceeds": round(new_price_usd, 2)
-                    })
+                    valid_countries.append(site_item)
                 elif has_error:
-                    # Log para debug: qué países se están saltando
                     site_id = site_item.get("site_id", "unknown")
                     error_code = site_item.get("error", {}).get("code", "unknown")
                     print(f"      ⏭️  Saltando {site_id}: {error_code}")
 
-            if site_listings:
-                body = {"site_listings": site_listings}
+            if not valid_countries:
+                print(f"      ⚠️ No hay países válidos para actualizar")
+                return (False, [])
 
-                print(f"      Actualizando {len(site_listings)} país(es)...")
+            # Actualizar país por país individualmente
+            print(f"      Actualizando {len(valid_countries)} país(es) individualmente...")
+            success_count = 0
+            failed_countries = []
+
+            for site_item in valid_countries:
+                site_id = site_item.get("site_id")
+                listing_item_id = site_item.get("item_id")
+
+                # Request individual por país
+                site_listings = [{
+                    "logistic_type": site_item.get("logistic_type", "remote"),
+                    "listing_item_id": listing_item_id,
+                    "net_proceeds": round(new_price_usd, 2)
+                }]
+
+                body = {"site_listings": site_listings}
                 result = ml_http_put(url, body)
 
                 if result is None:
-                    # Si falla, marcar todos como fallidos
-                    failed_countries = [s["listing_item_id"][:3] for s in site_listings]
-                    print(f"      ❌ Error en actualización masiva")
-                    return (False, failed_countries)
+                    failed_countries.append(site_id)
+                    print(f"      ❌ {site_id}: Error")
                 else:
-                    print(f"      ✅ Actualizado correctamente")
+                    success_count += 1
 
-                    # Actualizar en BD
-                    try:
-                        update_listing_price_in_db(item_id, new_price_usd)
-                    except Exception as e:
-                        print(f"      ⚠️ Error actualizando BD: {e}")
+            # Si al menos uno funcionó, considerar éxito
+            if success_count > 0:
+                print(f"      ✅ Actualizados {success_count}/{len(valid_countries)} países")
 
-                    return (True, [])
+                # Actualizar en BD
+                try:
+                    update_listing_price_in_db(item_id, new_price_usd)
+                except Exception as e:
+                    print(f"      ⚠️ Error actualizando BD: {e}")
+
+                if failed_countries:
+                    print(f"      ⚠️ Países con errores: {', '.join(failed_countries)}")
+
+                return (True, failed_countries)
             else:
-                print(f"      ⚠️ No hay países válidos para actualizar")
-                return (False, [])
+                print(f"      ❌ Todos los países fallaron")
+                return (False, failed_countries)
 
     # Fallback: intentar actualizar net_proceeds global (puede no funcionar si no hay site_items)
     print(f"   ⚠️ Sin site_items, intentando actualización global...")
@@ -351,35 +384,64 @@ def update_ml_price(item_id, new_price_usd, site_items=None):
 def get_all_published_listings():
     """
     Obtiene todos los listings publicados desde la base de datos.
-    Retorna lista de dicts con: item_id, asin, price_usd, site_items
+    Retorna lista de dicts con: item_id, asin, price_usd, amazon_price_last, site_items
     """
-    conn = sqlite3.connect(DB_PATH)
+    print("   → Conectando a base de datos...", flush=True)
+    conn = sqlite3.connect(DB_PATH, timeout=30)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
+    # Verificar si existe columna amazon_price_last, si no existe crearla
+    cursor.execute("PRAGMA table_info(listings)")
+    columns = [col[1] for col in cursor.fetchall()]
+
+    if 'amazon_price_last' not in columns:
+        print("   → Agregando columna amazon_price_last...", flush=True)
+        cursor.execute("ALTER TABLE listings ADD COLUMN amazon_price_last REAL DEFAULT NULL")
+        conn.commit()
+
+    print("   → Ejecutando query SQL...", flush=True)
     cursor.execute("""
-        SELECT item_id, asin, price_usd, title, site_items
+        SELECT item_id, asin, price_usd, amazon_price_last, title, site_items
         FROM listings
         WHERE item_id IS NOT NULL
         ORDER BY date_updated DESC
     """)
 
+    print("   → Convirtiendo resultados...", flush=True)
     listings = [dict(row) for row in cursor.fetchall()]
     conn.close()
+    print(f"   → Listo! {len(listings)} listings cargados", flush=True)
     return listings
 
 
-def update_listing_price_in_db(item_id, new_price_usd):
-    """Actualiza el precio almacenado en la BD"""
+def update_listing_price_in_db(item_id, new_price_usd, amazon_price=None):
+    """
+    Actualiza el precio almacenado en la BD.
+
+    Args:
+        item_id: ID del item en ML
+        new_price_usd: Nuevo precio en ML (USD)
+        amazon_price: Precio actual de Amazon (para tracking de cambios)
+    """
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    cursor.execute("""
-        UPDATE listings
-        SET price_usd = ?,
-            date_updated = ?
-        WHERE item_id = ?
-    """, (new_price_usd, datetime.now().isoformat(), item_id))
+    if amazon_price is not None:
+        cursor.execute("""
+            UPDATE listings
+            SET price_usd = ?,
+                amazon_price_last = ?,
+                date_updated = ?
+            WHERE item_id = ?
+        """, (new_price_usd, amazon_price, datetime.now().isoformat(), item_id))
+    else:
+        cursor.execute("""
+            UPDATE listings
+            SET price_usd = ?,
+                date_updated = ?
+            WHERE item_id = ?
+        """, (new_price_usd, datetime.now().isoformat(), item_id))
 
     conn.commit()
     conn.close()
@@ -417,9 +479,14 @@ def calculate_new_ml_price(amazon_price_usd):
     """
     Calcula el nuevo precio de ML para sincronización.
 
-    Fórmula: (Amazon + Tax 7% + $4 USD) × (1 + Markup 30%)
+    Lee configuración desde .env:
+    - PRICE_MARKUP: Porcentaje de markup (ej: 150 para 150%)
+    - USE_TAX: true/false para aplicar tax 7%
+    - FULFILLMENT_FEE: Fee 3PL en USD (default: 4.0)
 
-    Ejemplo con Amazon = $35.99:
+    Fórmula: (Amazon + Tax [opcional] + Fee) × (1 + Markup%)
+
+    Ejemplo con Amazon = $35.99, PRICE_MARKUP=30, USE_TAX=true:
     - Tax 7%: $35.99 × 0.07 = $2.52
     - 3PL Fee: $4.00
     - Costo: $35.99 + $2.52 + $4.00 = $42.51
@@ -427,22 +494,23 @@ def calculate_new_ml_price(amazon_price_usd):
 
     DEBE coincidir con compute_price() de transform_mapper_new.py
     """
+    # Leer configuración desde .env
+    PRICE_MARKUP = float(os.getenv("PRICE_MARKUP", "30"))
+    USE_TAX = os.getenv("USE_TAX", "true").lower() == "true"
+    FULFILLMENT_FEE = float(os.getenv("FULFILLMENT_FEE", "4.0"))
+    TAX_RATE = 0.07  # 7% Florida tax
+
     # Paso 1: Precio base de Amazon
     base_price = amazon_price_usd
 
-    # Paso 2: Agregar tax 7%
-    TAX_PERCENT = 7.0
-    tax_amount = round(base_price * (TAX_PERCENT / 100.0), 2)
+    # Paso 2: Agregar tax si está habilitado
+    tax_amount = round(base_price * TAX_RATE, 2) if USE_TAX else 0.0
 
-    # Paso 3: Agregar 3PL fee $4 USD
-    THREE_PL_FEE = 4.0
+    # Paso 3: Costo total = Amazon + Tax [opcional] + Fee
+    total_cost = round(base_price + tax_amount + FULFILLMENT_FEE, 2)
 
-    # Paso 4: Costo total = Amazon + Tax 7% + $4 USD
-    total_cost = round(base_price + tax_amount + THREE_PL_FEE, 2)
-
-    # Paso 5: Agregar markup 30%
-    MARKUP_PERCENT = 30.0
-    final_price = round(total_cost * (1.0 + MARKUP_PERCENT / 100.0), 2)
+    # Paso 4: Agregar markup
+    final_price = round(total_cost * (1.0 + PRICE_MARKUP / 100.0), 2)
 
     return final_price
 
@@ -452,7 +520,7 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
     Sincroniza un solo listing con Amazon.
 
     Args:
-        listing: dict con item_id, asin, price_usd, title
+        listing: dict con item_id, asin, price_usd, amazon_price_last, title
         prime_offer_cache: dict con {asin: prime_offer} pre-cargado
         changes_log: lista para registrar cambios
 
@@ -462,6 +530,7 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
     item_id = listing["item_id"]
     asin = listing["asin"]
     current_price = listing["price_usd"]
+    amazon_price_last = listing.get("amazon_price_last")  # Último precio conocido de Amazon
     title = listing["title"]
     site_items = listing.get("site_items")  # Países donde está publicado
 
@@ -470,6 +539,8 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
     print(f"   ML Item ID: {item_id}")
     print(f"   Título: {title[:60]}...")
     print(f"   Precio actual ML: ${current_price} USD")
+    if amazon_price_last:
+        print(f"   Último precio Amazon conocido: ${amazon_price_last} USD")
 
     # Consultar estado en Amazon usando cache pre-cargado
     print(f"   📡 Verificando datos Prime (desde cache batch)...")
@@ -558,9 +629,11 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
         amazon_price = amazon_status["price"]
         new_ml_price = calculate_new_ml_price(amazon_price)
 
+        # Leer markup actual del .env para el log
+        current_markup = float(os.getenv("PRICE_MARKUP", "30"))
         print(f"   ✅ Producto disponible en Amazon")
         print(f"   💰 Precio Amazon: ${amazon_price} USD")
-        print(f"   💰 Precio ML calculado (con {PRICE_MARKUP_PERCENT}% markup): ${new_ml_price} USD")
+        print(f"   💰 Precio ML calculado (con {current_markup}% markup): ${new_ml_price} USD")
 
         # REACTIVACIÓN: Si el producto estaba sin stock en ML, reactivarlo primero
         # Consultamos el stock actual en ML
@@ -570,7 +643,7 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
 
             if current_ml_stock == 0:
                 print(f"   ℹ️ Producto tiene stock=0 en ML, reactivando...")
-                if reactivate_ml_listing(item_id, quantity=10):
+                if reactivate_ml_listing(item_id, site_items=site_items, quantity=10):
                     result["action"] = "reactivated"
                     result["success"] = True
                     result["message"] = "Producto reactivado (stock: 0 → 10)"
@@ -583,31 +656,50 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
                     print(f"   ❌ Error reactivando producto")
 
 
-        # Calcular diferencia porcentual
-        if current_price and current_price > 0:
-            price_diff_percent = abs((new_ml_price - current_price) / current_price * 100)
+        # NUEVA LÓGICA: Comparar precio de Amazon actual vs último precio conocido
+        # Esto previene que el sync sobreescriba los precios bajados por la función
+        # de catálogo automático de MercadoLibre
+
+        PRICE_CHANGE_THRESHOLD = 2.0  # Umbral de cambio en Amazon (2%)
+        should_update = False
+
+        if amazon_price_last is None:
+            # Primera vez que sincronizamos este producto, siempre actualizar
+            print(f"   ℹ️ Primera sincronización para este producto")
+            print(f"   🔄 ACCIÓN: Actualizar precio y guardar precio Amazon de referencia")
+            should_update = True
         else:
-            price_diff_percent = 100  # Si no hay precio anterior, actualizar
+            # Comparar precio actual de Amazon vs último precio conocido
+            amazon_price_diff = abs(amazon_price - amazon_price_last)
+            amazon_price_diff_percent = (amazon_price_diff / amazon_price_last * 100) if amazon_price_last > 0 else 100
 
-        # Solo actualizar si la diferencia es mayor al 2%
-        PRICE_CHANGE_THRESHOLD = 2.0
+            if amazon_price_diff_percent > PRICE_CHANGE_THRESHOLD:
+                print(f"   📊 Precio Amazon cambió: ${amazon_price_last} → ${amazon_price} ({amazon_price_diff_percent:.1f}%)")
+                print(f"   🔄 ACCIÓN: Actualizar precio en ML")
+                should_update = True
+            else:
+                print(f"   ℹ️ Precio Amazon sin cambios significativos: ${amazon_price} (diff: {amazon_price_diff_percent:.1f}%)")
+                print(f"   ✅ No se actualiza (respeta ajustes de catálogo automático de ML)")
+                result["action"] = "no_change"
+                result["success"] = True
+                result["message"] = f"Amazon sin cambios (${amazon_price})"
 
-        if price_diff_percent > PRICE_CHANGE_THRESHOLD:
-            print(f"   📊 Cambio de precio: {price_diff_percent:.1f}% (umbral: {PRICE_CHANGE_THRESHOLD}%)")
-            print(f"   🔄 ACCIÓN: Actualizar precio en ML")
-
+        # Actualizar precio si corresponde
+        if should_update:
             success, failed_countries = update_ml_price(item_id, new_ml_price, site_items)
 
             if success:
-                # Actualizar también en BD
-                update_listing_price_in_db(item_id, new_ml_price)
+                # Actualizar en BD el precio de ML Y el último precio de Amazon
+                update_listing_price_in_db(item_id, new_ml_price, amazon_price)
 
                 result["action"] = "price_updated"
                 result["success"] = True
-                result["message"] = f"Precio actualizado: ${current_price} → ${new_ml_price} USD"
+                result["message"] = f"Precio actualizado: ${current_price} → ${new_ml_price} USD (Amazon: ${amazon_price})"
                 result["old_price"] = current_price
                 result["new_price"] = new_ml_price
-                print(f"   ✅ Precio actualizado exitosamente")
+                result["amazon_price"] = amazon_price
+                print(f"   ✅ Precio ML actualizado: ${current_price} → ${new_ml_price}")
+                print(f"   ✅ Precio Amazon guardado: ${amazon_price}")
 
                 # Notificar por Telegram
                 if telegram_configured():
@@ -639,12 +731,6 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
             # Si algunos países fallaron pero no todos
             if failed_countries:
                 print(f"   ⚠️ Países con errores: {', '.join(failed_countries)}")
-        else:
-            print(f"   ℹ️ Diferencia de precio: {price_diff_percent:.1f}% (menor al umbral)")
-            print(f"   ✅ No se requiere actualización")
-            result["action"] = "no_change"
-            result["success"] = True
-            result["message"] = "Sin cambios significativos"
 
     # Caso 4: Error consultando Amazon
     else:
@@ -662,40 +748,57 @@ def main():
     """Función principal de sincronización"""
     start_time = datetime.now()
 
-    print("=" * 80)
-    print("🔄 SINCRONIZACIÓN AMAZON → MERCADOLIBRE")
-    print("=" * 80)
-    print(f"📅 Fecha: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"💰 Markup configurado: {PRICE_MARKUP_PERCENT}%")
-    print()
+    # Leer configuración actual del .env
+    current_markup = float(os.getenv("PRICE_MARKUP", "30"))
+    use_tax = os.getenv("USE_TAX", "true").lower() == "true"
+    fulfillment_fee = float(os.getenv("FULFILLMENT_FEE", "4.0"))
+
+    print("=" * 80, flush=True)
+    print("🔄 SINCRONIZACIÓN AMAZON → MERCADOLIBRE", flush=True)
+    print("=" * 80, flush=True)
+    print(f"📅 Fecha: {start_time.strftime('%Y-%m-%d %H:%M:%S')}", flush=True)
+    print(f"💰 Markup configurado: {current_markup}%", flush=True)
+    print(f"💵 Tax (7% Florida): {'ACTIVADO' if use_tax else 'DESACTIVADO'}", flush=True)
+    print(f"📦 Fulfillment Fee: ${fulfillment_fee} USD", flush=True)
+    print(flush=True)
 
     # Verificar que existe la BD
+    print(f"🔍 Verificando base de datos en: {DB_PATH}", flush=True)
     if not os.path.exists(DB_PATH):
-        print(f"❌ No se encontró la base de datos: {DB_PATH}")
-        print("   Ejecuta primero save_listing_data.py para crear la BD")
+        print(f"❌ No se encontró la base de datos: {DB_PATH}", flush=True)
+        print("   Ejecuta primero save_listing_data.py para crear la BD", flush=True)
         sys.exit(1)
+    print(f"✅ Base de datos encontrada", flush=True)
+    print(flush=True)
 
     # Obtener todos los listings publicados
-    print("📋 Cargando listings desde la base de datos...")
+    print("📋 Cargando listings desde la base de datos...", flush=True)
     listings = get_all_published_listings()
 
     if not listings:
-        print("⚠️ No se encontraron listings publicados en la BD")
-        print("   Asegúrate de que los listings tengan item_id asignado")
+        print("⚠️ No se encontraron listings publicados en la BD", flush=True)
+        print("   Asegúrate de que los listings tengan item_id asignado", flush=True)
         sys.exit(0)
 
-    print(f"✅ Encontrados {len(listings)} listings para sincronizar\n")
+    print(f"✅ Encontrados {len(listings)} listings para sincronizar\n", flush=True)
 
     # Notificar inicio de sync
+    print("📲 Verificando notificación Telegram...", flush=True)
     if telegram_configured():
+        print("   → Enviando notificación...", flush=True)
         notify_sync_start(len(listings))
+        print("   → Notificación enviada", flush=True)
+    else:
+        print("   → Telegram no configurado, saltando", flush=True)
 
     # Extraer todos los ASINs para hacer batch request
+    print("📦 Extrayendo ASINs...", flush=True)
     asins = [listing["asin"] for listing in listings]
+    print(f"   → {len(asins)} ASINs extraídos", flush=True)
 
     # Obtener precios Prime en BATCH (mucho más rápido que individual)
-    print(f"📊 Obteniendo precios Prime de {len(asins)} productos en BATCH...")
-    print(f"   (Endpoint optimizado: 20 ASINs por request, 4x más rápido)\n")
+    print(f"\n📊 Obteniendo precios Prime de {len(asins)} productos en BATCH...", flush=True)
+    print(f"   (Endpoint optimizado: 20 ASINs por request, 4x más rápido)\n", flush=True)
 
     prime_offer_cache = get_prime_offers_batch_optimized(asins, batch_size=20, show_progress=True)
 
@@ -767,6 +870,21 @@ def main():
     # Notificar finalización de sync
     if telegram_configured():
         notify_sync_complete(stats, duration)
+
+    # Limpiar JSONs viejos de storage/asins_json/ (evitar usar datos desactualizados)
+    print("\n🧹 Limpiando JSONs viejos de ASINs...")
+    asins_json_dir = Path("storage/asins_json")
+    if asins_json_dir.exists():
+        deleted_count = 0
+        for json_file in asins_json_dir.glob("*.json"):
+            try:
+                json_file.unlink()
+                deleted_count += 1
+            except Exception as e:
+                print(f"   ⚠️ Error eliminando {json_file.name}: {e}")
+        print(f"   ✅ Eliminados {deleted_count} archivos JSON viejos")
+    else:
+        print(f"   ℹ️  Directorio {asins_json_dir} no existe")
 
 
 if __name__ == "__main__":

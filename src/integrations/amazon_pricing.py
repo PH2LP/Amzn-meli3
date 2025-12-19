@@ -15,8 +15,8 @@ SPAPI_BASE = "https://sellingpartnerapi-na.amazon.com"
 MARKETPLACE_ID = "ATVPDKIKX0DER"  # US
 
 # Configuración de filtros de fast fulfillment
-MAX_WAREHOUSE_HOURS = 24  # Máximo tiempo para que salga del almacén (24h = 1 día)
-MAX_BACKORDER_DAYS = 7    # Máximo días de espera si tiene fecha futura
+MAX_WAREHOUSE_HOURS = 24  # Máximo 24 horas para salir del almacén (Prime 1-day)
+MAX_BACKORDER_DAYS = 0    # Máximo días de espera si tiene fecha futura
 
 
 def validate_fast_fulfillment(offer: Dict, asin: str = "") -> tuple[bool, str]:
@@ -44,8 +44,8 @@ def validate_fast_fulfillment(offer: Dict, asin: str = "") -> tuple[bool, str]:
     shipping_time = offer.get('ShippingTime', {})
 
     if not shipping_time:
-        # Si no tiene ShippingTime, asumimos que está disponible (legacy behavior)
-        return (True, "OK - No ShippingTime data")
+        # RECHAZAR: Sin ShippingTime no podemos validar availabilityType ni maximumHours
+        return (False, "Sin datos de ShippingTime - No se puede validar fast fulfillment")
 
     availability_type = shipping_time.get('availabilityType', 'NOW')
     maximum_hours = shipping_time.get('maximumHours', 0)
@@ -55,22 +55,20 @@ def validate_fast_fulfillment(offer: Dict, asin: str = "") -> tuple[bool, str]:
     if availability_type == "FUTURE_WITHOUT_DATE":
         return (False, f"Sin fecha de disponibilidad (FUTURE_WITHOUT_DATE)")
 
-    # REGLA 2: Validar productos con fecha futura
+    # REGLA 2: RECHAZAR todos los productos en backorder (FUTURE_WITH_DATE)
+    # No aceptamos productos sin inventario inmediato
     if availability_type == "FUTURE_WITH_DATE":
         if not available_date:
             return (False, "FUTURE_WITH_DATE pero sin availableDate")
 
         try:
-            # Parsear fecha
+            # Calcular días hasta disponibilidad para el mensaje
             avail_dt = datetime.fromisoformat(available_date.replace('Z', '+00:00'))
             now = datetime.now(timezone.utc)
             days_until = (avail_dt - now).days
 
-            if days_until > MAX_BACKORDER_DAYS:
-                return (False, f"Disponible en {days_until} días (>{MAX_BACKORDER_DAYS}d)")
-
-            # Si está dentro de 7 días, es aceptable
-            return (True, f"OK - Disponible en {days_until} días")
+            # RECHAZAR - No aceptamos productos en backorder
+            return (False, f"Producto en backorder - Disponible en {days_until} días")
 
         except Exception as e:
             return (False, f"Error parseando availableDate: {e}")
@@ -175,7 +173,9 @@ def get_prime_offer(asin: str, retry_count: int = 3) -> Optional[Dict]:
                 # No hay ofertas disponibles
                 return None
 
-            # 7. Buscar oferta Prime con fast fulfillment
+            # 7. Recolectar TODAS las ofertas Prime + FBA válidas y elegir la más barata
+            valid_offers = []
+
             for offer in payload['Offers']:
                 # Verificar que sea FBA
                 is_fba = offer.get('IsFulfilledByAmazon', False)
@@ -199,11 +199,11 @@ def get_prime_offer(asin: str, retry_count: int = 3) -> Optional[Dict]:
                 # ✅ Validar fast fulfillment (nuevo filtro)
                 is_valid, reason = validate_fast_fulfillment(offer, asin)
                 if not is_valid:
-                    print(f"   ⏭️  {asin}: Prime pero rechazado - {reason}")
-                    return None  # Rechazar oferta aunque sea Prime
+                    # No retornar None, solo skip esta oferta y continuar
+                    continue
 
-                # ✅ Encontramos oferta Prime válida con fast fulfillment
-                return {
+                # ✅ Oferta válida - agregarla a la lista
+                valid_offers.append({
                     "price": float(price),
                     "currency": currency,
                     "is_prime": True,
@@ -211,10 +211,15 @@ def get_prime_offer(asin: str, retry_count: int = 3) -> Optional[Dict]:
                     "in_stock": True,
                     "is_buybox_winner": offer.get('IsBuyBoxWinner', False),
                     "fulfillment_validation": reason  # Razón de aceptación
-                }
+                })
 
-            # No se encontró oferta Prime
-            return None
+            # Si no hay ofertas válidas, retornar None
+            if not valid_offers:
+                return None
+
+            # Elegir la oferta MÁS BARATA de las válidas
+            cheapest_offer = min(valid_offers, key=lambda x: x['price'])
+            return cheapest_offer
 
         except requests.exceptions.Timeout:
             print(f"⏱️  Timeout en intento {attempt + 1}/{retry_count} para {asin}")
@@ -300,7 +305,7 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
     original_count = len(asins)
     asins = list(dict.fromkeys(asins))  # Mantiene orden, elimina duplicados
     if len(asins) < original_count and show_progress:
-        print(f"ℹ️  Eliminados {original_count - len(asins)} ASINs duplicados")
+        print(f"ℹ️  Eliminados {original_count - len(asins)} ASINs duplicados", flush=True)
 
     if batch_size > 20:
         print(f"⚠️ batch_size limitado a 20 (máximo de Amazon SP-API)")
@@ -310,7 +315,7 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
     total_batches = (len(asins) + batch_size - 1) // batch_size
 
     if show_progress:
-        print(f"📊 Obteniendo precios Prime de {len(asins)} ASINs usando BATCH (batches de {batch_size})")
+        print(f"📊 Obteniendo precios Prime de {len(asins)} ASINs usando BATCH (batches de {batch_size})", flush=True)
 
     # Procesar en batches
     for batch_num in range(total_batches):
@@ -319,7 +324,7 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
         batch_asins = asins[start_idx:end_idx]
 
         if show_progress:
-            print(f"   Batch {batch_num + 1}/{total_batches}: Procesando {len(batch_asins)} ASINs...")
+            print(f"   Batch {batch_num + 1}/{total_batches}: Procesando {len(batch_asins)} ASINs...", flush=True)
 
         # Preparar batch request
         url = f"{SPAPI_BASE}/batches/products/pricing/v0/itemOffers"
@@ -356,22 +361,22 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                 if response.status_code == 429:
                     if attempt < max_retries - 1:
                         wait_time = retry_delay * (attempt + 1)  # 15s, 30s, 45s
-                        print(f"   ⏱️ Rate limit (429) en batch {batch_num + 1}, esperando {wait_time}s antes de reintentar...")
+                        print(f"   ⏱️ Rate limit (429) en batch {batch_num + 1}, esperando {wait_time}s antes de reintentar...", flush=True)
                         time.sleep(wait_time)
                         continue
                     else:
-                        print(f"   ❌ Rate limit persistente después de {max_retries} intentos")
+                        print(f"   ❌ Rate limit persistente después de {max_retries} intentos", flush=True)
                         for asin in batch_asins:
                             results[asin] = None
                         break
 
                 if response.status_code != 200:
-                    print(f"   ❌ Error batch {batch_num + 1}: Status {response.status_code}")
+                    print(f"   ❌ Error batch {batch_num + 1}: Status {response.status_code}", flush=True)
                     try:
                         error_msg = response.json()
-                        print(f"      Error: {error_msg}")
+                        print(f"      Error: {error_msg}", flush=True)
                     except:
-                        print(f"      Response: {response.text[:200]}")
+                        print(f"      Response: {response.text[:200]}", flush=True)
                     # Marcar todos los ASINs del batch como None
                     for asin in batch_asins:
                         results[asin] = None
@@ -381,7 +386,7 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                 data = response.json()
 
                 if "responses" not in data:
-                    print(f"   ⚠️ Respuesta sin 'responses' en batch {batch_num + 1}")
+                    print(f"   ⚠️ Respuesta sin 'responses' en batch {batch_num + 1}", flush=True)
                     for asin in batch_asins:
                         results[asin] = None
                     break
@@ -405,8 +410,9 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                         results[asin] = None
                         continue
 
-                    # Buscar oferta Prime con fast fulfillment
-                    prime_offer = None
+                    # Recolectar TODAS las ofertas Prime + FBA válidas y elegir la más barata
+                    valid_offers = []
+
                     for offer in offers:
                         is_fba = offer.get("IsFulfilledByAmazon", False)
                         prime_info = offer.get("PrimeInformation", {})
@@ -421,28 +427,37 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                                 # Validar fast fulfillment
                                 is_valid, reason = validate_fast_fulfillment(offer, asin)
                                 if not is_valid:
-                                    # Rechazar aunque sea Prime
-                                    prime_offer = None
-                                    break
+                                    # No rechazar, solo skip esta oferta y continuar
+                                    continue
 
-                                prime_offer = {
+                                # Obtener datos de ShippingTime para logging
+                                shipping_time = offer.get("ShippingTime", {})
+
+                                # Oferta válida - agregarla
+                                valid_offers.append({
                                     "price": float(price),
                                     "currency": currency,
                                     "is_prime": True,
                                     "is_fba": True,
                                     "in_stock": True,
                                     "is_buybox_winner": offer.get("IsBuyBoxWinner", False),
-                                    "fulfillment_validation": reason
-                                }
-                                break
+                                    "fulfillment_validation": reason,
+                                    "availability_type": shipping_time.get("availabilityType"),
+                                    "maximum_hours": shipping_time.get("maximumHours"),
+                                    "available_date": shipping_time.get("availableDate")
+                                })
 
-                    results[asin] = prime_offer
+                    # Elegir la MÁS BARATA de las ofertas válidas
+                    if valid_offers:
+                        results[asin] = min(valid_offers, key=lambda x: x['price'])
+                    else:
+                        results[asin] = None
 
                 # Salir del retry loop si todo fue exitoso
                 break
 
             except requests.exceptions.Timeout:
-                print(f"   ⏱️ Timeout en batch {batch_num + 1}, intento {attempt + 1}/{max_retries}")
+                print(f"   ⏱️ Timeout en batch {batch_num + 1}, intento {attempt + 1}/{max_retries}", flush=True)
                 if attempt < max_retries - 1:
                     time.sleep(retry_delay)
                     continue
@@ -451,7 +466,7 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                         results[asin] = None
 
             except Exception as e:
-                print(f"   ❌ Error en batch {batch_num + 1}: {e}")
+                print(f"   ❌ Error en batch {batch_num + 1}: {e}", flush=True)
                 if attempt < max_retries - 1:
                     time.sleep(retry_delay)
                     continue
@@ -467,7 +482,7 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
     # Resumen
     if show_progress:
         prime_count = sum(1 for v in results.values() if v is not None)
-        print(f"   ✅ {prime_count}/{len(asins)} ASINs con Prime")
+        print(f"   ✅ {prime_count}/{len(asins)} ASINs con Prime", flush=True)
 
     return results
 
