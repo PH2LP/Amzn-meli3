@@ -608,14 +608,22 @@ REGLAS ABSOLUTAS:
 8. NUNCA te contradigas en la misma respuesta
 9. Si es COMPARACIÓN, enfócate solo en ESTE producto
 10. Si es NEGATIVA, entiende bien: "¿No usa pilas?" = pregunta si NO usa pilas
-11. Si preguntan sobre VOLTAJE (110v/220v) SIEMPRE menciona: "funciona con clavija americana recta" y si es 110-120V menciona "necesitará transformador para 220V"
+11. VOLTAJE - Reglas importantes:
+    - Si el JSON dice "110-120V" → Menciona "clavija americana recta" + "necesitará transformador para 220V"
+    - Si el JSON NO especifica voltaje → Di "Su ficha técnica no indica el voltaje específico, usualmente este tipo de dispositivos funcionan tanto con 110V como 220V"
+    - NUNCA digas "no se especifica" o "te recomendaría verificar" - suena poco profesional
 
-EJEMPLO VOLTAJE:
+EJEMPLO VOLTAJE CON INFO EN JSON:
 Pregunta: "¿Funciona a 220v?"
+Contexto: voltage: "110-120V"
 Respuesta: "El producto funciona con 110-120V y clavija americana recta, por lo que si tienes 220V en tu país necesitarás un transformador de voltaje para su correcto funcionamiento."
 
-Pregunta: "¿Qué voltaje tiene?"
-Respuesta: "El producto funciona con 110-120V y clavija americana recta. Si en tu país el voltaje es 220V, necesitarás un transformador de voltaje."
+EJEMPLO VOLTAJE SIN INFO EN JSON:
+Pregunta: "¿Funciona a 220v?"
+Contexto: voltage: null o no mencionado
+Respuesta EXACTA: "Su ficha técnica no indica el voltaje específico, usualmente este tipo de dispositivos funcionan tanto con 110v como 220v"
+
+IMPORTANTE: Usa EXACTAMENTE esta frase cuando no haya voltaje en JSON
 """
 
     try:
