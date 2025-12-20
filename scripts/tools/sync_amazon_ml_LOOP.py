@@ -24,7 +24,9 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # Agregar directorio raíz al path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+sys.path.insert(0, str(project_root / 'src' / 'integrations'))
 
 # Importar el sync principal
 from scripts.tools.sync_amazon_ml_GLOW import main as run_sync
