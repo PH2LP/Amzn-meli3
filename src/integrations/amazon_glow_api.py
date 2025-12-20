@@ -58,17 +58,6 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
     session = requests.Session()
     session.headers.update({
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-        'sec-fetch-dest': 'document',
-        'sec-fetch-mode': 'navigate',
-        'sec-fetch-site': 'none',
-        'sec-fetch-user': '?1',
-        'upgrade-insecure-requests': '1',
     })
 
     # NO usar cookies - sistema simple que detecta FREE delivery vs paid delivery
@@ -118,11 +107,34 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
         if csrf_token:
             headers['anti-csrftoken-a2z'] = csrf_token
 
-        glow_response = session.post(glow_url, params=params, json=payload, headers=headers, timeout=15)
+        # Intentar Glow API con retry en caso de 503
+        glow_success = False
+        for retry in range(3):  # Máximo 3 intentos
+            try:
+                glow_response = session.post(glow_url, params=params, json=payload, headers=headers, timeout=15)
 
-        if glow_response.status_code != 200:
-            result["error"] = f"Glow API error {glow_response.status_code}"
-            # Continuar de todas formas, a veces funciona sin el cambio
+                if glow_response.status_code == 200:
+                    glow_success = True
+                    break
+                elif glow_response.status_code == 503:
+                    # 503 Service Unavailable - reintentar después de 1s
+                    if retry < 2:  # Solo esperar si no es el último intento
+                        import time
+                        time.sleep(1)
+                        continue
+                else:
+                    # Otro error - no reintentar
+                    break
+            except:
+                if retry < 2:
+                    import time
+                    time.sleep(1)
+                    continue
+                break
+
+        if not glow_success:
+            result["error"] = f"Glow API failed after retries"
+            # Continuar de todas formas, intentar parsear lo que haya
 
         # Paso 3: GET product page nuevamente para obtener delivery dates actualizados
         response = session.get(url, timeout=30)
@@ -134,11 +146,36 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
         html = response.text
         soup = BeautifulSoup(html, 'html.parser')
 
-        # NO setear prime_available aquí - solo si detectamos fecha Prime FREE delivery más adelante
-        # La presencia de la palabra "prime" en HTML no significa que tenga Prime FREE delivery
+        # VALIDAR PRIME BADGE (requisito fundamental)
+        # Buscar indicadores de que el producto es elegible para Prime
+        prime_indicators = [
+            # Badge de Prime en delivery section
+            r'id="[^"]*prime[^"]*badge',
+            r'class="[^"]*prime[^"]*badge',
+            # Prime logo
+            r'alt="Prime"',
+            r'alt="Amazon Prime"',
+            # Texto de Prime eligibility
+            r'Eligible for.*Prime',
+            r'FREE.*delivery.*Prime members',
+            r'Prime members get FREE',
+            # Data attributes
+            r'data-.*prime.*eligible',
+        ]
+
+        has_prime_badge = False
+        html_lower = html.lower()
+
+        for pattern in prime_indicators:
+            if re.search(pattern, html, re.IGNORECASE):
+                has_prime_badge = True
+                result["prime_available"] = True
+                break
 
         # Extraer precio
         price_patterns = [
+            # Patrón 0: a-offscreen (más confiable, incluye decimales completos)
+            (r'<span class="a-offscreen">\$([0-9,.]+)</span>', None),
             # Patrón 1: "a-price-whole">25<" (dollars) + buscar cents después
             (r'<span class="a-price-whole">([0-9,]+)<', r'<span class="a-price-fraction">([0-9]+)<'),
             # Patrón 2: JSON con precio completo "$25.99"
@@ -169,9 +206,12 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
                     pass
 
         # Verificar disponibilidad
+        # ESTRATEGIA MEJORADA: Buscar indicadores fuertes de que se puede comprar
         availability_indicators = [
+            "buy new", "add to cart", "add to list",  # Botones de compra
             "in stock", "en stock", "disponible", "available",
-            "queda(n)", "quedán", "quedan"
+            "queda(n)", "quedán", "quedan",
+            "order within",  # "Order within X hours" indica disponible
         ]
 
         html_lower = html.lower()
@@ -181,68 +221,58 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
                 result["available"] = True
                 break
 
-        # Verificar indisponibilidad
-        if not result["in_stock"]:
-            unavailable_indicators = [
-                "currently unavailable", "out of stock",
-                "no disponible", "agotado", "sin stock"
-            ]
-
-            for indicator in unavailable_indicators:
-                if indicator in html_lower:
-                    result["available"] = False
-                    result["error"] = "Out of stock"
-                    return result
+        # IMPORTANTE: Si NO encontramos indicadores pero SÍ hay precio Y delivery,
+        # entonces está disponible (seller alternativo)
+        # Solo marcar como unavailable si explícitamente dice unavailable Y no hay precio/delivery
 
         # Buscar fecha de entrega
-        # ESTRATEGIA: Buscar TODAS las fechas de entrega y elegir la más temprana
-        # Amazon a veces muestra múltiples fechas (regular, Prime, etc)
+        # ESTRATEGIA: Buscar SOLO el PRIMARY delivery message (seller principal/buybox)
+        # Ignorar secondary messages, otros sellers, fastest delivery, etc.
 
         all_dates = []
 
-        # PRIORIDAD 0: Buscar atributos data-csa-c-delivery-time (Amazon los usa para delivery dates)
-        # IMPORTANTE: SOLO detectar delivery FREE, ignorar "fastest" (se paga)
-        # Ejemplo: data-csa-c-delivery-price="FREE" data-csa-c-delivery-time="Monday, December 29"
+        # PRIORIDAD 0: Buscar SOLO en PRIMARY_DELIVERY_MESSAGE (LARGE, MEDIUM, o cualquier variante)
+        # Este es el bloque del seller principal (buybox winner)
+        # Nota: Amazon usa _LARGE, _MEDIUM, etc. dependiendo del contexto
 
-        # Buscar todas las fechas de entrega
-        data_delivery_pattern = r'data-csa-c-delivery-time="([^"]+)"'
-        data_matches = re.findall(data_delivery_pattern, html, re.IGNORECASE)
+        # Buscar TODO el bloque DELIVERY_BLOCK completo
+        # Este contiene todas las opciones de envío (FREE, fastest, etc.)
+        delivery_block_pattern = r'<div id="mir-layout-DELIVERY_BLOCK"[^>]*>(.*?)</div></div></div>'
+        delivery_block_match = re.search(delivery_block_pattern, html, re.IGNORECASE | re.DOTALL)
 
-        if data_matches:
-            for date_str in data_matches:
-                # Buscar el contexto del elemento HTML que contiene esta fecha
-                idx = html.find(f'data-csa-c-delivery-time="{date_str}"')
-                if idx >= 0:
-                    # Obtener el contexto del elemento completo (antes y después)
-                    # Buscar el <span> o elemento que contiene este atributo
-                    context_start = max(0, idx - 500)
-                    context_end = min(len(html), idx + 500)
-                    context = html[context_start:context_end]
+        if delivery_block_match:
+            delivery_html = delivery_block_match.group(1)
 
-                    # FILTRO CRÍTICO: Solo aceptar si tiene data-csa-c-delivery-price="FREE"
-                    # O si es delivery de Prime members
-                    is_free_delivery = 'data-csa-c-delivery-price="FREE"' in context
-                    is_prime_delivery = 'prime' in context.lower() and 'members' in context.lower()
+            # Buscar TODAS las ocurrencias de data-csa-c-delivery dentro del bloque
+            # Patrón 1: price antes de time
+            pattern1 = r'<span[^>]*data-csa-c-delivery-price="([^"]*)"[^>]*data-csa-c-delivery-time="([^"]*)"[^>]*>'
+            matches1 = re.findall(pattern1, delivery_html, re.IGNORECASE)
 
-                    # RECHAZAR si es "fastest" (se paga extra)
-                    is_paid_fastest = 'data-csa-c-delivery-price="fastest"' in context
+            # Patrón 2: time antes de price
+            pattern2 = r'<span[^>]*data-csa-c-delivery-time="([^"]*)"[^>]*data-csa-c-delivery-price="([^"]*)"[^>]*>'
+            matches2 = re.findall(pattern2, delivery_html, re.IGNORECASE)
 
-                    if is_paid_fastest:
-                        # Ignorar delivery pago
-                        continue
+            # Capturar solo FREE delivery (ignorar fastest, paid, etc.)
+            for price_type, date_str in matches1:
+                if price_type.upper() == "FREE":
+                    all_dates.append(('delivery_block', date_str))
 
-                    if is_free_delivery or is_prime_delivery:
-                        # Es delivery FREE o Prime
-                        if is_prime_delivery:
-                            all_dates.append(('prime', date_str))
-                            result["prime_available"] = True
-                        else:
-                            all_dates.append(('regular', date_str))
+            for date_str, price_type in matches2:
+                if price_type.upper() == "FREE":
+                    all_dates.append(('delivery_block', date_str))
 
-        # PRIORIDAD 1: Buscar fecha de Prime (más rápida)
+        # Si ya encontramos fechas en data-csa-c attributes, USAR SOLO ESAS
+        # NO buscar en el resto del HTML porque puede capturar fechas de otros sellers
 
-        # PRIMERA PRIORIDAD: Detectar same-day/next-day ("hoy", "today", "mañana", "tomorrow")
         if not all_dates:
+            # FALLBACK: Solo si NO encontramos data-csa-c attributes
+            # Buscar fecha de Prime (más rápida)
+
+            # PRIMERA PRIORIDAD: Detectar same-day/next-day ("hoy", "today", "mañana", "tomorrow")
+            pass  # Comentado para evitar capturar fechas incorrectas
+
+        # DESHABILITAR búsquedas de fallback para evitar capturar fechas de otros sellers
+        if False and not all_dates:
             same_day_patterns = [
                 # "miembros Prime reciben entrega GRATIS hoy"
                 # "Prime members get FREE delivery today"
@@ -305,40 +335,44 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
                     result["prime_available"] = True
                     break
 
-        # PRIORIDAD 2: Buscar SOLO fechas de FREE delivery (ignorar "fastest delivery" que se paga)
-        delivery_patterns = [
-            # SOLO FREE delivery con rangos "FREE delivery December 26 - 28"
-            r'FREE\s+delivery\s+(?:<[^>]+>)?(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+\s*-\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)?\s*\d+)',
-            # SOLO FREE delivery con fecha simple "FREE delivery Friday, December 26"
-            r'FREE\s+delivery\s+(?:<[^>]+>)?((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+)',
-            # Atributos data-* con delivery-price="FREE"
-            r'data-csa-c-delivery-price="FREE"[^>]*data-csa-c-delivery-time="((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+(?:\s*-\s*\d+)?)"',
-            # Español: "entrega GRATIS el sábado, 27 de diciembre"
-            r'entrega\s+(?:GRATIS|gratis)\s+el\s+((?:lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo),?\s+\d+\s+de\s+(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre))',
-        ]
+        # FALLBACK: Buscar fechas de FREE delivery solo si NO encontramos data-csa-c
+        if not all_dates:
+            # PRIORIDAD 2: Buscar SOLO fechas de FREE delivery (ignorar "fastest delivery" que se paga)
+            # IMPORTANTE: Debe decir explícitamente "FREE" en el texto, NO capturar "fastest" o "Or fastest"
+            delivery_patterns = [
+                # SOLO FREE delivery con rangos "FREE delivery December 26 - 28"
+                # Nota: NO captura "Or fastest delivery" o "fastest delivery"
+                r'FREE\s+delivery\s+(?:<[^>]+>)?(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+\s*-\s*((?:January|February|March|April|May|June|July|August|September|October|November|December)?\s*\d+)',
+                # SOLO FREE delivery con fecha simple "FREE delivery Friday, December 26"
+                r'FREE\s+delivery\s+(?:<[^>]+>)?((?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),?\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+)',
+                # Atributos data-* con delivery-price="FREE"
+                r'data-csa-c-delivery-price="FREE"[^>]*data-csa-c-delivery-time="((?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+(?:\s*-\s*\d+)?)"',
+                # Español: "entrega GRATIS el sábado, 27 de diciembre"
+                r'entrega\s+(?:GRATIS|gratis)\s+el\s+((?:lunes|martes|miércoles|miercoles|jueves|viernes|sábado|sabado|domingo),?\s+\d+\s+de\s+(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre))',
+            ]
 
-        # Variable para rastrear el último mes visto (para rangos como "December 26 - 28")
-        last_seen_month = None
+            # Variable para rastrear el último mes visto (para rangos como "December 26 - 28")
+            last_seen_month = None
 
-        for pattern in delivery_patterns:
-            matches = re.findall(pattern, html, re.IGNORECASE)
-            for match_date in matches[:3]:  # Max 3 fechas por patrón
-                date_str = match_date.strip()
+            for pattern in delivery_patterns:
+                matches = re.findall(pattern, html, re.IGNORECASE)
+                for match_date in matches[:3]:  # Max 3 fechas por patrón
+                    date_str = match_date.strip()
 
-                # Si la fecha es solo un número (ej: "28" del rango "December 26 - 28")
-                # Agregarle el mes del contexto
-                if date_str.isdigit():
-                    # Buscar el mes en el contexto anterior
-                    context_match = re.search(
-                        r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+\s*-\s*' + date_str,
-                        html,
-                        re.IGNORECASE
-                    )
-                    if context_match:
-                        month = context_match.group(1)
-                        date_str = f"{month} {date_str}"
+                    # Si la fecha es solo un número (ej: "28" del rango "December 26 - 28")
+                    # Agregarle el mes del contexto
+                    if date_str.isdigit():
+                        # Buscar el mes en el contexto anterior
+                        context_match = re.search(
+                            r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d+\s*-\s*' + date_str,
+                            html,
+                            re.IGNORECASE
+                        )
+                        if context_match:
+                            month = context_match.group(1)
+                            date_str = f"{month} {date_str}"
 
-                all_dates.append(('regular', date_str))
+                    all_dates.append(('regular', date_str))
 
         # Si encontramos fechas, elegir la MÁS TARDÍA para ser CONSERVADOR
         if all_dates:
@@ -391,8 +425,8 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
                     except:
                         pass
 
-                # Elegir la fecha MÁS TEMPRANA
-                # (la fecha de Prime es la más temprana, queremos detectarla)
+                # Elegir la fecha MÁS TEMPRANA (opción más rápida disponible)
+                # Si Amazon muestra múltiples opciones FREE, usar la más rápida
                 if parsed_dates:
                     earliest = min(parsed_dates, key=lambda x: x[0])
                     result["delivery_date"] = earliest[1]
@@ -404,6 +438,11 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
         if result["delivery_date"]:
             try:
                 date_str = result["delivery_date"].replace(',', '').strip()
+
+                # Si es un rango (ej: "December 24 - 26"), tomar la PRIMERA fecha (más temprana)
+                if ' - ' in date_str:
+                    # Tomar todo antes del " - "
+                    date_str = date_str.split(' - ')[0].strip()
 
                 # Normalizar español -> inglés
                 months_es = {
@@ -461,8 +500,11 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
             except Exception as e:
                 result["error"] = f"Error parsing date: {e}"
 
-        if result["delivery_date"] and result["in_stock"]:
+        # Marcar como disponible si tiene precio Y delivery
+        # (suficiente para confirmar que se puede comprar, aunque diga "currently unavailable" para Amazon)
+        if result["delivery_date"] and result["price"]:
             result["available"] = True
+            result["in_stock"] = True  # Si tiene delivery, está disponible
 
         return result
 
