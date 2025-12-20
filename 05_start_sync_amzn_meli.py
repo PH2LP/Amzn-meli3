@@ -57,6 +57,20 @@ def main():
         print()
         return
 
+    # Refrescar token de MercadoLibre antes de iniciar
+    print(f"{Colors.YELLOW}🔄 Refrescando token de MercadoLibre...{Colors.NC}")
+    sys.path.insert(0, str(project_dir / 'src' / 'integrations'))
+    try:
+        from mainglobal import refresh_ml_token
+        if refresh_ml_token(force=True):
+            print(f"{Colors.GREEN}   ✅ Token actualizado{Colors.NC}")
+        else:
+            print(f"{Colors.YELLOW}   ⚠️  No se pudo actualizar token (usando token actual){Colors.NC}")
+    except Exception as e:
+        print(f"{Colors.YELLOW}   ⚠️  Error refrescando token: {e}{Colors.NC}")
+        print(f"{Colors.YELLOW}   Continuando con token actual...{Colors.NC}")
+    print()
+
     # Crear directorio de logs
     log_dir = project_dir / "logs" / "sync_local"
     log_dir.mkdir(parents=True, exist_ok=True)

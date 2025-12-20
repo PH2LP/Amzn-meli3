@@ -57,6 +57,19 @@ def main():
             log("=" * 80)
             log("")
 
+            # Refrescar token de MercadoLibre antes de cada sync
+            log("🔄 Refrescando token de MercadoLibre...")
+            try:
+                from mainglobal import refresh_ml_token
+                if refresh_ml_token(force=True):
+                    log("   ✅ Token actualizado")
+                else:
+                    log("   ⚠️  No se pudo actualizar token (usando token actual)")
+            except Exception as e:
+                log(f"   ⚠️  Error refrescando token: {e}")
+                log("   Continuando con token actual...")
+            log("")
+
             # Ejecutar sync
             start_time = time.time()
 
