@@ -148,7 +148,7 @@ def send_telegram_message(text, parse_mode="HTML"):
     data = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": text,
-        "disable_web_page_preview": False
+        "disable_web_page_preview": True
     }
 
     # Solo agregar parse_mode si no es None
