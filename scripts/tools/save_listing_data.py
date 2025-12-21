@@ -5,11 +5,20 @@ Módulo para guardar datos de listings en la base de datos
 Usado por main2 para almacenar item_ids después de publicar
 """
 
+import os
 import sqlite3
 from datetime import datetime
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv(override=True)
 
 DB_PATH = "storage/listings_database.db"
+
+def is_save_to_db_enabled():
+    """Lee la variable SAVE_TO_DB del .env cada vez que se llama"""
+    return os.getenv("SAVE_TO_DB", "true").lower() == "true"
 
 def init_database():
     """Inicializa la base de datos si no existe"""
@@ -103,6 +112,11 @@ def save_listing(item_id, mini_ml, marketplaces=None, site_items=None):
         marketplaces: Lista de marketplaces donde está publicado
         site_items: Lista de dicts con info por país (site_id, item_id, price, status)
     """
+    # Verificar si el guardado en DB está habilitado
+    if not is_save_to_db_enabled():
+        print(f"   ⚠️  SAVE_TO_DB=false → No se guardará {mini_ml.get('asin', 'N/A')} en la DB")
+        return
+
     if marketplaces is None:
         marketplaces = ["MLM", "MLB", "MLC", "MCO", "MLA"]
 
