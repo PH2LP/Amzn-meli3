@@ -70,9 +70,80 @@ SPAPI_BASE = "https://sellingpartnerapi-na.amazon.com"
 MARKETPLACE_ID = "ATVPDKIKX0DER"  # Amazon US
 ML_API = "https://api.mercadolibre.com"
 ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
+ML_USER_ID = os.getenv("ML_USER_ID")  # Para detectar items de otra cuenta
+
+# Seller IDs conocidos de NEXO (diferentes por marketplace)
+# Estos seller_ids corresponden a la cuenta NEXO en diferentes países
+NEXO_SELLER_IDS = {
+    "3047790551",  # User ID principal
+    "3047796173",  # MCO (Colombia)
+    "3048288440",  # MLM (México)
+    "3048288454",  # MLB (Brasil)
+    "3048288470",  # MLA (Argentina)
+    "3048289672",  # MLC (Chile)
+    "3048289692",  # MLM Fulfillment
+}
+
+# Seller IDs conocidos de ONEWORLD (cuenta anterior)
+ONEWORLD_SELLER_IDS = {
+    "2629800952",  # USONEWORLDARR
+    "2629798326",  # USONEWORLDCOR
+    "2629798354",  # USONEWORLDCLR
+}
 
 # Configuración de precios
 PRICE_MARKUP_PERCENT = float(os.getenv("PRICE_MARKUP", 500))
+
+# ============================================================
+# FUNCIONES AUXILIARES
+# ============================================================
+
+def is_wrong_account_item(site_items_json):
+    """
+    Verifica si un item pertenece a una cuenta diferente a la actual (ONEWORLD).
+
+    Args:
+        site_items_json: String JSON con site_items de la DB (array de objetos)
+
+    Returns:
+        bool: True si el item pertenece EXCLUSIVAMENTE a cuenta ONEWORLD (no NEXO)
+    """
+    if not site_items_json:
+        return False
+
+    try:
+        site_items = json.loads(site_items_json)
+
+        # Si no hay datos, no es error de cuenta diferente
+        if not site_items:
+            return False
+
+        # Verificar si TODOS los seller_ids pertenecen a ONEWORLD
+        # site_items es un ARRAY de objetos: [{"seller_id": ..., "site_id": ...}, ...]
+        has_nexo = False
+        has_oneworld = False
+
+        for site_data in site_items:
+            # Saltar entradas que tienen error (no tienen seller_id válido)
+            if "error" in site_data:
+                continue
+
+            seller_id = str(site_data.get("seller_id", ""))
+
+            # Verificar si es NEXO
+            if seller_id in NEXO_SELLER_IDS:
+                has_nexo = True
+                break  # Si tiene al menos un NEXO, no es cuenta diferente
+
+            # Verificar si es ONEWORLD
+            if seller_id in ONEWORLD_SELLER_IDS:
+                has_oneworld = True
+
+        # Es cuenta diferente solo si tiene ONEWORLD pero NO tiene NEXO
+        return has_oneworld and not has_nexo
+
+    except (json.JSONDecodeError, AttributeError, TypeError):
+        return False
 
 # ============================================================
 # FUNCIONES PARA GLOW API (PRECIO + DELIVERY)
@@ -643,7 +714,8 @@ def sync_one_listing(listing, glow_cache, changes_log):
         "action": "none",
         "success": False,
         "message": "",
-        "amazon_status": amazon_status
+        "amazon_status": amazon_status,
+        "site_items": site_items  # Para detectar errores por cuenta diferente
     }
 
     # Caso 1: Producto NO disponible / No cumple requisitos → Pausar en ML
@@ -866,7 +938,8 @@ def main():
         "reactivated": 0,
         "price_updated": 0,
         "no_change": 0,
-        "errors": 0
+        "errors": 0,
+        "errors_wrong_account": 0  # Errores por items de otra cuenta
     }
 
     # Sincronizar cada listing usando cache de Glow
@@ -886,7 +959,12 @@ def main():
             elif result["action"] == "no_change":
                 stats["no_change"] += 1
         else:
+            # Incrementar errores totales
             stats["errors"] += 1
+
+            # Detectar si el error es porque el item pertenece a otra cuenta
+            if is_wrong_account_item(result.get("site_items")):
+                stats["errors_wrong_account"] += 1
 
         # Los delays ya se manejaron en get_glow_data_batch()
         # No necesitamos delays adicionales aquí
@@ -918,6 +996,13 @@ def main():
     print(f"Precios actualizados:   {stats['price_updated']}")
     print(f"Sin cambios:            {stats['no_change']}")
     print(f"Errores:                {stats['errors']}")
+
+    # Desglose de errores
+    if stats['errors'] > 0:
+        errors_other = stats['errors'] - stats['errors_wrong_account']
+        print(f"   ├─ Cuenta diferente:  {stats['errors_wrong_account']}")
+        print(f"   └─ Otros errores:     {errors_other}")
+
     print()
     print(f"📄 Log guardado en: {log_file}")
     print(f"⏱️ Duración: {duration:.1f} minutos")

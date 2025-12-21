@@ -113,7 +113,7 @@ def notify_sync_complete(stats, duration_minutes=0):
     """Notifica finalización de sincronización
 
     Args:
-        stats: Dict con {total, paused, reactivated, price_updated, no_change, errors}
+        stats: Dict con {total, paused, reactivated, price_updated, no_change, errors, errors_wrong_account}
         duration_minutes: Duración en minutos
     """
     total = stats.get("total", 0)
@@ -121,6 +121,7 @@ def notify_sync_complete(stats, duration_minutes=0):
     reactivated = stats.get("reactivated", 0)
     updated = stats.get("price_updated", 0)
     errors = stats.get("errors", 0)
+    errors_wrong_account = stats.get("errors_wrong_account", 0)
     no_change = stats.get("no_change", 0)
 
     message = "━━━━━━━━━━━━━━━━━━━━━━━━\n"
@@ -139,6 +140,12 @@ def notify_sync_complete(stats, duration_minutes=0):
 
     if errors > 0:
         message += f"   • Errores: {errors}\n"
+
+        # Desglose de errores
+        errors_other = errors - errors_wrong_account
+        if errors_wrong_account > 0:
+            message += f"      ├─ Cuenta diferente: {errors_wrong_account}\n"
+            message += f"      └─ Otros errores: {errors_other}\n"
 
     if duration_minutes > 0:
         message += f"\n⏱️ Duración: {duration_minutes:.1f} min"
