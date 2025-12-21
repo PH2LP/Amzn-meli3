@@ -280,19 +280,15 @@ def get_asin_by_item_id(item_id):
             if str(PROJECT_ROOT) not in sys.path:
                 sys.path.insert(0, str(PROJECT_ROOT))
 
-            from src.integrations.amazon_glow_api import get_product_data_batch
+            from src.integrations.amazon_glow_api import check_real_availability_glow_api
 
             # Obtener precio actual de Amazon con Glow API
-            products = get_product_data_batch([asin])
-            if products and asin in products:
-                product_data = products[asin]
-                if product_data and product_data.get("price"):
-                    amazon_cost = product_data["price"]
-                    print(f"   ✅ Precio de Glow API: ${amazon_cost}")
-                else:
-                    print(f"   ⚠️ Glow API no devolvió precio, usando fallback...")
+            glow_data = check_real_availability_glow_api(asin)
+            if glow_data and glow_data.get("price"):
+                amazon_cost = glow_data["price"]
+                print(f"   ✅ Precio de Glow API: ${amazon_cost}")
             else:
-                print(f"   ⚠️ Glow API no devolvió datos, usando fallback...")
+                print(f"   ⚠️ Glow API no devolvió precio, usando fallback...")
         except Exception as e:
             print(f"   ⚠️ Error con Glow API: {e}")
 
