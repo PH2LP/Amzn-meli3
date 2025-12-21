@@ -863,6 +863,7 @@ def main():
     stats = {
         "total": len(listings),
         "paused": 0,
+        "reactivated": 0,
         "price_updated": 0,
         "no_change": 0,
         "errors": 0
@@ -878,6 +879,8 @@ def main():
         if result["success"]:
             if result["action"] == "paused":
                 stats["paused"] += 1
+            elif result["action"] == "reactivated":
+                stats["reactivated"] += 1
             elif result["action"] == "price_updated":
                 stats["price_updated"] += 1
             elif result["action"] == "no_change":
@@ -909,7 +912,8 @@ def main():
     print("\n" + "=" * 80)
     print("📊 RESUMEN DE SINCRONIZACIÓN")
     print("=" * 80)
-    print(f"Total procesados:     {stats['total']}")
+    print(f"Total procesados:       {stats['total']}")
+    print(f"Productos reactivados:  {stats['reactivated']}")
     print(f"Publicaciones pausadas: {stats['paused']}")
     print(f"Precios actualizados:   {stats['price_updated']}")
     print(f"Sin cambios:            {stats['no_change']}")

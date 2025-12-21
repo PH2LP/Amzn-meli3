@@ -76,7 +76,7 @@ def notify_listing_reactivated(asin, item_id):
     return send_message(message, disable_notification=True)
 
 
-def notify_price_update(asin, old_price, new_price, countries):
+def notify_price_update(asin, old_price, new_price, countries, amazon_old_price=None, amazon_new_price=None):
     """Notifica actualización de precio"""
     change_percent = abs((new_price - old_price) / old_price * 100) if old_price > 0 else 0
 
@@ -84,7 +84,13 @@ def notify_price_update(asin, old_price, new_price, countries):
     emoji = "📈" if new_price > old_price else "📉"
 
     message = f"{emoji} <code>{asin}</code>\n"
-    message += f"   ${old_price:.2f} → ${new_price:.2f} ({change_percent:+.1f}%)\n"
+    message += f"   ML: ${old_price:.2f} → ${new_price:.2f} ({change_percent:+.1f}%)\n"
+
+    # Agregar cambio de precio de Amazon si está disponible
+    if amazon_old_price is not None and amazon_new_price is not None:
+        amazon_change_percent = abs((amazon_new_price - amazon_old_price) / amazon_old_price * 100) if amazon_old_price > 0 else 0
+        amazon_emoji = "📈" if amazon_new_price > amazon_old_price else "📉"
+        message += f"   AMZ: ${amazon_old_price:.2f} → ${amazon_new_price:.2f} ({amazon_emoji} {amazon_change_percent:+.1f}%)\n"
 
     # Agregar países si están disponibles
     if countries:
@@ -107,11 +113,12 @@ def notify_sync_complete(stats, duration_minutes=0):
     """Notifica finalización de sincronización
 
     Args:
-        stats: Dict con {total, paused, price_updated, no_change, errors}
+        stats: Dict con {total, paused, reactivated, price_updated, no_change, errors}
         duration_minutes: Duración en minutos
     """
     total = stats.get("total", 0)
     paused = stats.get("paused", 0)
+    reactivated = stats.get("reactivated", 0)
     updated = stats.get("price_updated", 0)
     errors = stats.get("errors", 0)
     no_change = stats.get("no_change", 0)
@@ -122,6 +129,10 @@ def notify_sync_complete(stats, duration_minutes=0):
 
     message += f"📊 <b>Resumen:</b>\n"
     message += f"   • Total procesados: {total}\n"
+
+    if reactivated > 0:
+        message += f"   • Items reactivados: {reactivated}\n"
+
     message += f"   • Precios actualizados: {updated}\n"
     message += f"   • Productos pausados: {paused}\n"
     message += f"   • Sin cambios: {no_change}\n"

@@ -34,7 +34,7 @@ load_dotenv(override=True)
 
 # Agregar directorio raíz al path para imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from src.integrations.amazon_pricing import get_prime_offers_batch_optimized
+from src.integrations.amazon_glow_api import check_real_availability_glow_api
 
 # Importar notificaciones Telegram (bot separado para sync)
 try:
@@ -105,21 +105,26 @@ def get_amazon_access_token():
 
 def check_amazon_product_status_from_cache(asin, prime_offer_cache):
     """
-    Verifica el estado de un producto usando el cache de ofertas Prime.
+    Verifica el estado de un producto usando Glow API.
 
-    Esta versión optimizada usa datos pre-cargados en batch en vez de
-    hacer requests individuales a Amazon (4x más rápido).
+    NUEVA VERSIÓN: Usa Glow API en tiempo real (más lento pero MÁS PRECISO)
+    - Verifica precio actual
+    - Verifica disponibilidad
+    - Verifica tiempo de entrega real
+    - Filtra delivery pago (solo acepta FREE)
 
     Args:
         asin: ASIN del producto
-        prime_offer_cache: Dict con {asin: prime_offer} pre-cargado con batch
+        prime_offer_cache: No usado (mantenido por compatibilidad)
 
     Returns:
         dict: {
             "available": bool,
             "price": float or None,
             "buyable": bool,
-            "status": str  # "active", "unavailable", "not_found", "error"
+            "status": str,  # "active", "no_prime", "error"
+            "delivery_days": int or None,
+            "delivery_date": str or None
         }
     """
     result = {
@@ -127,32 +132,45 @@ def check_amazon_product_status_from_cache(asin, prime_offer_cache):
         "price": None,
         "buyable": False,
         "status": "unknown",
-        "error": None
+        "error": None,
+        "delivery_days": None,
+        "delivery_date": None
     }
 
-    # Verificar si tenemos datos Prime para este ASIN
-    if asin not in prime_offer_cache:
+    # Obtener zipcode desde .env
+    zipcode = os.getenv("BUYER_ZIPCODE", "33172")
+
+    # Llamar a Glow API (incluye precio + delivery en una sola llamada)
+    glow_result = check_real_availability_glow_api(asin, zipcode)
+
+    # Verificar si hay error
+    if glow_result.get("error"):
+        error_msg = glow_result["error"]
+
+        # Si está out of stock, marcarlo como no disponible
+        if "out of stock" in error_msg.lower():
+            result["status"] = "no_prime"
+            result["error"] = "Out of stock"
+            return result
+
+        # Otros errores
         result["status"] = "error"
-        result["error"] = "ASIN no encontrado en cache de pricing"
+        result["error"] = error_msg
         return result
 
-    prime_offer = prime_offer_cache[asin]
-
-    if prime_offer:
-        # Tiene oferta Prime activa
-        result["price"] = prime_offer["price"]
+    # Producto disponible
+    if glow_result.get("available") and glow_result.get("in_stock"):
+        result["price"] = glow_result.get("price")
         result["buyable"] = True
         result["available"] = True
         result["status"] = "active"
-        # Agregar datos de ShippingTime para debugging
-        result["availability_type"] = prime_offer.get("availability_type")
-        result["maximum_hours"] = prime_offer.get("maximum_hours")
-        result["available_date"] = prime_offer.get("available_date")
-        result["fulfillment_validation"] = prime_offer.get("fulfillment_validation")
+        result["delivery_days"] = glow_result.get("days_until_delivery")
+        result["delivery_date"] = glow_result.get("delivery_date")
+        result["prime_available"] = glow_result.get("prime_available", False)
     else:
-        # No hay oferta Prime = producto no disponible para nosotros
+        # No disponible o sin stock
         result["status"] = "no_prime"
-        result["error"] = "Sin oferta Prime activa"
+        result["error"] = "No disponible o sin stock"
         result["available"] = False
 
     return result
@@ -629,11 +647,67 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
         amazon_price = amazon_status["price"]
         new_ml_price = calculate_new_ml_price(amazon_price)
 
-        # Leer markup actual del .env para el log
+        # Leer configuración del .env
         current_markup = float(os.getenv("PRICE_MARKUP", "30"))
+        max_delivery_days = int(os.getenv("MAX_DELIVERY_DAYS", "2"))
+
         print(f"   ✅ Producto disponible en Amazon")
         print(f"   💰 Precio Amazon: ${amazon_price} USD")
         print(f"   💰 Precio ML calculado (con {current_markup}% markup): ${new_ml_price} USD")
+
+        # VALIDACIÓN DE DELIVERY TIME (usando datos de Glow API)
+        delivery_days = amazon_status.get("delivery_days")
+        delivery_date = amazon_status.get("delivery_date")
+
+        if delivery_days is None:
+            # NO se pudo determinar fecha de entrega → PAUSAR por seguridad
+            print(f"   ⚠️ No se pudo determinar tiempo de entrega")
+            print(f"   ⏸️ ACCIÓN: Pausar publicación (sin fecha de entrega)")
+
+            if pause_ml_listing(item_id, site_items, current_price):
+                result["action"] = "paused"
+                result["success"] = True
+                result["message"] = "Pausado: No se pudo determinar tiempo de entrega"
+                print(f"   ✅ Publicación pausada exitosamente")
+
+                if telegram_configured():
+                    notify_listing_paused(asin, item_id, "Sin fecha de entrega")
+            else:
+                result["action"] = "pause_failed"
+                result["message"] = "Error al pausar publicación"
+                print(f"   ❌ Error pausando publicación")
+
+            # Salir early, no actualizar precio
+            changes_log.append(result)
+            return result
+
+        # Tiene fecha de entrega, verificar si es válida
+        print(f"   📅 Fecha entrega: {delivery_date}")
+        print(f"   ⏱️  Días hasta entrega: {delivery_days}d")
+
+        if delivery_days > max_delivery_days:
+            # Tarda demasiado → Pausar producto
+            print(f"   ❌ DELIVERY RECHAZADO: Tarda {delivery_days}d (>{max_delivery_days}d)")
+            print(f"   ⏸️ ACCIÓN: Pausar publicación (delivery lento)")
+
+            if pause_ml_listing(item_id, site_items, current_price):
+                result["action"] = "paused"
+                result["success"] = True
+                result["message"] = f"Pausado por delivery lento: {delivery_days}d ({delivery_date})"
+                print(f"   ✅ Publicación pausada exitosamente")
+
+                if telegram_configured():
+                    notify_listing_paused(asin, item_id, f"Delivery lento: {delivery_days}d")
+            else:
+                result["action"] = "pause_failed"
+                result["message"] = "Error al pausar publicación"
+                print(f"   ❌ Error pausando publicación")
+
+            # Salir early, no actualizar precio
+            changes_log.append(result)
+            return result
+        else:
+            print(f"   ✅ Delivery OK: {delivery_days}d (≤{max_delivery_days}d)")
 
         # REACTIVACIÓN: Si el producto estaba sin stock en ML, reactivarlo primero
         # Consultamos el stock actual en ML
@@ -715,7 +789,7 @@ def sync_one_listing(listing, prime_offer_cache, changes_log):
                     else:
                         countries = ["Global"]
 
-                    notify_price_update(asin, current_price, new_ml_price, countries)
+                    notify_price_update(asin, current_price, new_ml_price, countries, amazon_price_last, amazon_price)
             else:
                 result["action"] = "price_update_failed"
                 result["message"] = "Error al actualizar precio"
@@ -791,18 +865,15 @@ def main():
     else:
         print("   → Telegram no configurado, saltando", flush=True)
 
-    # Extraer todos los ASINs para hacer batch request
-    print("📦 Extrayendo ASINs...", flush=True)
-    asins = [listing["asin"] for listing in listings]
-    print(f"   → {len(asins)} ASINs extraídos", flush=True)
+    # NUEVA VERSIÓN: Ya no usamos batch de SP-API, usamos Glow API en tiempo real
+    # El cache está vacío porque cada sync_one_listing() llama a Glow directamente
+    print("📊 Modo: Glow API (verificación en tiempo real)", flush=True)
+    print("   ⚡ Precio + Delivery en una sola llamada por producto", flush=True)
+    print("   🔍 Filtra delivery pago (solo FREE delivery)", flush=True)
+    print(f"   📍 Zipcode: {os.getenv('BUYER_ZIPCODE', '33172')}", flush=True)
+    print()
 
-    # Obtener precios Prime en BATCH (mucho más rápido que individual)
-    print(f"\n📊 Obteniendo precios Prime de {len(asins)} productos en BATCH...", flush=True)
-    print(f"   (Endpoint optimizado: 20 ASINs por request, 4x más rápido)\n", flush=True)
-
-    prime_offer_cache = get_prime_offers_batch_optimized(asins, batch_size=20, show_progress=True)
-
-    print(f"\n✅ Cache de precios Prime cargado ({len(prime_offer_cache)} productos)\n")
+    prime_offer_cache = {}  # Cache vacío (no usado en nueva versión)
 
     # Log de cambios
     changes_log = []
@@ -817,7 +888,7 @@ def main():
         "errors": 0
     }
 
-    # Sincronizar cada listing (usando cache, sin delays)
+    # Sincronizar cada listing (con delay para Glow API)
     for i, listing in enumerate(listings, 1):
         print(f"\n[{i}/{len(listings)}]", end=" ")
 
@@ -836,8 +907,10 @@ def main():
         else:
             stats["errors"] += 1
 
-        # Ya NO necesitamos delay entre listings porque usamos cache pre-cargado
-        # El delay ya se manejó en get_prime_offers_batch_optimized()
+        # DELAY entre productos (Glow API requiere ~6 segundos por request)
+        # Para no sobrecargar Amazon ni trigger rate limits
+        if i < len(listings):  # No delay después del último
+            time.sleep(6)
 
     # Guardar log de cambios
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
