@@ -254,7 +254,7 @@ def get_asin_by_item_id(item_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT asin, title, brand, model, permalink, country
+        SELECT asin, title, brand, model, permalink, country, costo_amazon
         FROM listings
         WHERE item_id = ?
         LIMIT 1
@@ -269,57 +269,25 @@ def get_asin_by_item_id(item_id):
     result = dict(row)
     asin = result.get("asin")
 
-    # SIEMPRE obtener precio en TIEMPO REAL de Amazon API cuando hay una venta
-    # Esto garantiza que el precio sea exacto al momento de la venta
-    amazon_cost = 0
-    if asin:
-        print(f"   🔄 Obteniendo precio en tiempo real de Amazon API...")
+    # Obtener precio de Amazon desde la DB
+    amazon_cost = result.get("costo_amazon", 0) or 0
 
-        try:
-            # Importar la función de pricing de Amazon
-            import sys
-            if str(PROJECT_ROOT) not in sys.path:
-                sys.path.insert(0, str(PROJECT_ROOT))
-
-            from src.integrations.amazon_pricing import get_prime_offers_batch_optimized
-
-            # Obtener precio en tiempo real
-            prices = get_prime_offers_batch_optimized([asin], show_progress=False)
-            if prices and asin in prices and prices[asin]:
-                price_data = prices[asin]
-                amazon_cost = price_data.get("price", 0)
-                print(f"   ✅ Precio obtenido de Amazon API: ${amazon_cost}")
-            else:
-                print(f"   ⚠️ No se pudo obtener precio de Amazon API, intentando con JSON...")
-
-                # Fallback: Intentar obtener de JSON local si la API falla
-                json_file = ASINS_JSON_DIR / f"{asin}.json"
-                if json_file.exists():
-                    try:
-                        with open(json_file, 'r') as f:
-                            data = json.load(f)
-                            amazon_cost = data.get("prime_pricing", {}).get("price", 0)
-                            print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
-                    except Exception as e:
-                        print(f"   ⚠️ Error leyendo JSON: {e}")
-                else:
-                    print(f"   ❌ JSON no existe para ASIN {asin}")
-
-        except Exception as e:
-            print(f"   ❌ Error obteniendo precio de Amazon API: {e}")
-            import traceback
-            traceback.print_exc()
-
-            # Fallback: Intentar obtener de JSON local si hay error
-            json_file = ASINS_JSON_DIR / f"{asin}.json"
-            if json_file.exists():
-                try:
-                    with open(json_file, 'r') as f:
-                        data = json.load(f)
-                        amazon_cost = data.get("prime_pricing", {}).get("price", 0)
-                        print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
-                except Exception as e:
-                    print(f"   ⚠️ Error leyendo JSON: {e}")
+    # Si no hay precio en DB, intentar obtener de JSON como fallback
+    if amazon_cost == 0 and asin:
+        print(f"   ⚠️ No hay precio en DB, intentando JSON...")
+        json_file = ASINS_JSON_DIR / f"{asin}.json"
+        if json_file.exists():
+            try:
+                with open(json_file, 'r') as f:
+                    data = json.load(f)
+                    amazon_cost = data.get("prime_pricing", {}).get("price", 0)
+                    print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
+            except Exception as e:
+                print(f"   ⚠️ Error leyendo JSON: {e}")
+        else:
+            print(f"   ❌ No hay precio disponible para ASIN {asin}")
+    else:
+        print(f"   💲 Precio desde DB: ${amazon_cost}")
 
     result["amazon_cost"] = amazon_cost
     return result
