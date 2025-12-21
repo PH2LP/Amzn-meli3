@@ -107,7 +107,11 @@
   },
   "BALL_SIZE": {
     "value_type": "number",
-    "values": {},
+    "values": {
+      "3": "3088204",
+      "4": "3040573",
+      "5": "3040562"
+    },
     "allowed_units": [],
     "tags": {},
     "hierarchy": "CHILD_PK",
@@ -167,14 +171,6 @@
       "no": "242084",
       "yes": "242085"
     },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "FOOTBALL_BALL_CIRCUMFERENCE": {
-    "value_type": "string",
-    "values": {},
     "allowed_units": [],
     "tags": {},
     "hierarchy": "CHILD_DEPENDENT",
@@ -427,6 +423,14 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "FOOTBALL_BALL_CIRCUMFERENCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
   "EMPTY_GTIN_REASON": {
     "value_type": "list",
     "values": {
@@ -483,32 +487,6 @@
       "textured": "11688404"
     },
     "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "MAX_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "MIN_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg"
-    ],
     "tags": {
       "hidden": true
     },

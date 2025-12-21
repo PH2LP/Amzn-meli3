@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-12-08 00:28:09",
+  "total_checked": 5,
+  "prohibited_categories": {
+    "CBT455425": {
+      "name": "Building Toys",
+      "prohibited_in": [
+        "MLA",
+        "MLB",
+        "MLC",
+        "MCO",
+        "MLM"
+      ]
+    },
+    "CBT1039": {
+      "name": "Cameras and Accessories",
+      "prohibited_in": [
+        "MLA",
+        "MLB",
+        "MLC",
+        "MCO",
+        "MLM"
+      ]
+    },
+    "CBT1049": {
+      "name": "Camera Accessories",
+      "prohibited_in": [
+        "MLA",
+        "MLB",
+        "MLC",
+        "MCO",
+        "MLM"
+      ]
+    }
+  }
+}

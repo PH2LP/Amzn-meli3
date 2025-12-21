@@ -422,6 +422,20 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "WITH_VIRTUAL_TRY_ON": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "WITH_POSITIVE_IMPACT": {
     "value_type": "boolean",
     "values": {

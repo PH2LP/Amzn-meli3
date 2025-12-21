@@ -73,15 +73,37 @@ def analyze_question_with_ai(question_text, item_context_title=None):
 CONTEXTO IMPORTANTE:
 El cliente preguntó esto en la publicación: "{item_context_title}"
 
+⚠️ REGLA CRÍTICA: Si pregunta sobre CARACTERÍSTICAS/ESPECIFICACIONES del producto actual → is_product_search = FALSE
+
+Características incluyen: calidad, resolución, capacidad, velocidad, tamaño, peso, material, color, batería, resistencia, conectividad, funciones, modos, compatibilidad, qué incluye, qué trae, accesorios incluidos, cables, cargadores, conexiones, precio, envío, garantía, voltaje, etc.
+
+⚠️ REGLA CRÍTICA 2: Si pregunta sobre DIFERENCIA/COMPARACIÓN entre versiones/colores del MISMO producto → is_product_search = FALSE
+
+Ejemplos:
+- "What is the difference between the orange and brown one?" → is_product_search = FALSE (pregunta sobre versiones del mismo producto)
+- "Cuál es la diferencia entre el blanco y el negro?" → is_product_search = FALSE (pregunta sobre colores)
+- "What's the difference between 4K and 4K Max?" → is_product_search = TRUE (son productos diferentes)
+
+⚠️ REGLA CRÍTICA 3: Si pregunta sobre PRECIO FINAL o PRECIO CON ENVÍO a una ubicación → is_product_search = FALSE
+
+Ejemplos:
+- "What is the final price delivered to my home in Chubut?" → is_product_search = FALSE (pregunta sobre precio/envío)
+- "Cuánto sale con envío a Buenos Aires?" → is_product_search = FALSE (pregunta sobre precio/envío)
+- "How much to ship to Santiago?" → is_product_search = FALSE (pregunta sobre envío)
+- "Precio total a Córdoba?" → is_product_search = FALSE (pregunta sobre precio)
+
+IMPORTANTE: Si el producto es un VIDEOPORTERO/TIMBRE y pregunta "qué cámara tiene?" o "what camera?" → NO es búsqueda de producto, es pregunta sobre LA CÁMARA DEL TIMBRE
+
 Usa este contexto para interpretar la pregunta:
-- Si pregunta "Tenés el Pro?" y el contexto es "iPhone 15", busca "iPhone 15 Pro"
-- Si pregunta "Tenés AirPods?" y el contexto es "iPhone 15", busca "AirPods" (producto diferente)
-- Si pregunta "Tenés en negro?" refiere al mismo producto del contexto pero en color negro
-- Si pregunta "Tenés de 256GB?" refiere al mismo producto del contexto pero con esa capacidad
-- Si pregunta "Tenés el Plus?" y el contexto es "Samsung Galaxy S24", busca "Samsung Galaxy S24 Plus"
+- Si pregunta sobre características (velocidad, color, tamaño, peso, material, batería, etc.) → NO es búsqueda de producto
+- Si pregunta "Tenés el Pro?" y el contexto es "iPhone 15" → busca "iPhone 15 Pro" (producto diferente)
+- Si pregunta "Tenés AirPods?" y el contexto es "iPhone 15" → busca "AirPods" (producto diferente)
+- Si pregunta "Tenés en negro?" refiere al mismo producto del contexto pero en color negro → NO es búsqueda
+- Si pregunta "Tenés de 256GB?" refiere al mismo producto del contexto pero con esa capacidad → NO es búsqueda
+- Si pregunta "Tenés el Plus?" y el contexto es "Samsung Galaxy S24" → busca "Samsung Galaxy S24 Plus"
 - Si pregunta "Tenés el Max?" combina con el contexto (ej: "Tenés el Max?" en "iPhone 15 Pro" → "iPhone 15 Pro Max")
 - Si pregunta "Tenés el modelo 2024?" combina con el contexto (ej: en "MacBook Air" → "MacBook Air 2024")
-- Si pregunta sobre accesorios (funda, cargador, cable) pero está en producto principal, busca el accesorio solo
+- Si pregunta sobre accesorios (funda, cargador, cable) pero está en producto principal → busca el accesorio
 - Si pregunta "Tenés sin cable?" refiere a versión inalámbrica del mismo producto del contexto
 """
 
@@ -90,6 +112,10 @@ Usa este contexto para interpretar la pregunta:
 1. ¿Es una búsqueda de producto específico? (true/false)
 2. Si es búsqueda, extrae palabras clave del producto (usa el CONTEXTO si está disponible)
 3. Categoría general del producto
+
+⚠️ REGLA CRÍTICA: Si el cliente pregunta sobre CARACTERÍSTICAS/ESPECIFICACIONES del producto actual → is_product_search = FALSE
+
+Características incluyen: color, tamaño, peso, velocidad, batería, resistencia al agua, material, conectividad, capacidad, dimensiones, calidad, funciones, modos, compatibilidad, voltaje, transformador, electricidad, watts, amperaje, garantía, envío, precio, stock, qué incluye, accesorios incluidos, cables incluidos, cargadores incluidos, precio con envío, costo de envío, etc.
 
 {context_info}
 
@@ -106,10 +132,41 @@ Ejemplos SIN contexto:
 - "Tenes el filtro Waterdrop G3?" → {{"is_product_search": true, "keywords": "filtro Waterdrop G3", "category": "water filters"}}
 - "Cuánto demora el envío?" → {{"is_product_search": false, "keywords": "", "category": ""}}
 
-Ejemplos CON contexto:
+Ejemplos CON contexto - Búsqueda de producto DIFERENTE:
 - Contexto: "iPhone 15 128GB" + Pregunta: "Tenés el Pro?" → {{"is_product_search": true, "keywords": "iPhone 15 Pro", "category": "smartphones"}}
 - Contexto: "iPhone 15" + Pregunta: "Tenés los AirPods Max?" → {{"is_product_search": true, "keywords": "AirPods Max", "category": "headphones"}}
 - Contexto: "Parlante JBL Charge 5" + Pregunta: "Tenés el Pro?" → {{"is_product_search": true, "keywords": "Parlante JBL Charge 5 Pro", "category": "speakers"}}
+
+Ejemplos CON contexto - Pregunta sobre CARACTERÍSTICAS (NO es búsqueda):
+- Contexto: "Masajeador Cotsoco 20 Velocidades" + Pregunta: "What speeds does it have?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Masajeador Portátil" + Pregunta: "Qué velocidades trae?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "iPhone 15" + Pregunta: "De qué color es?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Samsung Galaxy S24" + Pregunta: "Cuánta batería tiene?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Reloj Casio" + Pregunta: "Es resistente al agua?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Reloj Fitbit" + Pregunta: "Is it water resistant? Can you swim with it?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Ring Doorbell" + Pregunta: "What quality does the camera have?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Videoportero Ring" + Pregunta: "Hello, what camera does it have?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Ring Battery Doorbell" + Pregunta: "What camera?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Micrófonos JBL" + Pregunta: "Usa baterías AA?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Reloj Fitbit" + Pregunta: "Qué funciones trae?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Purificador Core 300" + Pregunta: "Does it work at 220v or does it need a transformer?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Secador de Pelo" + Pregunta: "Funciona con 110v?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Licuadora" + Pregunta: "What voltage?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Navegador Garmin GPS" + Pregunta: "Does it have a connection for the car's cigarette lighter?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "iPhone 15" + Pregunta: "What is the final price delivered to my home in Buenos Aires?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "MacBook Pro" + Pregunta: "Qué incluye? Trae cargador?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Reloj Garmin" + Pregunta: "Does it include a charging cable?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Auriculares Sony" + Pregunta: "What accessories are included?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Cámara Canon" + Pregunta: "Cuánto sale con envío a Chubut?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Tablet Samsung" + Pregunta: "How much is shipping to my city?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+
+Ejemplos de DIFERENCIAS entre versiones/colores del MISMO producto (NO es búsqueda):
+- Contexto: "Fire TV Stick 4K" + Pregunta: "What is the difference between the orange and brown one?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Fire TV Stick 4K" + Pregunta: "What is the difference between the one that is all orange and the one that comes brown with orange, both being 4k?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "iPhone 15" + Pregunta: "Cuál es la diferencia entre el de 128GB y el de 256GB?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "Samsung S24" + Pregunta: "Qué diferencia hay entre el negro y el gris?" → {{"is_product_search": false, "keywords": "", "category": ""}}
+- Contexto: "MacBook Air" + Pregunta: "What's the difference between M2 and M3?" → {{"is_product_search": true, "keywords": "MacBook Air M2 M3", "category": "laptops"}}
+- Contexto: "AirPods" + Pregunta: "Diferencia entre los Pro y los Max?" → {{"is_product_search": true, "keywords": "AirPods Pro Max", "category": "headphones"}}
 """
 
     try:

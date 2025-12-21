@@ -24,17 +24,23 @@ import sys
 import json
 import sqlite3
 import requests
-from datetime import datetime
+import fcntl
+import hashlib
+from datetime import datetime, timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
 load_dotenv(override=True)
 
-# Configuración
-DB_PATH = "storage/listings_database.db"
-SALES_LOG_PATH = "storage/logs/sales_notified.json"
-LOG_DIR = Path("storage/logs/sales")
+# Configuración - Usar rutas absolutas desde la raíz del proyecto
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+DB_PATH = PROJECT_ROOT / "storage" / "listings_database.db"
+SALES_LOG_PATH = PROJECT_ROOT / "storage" / "logs" / "sales_notified.json"
+ASINS_JSON_DIR = PROJECT_ROOT / "storage" / "asins_json"
+LOG_DIR = PROJECT_ROOT / "storage" / "logs" / "sales"
+LOCK_FILE = PROJECT_ROOT / "storage" / "telegram_notifier.lock"
+DEDUP_FILE = PROJECT_ROOT / "storage" / "telegram_messages_sent.json"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 # APIs
@@ -44,6 +50,89 @@ ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
 # Telegram
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+# ============================================================
+# FUNCIONES DE FILE LOCKING Y DEDUPLICACIÓN
+# ============================================================
+
+class FileLock:
+    """Context manager para file locking con fcntl"""
+    def __init__(self, lock_file):
+        self.lock_file = Path(lock_file)
+        self.lock_file.parent.mkdir(parents=True, exist_ok=True)
+        self.fd = None
+
+    def __enter__(self):
+        self.fd = open(str(self.lock_file), 'w')
+        try:
+            fcntl.flock(self.fd.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            return self
+        except IOError:
+            raise RuntimeError("Ya hay otra instancia ejecutándose")
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.fd:
+            fcntl.flock(self.fd.fileno(), fcntl.LOCK_UN)
+            self.fd.close()
+
+
+def generate_message_hash(pack_id, marketplace, asin):
+    """Genera un hash único para identificar mensajes duplicados"""
+    today = datetime.now().strftime("%Y-%m-%d")
+    unique_str = f"{pack_id}|{marketplace}|{asin}|{today}"
+    return hashlib.sha256(unique_str.encode()).hexdigest()[:16]
+
+
+def load_sent_messages():
+    """Carga el registro de mensajes enviados en las últimas 24h"""
+    if not DEDUP_FILE.exists():
+        return {}
+
+    try:
+        with open(str(DEDUP_FILE), "r") as f:
+            all_messages = json.load(f)
+
+        # Limpiar mensajes más viejos de 24 horas
+        cutoff = datetime.now() - timedelta(hours=24)
+        valid_messages = {}
+
+        for msg_hash, data in all_messages.items():
+            timestamp = datetime.fromisoformat(data.get("timestamp", "2000-01-01"))
+            if timestamp > cutoff:
+                valid_messages[msg_hash] = data
+
+        # Guardar solo los válidos
+        if len(valid_messages) != len(all_messages):
+            with open(str(DEDUP_FILE), "w") as f:
+                json.dump(valid_messages, f, indent=2)
+
+        return valid_messages
+    except Exception as e:
+        print(f"⚠️ Error cargando mensajes enviados: {e}")
+        return {}
+
+
+def save_sent_message(msg_hash, pack_id, marketplace, asin):
+    """Registra un mensaje como enviado"""
+    DEDUP_FILE.parent.mkdir(parents=True, exist_ok=True)
+
+    sent_messages = load_sent_messages()
+    sent_messages[msg_hash] = {
+        "timestamp": datetime.now().isoformat(),
+        "pack_id": pack_id,
+        "marketplace": marketplace,
+        "asin": asin
+    }
+
+    with open(str(DEDUP_FILE), "w") as f:
+        json.dump(sent_messages, f, indent=2)
+
+
+def was_message_sent(msg_hash):
+    """Verifica si un mensaje ya fue enviado"""
+    sent_messages = load_sent_messages()
+    return msg_hash in sent_messages
+
 
 # ============================================================
 # FUNCIONES DE TELEGRAM
@@ -59,9 +148,12 @@ def send_telegram_message(text, parse_mode="HTML"):
     data = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": text,
-        "parse_mode": parse_mode,
         "disable_web_page_preview": False
     }
+
+    # Solo agregar parse_mode si no es None
+    if parse_mode:
+        data["parse_mode"] = parse_mode
 
     try:
         r = requests.post(url, json=data, timeout=30)
@@ -78,16 +170,16 @@ def send_telegram_message(text, parse_mode="HTML"):
 
 def get_ml_orders(user_id, limit=50):
     """
-    Obtiene órdenes recientes del seller.
+    Obtiene órdenes recientes del seller (CBT - Cross Border Trade).
 
     Args:
         user_id: ID del usuario vendedor
         limit: Número máximo de órdenes a obtener
 
     Returns:
-        list: Lista de órdenes
+        list: Lista de órdenes completas (con pack_id agregado)
     """
-    url = f"{ML_API}/orders/search"
+    url = f"{ML_API}/marketplace/orders/search"
     headers = {"Authorization": f"Bearer {ML_TOKEN}"}
     params = {
         "seller": user_id,
@@ -99,7 +191,30 @@ def get_ml_orders(user_id, limit=50):
         r = requests.get(url, headers=headers, params=params, timeout=30)
         r.raise_for_status()
         data = r.json()
-        return data.get("results", [])
+
+        # En CBT, cada resultado es un "cart" que contiene "orders"
+        all_orders = []
+        carts = data.get("results", [])
+
+        for cart in carts:
+            pack_id = cart.get("id")  # ID del pack/cart (esto es lo que se ve en ML)
+            orders = cart.get("orders", [])
+
+            for order in orders:
+                order_id = order.get("id")
+
+                # Obtener detalles completos de la orden
+                order_url = f"{ML_API}/marketplace/orders/{order_id}"
+                order_resp = requests.get(order_url, headers=headers, timeout=10)
+
+                if order_resp.status_code == 200:
+                    full_order = order_resp.json()
+                    # Agregar el pack_id al objeto order
+                    full_order["pack_id"] = pack_id
+                    all_orders.append(full_order)
+
+        return all_orders
+
     except Exception as e:
         print(f"❌ Error obteniendo órdenes: {e}")
         return []
@@ -132,9 +247,9 @@ def get_asin_by_item_id(item_id):
         item_id: ID del item en MercadoLibre
 
     Returns:
-        dict: {asin, title, brand, model, permalink} o None
+        dict: {asin, title, brand, model, permalink, amazon_cost} o None
     """
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(str(DB_PATH))
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
@@ -148,18 +263,75 @@ def get_asin_by_item_id(item_id):
     row = cursor.fetchone()
     conn.close()
 
-    if row:
-        return dict(row)
-    return None
+    if not row:
+        return None
+
+    result = dict(row)
+    asin = result.get("asin")
+
+    # SIEMPRE obtener precio en TIEMPO REAL de Amazon API cuando hay una venta
+    # Esto garantiza que el precio sea exacto al momento de la venta
+    amazon_cost = 0
+    if asin:
+        print(f"   🔄 Obteniendo precio en tiempo real de Amazon API...")
+
+        try:
+            # Importar la función de pricing de Amazon
+            import sys
+            if str(PROJECT_ROOT) not in sys.path:
+                sys.path.insert(0, str(PROJECT_ROOT))
+
+            from src.integrations.amazon_pricing import get_prime_offers_batch_optimized
+
+            # Obtener precio en tiempo real
+            prices = get_prime_offers_batch_optimized([asin], show_progress=False)
+            if prices and asin in prices and prices[asin]:
+                price_data = prices[asin]
+                amazon_cost = price_data.get("price", 0)
+                print(f"   ✅ Precio obtenido de Amazon API: ${amazon_cost}")
+            else:
+                print(f"   ⚠️ No se pudo obtener precio de Amazon API, intentando con JSON...")
+
+                # Fallback: Intentar obtener de JSON local si la API falla
+                json_file = ASINS_JSON_DIR / f"{asin}.json"
+                if json_file.exists():
+                    try:
+                        with open(json_file, 'r') as f:
+                            data = json.load(f)
+                            amazon_cost = data.get("prime_pricing", {}).get("price", 0)
+                            print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
+                    except Exception as e:
+                        print(f"   ⚠️ Error leyendo JSON: {e}")
+                else:
+                    print(f"   ❌ JSON no existe para ASIN {asin}")
+
+        except Exception as e:
+            print(f"   ❌ Error obteniendo precio de Amazon API: {e}")
+            import traceback
+            traceback.print_exc()
+
+            # Fallback: Intentar obtener de JSON local si hay error
+            json_file = ASINS_JSON_DIR / f"{asin}.json"
+            if json_file.exists():
+                try:
+                    with open(json_file, 'r') as f:
+                        data = json.load(f)
+                        amazon_cost = data.get("prime_pricing", {}).get("price", 0)
+                        print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
+                except Exception as e:
+                    print(f"   ⚠️ Error leyendo JSON: {e}")
+
+    result["amazon_cost"] = amazon_cost
+    return result
 
 
 def load_notified_sales():
     """Carga el registro de ventas ya notificadas"""
-    if not os.path.exists(SALES_LOG_PATH):
+    if not SALES_LOG_PATH.exists():
         return {}
 
     try:
-        with open(SALES_LOG_PATH, "r") as f:
+        with open(str(SALES_LOG_PATH), "r") as f:
             return json.load(f)
     except:
         return {}
@@ -174,7 +346,10 @@ def save_notified_sale(order_id, order_data):
         "asin": order_data.get("asin")
     }
 
-    with open(SALES_LOG_PATH, "w") as f:
+    # Asegurar que el directorio existe
+    SALES_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(str(SALES_LOG_PATH), "w") as f:
         json.dump(notified, f, indent=2)
 
 
@@ -194,93 +369,152 @@ def format_sale_notification(order, asin_data):
         str: Mensaje formateado en HTML para Telegram
     """
     # Extraer datos de la orden
-    order_id = order.get("id")
+    order_id = order.get("id")  # Order ID individual
+    pack_id = order.get("pack_id", order_id)  # Pack ID (lo que se ve en ML)
     order_items = order.get("order_items", [])
 
     if not order_items:
         return None
 
     item = order_items[0].get("item", {})
-    item_id = item.get("id")
     item_title = item.get("title", "Sin título")
     quantity = order_items[0].get("quantity", 1)
-    unit_price = order_items[0].get("unit_price", 0)
-    total_amount = order.get("total_amount", 0)
 
-    # Datos del comprador
+    # Datos financieros
+    unit_price = order_items[0].get("unit_price", 0)
+    sale_fee = order_items[0].get("sale_fee", 0)
+
+    # Obtener el total que pagó el cliente desde payments
+    payments = order.get("payments", [])
+    total_paid_by_customer = payments[0].get("total_paid_amount", 0) if payments else unit_price
+
+    # Obtener shipping cost desde el endpoint de shipments
+    shipping = order.get("shipping", {})
+    shipping_id = shipping.get("id")
+    shipping_cost = 0
+
+    if shipping_id:
+        try:
+            import requests
+            headers = {"Authorization": f"Bearer {ML_TOKEN}"}
+            r = requests.get(f"{ML_API}/marketplace/shipments/{shipping_id}",
+                           headers=headers, timeout=10)
+            if r.status_code == 200:
+                shipment_data = r.json()
+                lead_time = shipment_data.get("lead_time", {})
+                shipping_cost = lead_time.get("list_cost", 0)
+        except:
+            pass
+
+    # NET PROCEEDS - Calcular manualmente para TODAS las unidades
+    # = (Precio de venta * cantidad) - (Fee ML * cantidad) - Shipping
+    net_proceeds = (unit_price * quantity) - (sale_fee * quantity) - shipping_cost
+
+    # Marketplace
+    context = order.get("context", {})
+    marketplace = context.get("site", "ML")
+
+    # Comprador
     buyer = order.get("buyer", {})
     buyer_nickname = buyer.get("nickname", "N/A")
-
-    # Datos de envío
-    shipping = order.get("shipping", {})
-    shipping_address = shipping.get("receiver_address", {})
-    city = shipping_address.get("city", {}).get("name", "N/A")
-    state = shipping_address.get("state", {}).get("name", "N/A")
-    country = shipping_address.get("country", {}).get("name", "N/A")
 
     # Datos del ASIN
     asin = asin_data.get("asin", "N/A")
     brand = asin_data.get("brand", "N/A")
-    model = asin_data.get("model", "N/A")
-    ml_permalink = asin_data.get("permalink", "N/A")
+    amazon_cost = asin_data.get("amazon_cost", 0)
 
-    # Link de Amazon
-    amazon_link = f"https://www.amazon.com/dp/{asin}"
+    # Calcular ganancia (lo que recibís - costo Amazon)
+    # Solo costo Amazon + 3PL (NO se paga tax) * cantidad de unidades
+    fulfillment_fee = 4.0
+    total_amazon_cost = (amazon_cost + fulfillment_fee) * quantity
+    profit = net_proceeds - total_amazon_cost
 
-    # Formato del mensaje
+    # Link de Amazon Business (NO amazon.com normal)
+    amazon_link = f"https://www.amazon.com/business/dp/{asin}"
+
+    # Link de MercadoLibre (orden)
+    # Mapear marketplace a dominio
+    ml_domains = {
+        "MLM": "mercadolibre.com.mx",
+        "MLA": "mercadolibre.com.ar",
+        "MLB": "mercadolibre.com.br",
+        "MLC": "mercadolibre.cl",
+        "MLU": "mercadolibre.com.uy",
+        "MCO": "mercadolibre.com.co",
+        "MLV": "mercadolibre.com.ve",
+        "MPA": "mercadolibre.com.pa",
+        "MPE": "mercadolibre.com.pe",
+    }
+    ml_domain = ml_domains.get(marketplace, "mercadolibre.com")
+    ml_order_link = f"https://www.{ml_domain}/ventas/{pack_id}/detalle"
+
+    # Calcular precio total de Amazon (producto + warehouse)
+    amazon_total_price = amazon_cost + fulfillment_fee
+
+    # Formato del mensaje PRINCIPAL (sin número de orden)
     message = f"""
-🎉 <b>¡NUEVA VENTA EN MERCADOLIBRE!</b> 🎉
+🎉 <b>¡NUEVA VENTA!</b>
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📦 <b>PRODUCTO</b>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• <b>Título:</b> {item_title}
-• <b>Marca:</b> {brand}
-• <b>Modelo:</b> {model}
-• <b>Cantidad:</b> {quantity}
-• <b>Precio unitario:</b> ${unit_price:.2f}
-• <b>Total:</b> ${total_amount:.2f}
+📦 <b>{item_title}</b>
+🏷️ Marca: <b>{brand}</b>
+👤 Comprador: <b>{buyer_nickname}</b>
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🛒 <b>COMPRAR EN AMAZON AHORA</b>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• <b>ASIN:</b> <code>{asin}</code>
+━━━━━━━━━━━━━━━━━━━━━
+💰 <b>FINANCIERO</b>
+━━━━━━━━━━━━━━━━━━━━━
+📊 Cantidad: <b>{quantity}</b>
+💵 Total pagado: <b>${total_paid_by_customer:.2f}</b>
+💰 Recibís (neto): <b>${net_proceeds:.2f}</b>
+✅ Ganancia: <b>${profit:.2f}</b>
 
-🔗 <b><a href="{amazon_link}">👉 CLICK AQUÍ PARA COMPRAR EN AMAZON 👈</a></b>
+━━━━━━━━━━━━━━━━━━━━━
+🛒 <b>COMPRAR EN AMAZON</b>
+━━━━━━━━━━━━━━━━━━━━━
+<code>{asin}</code>
+💲 Precio Amazon + Warehouse = <b>${amazon_total_price:.2f} x {quantity} = ${amazon_total_price * quantity:.2f}</b>
+🔗 <a href="{amazon_link}">👉 CLICK PARA COMPRAR 👈</a>
 
-⚠️ <b>Comprar {quantity} unidad(es)</b>
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-👤 <b>COMPRADOR</b>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• <b>Usuario:</b> {buyer_nickname}
-• <b>Ubicación:</b> {city}, {state}, {country}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📋 <b>ORDEN</b>
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• <b>ID Orden:</b> <code>{order_id}</code>
-• <b>ID MercadoLibre:</b> <code>{item_id}</code>
-• <b>Link ML:</b> <a href="{ml_permalink}">Ver publicación</a>
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-✅ Comprar en Amazon y marcar como enviado en ML.
+<a href="{ml_order_link}">🔗 Ver orden completa en MercadoLibre</a>
 """
 
-    return message.strip()
+    # Mensaje SEPARADO con solo el número de orden (para copiar fácil)
+    order_number_message = f"{marketplace}-{pack_id}"
+
+    # Retornar ambos mensajes
+    return (message.strip(), order_number_message)
 
 
 def check_new_sales():
     """
     Revisa si hay nuevas ventas y envía notificaciones.
+    Usa file locking para evitar ejecuciones concurrentes.
 
     Returns:
         dict: Estadísticas de ventas procesadas
     """
-    print("=" * 80)
-    print("🔔 VERIFICANDO NUEVAS VENTAS")
-    print("=" * 80)
-    print(f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    # Intentar obtener el lock
+    try:
+        with FileLock(LOCK_FILE):
+            print("=" * 80)
+            print("🔔 VERIFICANDO NUEVAS VENTAS")
+            print("=" * 80)
+            print(f"📅 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print("🔒 Lock adquirido - procesando...\n")
+
+            return _check_new_sales_impl()
+    except RuntimeError as e:
+        print(f"⚠️ {e}")
+        print("   Otra instancia ya está procesando ventas. Saltando...")
+        return {"error": "Instance already running"}
+
+
+def _check_new_sales_impl():
+    """
+    Implementación interna de check_new_sales (sin lock).
+
+    Returns:
+        dict: Estadísticas de ventas procesadas
+    """
 
     # Verificar credenciales
     if not ML_TOKEN:
@@ -315,71 +549,127 @@ def check_new_sales():
         "total_orders": len(orders),
         "new_sales": 0,
         "already_notified": 0,
+        "duplicates_detected": 0,
         "notifications_sent": 0,
         "errors": 0
     }
 
     # Procesar cada orden
     for order in orders:
-        order_id = str(order.get("id"))
+        order_id = str(order.get("id"))  # Order ID individual
+        pack_id = str(order.get("pack_id", order_id))  # Pack ID (lo que se ve en ML)
         order_status = order.get("status")
 
         # Solo notificar órdenes pagadas
         if order_status not in ["paid", "confirmed"]:
             continue
 
-        # Verificar si ya fue notificada
-        if order_id in notified_sales:
+        # Verificar si ya fue notificada (usar pack_id para evitar duplicados)
+        if pack_id in notified_sales:
             stats["already_notified"] += 1
             continue
 
         stats["new_sales"] += 1
 
-        # Extraer item_id
+        # Extraer item_id y parent_item_id (CBT)
         order_items = order.get("order_items", [])
         if not order_items:
             continue
 
         item = order_items[0].get("item", {})
-        item_id = item.get("id")
+        item_id = item.get("id")  # ID local del marketplace (MLM, MLU, etc.)
+        parent_item_id = item.get("parent_item_id")  # ID de CBT (CBT...)
+
+        # Obtener marketplace del context
+        context = order.get("context", {})
+        marketplace = context.get("site", "MLU")
 
         print(f"\n{'─'*80}")
         print(f"🆕 NUEVA VENTA DETECTADA")
         print(f"{'─'*80}")
-        print(f"   Orden ID: {order_id}")
+        print(f"   Pack ID (ML): {pack_id}")
+        print(f"   Order ID: {order_id}")
+        print(f"   Marketplace: {marketplace}")
         print(f"   Item ID: {item_id}")
+        print(f"   CBT ID: {parent_item_id}")
         print(f"   Estado: {order_status}")
 
-        # Buscar ASIN en la BD
+        # Buscar ASIN en la BD usando CBT ID
         print(f"   🔍 Buscando ASIN en BD...")
-        asin_data = get_asin_by_item_id(item_id)
+        search_id = parent_item_id if parent_item_id else item_id
+        asin_data = get_asin_by_item_id(search_id)
 
         if not asin_data:
             print(f"   ⚠️ No se encontró ASIN para item_id: {item_id}")
             stats["errors"] += 1
             continue
 
-        print(f"   ✅ ASIN encontrado: {asin_data.get('asin')}")
+        asin = asin_data.get('asin')
+        print(f"   ✅ ASIN encontrado: {asin}")
 
-        # Formatear mensaje
-        message = format_sale_notification(order, asin_data)
+        # Generar hash único para detectar duplicados
+        msg_hash = generate_message_hash(pack_id, marketplace, asin)
+        print(f"   🔑 Hash: {msg_hash}")
 
-        if not message:
+        # Verificar si ya se envió este mensaje (deduplicación por hash)
+        if was_message_sent(msg_hash):
+            print(f"   🔄 Mensaje ya enviado anteriormente (duplicado detectado)")
+            print(f"      Saltando notificación...")
+            stats["duplicates_detected"] += 1
+            stats["already_notified"] += 1
+            continue
+
+        # Formatear mensaje (retorna 2 mensajes: principal y número de orden)
+        messages = format_sale_notification(order, asin_data)
+
+        if not messages:
             print(f"   ❌ Error formateando mensaje")
             stats["errors"] += 1
             continue
 
-        # Enviar notificación
-        print(f"   📤 Enviando notificación a Telegram...")
-        if send_telegram_message(message):
-            print(f"   ✅ Notificación enviada exitosamente")
+        main_message, order_number_message = messages
+
+        # Enviar MENSAJE PRINCIPAL (con toda la info)
+        print(f"   📤 Enviando notificación principal a Telegram...")
+        if send_telegram_message(main_message):
+            print(f"   ✅ Notificación principal enviada exitosamente")
+
+            # Enviar NÚMERO DE ORDEN en mensaje separado (para copiar fácil)
+            print(f"   📤 Enviando número de orden separado...")
+            send_telegram_message(order_number_message, parse_mode=None)
+            print(f"   ✅ Número de orden enviado en mensaje separado")
+
             stats["notifications_sent"] += 1
 
-            # Guardar como notificada
-            save_notified_sale(order_id, {
+            # Guardar hash del mensaje enviado para deduplicación
+            save_sent_message(msg_hash, pack_id, marketplace, asin)
+            print(f"   💾 Hash registrado para evitar duplicados")
+
+            # Guardar como notificada en el sistema legacy
+            save_notified_sale(pack_id, {
                 "item_id": item_id,
-                "asin": asin_data.get("asin")
+                "asin": asin
             })
+
+            # Registrar venta en DB y actualizar Excel + Dropbox
+            print(f"   💾 Registrando venta en DB y actualizando Excel...")
+            try:
+                import subprocess
+                import sys
+
+                # 1. Registrar venta en DB (track_sales.py)
+                track_cmd = [sys.executable, "scripts/tools/track_sales.py"]
+                subprocess.run(track_cmd, cwd=str(PROJECT_ROOT), timeout=30, capture_output=True)
+
+                # 2. Generar Excel y subir a Dropbox (generate_excel_desktop.py hace todo)
+                excel_cmd = [sys.executable, "scripts/tools/generate_excel_desktop.py"]
+                subprocess.run(excel_cmd, cwd=str(PROJECT_ROOT), timeout=30, capture_output=True)
+
+                print(f"   ✅ Venta registrada, Excel generado y subido a Dropbox")
+
+            except Exception as e:
+                print(f"   ⚠️  Error: {e}")
+
         else:
             print(f"   ❌ Error enviando notificación")
             stats["errors"] += 1
@@ -391,6 +681,7 @@ def check_new_sales():
     print(f"Total órdenes revisadas:  {stats['total_orders']}")
     print(f"Nuevas ventas:            {stats['new_sales']}")
     print(f"Ya notificadas:           {stats['already_notified']}")
+    print(f"  └─ Duplicados bloqueados: {stats['duplicates_detected']}")
     print(f"Notificaciones enviadas:  {stats['notifications_sent']}")
     print(f"Errores:                  {stats['errors']}")
     print()
@@ -399,7 +690,7 @@ def check_new_sales():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     log_file = LOG_DIR / f"check_{timestamp}.json"
 
-    with open(log_file, "w") as f:
+    with open(str(log_file), "w") as f:
         json.dump({
             "timestamp": datetime.now().isoformat(),
             "statistics": stats

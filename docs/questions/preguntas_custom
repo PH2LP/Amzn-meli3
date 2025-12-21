@@ -7,7 +7,7 @@
 # ========================================
 
 PREGUNTA: ¿Desde dónde envían el producto?
-KEYWORDS: desde.+donde|de.+donde|origen|envian|envia|procedencia|from.+where|where.+from|ship.+from|shipping.+from|where.+located
+KEYWORDS: desde.*donde|de.*donde|origen|envian|envia|procedencia|from.+where|where.+from|ship.+from|shipping.+from|where.+located
 RESPUESTA: El producto se envía desde Estados Unidos a través del programa Mercado Libre Global Selling.
 
 PREGUNTA: ¿Cuánto tarda en llegar?
@@ -67,7 +67,7 @@ KEYWORDS: devol|retorn|cambio|no.+gusta|no.+me.+sirve|return|refund|give.+back|s
 RESPUESTA: Sí. Tenés 30 días desde que lo recibís para hacer una devolución sin costo.
 
 PREGUNTA: ¿Qué pasa si el producto llega diferente a la descripción?
-KEYWORDS: diferente|distinto|no.+es.+igual|error|equivocado|wrong|different|not.+same|not.+as.+described|mismatch
+KEYWORDS: llega.+diferente|llega.+distinto|no.+es.+igual|error|equivocado|wrong.+product|different.+product|not.+same|not.+as.+described|producto.+diferente|producto.+distinto
 RESPUESTA: Podés hacer un reclamo y Mercado Libre te devuelve el dinero o se envía un reemplazo.
 
 # ========================================
@@ -91,7 +91,7 @@ KEYWORDS: original|autentico|authentico|falso|trucho|legitimo|copia|replica|pira
 RESPUESTA: Sí, trabajamos únicamente con productos originales, nuevos y en su empaque sellado.
 
 PREGUNTA: ¿Incluye todos los accesorios?
-KEYWORDS: incluye|accesorios|viene.+con|trae|contenido|include|accessories|comes.+with|what.+included|in.+the.+box
+KEYWORDS: incluye.+accesorios|accesorios|viene.+con|contenido|include|accessories|comes.+with|what.+included|in.+the.+box
 RESPUESTA: Sí, incluye exactamente lo que se detalla en las imágenes y descripción del producto.
 
 # ========================================

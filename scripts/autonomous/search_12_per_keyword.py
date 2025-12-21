@@ -436,29 +436,36 @@ class SimpleKeywordSearch:
         try:
             import openai
 
-            prompt = f"""Analiza si este producto es RELEVANTE a la búsqueda del usuario.
+            prompt = f"""Determina si este producto es RELEVANTE a la keyword buscada.
 
-KEYWORD BUSCADA: "{keyword}"
+KEYWORD: "{keyword}"
+TÍTULO: "{title}"
+MARCA: "{brand if brand else 'N/A'}"
 
-PRODUCTO:
-- Título: "{title}"
-- Marca: "{brand if brand else 'Sin marca'}"
+REGLAS IMPORTANTES:
+1. Si el producto coincide DIRECTAMENTE con la keyword → RELEVANTE
+2. Si es un accesorio/complemento relacionado → RELEVANTE
+3. Si es una variante/modelo del producto buscado → RELEVANTE
+4. Solo rechazar si es COMPLETAMENTE diferente
 
-EJEMPLOS DE IRRELEVANCIA:
-- Busco "wireless earbuds" → encuentro "USB Cable" → IRRELEVANTE
-- Busco "lego" → encuentro "Libro sobre LEGO" → IRRELEVANTE
-- Busco "iphone case" → encuentro "iPhone charger" → IRRELEVANTE
-- Busco "gaming mouse" → encuentro "Mouse pad" → IRRELEVANTE
+EJEMPLOS IRRELEVANTES (rechazar):
+- Keyword "laptop" → Producto "Mouse pad" (accesorio sin el producto principal)
+- Keyword "iphone" → Producto "Samsung charger" (marca/producto diferente)
+- Keyword "guitar" → Producto "Book about guitars" (no es el producto, es un libro)
+- Keyword "camera" → Producto "Camera cleaning kit" (solo limpieza, no cámara)
 
-EJEMPLOS DE RELEVANCIA:
-- Busco "wireless earbuds" → encuentro "Bluetooth Earbuds XYZ" → RELEVANTE
-- Busco "lego" → encuentro "LEGO Star Wars Set" → RELEVANTE
-- Busco "iphone case" → encuentro "iPhone 15 Pro Case" → RELEVANTE
+EJEMPLOS RELEVANTES (aprobar):
+- Keyword "wireless earbuds" → "Bluetooth Wireless Earbuds Pro" ✓
+- Keyword "gaming mouse" → "RGB Gaming Mouse Wireless" ✓
+- Keyword "laptop stand" → "Adjustable Aluminum Laptop Stand" ✓
+- Keyword "microphone" → "USB Condenser Microphone Kit" ✓
+- Keyword "keyboard" → "Mechanical Gaming Keyboard RGB" ✓
+- Keyword "usb hub" → "7-Port USB Hub 3.0" ✓
 
-¿Este producto ES RELEVANTE a la keyword buscada?
+IMPORTANTE: Cuando tengas duda, marca como RELEVANTE. Solo rechaza si estás 100% seguro que es irrelevante.
 
-Responde SOLO en formato JSON:
-{{"is_relevant": true/false, "reason": "explicación breve"}}"""
+Responde en JSON:
+{{"is_relevant": true/false, "reason": "explicación"}}"""
 
             response = openai.chat.completions.create(
                 model="gpt-4o-mini",

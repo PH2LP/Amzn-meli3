@@ -906,6 +906,18 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
+  "CASE_SHAPE": {
+    "value_type": "string",
+    "values": {
+      "rectangular": "167161",
+      "round": "167160",
+      "octagonal": "9824505"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
     "values": {
@@ -971,6 +983,20 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "WITH_VIRTUAL_TRY_ON": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "CRYSTAL_TYPE": {
     "value_type": "string",
     "values": {
@@ -979,20 +1005,6 @@
       "ceramic": "112168",
       "sapphire": "112166",
       "spherical glass": "112164"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "CASE_SHAPE": {
-    "value_type": "string",
-    "values": {
-      "rectangular": "167161",
-      "round": "167160",
-      "octagonal": "9824505"
     },
     "allowed_units": [],
     "tags": {

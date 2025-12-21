@@ -1,0 +1,20 @@
+{
+  "blacklist": [
+    "CBT412529"
+  ],
+  "details": {
+    "CBT412529": {
+      "name": "Monoculars",
+      "reason": "Category not allowed - detected during Blink (B0FKPK5D8F) publishing",
+      "first_detected": "2025-12-08",
+      "blocked_in": ["MLM", "MLA"],
+      "suspended_in": ["MLC", "MCO", "MLB"],
+      "asin_examples": ["B0FKPK5D8F"],
+      "note": "Prohibited globally - if blocked in 1 country, avoid in all countries"
+    }
+  },
+  "total": 1,
+  "last_updated": "2025-12-08T06:30:00Z",
+  "version": "1.0",
+  "description": "Global category blacklist - categories that failed publishing in at least one country"
+}

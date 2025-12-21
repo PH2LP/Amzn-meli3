@@ -4,7 +4,8 @@
     "values": {},
     "allowed_units": [],
     "tags": {
-      "catalog_required": true
+      "catalog_required": true,
+      "required": true
     },
     "hierarchy": "PARENT_PK",
     "relevance": 1
@@ -119,34 +120,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "FUNCTIONS": {
-    "value_type": "string",
-    "values": {
-      "light": "4401975",
-      "sound": "3572225",
-      "music": "8082623"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "PLAY_AREAS": {
-    "value_type": "string",
-    "values": {
-      "bedroom": "19256712",
-      "kitchen": "19256713",
-      "bathroom": "19256714"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "HEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -188,6 +161,20 @@
       "years"
     ],
     "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "PLAY_AREAS": {
+    "value_type": "string",
+    "values": {
+      "bedroom": "19256712",
+      "kitchen": "19256713",
+      "bathroom": "19256714"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
     "hierarchy": "FAMILY",
     "relevance": 1
   },

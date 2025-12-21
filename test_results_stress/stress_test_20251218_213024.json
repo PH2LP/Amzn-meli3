@@ -1,0 +1,2017 @@
+{
+  "timestamp": "2025-12-18T21:30:24.231017",
+  "summary": {
+    "total_questions": 47,
+    "passed": 17,
+    "failed": 30,
+    "success_rate": 36.17021276595745
+  },
+  "by_question_type": {
+    "comparison": {
+      "total": 7,
+      "passed": 0
+    },
+    "critical_safety": {
+      "total": 8,
+      "passed": 4
+    },
+    "multiple": {
+      "total": 1,
+      "passed": 0
+    },
+    "negative": {
+      "total": 2,
+      "passed": 0
+    },
+    "product_search": {
+      "total": 9,
+      "passed": 8
+    },
+    "compatibility": {
+      "total": 6,
+      "passed": 1
+    },
+    "quantity": {
+      "total": 2,
+      "passed": 0
+    },
+    "compatibility|critical_safety": {
+      "total": 2,
+      "passed": 1
+    },
+    "critical_safety|negative": {
+      "total": 1,
+      "passed": 1
+    },
+    "quantity|ambiguous": {
+      "total": 3,
+      "passed": 1
+    },
+    "ambiguous": {
+      "total": 1,
+      "passed": 0
+    },
+    "comparison|negative": {
+      "total": 1,
+      "passed": 0
+    },
+    "product_search|negative": {
+      "total": 1,
+      "passed": 1
+    },
+    "edge_case|critical_safety": {
+      "total": 1,
+      "passed": 0
+    },
+    "compatibility|multiple": {
+      "total": 1,
+      "passed": 0
+    },
+    "comparison|multiple": {
+      "total": 1,
+      "passed": 0
+    }
+  },
+  "errors_by_type": {
+    "Debía notificar pero respondió": 6,
+    "Debía detectar product_search": 1
+  },
+  "worst_cases": [
+    {
+      "question": {
+        "text": "¿Este cepillo secador TYMO 4 en 1 utiliza la misma tecnología de iones negativos que el modelo TYMO 5 en 1, y cómo afecta eso a la durabilidad del cabello a largo plazo?",
+        "type": "comparison",
+        "difficulty": "extreme",
+        "trap": "Comparación con un modelo inexistente y efectos a largo plazo difíciles de medir.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "cepillo secador TYMO 5 en 1",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "Si el cepillo secador se utiliza diariamente durante más de 20 minutos, ¿existe algún riesgo de sobrecalentamiento que pueda comprometer la seguridad del usuario?",
+        "type": "critical_safety",
+        "difficulty": "high",
+        "trap": "Involucra tiempo de uso y un posible riesgo no evidente a corto plazo.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Volumizer Oro Titanio 4 en 1 de TYMO está diseñado para ser seguro y eficiente en su uso diario. Gracias a su barril de titanio y la tecnología de iones negativos, distribuye el calor de manera uniforme, lo que ayuda a minimizar el riesgo de sobrecalentamiento. Además, cuenta con control de temperatura múltiple, lo que permite ajustar el calor según tus necesidades. Sin embargo, siempre es recomendable seguir las instrucciones del manual de usuario para garantizar un uso seguro y prolongado.",
+        "confidence": 86.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "¿Este producto viene con repuestos de cerdas o accesorios adicionales, y en caso negativo, dónde puedo adquirirlos?",
+        "type": "multiple",
+        "difficulty": "medium",
+        "trap": "Pregunta sobre contenido del paquete y búsqueda de productos adicionales.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Volumizer Oro Titanio 4 en 1 de TYMO no incluye repuestos de cerdas ni accesorios adicionales en el paquete. Para adquirir repuestos o accesorios, te recomendaría contactar directamente al fabricante o visitar su sitio web oficial para obtener información sobre disponibilidad y opciones de compra.",
+        "confidence": 94.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "No quiero buscar un secador convencional, sino algo que no tenga función de volumen. ¿Este cepillo es una buena opción?",
+        "type": "negative",
+        "difficulty": "extreme",
+        "trap": "Pregunta formulada de manera negativa sobre una función principal del producto.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "secador sin función de volumen",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "Estoy buscando un alisador que también tenga función de secado, ¿este producto es adecuado para eso?",
+        "type": "product_search",
+        "difficulty": "medium",
+        "trap": "Confunde el propósito principal del producto y puede llevar a sugerir otros productos.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Volumizer Oro Titanio 4 en 1 de TYMO es ideal para ti, ya que seca y estiliza el cabello en un solo paso. Con su barril de titanio que distribuye el calor de manera uniforme y su tecnología de iones negativos, no solo ayuda a secar el cabello rápidamente, sino que también reduce el frizz, ofreciendo resultados de salón en casa. Es una excelente opción si buscas un dispositivo que combine ambas funciones.",
+        "confidence": 91.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO detectó búsqueda de producto",
+        "issues": [
+          "Debía detectar product_search"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "¿Este trípode Victiv VT75H es compatible con cámaras que pesan más de 5 kg, incluso si las especificaciones dicen algo diferente?",
+        "type": "compatibility",
+        "difficulty": "extreme",
+        "trap": "La trampa está en preguntar por una capacidad de peso específica que podría contradecir las especificaciones oficiales.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 66.14999999999999,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El trípode Victiv VT75H está diseñado para soportar hasta 16 libras, lo que equivale aproximadamente a 7.26 kg. Por lo tanto, es compatible con cámaras que pesen más de 5 kg. Esto debería proporcionarle la estabilidad y flexibilidad que necesita para su equipo fotográfico o de video. Si tiene alguna otra pregunta o necesita más detalles, estaré encantado de ayudarle.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              95,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              80,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "Comparado con un trípode de aluminio genérico que no tenga cabezal fluido, ¿es el VT75H más ligero o más pesado si también consideramos el peso del embalaje?",
+        "type": "comparison",
+        "difficulty": "high",
+        "trap": "La trampa está en comparar no solo el trípode en sí, sino también considerar el peso del embalaje.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 59.0,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El trípode VT75H de Victiv pesa 2 kg, lo que es bastante ligero para un trípode profesional con cabezal fluido, diseñado para ofrecer movimientos suaves en fotografía y video. Sin embargo, no tengo información específica sobre el peso del embalaje ni sobre el peso de un trípode de aluminio genérico sin cabezal fluido para hacer una comparación directa. Si el peso total es una preocupación importante para ti, te recomendaría considerar también el peso del embalaje al hacer tu elección.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              70,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "¿El VT75H tiene algún accesorio que no sea compatible con smartphones, a pesar de que se vende como compatible?",
+        "type": "negative",
+        "difficulty": "high",
+        "trap": "La pregunta está formulada de manera negativa, lo que puede confundir sobre la compatibilidad anunciada.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Trípode VT75H de Victiv está diseñado para ser compatible tanto con cámaras como con teléfonos inteligentes, gracias a su soporte para teléfono incluido. No hay indicación de que algún accesorio del trípode no sea compatible con smartphones. Además, el control remoto incluido facilita el uso con teléfonos. Si tienes alguna preocupación específica sobre la compatibilidad, estaré encantado de ayudarte más.",
+        "confidence": 94.3,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "¿Este destornillador eléctrico 68 en 1 incluye brocas de titanio y son compatibles con el modelo MIKESIER A00116?",
+        "type": "compatibility",
+        "difficulty": "high",
+        "trap": "La confusión entre los modelos similares A00115 y A00116 y la inclusión de brocas específicas.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "destornillador eléctrico 68 en 1",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    },
+    {
+      "question": {
+        "text": "¿Cuántas herramientas incluye el paquete y hay alguna variación en el contenido si lo compro junto a otro producto del mismo vendedor?",
+        "type": "quantity",
+        "difficulty": "medium",
+        "trap": "Posible variación en el contenido de acuerdo al vendedor o compra combinada.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El paquete del Destornillador Eléctrico MIKESIER A00115 incluye un destornillador eléctrico y un juego de 68 bits, lo que suma un total de 69 herramientas. No tengo información sobre variaciones en el contenido si se compra junto a otro producto del mismo vendedor. Te recomendaría contactar directamente al vendedor para obtener detalles específicos sobre combinaciones de productos.",
+        "confidence": 70.1,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              85,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              86,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    }
+  ],
+  "all_results": [
+    {
+      "question": {
+        "text": "¿Este cepillo secador TYMO 4 en 1 utiliza la misma tecnología de iones negativos que el modelo TYMO 5 en 1, y cómo afecta eso a la durabilidad del cabello a largo plazo?",
+        "type": "comparison",
+        "difficulty": "extreme",
+        "trap": "Comparación con un modelo inexistente y efectos a largo plazo difíciles de medir.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "cepillo secador TYMO 5 en 1",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "Si el cepillo secador se utiliza diariamente durante más de 20 minutos, ¿existe algún riesgo de sobrecalentamiento que pueda comprometer la seguridad del usuario?",
+        "type": "critical_safety",
+        "difficulty": "high",
+        "trap": "Involucra tiempo de uso y un posible riesgo no evidente a corto plazo.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Volumizer Oro Titanio 4 en 1 de TYMO está diseñado para ser seguro y eficiente en su uso diario. Gracias a su barril de titanio y la tecnología de iones negativos, distribuye el calor de manera uniforme, lo que ayuda a minimizar el riesgo de sobrecalentamiento. Además, cuenta con control de temperatura múltiple, lo que permite ajustar el calor según tus necesidades. Sin embargo, siempre es recomendable seguir las instrucciones del manual de usuario para garantizar un uso seguro y prolongado.",
+        "confidence": 86.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "¿Este producto viene con repuestos de cerdas o accesorios adicionales, y en caso negativo, dónde puedo adquirirlos?",
+        "type": "multiple",
+        "difficulty": "medium",
+        "trap": "Pregunta sobre contenido del paquete y búsqueda de productos adicionales.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Volumizer Oro Titanio 4 en 1 de TYMO no incluye repuestos de cerdas ni accesorios adicionales en el paquete. Para adquirir repuestos o accesorios, te recomendaría contactar directamente al fabricante o visitar su sitio web oficial para obtener información sobre disponibilidad y opciones de compra.",
+        "confidence": 94.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "No quiero buscar un secador convencional, sino algo que no tenga función de volumen. ¿Este cepillo es una buena opción?",
+        "type": "negative",
+        "difficulty": "extreme",
+        "trap": "Pregunta formulada de manera negativa sobre una función principal del producto.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "secador sin función de volumen",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "Estoy buscando un alisador que también tenga función de secado, ¿este producto es adecuado para eso?",
+        "type": "product_search",
+        "difficulty": "medium",
+        "trap": "Confunde el propósito principal del producto y puede llevar a sugerir otros productos.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Volumizer Oro Titanio 4 en 1 de TYMO es ideal para ti, ya que seca y estiliza el cabello en un solo paso. Con su barril de titanio que distribuye el calor de manera uniforme y su tecnología de iones negativos, no solo ayuda a secar el cabello rápidamente, sino que también reduce el frizz, ofreciendo resultados de salón en casa. Es una excelente opción si buscas un dispositivo que combine ambas funciones.",
+        "confidence": 91.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO detectó búsqueda de producto",
+        "issues": [
+          "Debía detectar product_search"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B08VWF7R91",
+      "product_title": "Cepillo Secador Volumizer Oro Titanio 4 en 1 Profesional"
+    },
+    {
+      "question": {
+        "text": "¿Este trípode Victiv VT75H es compatible con cámaras que pesan más de 5 kg, incluso si las especificaciones dicen algo diferente?",
+        "type": "compatibility",
+        "difficulty": "extreme",
+        "trap": "La trampa está en preguntar por una capacidad de peso específica que podría contradecir las especificaciones oficiales.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 66.14999999999999,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El trípode Victiv VT75H está diseñado para soportar hasta 16 libras, lo que equivale aproximadamente a 7.26 kg. Por lo tanto, es compatible con cámaras que pesen más de 5 kg. Esto debería proporcionarle la estabilidad y flexibilidad que necesita para su equipo fotográfico o de video. Si tiene alguna otra pregunta o necesita más detalles, estaré encantado de ayudarle.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              95,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              80,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "¿Este trípode puede soportar condiciones extremas como una tormenta eléctrica sin riesgo para los equipos instalados?",
+        "type": "critical_safety",
+        "difficulty": "extreme",
+        "trap": "La pregunta implica riesgos eléctricos y condiciones meteorológicas extremas, lo que puede ser complejo de responder automáticamente.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El trípode Victiv VT75H está diseñado para proporcionar estabilidad y flexibilidad en grabaciones, tanto en interiores como exteriores. Sin embargo, no está específicamente diseñado para soportar condiciones extremas como una tormenta eléctrica. Para proteger sus equipos, se recomienda evitar el uso del trípode en situaciones climáticas adversas.",
+        "confidence": 84.0,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              70,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              100,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (review_recommended)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "Comparado con un trípode de aluminio genérico que no tenga cabezal fluido, ¿es el VT75H más ligero o más pesado si también consideramos el peso del embalaje?",
+        "type": "comparison",
+        "difficulty": "high",
+        "trap": "La trampa está en comparar no solo el trípode en sí, sino también considerar el peso del embalaje.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 59.0,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El trípode VT75H de Victiv pesa 2 kg, lo que es bastante ligero para un trípode profesional con cabezal fluido, diseñado para ofrecer movimientos suaves en fotografía y video. Sin embargo, no tengo información específica sobre el peso del embalaje ni sobre el peso de un trípode de aluminio genérico sin cabezal fluido para hacer una comparación directa. Si el peso total es una preocupación importante para ti, te recomendaría considerar también el peso del embalaje al hacer tu elección.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              70,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "Si busco un trípode con nivel de burbuja y el VT75H no lo tiene, ¿qué modelo similar podría considerar?",
+        "type": "product_search",
+        "difficulty": "medium",
+        "trap": "La pregunta implica buscar un producto con características específicas que el actual puede no tener.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "trípode con nivel de burbuja",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "¿El VT75H tiene algún accesorio que no sea compatible con smartphones, a pesar de que se vende como compatible?",
+        "type": "negative",
+        "difficulty": "high",
+        "trap": "La pregunta está formulada de manera negativa, lo que puede confundir sobre la compatibilidad anunciada.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El Trípode VT75H de Victiv está diseñado para ser compatible tanto con cámaras como con teléfonos inteligentes, gracias a su soporte para teléfono incluido. No hay indicación de que algún accesorio del trípode no sea compatible con smartphones. Además, el control remoto incluido facilita el uso con teléfonos. Si tienes alguna preocupación específica sobre la compatibilidad, estaré encantado de ayudarte más.",
+        "confidence": 94.3,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0DSH3G51F",
+      "product_title": "Trípode VT75H 75\" Profesional para Cámara y Teléfono Negro"
+    },
+    {
+      "question": {
+        "text": "¿El destornillador MIKESIER A00115 puede funcionar de forma segura en ambientes con alta humedad o podría presentar riesgo de electrocución?",
+        "type": "critical_safety",
+        "difficulty": "extreme",
+        "trap": "Confusión entre funcionamiento en ambientes húmedos y riesgos eléctricos.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 64.0,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El destornillador eléctrico MIKESIER A00115 no especifica resistencia al agua o a la humedad en sus características. Por lo tanto, no se recomienda su uso en ambientes con alta humedad, ya que podría presentar riesgos de seguridad. Es ideal para reparaciones electrónicas en condiciones secas y controladas.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              70,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              100,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (low_confidence)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    },
+    {
+      "question": {
+        "text": "¿Este destornillador eléctrico 68 en 1 incluye brocas de titanio y son compatibles con el modelo MIKESIER A00116?",
+        "type": "compatibility",
+        "difficulty": "high",
+        "trap": "La confusión entre los modelos similares A00115 y A00116 y la inclusión de brocas específicas.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "destornillador eléctrico 68 en 1",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    },
+    {
+      "question": {
+        "text": "¿Cuántas herramientas incluye el paquete y hay alguna variación en el contenido si lo compro junto a otro producto del mismo vendedor?",
+        "type": "quantity",
+        "difficulty": "medium",
+        "trap": "Posible variación en el contenido de acuerdo al vendedor o compra combinada.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El paquete del Destornillador Eléctrico MIKESIER A00115 incluye un destornillador eléctrico y un juego de 68 bits, lo que suma un total de 69 herramientas. No tengo información sobre variaciones en el contenido si se compra junto a otro producto del mismo vendedor. Te recomendaría contactar directamente al vendedor para obtener detalles específicos sobre combinaciones de productos.",
+        "confidence": 70.1,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              85,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              86,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    },
+    {
+      "question": {
+        "text": "Comparando el destornillador MIKESIER A00115 con el modelo de Bosch GSR 120, ¿cuál tiene un torque más bajo?",
+        "type": "comparison",
+        "difficulty": "extreme",
+        "trap": "Confundir cuál de los dos modelos tiene un torque más bajo puede requerir información externa.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "Bosch GSR 120",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    },
+    {
+      "question": {
+        "text": "No estoy buscando un destornillador eléctrico como el MIKESIER A00115, sino más bien algo manual con varias cabezas intercambiables, ¿alguna recomendación?",
+        "type": "product_search",
+        "difficulty": "high",
+        "trap": "La pregunta parece negativa y busca un tipo de producto diferente, como uno manual.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "destornillador manual con varias cabezas intercambiables",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0FHQ3LQJM",
+      "product_title": "Destornillador MIKESIER A00115 Eléctrico 68 en 1 Portátil"
+    },
+    {
+      "question": {
+        "text": "¿Los Auriculares ProCase para Protección Auditiva NRR 28dB Rojos son compatibles con el sistema de radio Bluetooth utilizado en la construcción de túneles bajo agua?",
+        "type": "compatibility|critical_safety",
+        "difficulty": "extreme",
+        "trap": "La pregunta mezcla protección auditiva pasiva con el uso de tecnología activa (Bluetooth) y un contexto específico de seguridad.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "auriculares con sistema de radio Bluetooth para construcción de túneles bajo agua",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (product_search)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B07MNZ7C1M",
+      "product_title": "Auriculares ProCase PARA Protección Auditiva NRR 28dB Rojos"
+    },
+    {
+      "question": {
+        "text": "¿En qué es mejor el modelo ProCase NRR 28dB rojo en comparación con el ProCase NRR 29dB azul en situaciones de exposición a frecuencias ultrasónicas?",
+        "type": "comparison",
+        "difficulty": "high",
+        "trap": "El NRR estándar puede no considerar frecuencias ultrasónicas, haciendo la comparación confusa.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "ProCase NRR 29dB azul",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B07MNZ7C1M",
+      "product_title": "Auriculares ProCase PARA Protección Auditiva NRR 28dB Rojos"
+    },
+    {
+      "question": {
+        "text": "¿Es cierto que los auriculares ProCase NRR 28dB pueden utilizarse como equipo de protección para la visión al trabajar con láseres de alta potencia?",
+        "type": "critical_safety|negative",
+        "difficulty": "extreme",
+        "trap": "La pregunta falsamente sugiere que protegen la visión, lo que es un malentendido crítico de seguridad.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "equipo de protección para la visión al trabajar con láseres de alta potencia",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (product_search)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B07MNZ7C1M",
+      "product_title": "Auriculares ProCase PARA Protección Auditiva NRR 28dB Rojos"
+    },
+    {
+      "question": {
+        "text": "¿Cuántos pares de almohadillas de repuesto vienen con los auriculares ProCase si compro dos unidades?",
+        "type": "quantity|ambiguous",
+        "difficulty": "medium",
+        "trap": "La pregunta implica que el producto incluye almohadillas de repuesto, lo cual puede no ser el caso.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 68.4,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "Gracias por tu consulta. Los auriculares ProCase que mencionas no incluyen pares de almohadillas de repuesto según la información proporcionada. Si compras dos unidades, recibirás dos auriculares, pero no se especifica que vengan con almohadillas adicionales. Si necesitas más detalles sobre accesorios o repuestos, te recomendaría contactar directamente con el vendedor o fabricante.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              94,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B07MNZ7C1M",
+      "product_title": "Auriculares ProCase PARA Protección Auditiva NRR 28dB Rojos"
+    },
+    {
+      "question": {
+        "text": "¿Este producto es mejor o peor que los auriculares Bose QuietComfort 35 en términos de calidad de sonido?",
+        "type": "product_search",
+        "difficulty": "high",
+        "trap": "La pregunta compara productos de categorías completamente diferentes: protección auditiva vs. auriculares de audio.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "auriculares Bose QuietComfort 35",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B07MNZ7C1M",
+      "product_title": "Auriculares ProCase PARA Protección Auditiva NRR 28dB Rojos"
+    },
+    {
+      "question": {
+        "text": "¿El grifo Fransiton 8111 es compatible con sistemas de baja presión, o su diseño de acero inoxidable implica limitaciones en ese aspecto?",
+        "type": "compatibility",
+        "difficulty": "high",
+        "trap": "La pregunta mezcla compatibilidad con especificaciones de material, lo cual puede ser confuso si el material afecta o no el rendimiento en baja presión.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 56.2,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El grifo Fransiton 8111 está diseñado para ser versátil y eficiente, pero el contexto no proporciona información específica sobre su compatibilidad con sistemas de baja presión. Sin embargo, su diseño con válvulas cerámicas sugiere un enfoque en el ahorro de agua, lo cual podría ser beneficioso en sistemas de baja presión. Recomendaría consultar con un profesional para asegurar la compatibilidad con su sistema específico.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              60,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              72,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B07STFRGNH",
+      "product_title": "Grifo Fransiton 8111 Baño Monomando Acero Inoxidable Bronce"
+    },
+    {
+      "question": {
+        "text": "Si comparo el monomando Fransiton 8111 con el modelo 8112, ¿cuál tiene un mejor desempeño cuando se usa simultáneamente con un calentador solar y un filtro de agua?",
+        "type": "comparison",
+        "difficulty": "extreme",
+        "trap": "La pregunta implica una comparación compleja que requiere entender el rendimiento conjunto con otros dispositivos, no solo las especificaciones individuales.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "Fransiton 8112",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B07STFRGNH",
+      "product_title": "Grifo Fransiton 8111 Baño Monomando Acero Inoxidable Bronce"
+    },
+    {
+      "question": {
+        "text": "¿Es seguro usar el grifo Fransiton 8111 en condiciones de agua con alto contenido de minerales, o hay riesgo de corrosión a pesar de ser de acero inoxidable?",
+        "type": "critical_safety",
+        "difficulty": "extreme",
+        "trap": "La pregunta mezcla seguridad con material, y requiere conocimiento sobre cómo los minerales afectan al acero inoxidable.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El grifo Fransiton 8111 está fabricado en acero inoxidable y bronce, materiales conocidos por su resistencia a la corrosión. Esto lo hace adecuado para su uso en condiciones de agua con alto contenido de minerales. Además, las válvulas cerámicas ayudan a prevenir el desgaste, lo que contribuye a su durabilidad. Sin embargo, siempre es recomendable realizar un mantenimiento regular para asegurar su óptimo funcionamiento a largo plazo.",
+        "confidence": 90.6,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B07STFRGNH",
+      "product_title": "Grifo Fransiton 8111 Baño Monomando Acero Inoxidable Bronce"
+    },
+    {
+      "question": {
+        "text": "No busco un grifo monomando, ¿qué productos similares tienes que no pertenezcan a esa categoría?",
+        "type": "product_search",
+        "difficulty": "medium",
+        "trap": "La pregunta está formulada negativamente, buscando productos diferentes al actual, lo que puede confundir a sistemas que identifican productos similares.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": null,
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B07STFRGNH",
+      "product_title": "Grifo Fransiton 8111 Baño Monomando Acero Inoxidable Bronce"
+    },
+    {
+      "question": {
+        "text": "¿La cámara endoscópica ATC30LD8.5L15 tiene una longitud de cable ajustable o solo el brillo del LED es ajustable?",
+        "type": "ambiguous",
+        "difficulty": "high",
+        "trap": "El nombre del producto menciona 'LED Ajustable', pero no especifica si el cable también es ajustable.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La cámara endoscópica ATC30LD8.5L15 de Anykit cuenta con un cable semi-rígido de 50 pies de longitud, el cual no es ajustable. Sin embargo, el brillo de la luz LED sí es ajustable, lo que permite obtener imágenes claras incluso en ambientes oscuros. Si tienes más preguntas, estaré encantado de ayudarte.",
+        "confidence": 99.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FGDC15DP",
+      "product_title": "Cámara Endoscópica ATC30LD8.5L15 USB 50ft IP67 LED Ajustable"
+    },
+    {
+      "question": {
+        "text": "Si la cámara tiene certificación IP67, ¿eso garantiza que es completamente sumergible durante 50 minutos o solo por un instante?",
+        "type": "critical_safety",
+        "difficulty": "extreme",
+        "trap": "La certificación IP67 indica resistencia al agua pero no especifica duración de inmersión, lo cual es crucial para seguridad.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "legal",
+          "keyword_matched": "certificación"
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (critical_question)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0FGDC15DP",
+      "product_title": "Cámara Endoscópica ATC30LD8.5L15 USB 50ft IP67 LED Ajustable"
+    },
+    {
+      "question": {
+        "text": "¿La cámara Anykit ATC30LD8.5L15 es compatible con dispositivos que no sean USB, como HDMI o Thunderbolt, o necesito un adaptador específico?",
+        "type": "compatibility",
+        "difficulty": "medium",
+        "trap": "El producto está en la categoría USB, pero la pregunta confunde especificaciones de conectividad.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La cámara endoscópica Anykit ATC30LD8.5L15 está diseñada para conectarse a dispositivos a través de USB-C. No es compatible directamente con HDMI o Thunderbolt, por lo que necesitarías un adaptador específico para usarla con esos tipos de conexión. Sin embargo, su conexión USB-C es muy versátil y fácil de usar con muchos dispositivos modernos, especialmente aquellos con puertos USB-C.",
+        "confidence": 92.4,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FGDC15DP",
+      "product_title": "Cámara Endoscópica ATC30LD8.5L15 USB 50ft IP67 LED Ajustable"
+    },
+    {
+      "question": {
+        "text": "¿Cuántos modelos de cámaras endoscópicas ofrece Anykit que incluyen una certificación de seguridad diferente a la IP67?",
+        "type": "product_search",
+        "difficulty": "high",
+        "trap": "La pregunta busca otros productos basándose en certificaciones de seguridad específicas.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": null,
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0FGDC15DP",
+      "product_title": "Cámara Endoscópica ATC30LD8.5L15 USB 50ft IP67 LED Ajustable"
+    },
+    {
+      "question": {
+        "text": "¿Es cierto que la cámara USB ATC30LD8.5L15 no incluye tecnología de visión nocturna, aunque otros modelos Anykit más antiguos sí lo hacen?",
+        "type": "comparison|negative",
+        "difficulty": "extreme",
+        "trap": "La pregunta implica comparaciones y utiliza negaciones para confundir sobre características del producto.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La cámara endoscópica USB ATC30LD8.5L15 de Anykit no menciona específicamente la inclusión de tecnología de visión nocturna en sus características principales. Sin embargo, cuenta con una luz LED ajustable, lo cual puede ser útil en condiciones de poca luz. Si la visión nocturna es un factor decisivo para usted, le recomendaría considerar otros modelos que ofrezcan esta función específica.",
+        "confidence": 89.7,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0FGDC15DP",
+      "product_title": "Cámara Endoscópica ATC30LD8.5L15 USB 50ft IP67 LED Ajustable"
+    },
+    {
+      "question": {
+        "text": "¿Esta rueda abdominal Abiarst es compatible con el piso de mármol pulido o existe riesgo de resbalones que puedan causar lesiones?",
+        "type": "compatibility|critical_safety",
+        "difficulty": "extreme",
+        "trap": "El usuario está preguntando tanto sobre la compatibilidad del producto con un tipo específico de superficie como sobre potenciales problemas de seguridad, lo cual podría ser pasado por alto.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La Rueda Abdominal Abiarst está diseñada para ofrecer estabilidad gracias a su rueda ultra-ancha y mangos de algodón de EVA que proporcionan un agarre cómodo. Sin embargo, al usarla sobre un piso de mármol pulido, es importante asegurarse de que la superficie esté seca y libre de polvo para minimizar el riesgo de resbalones. Considera usar una alfombra antideslizante para mayor seguridad.",
+        "confidence": 86.6,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B0CMP6Z2JV",
+      "product_title": "Rueda Abdominal Abiarst Para Entrenamiento Core Hombre"
+    },
+    {
+      "question": {
+        "text": "¿Esta rueda abdominal viene con instrucciones detalladas para su ensamblaje y uso, o necesitaré buscar un manual adicional?",
+        "type": "quantity|ambiguous",
+        "difficulty": "medium",
+        "trap": "La pregunta puede ser confusa porque mezcla la disponibilidad de instrucciones con la necesidad de buscar información adicional.",
+        "expected_behavior": "should_answer"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La Rueda Abdominal Abiarst no menciona específicamente si incluye instrucciones detalladas para su ensamblaje y uso. Sin embargo, dado su diseño compacto y eficiente, es probable que el ensamblaje sea sencillo. Si necesitas más información, te recomendaría contactar al vendedor directamente para confirmar la disponibilidad de un manual o instrucciones adicionales.",
+        "confidence": 73.8,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              50,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              98,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Respondió bien (conf: 73.8%)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0CMP6Z2JV",
+      "product_title": "Rueda Abdominal Abiarst Para Entrenamiento Core Hombre"
+    },
+    {
+      "question": {
+        "text": "Comparando esta rueda abdominal Abiarst con la 'Super Core Wheel 3000', ¿cuál ofrece mejor estabilidad para rutinas avanzadas?",
+        "type": "comparison",
+        "difficulty": "high",
+        "trap": "Requiere conocimiento sobre otro producto y su desempeño en situaciones específicas, lo que puede no estar directamente disponible.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "Super Core Wheel 3000",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0CMP6Z2JV",
+      "product_title": "Rueda Abdominal Abiarst Para Entrenamiento Core Hombre"
+    },
+    {
+      "question": {
+        "text": "No estoy buscando una rueda, sino una máquina completa para el core, ¿tienes alguna recomendación?",
+        "type": "product_search|negative",
+        "difficulty": "extreme",
+        "trap": "La pregunta está formulada negativamente y busca un producto diferente, lo cual puede ser difícil de interpretar para un sistema automatizado.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "máquina completa para el core",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0CMP6Z2JV",
+      "product_title": "Rueda Abdominal Abiarst Para Entrenamiento Core Hombre"
+    },
+    {
+      "question": {
+        "text": "Si la rueda se utiliza al revés, ¿causará algún daño al producto o al usuario?",
+        "type": "edge_case|critical_safety",
+        "difficulty": "high",
+        "trap": "Preguntar sobre el uso incorrecto del producto puede ser pasado por alto, pero tiene implicaciones de seguridad importantes.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La Rueda Abdominal Abiarst está diseñada para ser utilizada de manera específica, con la rueda en contacto con el suelo y los mangos hacia arriba para un agarre seguro. Usarla al revés podría afectar la estabilidad y la efectividad del ejercicio, y potencialmente causar incomodidad o riesgo de lesión al usuario. Es importante seguir las instrucciones de uso para garantizar un entrenamiento seguro y efectivo.",
+        "confidence": 88.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B0CMP6Z2JV",
+      "product_title": "Rueda Abdominal Abiarst Para Entrenamiento Core Hombre"
+    },
+    {
+      "question": {
+        "text": "¿La cortadora de pelo oneisall puede cortar todo tipo de pelaje, incluso el más duro, sin dañar la piel del animal?",
+        "type": "critical_safety",
+        "difficulty": "extreme",
+        "trap": "La pregunta implica tanto la capacidad de corte como la seguridad, lo que requiere una evaluación de la tecnología de la cuchilla y la construcción del producto.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La cortadora de pelo Oneisall está diseñada para el grooming profesional en casa y es ideal para cortar pelo grueso, gracias a sus cuchillas afiladas y seguras con protección de tres capas. Esto ayuda a cortar eficazmente sin dañar la piel del animal. Además, su motor silencioso y diseño fácil de usar la hacen adecuada para todo tipo de pelaje.",
+        "confidence": 92.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B0999J4PTJ",
+      "product_title": "Cortadora de Pelo Oneisall PARA Perros y Gatos Silenciosa"
+    },
+    {
+      "question": {
+        "text": "¿Este modelo de cortadora de pelo incluye peines guía de diferentes tamaños o debo comprarlos por separado?",
+        "type": "quantity",
+        "difficulty": "medium",
+        "trap": "La trampa está en la falta de claridad sobre si el producto incluye accesorios o no.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "Este modelo de cortadora de pelo para mascotas Oneisall incluye 4 peines guía de diferentes tamaños, por lo que no necesitas comprarlos por separado. Esto te permitirá ajustar el corte según las necesidades de tu mascota. Además, el kit incluye tijeras y un peine, lo que lo hace muy completo para el grooming en casa.",
+        "confidence": 98.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0999J4PTJ",
+      "product_title": "Cortadora de Pelo Oneisall PARA Perros y Gatos Silenciosa"
+    },
+    {
+      "question": {
+        "text": "¿Cuál es más silenciosa para mascotas nerviosas, esta cortadora de pelo oneisall o la marca rival A?",
+        "type": "comparison",
+        "difficulty": "high",
+        "trap": "Requiere conocimiento detallado sobre el nivel de ruido de ambos productos, que puede no estar disponible directamente.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "marca rival A",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0999J4PTJ",
+      "product_title": "Cortadora de Pelo Oneisall PARA Perros y Gatos Silenciosa"
+    },
+    {
+      "question": {
+        "text": "Si esta cortadora se queda sin batería, ¿puedo usar un cargador genérico o necesito uno específico? ¿Qué pasa si uso el incorrecto?",
+        "type": "compatibility",
+        "difficulty": "extreme",
+        "trap": "Hay ambigüedad sobre la compatibilidad de cargadores y los riesgos de usar uno incorrecto.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "La cortadora de pelo Oneisall para mascotas es inalámbrica y se carga en 4-5 horas. No se especifica si requiere un cargador específico, por lo que te recomendaría usar el cargador original para evitar posibles daños. Usar un cargador incorrecto podría afectar la batería o el funcionamiento del dispositivo. Si tienes más dudas, te sugiero contactar al fabricante para obtener más detalles.",
+        "confidence": 81.6,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              70,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              76,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (review_recommended)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0999J4PTJ",
+      "product_title": "Cortadora de Pelo Oneisall PARA Perros y Gatos Silenciosa"
+    },
+    {
+      "question": {
+        "text": "Estoy buscando una afeitadora eléctrica para humanos, ¿este producto es adecuado para eso?",
+        "type": "product_search",
+        "difficulty": "high",
+        "trap": "La pregunta está diseñada para probar el entendimiento de búsqueda de productos específicos más allá del ámbito de la categoría presente.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "afeitadora eléctrica para humanos",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0999J4PTJ",
+      "product_title": "Cortadora de Pelo Oneisall PARA Perros y Gatos Silenciosa"
+    },
+    {
+      "question": {
+        "text": "¿Este cable de carga rápida es compatible con otros dispositivos MagSafe que no sean iPhone, como un Samsung Galaxy con funda MagSafe?",
+        "type": "compatibility",
+        "difficulty": "extreme",
+        "trap": "La pregunta mezcla compatibilidad con estándar MagSafe y dispositivos de otras marcas, algo que no es común.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "Samsung Galaxy con funda MagSafe",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B09W2HR3KF",
+      "product_title": "Cable USB-C PARA iPhone 14 Mag-Safe Carga Rápida 2m Blanco"
+    },
+    {
+      "question": {
+        "text": "¿El cable incluye algún tipo de protección contra sobrecargas que pueda evitar daños al usar un adaptador de corriente no certificado?",
+        "type": "critical_safety",
+        "difficulty": "high",
+        "trap": "La pregunta implica una situación de uso común pero potencialmente peligrosa, mezclando especificaciones con seguridad.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "electrical_safety",
+          "keyword_matched": "corriente"
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Correctamente notificó (critical_question)",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B09W2HR3KF",
+      "product_title": "Cable USB-C PARA iPhone 14 Mag-Safe Carga Rápida 2m Blanco"
+    },
+    {
+      "question": {
+        "text": "Busco un dispositivo que cargue más rápido que este cable de 2m, pero que sea compatible con el mismo puerto USB-C, ¿qué producto recomendarías?",
+        "type": "product_search",
+        "difficulty": "medium",
+        "trap": "La pregunta se centra en la velocidad de carga y la compatibilidad del puerto, pero busca un producto diferente.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "dispositivo que cargue más rápido que el cable USB-C",
+          "detection_confidence": 90
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B09W2HR3KF",
+      "product_title": "Cable USB-C PARA iPhone 14 Mag-Safe Carga Rápida 2m Blanco"
+    },
+    {
+      "question": {
+        "text": "¿Este teclado Apple para iPad funciona con la última iPad Pro o solo con la décima generación, y qué sucede si lo uso con otra generación anterior?",
+        "type": "compatibility|multiple",
+        "difficulty": "extreme",
+        "trap": "Confunde diferentes generaciones de iPad y pregunta sobre comportamiento con generaciones no mencionadas.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "teclado Apple para iPad",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0BJLFH8RC",
+      "product_title": "Teclado Apple PARA iPad apple_ipad_10th_generation Blanco"
+    },
+    {
+      "question": {
+        "text": "¿Este teclado es seguro para usar durante largas sesiones de escritura en cuanto a la postura ergonómica, considerando que no tiene patas ajustables?",
+        "type": "critical_safety",
+        "difficulty": "high",
+        "trap": "La seguridad de uso está relacionada con la ergonomía, no con un tema técnico evidente.",
+        "expected_behavior": "should_notify"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "El teclado Apple para iPad 10ª generación está diseñado ergonómicamente para largas sesiones de trabajo, lo que sugiere que es seguro para la postura durante la escritura prolongada. Aunque no tiene patas ajustables, su diseño desmontable con acoplamiento magnético y su trackpad integrado con gestos Multi-Touch ofrecen una experiencia cómoda y versátil. Esto puede ayudar a mantener una postura adecuada mientras trabajas.",
+        "confidence": 89.1,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "✗ NO notificó cuando debía",
+        "issues": [
+          "Debía notificar pero respondió"
+        ],
+        "score": 0.0
+      },
+      "product_asin": "B0BJLFH8RC",
+      "product_title": "Teclado Apple PARA iPad apple_ipad_10th_generation Blanco"
+    },
+    {
+      "question": {
+        "text": "¿Cuántas teclas tiene este producto y se incluyen repuestos o herramientas para cambiar las teclas desgastadas?",
+        "type": "quantity|ambiguous",
+        "difficulty": "extreme",
+        "trap": "Pregunta por una especificación que no siempre se detalla y asume el contenido de la caja sin información clara.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "answered",
+        "answer": "Este teclado Apple para iPad de 10ª generación cuenta con una fila de 14 teclas, pero no se especifica el número total de teclas en el contexto proporcionado. Tampoco se menciona si se incluyen repuestos o herramientas para cambiar teclas desgastadas. Sin embargo, su diseño desmontable y la conectividad sencilla son características destacadas que facilitan su uso.",
+        "confidence": 72.6,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              50,
+              0.5
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              86,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.2
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0BJLFH8RC",
+      "product_title": "Teclado Apple PARA iPad apple_ipad_10th_generation Blanco"
+    },
+    {
+      "question": {
+        "text": "¿Es este teclado mejor que el Magic Keyboard en términos de fiabilidad y duración de la batería, y cómo se compara el peso con otros accesorios similares?",
+        "type": "comparison|multiple",
+        "difficulty": "medium",
+        "trap": "Mezcla diferentes criterios de comparación, lo que puede llevar a respuestas parciales o confusas.",
+        "expected_behavior": "should_ask_clarification"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "Magic Keyboard",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": false,
+        "verdict": "",
+        "issues": [],
+        "score": 0.0
+      },
+      "product_asin": "B0BJLFH8RC",
+      "product_title": "Teclado Apple PARA iPad apple_ipad_10th_generation Blanco"
+    },
+    {
+      "question": {
+        "text": "Estoy buscando un teclado que sea compatible con sistemas operativos Windows y macOS. ¿Este teclado Apple sería una buena opción?",
+        "type": "product_search",
+        "difficulty": "medium",
+        "trap": "Pregunta que desvía la atención hacia compatibilidad no relacionada directamente con el producto anunciado.",
+        "expected_behavior": "should_detect_search"
+      },
+      "result_v2": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "product_search",
+        "should_notify": true,
+        "notification_type": "product_search",
+        "metadata": {
+          "product_searched": "teclado compatible con Windows y macOS",
+          "detection_confidence": 85
+        }
+      },
+      "analysis": {
+        "passed": true,
+        "verdict": "✓ Detectó búsqueda de producto",
+        "issues": [],
+        "score": 1.0
+      },
+      "product_asin": "B0BJLFH8RC",
+      "product_title": "Teclado Apple PARA iPad apple_ipad_10th_generation Blanco"
+    }
+  ]
+}

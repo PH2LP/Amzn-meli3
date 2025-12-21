@@ -23,6 +23,7 @@
     "values": {},
     "allowed_units": [],
     "tags": {
+      "catalog_required": true,
       "required": true
     },
     "hierarchy": "PARENT_PK",
@@ -89,20 +90,6 @@
       "defines_picture": true
     },
     "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "RECOMMENDED_CONSTRUCTIONS": {
-    "value_type": "string",
-    "values": {
-      "home": "9872828",
-      "mechanical workshop": "9872829"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
   "FILTRABLE_RECOMMENDED_AGE_GROUP": {
@@ -256,16 +243,6 @@
     "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
-  "DETAILED_MODEL": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
   "COLLECTION": {
     "value_type": "string",
     "values": {
@@ -381,6 +358,21 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "RECOMMENDED_CONSTRUCTIONS": {
+    "value_type": "string",
+    "values": {
+      "home": "9872828",
+      "mechanical workshop": "9872829"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
   "TOY_SAFETY_CERTIFICATE_NUMBER": {
     "value_type": "string",
     "values": {},
@@ -462,6 +454,17 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "DETAILED_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
   "RECOMMENDED_AGE_GROUP": {
     "value_type": "list",
     "values": {
@@ -490,79 +493,6 @@
     "tags": {
       "hidden": true,
       "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "COLORS_NUMBER": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "TOY_ASSEMBLED_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "TOY_ASSEMBLED_HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "TOY_ASSEMBLED_DEPTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg",
-      "lb",
-      "oz"
-    ],
-    "tags": {
-      "hidden": true
     },
     "hierarchy": "FAMILY",
     "relevance": 2

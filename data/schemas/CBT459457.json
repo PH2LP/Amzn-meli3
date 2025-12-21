@@ -32,6 +32,7 @@
     },
     "allowed_units": [],
     "tags": {
+      "catalog_required": true,
       "required": true
     },
     "hierarchy": "FAMILY",
@@ -107,19 +108,6 @@
       "catalog_listing_required": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "GTIN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
   "EMPTY_GTIN_REASON": {
@@ -266,6 +254,21 @@
     ],
     "tags": {},
     "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
   "ITEM_CONDITION": {

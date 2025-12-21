@@ -4,6 +4,7 @@ Amazon Product Pricing API
 Obtiene precios y ofertas Prime de productos en Amazon
 """
 
+import os
 import requests
 import time
 from datetime import datetime, timezone
@@ -18,6 +19,13 @@ MARKETPLACE_ID = "ATVPDKIKX0DER"  # US
 MAX_WAREHOUSE_HOURS = 24  # Máximo 24 horas para salir del almacén (Prime 1-day)
 MAX_BACKORDER_DAYS = 0    # Máximo días de espera si tiene fecha futura
 
+# Import opcional del scraper para validación adicional
+try:
+    from .amazon_availability_scraper import validate_fast_fulfillment_scraper
+    SCRAPER_AVAILABLE = True
+except ImportError:
+    SCRAPER_AVAILABLE = False
+
 
 def validate_fast_fulfillment(offer: Dict, asin: str = "") -> tuple[bool, str]:
     """
@@ -29,10 +37,12 @@ def validate_fast_fulfillment(offer: Dict, asin: str = "") -> tuple[bool, str]:
     3. ✅ Si es "NOW", maximumHours debe ser <= 24h
     4. ❌ Rechaza "FUTURE_WITH_DATE" si faltan >7 días
     5. ❌ Rechaza "FUTURE_WITHOUT_DATE"
+    6. ✅ Validar ShipsFrom state (rechaza estados lejanos a tu ubicación)
+    7. 🔍 (OPCIONAL) Validación adicional con web scraping para verificar disponibilidad REAL
 
     Args:
         offer: Dict con datos de la oferta de Amazon SP-API
-        asin: ASIN del producto (para logging)
+        asin: ASIN del producto (para logging y scraping)
 
     Returns:
         Tuple (is_valid: bool, reason: str)
@@ -75,18 +85,66 @@ def validate_fast_fulfillment(offer: Dict, asin: str = "") -> tuple[bool, str]:
 
     # REGLA 3: Validar productos disponibles NOW
     if availability_type == "NOW":
-        # Si maximumHours es 0, sale inmediatamente (ideal)
-        if maximum_hours == 0:
-            return (True, "OK - Envío inmediato")
-
         # Si maximumHours > MAX_WAREHOUSE_HOURS, tarda mucho en salir del almacén
         if maximum_hours > MAX_WAREHOUSE_HOURS:
             hours = maximum_hours
             days = hours / 24
             return (False, f"MaxHours={hours}h ({days:.1f}d) >{MAX_WAREHOUSE_HOURS}h")
 
-        # Dentro del límite aceptable
-        return (True, f"OK - Sale en {maximum_hours}h")
+        # REGLA 3.1: Validar desde qué estado envía el producto
+        # IMPORTANTE: maximumHours solo mide tiempo en warehouse, NO tiempo de tránsito
+        # Un producto puede salir en 0h de Seattle pero tardar 7 días en llegar a Miami
+        ships_from = offer.get('ShipsFrom', {})
+        ships_from_state = ships_from.get('State', '').upper()
+
+        # Obtener lista de estados permitidos desde .env
+        allowed_states_str = os.getenv('ALLOWED_SHIP_FROM_STATES', '')
+
+        if allowed_states_str and ships_from_state:
+            allowed_states = [s.strip().upper() for s in allowed_states_str.split(',')]
+
+            if ships_from_state not in allowed_states:
+                return (False, f"Envía desde {ships_from_state} (muy lejos, tarda días en llegar)")
+
+        # Validación básica de SP-API pasó
+        location_info = f" desde {ships_from_state}" if ships_from_state else ""
+        sp_api_reason = f"OK - Envío inmediato{location_info}" if maximum_hours == 0 else f"OK - Sale en {maximum_hours}h{location_info}"
+
+        # VALIDACIÓN ADICIONAL CON SCRAPER (si está habilitado)
+        # NOTA: La SP-API NO respeta el parámetro zipcode, por lo que puede dar
+        # disponibilidad inmediata cuando en realidad tarda días en tu ubicación
+        use_scraper = os.getenv("USE_SCRAPER_VALIDATION", "false").lower() == "true"
+
+        if use_scraper and SCRAPER_AVAILABLE and asin:
+            # Hacer validación adicional con scraping (más lento pero preciso)
+            max_delivery_days = int(os.getenv("MAX_DELIVERY_DAYS", "3"))
+
+            # Obtener precio del SP-API para validación cruzada
+            listing_price = offer.get('ListingPrice', {})
+            sp_api_price = listing_price.get('Amount')
+            if sp_api_price:
+                sp_api_price = float(sp_api_price)  # Ya viene en dólares, no en centavos
+
+            try:
+                is_valid_scraper, scraper_reason = validate_fast_fulfillment_scraper(
+                    asin,
+                    max_delivery_days=max_delivery_days,
+                    sp_api_price=sp_api_price  # Pasar precio para validación cruzada
+                )
+
+                if not is_valid_scraper:
+                    # El scraper detectó que NO cumple fast fulfillment real
+                    return (False, f"Scraper validation: {scraper_reason}")
+
+                # Ambas validaciones pasaron
+                return (True, f"{sp_api_reason} + Scraper: {scraper_reason}")
+
+            except Exception as e:
+                # Si el scraper falla, usar solo validación de SP-API
+                return (True, f"{sp_api_reason} (scraper error: {str(e)[:50]})")
+
+        # Sin scraper, confiar en SP-API
+        return (True, sp_api_reason)
 
     # Tipo de disponibilidad desconocido
     return (False, f"Tipo de disponibilidad desconocido: {availability_type}")
@@ -137,8 +195,14 @@ def get_prime_offer(asin: str, retry_count: int = 3) -> Optional[Dict]:
             # 3. Params
             params = {
                 "MarketplaceId": MARKETPLACE_ID,
-                "ItemCondition": "New"  # Solo productos nuevos
+                "ItemCondition": "New",  # Solo productos nuevos
+                "CustomerType": "Consumer"  # Consumer (Prime personal) vs Business (Business Prime)
             }
+
+            # Agregar zipcode si está configurado (para obtener disponibilidad precisa)
+            buyer_zipcode = os.getenv("BUYER_ZIPCODE")
+            if buyer_zipcode:
+                params["deliveryPostalCode"] = buyer_zipcode
 
             # 4. Request
             response = requests.get(url, headers=headers, params=params, timeout=15)
@@ -203,6 +267,9 @@ def get_prime_offer(asin: str, retry_count: int = 3) -> Optional[Dict]:
                     continue
 
                 # ✅ Oferta válida - agregarla a la lista
+                # Obtener ShipsFrom para logging
+                ships_from = offer.get('ShipsFrom', {})
+
                 valid_offers.append({
                     "price": float(price),
                     "currency": currency,
@@ -210,7 +277,9 @@ def get_prime_offer(asin: str, retry_count: int = 3) -> Optional[Dict]:
                     "is_fba": True,
                     "in_stock": True,
                     "is_buybox_winner": offer.get('IsBuyBoxWinner', False),
-                    "fulfillment_validation": reason  # Razón de aceptación
+                    "fulfillment_validation": reason,  # Razón de aceptación
+                    "ships_from_state": ships_from.get("State"),
+                    "ships_from_country": ships_from.get("Country")
                 })
 
             # Si no hay ofertas válidas, retornar None
@@ -339,13 +408,22 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
 
         # Crear array de requests
         requests_array = []
+        buyer_zipcode = os.getenv("BUYER_ZIPCODE")
+
         for asin in batch_asins:
-            requests_array.append({
+            request_params = {
                 "uri": f"/products/pricing/v0/items/{asin}/offers",
                 "method": "GET",
                 "MarketplaceId": MARKETPLACE_ID,
-                "ItemCondition": "New"
-            })
+                "ItemCondition": "New",
+                "CustomerType": "Consumer"  # Consumer (Prime personal) vs Business (Business Prime)
+            }
+
+            # Agregar zipcode si está configurado (para obtener disponibilidad precisa)
+            if buyer_zipcode:
+                request_params["deliveryPostalCode"] = buyer_zipcode
+
+            requests_array.append(request_params)
 
         body = {"requests": requests_array}
 
@@ -430,8 +508,9 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                                     # No rechazar, solo skip esta oferta y continuar
                                     continue
 
-                                # Obtener datos de ShippingTime para logging
+                                # Obtener datos de ShippingTime y ShipsFrom para logging
                                 shipping_time = offer.get("ShippingTime", {})
+                                ships_from = offer.get("ShipsFrom", {})
 
                                 # Oferta válida - agregarla
                                 valid_offers.append({
@@ -444,7 +523,9 @@ def get_prime_offers_batch_optimized(asins: List[str], batch_size: int = 20, sho
                                     "fulfillment_validation": reason,
                                     "availability_type": shipping_time.get("availabilityType"),
                                     "maximum_hours": shipping_time.get("maximumHours"),
-                                    "available_date": shipping_time.get("availableDate")
+                                    "available_date": shipping_time.get("availableDate"),
+                                    "ships_from_state": ships_from.get("State"),
+                                    "ships_from_country": ships_from.get("Country")
                                 })
 
                     # Elegir la MÁS BARATA de las ofertas válidas

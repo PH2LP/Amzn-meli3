@@ -1,0 +1,15 @@
+# LISTA NEGRA: ASINs con entrega lenta (>3 días)
+# ================================================
+# La SP-API reporta estos productos como FBA NOW con 0 horas,
+# pero en realidad tardan días en llegar a Miami (33172) porque
+# Amazon solo tiene stock en warehouses lejanos (costa oeste, etc.)
+#
+# Formato: ASIN  # Comentario opcional
+# Líneas vacías y comentarios (#) son ignorados
+#
+# Para agregar ASINs problemáticos:
+# 1. Verifica manualmente en Amazon.com con zipcode 33172
+# 2. Si tarda >3 días, agrégalo aquí
+# 3. El sync lo pausará automáticamente
+
+B0FDWT3MXK  # Tarda 6 días (verificado con scraping)

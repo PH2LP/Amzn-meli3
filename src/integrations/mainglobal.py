@@ -50,12 +50,139 @@ def _get_markup():
     except:
         return 0.40
 
+# ============ AUTO TOKEN REFRESH ============
+_last_token_refresh = 0  # Timestamp del último refresh
+_token_lock_file = "storage/.token_refresh.lock"
+
+def refresh_ml_token(force=False):
+    """Renueva automáticamente el token de MercadoLibre cuando expira (con lock file para procesos paralelos)"""
+    global _last_token_refresh, ML_ACCESS_TOKEN, HEADERS
+    import time as time_module
+    from pathlib import Path
+
+    # Evitar múltiples refreshes en menos de 10 segundos (salvo que sea forzado)
+    if not force and (time_module.time() - _last_token_refresh) < 10:
+        print("⏭️  Refresh reciente (<10s), usando token actual")
+        return True
+
+    lock_path = Path(_token_lock_file)
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # 🔒 Esperar si otro proceso está refrescando el token
+    max_wait = 30  # segundos
+    wait_start = time_module.time()
+    while lock_path.exists():
+        if time_module.time() - wait_start > max_wait:
+            print("⚠️  Timeout esperando lock de token, forzando refresh...")
+            break
+        print("⏳ Otro proceso está refrescando el token, esperando...")
+        time_module.sleep(2)
+
+    # Si esperamos y el lock desapareció, recargar .env y continuar sin refrescar
+    if not force and lock_path.exists() is False and (time_module.time() - wait_start) > 0:
+        print("✅ Token ya refrescado por otro proceso, recargando .env...")
+        load_dotenv(override=True)
+        ML_ACCESS_TOKEN = os.getenv("ML_ACCESS_TOKEN")
+        return True
+
+    # 🔒 Crear lock file
+    try:
+        lock_path.write_text(str(os.getpid()))
+    except Exception as e:
+        print(f"⚠️  Error creando lock file: {e}")
+
+    print("🔄 Token expirado, renovando automáticamente...")
+
+    env_path = ".env"
+    from dotenv import dotenv_values
+    env = dotenv_values(env_path)
+
+    client_id = env.get("ML_CLIENT_ID")
+    client_secret = env.get("ML_CLIENT_SECRET")
+    refresh_token = env.get("ML_REFRESH_TOKEN")
+
+    if not client_id or not client_secret or not refresh_token:
+        print("❌ Faltan credenciales ML en .env para renovar token")
+        return False
+
+    url = "https://api.mercadolibre.com/oauth/token"
+    payload = {
+        "grant_type": "refresh_token",
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "refresh_token": refresh_token
+    }
+
+    try:
+        r = requests.post(url, data=payload, timeout=10)
+        r.raise_for_status()
+        data = r.json()
+
+        new_access_token = data.get("access_token")
+        new_refresh_token = data.get("refresh_token", refresh_token)
+
+        if not new_access_token:
+            print("❌ ML no devolvió access_token en la respuesta")
+            return False
+
+        # Actualizar .env
+        with open(env_path, "r") as f:
+            lines = f.readlines()
+        new_lines = []
+        for line in lines:
+            if line.startswith("ML_ACCESS_TOKEN="):
+                new_lines.append(f"ML_ACCESS_TOKEN={new_access_token}\n")
+            elif line.startswith("ML_REFRESH_TOKEN="):
+                new_lines.append(f"ML_REFRESH_TOKEN={new_refresh_token}\n")
+            else:
+                new_lines.append(line)
+        with open(env_path, "w") as f:
+            f.writelines(new_lines)
+
+        # Actualizar variables globales en memoria
+        ML_ACCESS_TOKEN = new_access_token
+        HEADERS = {"Authorization": f"Bearer {new_access_token}"}
+        os.environ["ML_ACCESS_TOKEN"] = new_access_token
+        os.environ["ML_REFRESH_TOKEN"] = new_refresh_token
+
+        _last_token_refresh = time_module.time()
+        print(f"✅ Token renovado: {new_access_token[:40]}...")
+
+        # 🔓 Eliminar lock file
+        try:
+            if lock_path.exists():
+                lock_path.unlink()
+        except Exception as e:
+            print(f"⚠️  Error eliminando lock file: {e}")
+
+        return True
+
+    except Exception as e:
+        print(f"❌ Error renovando token: {e}")
+
+        # 🔓 Eliminar lock file incluso si falla
+        try:
+            if lock_path.exists():
+                lock_path.unlink()
+        except:
+            pass
+
+        return False
+
 # ============ HTTP ============
-def http_get(url, params=None, extra_headers=None, timeout=30):
+def http_get(url, params=None, extra_headers=None, timeout=30, _retry_count=0):
     h = dict(HEADERS)
     if extra_headers:
         h.update(extra_headers)
     r = requests.get(url, headers=h, params=params, timeout=timeout)
+
+    # Si el token expiró (401), renovar y reintentar UNA vez
+    if r.status_code == 401 and _retry_count == 0:
+        if "invalid_token" in r.text or "expired" in r.text.lower():
+            if refresh_ml_token():
+                # Reintentar con el nuevo token
+                return http_get(url, params, extra_headers, timeout, _retry_count=1)
+
     if not r.ok:
         raise RuntimeError(f"GET {url} → {r.status_code} {r.text}")
     return r.json()
@@ -455,11 +582,19 @@ def fix_attributes_with_value_ids(cid: str, attributes: list) -> list:
 
     return fixed_attrs
 
-def http_post(url, body, extra_headers=None, timeout=60):
+def http_post(url, body, extra_headers=None, timeout=60, _retry_count=0):
     h = {"Authorization": HEADERS["Authorization"], "Content-Type": "application/json"}
     if extra_headers:
         h.update(extra_headers)
     r = requests.post(url, headers=h, json=body, timeout=timeout)
+
+    # Si el token expiró (401), renovar y reintentar UNA vez
+    if r.status_code == 401 and _retry_count == 0:
+        if "invalid_token" in r.text or "expired" in r.text.lower():
+            if refresh_ml_token():
+                # Reintentar con el nuevo token
+                return http_post(url, body, extra_headers, timeout, _retry_count=1)
+
     # Retry con delay si rate limited
     if r.status_code == 429:
         print("⏳ Rate limited, esperando 10s y reintentando...")
@@ -469,11 +604,19 @@ def http_post(url, body, extra_headers=None, timeout=60):
         raise RuntimeError(f"POST {url} → {r.status_code} {r.text}")
     return r.json()
 
-def http_put(url, body, extra_headers=None, timeout=60):
+def http_put(url, body, extra_headers=None, timeout=60, _retry_count=0):
     h = {"Authorization": HEADERS["Authorization"], "Content-Type": "application/json"}
     if extra_headers:
         h.update(extra_headers)
     r = requests.put(url, headers=h, json=body, timeout=timeout)
+
+    # Si el token expiró (401), renovar y reintentar UNA vez
+    if r.status_code == 401 and _retry_count == 0:
+        if "invalid_token" in r.text or "expired" in r.text.lower():
+            if refresh_ml_token():
+                # Reintentar con el nuevo token
+                return http_put(url, body, extra_headers, timeout, _retry_count=1)
+
     if r.status_code == 429:
         time.sleep(5)
         r = requests.put(url, headers=h, json=body, timeout=timeout)
@@ -663,12 +806,12 @@ def get_ai_copy_and_category(amazon_json) -> Tuple[str, str, str, str]:
                      "• Compra protegida por Mercado Libre\n"
                      "• Garantía de 30 días desde la entrega\n"
                      "• Factura emitida por Mercado Libre (no factura local del país)\n"
-                     "• Productos eléctricos: 110-120V + clavija americana\n"
-                     "• Puede requerir adaptador o transformador, según el país\n"
+                     "• PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.\n"
                      "• Medidas y peso pueden aparecer en sistema imperial\n"
                      "• Si incluye baterías, pueden enviarse retiradas por normas aéreas\n"
                      "• Atención al cliente en español e inglés\n\n"
-                     "Somos ONEWORLD 🌎")
+                     "¿No encontrás lo que buscás? ¡Envianos una pregunta e intentaremos conseguir el producto para usted!\n\n"
+                     "Somos USA_NEXO")
     fallback_model = amazon_json.get("attributes", {}).get("model", [{}])[0].get("value", "") or "Genérico"
     fallback_kw = "juego de construcción lego" if "lego" in (amazon_json.get("title","").lower()) else "producto genérico"
 
@@ -702,13 +845,14 @@ Reglas de estilo:
 • Compra protegida por Mercado Libre
 • Garantía de 30 días desde la entrega
 • Factura emitida por Mercado Libre (no factura local del país)
-• Productos eléctricos: 110-120V + clavija americana
-• Puede requerir adaptador o transformador, según el país
+• PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.
 • Medidas y peso pueden aparecer en sistema imperial
 • Si incluye baterías, pueden enviarse retiradas por normas aéreas
 • Atención al cliente en español e inglés
 
-Somos ONEWORLD 🌎"
+¿No encontrás lo que buscás? ¡Envianos una pregunta e intentaremos conseguir el producto para usted!
+
+Somos USA_NEXO"
 
 JSON DE AMAZON (recortado):
 {json.dumps(amazon_json)[:15000]}
@@ -1508,7 +1652,8 @@ Devuelve SOLO un array JSON con los atributos rellenados.
     if excluded_sites:
         original_count = len(sites)
         sites = [s for s in sites if s.get("site_id") not in excluded_sites]
-        print(f"🚫 {original_count - len(sites)} países excluidos (ya publicados): {', '.join(excluded_sites)}")
+        qprint(f"🚫 Filtrando {original_count - len(sites)} países ya publicados: {', '.join(excluded_sites)}")
+        qprint(f"   Publicando solo en: {', '.join([s.get('site_id') for s in sites])}")
         if not sites:
             print("⚠️ ADVERTENCIA: Todos los países fueron excluidos. No hay nada que publicar.")
             return None
@@ -1570,14 +1715,15 @@ Devuelve SOLO un array JSON con los atributos rellenados.
 
             # Verificar si hay errores en site_items (por país)
             site_items = res.get("site_items", [])
-            has_errors = any(item.get("error") for item in site_items)
+            # ✅ Filtrar solo elementos dict válidos
+            has_errors = any(item.get("error") for item in site_items if isinstance(item, dict))
 
             if not has_errors:
                 qprint(f"✅ Publicado → {item_id}")
                 break  # Éxito completo, salir del loop
 
             # Si todos los países tienen error, tratarlo como falla
-            all_failed = all(item.get("error") for item in site_items)
+            all_failed = all(item.get("error") for item in site_items if isinstance(item, dict))
             if not all_failed:
                 qprint(f"✅ Publicado → {item_id} (con algunos errores por país)")
 
@@ -1591,6 +1737,9 @@ Devuelve SOLO un array JSON con los atributos rellenados.
 
                 # Primerapasada: recopilar todos los estados por país
                 for item in site_items:
+                    # ✅ Saltar elementos que no son diccionarios
+                    if not isinstance(item, dict):
+                        continue
                     site_id = item.get("site_id", "Unknown")
                     has_item_id = bool(item.get("item_id"))
                     has_error = bool(item.get("error"))
@@ -1603,16 +1752,24 @@ Devuelve SOLO un array JSON con los atributos rellenados.
                     # Si NO tiene item_id pero SÍ tiene error → falla (pero solo si no hay éxito previo)
                     elif has_error and site_id not in success_countries_dict:
                         error_obj = item["error"]
-                        error_msg = error_obj.get("message", "Unknown error")
-                        causes = error_obj.get("cause", [])
+
+                        # ✅ Verificar si error_obj es un dict o un string
+                        if isinstance(error_obj, dict):
+                            error_msg = error_obj.get("message", "Unknown error")
+                            causes = error_obj.get("cause", [])
+                        else:
+                            # Si es un string, usarlo directamente
+                            error_msg = str(error_obj)
+                            causes = []
 
                         # Extraer detalles de los causes
                         cause_details = []
                         for cause in causes:
-                            cause_msg = cause.get("message", "")
-                            cause_code = cause.get("code", "")
-                            if cause_msg:
-                                cause_details.append(f"{cause_code}: {cause_msg}")
+                            if isinstance(cause, dict):
+                                cause_msg = cause.get("message", "")
+                                cause_code = cause.get("code", "")
+                                if cause_msg:
+                                    cause_details.append(f"{cause_code}: {cause_msg}")
 
                         if cause_details:
                             failed_countries_dict[site_id] = {
@@ -1649,7 +1806,8 @@ Devuelve SOLO un array JSON con los atributos rellenados.
             # Todos fallaron - extraer errores para retry
             error_messages = []
             for item in site_items:
-                if item.get("error"):
+                # ✅ Saltar elementos que no son diccionarios
+                if isinstance(item, dict) and item.get("error"):
                     error_messages.append(json.dumps(item["error"]))
             error_text = " | ".join(error_messages)
 
@@ -1717,11 +1875,14 @@ Devuelve SOLO un array JSON con los atributos rellenados.
         qprint(f"💾 Guardado en BD para sincronización: {mini.get('asin', 'N/A')} → {item_id}")
         if site_items:
             # País activo = tiene item_id (publicación exitosa)
-            active_countries = [s.get("site_id") for s in site_items if s.get("item_id")]
+            # ✅ Filtrar solo elementos dict válidos antes de acceder con .get()
+            active_countries = [s.get("site_id") for s in site_items if isinstance(s, dict) and s.get("item_id")]
             if active_countries:
                 print(f"   Países activos: {', '.join(active_countries)}")
     except Exception as e:
         print(f"⚠️ Error guardando en BD (no crítico): {e}")
+        import traceback
+        traceback.print_exc()  # Mostrar traceback completo para debugging
 
     return res
         

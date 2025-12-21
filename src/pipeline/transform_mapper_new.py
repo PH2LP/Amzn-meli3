@@ -220,43 +220,63 @@ PACKAGE_DIMENSION_KEYS = {
 
 def _find_in_flat(flat: Dict[str, Any], keys: List[str]):
     norm = {normalize_key(k): v for k, v in flat.items()}
+
+    # Lista de valores inválidos que NO debemos retornar
+    # NOTA: Las unidades (kg, g, lb, cm, etc.) NO están en esta lista porque son valores válidos
+    # cuando estamos buscando específicamente el campo "unit"
+    invalid_values = {
+        "en_us", "en-us", "es_mx", "pt_br", "language_tag",
+        "atvpdkikx0der", "a1am78c64um0y8", "marketplace_id",
+        "default", "none", "null", "n/a", "na", "not specified", "unknown",
+        "true", "false", "yes", "no"
+    }
+
     for k in keys:
         nk = normalize_key(k)
         for fk, v in norm.items():
+            # Filtrar keys de metadata
+            if "languagetag" in fk or "language_tag" in fk:
+                continue
+            if "marketplaceid" in fk or "marketplace_id" in fk:
+                continue
+
+            # 🔴 CRÍTICO: Si la key es de un array, solo aceptar si termina en "value" o "unit"
+            # Las unidades son necesarias para hacer conversiones correctas
+            if "[" in fk and not (fk.endswith("value") or fk.endswith("unit")):
+                continue
+
             if nk in fk or fk in nk:
-                return v
+                val = str(v).strip() if v else ""
+
+                # Validar que no sea un valor inválido
+                if val and val.lower() not in invalid_values:
+                    return v
     return None
 
 def get_pkg_dim(flat, kind) -> Dict[str, Any] | None:
     kind = kind.lower()
     # 1) valor + unidad explícitas
     val = None; unit = None
-    for val_key in [
-        f"attributes.item_package_dimensions[0].{kind}.value",
-        f"item_package_dimensions.{kind}.value",
-        f"package_dimensions.{kind}.value",
-        f"{kind}.value"
-    ] + PACKAGE_DIMENSION_KEYS.get(kind, []):
+    # Buscar SOLO en las claves específicas de PAQUETE, no en claves genéricas
+    # que podrían coincidir con peso del producto o de componentes
+    for val_key in PACKAGE_DIMENSION_KEYS.get(kind, []):
         v = _find_in_flat(flat, [val_key])
         if v is not None:
             val = extract_number(v)
             if val is not None: break
     # Para peso, buscar en item_package_weight (no dimensions)
     # Para dimensiones, buscar en item_package_dimensions
+    # IMPORTANTE: Solo buscar en claves específicas de PAQUETE, no en genéricas
     if kind == "weight":
         unit_keys = [
             "attributes.item_package_weight[0].unit",
-            "item_package_weight.unit",
-            "attributes.item_weight[0].unit",
-            "item_weight.unit",
-            f"{kind}.unit"
+            "item_package_weight.unit"
         ]
     else:
         unit_keys = [
             f"attributes.item_package_dimensions[0].{kind}.unit",
             f"item_package_dimensions.{kind}.unit",
-            f"package_dimensions.{kind}.unit",
-            f"{kind}.unit"
+            f"package_dimensions.{kind}.unit"
         ]
 
     for unit_key in unit_keys:
@@ -345,20 +365,29 @@ def compute_price(base, tax=0.0) -> Dict[str, float]:
     """
     Calcula el precio final para ML usando net_proceeds.
 
-    Fórmula:
-    1. costo_total = precio_base + tax (lo que el seller paga)
-    2. net_proceeds = costo_total * (1 + markup) (lo que el seller quiere ganar)
+    Fórmula correcta:
+    1. precio_base (Amazon price)
+    2. + tax (7% del precio base = base * 0.07)
+    3. + $4 USD fijo (costo 3PL fulfillment)
+    4. = costo_total (lo que el seller paga)
+    5. costo_total * (1 + markup%) = net_proceeds (lo que el seller quiere ganar)
 
     ML se encarga automáticamente de:
-    - Agregar comisiones
+    - Agregar comisiones (CBT fees)
     - Agregar shipping costs
     - Calcular el precio final que ve el comprador
     """
-    cost = round(base + tax, 2)
+    TAX_RATE = 0.07  # 7% tax
+    FULFILLMENT_FEE = 4.0  # $4 USD fijo por 3PL
+
+    tax_amount = round(base * TAX_RATE, 2) if tax == 0.0 else tax  # Usar 7% si no se pasó tax
+    cost = round(base + tax_amount + FULFILLMENT_FEE, 2)
     net_proceeds = round(cost * (1.0 + MARKUP_PCT), 2)
+
     return {
         "base_usd": round(base, 2),
-        "tax_usd": round(tax, 2),
+        "tax_usd": tax_amount,
+        "fulfillment_fee_usd": FULFILLMENT_FEE,
         "cost_usd": cost,
         "markup_pct": int(MARKUP_PCT * 100),
         "net_proceeds_usd": net_proceeds
@@ -376,12 +405,24 @@ def first_of(amazon_json, keys):
     for k in keys:
         nk = normalize_key(k)
         for fk, v in norm_flat.items():
-            # 🔹 Evitar tomar etiquetas de idioma, metadata, o IDs de marketplace
-            # Filtrar por nombre de la key
+            # 🔹 CRÍTICO: Solo aceptar valores que vengan de campos "value"
+            # Amazon envía atributos como: {"color":[{"value":"Red","language_tag":"en_US"}]}
+            # Pero a veces envía: {"manufacturer":[{"language_tag":"en_US"}]} SIN el campo "value"
+            # Debemos RECHAZAR estos casos donde solo hay metadata sin valor real
+
+            # Filtrar por nombre de la key - debe contener "value" o el campo específico
             if "languagetag" in fk or "language_tag" in fk:
                 continue
             if "marketplaceid" in fk or "marketplace_id" in fk:
                 continue
+
+            # 🔴 NUEVO: Solo aceptar si la key termina en "value" o es el campo directo (sin array)
+            # Esto previene tomar "language_tag" cuando buscamos "color"
+            if "[" in fk:  # Es un array
+                # Debe terminar en ".value" para ser válido
+                if not fk.endswith("value"):
+                    continue
+
             if not (nk in fk):
                 continue
 
@@ -674,8 +715,19 @@ def ai_title_es(base_title, brand, model, bullets, max_chars=60):
     model_instruction = ""
     if model_is_relevant and model:
         model_instruction = f"""
-IMPORTANTE: El modelo "{model}" es un identificador clave que los compradores buscan.
-DEBES incluirlo en el título de forma natural."""
+🔴 CRÍTICO - PRIORIDAD MÁXIMA:
+El modelo "{model}" es un identificador clave que los compradores buscan activamente.
+Es MÁS IMPORTANTE que cualquier otro atributo descriptivo.
+
+OBLIGATORIO: Incluir "{model}" en el título.
+⚠️ IMPORTANTE: Si "{model}" ya contiene la marca (ej: "JBL Tune Flex 2"), NO repitas la marca.
+   - CORRECTO: "Audífonos {model} Negro Cancelación"
+   - INCORRECTO: "Audífonos JBL {model} Negro Cancelación" (duplica "JBL")
+
+Estructura forzada: Tipo + Modelo + 1-2 atributos clave
+
+Si no cabe en {max_chars} caracteres, SACRIFICA otros atributos pero NUNCA el modelo.
+Ejemplo: "Audífonos {model} Negro Cancelación" es MEJOR que "Audífonos JBL Inalámbricos Negro Cancelación Ruido"."""
     else:
         model_instruction = f"""
 IMPORTANTE: El modelo "{model}" es un código técnico interno (SKU/part number).
@@ -692,38 +744,91 @@ REGLAS ESTRICTAS:
 6. Español LATAM neutro y profesional
 {model_instruction}
 
-⚠️ CRÍTICO - DETECCIÓN DE PRODUCTOS OFICIALES vs ACCESORIOS:
+⚠️ ⚠️ ⚠️ CRÍTICO - DETECCIÓN AUTOMÁTICA DE ACCESORIOS ⚠️ ⚠️ ⚠️
 
-PASO 1: Determinar si es producto oficial de la marca o accesorio third-party
-- Verifica si la MARCA del producto coincide con la marca del dispositivo compatible
-- Analiza el título original y las características
+🔴 PASO 1: ANALIZA EL TÍTULO ORIGINAL DE AMAZON:
+Título: "{base_title}"
 
-CASO A: PRODUCTO OFICIAL de la marca
-Ejemplos: Apple Magic Keyboard, Sony DualSense Controller, Samsung Smart Cover
-- La MARCA del producto (Apple, Sony, Samsung) coincide con el dispositivo (iPad, PlayStation, Galaxy)
-- Formato: [Marca] [Modelo] [Tipo de Producto] + Atributos
-- Ejemplos correctos:
-  * "Apple Magic Keyboard iPad Pro 13 Español Trackpad Negro"
-  * "Sony DualSense Controller PS5 Blanco Inalámbrico"
-  * "Apple USB-C Lightning Cable 1m Carga Rápida Original"
-- ✅ NO uses "PARA" si es producto oficial de la marca
+DETECTA si el título original contiene CUALQUIERA de estas señales:
+- Palabras de compatibilidad: "for", "compatible", "designed for", "works with", "fits"
+- Tipos de accesorio: "case", "cover", "funda", "protector", "charger", "cargador", "cable", "adapter", "adaptador", "dock", "base", "stand", "soporte", "holder", "mount", "keyboard", "teclado", "mouse"
+- Frases como: "Charging Dock for", "Case for", "Keyboard for", "Compatible with"
 
-CASO B: ACCESORIO THIRD-PARTY (otra marca para dispositivo de otra marca)
-Ejemplos: Logitech keyboard for iPad, Anker charger for iPhone
-- La MARCA del producto NO coincide con el dispositivo compatible
-- Formato: [Tipo Accesorio] [Marca Fabricante] PARA [Dispositivo Compatible] + Atributos
-- Ejemplos correctos:
-  * "Teclado Bluetooth Logitech PARA iPad 10ma Gen Retroiluminado"
-  * "Base Cargadora PARA Nintendo Switch Dock USB-C"
-  * "Funda Protectora PARA iPhone 14 Pro Silicona Negro"
-  * "Cable USB-C Anker PARA MacBook Pro Carga Rápida 2m"
-- ✅ SIEMPRE usa "PARA" en accesorios third-party
-- ❌ NUNCA: "iPad Teclado Bluetooth" (ambiguo, puede ser suspendido)
+SI ENCUENTRAS CUALQUIERA → El producto ES UN ACCESORIO → DEBES usar "PARA"
 
-CASO C: PRODUCTO ORIGINAL (no es accesorio)
-- Dispositivo standalone: iPad, PlayStation, Nintendo Switch, MacBook
-- Formato directo: Marca + Modelo + Tipo + Atributos
-- Ejemplos: "iPad Pro 11 256GB", "Nintendo Switch OLED 64GB"
+🔴 REGLA PRINCIPAL - USO OBLIGATORIO DE "PARA":
+Un producto ES ACCESORIO si cumple CUALQUIERA de estos criterios:
+1. ✅ El título Amazon menciona "for [dispositivo]", "compatible with", "designed for"
+2. ✅ Es un complemento: funda, case, cable, cargador, protector, soporte, dock, base, teclado, mouse
+3. ✅ La marca del producto NO es la misma que el dispositivo mencionado
+4. ✅ Se usa CON otro dispositivo pero no es ese dispositivo
+
+⚠️ CRÍTICO - USO INTELIGENTE DE LA MARCA:
+
+REGLA 1: ¿Incluir la marca en el título?
+- SI el título original de Amazon menciona la marca → Inclúyela en ML
+  Ejemplos: "Anker Charging Dock" → "Base Cargadora Anker PARA..."
+           "Logitech Keyboard for iPad" → "Teclado Logitech PARA iPad"
+- SI el título original NO menciona la marca → NO la incluyas (producto genérico)
+  Ejemplos: "Charging Dock for PS5" → "Base Cargadora PARA PS5"
+           "Protective Case iPhone" → "Funda Protectora PARA iPhone"
+
+REGLA 2: NO confundir marca del producto con marca del dispositivo compatible
+- La marca que incluyas DEBE ser la del PRODUCTO (fabricante real: {brand})
+- NO uses la marca del dispositivo compatible (PlayStation, Apple, Samsung, etc.)
+- Ejemplos de ERROR a evitar:
+  ❌ "Sony Charging Base PARA PS5" (cuando marca real es Anker)
+  ❌ "Apple Cable Lightning" (cuando marca real es genérico)
+  ❌ "Nintendo Funda Switch" (cuando marca real es otra)
+
+REGLA 3: Prioridad en el título
+- Si incluyes marca: [Tipo Producto] [Marca] PARA [Dispositivo] [Atributos]
+  Ejemplo: "Base Cargadora Anker PARA PS5 DualSense USB-C"
+- Si NO incluyes marca: [Tipo Producto] PARA [Dispositivo] [Atributos]
+  Ejemplo: "Base Cargadora PARA PS5 DualSense USB-C Negro"
+
+📋 CASOS DE USO OBLIGATORIO DE "PARA":
+
+TIPO A - ACCESORIOS GENÉRICOS (Sin marca en título Amazon):
+- "Funda PARA iPhone 14 Pro Silicona Transparente" (sin marca, genérico)
+- "Cable USB-C PARA MacBook Pro 2m Carga Rápida" (sin marca, genérico)
+- "Protector Pantalla PARA iPad Air Vidrio Templado" (sin marca, genérico)
+- "Base Cargadora PARA Nintendo Switch Dock Negro" (sin marca, genérico)
+✅ NO incluir marca si el título original no la menciona
+
+TIPO B - ACCESORIOS DE MARCA THIRD-PARTY (Marca en título Amazon):
+- Amazon: "Logitech Keyboard for iPad" → ML: "Teclado Logitech PARA iPad 10ma Gen Bluetooth"
+- Amazon: "Anker Charger for iPhone" → ML: "Cargador Anker PARA iPhone 65W USB-C"
+- Amazon: "Spigen Case Galaxy S24" → ML: "Funda Spigen PARA Samsung Galaxy S24 Ultra"
+- Amazon: "KDD Charging Dock Compatible with Nintendo Switch" → ML: "Base Cargadora KDD PARA Nintendo Switch 6 Joycons"
+- Amazon: "Macally Keyboard and Mouse for Mac" → ML: "Teclado y Mouse Macally PARA Mac Bluetooth Recargable"
+✅ Incluir marca si aparece en título Amazon
+✅ Usa la MARCA REAL del producto (de los datos: {brand})
+✅ NO uses marca del dispositivo compatible (Sony, Apple, Nintendo, etc.)
+✅ DETECTA "for [dispositivo]" o "Compatible with" → USA "PARA [dispositivo]"
+
+TIPO C - ACCESORIOS OFICIALES (Mismo fabricante):
+- Amazon: "Apple Magic Keyboard for iPad Air" → ML: "Apple Magic Keyboard PARA iPad Air 11 Trackpad USB-C Blanco"
+- Amazon: "Apple Smart Folio for iPad Pro 11" → ML: "Apple Smart Folio PARA iPad Pro 11 Negro Magnética"
+- Amazon: "Samsung Clear View Cover for Galaxy S24" → ML: "Samsung Clear View Cover PARA Galaxy S24 Original"
+- Amazon: "Sony DualSense Charging Station for PS5" → ML: "Sony DualSense Charging Station PARA PS5 Base Oficial"
+✅ USA "PARA" incluso si es oficial, porque sigue siendo un accesorio
+✅ La marca coincide con el dispositivo, pero el formato es el mismo
+✅ DETECTA "for [dispositivo]" en el título Amazon → USA "PARA [dispositivo]" en ML
+
+❌ NUNCA USES "PARA" EN:
+- Dispositivos standalone: "iPad Pro 11 256GB WiFi Gris"
+- Productos completos: "Nintendo Switch OLED 64GB Blanco"
+- Hardware principal: "iPhone 15 Pro Max 512GB Titanio"
+
+🎯 FORMATO CORRECTO PARA ACCESORIOS:
+[Tipo de Accesorio] [Marca si hay] PARA [Dispositivo Compatible] [Atributos Clave]
+
+Ejemplos:
+✅ "Funda PARA iPhone 14 Pro Max Silicona Negra"
+✅ "Teclado Bluetooth PARA iPad Air 5ta Gen"
+✅ "Cable Lightning PARA iPhone 1m Certificado MFi"
+❌ "iPhone Funda 14 Pro Max" (INCORRECTO - suspensión garantizada)
 
 DATOS DEL PRODUCTO:
 Título original: {base_title}
@@ -779,6 +884,21 @@ def _is_model_searchable(brand, model, title):
     brand_upper = str(brand).upper() if brand else ""
     title_upper = str(title).upper() if title else ""
 
+    # ❌ FILTRO PRIORITARIO: Palabras genéricas que NUNCA son modelos
+    # Se revisa ANTES para evitar que otras reglas las validen incorrectamente
+    # Incluye inglés y español porque Amazon a veces tiene datos en ambos idiomas
+    generic_words = [
+        "NACIONAL", "NATIONAL",  # Caso real: Nintendo Switch
+        "ORIGINAL",
+        "STANDARD", "ESTANDAR",
+        "CLASSIC", "CLASICO", "CLÁSICO",
+        "NEW", "NUEVO", "NUEVA",
+        "VERSION", "VERSIÓN", "VERSÃO",
+        "BASIC", "BASICO", "BÁSICO"
+    ]
+    if model_upper in generic_words:
+        return False
+
     # ✅ CASOS DONDE EL MODELO SÍ ES IMPORTANTE (debe ir en título)
 
     # 1. LEGO - Los números son clave (ej: 10314, 21348)
@@ -820,7 +940,20 @@ def _is_model_searchable(brand, model, title):
     if any(x in title_upper for x in ["STEAM DECK", "ROG ALLY", "SWITCH OLED"]):
         return True
 
-    # 8. Modelos cortos y alfanuméricos reconocibles (no códigos técnicos)
+    # 8. Audio (JBL, Sony, Bose, Beats, Sennheiser) - Modelos con nombres comerciales
+    # Ejemplos: "JBL Tune Flex 2", "Sony WH-1000XM5", "Bose QuietComfort 45"
+    audio_brands = ["JBL", "SONY", "BOSE", "BEATS", "SENNHEISER", "AUDIO-TECHNICA", "SHURE"]
+    audio_keywords = ["HEADPHONE", "EARB", "SPEAKER", "SOUNDBAR", "TUNE", "QUIETCOMFORT", "WH-", "WF-"]
+    if any(brand in audio_brands for brand in audio_brands if brand in brand_upper):
+        # Si el modelo tiene números y aparece en el título, es relevante
+        if any(char.isdigit() for char in model_upper) and model_upper in title_upper:
+            return True
+    # También verificar por keywords en el título (para marcas menos conocidas)
+    if any(kw in title_upper for kw in audio_keywords):
+        if any(char.isdigit() for char in model_upper) and model_upper in title_upper and len(model_upper) <= 20:
+            return True
+
+    # 9. Modelos cortos y alfanuméricos reconocibles (no códigos técnicos)
     # Ejemplo: "MX Master 3", "K380", "AirPods Pro 2"
     if len(model_upper) <= 8 and model_upper[0].isalpha():
         # Si el modelo aparece en el título original, probablemente sea relevante
@@ -1019,13 +1152,13 @@ Devuelve SOLO el texto plano formateado, sin explicaciones adicionales."""
 
         # 2. Eliminar cualquier versión del footer que la IA haya agregado (con o sin separadores)
         texto = re.sub(
-            r'[═─]{5,}.*?INFORMACIÓN IMPORTANTE.*?ONEWORLD.*?🌎',
+            r'[═─]{5,}.*?INFORMACIÓN IMPORTANTE.*?(ONEWORLD|USA_NEXO|DIRECTFROMUSA).*?',
             '',
             texto,
             flags=re.DOTALL | re.IGNORECASE
         )
         texto = re.sub(
-            r'INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES.*?ONEWORLD.*?🌎',
+            r'INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES.*?(ONEWORLD|USA_NEXO|DIRECTFROMUSA).*?',
             '',
             texto,
             flags=re.DOTALL | re.IGNORECASE
@@ -1100,11 +1233,13 @@ INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 • Compra protegida por Mercado Libre
 • Garantía del vendedor: 30 días
 • Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
-• Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
+• PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.
 • Medidas y peso pueden estar en sistema imperial
 • Atención al cliente en español e inglés
 
-Somos ONEWORLD"""
+¿No encontrás lo que buscás? ¡Envianos una pregunta e intentaremos conseguir el producto para usted!
+
+Somos USA_NEXO"""
 
         texto += footer_text
         return texto
@@ -1123,11 +1258,13 @@ INFORMACIÓN IMPORTANTE PARA COMPRAS INTERNACIONALES
 • Compra protegida por Mercado Libre
 • Garantía del vendedor: 30 días
 • Facturación: su factura local la emite Mercado Libre. Nosotros tributamos en EE.UU.
-• Productos eléctricos: 110-120V + clavija americana (puede requerir adaptador)
+• PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.
 • Medidas y peso pueden estar en sistema imperial
 • Atención al cliente en español e inglés
 
-Somos ONEWORLD"""
+¿No encontrás lo que buscás? ¡Envianos una pregunta e intentaremos conseguir el producto para usted!
+
+Somos USA_NEXO"""
 
 def ai_characteristics(amazon_json)->Tuple[List[dict], List[dict]]:
     """Extrae main/second characteristics con IA (robusto, JSON-only)."""
@@ -1287,13 +1424,22 @@ def detect_category(amazon_json, excluded_categories=None)->Tuple[str,str,float]
             if item_type and isinstance(item_type, list):
                 product_data['browseClassification'] = item_type[0].get("value", "")
 
-        # Llamar a CategoryMatcherV2 con exclusión de categorías bloqueadas
-        matcher = get_category_matcher()
-        result = matcher.find_category(product_data, use_ai=True, excluded_categories=excluded_categories)
+        # 🔹 LEGO OVERRIDE: Forzar CBT1157 si es marca LEGO
+        brand = attributes.get("brand", [{}])[0].get("value", "") if attributes.get("brand") else ""
+        if brand and "LEGO" in brand.upper():
+            qprint(f"🧱 Marca LEGO detectada → Forzando categoría CBT1157 (Building Blocks & Figures)")
+            cat_id = "CBT1157"
+            cat_name = "Building Blocks & Figures"
+            sim = 1.0
+            result = {"category_id": cat_id, "category_name": cat_name, "confidence": sim, "method": "LEGO_OVERRIDE"}
+        else:
+            # Llamar a CategoryMatcherV2 con exclusión de categorías bloqueadas
+            matcher = get_category_matcher()
+            result = matcher.find_category(product_data, use_ai=True, excluded_categories=excluded_categories)
 
-        cat_id = result.get("category_id", "CBT1157")
-        cat_name = result.get("category_name", "Default")
-        sim = float(result.get("confidence", 0.0))
+            cat_id = result.get("category_id", "CBT1157")
+            cat_name = result.get("category_name", "Default")
+            sim = float(result.get("confidence", 0.0))
 
         qprint(f"🤖 CategoryMatcherV2 → {cat_name} (confidence: {sim:.2f})")
         qprint(f"   Método: {result.get('method', 'unknown')}")
@@ -1494,15 +1640,12 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
         "weight_kg": round(weight_kg, 3)
     }
 
-    # precio + tax (mini)
+    # precio + tax + 3PL (mini)
     base_price = get_amazon_base_price(amazon_json)
     tax = get_amazon_tax(amazon_json)
     price = compute_price(base_price, tax)
 
-    if tax > 0:
-        qprint(f"💰 Precio: ${base_price} + tax ${tax} = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
-    else:
-        qprint(f"💰 Precio: ${base_price} (sin tax) → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
+    qprint(f"💰 Precio: ${base_price} + tax ${price['tax_usd']} + 3PL ${price['fulfillment_fee_usd']} = costo ${price['cost_usd']} → net proceeds ${price['net_proceeds_usd']} (markup {price['markup_pct']}%)")
 
     # ================== IMÁGENES (Amazon → mini_ml imágenes con metadata) ==================
     # Usamos extract_images (una por variante, ordenada, hi-res)
@@ -1534,13 +1677,20 @@ def build_mini_ml(amazon_json: dict, excluded_categories=None) -> dict:
                 })
         images = enriched
 
-    # ================== FILTRADO DE LOGOS (solo para accesorios) ==================
+    # ================== FILTRADO DE LOGOS (DESACTIVADO) ==================
+    # NOTA: Desactivado porque:
+    # 1. Amazon ya filtra imágenes malas (QC estricto)
+    # 2. MercadoLibre permite logos contextuales (dispositivo compatible visible)
+    # 3. Solo elimina fotos válidas y cuesta dinero (GPT-4 Vision)
+    # 4. Los logos en imágenes de Amazon son naturales, no watermarks
+
     # Detectar si es accesorio basado en título
     title_lower = title_es.lower() if title_es else ""
     accessory_keywords = ["para ", "compatible", "case", "funda", "cover", "cable", "charger", "dock", "adapter", "stand", "mount", "holder", "protector"]
     is_accessory = any(kw in title_lower for kw in accessory_keywords)
 
-    if is_accessory and LOGO_FILTER_AVAILABLE and images:
+    # Logo filter desactivado - mantener todas las imágenes
+    if False and is_accessory and LOGO_FILTER_AVAILABLE and images:
         try:
             global LOGO_FILTER_INSTANCE
             if LOGO_FILTER_INSTANCE is None:

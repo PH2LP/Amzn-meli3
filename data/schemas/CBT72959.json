@@ -216,6 +216,17 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "HARD_DRIVE_AND_SSD_LOCATION": {
+    "value_type": "list",
+    "values": {
+      "internal": "96008",
+      "external": "96007"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "APPLICATIONS": {
     "value_type": "string",
     "values": {
@@ -240,17 +251,19 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "HARD_DRIVE_AND_SSD_LOCATION": {
-    "value_type": "list",
+  "HARD_DRIVE_AND_SSD_FORM_FACTOR": {
+    "value_type": "string",
     "values": {
-      "internal": "96008",
-      "external": "96007"
+      "1.8 \"": "187498",
+      "msata": "417940",
+      "3.5 \"": "9049275",
+      "aic": "2572693",
+      "m.2 2280": "405403",
+      "2.5 \"": "9049266",
+      "m.2 2260": "6565560"
     },
     "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "required": true
-    },
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -264,25 +277,6 @@
     "allowed_units": [],
     "tags": {
       "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "HARD_DRIVE_AND_SSD_FORM_FACTOR": {
-    "value_type": "string",
-    "values": {
-      "1.8 \"": "187498",
-      "msata": "417940",
-      "3.5 \"": "9049275",
-      "aic": "2572693",
-      "m.2 2280": "405403",
-      "2.5 \"": "9049266",
-      "m.2 2260": "6565560"
-    },
-    "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "required": true
     },
     "hierarchy": "FAMILY",
     "relevance": 1

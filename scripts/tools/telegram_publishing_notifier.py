@@ -50,6 +50,9 @@ def send_message(message, parse_mode="HTML", disable_notification=False):
         return True
     except Exception as e:
         print(f"❌ Error enviando a bot de publicaciones: {e}")
+        if hasattr(e, 'response') and e.response is not None:
+            print(f"   Respuesta de Telegram: {e.response.text[:200]}")
+            print(f"   Status code: {e.response.status_code}")
         return False
 
 

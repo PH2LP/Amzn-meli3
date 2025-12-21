@@ -32,6 +32,7 @@
     },
     "allowed_units": [],
     "tags": {
+      "catalog_required": true,
       "required": true
     },
     "hierarchy": "FAMILY",
@@ -114,7 +115,9 @@
     "values": {},
     "allowed_units": [],
     "tags": {
+      "hidden": true,
       "multivalued": true,
+      "read_only": true,
       "variation_attribute": true,
       "used_hidden": true,
       "validate": true
@@ -301,7 +304,10 @@
   },
   "IS_UNIVERSAL_FIT": {
     "value_type": "boolean",
-    "values": {},
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
     "allowed_units": [],
     "tags": {
       "hidden": true

@@ -911,7 +911,7 @@ Las siguientes categorías fueron BLOQUEADAS en algunos países:
 
 📌 TÍTULO: {product.get('title', 'N/A')}
 🏷️ MARCA: {product.get('brand', 'N/A')}
-📝 DESCRIPCIÓN: {product.get('description', 'N/A')[:250]}{sp_hints}
+📝 DESCRIPCIÓN: {(product.get('description') or 'N/A')[:250]}{sp_hints}
 
 ╔══════════════════════════════════════════════════════════════╗
 ║           CANDIDATOS (Top {len(candidates)} por similitud)              ║

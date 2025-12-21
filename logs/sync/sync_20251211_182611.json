@@ -1,0 +1,2002 @@
+{
+  "timestamp": "2025-12-11T18:26:11.761475",
+  "statistics": {
+    "total": 142,
+    "paused": 0,
+    "price_updated": 1,
+    "no_change": 141,
+    "errors": 0
+  },
+  "changes": [
+    {
+      "item_id": "CBT3177659820",
+      "asin": "B07T67CLB7",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 18.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177531344",
+      "asin": "B0DZT6TPGQ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177633922",
+      "asin": "B00VU2NHVG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 28.22,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177531186",
+      "asin": "B07YFT27K9",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 24.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177046486",
+      "asin": "B08YMBQJ49",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 198.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177046404",
+      "asin": "B008BMASJM",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177046328",
+      "asin": "B07NQVWRR3",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 99.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176930838",
+      "asin": "B0F7X5JHR9",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 319.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177556656",
+      "asin": "B0FCM26BDZ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 449.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177530766",
+      "asin": "B0F1MJSL7N",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 99.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177620590",
+      "asin": "B009YIDUM4",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 59.4,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177530672",
+      "asin": "B0CJRGSWKX",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 99.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177095970",
+      "asin": "B09ZNY8VNQ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 46.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807180647",
+      "asin": "B09ZXR98LJ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 238.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176930464",
+      "asin": "B0BWLVJFGN",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177403720",
+      "asin": "B07MNZ7C1M",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 9.23,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176930314",
+      "asin": "B0CB5JCNM1",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 69.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177403572",
+      "asin": "B0F2YG21R3",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 279.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177581522",
+      "asin": "B01D47DUD4",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 27.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177568538",
+      "asin": "B0FPD23Q82",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 179.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177542952",
+      "asin": "B0F9YKTYNP",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 63.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177542868",
+      "asin": "B073J3GWCC",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177300312",
+      "asin": "B0DLGBGH3R",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 81.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177555718",
+      "asin": "B07DWS7TRY",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 23.69,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177503980",
+      "asin": "B0DTYNB8YZ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 26.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177364652",
+      "asin": "B0723D3FVL",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177222986",
+      "asin": "B0D79SLYRG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 69.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177044966",
+      "asin": "B0FLDM5BSX",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 74.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177402836",
+      "asin": "B0DXKY469R",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 52.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177428696",
+      "asin": "B07GQT8879",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 54.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177094818",
+      "asin": "B0CKVD62NX",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 157.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177299760",
+      "asin": "B08C8Y5XDC",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 74.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177428490",
+      "asin": "B07Y1C6GDS",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 49.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177235478",
+      "asin": "B08HM3X3D3",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 59.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177222488",
+      "asin": "B08GKBDSTN",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177299502",
+      "asin": "B081C946ZJ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177402316",
+      "asin": "B0C2L54Q9H",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 79.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177044344",
+      "asin": "B08R36G3WB",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 15.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177415070",
+      "asin": "B08R36B7LG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 15.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177094074",
+      "asin": "B0F3NZ12GL",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 125.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807178721",
+      "asin": "B0F32RPRR5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807178657",
+      "asin": "B07PJ7XZ7X",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 21.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177427684",
+      "asin": "B08R72LPNQ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 18.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177221810",
+      "asin": "B0CG19QXWD",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 518.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177234670",
+      "asin": "B0DS2DF5S5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 279.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177427534",
+      "asin": "B0BHQLWR84",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 25.06,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177401612",
+      "asin": "B01HGM33HG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 50.33,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177363270",
+      "asin": "B0CNTRVZPW",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 49.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177401484",
+      "asin": "B07FR2HF77",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 51.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177298592",
+      "asin": "B08SJZQWQT",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 63.88,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177451646",
+      "asin": "B0DRVZ6S5R",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 32.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177093330",
+      "asin": "B0FQBYF7MZ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 79.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177298356",
+      "asin": "B0F91PZJG5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177439590",
+      "asin": "B0F87Z5V45",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 46.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177362600",
+      "asin": "B0BX3XV11W",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 40.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807186669",
+      "asin": "B0BRT9C5S2",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177439362",
+      "asin": "B0CTTYRJJY",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807186517",
+      "asin": "B0FKJ6BZ7R",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 189.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177042592",
+      "asin": "B0CRHDGQRP",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 159.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177220512",
+      "asin": "B0DRY8DMCK",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 45.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176926994",
+      "asin": "B0BFJZNJ6R",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177426034",
+      "asin": "B0CTWHSSM8",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807185825",
+      "asin": "B0C4FSQHVK",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 9.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177425726",
+      "asin": "B07KRTYX5G",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 56.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177296918",
+      "asin": "B08R8FSFRB",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 31.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176926396",
+      "asin": "B0CXDMYHZ1",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.89,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177348338",
+      "asin": "B0CXD1D1KN",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 47.49,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177130080",
+      "asin": "B0D54JZTHY",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 74.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177309404",
+      "asin": "B0BZWRSRWV",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 49.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176925982",
+      "asin": "B0BZWRLRLK",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 49.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177219138",
+      "asin": "B093PNQ82J",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 26.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177296188",
+      "asin": "B0CCNZDNSN",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 11.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176670886",
+      "asin": "B0DYV5YQ1Y",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 139.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177283128",
+      "asin": "B0DD78Y3L5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 299.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177308934",
+      "asin": "B0BRLYT8M1",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 103.96,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177308786",
+      "asin": "B0CQ2HZ8MS",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177282900",
+      "asin": "B0FF9G5HWP",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 74.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807175291",
+      "asin": "B0C6YBHKJ5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 104.49,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176670334",
+      "asin": "B0997VXC6D",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 25.97,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177269724",
+      "asin": "B08JGP1WYM",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 24.94,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176989364",
+      "asin": "B08JGN8D9Q",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 26.93,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177231262",
+      "asin": "B08LQ3867X",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 24.93,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177231172",
+      "asin": "B098QKHRGK",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177231082",
+      "asin": "B08TBG3SPW",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 49.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176899056",
+      "asin": "B0CBPNWCVS",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 51.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176924786",
+      "asin": "B0CMTC3NB6",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 27.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177230860",
+      "asin": "B089KV4YYX",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 32.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177230748",
+      "asin": "B0D2X7DCG5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176924428",
+      "asin": "B08G1BBBQW",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 159.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176898508",
+      "asin": "B0DD3VZ8JZ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 21.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807174009",
+      "asin": "B0F83XMKHC",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 89.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807173901",
+      "asin": "B0BNDM2RNG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 113.97,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176898182",
+      "asin": "B08131HFSG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 115.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177191556",
+      "asin": "B0998FWTHP",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 159.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176668734",
+      "asin": "B07VVK39F7",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 84.97,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176668622",
+      "asin": "B087M2ZWXR",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177038786",
+      "asin": "B01728NLRG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 169.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177127388",
+      "asin": "B084ZKLQR8",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 34.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177075936",
+      "asin": "B0D9GRD6H7",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 35.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807173189",
+      "asin": "B088F7SY6S",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 142.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176668108",
+      "asin": "B0CXSL7BDP",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.24,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176923174",
+      "asin": "B0CW9249DK",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 174.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177152624",
+      "asin": "B0CS6BWL4Q",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176923076",
+      "asin": "B0DHPLVN41",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 35.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807125123",
+      "asin": "B0BTD871Y3",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 31.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176987226",
+      "asin": "B0BVBPH5FG",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807172797",
+      "asin": "B0DM8QJRN6",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 38.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176667738",
+      "asin": "B0DSVVJXK5",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 339.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177025142",
+      "asin": "B0D1QKZWRS",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 39.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807160711",
+      "asin": "B09SBTHYGN",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 18.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176961168",
+      "asin": "B07NQD7RP9",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 26.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176986784",
+      "asin": "B08HRPDBFF",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 99.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177074920",
+      "asin": "B08HRPDYTP",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 99.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177037534",
+      "asin": "B08J4C8871",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 79.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176667040",
+      "asin": "B0B1YMNGS2",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 35.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176896344",
+      "asin": "B0F9NNK4XB",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 24.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177011612",
+      "asin": "B0DM1YHPRX",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 19.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807124161",
+      "asin": "B0F1N3HZPS",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 27.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177037130",
+      "asin": "B0FM2TWFGJ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 25.59,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3177011412",
+      "asin": "B0BNPMJDB6",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 17.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176666666",
+      "asin": "B0D9ZJVQCD",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 129.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807149741",
+      "asin": "B095K84L6H",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 50.95,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176527518",
+      "asin": "B0BYDS9KHV",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 52.23,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176527458",
+      "asin": "B0CK1MXC7J",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176972908",
+      "asin": "B0F67KWWQH",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 279.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176527350",
+      "asin": "B0DSPJPRXD",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 28.49,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176972746",
+      "asin": "B0CZ6XY78Y",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 159.0,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176450374",
+      "asin": "B0CYQ5P6T7",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 69.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176895450",
+      "asin": "B088TSR6YJ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 21.98,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807123333",
+      "asin": "B0CY2C7H6S",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 59.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176959520",
+      "asin": "B089DR29T6",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 24.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807135969",
+      "asin": "B088WW5HK2",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 9.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176920752",
+      "asin": "B07X93FQBC",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 101.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807148677",
+      "asin": "B0CGTVYBVQ",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 35.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176971884",
+      "asin": "B0DGXQV7WR",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 29.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176449190",
+      "asin": "B0FSWLNL21",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 13.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176449058",
+      "asin": "B0DJ8C7Q9D",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 27.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807122021",
+      "asin": "B0FC69S878",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 18.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT2807134967",
+      "asin": "B07ZKB4SLK",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 69.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176919096",
+      "asin": "B0DB1XN58W",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 269.99,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176750350",
+      "asin": "B0DRW8ZNLB",
+      "action": "no_change",
+      "success": true,
+      "message": "Sin cambios significativos",
+      "amazon_status": {
+        "available": true,
+        "price": 34.49,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      }
+    },
+    {
+      "item_id": "CBT3176736692",
+      "asin": "B088XT3HV3",
+      "action": "price_updated",
+      "success": true,
+      "message": "Precio actualizado: $150.98 → $162.09 USD",
+      "amazon_status": {
+        "available": true,
+        "price": 97.25,
+        "buyable": true,
+        "status": "active",
+        "error": null
+      },
+      "old_price": 150.98,
+      "new_price": 162.09
+    }
+  ]
+}

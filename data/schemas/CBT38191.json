@@ -29,10 +29,7 @@
       "tent": "2573443"
     },
     "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "required": true
-    },
+    "tags": {},
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },

@@ -1,0 +1,1099 @@
+{
+  "BRAND": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "AGE_GROUP": {
+    "value_type": "list",
+    "values": {
+      "adults": "6725189",
+      "kids": "1065183",
+      "babies": "371795"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true,
+      "required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "FABRIC_DESIGN": {
+    "value_type": "string",
+    "values": {
+      "flowered": "508603",
+      "stripes": "508607",
+      "print": "26184735",
+      "animal print": "1229500",
+      "logo": "25132211",
+      "plaid": "44991939",
+      "polka dot": "44991943"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "SIZE": {
+    "value_type": "string",
+    "values": {
+      "2-5": "6010531",
+      "5-8": "6009513",
+      "8-11": "6018643",
+      "11-14.5": "6773880",
+      "34-38": "5058265",
+      "34-43": "6860002",
+      "36-41": "5269056",
+      "37-70": "4557905",
+      "38-43": "6847317",
+      "39-42": "4499895",
+      "40-43": "6766890",
+      "40-44": "6661452",
+      "41-44": "4557906",
+      "42-47": "5269057",
+      "43-46": "4499897",
+      "44-47": "6766891",
+      "44-48": "6661453",
+      "only": "6367305"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "SIZE_GRID_ROW_ID": {
+    "value_type": "grid_row_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "MAIN_COLOR": {
+    "value_type": "list",
+    "values": {
+      "black": "2450295",
+      "blue": "2450293",
+      "red": "2450307",
+      "violet": "2450311",
+      "brown": "2450291",
+      "green": "2450314",
+      "orange": "2450327",
+      "sky blue": "2450278",
+      "pink": "2450312",
+      "golden": "2450289",
+      "silver": "2450303",
+      "yellow": "2450296",
+      "gray": "2450294",
+      "multicolored": "46671867",
+      "white": "2450308",
+      "beige": "2450281"
+    },
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "GENDER": {
+    "value_type": "list",
+    "values": {
+      "woman": "339665",
+      "man": "339666",
+      "girls": "339668",
+      "babies": "371795",
+      "gender neutral": "110461",
+      "boys": "339667",
+      "gender neutral kid": "19159491"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true,
+      "grid_template_required": true,
+      "grid_filter": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SOCKS_TYPE": {
+    "value_type": "list",
+    "values": {
+      "thermicals": "1211121",
+      "mesh": "1211119",
+      "school socks": "44992009",
+      "dress": "6528142",
+      "crew socks": "44992001",
+      "socket": "1211120",
+      "invisibles": "1211123",
+      "thigh high": "3634262",
+      "dress socks": "44992013",
+      "sportives": "1211124"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LENGTH_TYPE": {
+    "value_type": "list",
+    "values": {
+      "long": "433368",
+      "short": "2150770",
+      "3/4": "2150772"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "TOE_TYPE": {
+    "value_type": "string",
+    "values": {
+      "reinforced": "44992024",
+      "seamless": "44992027"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MAIN_MATERIAL": {
+    "value_type": "string",
+    "values": {
+      "microfiber": "3629910",
+      "fleece": "44992040",
+      "wool": "3630111",
+      "linen": "462318",
+      "bamboo": "4327467",
+      "thread": "2190155",
+      "acrylic": "1258137",
+      "super line": "2516300",
+      "cashmere": "31802441",
+      "polyester": "466794",
+      "cotton": "466793",
+      "elastodiene": "7846051",
+      "lycra": "4402106",
+      "nylon": "7980354",
+      "fishnet": "44992051"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "COMPOSITION": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CHARACTER": {
+    "value_type": "string",
+    "values": {
+      "the simpsons": "930399",
+      "the avengers": "963355",
+      "ed, edd and eddy": "7485164",
+      "finn and jake": "7485161",
+      "harry potter": "415873",
+      "no face": "7485160",
+      "obi wan": "7509249",
+      "saitama": "5215909"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_RECYCLED_MATERIALS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "PAIRS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SIZE_GRID_ID": {
+    "value_type": "grid_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VERTICAL_TAGS": {
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WITH_VIRTUAL_TRY_ON": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SOCKS_SIZE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 2
+  },
+  "RELEASE_SEASON": {
+    "value_type": "list",
+    "values": {
+      "spring/summer": "994283",
+      "autumn/winter": "994284"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "RELEASE_YEAR": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "FILTRABLE_SIZE": {
+    "value_type": "list",
+    "values": {
+      "premature": "12917809",
+      "0-3 months": "13735569",
+      "0-4 meses": "18314416",
+      "3-6 months": "12917811",
+      "6-9 months": "12917812",
+      "9-12 months": "12917813",
+      "12-18 months": "12917815",
+      "18-24 months": "12917817",
+      "24-36 months": "13735570",
+      "5 us": "20317481",
+      "6 us": "20317135",
+      "6.5 us": "20317482",
+      "7.5 us": "20317483",
+      "8 us": "20317136",
+      "8.5 us": "20317484",
+      "9 us": "20317485",
+      "10.5 us": "20317486",
+      "11.5 us": "20317487",
+      "12 us": "20317138",
+      "13 us": "20317488",
+      "35 eu": "20317489",
+      "36 eu": "20317163",
+      "37 eu": "20317490",
+      "38 eu": "20317164",
+      "39 eu": "20317491",
+      "40 eu": "20317165",
+      "41 eu": "20317492",
+      "42 eu": "20317166",
+      "43 eu": "20317493",
+      "44 eu": "20317167",
+      "45 eu": "20317494",
+      "46 eu": "20317168",
+      "47 eu": "20317495",
+      "1 year": "12189459",
+      "2 years": "12189461",
+      "3 years": "12189463",
+      "4 years": "12189465",
+      "5 years": "12189467",
+      "6 years": "12189469",
+      "7 years": "12189471",
+      "8 years": "12189473",
+      "9 years": "12189475",
+      "10 years": "12189477",
+      "11 years": "12189479",
+      "12 years": "12189481",
+      "13 years": "12189483",
+      "14 years": "12189485",
+      "15 years": "12189487",
+      "16 years": "12189489"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FILTRABLE_GENDER": {
+    "value_type": "list",
+    "values": {
+      "man": "18549360",
+      "woman": "18549361",
+      "girls": "18549362",
+      "boys": "18549363",
+      "babies": "18549364"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_EMERGING_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_HIGHLIGHT_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "VALUE_ADDED_TAX": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_TYPE": {
+    "value_type": "list",
+    "values": {
+      "no additional packaging": "47115155",
+      "with additional packaging": "47115156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
+    "values": {
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_KIT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "flammable": "7651070",
+      "aerosol": "7651071",
+      "oxidizer": "7651072",
+      "corrosive": "7651073",
+      "explosive": "7651074",
+      "toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "value_type": "list",
+    "values": {
+      "for humans": "7575926",
+      "for animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "value_type": "list",
+    "values": {
+      "for humans with a medical prescription": "7575930",
+      "for humans without a medical prescription": "7575931",
+      "for animals with a medical prescription": "7575932",
+      "for animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "stand-alone lithium (loose or isolated)": "7575934",
+      "lithium installed": "7575935",
+      "for cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "value_type": "list",
+    "values": {
+      "bag": "7435891",
+      "box": "7435892",
+      "envelope": "7575937",
+      "self-shipping": "7575939",
+      "exb": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "value_type": "list",
+    "values": {
+      "has imei": "7435893",
+      "has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "value_type": "list",
+    "values": {
+      "android": "9936777",
+      "ios": "9936778",
+      "desktop": "9936779",
+      "mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "value_type": "string",
+    "values": {
+      "pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "contains liquid": "7435885",
+      "fragile": "7435883",
+      "with expiration": "7435888",
+      "without expiration": "8847339",
+      "health device": "7575925",
+      "disinfectant and sanitizer": "7575917",
+      "mapa": "7575924",
+      "health and correlates": "7575923",
+      "voluminous": "8721108",
+      "unflyable": "10490116",
+      "no rotatable": "12928414",
+      "folding": "41722098",
+      "magnetic": "52092586",
+      "can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

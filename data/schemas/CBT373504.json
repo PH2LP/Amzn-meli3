@@ -182,9 +182,7 @@
       "fluorescent": "344363"
     },
     "allowed_units": [],
-    "tags": {
-      "required": true
-    },
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },

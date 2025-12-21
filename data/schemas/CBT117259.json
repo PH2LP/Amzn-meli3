@@ -109,30 +109,12 @@
     "values": {
       "220v": "198813",
       "110v": "39205162",
-      "110/220v": "39205163",
-      "380v": "106543",
-      "480v": "24517453",
-      "560v": "45522378",
-      "600v": "22524318",
-      "1.2v": "14223009",
-      "1.5v": "8206319",
-      "3v": "3625879",
-      "4.5v": "2638487",
-      "6v": "2499688",
-      "9v": "8149915",
-      "12v": "909022",
-      "24v": "3323363",
-      "48v": "14754561",
-      "72v": "13244394",
-      "18v": "2090739",
-      "3.7v": "2859336",
-      "440v": "376790",
-      "36v": "3314711",
-      "60v": "1263450",
-      "5v": "2453518"
+      "110/220v": "39205163"
     },
     "allowed_units": [],
-    "tags": {},
+    "tags": {
+      "conditional_required": true
+    },
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
@@ -469,6 +451,20 @@
     "allowed_units": [],
     "tags": {},
     "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "POWER_SUPPLY_TYPES": {
+    "value_type": "string",
+    "values": {
+      "domestic current": "49713698",
+      "manual operation": "49605648",
+      "domestic current/manual operation": "53832744"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "RSPEBT_PRODUCT_REGISTRATION_NUMBER": {

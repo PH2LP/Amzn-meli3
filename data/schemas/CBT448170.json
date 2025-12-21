@@ -425,6 +425,25 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "CELL_BATTERY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "aaa": "6178423",
+      "aa": "6178424"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "BATTERY_VOLTAGE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "POWER_SUPPLY_TYPES": {
     "value_type": "string",
     "values": {

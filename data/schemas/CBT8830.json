@@ -92,6 +92,29 @@
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
+  "SALE_FORMAT": {
+    "value_type": "list",
+    "values": {
+      "unit": "1359391",
+      "pack": "1359392"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "NET_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "kg",
+      "mg",
+      "g"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
   "PACKAGING_TYPE": {
     "value_type": "string",
     "values": {
@@ -132,44 +155,11 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "NET_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "kg",
-      "mg",
-      "g"
-    ],
-    "tags": {},
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "SALE_FORMAT": {
-    "value_type": "list",
-    "values": {
-      "unit": "1359391",
-      "pack": "1359392"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
   "UNITS_PER_PACKAGE": {
     "value_type": "number",
     "values": {},
     "allowed_units": [],
     "tags": {},
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "UNITS_PER_PACK": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "conditional_required": true
-    },
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
@@ -206,6 +196,16 @@
       "g"
     ],
     "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "UNITS_PER_PACK": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "conditional_required": true
+    },
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },

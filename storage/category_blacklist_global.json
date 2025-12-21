@@ -1,0 +1,770 @@
+{
+  "blacklist": [
+    "CBT440904",
+    "CBT407889",
+    "CBT411155",
+    "CBT12199",
+    "CBT1362",
+    "CBT412529",
+    "CBT4707",
+    "CBT4702",
+    "CBT47810",
+    "CBT457908",
+    "CBT392352",
+    "CBT411154",
+    "CBT440905",
+    "CBT47814",
+    "CBT433414",
+    "CBT412087",
+    "CBT412090",
+    "CBT457932",
+    "CBT416818",
+    "CBT411156",
+    "CBT411157",
+    "CBT190857",
+    "CBT432058",
+    "CBT413731",
+    "CBT414117",
+    "CBT417503",
+    "CBT432403",
+    "CBT413964",
+    "CBT432623",
+    "CBT47779",
+    "CBT416959",
+    "CBT412088",
+    "CBT47778",
+    "CBT416960",
+    "CBT417664",
+    "CBT79237",
+    "CBT79236",
+    "CBT79223",
+    "CBT79224",
+    "CBT432113",
+    "CBT439586",
+    "CBT95489",
+    "CBT455530",
+    "CBT414388",
+    "CBT414320",
+    "CBT414243",
+    "CBT434342",
+    "CBT415198",
+    "CBT414322",
+    "CBT414228",
+    "CBT414235",
+    "CBT414238",
+    "CBT414244",
+    "CBT414236",
+    "CBT455531",
+    "CBT414237",
+    "CBT414611",
+    "CBT458006",
+    "CBT457959",
+    "CBT416563",
+    "CBT414229",
+    "CBT414232",
+    "CBT414234",
+    "CBT414240",
+    "CBT414385",
+    "CBT414241",
+    "CBT414321",
+    "CBT457803",
+    "CBT457804",
+    "CBT457807",
+    "CBT457808",
+    "CBT457805",
+    "CBT457806",
+    "CBT457809",
+    "CBT413600",
+    "CBT377252"
+  ],
+  "details": {
+    "CBT440904": {
+      "name": "Gun Shooting Sport",
+      "reason": "Gun Shooting Sport - ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT407889": {
+      "name": "Stun Guns",
+      "reason": "Stun Guns - ARMAS ELÉCTRICAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT411155": {
+      "name": "Laser sights",
+      "reason": "Laser sights - MIRAS LÁSER PARA ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT12199": {
+      "name": "Hunting Gear",
+      "reason": "Hunting Gear - EQUIPAMIENTO DE CAZA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT1362": {
+      "name": "Camping, Hunting & Fishing",
+      "reason": "Categoría padre de caza",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT412529": {
+      "name": "Monoculars",
+      "reason": "Monoculars - MONOCULARES (ÓPTICA CAZA)",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT4707": {
+      "name": "Binoculars",
+      "reason": "Binoculars - BINOCULARES (PUEDE SER CAZA)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT4702": {
+      "name": "Telescopes",
+      "reason": "Telescopes - TELESCOPIOS (PUEDE SER CAZA)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "manual_critical"
+    },
+    "CBT47810": {
+      "name": "Compressed Air Guns",
+      "reason": "Compressed Air Guns - ARMAS DE AIRE COMPRIMIDO",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT457908": {
+      "name": "Gel Blasters",
+      "reason": "Gel Blasters - ARMAS DE GEL",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT392352": {
+      "name": "Gun Cleaning Kit",
+      "reason": "Gun Cleaning Kit - KIT DE LIMPIEZA DE ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT411154": {
+      "name": "Gun Accessories",
+      "reason": "Gun Accessories - ACCESORIOS DE ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons"
+    },
+    "CBT440905": {
+      "name": "Others",
+      "reason": "Others (Gun Shooting Sport) - OTROS ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT47814": {
+      "name": "Pellets",
+      "reason": "Pellets - MUNICIONES",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT433414": {
+      "name": "Compressed Air Gun Springs",
+      "reason": "Compressed Air Gun Springs - REPUESTOS DE ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT412087": {
+      "name": "Clips",
+      "reason": "Clips (Gun Accessories) - CARGADORES",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT412090": {
+      "name": "Covers",
+      "reason": "Covers (Gun Accessories) - FUNDAS DE ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT457932": {
+      "name": "Gel Balls",
+      "reason": "Gel Balls - MUNICIONES DE GEL",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT416818": {
+      "name": "Grips",
+      "reason": "Grips (Gun Accessories) - EMPUÑADURAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT411156": {
+      "name": "Mounts",
+      "reason": "Mounts (Gun Accessories) - MONTAJES PARA ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT411157": {
+      "name": "Other Accessories",
+      "reason": "Other Accessories (Gun) - OTROS ACCESORIOS ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT190857": {
+      "name": "Stocks",
+      "reason": "Stocks (Gun Accessories) - CULATAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT432058": {
+      "name": "Gun Slings",
+      "reason": "Gun Slings - CORREAS PARA ARMAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_weapons_path"
+    },
+    "CBT413731": {
+      "name": "Brass Knuckles",
+      "reason": "Brass Knuckles - MANOPLAS (PROHIBIDO)",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT414117": {
+      "name": "Machetes",
+      "reason": "Machetes - MACHETES (RESTRINGIDO)",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT417503": {
+      "name": "Fishing Grippers",
+      "reason": "Hunting in path: Sports and Fitness > Camping, Hunting & Fishing > Fishing Equipment > Fishing Grippers",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT432403": {
+      "name": "Harpoons",
+      "reason": "Harpoons - ARPONES",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT413964": {
+      "name": "Pepper Sprays",
+      "reason": "Pepper Sprays - SPRAY PIMIENTA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT432623": {
+      "name": "Blowguns",
+      "reason": "Blowguns - CERBATANAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT47779": {
+      "name": "Other",
+      "reason": "Other (Hunting Gear) - OTROS CAZA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT416959": {
+      "name": "PCP Pumps",
+      "reason": "PCP Pumps - BOMBAS PCP (ARMAS NEUMÁTICAS)",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT412088": {
+      "name": "Replacement Parts",
+      "reason": "Replacement Parts (Hunting) - REPUESTOS CAZA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT47778": {
+      "name": "Bow & Arrow",
+      "reason": "Bow & Arrow (Hunting) - ARCO Y FLECHA CAZA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT416960": {
+      "name": "Shooting Sticks",
+      "reason": "Shooting Sticks - BASTONES DE TIRO",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT417664": {
+      "name": "Slingshots",
+      "reason": "Slingshots - HONDAS/RESORTERA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT79237": {
+      "name": "Arrows",
+      "reason": "Arrows (Hunting) - FLECHAS CAZA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT79236": {
+      "name": "Bows",
+      "reason": "Bows (Hunting) - ARCOS CAZA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT79223": {
+      "name": "Crossbows",
+      "reason": "Crossbows - BALLESTAS",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT79224": {
+      "name": "Other",
+      "reason": "Other (Bow & Arrow) - OTROS ARCO Y FLECHA",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT432113": {
+      "name": "Quivers",
+      "reason": "Quivers - ALJABAS (PORTAFLECHAS)",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_hunting_path"
+    },
+    "CBT439586": {
+      "name": "Tactical Uniforms",
+      "reason": "Tactical Uniforms",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT95489": {
+      "name": "Tactical Clothes",
+      "reason": "Tactical Clothes",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT455530": {
+      "name": "Tactical Accessories",
+      "reason": "Tactical Accessories",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414388": {
+      "name": "Epaulettes",
+      "reason": "Epaulettes (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414320": {
+      "name": "Flashlight Holders",
+      "reason": "Flashlight Holders (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414243": {
+      "name": "Boots",
+      "reason": "Boots (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT434342": {
+      "name": "Flashlights",
+      "reason": "Flashlights (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT415198": {
+      "name": "Jackets",
+      "reason": "Jackets (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414322": {
+      "name": "Handcuff Cases",
+      "reason": "Handcuff Cases (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414228": {
+      "name": "Other",
+      "reason": "Other (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414235": {
+      "name": "Holsters",
+      "reason": "Holsters (Tactical)",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414238": {
+      "name": "T-Shirts, Tanks & Polos",
+      "reason": "T-Shirts Tactical",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414244": {
+      "name": "Magazine Holders",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Magazine Holders",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414236": {
+      "name": "Tactical Gloves",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Clothes > Tactical Gloves",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT455531": {
+      "name": "Other",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Other",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414237": {
+      "name": "Tactical Hats",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Clothes > Tactical Hats",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414611": {
+      "name": "Patches & Emblems",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Patches & Emblems",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT458006": {
+      "name": "Tactical Knee Pads",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Clothes > Tactical Knee Pads",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457959": {
+      "name": "Tactical Backpacks",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tactical Backpacks",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT416563": {
+      "name": "Tactical Bags & Backpacks",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tactical Bags & Backpacks",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414229": {
+      "name": "Tactical Pants",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Clothes > Tactical Pants",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414232": {
+      "name": "Tactical Belts",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tactical Belts",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414234": {
+      "name": "Tactical Handcuffs",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tactical Handcuffs",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414240": {
+      "name": "Tactical Kits",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tactical Kits",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414385": {
+      "name": "Tactical Straps",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tactical Straps",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414241": {
+      "name": "Tonfa Holder",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Tonfa Holder",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT414321": {
+      "name": "Waist Packs",
+      "reason": "Tactical in path: Clothing and Accessories > Work & School Clothing > Tactical Accessories > Waist Packs",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457803": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > American Football > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457804": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > Basketball > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457807": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > Handball > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457808": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > Rugby > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457805": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > Voleyball > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457806": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > Tennis, Paddle & Squash > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT457809": {
+      "name": "Tactical boards",
+      "reason": "Tactical in path: Sports and Fitness > Hockey > Equipment > Tactical boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT413600": {
+      "name": "Tactical Boards",
+      "reason": "Tactical in path: Sports and Fitness > Soccer > Equipment & Training > Tactical Boards",
+      "severity": "HIGH",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "pattern_tactical_path"
+    },
+    "CBT377252": {
+      "name": "Cat Treats",
+      "reason": "ALIMENTOS PARA MASCOTAS - Requiere permisos sanitarios especiales",
+      "severity": "CRITICAL",
+      "blocked_in": [
+        "ALL"
+      ],
+      "source": "rejected_real_case"
+    }
+  },
+  "total": 76,
+  "version": "4.1",
+  "last_updated": "2025-12-08",
+  "note": "Filtered blacklist - only TRULY prohibited categories (weapons, hunting, tactical)"
+}

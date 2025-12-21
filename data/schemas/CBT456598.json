@@ -150,7 +150,9 @@
     "values": {},
     "allowed_units": [],
     "tags": {
+      "hidden": true,
       "multivalued": true,
+      "read_only": true,
       "variation_attribute": true,
       "used_hidden": true,
       "validate": true

@@ -25,6 +25,7 @@
     },
     "allowed_units": [],
     "tags": {
+      "catalog_required": true,
       "fixed": true,
       "required": true
     },

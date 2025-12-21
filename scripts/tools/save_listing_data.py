@@ -134,7 +134,8 @@ def save_listing(item_id, mini_ml, marketplaces=None, site_items=None):
 
     # Convertir listas/dicts a JSON string
     import json
-    images_urls = json.dumps([img.get("url") for img in mini_ml.get("images", [])])
+    # ✅ Filtrar solo elementos dict válidos antes de acceder con .get()
+    images_urls = json.dumps([img.get("url") for img in mini_ml.get("images", []) if isinstance(img, dict)])
     attributes = json.dumps(mini_ml.get("attributes_mapped", {}))
     main_features = json.dumps(mini_ml.get("main_characteristics", []))
     marketplaces_str = json.dumps(marketplaces)

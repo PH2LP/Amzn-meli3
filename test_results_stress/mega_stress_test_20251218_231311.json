@@ -1,0 +1,1691 @@
+{
+  "timestamp": "2025-12-18T23:13:11.123128",
+  "config": {
+    "max_products": 50,
+    "questions_per_product": 1,
+    "save_results": true,
+    "output_dir": "test_results_stress"
+  },
+  "summary": {
+    "total_questions": 50,
+    "acceptable": 50,
+    "problematic": 0,
+    "acceptance_rate": 100.0
+  },
+  "by_difficulty": {
+    "hard": {
+      "total": 31,
+      "acceptable": 31
+    },
+    "medium": {
+      "total": 18,
+      "acceptable": 18
+    },
+    "easy": {
+      "total": 1,
+      "acceptable": 1
+    }
+  },
+  "by_type": {
+    "use_case_specific": {
+      "total": 30,
+      "acceptable": 30
+    },
+    "compatibility": {
+      "total": 10,
+      "acceptable": 10
+    },
+    "funcionamiento": {
+      "total": 6,
+      "acceptable": 6
+    },
+    "simple": {
+      "total": 1,
+      "acceptable": 1
+    },
+    "comparison": {
+      "total": 1,
+      "acceptable": 1
+    },
+    "rebuscada": {
+      "total": 1,
+      "acceptable": 1
+    },
+    "edge_case": {
+      "total": 1,
+      "acceptable": 1
+    }
+  },
+  "problematic_cases": [],
+  "all_results": [
+    {
+      "question": {
+        "text": "¿Es fácil de usar para una persona mayor que no sabe de tecnología?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar sobre la facilidad de uso basándose en la descripción y características del producto"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Robot Aspirador y Mop MANVN 2300Pa Slim Control App es bastante fácil de usar, incluso para personas mayores que no están familiarizadas con la tecnología. Aunque cuenta con control inteligente a través de una app y comandos de voz, su funcionamiento básico es sencillo: se puede encender y dejar que haga su trabajo automáticamente. Además, tiene características como la carga automática y un diseño ultra delgado que facilita su uso diario sin complicaciones adicionales.",
+        "confidence": 88.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 88.5,
+        "action": "answered"
+      },
+      "product_asin": "B0FJ1WT2Y6",
+      "product_title": "Robot Aspirador y Mop MANVN 2300Pa Slim Control App 2-en-1"
+    },
+    {
+      "question": {
+        "text": "¿El sensor de movimiento detecta bien en días nublados o con mucha niebla?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar sobre el funcionamiento del sensor de movimiento en diferentes condiciones climáticas"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La luz solar exterior HM-4 de HMCITY está equipada con sensores de movimiento mejorados, diseñados para funcionar de manera eficiente en diversas condiciones climáticas. Aunque los sensores de movimiento suelen ser menos precisos en condiciones de niebla densa, el diseño de esta luz solar está optimizado para detectar movimiento incluso en días nublados. Esto se debe a su tecnología avanzada y su capacidad para operar con energía solar, lo que le permite seguir funcionando adecuadamente en condiciones de baja visibilidad. Sin embargo, como con cualquier dispositivo de este tipo, el rendimiento puede variar ligeramente dependiendo de la densidad de la niebla o la nubosidad.",
+        "confidence": 88.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 88.5,
+        "action": "answered"
+      },
+      "product_asin": "B083FKXK3N",
+      "product_title": "Luz Solar HM-4 120 LED IP65 Sensor Movimiento Exterior"
+    },
+    {
+      "question": {
+        "text": "Si mi hijo usa el kit para un experimento al aire libre y hace calor, ¿los materiales de los experimentos pueden derretirse o perder propiedades?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre el uso de los materiales del kit en condiciones exteriores de calor, lo cual no está especificado en el JSON."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "health_safety",
+          "keyword_matched": "posible toxicidad o pérdida de propiedades de los materiales del kit debido a altas temperaturas, lo que podría afectar la seguridad del niño durante el experimento."
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Conservador en pregunta difícil",
+        "confidence": 0.0,
+        "action": "no_answer"
+      },
+      "product_asin": "B08VDDKVL5",
+      "product_title": "Kit de Ciencia NGMEGAGRS 45 Experimentos Divertidos Niños"
+    },
+    {
+      "question": {
+        "text": "¿Este soporte es compatible con un monitor de 27 pulgadas de la marca Dell?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Debe razonar sobre la compatibilidad del soporte con monitores dentro del rango 13-27 pulgadas, sin importar la marca específica del monitor."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, el soporte \"Soporte LG Ajustable para Monitor y Laptop 13-27\\\"\" de la marca UPGRAVITY es compatible con monitores de hasta 27 pulgadas, por lo que debería ser adecuado para un monitor Dell de ese tamaño. Además, ofrece ajuste de altura, inclinación y rotación, lo que puede mejorar la ergonomía de su espacio de trabajo.",
+        "confidence": 98.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 98%)",
+        "confidence": 98.0,
+        "action": "answered"
+      },
+      "product_asin": "B09Y1GDYTF",
+      "product_title": "Soporte LG PARA Monitor y Laptop Ajustable 13-27\" Negro"
+    },
+    {
+      "question": {
+        "text": "¿La guía de notas de silicona es fácil de colocar sobre un piano de 88 teclas o hay que ajustar algo en particular?",
+        "difficulty": "medium",
+        "type": "use_case_specific",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Debe razonar sobre la compatibilidad con un piano de 88 teclas dada la categoría del producto."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Guía de Notas BEATBIT para Piano es muy fácil de colocar sobre un piano de 88 teclas. No requiere ajustes especiales, ya que está diseñada para adaptarse tanto a pianos de 88 teclas como de 61 teclas. Su material de silicona permite una instalación rápida y sencilla, además de ser removible y reutilizable, lo que facilita su uso sin necesidad de adhesivos.",
+        "confidence": 95.4,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 95%)",
+        "confidence": 95.4,
+        "action": "answered"
+      },
+      "product_asin": "B0BC8QGB81",
+      "product_title": "Guía de Notas BEATBIT PARA Piano 88 Teclas Silicona Negra"
+    },
+    {
+      "question": {
+        "text": "¿Es compatible con MacBook Pro M1?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Razonar si un hub USB-C debería funcionar con dispositivos que tienen puertos USB-C."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, el Hub USB-C Anker A83A2 10-en-1 es compatible con MacBook, incluyendo modelos con el chip M1. Ofrece amplia compatibilidad con dispositivos MacBook y Windows, lo que lo hace ideal para maximizar la conectividad de tu MacBook Pro M1 con sus múltiples puertos y características avanzadas como doble pantalla 4K y carga passthrough de hasta 85W.",
+        "confidence": 95.05000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 95%)",
+        "confidence": 95.05000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B0BNZW5HJY",
+      "product_title": "Hub USB-C Anker A83A2 10-en-1 Dual 4K HDMI 100W"
+    },
+    {
+      "question": {
+        "text": "¿Este dron es fácil de usar para alguien que nunca ha manejado uno antes, o requiere conocimientos previos?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre la facilidad de uso basada en el hecho de que el producto es un dron, usualmente requieren cierto nivel de habilidad o aprendizaje inicial."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El dron HK99 Plegable 4K de Hocany está diseñado para ser accesible incluso para principiantes. Cuenta con una interfaz amigable y un modo principiante que facilita su uso sin necesidad de experiencia previa. Además, el control gestual permite capturas fáciles, lo que lo hace ideal para quienes nunca han manejado un dron antes.",
+        "confidence": 95.65,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 96%)",
+        "confidence": 95.65,
+        "action": "answered"
+      },
+      "product_asin": "B0FQ4VQGBW",
+      "product_title": "Dron HK99 Plegable 4K Cámara GPS 48 Min Vuelo Estable"
+    },
+    {
+      "question": {
+        "text": "¿La cerradura tiene algún sistema antivandalismo?",
+        "difficulty": "medium",
+        "type": "funcionamiento",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "La pregunta requiere razonar sobre las características de seguridad y protección que puede ofrecer la marca SCHLAGE en sus productos, aunque no está explícitamente indicado en el JSON."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "physical_safety",
+          "keyword_matched": "La cerradura puede ser vulnerable a actos de vandalismo, lo que podría comprometer la seguridad física de las personas y sus propiedades."
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Correctamente conservador (critical_question)",
+        "confidence": 0.0,
+        "action": "no_answer"
+      },
+      "product_asin": "B0097GTAMC",
+      "product_title": "Cerradura SCHLAGE Para Entrada Teclado Brillante 2 Seguridad"
+    },
+    {
+      "question": {
+        "text": "Quiero regalar esta base cargadora, ¿viene en una caja bonita o solo en bolsa?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar sobre presentación del producto"
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 51.5,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "Gracias por tu interés en la Base Cargadora NinxGloy para Meta Quest VC6000. Actualmente, no tengo información específica sobre el tipo de empaque en el que viene este producto, ya sea una caja decorativa o una bolsa. Sin embargo, dado que es un producto diseñado para cargar y organizar dispositivos de realidad virtual, es probable que venga en un empaque adecuado para proteger y presentar el producto de manera profesional. Te recomendaría verificar con el vendedor o el sitio web donde planeas realizar la compra para obtener detalles específicos sobre el empaque.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              50,
+              0.55
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Conservador en pregunta difícil",
+        "confidence": 51.5,
+        "action": "no_answer"
+      },
+      "product_asin": "B0DQL7BBKB",
+      "product_title": "Base Cargadora NinxGloy PARA Meta Quest VC6000 Vertical 15W"
+    },
+    {
+      "question": {
+        "text": "¿El micrófono COMICA CVM-V30 LITE B viene en una caja que sea bonita para regalo o solo en un empaque simple?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Considera cómo podría estar empacado el producto al recibirlo, pero esta información no está explícitamente en los datos proporcionados."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 37.17,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El micrófono COMICA CVM-V30 LITE B viene en un empaque que no está especificado en la información proporcionada, por lo que no puedo confirmar si es adecuado como caja de regalo o si es un empaque simple. Sin embargo, el producto en sí es ligero, compacto y diseñado para un uso profesional, lo que podría ser un excelente regalo para alguien interesado en la grabación de sonido.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              50,
+              0.55
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              66,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Conservador en pregunta difícil",
+        "confidence": 37.17,
+        "action": "no_answer"
+      },
+      "product_asin": "B07DWS7TRY",
+      "product_title": "Micrófono COMICA CVM-V30 LITE B Supercardioide 3.5mm Negro"
+    },
+    {
+      "question": {
+        "text": "Mi abuela tiene 80 años y no sabe de tecnología, ¿estos auriculares son fáciles de usar para alguien de su edad?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar sobre la facilidad de uso y características del producto para personas mayores"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Los auriculares Bluetooth Fodsports FX-S están diseñados para ser fáciles de usar, incluso para personas que no están familiarizadas con la tecnología. Cuentan con control manos libres para llamadas y música, lo que simplifica su uso mientras se conduce. Además, son ligeros y fáciles de montar en cascos, lo que puede ser una ventaja para su abuela. Sin embargo, dado que no se especifica la facilidad de uso en detalle, podría ser útil que alguien le ayude a configurarlos inicialmente.",
+        "confidence": 82.0,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.55
+            ],
+            [
+              "info_completeness",
+              90.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 82%)",
+        "confidence": 82.0,
+        "action": "answered"
+      },
+      "product_asin": "B0F7KVTKLN",
+      "product_title": "Auriculares Bluetooth Fodsports PARA Moto IP67 Negro 2 Pack"
+    },
+    {
+      "question": {
+        "text": "¿El altavoz JBL Clip 5 es sumergible en el agua o solo resistente a salpicaduras?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre el uso en condiciones específicas, como la resistencia al agua."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El altavoz JBL Clip 5 es resistente al agua y al polvo, lo que lo hace ideal para actividades al aire libre. Sin embargo, la información proporcionada no especifica si es sumergible. Para un uso seguro, te recomendaría tratarlo como resistente a salpicaduras y evitar sumergirlo completamente en agua.",
+        "confidence": 85.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": "PASO 1 - ENTENDER EL PRODUCTO:\n- Es un altavoz Bluetooth portátil.\n- Se usa para ofrecer sonido de alta calidad en cualquier lugar.\n- Sus 3 características principales son: sonido JBL Pro con graves p"
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 85%)",
+        "confidence": 85.0,
+        "action": "answered"
+      },
+      "product_asin": "B0CTP56C5R",
+      "product_title": "Altavoz Bluetooth JBL Clip 5 Negro Ultra-Portable"
+    },
+    {
+      "question": {
+        "text": "¿Si lo uso en un día lluvioso, podría dañarse o está pensado para soportar algo de agua?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre el grado de protección IP54 que indica que puede resistir salpicaduras de agua."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "physical_safety",
+          "keyword_matched": "El uso del producto en condiciones de lluvia puede comprometer su integridad estructural o causar lesiones si no está diseñado para resistir el agua."
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Conservador en pregunta difícil",
+        "confidence": 0.0,
+        "action": "no_answer"
+      },
+      "product_asin": "B0B56BB51R",
+      "product_title": "Nivel Láser LL-T2 Verde 100ft Auto Nivelación IP54 Portátil"
+    },
+    {
+      "question": {
+        "text": "¿El amplificador está hecho de aluminio o de otro material?",
+        "difficulty": "easy",
+        "type": "simple",
+        "expected_behavior": "should_answer",
+        "info_needed": "Verificar el material de construcción mencionado en la descripción del producto."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El amplificador de auriculares portátil Neoteck NTK059 está hecho de aluminio, específicamente con una superficie mate de aluminio. Esto le proporciona un diseño elegante y duradero, ideal para mejorar la calidad de audio de tus dispositivos portátiles mientras te ofrece una experiencia auditiva nítida y sin distorsiones.",
+        "confidence": 99.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió bien (conf: 99%)",
+        "confidence": 99.0,
+        "action": "answered"
+      },
+      "product_asin": "B01MS22YWV",
+      "product_title": "Amplificador NTK059 3.5mm Portátil Aluminio Compacto"
+    },
+    {
+      "question": {
+        "text": "¿Este modelo de licuadora Ganiza se puede desmontar para facilitar su limpieza?",
+        "difficulty": "medium",
+        "type": "funcionamiento",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Debe razonar sobre las características de una licuadora portátil para considerar su facilidad de limpieza, lo cual no está explícitamente en el JSON."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 60.059999999999995,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "La licuadora Ganiza GB10 está diseñada para ser fácil de limpiar, lo cual sugiere que sus componentes son desmontables para facilitar este proceso. Sin embargo, no se especifica explícitamente en la información proporcionada si todas las partes son desmontables. Lo que sí se destaca es su función de limpieza automática, lo que simplifica el mantenimiento diario.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.55
+            ],
+            [
+              "info_completeness",
+              90.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              88,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Correctamente conservador (low_confidence)",
+        "confidence": 60.059999999999995,
+        "action": "no_answer"
+      },
+      "product_asin": "B0CCDG91CS",
+      "product_title": "Licuadora Ganiza GB10 900W 15 en 1 Portátil Acero Inoxidable"
+    },
+    {
+      "question": {
+        "text": "¿Este timbre podría funcionar de manera adecuada si lo coloco en una casa con paredes gruesas de concreto?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Tendría que razonar sobre la distancia de funcionamiento (500ft) y considerar las características típicas de transmisión de dispositivos inalámbricos en entornos con obstáculos como paredes de concreto."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Timbre Inalámbrico SanJie está diseñado para ofrecer una cobertura de hasta 500 pies, lo que debería permitir un funcionamiento adecuado en la mayoría de los hogares. Sin embargo, las paredes gruesas de concreto pueden afectar la señal inalámbrica, reduciendo potencialmente su alcance. Si bien no se especifica la resistencia al agua, el diseño elegante y eficiente del producto junto con su instalación sencilla son características destacadas. Recomendaría probar su funcionamiento en diferentes ubicaciones dentro de su hogar para asegurar un rendimiento óptimo.",
+        "confidence": 76.5,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              70,
+              0.55
+            ],
+            [
+              "info_completeness",
+              90.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 76%)",
+        "confidence": 76.5,
+        "action": "answered"
+      },
+      "product_asin": "B0CRB36VPB",
+      "product_title": "Timbre Inalámbrico SanJie Para Casa Negocio 500ft 55"
+    },
+    {
+      "question": {
+        "text": "Mi abuelo tiene problemas de vista, ¿la pantalla es lo suficientemente grande como para ver la hora fácilmente?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "El razonamiento sobre el tamaño de la pantalla y cómo eso podría afectar a una persona con problemas de visión."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Reloj Casio AE-1500WH-5AVCF es un reloj digital deportivo con un diseño que prioriza la funcionalidad y la comodidad. Una de sus características destacadas es su pantalla digital clara y fácil de leer, lo cual podría ser beneficioso para personas con problemas de vista, como su abuelo. Además, cuenta con una luz de fondo LED brillante que facilita la lectura en condiciones de poca luz. Sin embargo, no tengo información específica sobre el tamaño exacto de la pantalla, por lo que mi recomendación sería probarlo en persona si es posible.",
+        "confidence": 70.75,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              85,
+              0.55
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              0,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 71%)",
+        "confidence": 70.75,
+        "action": "answered"
+      },
+      "product_asin": "B08VMTXZP1",
+      "product_title": "Reloj Casio AE-1500WH-5AVCF Hombre Digital Resistente Agua"
+    },
+    {
+      "question": {
+        "text": "¿Mi abuela que tiene 80 años y no sabe mucho de tecnología podría usar fácilmente este Echo Show?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar si el producto es intuitivo y fácil de usar para personas mayores, considerando que es un asistente virtual con pantalla táctil."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Echo Show 5 de Amazon es un dispositivo diseñado para ser fácil de usar, incluso para personas que no están familiarizadas con la tecnología. Con su pantalla de 5.5 pulgadas y controles de voz a través de Alexa, su abuela podría controlar dispositivos inteligentes y realizar videollamadas de manera sencilla. Además, cuenta con controles de privacidad para el micrófono y la cámara, lo que proporciona tranquilidad adicional. La guía de inicio rápido incluida también facilita la configuración inicial.",
+        "confidence": 88.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 88.5,
+        "action": "answered"
+      },
+      "product_asin": "B09B2SRGXH",
+      "product_title": "Echo Show 5 H97N6S Pantalla 5.5\" Alexa Control Smart Home"
+    },
+    {
+      "question": {
+        "text": "¿La mochila es suficientemente ligera como para llevarla en una caminata de un día completo sin que sea un problema?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "El tamaño y el peso de la mochila para evaluar su ligereza y comodidad en una caminata prolongada."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Mochila Loowoko 50L es bastante ligera, con un peso de 1070 gramos. Esto, combinado con su diseño ergonómico y correas de malla transpirables, la hace adecuada para llevar en una caminata de un día completo sin que resulte incómoda. Además, su capacidad de 50 litros y múltiples bolsillos permiten distribuir el peso de manera eficiente, lo que puede ayudar a reducir la fatiga durante la caminata.",
+        "confidence": 92.85000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 93%)",
+        "confidence": 92.85000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B07FR2HF77",
+      "product_title": "Mochila Loowoko 50L Impermeable Senderismo Unisex Ligera"
+    },
+    {
+      "question": {
+        "text": "Quiero saber si el cable es compatible con iPhone 12, ¿podrías confirmarlo?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Compatibilidad de cargadores Bkayp con modelos de iPhone más allá del iPhone XS."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, el cable de carga rápida Bkayp es compatible con el iPhone 12. Está diseñado para funcionar con múltiples modelos de iPhone, gracias a su conector Lightning, lo que incluye al iPhone 12. Además, cuenta con certificación MFi, lo que garantiza una carga segura y eficiente sin advertencias de incompatibilidad.",
+        "confidence": 96.25,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 96%)",
+        "confidence": 96.25,
+        "action": "answered"
+      },
+      "product_asin": "B0BGSDTZVF",
+      "product_title": "Cargador Bkayp PARA iPhone XS 10ft Rápido Nylon Trenzado"
+    },
+    {
+      "question": {
+        "text": "¿El color gris de la licuadora es un gris claro o más bien oscuro?",
+        "difficulty": "hard",
+        "type": "comparison",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Color del producto y percepción personal del color."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El color de la licuadora NutriBullet NB50500 es \"Gunmetal Gray\", que generalmente se refiere a un tono de gris oscuro. Espero que esta información le sea útil para su decisión de compra.",
+        "confidence": 96.25,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": "PASO 1 - ENTENDER EL PRODUCTO:\n- Es una licuadora personal NutriBullet NB50500.\n- Se usa para preparar batidos saludables y deliciosos rápidamente.\n- Sus características principales incluyen un motor "
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 96%)",
+        "confidence": 96.25,
+        "action": "answered"
+      },
+      "product_asin": "B0CBWD3PN7",
+      "product_title": "NutriBullet NB50500 Licuadora Personal 32oz Gris Potente"
+    },
+    {
+      "question": {
+        "text": "Si la almohadilla la usa mi abuela que tiene problemas de circulación, ¿le va a resultar fácil ajustarla sola?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Entender el uso del producto por parte de personas mayores o con limitaciones físicas"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Almohadilla Calentadora IKEEPFIT está diseñada para ser fácil de usar, incluso para personas mayores. Su diseño portátil y ligero, junto con una cintura ajustable de 30 a 65 pulgadas, facilita su colocación y ajuste. Además, el dispositivo es inalámbrico, lo que elimina la complicación de manejar cables. Sin embargo, si su abuela tiene dificultades con la movilidad, podría necesitar ayuda inicial para ajustarla correctamente.",
+        "confidence": 90.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 90%)",
+        "confidence": 90.5,
+        "action": "answered"
+      },
+      "product_asin": "B0DSB8R9LG",
+      "product_title": "Almohadilla Calentadora IKEEPFIT Cordless Masaje Mujer"
+    },
+    {
+      "question": {
+        "text": "Mi hermana se desespera por el frizz, ¿este cepillo secador es realmente efectivo para controlarlo?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre el término 'antifrizz' del nombre del producto y cómo podría aplicarse en un caso real."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Cepillo Secador Umeely SY-BD08 está diseñado para reducir el frizz gracias a su tecnología cerámica e iónica, que ayuda a suavizar el cabello y a minimizar el daño. Esto lo hace ideal para quienes buscan un peinado más suave y menos encrespado. Además, sus cerdas de nylon están diseñadas para prevenir enredos, lo que facilita el proceso de peinado. Es una excelente opción si tu hermana busca controlar el frizz de manera efectiva mientras seca y peina su cabello en un solo paso.",
+        "confidence": 91.25,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 91%)",
+        "confidence": 91.25,
+        "action": "answered"
+      },
+      "product_asin": "B09VGXRKN9",
+      "product_title": "Cepillo Secador Umeely SY-BD08 Cerámico 1200W Antifrizz"
+    },
+    {
+      "question": {
+        "text": "¿La cancelación activa de estos audífonos funciona bien en lugares ruidosos como el transporte público?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razoar sobre el uso de la cancelación activa en situaciones ruidosas"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Los audífonos JBL Vibe Beam 2 cuentan con cancelación activa de ruido, diseñada para ofrecer una experiencia de audio inmersiva incluso en entornos ruidosos como el transporte público. Esta característica, junto con los 4 micrófonos para llamadas claras, debería mejorar significativamente la calidad del sonido al reducir el ruido ambiental. Sin embargo, la efectividad puede variar dependiendo del nivel de ruido y las expectativas personales.",
+        "confidence": 90.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 90%)",
+        "confidence": 90.5,
+        "action": "answered"
+      },
+      "product_asin": "B0DN45YMP6",
+      "product_title": "Audífonos JBL Vibe Beam 2 Negro Cancelación Activa 40h"
+    },
+    {
+      "question": {
+        "text": "¿Puede funcionar el Chime Pro si lo coloco en el extremo de mi casa, que está a aproximadamente 2000 pies del enrutador principal?",
+        "difficulty": "medium",
+        "type": "funcionamiento",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Requiere verificar la distancia que el extensor WiFi puede cubrir (2000ft según descripción)."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Chime Pro de Ring está diseñado para extender la señal wifi hasta 2000 pies cuadrados. Sin embargo, la efectividad de la conexión puede variar dependiendo de factores como la disposición de la casa, las paredes y otros obstáculos que puedan interferir con la señal. Si su enrutador principal está a aproximadamente 2000 pies de distancia, es posible que el rendimiento no sea óptimo. Sería recomendable considerar la ubicación y posibles obstáculos para asegurar una buena conexión.",
+        "confidence": 83.0,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.55
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 83%)",
+        "confidence": 83.0,
+        "action": "answered"
+      },
+      "product_asin": "B07WML2XTD",
+      "product_title": "Chime Pro 53-023192 Extensor Wifi 2000ft Luz Nocturna"
+    },
+    {
+      "question": {
+        "text": "¿Este juego de accesorios es compatible con la aspiradora G8000 Max o solo con modelos específicos?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Necesita conectar que los accesorios son para la aspiradora 'G8000 Max', sugiriendo que deben ser compatibles con ese modelo."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Este kit de repuestos es compatible específicamente con el modelo Tikom G8000 Max, así como con el L8000 Pro 2025. Está diseñado para mantener estos modelos en óptimas condiciones, asegurando un rendimiento eficiente de tu robot aspirador.",
+        "confidence": 99.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 99%)",
+        "confidence": 99.0,
+        "action": "answered"
+      },
+      "product_asin": "B0FN75DTW9",
+      "product_title": "Accesorios PARA G8000 Max Robot Aspiradora 2 Cepillos 6"
+    },
+    {
+      "question": {
+        "text": "¿El sistema de riego automático es fácil de instalar para alguien que no tiene experiencia en jardinería?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre la facilidad de uso e instalación para usuarios sin experiencia previa en sistemas de riego."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Sistema de Riego Automático Rain Bird 32ETI está diseñado para ser fácil de instalar, incluso para personas sin experiencia en jardinería. Una de sus características destacadas es que se puede instalar rápidamente en una tarde, lo que sugiere que no requiere habilidades avanzadas. Además, su diseño incluye aspersores retráctiles y una fácil conexión a un grifo exterior, lo que simplifica aún más el proceso de instalación.",
+        "confidence": 90.10000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 90%)",
+        "confidence": 90.10000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B00K72WU3Q",
+      "product_title": "Sistema Riego Automático Rain Bird 32ETI Para Jardín"
+    },
+    {
+      "question": {
+        "text": "¿El color blanco del dispositivo es un blanco puro o tiene algún tono específico?",
+        "difficulty": "hard",
+        "type": "rebuscada",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar sobre el color del dispositivo que podría no estar explícitamente detallado"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El dispositivo ZZP para hongos en uñas es de color blanco, pero no se especifica si es un blanco puro o si tiene algún tono específico. Si necesitas más detalles sobre el color exacto, te recomendaría contactar directamente con el fabricante o el vendedor para obtener información más precisa.",
+        "confidence": 88.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 88.0,
+        "action": "answered"
+      },
+      "product_asin": "B0BNHJKCR2",
+      "product_title": "Dispositivo ZZP PARA Hongos Uñas Efectivo y Seguro Blanco"
+    },
+    {
+      "question": {
+        "text": "¿Este rodillo abdominal es adecuado para alguien que nunca antes ha hecho ejercicio?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar sobre el uso del producto por principiantes en el ejercicio"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El rodillo abdominal Luyata 55685958 es adecuado para principiantes, ya que es un set de ejercicio completo que incluye una guía de ejercicios para ayudar a los usuarios a comenzar. Su diseño compacto y la inclusión de una almohadilla para las rodillas y barras para flexiones proporcionan comodidad y estabilidad, lo que facilita su uso para aquellos que nunca han hecho ejercicio antes. Además, el rodillo está diseñado para fortalecer el abdomen y tonificar el cuerpo, lo que lo hace ideal para quienes buscan iniciar una rutina de ejercicios en casa.",
+        "confidence": 91.25,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 91%)",
+        "confidence": 91.25,
+        "action": "answered"
+      },
+      "product_asin": "B087J9ZB98",
+      "product_title": "Rodillo Abdominal Luyata 55685958 Negro 10 en 1 Ejercicio"
+    },
+    {
+      "question": {
+        "text": "¿Las piezas de este set son compatibles con los sets de LEGO City?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Compatibilidad entre piezas de diferentes sets de LEGO"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, las piezas de este set LEGO 60454 Camper Van son compatibles con otros sets de LEGO, incluyendo los de la línea LEGO City. LEGO mantiene un estándar de compatibilidad entre sus piezas, lo que permite combinarlas y expandir la creatividad en el juego. Si tienes más preguntas o necesitas más detalles, estaré encantado de ayudarte.",
+        "confidence": 98.80000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 99%)",
+        "confidence": 98.80000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B0DJ19FVRD",
+      "product_title": "LEGO 60454 Camper Van Construcción Juguete 385 Piezas"
+    },
+    {
+      "question": {
+        "text": "Mi abuela tiene 80 años y no sabe mucho de tecnología, ¿es fácil de usar para ella?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre la facilidad de uso del producto para una persona mayor."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Robot Aspiradora Shark AV2610WA está diseñada para ser fácil de usar, incluso para personas que no están familiarizadas con la tecnología. Se puede controlar a través de una aplicación, lo que permite una operación sencilla y cómoda. Además, cuenta con características como el autovaciado y la navegación LiDAR, que automatizan gran parte del proceso de limpieza, reduciendo la necesidad de intervención manual. Esto la hace ideal para personas mayores que buscan mantener su hogar limpio sin complicaciones.",
+        "confidence": 88.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 88.5,
+        "action": "answered"
+      },
+      "product_asin": "B0B89C8H4Q",
+      "product_title": "Robot Aspiradora Shark AV2610WA Auto-vaciado HEPA 2-en-1"
+    },
+    {
+      "question": {
+        "text": "¿Funcionará bien para cargar mi iPhone 13 y al mismo tiempo otros dispositivos?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Debe razonar sobre la compatibilidad con un iPhone 13 y la capacidad de carga múltiple del producto."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El cargador inalámbrico 3 en 1 de Anlmz está diseñado para cargar simultáneamente un iPhone, un Apple Watch y AirPods. Es compatible con el iPhone 8 y modelos posteriores, por lo que funcionará perfectamente con tu iPhone 13. Además, ofrece carga rápida en aproximadamente 3.5 horas y cuenta con protección contra sobrecalentamiento, lo que asegura un uso seguro y eficiente para todos tus dispositivos al mismo tiempo.",
+        "confidence": 95.60000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 96%)",
+        "confidence": 95.60000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B0BF9TYJWR",
+      "product_title": "Base Cargadora Anlmz PARA iPhone CW350 3 en 1 Rápida"
+    },
+    {
+      "question": {
+        "text": "¿Puede ser usada esta rodillera mientras corro bajo la lluvia o se arruinaría?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre el uso en condiciones de humedad y si el material de la rodillera lo permite."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La rodillera de compresión Modvel está diseñada para ser transpirable y absorbente, lo cual es ideal para actividades deportivas. Sin embargo, no se menciona específicamente que sea resistente al agua. Si corres bajo la lluvia, es posible que se moje, pero al ser lavable a mano, puedes cuidarla adecuadamente después de su uso. Te recomendaría evitar exposiciones prolongadas al agua para mantener su durabilidad y funcionalidad.",
+        "confidence": 84.8,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.55
+            ],
+            [
+              "info_completeness",
+              95.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              68,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              100,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 85%)",
+        "confidence": 84.8,
+        "action": "answered"
+      },
+      "product_asin": "B08JGP1WYM",
+      "product_title": "Rodillera Modvel PARA Hombres y Mujeres Compresión 2-Pack"
+    },
+    {
+      "question": {
+        "text": "¿Tiene alguna función específica para evitar caerse por las escaleras?",
+        "difficulty": "medium",
+        "type": "funcionamiento",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Debe inferir que la función de detección de caídas es una característica común en aspiradoras robot que debería estar en la descripción del producto."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "physical_safety",
+          "keyword_matched": "El riesgo de caídas por escaleras puede causar lesiones graves, por lo que es crucial conocer las funciones de seguridad del producto."
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Correctamente conservador (critical_question)",
+        "confidence": 0.0,
+        "action": "no_answer"
+      },
+      "product_asin": "B0FLKC6L74",
+      "product_title": "Aspiradora Robot G90 4200Pa Limpieza Inteligente Automática"
+    },
+    {
+      "question": {
+        "text": "¿Este termostato inteligente se puede integrar con sistemas de domótica como Google Home?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Compatibilidad con sistemas de domótica como Google Home."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, el Termostato Google G4CVZ Inteligente Wifi Programable se puede integrar con sistemas de domótica como Google Home. De hecho, es programable desde la app Google Home y es compatible con Google Assistant, lo que facilita su integración en un hogar inteligente. Además, también es compatible con Alexa, lo que amplía sus posibilidades de control por voz.",
+        "confidence": 97.60000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 98%)",
+        "confidence": 97.60000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B08HRPDBFF",
+      "product_title": "Termostato Google G4CVZ Inteligente Wifi Programable Gris"
+    },
+    {
+      "question": {
+        "text": "Si lo uso debajo del agua, ¿la correa de muñeca es lo suficientemente segura para que no se me escape la cámara?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razoar sobre características de seguridad y uso bajo el agua"
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 0.0,
+        "reason": "critical_question",
+        "should_notify": true,
+        "notification_type": "critical_question",
+        "metadata": {
+          "critical_category": "physical_safety",
+          "keyword_matched": "la correa de muñeca podría no ser lo suficientemente segura para evitar que la cámara se escape, lo que podría causar daños a la cámara o lesiones a personas cercanas."
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Conservador en pregunta difícil",
+        "confidence": 0.0,
+        "action": "no_answer"
+      },
+      "product_asin": "B0BKRPJMWD",
+      "product_title": "Kit Accesorios SYAC0048 Para Cámara Acción 60 en 1"
+    },
+    {
+      "question": {
+        "text": "¿Este sistema de alarma es fácil de instalar por alguien que no tiene experiencia previa con dispositivos de seguridad?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre la facilidad de uso e instalación para personas sin experiencia en tecnología."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El sistema de alarma de movimiento inalámbrico TL-5102MP de Smart Caregiver Corporation es fácil de instalar, incluso para alguien sin experiencia previa en dispositivos de seguridad. Su diseño inalámbrico elimina la necesidad de complicadas conexiones, y el bracket opcional permite una instalación personalizada según tus necesidades. Además, el sistema es compacto y ligero, lo que facilita su manejo durante la instalación.",
+        "confidence": 94.05000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 94%)",
+        "confidence": 94.05000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B008BMASJM",
+      "product_title": "Sistema Alarma TL-5102MP Inalámbrico Movimiento 300"
+    },
+    {
+      "question": {
+        "text": "¿La fuente de agua es fácil de limpiar y tiene algún tipo de filtro para mantener el agua fresca?",
+        "difficulty": "medium",
+        "type": "funcionamiento",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "Debe razonar sobre las características de funcionamiento y características técnicas de la fuente para mascotas."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Fuente de Agua Veken PFC3V301 es fácil de limpiar y está diseñada con acero inoxidable, lo que contribuye a su higiene. Además, cuenta con un sistema de filtración avanzada de 5 etapas que ayuda a mantener el agua fresca para tus mascotas. Esto asegura que el agua esté siempre en óptimas condiciones para el consumo de tus mascotas.",
+        "confidence": 97.2,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 97%)",
+        "confidence": 97.2,
+        "action": "answered"
+      },
+      "product_asin": "B0CK1MXC7J",
+      "product_title": "Fuente de Agua Veken PFC3V301 Acero Inoxidable 2.8L"
+    },
+    {
+      "question": {
+        "text": "¿Este docking station es compatible con SSDs M.2 NVMe y SATA?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "compatibilidad técnica con SSDs M.2 en los estándares NVMe y SATA"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, el Docking Station M04 de FREEGENE es compatible con SSDs M.2 tanto NVMe como SATA. Esto lo hace una opción versátil para transferir datos de diferentes tipos de SSD a través de su conexión USB-C de alta velocidad.",
+        "confidence": 98.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 98%)",
+        "confidence": 98.0,
+        "action": "answered"
+      },
+      "product_asin": "B084ZKLQR8",
+      "product_title": "Docking Station M04 USB-C Aluminio 10Gbps Para SSD M.2"
+    },
+    {
+      "question": {
+        "text": "¿El tamaño de 9x8 pulgadas será suficiente para un mouse de gaming grande?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre el uso específico del tamaño del mouse pad para mouses grandes."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Mouse Pad MP114-BSD1 de 3M tiene dimensiones de 9x8 pulgadas, lo cual es compacto y adecuado para la mayoría de los usos de oficina. Sin embargo, para un mouse de gaming grande que requiere movimientos amplios y rápidos, este tamaño podría ser algo limitado. La superficie precisa y la base antideslizante son excelentes características, pero si buscas un espacio más amplio para gaming, podrías considerar opciones más grandes.",
+        "confidence": 85.95,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 86%)",
+        "confidence": 85.95,
+        "action": "answered"
+      },
+      "product_asin": "B00L2AN9PK",
+      "product_title": "Mouse Pad MP114-BSD1 9x8 Pulgadas Antideslizante"
+    },
+    {
+      "question": {
+        "text": "Si quisiera armar este kit con mi hijo de 8 años, ¿es fácil de ensamblar y viene con instrucciones claras?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre la facilidad de uso del producto considerando que es un kit STEM y podría tener instrucciones incluidas para su armado."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Kit RC STEM Inventions Para Vehículos Control Remoto es fácil de ensamblar, lo que lo hace ideal para armarlo junto a tu hijo de 8 años. Cuenta con conexiones tipo plug-and-socket, lo que facilita el montaje. Además, es un producto diseñado para fomentar el aprendizaje en ciencia y tecnología, lo que lo hace perfecto para proyectos educativos. Aunque no se menciona específicamente si incluye instrucciones, el diseño está pensado para ser accesible tanto para principiantes como para entusiastas, lo que sugiere que las instrucciones deberían ser claras y fáciles de seguir.",
+        "confidence": 87.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 87.5,
+        "action": "answered"
+      },
+      "product_asin": "B0BFJZNJ6R",
+      "product_title": "Kit RC STEM Inventions Para Vehículos Control Remoto 5"
+    },
+    {
+      "question": {
+        "text": "¿Es cómodo para escribir durante largos periodos de tiempo?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Requiere razonar sobre el uso del teclado retroiluminado y la ergonomía potencial del producto, aunque no se proporciona directamente en el JSON."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Funda para iPad con Teclado Retroiluminado de Harvopu está diseñada para ofrecer comodidad al escribir durante largos periodos. Cuenta con tres posiciones ajustables que permiten encontrar la postura más cómoda para ti. Además, el teclado es desmontable, lo que facilita su uso en diferentes situaciones. Estas características, junto con su diseño ergonómico, hacen que sea una opción ideal tanto para estudiantes como para profesionales que necesitan escribir durante mucho tiempo.",
+        "confidence": 89.30000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 89%)",
+        "confidence": 89.30000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B0CMWPDGZH",
+      "product_title": "Funda PARA iPad A2696/A2757/A2777 Teclado Retroiluminado"
+    },
+    {
+      "question": {
+        "text": "¿Las raquetas sirven para un adulto principiante que nunca jugó antes?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Entender que es un set para adultos y razonar sobre su idoneidad para principiantes."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "Sí, el Set de Raquetas de Tenis Layway 27\" para Adultos es ideal para un adulto principiante que nunca ha jugado antes. Este set está diseñado específicamente para principiantes y jugadores intermedios, ofreciendo un tamaño de cabeza grande de 105 pulgadas cuadradas que facilita el golpeo de la pelota. Además, las raquetas son ligeras, cada una pesando solo 0.57 lb, lo que permite un manejo más sencillo y cómodo durante el juego. También incluye todo lo necesario para empezar: 2 raquetas, 3 pelotas, 2 empuñaduras y una bolsa de transporte.",
+        "confidence": 94.0,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 94%)",
+        "confidence": 94.0,
+        "action": "answered"
+      },
+      "product_asin": "B09FL5TQWJ",
+      "product_title": "Set de Raquetas de Tenis Layway 27\" para Adultos Azul 8 en 1"
+    },
+    {
+      "question": {
+        "text": "Tengo manos grandes, ¿la tablet me va a resultar incómoda de usar?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonamiento sobre el tamaño de la tablet (11 pulgadas) en relación con su uso por personas con manos grandes"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Samsung SM7325-L Tablet tiene una pantalla de 11 pulgadas y un diseño ligero y duradero, lo que puede facilitar su manejo incluso si tienes manos grandes. Sus dimensiones son 25.7 x 16.8 x 0.68 cm, lo que proporciona un área de agarre adecuada. Además, su peso de 0.712 kg la hace bastante manejable. Sin embargo, la comodidad puede variar según las preferencias personales, por lo que te recomendaría probarla en una tienda para asegurarte de que se adapta bien a tus necesidades.",
+        "confidence": 87.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 88%)",
+        "confidence": 87.5,
+        "action": "answered"
+      },
+      "product_asin": "B0CLFH7CCV",
+      "product_title": "Samsung SM7325-L Tablet 11\" 64GB Plata Pantalla Grande"
+    },
+    {
+      "question": {
+        "text": "¿Tiene alguna función para que los chicos puedan jugar o es solo para llamadas y mensajes?",
+        "difficulty": "medium",
+        "type": "funcionamiento",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "características técnicas y funcionalidad del producto"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El Reloj Inteligente JRTV5 para niños de JrTrack está diseñado principalmente para mantener a los niños seguros y conectados mediante funciones como GPS en tiempo real, llamadas y mensajes seguros. No se menciona específicamente que tenga funciones de juego, por lo que parece estar enfocado en la comunicación y seguridad más que en el entretenimiento.",
+        "confidence": 92.5,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 92%)",
+        "confidence": 92.5,
+        "action": "answered"
+      },
+      "product_asin": "B0F94LH1PR",
+      "product_title": "Reloj Inteligente JRTV5 Niños GPS Llamadas Textos Seguridad"
+    },
+    {
+      "question": {
+        "text": "¿El compartimento para zapatos es lo suficientemente grande como para guardar unas zapatillas de tenis talla 42?",
+        "difficulty": "medium",
+        "type": "use_case_specific",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "debe razonar sobre el tamaño típico de un compartimento para zapatos en una mochila de tenis y la talla indicativa de calzado"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Mochila Sucipi Mujer Tenis cuenta con un compartimento específico para zapatos, diseñado para ser funcional y práctico. Aunque no se especifica el tamaño exacto del compartimento, la mochila tiene unas dimensiones generales de 31.75 x 11.43 x 41.91 cm, lo que sugiere que debería ser capaz de acomodar unas zapatillas de tenis talla 42. Sin embargo, para estar completamente seguro, te recomendaría verificar las dimensiones de tus zapatillas en comparación con el espacio disponible.",
+        "confidence": 79.0,
+        "reason": "medium_confidence",
+        "should_notify": true,
+        "notification_type": "review_recommended",
+        "metadata": {
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.55
+            ],
+            [
+              "info_completeness",
+              90.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              80,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 79%)",
+        "confidence": 79.0,
+        "action": "answered"
+      },
+      "product_asin": "B0FRD7DQPN",
+      "product_title": "Mochila Sucipi Mujer Tenis Compartimento Zapatos Negro"
+    },
+    {
+      "question": {
+        "text": "Si lo uso para guardar mis cosas de golf, ¿tiene divisiones para separar los palos de las pelotas?",
+        "difficulty": "hard",
+        "type": "edge_case",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "razonar que es un organizador para el maletero de un auto dentro de la categoría de bolsas de golf, pero está diseñado para organizar cosas en general, no específicamente equipamiento de golf."
+      },
+      "result": {
+        "action": "no_answer",
+        "answer": null,
+        "confidence": 55.3,
+        "reason": "low_confidence",
+        "should_notify": true,
+        "notification_type": "low_confidence",
+        "metadata": {
+          "generated_answer": "El organizador de maletero para golf YOREPEK está diseñado para mantener tu equipo de golf ordenado y accesible. Sin embargo, no especifica divisiones específicas para separar los palos de las pelotas. Cuenta con cinco compartimentos en total, lo que podría permitirte organizar tus pertenencias de manera flexible, pero no se menciona una separación específica para palos y pelotas. Su diseño incluye almacenamiento separado para zapatos y un amplio espacio con tres secciones, lo que podría ayudarte a mantener tus accesorios en orden de manera general.",
+          "reasoning": "",
+          "confidence_factors": [
+            [
+              "model_confidence",
+              80,
+              0.55
+            ],
+            [
+              "info_completeness",
+              90.0,
+              0.2
+            ],
+            [
+              "answer_length",
+              50,
+              0.1
+            ],
+            [
+              "no_suspicious_words",
+              80,
+              0.15
+            ]
+          ]
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Conservador en pregunta difícil",
+        "confidence": 55.3,
+        "action": "no_answer"
+      },
+      "product_asin": "B09PZZ1QRM",
+      "product_title": "Organizador YOREPEK PARA Maletero de Auto 2 Capas"
+    },
+    {
+      "question": {
+        "text": "Mi abuela tiene 80 años y no sabe de tecnología, ¿es fácil de usar para ella?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "Debe razonar sobre la facilidad de uso sin información directa del JSON."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Pantalla CarPlay Leadtree de 11.5\" HD está diseñada para ser fácil de usar, incluso para personas que no están familiarizadas con la tecnología. Ofrece control de voz inteligente, lo que facilita su operación sin necesidad de interactuar físicamente con la pantalla. Además, su conexión inalámbrica a CarPlay y Android Auto permite una integración sencilla con dispositivos móviles, lo que mejora la experiencia de conducción sin complicaciones técnicas.",
+        "confidence": 88.9,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 89%)",
+        "confidence": 88.9,
+        "action": "answered"
+      },
+      "product_asin": "B0FCMN3927",
+      "product_title": "Pantalla CarPlay Leadtree PARA Todos los Vehículos 11.5\" HD"
+    },
+    {
+      "question": {
+        "text": "¿El gato Tuxedo de LEGO viene con alguna base o soporte para exhibirlo una vez armado?",
+        "difficulty": "hard",
+        "type": "use_case_specific",
+        "expected_behavior": "should_handle_gracefully",
+        "info_needed": "debe razonar sobre el uso y exhibición del producto armado basado en la descripción general de LEGO Ideas"
+      },
+      "result": {
+        "action": "answered",
+        "answer": "El modelo de gato tuxedo de LEGO no incluye una base o soporte específico para exhibirlo una vez armado. Sin embargo, su diseño robusto y detallado permite que se mantenga de pie por sí mismo, lo que facilita su exhibición en cualquier superficie plana. Además, su altura de más de 32 cm lo convierte en una pieza decorativa impresionante para cualquier espacio.",
+        "confidence": 92.10000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió pregunta difícil (conf: 92%)",
+        "confidence": 92.10000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B0CPQ74S99",
+      "product_title": "LEGO Ideas 6474650 Gato Tuxedo 1710 Piezas Decoración"
+    },
+    {
+      "question": {
+        "text": "¿La docking station es compatible con laptops Dell y se pueden conectar los tres monitores a la vez en 4K?",
+        "difficulty": "medium",
+        "type": "compatibility",
+        "expected_behavior": "should_answer_or_low_confidence",
+        "info_needed": "La marca del producto, características técnicas de soporte de monitores y compatibilidad con dispositivos."
+      },
+      "result": {
+        "action": "answered",
+        "answer": "La Docking Station UC0517 de Selore&S-Global es compatible con dispositivos USB-C, lo que incluye muchas laptops Dell modernas que tienen este tipo de puerto. En cuanto a la conexión de monitores, puedes conectar hasta tres monitores 4K simultáneamente gracias a sus dos puertos HDMI y un DisplayPort. Esto la hace ideal para profesionales que necesitan múltiples pantallas para su trabajo diario.",
+        "confidence": 91.30000000000001,
+        "reason": "high_confidence",
+        "should_notify": false,
+        "notification_type": null,
+        "metadata": {
+          "reasoning": ""
+        }
+      },
+      "analysis": {
+        "acceptable": true,
+        "verdict": "✓ Respondió (conf: 91%)",
+        "confidence": 91.30000000000001,
+        "action": "answered"
+      },
+      "product_asin": "B0CXSL7BDP",
+      "product_title": "Docking Station UC0517 USB-C 3 Monitores 4K 100W Ethernet"
+    }
+  ]
+}
