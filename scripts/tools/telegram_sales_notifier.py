@@ -254,7 +254,7 @@ def get_asin_by_item_id(item_id):
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT asin, title, brand, model, permalink, country, costo_amazon
+        SELECT asin, title, brand, model, permalink, country
         FROM listings
         WHERE item_id = ?
         LIMIT 1
@@ -269,25 +269,47 @@ def get_asin_by_item_id(item_id):
     result = dict(row)
     asin = result.get("asin")
 
-    # Obtener precio de Amazon desde la DB
-    amazon_cost = result.get("costo_amazon", 0) or 0
+    # Obtener precio en TIEMPO REAL de Glow API cuando hay una venta
+    amazon_cost = 0
+    if asin:
+        print(f"   🔄 Obteniendo precio en tiempo real de Glow API...")
 
-    # Si no hay precio en DB, intentar obtener de JSON como fallback
-    if amazon_cost == 0 and asin:
-        print(f"   ⚠️ No hay precio en DB, intentando JSON...")
-        json_file = ASINS_JSON_DIR / f"{asin}.json"
-        if json_file.exists():
-            try:
-                with open(json_file, 'r') as f:
-                    data = json.load(f)
-                    amazon_cost = data.get("prime_pricing", {}).get("price", 0)
-                    print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
-            except Exception as e:
-                print(f"   ⚠️ Error leyendo JSON: {e}")
-        else:
-            print(f"   ❌ No hay precio disponible para ASIN {asin}")
-    else:
-        print(f"   💲 Precio desde DB: ${amazon_cost}")
+        try:
+            # Importar función de Glow API
+            import sys
+            if str(PROJECT_ROOT) not in sys.path:
+                sys.path.insert(0, str(PROJECT_ROOT))
+
+            from src.integrations.amazon_glow_api import get_product_data_batch
+
+            # Obtener precio actual de Amazon con Glow API
+            products = get_product_data_batch([asin])
+            if products and asin in products:
+                product_data = products[asin]
+                if product_data and product_data.get("price"):
+                    amazon_cost = product_data["price"]
+                    print(f"   ✅ Precio de Glow API: ${amazon_cost}")
+                else:
+                    print(f"   ⚠️ Glow API no devolvió precio, usando fallback...")
+            else:
+                print(f"   ⚠️ Glow API no devolvió datos, usando fallback...")
+        except Exception as e:
+            print(f"   ⚠️ Error con Glow API: {e}")
+
+        # Fallback: Si Glow API falla, intentar JSON
+        if amazon_cost == 0:
+            print(f"   📋 Intentando obtener precio de JSON...")
+            json_file = ASINS_JSON_DIR / f"{asin}.json"
+            if json_file.exists():
+                try:
+                    with open(json_file, 'r') as f:
+                        data = json.load(f)
+                        amazon_cost = data.get("prime_pricing", {}).get("price", 0)
+                        print(f"   💲 Precio desde JSON (fallback): ${amazon_cost}")
+                except Exception as e:
+                    print(f"   ⚠️ Error leyendo JSON: {e}")
+            else:
+                print(f"   ❌ No hay precio disponible para ASIN {asin}")
 
     result["amazon_cost"] = amazon_cost
     return result
