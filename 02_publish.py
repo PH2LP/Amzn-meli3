@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-main2.py - Pipeline Profesional Amazon → MercadoLibre CBT
+02_publish.py - Pipeline Profesional Amazon → MercadoLibre CBT
 ═══════════════════════════════════════════════════════════════════════════════
+
+¿Qué hace?
+    Publica productos de la DB a MercadoLibre (uno por uno)
+
+USO:
+    python3 02_publish.py
+
 Pipeline completo con validación IA, retry inteligente y tracking de estado.
 
 Flujo optimizado:

@@ -439,10 +439,24 @@ def check_real_availability_glow_api(asin: str, zipcode: str = None) -> Dict:
             try:
                 date_str = result["delivery_date"].replace(',', '').strip()
 
-                # Si es un rango (ej: "December 24 - 26"), tomar la PRIMERA fecha (más temprana)
+                # Si es un rango (ej: "December 24 - 26"), tomar la ÚLTIMA fecha (más tardía, conservador)
                 if ' - ' in date_str:
-                    # Tomar todo antes del " - "
-                    date_str = date_str.split(' - ')[0].strip()
+                    parts = date_str.split(' - ')
+                    # Tomar la parte final del rango
+                    end_date = parts[1].strip()
+
+                    # Si la parte final solo tiene el día (ej: "26" en "December 24 - 26")
+                    # Necesita agregar el mes del contexto
+                    if end_date.replace(',', '').strip().isdigit():
+                        # Extraer el mes de la primera parte
+                        start_part = parts[0].strip()
+                        for month_word in ['January', 'February', 'March', 'April', 'May', 'June',
+                                          'July', 'August', 'September', 'October', 'November', 'December']:
+                            if month_word in start_part:
+                                end_date = f"{month_word} {end_date}"
+                                break
+
+                    date_str = end_date
 
                 # Normalizar español -> inglés
                 months_es = {

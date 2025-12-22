@@ -35,6 +35,7 @@ load_dotenv(override=True)
 # Agregar directorio raíz al path para imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from src.integrations.amazon_availability_scraper import check_real_availability
+from src.integrations.mainglobal import refresh_ml_token
 
 # Importar notificaciones Telegram (bot separado para sync)
 try:
@@ -862,6 +863,19 @@ def sync_one_listing(listing, glow_cache, changes_log):
 def main():
     """Función principal de sincronización"""
     start_time = datetime.now()
+
+    # Refrescar token de ML automáticamente si está expirado
+    print("🔑 Verificando token de MercadoLibre...", flush=True)
+    if refresh_ml_token():
+        print("✅ Token de ML refrescado correctamente", flush=True)
+    else:
+        print("⚠️ Token de ML ya está vigente", flush=True)
+    print(flush=True)
+
+    # Recargar .env después de refresh para obtener el nuevo token
+    load_dotenv(override=True)
+    global ML_TOKEN
+    ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
 
     # Leer configuración actual del .env
     current_markup = float(os.getenv("PRICE_MARKUP", "30"))

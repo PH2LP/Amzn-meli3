@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-stop_auto_answer.py
+09_stop_autoanswer.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Detiene el bot de respuestas automáticas
+
+USO:
+    python3 09_stop_autoanswer.py
+
 Detiene el sistema de respuestas automáticas en el servidor VPS
 ────────────────────────────────────────────────────────────────────
 """

@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-server_status.py
+11_server_status.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Muestra el estado de todos los procesos en el servidor
+
+USO:
+    python3 11_server_status.py
+
 Verifica el estado del sync de Amazon-ML en el servidor VPS
 ────────────────────────────────────────────────────────────────────
 """

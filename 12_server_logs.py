@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-server_logs.py
+12_server_logs.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Muestra todos los logs del servidor
+
+USO:
+    python3 12_server_logs.py
+
 Visualiza los logs del sync de Amazon-ML en el servidor
 ────────────────────────────────────────────────────────────────────
 """

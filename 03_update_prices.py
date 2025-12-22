@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """
-update_prices.py
+03_update_prices.py
 ═══════════════════════════════════════════════════════════════════════════════
 ACTUALIZACIÓN MASIVA DE PRECIOS EN MERCADOLIBRE
 ═══════════════════════════════════════════════════════════════════════════════
+
+¿Qué hace?
+    Actualiza precios de productos ya publicados en MercadoLibre
+
+USO:
+    python3 03_update_prices.py
 
 Recalcula y actualiza TODOS los precios de tus publicaciones activas usando
 el PRICE_MARKUP actual del archivo .env

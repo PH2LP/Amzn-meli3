@@ -6,15 +6,17 @@
 RASTREAR Y REGISTRAR VENTAS DE MERCADOLIBRE
 ═══════════════════════════════════════════════════════════════════════════════
 
+¿Qué hace?
+    Registra ventas manualmente de MercadoLibre y calcula ganancias
+
+USO:
+    python3 17_track_sales.py                # Trackear nuevas
+    python3 17_track_sales.py --stats        # Ver estadísticas
+
 Monitorea ventas automáticamente y registra:
 - Ingresos de MercadoLibre
 - Costos de Amazon + 3PL
 - Ganancia neta por venta
-
-USO:
-    python3 17_track_sales.py                # Revisar nuevas ventas
-    python3 17_track_sales.py --stats        # Ver estadísticas
-    python3 17_track_sales.py --export       # Exportar a Excel
 ═══════════════════════════════════════════════════════════════════════════════
 """
 

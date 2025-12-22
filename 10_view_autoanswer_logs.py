@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """
-view_auto_answer_logs.py
+10_view_autoanswer_logs.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Muestra los logs del bot de respuestas
+
+USO:
+    python3 10_view_autoanswer_logs.py
+    python3 10_view_autoanswer_logs.py --live    (tiempo real)
+
 Visualiza los logs del sistema de respuestas automáticas
 ────────────────────────────────────────────────────────────────────
 """

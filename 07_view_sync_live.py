@@ -3,10 +3,10 @@
 """
 07_view_sync_live.py
 ═══════════════════════════════════════════════════════════════════════════════
-VER LOGS DE SYNC LOCAL EN TIEMPO REAL
+VER LOGS DE SYNC CRON EN TIEMPO REAL
 ═══════════════════════════════════════════════════════════════════════════════
 
-Muestra los logs del sync local en tiempo real
+Muestra los logs del sync ejecutado por cron en tiempo real
 
 USO:
     python3 07_view_sync_live.py
@@ -15,8 +15,8 @@ USO:
 ═══════════════════════════════════════════════════════════════════════════════
 """
 
-import sys
 import subprocess
+import sys
 from pathlib import Path
 
 # Colores
@@ -30,54 +30,37 @@ class Colors:
 
 def main():
     project_dir = Path(__file__).parent
-    log_dir = project_dir / "logs" / "sync_local"
+    log_file = project_dir / "logs" / "sync" / "sync_cron.log"
 
     print()
     print(f"{Colors.CYAN}╔════════════════════════════════════════════════════════════════╗{Colors.NC}")
-    print(f"{Colors.CYAN}║        LOGS DE SINCRONIZACIÓN LOCAL - TIEMPO REAL            ║{Colors.NC}")
+    print(f"{Colors.CYAN}║          SYNC CRON - MONITOREO EN TIEMPO REAL                ║{Colors.NC}")
     print(f"{Colors.CYAN}╚════════════════════════════════════════════════════════════════╝{Colors.NC}")
     print()
 
-    # Verificar si hay sync corriendo
-    check_cmd = "ps aux | grep 'sync_amazon_ml' | grep -v grep | grep -v '07_view'"
-    result = subprocess.run(check_cmd, shell=True, capture_output=True, text=True)
-
-    if result.returncode != 0 or not result.stdout.strip():
-        print(f"{Colors.RED}❌ No hay sync corriendo{Colors.NC}")
-        print(f"{Colors.YELLOW}   Inicialo con: python3 05_start_sync_amzn_meli.py{Colors.NC}")
+    if not log_file.exists():
+        print(f"{Colors.YELLOW}⚠️  Esperando primera ejecución del cron...{Colors.NC}")
+        print(f"   Log: {log_file}")
+        print(f"   Próximas ejecuciones: 00:00, 06:00, 12:00, 18:00")
         print()
-        sys.exit(1)
-
-    # Obtener PID
-    parts = result.stdout.strip().split()
-    pid = parts[1] if len(parts) > 1 else "?"
-    print(f"{Colors.GREEN}✅ Sync corriendo (PID: {pid}){Colors.NC}")
-
-    # Buscar el log más reciente
-    log_files = sorted(log_dir.glob("sync_*.log"), key=lambda x: x.stat().st_mtime, reverse=True)
-
-    if not log_files:
-        print(f"{Colors.YELLOW}⚠️  No se encontraron archivos de log en {log_dir}{Colors.NC}")
+        print(f"{Colors.CYAN}   Monitoreando archivo (se actualizará cuando corra el cron)...{Colors.NC}")
         print()
-        sys.exit(1)
 
-    log_file = log_files[0]
-    print(f"📝 Log: {log_file.name}")
-    print()
-    print(f"{Colors.CYAN}{'─' * 64}{Colors.NC}")
+    print(f"{Colors.GREEN}📝 Monitoreando: {log_file.name}{Colors.NC}")
     print(f"{Colors.YELLOW}👀 Mostrando logs en tiempo real (Ctrl+C para salir)...{Colors.NC}")
     print(f"{Colors.CYAN}{'─' * 64}{Colors.NC}")
     print()
 
     try:
-        # Mostrar últimas 30 líneas
-        subprocess.run(f"tail -30 {log_file}", shell=True)
+        # Mostrar últimas 50 líneas si el archivo existe
+        if log_file.exists():
+            subprocess.run(f"tail -50 {log_file}", shell=True)
+            print(f"{Colors.CYAN}{'─' * 64}{Colors.NC}")
+            print(f"{Colors.GREEN}▼ LOGS EN VIVO{Colors.NC}")
+            print(f"{Colors.CYAN}{'─' * 64}{Colors.NC}")
+            print()
 
-        print(f"{Colors.CYAN}{'─' * 64}{Colors.NC}")
-        print(f"{Colors.GREEN}▼ LOGS EN VIVO{Colors.NC}")
-        print(f"{Colors.CYAN}{'─' * 64}{Colors.NC}")
-
-        # Seguir el archivo
+        # Seguir el archivo (tail -f espera si no existe)
         subprocess.run(f"tail -f {log_file}", shell=True)
     except KeyboardInterrupt:
         print()

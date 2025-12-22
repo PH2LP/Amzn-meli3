@@ -6,12 +6,15 @@
 VER LOGS DEL SALES TRACKING DAEMON EN TIEMPO REAL
 ═══════════════════════════════════════════════════════════════════════════════
 
-Muestra los logs del daemon de sales tracking ejecutándose en el servidor.
+¿Qué hace?
+    Muestra los logs del daemon de ventas
 
 USO:
-    python3 19_view_sales_logs.py          # Ver últimas 50 líneas
-    python3 19_view_sales_logs.py --live   # Ver en tiempo real (tail -f)
-    python3 19_view_sales_logs.py --full   # Ver archivo completo
+    python3 19_view_sales_logs.py              # Últimas 50 líneas
+    python3 19_view_sales_logs.py --live       # Tiempo real
+    python3 19_view_sales_logs.py --full       # Todo el archivo
+
+Muestra los logs del daemon de sales tracking ejecutándose en el servidor.
 ═══════════════════════════════════════════════════════════════════════════════
 """
 

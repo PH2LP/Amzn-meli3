@@ -59,17 +59,33 @@ def main():
             log("=" * 80)
             log("")
 
-            # Refrescar token de MercadoLibre antes de cada sync
-            log("🔄 Refrescando token de MercadoLibre...")
+            # Esperar 10 minutos (servidor refresca token a las :00, sync empieza a las :10)
+            log("⏸️  Esperando 10 minutos (servidor refresca token)...")
+            time.sleep(600)  # 10 minutos
+            log("")
+
+            # Descargar token actualizado desde servidor
+            log("🔄 Descargando token actualizado desde servidor...")
             try:
-                from mainglobal import refresh_ml_token
-                if refresh_ml_token(force=True):
-                    log("   ✅ Token actualizado")
+                import subprocess
+                result = subprocess.run(
+                    ["sshpass", "-p", "koqven-1regka-nyfXiw", "scp", "-o", "StrictHostKeyChecking=no",
+                     "root@138.197.32.67:/opt/amz-ml-system/.env", str(project_root / ".env")],
+                    capture_output=True,
+                    text=True,
+                    timeout=10
+                )
+                if result.returncode == 0:
+                    log("   ✅ Token sincronizado desde servidor")
+                    # Recargar variables de entorno
+                    from dotenv import load_dotenv
+                    load_dotenv(override=True)
                 else:
-                    log("   ⚠️  No se pudo actualizar token (usando token actual)")
+                    log(f"   ⚠️  No se pudo descargar .env: {result.stderr}")
+                    log("   Continuando con token local...")
             except Exception as e:
-                log(f"   ⚠️  Error refrescando token: {e}")
-                log("   Continuando con token actual...")
+                log(f"   ⚠️  Error descargando .env: {e}")
+                log("   Continuando con token local...")
             log("")
 
             # Ejecutar sync

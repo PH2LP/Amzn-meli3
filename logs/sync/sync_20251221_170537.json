@@ -1,0 +1,387 @@
+{
+  "timestamp": "2025-12-21T17:05:37.335987",
+  "statistics": {
+    "total": 20,
+    "paused": 5,
+    "reactivated": 0,
+    "price_updated": 1,
+    "no_change": 14,
+    "errors": 0,
+    "errors_wrong_account": 0
+  },
+  "changes": [
+    {
+      "item_id": "CBT3231984704",
+      "asin": "B0F8B2MVHS",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($35.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 35.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tomorrow, December 22",
+        "days_until_delivery": 0,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"site_id\": \"MLB\", \"logistic_type\": \"remote\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 422, \"cause\": [{\"cause_id\": 5101, \"code\": \"item.shipping.mode.not_supported\", \"department\": \"cbt-item-validation\", \"message\": \"You can't send the product in this kind of shipment in Brazil.\", \"references\": [\"item.shipping.mode\"], \"type\": \"error\"}]}}, {\"item_id\": \"MLC1794417917\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4553596834\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MCO3432206506\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA1615361957\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3180939790",
+      "asin": "B089DR29T6",
+      "action": "paused",
+      "success": true,
+      "message": "Pausado: No cumple requisitos de fast delivery o sin precio",
+      "amazon_status": {
+        "available": false,
+        "price": null,
+        "buyable": false,
+        "status": "unavailable",
+        "error": "No cumple requisitos de fast delivery o sin precio",
+        "delivery_date": null,
+        "days_until_delivery": null
+      },
+      "site_items": "[{\"item_id\": \"MCO3400108796\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3417883882\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB4360422285\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4507032416\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2665472210\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT2810687431",
+      "asin": "B0CCK96SZJ",
+      "action": "paused",
+      "success": true,
+      "message": "Pausado: No cumple requisitos de fast delivery o sin precio",
+      "amazon_status": {
+        "available": false,
+        "price": null,
+        "buyable": false,
+        "status": "unavailable",
+        "error": "No cumple requisitos de fast delivery o sin precio",
+        "delivery_date": null,
+        "days_until_delivery": null
+      },
+      "site_items": "[{\"item_id\": \"MLC3421647254\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM2619819707\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MCO3403840876\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB4361988993\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2670239992\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185580218",
+      "asin": "B0B56BB51R",
+      "action": "paused",
+      "success": true,
+      "message": "Pausado: No cumple requisitos de fast delivery o sin precio",
+      "amazon_status": {
+        "available": false,
+        "price": null,
+        "buyable": false,
+        "status": "unavailable",
+        "error": "No cumple requisitos de fast delivery o sin precio",
+        "delivery_date": null,
+        "days_until_delivery": null
+      },
+      "site_items": "[{\"item_id\": \"MCO3403461460\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4511633084\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421639386\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB6048710602\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2670117644\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185122468",
+      "asin": "B0C3HCD34R",
+      "action": "paused",
+      "success": true,
+      "message": "Pausado: No cumple requisitos de fast delivery o sin precio",
+      "amazon_status": {
+        "available": false,
+        "price": null,
+        "buyable": false,
+        "status": "unavailable",
+        "error": "No cumple requisitos de fast delivery o sin precio",
+        "delivery_date": null,
+        "days_until_delivery": null
+      },
+      "site_items": "[{\"item_id\": \"MCO3403740844\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4511218160\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421018342\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6047978000\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2669688506\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3182149166",
+      "asin": "B09C588YB6",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($99.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 99.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLB4360831355\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3401141642\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3418561674\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM2618984101\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2666620486\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3182127426",
+      "asin": "B01171X0UW",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($34.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 34.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MCO1761427725\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4508032800\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3418585546\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6045160378\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2666620972\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT2809567861",
+      "asin": "B01N0993NM",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($47.5)",
+      "amazon_status": {
+        "available": true,
+        "price": 47.5,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLC3418882892\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3401427812\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4508063486\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6045290280\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2666906070\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT2809533213",
+      "asin": "B075LNDSB7",
+      "action": "price_updated",
+      "success": true,
+      "message": "Precio actualizado: $136.84 → $159.84 USD (Amazon: $134.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 134.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MCO3401300312\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB6045101432\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4508379258\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC1784263877\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2667087612\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]",
+      "old_price": 136.84,
+      "new_price": 159.84,
+      "amazon_price": 134.99
+    },
+    {
+      "item_id": "CBT3183909452",
+      "asin": "B0FY2GS91C",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($119.98)",
+      "amazon_status": {
+        "available": true,
+        "price": 119.98,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MCO3402456406\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB6046595984\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3420119274\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4509926690\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2668169848\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3184947086",
+      "asin": "B09KX1RBJ3",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($59.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 59.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLM4510906614\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421095316\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3403482926\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6048188716\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2669391340\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT2810402899",
+      "asin": "B0CZPLV566",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($129.95)",
+      "amazon_status": {
+        "available": true,
+        "price": 129.95,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MCO3403691298\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3420800416\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4510899106\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB6048330886\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2669817566\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185255834",
+      "asin": "B01LXDNNBW",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($109.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 109.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLM4511617266\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3403563206\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421392512\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB6048603796\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2669445850\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185411902",
+      "asin": "B074XBXFPD",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($149.0)",
+      "amazon_status": {
+        "available": true,
+        "price": 149.0,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLM4511618574\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3403988848\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421215788\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6048567776\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2670078048\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185417822",
+      "asin": "B0FCMN3927",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($103.97)",
+      "amazon_status": {
+        "available": true,
+        "price": 103.97,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLM4511838634\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421088910\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3404015706\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6048710860\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2669447168\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185702886",
+      "asin": "B086RNZX13",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($39.95)",
+      "amazon_status": {
+        "available": true,
+        "price": 39.95,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLC3421533424\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM2619784161\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MCO3404099722\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB4361978979\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2670047056\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185989914",
+      "asin": "B086Z7Q7G7",
+      "action": "paused",
+      "success": true,
+      "message": "Pausado: No cumple requisitos de fast delivery o sin precio",
+      "amazon_status": {
+        "available": false,
+        "price": null,
+        "buyable": false,
+        "status": "unavailable",
+        "error": "No cumple requisitos de fast delivery o sin precio",
+        "delivery_date": null,
+        "days_until_delivery": null
+      },
+      "site_items": "[{\"item_id\": \"MLB4362086163\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM2619877277\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO3404078396\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421937892\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2670050534\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT2810844647",
+      "asin": "B07MKBKN4H",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($12.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 12.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLM4512410332\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO1761803571\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC3421951970\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLB6049127054\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA2670456160\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3181514108",
+      "asin": "B07KRTYX5G",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($56.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 56.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MCO3400537698\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4507447070\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLC1784213695\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLB\", \"logistic_type\": \"remote\", \"item_id\": \"MLB6056973372\", \"seller_id\": 3048288454}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MLA2666217164\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]"
+    },
+    {
+      "item_id": "CBT3185491488",
+      "asin": "B0DV4VRMND",
+      "action": "no_change",
+      "success": true,
+      "message": "Amazon sin cambios ($49.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 49.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tuesday, December 23",
+        "days_until_delivery": 1,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"item_id\": \"MLC3421601122\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM2624654363\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MCO1764306507\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLB6056973914\", \"seller_id\": 3048288454, \"site_id\": \"MLB\", \"logistic_type\": \"remote\"}]"
+    }
+  ]
+}

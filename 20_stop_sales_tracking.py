@@ -6,6 +6,12 @@
 DETENER SALES TRACKING DAEMON EN SERVIDOR
 ═══════════════════════════════════════════════════════════════════════════════
 
+¿Qué hace?
+    Detiene el daemon de ventas en el servidor
+
+USO:
+    python3 20_stop_sales_tracking.py
+
 Detiene el daemon de sales tracking que se ejecuta en el servidor.
 ═══════════════════════════════════════════════════════════════════════════════
 """

@@ -6,6 +6,12 @@
 INICIAR SALES TRACKING DAEMON EN SERVIDOR
 ═══════════════════════════════════════════════════════════════════════════════
 
+¿Qué hace?
+    Inicia el daemon de ventas en el servidor
+
+USO:
+    python3 18_start_sales_tracking.py
+
 Inicia el daemon de tracking de ventas en el servidor que:
 - Trackea nuevas ventas cada 1 hora
 - Genera Excel profesional con Dashboard

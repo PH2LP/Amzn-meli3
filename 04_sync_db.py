@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """
-sync_db_to_server.py
+04_sync_db.py
 ═══════════════════════════════════════════════════════════════════════════════
 SINCRONIZACIÓN DE BASE DE DATOS LOCAL → SERVIDOR
 ═══════════════════════════════════════════════════════════════════════════════
+
+¿Qué hace?
+    Sincroniza la base de datos local con el servidor VPS
+
+USO:
+    python3 04_sync_db.py
 
 Sincroniza la base de datos SQLite local (storage/listings_database.db)
 con la base de datos del servidor remoto.

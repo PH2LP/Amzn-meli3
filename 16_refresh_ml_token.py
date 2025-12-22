@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-refresh_ml_token.py
+16_refresh_ml_token.py
 ═══════════════════════════════════════════════════════════════════════════════
 REFRESH ML TOKEN: Actualiza el token de MercadoLibre manualmente
 ═══════════════════════════════════════════════════════════════════════════════
 
-Refresca el access token de MercadoLibre y lo guarda en el .env
+¿Qué hace?
+    Renueva el token de MercadoLibre cuando expira
 
 USO:
     python3 16_refresh_ml_token.py
+
+Refresca el access token de MercadoLibre y lo guarda en el .env
 ═══════════════════════════════════════════════════════════════════════════════
 """
 

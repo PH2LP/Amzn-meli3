@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-parallel_publish.py
+14_parallel_publish.py
 ═══════════════════════════════════════════════════════════════════════════════
 PUBLICACIÓN PARALELA: Ejecuta múltiples procesos de 02_publish.py en paralelo
 ═══════════════════════════════════════════════════════════════════════════════
+
+¿Qué hace?
+    Publica múltiples productos en paralelo (más rápido)
+
+USO:
+    python3 14_parallel_publish.py
 
 Divide automáticamente la lista de ASINs en partes iguales y ejecuta N procesos
 paralelos de 02_publish.py, cada uno procesando su parte.

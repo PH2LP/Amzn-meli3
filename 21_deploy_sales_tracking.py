@@ -6,6 +6,13 @@
 DEPLOY DE SALES TRACKING DAEMON AL SERVIDOR
 ═══════════════════════════════════════════════════════════════════════════════
 
+¿Qué hace?
+    Sube los archivos de ventas al servidor
+
+USO:
+    python3 21_deploy_sales_tracking.py            # Solo subir
+    python3 21_deploy_sales_tracking.py --start    # Subir + iniciar
+
 Sube todos los archivos necesarios al servidor:
 - scripts/server/sales_tracking_daemon.py
 - scripts/tools/track_sales.py

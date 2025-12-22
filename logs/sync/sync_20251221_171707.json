@@ -1,0 +1,36 @@
+{
+  "timestamp": "2025-12-21T17:17:07.993191",
+  "statistics": {
+    "total": 1,
+    "paused": 0,
+    "reactivated": 0,
+    "price_updated": 1,
+    "no_change": 0,
+    "errors": 0,
+    "errors_wrong_account": 0
+  },
+  "changes": [
+    {
+      "item_id": "CBT3231984704",
+      "asin": "B0F8B2MVHS",
+      "action": "price_updated",
+      "success": true,
+      "message": "Precio actualizado: $45.99 → $45.99 USD (Amazon: $35.99)",
+      "amazon_status": {
+        "available": true,
+        "price": 35.99,
+        "buyable": true,
+        "status": "active",
+        "error": null,
+        "delivery_date": "Tomorrow, December 22",
+        "days_until_delivery": 0,
+        "prime_available": true,
+        "in_stock": true
+      },
+      "site_items": "[{\"site_id\": \"MLB\", \"logistic_type\": \"remote\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 422, \"cause\": [{\"cause_id\": 5101, \"code\": \"item.shipping.mode.not_supported\", \"department\": \"cbt-item-validation\", \"message\": \"You can't send the product in this kind of shipment in Brazil.\", \"references\": [\"item.shipping.mode\"], \"type\": \"error\"}]}}, {\"item_id\": \"MLC1794417917\", \"seller_id\": 3048289672, \"site_id\": \"MLC\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLM4553596834\", \"seller_id\": 3048288440, \"site_id\": \"MLM\", \"logistic_type\": \"remote\"}, {\"site_id\": \"MLM\", \"logistic_type\": \"fulfillment\", \"error\": {\"message\": \"Validation error\", \"error\": \"validation_error\", \"status\": 400, \"cause\": [{\"department\": \"cbt-global-listing\", \"cause_id\": 5246, \"type\": \"error\", \"code\": \"net_proceeds.not_configured\", \"references\": [], \"message\": \"Seller 3048289692 doesn\\u2019t use the net proceeds pricing model for site MLM\"}]}}, {\"item_id\": \"MCO3432206506\", \"seller_id\": 3047796173, \"site_id\": \"MCO\", \"logistic_type\": \"remote\"}, {\"item_id\": \"MLA1615361957\", \"seller_id\": 3048288470, \"site_id\": \"MLA\", \"logistic_type\": \"remote\"}]",
+      "old_price": 45.99,
+      "new_price": 45.99,
+      "amazon_price": 35.99
+    }
+  ]
+}

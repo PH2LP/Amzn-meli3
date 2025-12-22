@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-start_auto_answer.py
+08_start_autoanswer.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Inicia el bot de respuestas automáticas en el servidor
+
+USO:
+    python3 08_start_autoanswer.py
+
 Inicia el sistema de respuestas automáticas en el servidor VPS
 ────────────────────────────────────────────────────────────────────
 """

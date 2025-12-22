@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-sync_mini_ml.py
+15_sync_mini_ml.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Sincronización rápida de productos específicos
+
+USO:
+    python3 15_sync_mini_ml.py
+
 Sincroniza archivos mini_ml.json locales al servidor
 ────────────────────────────────────────────────────────────────────
 """

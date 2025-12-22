@@ -50,7 +50,8 @@ def exchange_code_for_tokens(authorization_code):
         'code': authorization_code,
         'grant_type': 'authorization_code',
         'client_id': APP_KEY,
-        'client_secret': APP_SECRET
+        'client_secret': APP_SECRET,
+        'redirect_uri': 'http://localhost'
     }
 
     response = requests.post(token_url, data=data)

@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-parallel_search.py
+01_search_products.py
 ═══════════════════════════════════════════════════════════════════════════════
 BÚSQUEDA PARALELA SIMPLIFICADA - Configurable desde .env
 ═══════════════════════════════════════════════════════════════════════════════
 
+¿Qué hace?
+    Busca productos en Amazon usando keywords y los guarda en la base de datos
+
 USO:
-    python3 parallel_search.py
+    python3 01_search_products.py
 
 CONFIGURACIÓN (.env):
     PARALLEL_PROCESSES=4          # Número de procesos paralelos

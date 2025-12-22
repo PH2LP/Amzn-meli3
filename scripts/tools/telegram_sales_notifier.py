@@ -242,9 +242,10 @@ def get_ml_user_id():
 def get_asin_by_item_id(item_id):
     """
     Busca el ASIN asociado a un item_id de MercadoLibre.
+    Busca tanto en item_id (CBT) como en site_items (IDs locales de cada marketplace).
 
     Args:
-        item_id: ID del item en MercadoLibre
+        item_id: ID del item en MercadoLibre (puede ser CBT o local como MLB, MLM, etc.)
 
     Returns:
         dict: {asin, title, brand, model, permalink, amazon_cost} o None
@@ -253,6 +254,7 @@ def get_asin_by_item_id(item_id):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
+    # Primero buscar por item_id exacto (CBT)
     cursor.execute("""
         SELECT asin, title, brand, model, permalink, country
         FROM listings
@@ -261,6 +263,18 @@ def get_asin_by_item_id(item_id):
     """, (item_id,))
 
     row = cursor.fetchone()
+
+    # Si no encuentra, buscar en site_items (JSON con IDs locales)
+    if not row:
+        cursor.execute("""
+            SELECT asin, title, brand, model, permalink, country
+            FROM listings
+            WHERE site_items LIKE ?
+            LIMIT 1
+        """, (f'%{item_id}%',))
+
+        row = cursor.fetchone()
+
     conn.close()
 
     if not row:
@@ -580,13 +594,24 @@ def _check_new_sales_impl():
         print(f"   CBT ID: {parent_item_id}")
         print(f"   Estado: {order_status}")
 
-        # Buscar ASIN en la BD usando CBT ID
+        # Buscar ASIN en la BD usando CBT ID o item_id local
         print(f"   🔍 Buscando ASIN en BD...")
-        search_id = parent_item_id if parent_item_id else item_id
-        asin_data = get_asin_by_item_id(search_id)
+
+        # Intentar primero con CBT ID (parent_item_id)
+        asin_data = None
+        if parent_item_id:
+            print(f"      Buscando por CBT: {parent_item_id}")
+            asin_data = get_asin_by_item_id(parent_item_id)
+
+        # Si no encuentra, intentar con item_id local (MLB, MLM, etc.)
+        if not asin_data:
+            print(f"      Buscando por item_id local: {item_id}")
+            asin_data = get_asin_by_item_id(item_id)
 
         if not asin_data:
-            print(f"   ⚠️ No se encontró ASIN para item_id: {item_id}")
+            print(f"   ⚠️ No se encontró ASIN para:")
+            print(f"      CBT: {parent_item_id}")
+            print(f"      Item local: {item_id}")
             stats["errors"] += 1
             continue
 

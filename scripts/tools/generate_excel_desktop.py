@@ -107,37 +107,48 @@ def create_professional_excel():
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
 
-    # Ajustar anchos de columna (compactos y organizados)
+    # Ajustar anchos de columna (más espaciosos para evitar texto apretado)
     column_widths = {
-        'A': 16,  # Fecha
-        'B': 6,   # MKT
-        'C': 45,  # Producto
-        'D': 5,   # Cant
-        'E': 11,  # Precio Venta
-        'F': 9,   # Fee ML
-        'G': 8,   # Envío
-        'H': 10,  # Neto ML
-        'I': 10,  # Costo AMZ
-        'J': 6,   # 3PL
-        'K': 11,  # Total Costo
-        'L': 11,  # GANANCIA
-        'M': 9,   # Margen %
-        'N': 12,  # ASIN
-        'O': 16,  # Orden ML
-        'P': 15,  # CBT ID
-        'Q': 20,  # Comprador
-        'R': 10,  # País
-        'S': 8,   # Estado
+        'A': 18,  # Fecha
+        'B': 8,   # MKT
+        'C': 50,  # Producto (más ancho)
+        'D': 6,   # Cant
+        'E': 13,  # Precio Venta
+        'F': 11,  # Fee ML
+        'G': 10,  # Envío
+        'H': 12,  # Neto ML
+        'I': 12,  # Costo AMZ
+        'J': 8,   # 3PL
+        'K': 13,  # Total Costo
+        'L': 13,  # GANANCIA
+        'M': 11,  # Margen %
+        'N': 14,  # ASIN
+        'O': 18,  # Orden ML
+        'P': 16,  # CBT ID
+        'Q': 22,  # Comprador
+        'R': 12,  # País
+        'S': 10,  # Estado
     }
 
     for col, width in column_widths.items():
         ws.column_dimensions[col].width = width
 
-    # Formatear celdas de datos
+    # Formatear celdas de datos con todas las líneas gruesas
+    thick_border = Border(
+        left=Side(style='medium', color='000000'),
+        right=Side(style='medium', color='000000'),
+        top=Side(style='medium', color='000000'),
+        bottom=Side(style='medium', color='000000')
+    )
+
     for row in ws.iter_rows(min_row=2, max_row=ws.max_row):
         for cell in row:
-            cell.font = normal_font
-            cell.border = thin_border
+            # Todas las letras en negrita
+            cell.font = Font(name='Arial', size=10, bold=True)
+
+            # Todas las líneas gruesas
+            cell.border = thick_border
+
             cell.alignment = Alignment(vertical='center')
 
             # Formatear números como moneda (columnas financieras)

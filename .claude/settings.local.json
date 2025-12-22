@@ -1,24 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(sshpass -p 'koqven-1regka-nyfXiw' ssh -o StrictHostKeyChecking=no root@138.197.32.67 \"crontab -l | grep sync_amazon_ml\")",
-      "Bash(rm:*)",
-      "Bash(mv:*)",
-      "Bash(sshpass:*)",
-      "Bash(pip3 install:*)",
-      "Bash(/tmp/amazon_glow_api_PREV.py)",
-      "Bash(find:*)",
-      "Bash(git add:*)",
-      "Bash(git push:*)",
-      "Bash(cat:*)",
-      "Bash(python3:*)",
-      "Bash(chmod:*)",
-      "Bash(curl:*)",
-      "Bash(git commit:*)",
-      "Bash(sqlite3:*)",
-      "Bash(awk:*)",
-      "Bash(xargs kill:*)",
-      "Bash(git reset:*)"
+      "Bash(tee:*)",
+      "Bash(./scripts/tools/sync_with_token_download.sh:*)",
+      "Bash(pmset:*)",
+      "Bash(sudo pmset:*)"
     ],
     "deny": [],
     "ask": []

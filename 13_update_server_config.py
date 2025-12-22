@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """
-update_server_config.py
+13_update_server_config.py
 ────────────────────────────────────────────────────────────────────
+¿Qué hace?
+    Actualiza la configuración (.env) en el servidor
+
+USO:
+    python3 13_update_server_config.py
+
 Actualiza configuraciones del servidor (markup, tax, fulfillment cost)
 ────────────────────────────────────────────────────────────────────
 """

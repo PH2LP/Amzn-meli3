@@ -362,7 +362,30 @@ def process_order(order):
 
     if listing_data:
         asin = listing_data["asin"]
-        amazon_cost = listing_data["amazon_cost"]
+        # Intentar obtener precio en tiempo real con Glow API
+        if asin:
+            print(f"{Colors.CYAN}   🔄 Obteniendo precio en tiempo real de Glow API...{Colors.NC}")
+            try:
+                # Importar función de Glow API
+                sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+                from src.integrations.amazon_glow_api import check_real_availability_glow_api
+
+                # Obtener precio actual de Amazon con Glow API
+                glow_data = check_real_availability_glow_api(asin)
+                if glow_data and glow_data.get("price"):
+                    amazon_cost = glow_data["price"]
+                    print(f"{Colors.GREEN}   ✅ Precio de Glow API: ${amazon_cost}{Colors.NC}")
+                else:
+                    print(f"{Colors.YELLOW}   ⚠️  Glow API no devolvió precio, usando fallback...{Colors.NC}")
+                    # Fallback: usar precio del JSON si existe
+                    amazon_cost = listing_data["amazon_cost"]
+            except Exception as e:
+                print(f"{Colors.YELLOW}   ⚠️  Error con Glow API: {e}, usando fallback{Colors.NC}")
+                # Fallback: usar precio del JSON
+                amazon_cost = listing_data["amazon_cost"]
+        else:
+            # No hay ASIN, usar lo que venga del listing
+            amazon_cost = listing_data["amazon_cost"]
 
     # Datos del comprador
     buyer = order.get("buyer", {})
@@ -405,8 +428,10 @@ def process_order(order):
     profit_margin = 0
 
     if amazon_cost:
-        amazon_tax = round(amazon_cost * TAX_RATE, 2)
-        total_cost = round(amazon_cost + amazon_tax + FULFILLMENT_FEE, 2)
+        # Multiplicar amazon_cost por cantidad para obtener costo total
+        amazon_cost_total = round(amazon_cost * quantity, 2)
+        amazon_tax = round(amazon_cost_total * TAX_RATE, 2)
+        total_cost = round(amazon_cost_total + amazon_tax + FULFILLMENT_FEE, 2)
         profit = round(ml_finances["net_proceeds"] - total_cost, 2)
 
         if ml_finances["sale_price"] > 0:
