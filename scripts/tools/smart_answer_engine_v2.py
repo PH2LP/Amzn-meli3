@@ -362,6 +362,7 @@ Responde SOLO este JSON:
 def load_product_data(asin: str) -> Tuple[Optional[dict], Optional[dict]]:
     """
     Carga datos del producto desde mini_ml y/o amazon_json.
+    Si no existen, intenta descargarlos con SP API.
     """
     mini_ml = None
     amazon_json = None
@@ -385,6 +386,27 @@ def load_product_data(asin: str) -> Tuple[Optional[dict], Optional[dict]]:
             log(f"amazon_json cargado: {amazon_json_path}")
         except Exception as e:
             log(f"Error cargando amazon_json: {e}", "WARNING")
+
+    # Si no hay datos, intentar descargar con SP API
+    if not mini_ml and not amazon_json:
+        log(f"No se encontraron datos locales para {asin}, descargando con SP API...")
+        try:
+            import sys
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+            from src.integrations.amazon_api import get_product_data_from_asin
+
+            log(f"Descargando producto {asin} desde Amazon SP API...")
+            # Guardar directamente en storage/asins_json/
+            os.makedirs("storage/asins_json", exist_ok=True)
+            product_data = get_product_data_from_asin(asin, save_path=amazon_json_path)
+
+            if product_data and os.path.exists(amazon_json_path):
+                log(f"✅ Producto {asin} descargado y guardado en {amazon_json_path}")
+                amazon_json = product_data
+            else:
+                log(f"⚠️ No se pudo descargar información para {asin}", "WARNING")
+        except Exception as e:
+            log(f"Error descargando producto con SP API: {e}", "ERROR")
 
     return mini_ml, amazon_json
 
