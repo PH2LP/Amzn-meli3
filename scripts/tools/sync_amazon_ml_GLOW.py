@@ -1024,7 +1024,21 @@ def main():
 
     # Notificar finalización de sync
     if telegram_configured():
-        notify_sync_complete(stats, duration)
+        # Cargar stats del sync anterior para comparar
+        prev_sync_stats = None
+        try:
+            # Buscar el log anterior más reciente
+            prev_logs = sorted(LOG_DIR.glob("sync_*.json"), key=lambda x: x.stat().st_mtime, reverse=True)
+            # Saltar el log actual (el primero) y tomar el segundo
+            if len(prev_logs) >= 2:
+                prev_log_file = prev_logs[1]
+                with open(prev_log_file, 'r') as f:
+                    prev_log_data = json.load(f)
+                    prev_sync_stats = prev_log_data.get('statistics', {})
+        except Exception as e:
+            print(f"   ⚠️ No se pudo cargar sync anterior para comparación: {e}")
+
+        notify_sync_complete(stats, duration, prev_sync_stats)
 
     # Limpiar JSONs viejos de storage/asins_json/ (evitar usar datos desactualizados)
     print("\n🧹 Limpiando JSONs viejos de ASINs...")

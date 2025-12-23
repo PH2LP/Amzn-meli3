@@ -109,12 +109,13 @@ def notify_sync_error(asin, error_msg):
     return send_message(message, disable_notification=False)
 
 
-def notify_sync_complete(stats, duration_minutes=0):
+def notify_sync_complete(stats, duration_minutes=0, prev_sync_stats=None):
     """Notifica finalización de sincronización
 
     Args:
         stats: Dict con {total, paused, reactivated, price_updated, no_change, errors, errors_wrong_account}
         duration_minutes: Duración en minutos
+        prev_sync_stats: Stats del sync anterior para calcular cambios reales (opcional)
     """
     total = stats.get("total", 0)
     paused = stats.get("paused", 0)
@@ -124,6 +125,12 @@ def notify_sync_complete(stats, duration_minutes=0):
     errors_wrong_account = stats.get("errors_wrong_account", 0)
     no_change = stats.get("no_change", 0)
 
+    # Calcular cambios reales si tenemos stats anteriores
+    newly_paused = None
+    if prev_sync_stats:
+        prev_paused = prev_sync_stats.get("paused", 0) + prev_sync_stats.get("errors", 0)
+        newly_paused = max(0, paused - prev_paused)
+
     message = "━━━━━━━━━━━━━━━━━━━━━━━━\n"
     message += "✅ <b>SYNC COMPLETADO</b>\n"
     message += "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
@@ -132,14 +139,23 @@ def notify_sync_complete(stats, duration_minutes=0):
     message += f"   • Total procesados: {total}\n"
 
     if reactivated > 0:
-        message += f"   • Items reactivados: {reactivated}\n"
+        message += f"   • ♻️ Reactivados: {reactivated}\n"
 
-    message += f"   • Precios actualizados: {updated}\n"
-    message += f"   • Productos pausados: {paused}\n"
-    message += f"   • Sin cambios: {no_change}\n"
+    message += f"   • 💲 Precios actualizados: {updated}\n"
+
+    # Mostrar pausados con detalle si tenemos datos del sync anterior
+    if newly_paused is not None and newly_paused < paused:
+        already_paused = paused - newly_paused
+        message += f"   • ⏸️ Sin stock total: {paused}\n"
+        message += f"      ├─ Recién pausados: {newly_paused}\n"
+        message += f"      └─ Ya pausados: {already_paused}\n"
+    else:
+        message += f"   • ⏸️ Sin stock: {paused}\n"
+
+    message += f"   • ➡️ Sin cambios: {no_change}\n"
 
     if errors > 0:
-        message += f"   • Errores: {errors}\n"
+        message += f"   • ❌ Errores: {errors}\n"
 
         # Desglose de errores
         errors_other = errors - errors_wrong_account
