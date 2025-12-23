@@ -309,12 +309,12 @@ def get_order_billing(order):
         first_item = order_items[0]
 
         # Precio de venta (lo que pagó el cliente)
-        sale_price = first_item.get("full_unit_price", 0)
-        quantity = first_item.get("quantity", 1)
+        sale_price = first_item.get("full_unit_price") or 0
+        quantity = first_item.get("quantity") or 1
         total_sale_price = sale_price * quantity
 
         # Fee de MercadoLibre (comisión)
-        sale_fee = first_item.get("sale_fee", 0)
+        sale_fee = first_item.get("sale_fee") or 0
 
         # Obtener shipping cost desde el endpoint de shipments
         shipping = order.get("shipping", {})
@@ -337,18 +337,18 @@ def get_order_billing(order):
 
         # Taxes (los paga el cliente, no afectan lo que recibís)
         taxes_obj = order.get("taxes", {})
-        taxes = taxes_obj.get("amount", 0)
+        taxes = taxes_obj.get("amount") or 0 if taxes_obj else 0
 
         # NET PROCEEDS - Calcular manualmente
         # = Precio de venta - Fee ML - Shipping
         net_proceeds = total_sale_price - sale_fee - shipping_cost
 
         return {
-            "sale_price": round(total_sale_price, 2),
-            "ml_fee": round(sale_fee, 2),
-            "shipping_cost": round(shipping_cost, 2),
-            "taxes": round(taxes, 2),
-            "net_proceeds": round(net_proceeds, 2)
+            "sale_price": round(total_sale_price or 0, 2),
+            "ml_fee": round(sale_fee or 0, 2),
+            "shipping_cost": round(shipping_cost or 0, 2),
+            "taxes": round(taxes or 0, 2),
+            "net_proceeds": round(net_proceeds or 0, 2)
         }
 
     except Exception as e:
