@@ -228,18 +228,56 @@ def get_item_data_from_listing(ml_item_id):
         asin = row["asin"]
         title = row["title"]
 
-        # Obtener precio de Amazon desde el JSON
+        # Obtener precio de Amazon en TIEMPO REAL desde Glow API
         amazon_cost = 0
         if asin:
-            json_file = Path(f"storage/asins_json/{asin}.json")
-            if json_file.exists():
+            print(f"{Colors.CYAN}   🔄 Obteniendo precio en tiempo real de Glow API...{Colors.NC}")
+            try:
+                # Importar función de Glow API
+                import sys
+                sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+                from src.integrations.amazon_glow_api import check_real_availability_glow_api
+
+                # Obtener precio actual de Amazon con Glow API
+                glow_data = check_real_availability_glow_api(asin)
+                if glow_data and glow_data.get("price"):
+                    amazon_cost = glow_data["price"]
+                    print(f"{Colors.GREEN}   ✅ Precio de Glow API: ${amazon_cost}{Colors.NC}")
+                else:
+                    print(f"{Colors.YELLOW}   ⚠️ Glow API no devolvió precio, usando fallback...{Colors.NC}")
+            except Exception as e:
+                print(f"{Colors.YELLOW}   ⚠️ Error con Glow API: {e}{Colors.NC}")
+
+            # Fallback 1: amazon_price_last de la base de datos
+            if amazon_cost == 0:
+                print(f"{Colors.CYAN}   📋 Buscando último precio conocido en DB...{Colors.NC}")
                 try:
-                    with open(json_file, 'r') as f:
-                        data = json.load(f)
-                        # Buscar precio en prime_pricing.price
-                        amazon_cost = data.get("prime_pricing", {}).get("price", 0)
-                except:
-                    pass
+                    conn_db = sqlite3.connect(LISTINGS_DB_PATH, timeout=10)
+                    cursor_db = conn_db.cursor()
+                    cursor_db.execute("SELECT amazon_price_last FROM listings WHERE asin = ?", (asin,))
+                    price_row = cursor_db.fetchone()
+                    conn_db.close()
+
+                    if price_row and price_row[0]:
+                        amazon_cost = price_row[0]
+                        print(f"{Colors.GREEN}   💲 Precio desde DB (amazon_price_last): ${amazon_cost}{Colors.NC}")
+                except Exception as e:
+                    print(f"{Colors.YELLOW}   ⚠️ Error leyendo precio de DB: {e}{Colors.NC}")
+
+            # Fallback 2: Si aún no hay precio, intentar JSON local
+            if amazon_cost == 0:
+                print(f"{Colors.CYAN}   📋 Intentando obtener precio de JSON local...{Colors.NC}")
+                json_file = Path(f"storage/asins_json/{asin}.json")
+                if json_file.exists():
+                    try:
+                        with open(json_file, 'r') as f:
+                            data = json.load(f)
+                            amazon_cost = data.get("prime_pricing", {}).get("price", 0)
+                            print(f"{Colors.GREEN}   💲 Precio desde JSON (fallback): ${amazon_cost}{Colors.NC}")
+                    except Exception as e:
+                        print(f"{Colors.YELLOW}   ⚠️ Error leyendo JSON: {e}{Colors.NC}")
+                else:
+                    print(f"{Colors.RED}   ❌ No hay precio disponible para ASIN {asin}{Colors.NC}")
 
         return {
             "asin": asin,

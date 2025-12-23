@@ -171,10 +171,28 @@ def main():
             print(f"   🔄 Consultando Glow API...")
             glow_data = check_real_availability_glow_api(asin)
 
+            amazon_cost = 0
             if glow_data and glow_data.get("price"):
                 amazon_cost = glow_data["price"]
-                print(f"   {Colors.GREEN}✅ Precio: ${amazon_cost}{Colors.NC}")
+                print(f"   {Colors.GREEN}✅ Precio de Glow API: ${amazon_cost}{Colors.NC}")
 
+            # Fallback: amazon_price_last de listings DB
+            if amazon_cost == 0:
+                print(f"   {Colors.CYAN}📋 Glow API falló, buscando en DB...{Colors.NC}")
+                try:
+                    conn_listings = sqlite3.connect("storage/listings_database.db", timeout=10)
+                    cursor_listings = conn_listings.cursor()
+                    cursor_listings.execute("SELECT amazon_price_last FROM listings WHERE asin = ?", (asin,))
+                    price_row = cursor_listings.fetchone()
+                    conn_listings.close()
+
+                    if price_row and price_row[0]:
+                        amazon_cost = price_row[0]
+                        print(f"   {Colors.GREEN}💲 Precio desde DB (amazon_price_last): ${amazon_cost}{Colors.NC}")
+                except Exception as e:
+                    print(f"   {Colors.YELLOW}⚠️  Error leyendo DB: {e}{Colors.NC}")
+
+            if amazon_cost > 0:
                 # Actualizar en DB
                 result = update_sale_cost(sale_id, amazon_cost, sale['net_proceeds'])
 
@@ -183,7 +201,7 @@ def main():
 
                 updated += 1
             else:
-                print(f"   {Colors.YELLOW}⚠️  Glow API no devolvió precio{Colors.NC}\n")
+                print(f"   {Colors.YELLOW}⚠️  No se pudo obtener precio de ninguna fuente{Colors.NC}\n")
                 failed += 1
 
         except Exception as e:
