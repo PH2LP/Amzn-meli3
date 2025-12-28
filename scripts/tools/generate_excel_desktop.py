@@ -74,7 +74,10 @@ def create_professional_excel():
 
     # Formatear fecha
     if 'Fecha' in df.columns and len(df) > 0:
-        df['Fecha'] = pd.to_datetime(df['Fecha']).dt.strftime('%Y-%m-%d %H:%M')
+        try:
+            df['Fecha'] = pd.to_datetime(df['Fecha'], errors='coerce').dt.strftime('%Y-%m-%d %H:%M')
+        except:
+            pass
 
     # Exportar a Excel
     df.to_excel(DESKTOP_PATH, index=False, sheet_name='Ventas')
@@ -349,6 +352,86 @@ def create_professional_excel():
         ws_summary['A1'].font = Font(name='Arial', size=18, bold=True, color="1F4E78")
         ws_summary['A3'] = 'ℹ️ No hay ventas registradas aún'
         ws_summary['A3'].font = Font(name='Arial', size=12)
+
+    # ═══════════════════════════════════════════════════════════════
+    # HOJA: VENTAS POR DÍA
+    # ═══════════════════════════════════════════════════════════════
+    if len(df) > 0:
+        ws_daily = wb.create_sheet("Ventas por Día")
+
+        # Convertir fecha a solo día (sin hora)
+        df['Fecha_Solo'] = pd.to_datetime(df['Fecha'], errors='coerce').dt.date
+
+        # Agrupar por día
+        by_day = df.groupby('Fecha_Solo').agg({
+            'Producto': 'count',
+            'Precio Venta': 'sum',
+            'GANANCIA': 'sum',
+            'Margen %': 'mean',
+            'Costo AMZ': 'sum',
+            'Fee ML': 'sum',
+            'Neto ML': 'sum'
+        }).reset_index()
+
+        # Renombrar columnas
+        by_day.columns = ['Fecha', 'Ventas', 'Revenue', 'Ganancia', 'Margen %', 'Costo AMZ', 'Fee ML', 'Neto ML']
+
+        # Ordenar por fecha descendente (más reciente primero)
+        by_day = by_day.sort_values('Fecha', ascending=False)
+
+        # Escribir datos
+        for r_idx, row_data in enumerate(by_day.itertuples(index=False), 1):
+            for c_idx, value in enumerate(row_data, 1):
+                cell = ws_daily.cell(row=r_idx + 1, column=c_idx, value=value)
+
+        # Headers
+        headers = ['Fecha', 'Ventas', 'Revenue', 'Ganancia', 'Margen %', 'Costo AMZ', 'Fee ML', 'Neto ML']
+        for col_idx, header in enumerate(headers, 1):
+            cell = ws_daily.cell(row=1, column=col_idx, value=header)
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thin_border
+
+        # Formatear celdas de datos
+        for row in ws_daily.iter_rows(min_row=2, max_row=ws_daily.max_row):
+            for cell in row:
+                cell.font = normal_font
+                cell.border = thin_border
+                cell.alignment = Alignment(vertical='center')
+
+                # Formatear números
+                col_letter = get_column_letter(cell.column)
+                # C=Revenue, D=Ganancia, F=Costo AMZ, G=Fee ML, H=Neto ML
+                if col_letter in ['C', 'D', 'F', 'G', 'H']:
+                    cell.number_format = '$#,##0.00'
+                # E=Margen %
+                elif col_letter == 'E':
+                    cell.number_format = '0.00"%"'
+                # A=Fecha
+                elif col_letter == 'A':
+                    cell.number_format = 'yyyy-mm-dd'
+
+                # Resaltar ganancia
+                if col_letter == 'D':
+                    cell.fill = ganancia_fill
+                    cell.font = Font(name='Arial', size=10, bold=True, color="006100")
+
+        # Ajustar anchos de columna
+        ws_daily.column_dimensions['A'].width = 12  # Fecha
+        ws_daily.column_dimensions['B'].width = 8   # Ventas
+        ws_daily.column_dimensions['C'].width = 12  # Revenue
+        ws_daily.column_dimensions['D'].width = 12  # Ganancia
+        ws_daily.column_dimensions['E'].width = 10  # Margen %
+        ws_daily.column_dimensions['F'].width = 12  # Costo AMZ
+        ws_daily.column_dimensions['G'].width = 10  # Fee ML
+        ws_daily.column_dimensions['H'].width = 12  # Neto ML
+
+        # Fijar primera fila
+        ws_daily.freeze_panes = 'A2'
+
+        # Agregar filtros
+        ws_daily.auto_filter.ref = ws_daily.dimensions
 
     # Guardar
     wb.save(DESKTOP_PATH)
