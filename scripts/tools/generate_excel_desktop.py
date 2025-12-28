@@ -74,7 +74,7 @@ def create_professional_excel():
 
     # Formatear fecha
     if 'Fecha' in df.columns and len(df) > 0:
-        df['Fecha'] = pd.to_datetime(df['Fecha']).dt.strftime('%Y-%m-%d %H:%M')
+        df['Fecha'] = pd.to_datetime(df['Fecha'], errors='coerce').dt.strftime('%Y-%m-%d %H:%M')
 
     # Exportar a Excel
     df.to_excel(DESKTOP_PATH, index=False, sheet_name='Ventas')
