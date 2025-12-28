@@ -217,9 +217,15 @@ def create_professional_excel():
         ws_summary['A1'].alignment = Alignment(horizontal='center', vertical='center')
         ws_summary.row_dimensions[1].height = 30
 
+        # ═══ INSTRUCCIONES ═══
+        ws_summary['A2'] = '💡 CÓMO USAR LOS FILTROS:'
+        ws_summary['A2'].font = Font(name='Arial', size=11, bold=True, color="1F4E78")
+        ws_summary['A3'] = '1. Ve a la hoja "Ventas" (pestaña abajo)'
+        ws_summary['A3'].font = Font(name='Arial', size=10)
+
         # ═══ SECCIÓN 2: KPIs PRINCIPALES ═══
-        ws_summary['A3'] = '💰 RESUMEN FINANCIERO'
-        ws_summary['A3'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
+        ws_summary['A4'] = '💰 RESUMEN FINANCIERO'
+        ws_summary['A4'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
 
         kpis = [
             ['Total Ventas:', total_ventas, 'unidades'],
@@ -230,7 +236,7 @@ def create_professional_excel():
             ['Margen Promedio:', avg_margin, '%'],
         ]
 
-        row = 4
+        row = 5
         for label, value, unit in kpis:
             ws_summary[f'A{row}'] = label
             ws_summary[f'A{row}'].font = Font(name='Arial', size=11, bold=True)
@@ -248,8 +254,8 @@ def create_professional_excel():
             row += 1
 
         # ═══ SECCIÓN 3: DESGLOSE DE COSTOS ═══
-        ws_summary['D3'] = '📉 DESGLOSE DE COSTOS'
-        ws_summary['D3'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
+        ws_summary['D4'] = '📉 DESGLOSE DE COSTOS'
+        ws_summary['D4'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
 
         costs_breakdown = [
             ['Comisiones ML:', total_ml_fees],
@@ -258,7 +264,7 @@ def create_professional_excel():
             ['Total Costos:', total_costs],
         ]
 
-        row = 4
+        row = 5
         for label, value in costs_breakdown:
             ws_summary[f'D{row}'] = label
             ws_summary[f'D{row}'].font = Font(name='Arial', size=11, bold=True)
@@ -269,19 +275,19 @@ def create_professional_excel():
             row += 1
 
         # ═══ SECCIÓN 4: TOP PRODUCTOS ═══
-        ws_summary['A12'] = '🏆 TOP 5 PRODUCTOS MÁS RENTABLES'
-        ws_summary['A12'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
+        ws_summary['A13'] = '🏆 TOP 5 PRODUCTOS MÁS RENTABLES'
+        ws_summary['A13'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
 
         # Headers
         headers = ['Producto', 'Ganancia', 'Margen %']
         for col_idx, header in enumerate(headers, 1):
-            cell = ws_summary.cell(row=13, column=col_idx, value=header)
+            cell = ws_summary.cell(row=14, column=col_idx, value=header)
             cell.font = Font(name='Arial', size=10, bold=True, color="FFFFFF")
             cell.fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
             cell.alignment = Alignment(horizontal='center')
 
         # Data
-        row = 14
+        row = 15
         for idx, prod_row in top_products.iterrows():
             ws_summary[f'A{row}'] = prod_row['Producto'][:40]
             ws_summary[f'B{row}'] = f"${prod_row['GANANCIA']:,.2f}"
