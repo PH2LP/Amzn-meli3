@@ -107,37 +107,48 @@ def create_professional_excel():
         cell.alignment = Alignment(horizontal='center', vertical='center')
         cell.border = thin_border
 
-    # Ajustar anchos de columna (compactos y organizados)
+    # Ajustar anchos de columna (más espaciosos para evitar texto apretado)
     column_widths = {
-        'A': 16,  # Fecha
-        'B': 6,   # MKT
-        'C': 45,  # Producto
-        'D': 5,   # Cant
-        'E': 11,  # Precio Venta
-        'F': 9,   # Fee ML
-        'G': 8,   # Envío
-        'H': 10,  # Neto ML
-        'I': 10,  # Costo AMZ
-        'J': 6,   # 3PL
-        'K': 11,  # Total Costo
-        'L': 11,  # GANANCIA
-        'M': 9,   # Margen %
-        'N': 12,  # ASIN
-        'O': 16,  # Orden ML
-        'P': 15,  # CBT ID
-        'Q': 20,  # Comprador
-        'R': 10,  # País
-        'S': 8,   # Estado
+        'A': 18,  # Fecha
+        'B': 8,   # MKT
+        'C': 50,  # Producto (más ancho)
+        'D': 6,   # Cant
+        'E': 13,  # Precio Venta
+        'F': 11,  # Fee ML
+        'G': 10,  # Envío
+        'H': 12,  # Neto ML
+        'I': 12,  # Costo AMZ
+        'J': 8,   # 3PL
+        'K': 13,  # Total Costo
+        'L': 13,  # GANANCIA
+        'M': 11,  # Margen %
+        'N': 14,  # ASIN
+        'O': 18,  # Orden ML
+        'P': 16,  # CBT ID
+        'Q': 22,  # Comprador
+        'R': 12,  # País
+        'S': 10,  # Estado
     }
 
     for col, width in column_widths.items():
         ws.column_dimensions[col].width = width
 
-    # Formatear celdas de datos
+    # Formatear celdas de datos con todas las líneas gruesas
+    thick_border = Border(
+        left=Side(style='medium', color='000000'),
+        right=Side(style='medium', color='000000'),
+        top=Side(style='medium', color='000000'),
+        bottom=Side(style='medium', color='000000')
+    )
+
     for row in ws.iter_rows(min_row=2, max_row=ws.max_row):
         for cell in row:
-            cell.font = normal_font
-            cell.border = thin_border
+            # Todas las letras en negrita
+            cell.font = Font(name='Arial', size=10, bold=True)
+
+            # Todas las líneas gruesas
+            cell.border = thick_border
+
             cell.alignment = Alignment(vertical='center')
 
             # Formatear números como moneda (columnas financieras)
@@ -338,55 +349,6 @@ def create_professional_excel():
         ws_summary['A1'].font = Font(name='Arial', size=18, bold=True, color="1F4E78")
         ws_summary['A3'] = 'ℹ️ No hay ventas registradas aún'
         ws_summary['A3'].font = Font(name='Arial', size=12)
-
-    # ═══════════════════════════════════════════════════════════════
-    # HOJA: POR DÍA
-    # ═══════════════════════════════════════════════════════════════
-    if len(df) > 0:
-        ws_daily = wb.create_sheet("Por Día")
-
-        # Convertir fecha a solo día (sin hora)
-        df['Fecha_Solo'] = pd.to_datetime(df['Fecha'], errors='coerce').dt.date
-
-        # Agrupar por día
-        by_day = df.groupby('Fecha_Solo').agg({
-            'Producto': 'count',
-            'Precio Venta': 'sum',
-            'GANANCIA': 'sum',
-            'Margen %': 'mean'
-        }).reset_index()
-
-        # Renombrar columnas
-        by_day.columns = ['Fecha', 'Ventas', 'Revenue', 'Ganancia', 'Margen %']
-
-        # Ordenar por fecha descendente (más reciente primero)
-        by_day = by_day.sort_values('Fecha', ascending=False)
-
-        # Escribir datos
-        for r_idx, row_data in enumerate(by_day.itertuples(index=False), 1):
-            for c_idx, value in enumerate(row_data, 1):
-                cell = ws_daily.cell(row=r_idx + 1, column=c_idx, value=value)
-
-        # Headers
-        headers = ['Fecha', 'Ventas', 'Revenue', 'Ganancia', 'Margen %']
-        for col_idx, header in enumerate(headers, 1):
-            cell = ws_daily.cell(row=1, column=col_idx, value=header)
-            cell.font = Font(name='Arial', size=11, bold=True, color="FFFFFF")
-            cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
-            cell.alignment = Alignment(horizontal='center', vertical='center')
-
-        # Formato moneda para columnas Revenue y Ganancia
-        for row in ws_daily.iter_rows(min_row=2, max_row=ws_daily.max_row):
-            row[2].number_format = '$#,##0.00'  # Revenue
-            row[3].number_format = '$#,##0.00'  # Ganancia
-            row[4].number_format = '0.00"%"'    # Margen %
-
-        # Ajustar anchos
-        ws_daily.column_dimensions['A'].width = 12  # Fecha
-        ws_daily.column_dimensions['B'].width = 8   # Ventas
-        ws_daily.column_dimensions['C'].width = 12  # Revenue
-        ws_daily.column_dimensions['D'].width = 12  # Ganancia
-        ws_daily.column_dimensions['E'].width = 10  # Margen %
 
     # Guardar
     wb.save(DESKTOP_PATH)
