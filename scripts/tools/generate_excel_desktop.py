@@ -72,9 +72,10 @@ def create_professional_excel():
             'Comprador', 'País', 'Estado'
         ])
 
-    # Formatear fecha
+    # Formatear fecha (maneja múltiples formatos: ISO y simples)
     if 'Fecha' in df.columns and len(df) > 0:
-        df['Fecha'] = pd.to_datetime(df['Fecha'], errors='coerce').dt.strftime('%Y-%m-%d %H:%M')
+        df['Fecha'] = pd.to_datetime(df['Fecha'], format='mixed', errors='coerce')
+        df['Fecha'] = df['Fecha'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M') if pd.notna(x) else '')
 
     # Exportar a Excel
     df.to_excel(DESKTOP_PATH, index=False, sheet_name='Ventas')
