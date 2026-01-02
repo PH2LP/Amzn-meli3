@@ -248,8 +248,9 @@ def extract_delivery_info(html_content: str) -> Dict:
                             year += 1
 
                         temp_delivery_date = datetime(year, month_num, day)
-                        time_delta = temp_delivery_date - current_date
-                        temp_days = time_delta.days
+                        # Calcular días de calendario (no horas completas)
+                        # Incluye el día de entrega en el conteo
+                        temp_days = (temp_delivery_date.date() - current_date.date()).days + 1
 
                         # Quedarse con la fecha más rápida
                         if fastest_days is None or temp_days < fastest_days:
