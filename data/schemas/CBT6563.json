@@ -472,7 +472,7 @@
     "values": {
       "glow in the dark": "11662294",
       "dance": "11327992",
-      "sleep": "13709542"
+      "sleeps": "13709542"
     },
     "allowed_units": [],
     "tags": {
@@ -654,77 +654,6 @@
       "variation_attribute": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "IS_TOM_BRAND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "IS_SUITABLE_FOR_WASHING_MACHINE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "IS_HIGHLIGHT_BRAND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "GIFTABLE": {
-    "value_type": "string",
-    "values": {
-      "vppbasic": "54973163",
-      "vppfull": "54973164",
-      "cart": "54973165",
-      "checkout": "54973166"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "FILTRABLE_CHARACTER": {
@@ -924,6 +853,78 @@
     "allowed_units": [],
     "tags": {
       "hidden": true,
+      "read_only": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284",
+      "refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_WASHING_MACHINE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_HIGHLIGHT_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "GIFTABLE": {
+    "value_type": "string",
+    "values": {
+      "vppbasic": "54973163",
+      "vppfull": "54973164",
+      "cart": "54973165",
+      "checkout": "54973166"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
       "read_only": true
     },
     "hierarchy": "ITEM",

@@ -123,7 +123,7 @@
       "jurassic world": "4541011",
       "elsa": "482747",
       "demon slayer": "16909932",
-      "sebastian": "49550809",
+      "sebastian": "17643028",
       "c-3po": "49550760",
       "spider man": "3336905",
       "luluca": "11322565",
@@ -223,7 +223,7 @@
       "superman": "415867",
       "captain marvel": "49550762",
       "thanos": "3134456",
-      "silver surfer": "49550815",
+      "silver surfer": "4202306",
       "donald duck": "7294840",
       "dumbo": "507440",
       "dr. jumba": "49550772",
@@ -424,14 +424,6 @@
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
-  "ACTION_FIGURE_NUMBER": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "POWER_SUPPLY_TYPE": {
     "value_type": "string",
     "values": {
@@ -440,19 +432,6 @@
     },
     "allowed_units": [],
     "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "BATTERY_CAPACITY": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "Ah",
-      "mAh"
-    ],
-    "tags": {
-      "conditional_required": true
-    },
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -537,32 +516,7 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "INCLUDES_ACCESSORIES": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "IS_BOBBLEHEAD": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_CELL_BATTERIES": {
     "value_type": "boolean",
     "values": {
       "no": "242084",
@@ -584,6 +538,14 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "ACTION_FIGURE_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "PACKAGE_HEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -599,6 +561,17 @@
       "variation_attribute": true,
       "catalog_listing_required": true
     },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_ACCESSORIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -768,12 +741,34 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "WITH_LIGHTS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "PRODUCT_AUTHORIZATION_RPIN_NUMBER": {
     "value_type": "string",
     "values": {},
     "allowed_units": [],
     "tags": {},
     "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WITH_SOUND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "EMPTY_GTIN_REASON": {
@@ -793,6 +788,65 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "WITH_INTERCHANGEABLE_PIECES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CELL_BATTERY_SIZE": {
+    "value_type": "string",
+    "values": {
+      "aaa": "6073399",
+      "cr2034": "507455",
+      "aa": "6073398"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SCALE": {
+    "value_type": "string",
+    "values": {
+      "1:6": "5344793",
+      "1:8": "3580337",
+      "1:18": "7403788"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ARTICULATION_POINTS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ACTION_FIGURE_GAME_TYPE": {
+    "value_type": "string",
+    "values": {
+      "roleplay/pretend play": "68071019",
+      "narrative/imaginative": "68071020",
+      "educational/learning": "68071021",
+      "creative/artistic": "68071022",
+      "collectible": "68071023",
+      "strategy/competitive": "68071024",
+      "cooperative/family": "68071025"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "AGID": {
     "value_type": "string",
     "values": {},
@@ -805,31 +859,13 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
-  "WITH_LIGHTS": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
+  "BATTERY_VOLTAGE": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
+    "tags": {},
     "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_SOUND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
+    "relevance": 1
   },
   "FILTRABLE_CHARACTER": {
     "value_type": "string",
@@ -1049,74 +1085,6 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
-  "WITH_INTERCHANGEABLE_PIECES": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "ACCESSORIES_INCLUDED": {
-    "value_type": "string",
-    "values": {
-      "blade": "6011355",
-      "escudo": "5665479",
-      "arm": "6538809",
-      "base": "9014692",
-      "interchangeable hands": "11372587"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "CELL_BATTERY_SIZE": {
-    "value_type": "string",
-    "values": {
-      "aaa": "6073399",
-      "cr2034": "507455",
-      "aa": "6073398"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "SCALE": {
-    "value_type": "string",
-    "values": {
-      "1:6": "5344793",
-      "1:8": "3580337",
-      "1:18": "7403788"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "ARTICULATION_POINTS_NUMBER": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
   "MPN": {
     "value_type": "string",
     "values": {},
@@ -1295,19 +1263,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -1319,34 +1274,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "IS_KIT": {
     "value_type": "boolean",
@@ -1615,6 +1542,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

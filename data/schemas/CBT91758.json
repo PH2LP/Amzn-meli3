@@ -147,15 +147,34 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "DETAILED_MODEL": {
-    "value_type": "string",
+  "PRODUCT_LIFE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_LABEL": {
+    "value_type": "picture_id",
     "values": {},
     "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "MICROPHONE_FORMATS": {
@@ -423,42 +442,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "GTIN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "conditional_required": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 1
-  },
-  "PRODUCT_LIFE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "ANATEL_HOMOLOGATION_NUMBER": {
     "value_type": "number",
     "values": {},
@@ -490,43 +473,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SELLER_PACKAGE_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SELLER_PACKAGE_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "INCLUDES_ACCESSORIES": {
     "value_type": "boolean",
     "values": {
@@ -541,13 +487,54 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "ANATEL_HOMOLOGATION_LABEL": {
-    "value_type": "picture_id",
+  "DETAILED_MODEL": {
+    "value_type": "string",
     "values": {},
     "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "SYI_PYMES_ID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284",
+      "refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
   },
   "WITH_POWER_LIGHT": {
     "value_type": "boolean",
@@ -601,17 +588,6 @@
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "SELLER_PACKAGE_DATA_SOURCE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
   "ACCESSORIES_INCLUDED": {
     "value_type": "string",
     "values": {
@@ -624,18 +600,6 @@
       "multivalued": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "SELLER_PACKAGE_WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "INPUT_CONNECTORS": {
@@ -653,17 +617,6 @@
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "SYI_PYMES_ID": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
   "OUTPUT_CONNECTORS": {
     "value_type": "string",
     "values": {
@@ -678,18 +631,6 @@
       "multivalued": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "SELLER_PACKAGE_HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "COMPATIBLE_OPERATIVE_SYSTEMS": {
@@ -777,31 +718,6 @@
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "MPN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "variation_attribute": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
   "PACKAGE_DATA_SOURCE": {
     "value_type": "list",
     "values": {
@@ -818,6 +734,18 @@
       "read_only": true
     },
     "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {
@@ -871,33 +799,64 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true,
       "read_only": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 2
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
     "tags": {
-      "hidden": true,
-      "read_only": true
+      "hidden": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 2
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -1171,6 +1130,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   }
 }

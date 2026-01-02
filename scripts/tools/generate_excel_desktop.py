@@ -7,14 +7,15 @@ Genera Excel profesional con ventas en el Desktop
 
 import sqlite3
 import pandas as pd
-from datetime import datetime
+import datetime
+from datetime import datetime as dt
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
 # Configuración
 DB_PATH = "storage/sales_tracking.db"
-EXCEL_PATH = f"{datetime.now().strftime('%Y%m%d')}_VENTAS_MERCADOLIBRE.xlsx"
+EXCEL_PATH = f"{dt.now().strftime('%Y%m%d')}_VENTAS_ML_V2.xlsx"
 
 # Detectar si estamos en servidor o local
 import os
@@ -24,6 +25,39 @@ if os.path.exists("/opt/amz-ml-system"):
 else:
     # Estamos en local (Mac)
     DESKTOP_PATH = f"/Users/felipemelucci/Desktop/{EXCEL_PATH}"
+
+def get_sales_count():
+    """Obtiene el número total de ventas en la DB"""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM sales")
+        count = cursor.fetchone()[0]
+        conn.close()
+        return count
+    except:
+        return 0
+
+def has_sales_changed():
+    """Verifica si hay cambios en las ventas desde la última subida"""
+    LAST_COUNT_FILE = "storage/.last_sales_count"
+
+    current_count = get_sales_count()
+
+    # Leer último count guardado
+    try:
+        with open(LAST_COUNT_FILE, 'r') as f:
+            last_count = int(f.read().strip())
+    except:
+        last_count = -1  # Forzar subida en primera ejecución
+
+    # Si hay cambios, guardar nuevo count
+    if current_count != last_count:
+        with open(LAST_COUNT_FILE, 'w') as f:
+            f.write(str(current_count))
+        return True
+
+    return False
 
 def create_professional_excel():
     """Crea Excel profesional en el Desktop"""
@@ -351,6 +385,132 @@ def create_professional_excel():
         ws_summary['A3'] = 'ℹ️ No hay ventas registradas aún'
         ws_summary['A3'].font = Font(name='Arial', size=12)
 
+    # ═══ HOJA 3: VENTAS POR DÍA ═══
+    ws_daily = wb.create_sheet("Ventas Por Día", 2)
+
+    if len(df) > 0 and 'Fecha' in df.columns:
+        # Preparar datos diarios
+        df_copy = df.copy()
+        df_copy['Fecha_parsed'] = pd.to_datetime(df_copy['Fecha'], format='mixed', errors='coerce')
+        df_copy = df_copy[df_copy['Fecha_parsed'].notna()].copy()
+        df_copy['Fecha_Solo'] = df_copy['Fecha_parsed'].dt.date
+
+        # Agrupar por día
+        daily_summary = df_copy.groupby('Fecha_Solo').agg({
+            'Producto': 'count',           # Cantidad de ventas
+            'Cant': 'sum',                 # Unidades vendidas
+            'Precio Venta': 'sum',         # Revenue
+            'Total Costo': 'sum',          # Costos
+            'GANANCIA': 'sum',             # Ganancia
+            'Margen %': 'mean',            # Margen promedio
+            'ASIN': 'nunique',             # Productos únicos
+            'MKT': 'nunique'               # Marketplaces
+        }).reset_index()
+
+        # Renombrar columnas
+        daily_summary.columns = [
+            'Fecha', 'Ventas', 'Unidades', 'Revenue',
+            'Costos Totales', 'Ganancia', 'Margen %',
+            'Productos Únicos', 'MKTs Activos'
+        ]
+
+        # Ordenar descendente (más reciente primero)
+        daily_summary = daily_summary.sort_values('Fecha', ascending=False)
+
+        # Estilos (igual que hoja Ventas)
+        header_fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+        header_font = Font(name='Arial', size=11, bold=True, color="FFFFFF")
+
+        thick_border = Border(
+            left=Side(style='medium', color='000000'),
+            right=Side(style='medium', color='000000'),
+            top=Side(style='medium', color='000000'),
+            bottom=Side(style='medium', color='000000')
+        )
+
+        # Headers
+        headers = list(daily_summary.columns)
+        for col_idx, header in enumerate(headers, 1):
+            cell = ws_daily.cell(row=1, column=col_idx, value=header)
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thick_border
+
+        # Datos
+        for row_idx, row_data in enumerate(daily_summary.itertuples(index=False), 2):
+            for col_idx, value in enumerate(row_data, 1):
+                cell = ws_daily.cell(row=row_idx, column=col_idx, value=value)
+                cell.font = Font(name='Arial', size=10, bold=True)
+                cell.border = thick_border
+                cell.alignment = Alignment(vertical='center')
+
+        # Formato de números
+        for row_idx in range(2, len(daily_summary) + 2):
+            # Revenue, Costos, Ganancia (columnas D, E, F)
+            for col in [4, 5, 6]:
+                ws_daily.cell(row=row_idx, column=col).number_format = '$#,##0.00'
+            # Margen %
+            ws_daily.cell(row=row_idx, column=7).number_format = '0.00"%"'
+
+        # Fila de TOTALES
+        total_row = len(daily_summary) + 2
+        ws_daily[f'A{total_row}'] = 'TOTAL'
+        ws_daily[f'A{total_row}'].font = Font(name='Arial', size=10, bold=True)
+        ws_daily[f'A{total_row}'].border = thick_border
+
+        ws_daily[f'B{total_row}'] = daily_summary['Ventas'].sum()
+        ws_daily[f'B{total_row}'].font = Font(name='Arial', size=10, bold=True)
+        ws_daily[f'B{total_row}'].border = thick_border
+
+        ws_daily[f'C{total_row}'] = daily_summary['Unidades'].sum()
+        ws_daily[f'C{total_row}'].font = Font(name='Arial', size=10, bold=True)
+        ws_daily[f'C{total_row}'].border = thick_border
+
+        ws_daily[f'D{total_row}'] = daily_summary['Revenue'].sum()
+        ws_daily[f'E{total_row}'] = daily_summary['Costos Totales'].sum()
+        ws_daily[f'F{total_row}'] = daily_summary['Ganancia'].sum()
+        ws_daily[f'G{total_row}'] = daily_summary['Margen %'].mean()
+
+        # Formato totales (columnas H, I sin datos)
+        ws_daily[f'H{total_row}'].border = thick_border
+        ws_daily[f'I{total_row}'].border = thick_border
+
+        # Formato totales
+        for col in [4, 5, 6]:
+            ws_daily.cell(row=total_row, column=col).number_format = '$#,##0.00'
+            ws_daily.cell(row=total_row, column=col).font = Font(name='Arial', size=10, bold=True)
+            ws_daily.cell(row=total_row, column=col).border = thick_border
+        ws_daily.cell(row=total_row, column=7).number_format = '0.00"%"'
+        ws_daily.cell(row=total_row, column=7).font = Font(name='Arial', size=10, bold=True)
+        ws_daily.cell(row=total_row, column=7).border = thick_border
+
+        # Filtros automáticos
+        last_col = get_column_letter(len(headers))
+        ws_daily.auto_filter.ref = f"A1:{last_col}{len(daily_summary) + 1}"
+
+        # Freeze panes
+        ws_daily.freeze_panes = 'A2'
+
+        # Anchos de columna
+        column_widths = {
+            'A': 14,   # Fecha
+            'B': 10,   # Ventas
+            'C': 11,   # Unidades
+            'D': 13,   # Revenue
+            'E': 14,   # Costos
+            'F': 13,   # Ganancia
+            'G': 11,   # Margen %
+            'H': 16,   # Productos Únicos
+            'I': 14    # MKTs Activos
+        }
+
+        for col, width in column_widths.items():
+            ws_daily.column_dimensions[col].width = width
+    else:
+        ws_daily['A1'] = 'No hay datos disponibles'
+        ws_daily['A1'].font = Font(name='Arial', size=12)
+
     # Guardar
     wb.save(DESKTOP_PATH)
 
@@ -386,7 +546,7 @@ def upload_to_dropbox(excel_path):
         with open(excel_path, 'rb') as f:
             file_data = f.read()
 
-        dropbox_path = "/VENTAS_MERCADOLIBRE.xlsx"
+        dropbox_path = "/VENTAS_ML_V2.xlsx"
         dbx.files_upload(
             file_data,
             dropbox_path,
@@ -432,5 +592,12 @@ def upload_to_dropbox(excel_path):
 
 
 if __name__ == "__main__":
+    # Siempre generar Excel (para tener archivo actualizado localmente)
     excel_path = create_professional_excel()
-    upload_to_dropbox(excel_path)
+
+    # Solo subir a Dropbox si hay cambios
+    if has_sales_changed():
+        print("📊 Hay ventas nuevas - Subiendo a Dropbox...")
+        upload_to_dropbox(excel_path)
+    else:
+        print("ℹ️  No hay cambios - Excel no se sube a Dropbox")

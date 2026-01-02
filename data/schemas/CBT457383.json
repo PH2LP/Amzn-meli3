@@ -51,10 +51,7 @@
       "gold": "477129"
     },
     "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "required": true
-    },
+    "tags": {},
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
@@ -430,6 +427,20 @@
     "tags": {
       "hidden": true,
       "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WITH_VIRTUAL_TRY_ON": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
       "read_only": true
     },
     "hierarchy": "ITEM",

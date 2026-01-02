@@ -256,23 +256,7 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "DEDICATED_GRAPHIC_CARD_LINE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
   "INTEGRATED_GRAPHIC_CARD_LINE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
-  "DEDICATED_GRAPHIC_CARD_MODEL": {
     "value_type": "string",
     "values": {},
     "allowed_units": [],
@@ -289,6 +273,22 @@
     "relevance": 1
   },
   "DEDICATED_GRAPHIC_CARD_BRAND": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DEDICATED_GRAPHIC_CARD_LINE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DEDICATED_GRAPHIC_CARD_MODEL": {
     "value_type": "string",
     "values": {},
     "allowed_units": [],
@@ -338,6 +338,77 @@
     "value_type": "number",
     "values": {},
     "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "SSD_INTERFACE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "HARD_DRIVE_INTERFACE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "GAMING": {
+    "value_type": "list",
+    "values": {
+      "not recommended": "58523357",
+      "basic": "67143229",
+      "intermediate": "67143230",
+      "advanced": "67143231",
+      "ultra": "58523361"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VIDEO_MEMORY_TYPES": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "DETAILED_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "VIDEO_MEMORY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "KB",
+      "MB"
+    ],
     "tags": {},
     "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
@@ -450,119 +521,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "SSD_INTERFACE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "GTIN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "conditional_required": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 1
-  },
-  "HARD_DRIVE_INTERFACE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "OCP_CERTIFICATION_AGENCY": {
-    "value_type": "list",
-    "values": {
-      "bureau veritas argentina s.a.": "11695662",
-      "instituto del gas argentino s.a.": "11695663",
-      "intertek argentina certificaciones s.a.": "11695664",
-      "inti instituto nacional de tecnología industrial": "11695665",
-      "iqc s.a.": "11695666",
-      "iram instituto argentino de normalización y certificación": "11695667",
-      "lenor s.r.l.": "11695668",
-      "net connection international s.r.l. (ncc)": "11695669",
-      "qetkra s.r.l.": "11695670",
-      "tüv rheinland argentina s.a. (tuv)": "11695671",
-      "ul de argentina s.r.l.": "11695672",
-      "other (unspecified)": "11695673"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "VIDEO_MEMORY_TYPES": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "ENERGY_EFFICIENCY_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "DETAILED_MODEL": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "variation_attribute": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "SEC_STAMP": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "VIDEO_MEMORY": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "GB",
-      "KB",
-      "MB"
-    ],
-    "tags": {},
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
   "ANATEL_HOMOLOGATION_NUMBER": {
     "value_type": "number",
     "values": {},
@@ -573,45 +531,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "PRODUCT_LIFE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "EMPTY_GTIN_REASON": {
-    "value_type": "list",
-    "values": {
-      "the product is a handcrafted piece": "17055158",
-      "the product is a kit or pack": "17055159",
-      "the product does not have registered code": "17055160",
-      "another reason": "17055161"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "MANUFACTURER": {
     "value_type": "string",
     "values": {},
@@ -620,22 +539,6 @@
       "hidden": true
     },
     "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "GRADING": {
-    "value_type": "list",
-    "values": {
-      "excellent": "40108830",
-      "good": "40108831",
-      "acceptable": "40108832"
-    },
-    "allowed_units": [],
-    "tags": {
-      "used_hidden": true,
-      "conditional_required": true,
-      "new_hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 1
   },
   "ALPHANUMERIC_MODELS": {
@@ -881,14 +784,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "ANATEL_HOMOLOGATION_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "ACCESSORIES_INCLUDED": {
     "value_type": "string",
     "values": {},
@@ -897,6 +792,179 @@
       "multivalued": true
     },
     "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "OCP_CERTIFICATION_AGENCY": {
+    "value_type": "list",
+    "values": {
+      "bureau veritas argentina s.a.": "11695662",
+      "instituto del gas argentino s.a.": "11695663",
+      "intertek argentina certificaciones s.a.": "11695664",
+      "inti instituto nacional de tecnología industrial": "11695665",
+      "iqc s.a.": "11695666",
+      "iram instituto argentino de normalización y certificación": "11695667",
+      "lenor s.r.l.": "11695668",
+      "net connection international s.r.l. (ncc)": "11695669",
+      "qetkra s.r.l.": "11695670",
+      "tüv rheinland argentina s.a. (tuv)": "11695671",
+      "ul de argentina s.r.l.": "11695672",
+      "other (unspecified)": "11695673"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ENERGY_EFFICIENCY_LABEL": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SEC_STAMP": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "PRODUCT_LIFE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "HOME_DAILY_USE": {
+    "value_type": "list",
+    "values": {
+      "intermediate": "58523364",
+      "advanced": "58523365",
+      "ultra": "58523366",
+      "not recommended": "58523362",
+      "basic": "58523363"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "DESIGN_CREATION": {
+    "value_type": "list",
+    "values": {
+      "basic": "58523368",
+      "intermediate": "58523369",
+      "advanced": "58523370",
+      "ultra": "58523371",
+      "not recommended": "58523367"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WORK_STUDY": {
+    "value_type": "list",
+    "values": {
+      "not recommended": "58523372",
+      "basic": "58523373",
+      "intermediate": "58523374",
+      "advanced": "58523375",
+      "ultra": "58523376"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "GRADING": {
+    "value_type": "list",
+    "values": {
+      "excellent": "40108830",
+      "good": "40108831",
+      "acceptable": "40108832"
+    },
+    "allowed_units": [],
+    "tags": {
+      "used_hidden": true,
+      "conditional_required": true,
+      "new_hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_LABEL": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "WITH_WI_FI": {
@@ -946,6 +1014,60 @@
     "allowed_units": [],
     "tags": {
       "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FILTRABLE_USE": {
+    "value_type": "list",
+    "values": {
+      "gaming": "58523353",
+      "work & study": "58523354",
+      "design": "58523355",
+      "home": "58523356"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "TASK_FOCUS": {
+    "value_type": "list",
+    "values": {
+      "photo editing": "65178873",
+      "video editing": "65178874",
+      "3d modeling": "65178875",
+      "graphic design": "65178876",
+      "animation": "65178877"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FREQUENTLY_PLAYED": {
+    "value_type": "list",
+    "values": {
+      "online competitive": "65178878",
+      "action & adventure": "65178879",
+      "indies": "65178880",
+      "virtual reality": "65178881",
+      "sports": "65178882",
+      "strategy": "65178883"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
     },
     "hierarchy": "ITEM",
     "relevance": 2

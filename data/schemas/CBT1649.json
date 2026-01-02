@@ -228,6 +228,23 @@
     "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
+  "GAMING": {
+    "value_type": "list",
+    "values": {
+      "not recommended": "58523357",
+      "basic": "67143229",
+      "intermediate": "67143230",
+      "advanced": "67143231",
+      "ultra": "58523361"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "DRIVE_STORAGE": {
     "value_type": "string",
     "values": {},
@@ -292,6 +309,23 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "HOME_DAILY_USE": {
+    "value_type": "list",
+    "values": {
+      "intermediate": "58523364",
+      "advanced": "58523365",
+      "ultra": "58523366",
+      "not recommended": "58523362",
+      "basic": "58523363"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "PACKAGE_WIDTH": {
     "value_type": "number_unit",
     "values": {},
@@ -310,6 +344,23 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "DESIGN_CREATION": {
+    "value_type": "list",
+    "values": {
+      "basic": "58523368",
+      "intermediate": "58523369",
+      "advanced": "58523370",
+      "ultra": "58523371",
+      "not recommended": "58523367"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "PACKAGE_LENGTH": {
     "value_type": "number_unit",
     "values": {},
@@ -326,6 +377,23 @@
       "catalog_listing_required": true
     },
     "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WORK_STUDY": {
+    "value_type": "list",
+    "values": {
+      "not recommended": "58523372",
+      "basic": "58523373",
+      "intermediate": "58523374",
+      "advanced": "58523375",
+      "ultra": "58523376"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "PACKAGE_WEIGHT": {
@@ -690,7 +758,7 @@
     "values": {
       "adapter": "2296418",
       "cable": "9292081",
-      "optical pen": "11933535"
+      "stylus": "11933535"
     },
     "allowed_units": [],
     "tags": {
@@ -720,6 +788,60 @@
     "allowed_units": [],
     "tags": {
       "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FILTRABLE_USE": {
+    "value_type": "list",
+    "values": {
+      "gaming": "58523353",
+      "work & study": "58523354",
+      "design": "58523355",
+      "home": "58523356"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "TASK_FOCUS": {
+    "value_type": "list",
+    "values": {
+      "photo editing": "65178873",
+      "video editing": "65178874",
+      "3d modeling": "65178875",
+      "graphic design": "65178876",
+      "animation": "65178877"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FREQUENTLY_PLAYED": {
+    "value_type": "list",
+    "values": {
+      "online competitive": "65178878",
+      "action & adventure": "65178879",
+      "indies": "65178880",
+      "virtual reality": "65178881",
+      "sports": "65178882",
+      "strategy": "65178883"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
     },
     "hierarchy": "ITEM",
     "relevance": 2

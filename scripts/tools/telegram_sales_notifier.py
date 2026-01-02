@@ -278,6 +278,73 @@ def get_asin_by_item_id(item_id):
     conn.close()
 
     if not row:
+        # Si no se encuentra en DB, intentar obtener ASIN de ML API
+        print(f"   ⚠️ Item no encontrado en DB, consultando ML API...")
+
+        try:
+            url = f"https://api.mercadolibre.com/items/{item_id}"
+            headers = {"Authorization": f"Bearer {ML_TOKEN}"}
+            response = requests.get(url, headers=headers, timeout=10)
+
+            if response.status_code == 200:
+                item_data = response.json()
+                title = item_data.get("title", "Unknown")
+
+                # Buscar SELLER_SKU
+                asin = None
+                for attr in item_data.get("attributes", []):
+                    if attr.get("id") == "SELLER_SKU":
+                        asin = attr.get("value_name")
+                        break
+
+                if asin:
+                    print(f"   ✅ ASIN obtenido de ML API: {asin}")
+
+                    # Obtener precio de Glow API
+                    print(f"   🔄 Obteniendo precio de Glow API...")
+                    amazon_cost = 0
+
+                    try:
+                        import sys
+                        if str(PROJECT_ROOT) not in sys.path:
+                            sys.path.insert(0, str(PROJECT_ROOT))
+
+                        from src.integrations.amazon_glow_api import check_real_availability_glow_api
+
+                        glow_data = check_real_availability_glow_api(asin)
+                        if glow_data and glow_data.get("price"):
+                            amazon_cost = glow_data["price"]
+                            print(f"   ✅ Precio de Glow API: ${amazon_cost}")
+                        else:
+                            print(f"   ⚠️ Glow API no devolvió precio, buscando en listings DB...")
+                            # Fallback: buscar en listings DB por ASIN
+                            conn_fallback = sqlite3.connect(str(DB_PATH))
+                            cursor_fallback = conn_fallback.cursor()
+                            cursor_fallback.execute("SELECT amazon_price_last FROM listings WHERE asin = ? LIMIT 1", (asin,))
+                            price_row = cursor_fallback.fetchone()
+                            conn_fallback.close()
+
+                            if price_row and price_row[0]:
+                                amazon_cost = price_row[0]
+                                print(f"   💲 Precio desde DB: ${amazon_cost}")
+                    except Exception as e:
+                        print(f"   ⚠️ Error con Glow API: {e}")
+
+                    return {
+                        "asin": asin,
+                        "title": title,
+                        "brand": "N/A",
+                        "model": "N/A",
+                        "permalink": None,
+                        "amazon_cost": amazon_cost
+                    }
+                else:
+                    print(f"   ❌ No se encontró SELLER_SKU en el item")
+            else:
+                print(f"   ❌ Error consultando ML API: {response.status_code}")
+        except Exception as e:
+            print(f"   ❌ Error obteniendo ASIN de ML API: {e}")
+
         return None
 
     result = dict(row)
@@ -302,7 +369,17 @@ def get_asin_by_item_id(item_id):
                 amazon_cost = glow_data["price"]
                 print(f"   ✅ Precio de Glow API: ${amazon_cost}")
             else:
-                print(f"   ⚠️ Glow API no devolvió precio, usando fallback...")
+                print(f"   ⚠️ Glow API no devolvió precio, buscando en listings DB...")
+                # Fallback: buscar amazon_price_last en listings DB
+                conn_fallback = sqlite3.connect(str(DB_PATH))
+                cursor_fallback = conn_fallback.cursor()
+                cursor_fallback.execute("SELECT amazon_price_last FROM listings WHERE asin = ? LIMIT 1", (asin,))
+                price_row = cursor_fallback.fetchone()
+                conn_fallback.close()
+
+                if price_row and price_row[0]:
+                    amazon_cost = price_row[0]
+                    print(f"   💲 Precio desde DB (amazon_price_last): ${amazon_cost}")
         except Exception as e:
             print(f"   ⚠️ Error con Glow API: {e}")
 
@@ -429,6 +506,9 @@ def format_sale_notification(order, asin_data):
     total_amazon_cost = (amazon_cost + fulfillment_fee) * quantity
     profit = net_proceeds - total_amazon_cost
 
+    # Calcular % de ganancia (margen sobre el costo)
+    profit_margin = (profit / total_amazon_cost * 100) if total_amazon_cost > 0 else 0
+
     # Link de Amazon Business (NO amazon.com normal)
     amazon_link = f"https://www.amazon.com/business/dp/{asin}"
 
@@ -465,7 +545,7 @@ def format_sale_notification(order, asin_data):
 📊 Cantidad: <b>{quantity}</b>
 💵 Total pagado: <b>${total_paid_by_customer:.2f}</b>
 💰 Recibís (neto): <b>${net_proceeds:.2f}</b>
-✅ Ganancia: <b>${profit:.2f}</b>
+✅ Ganancia: <b>${profit:.2f} ({profit_margin:.1f}%)</b>
 
 ━━━━━━━━━━━━━━━━━━━━━
 🛒 <b>COMPRAR EN AMAZON</b>
@@ -480,8 +560,11 @@ def format_sale_notification(order, asin_data):
     # Mensaje SEPARADO con solo el número de orden (para copiar fácil)
     order_number_message = f"{marketplace}-{pack_id}"
 
-    # Retornar ambos mensajes
-    return (message.strip(), order_number_message)
+    # Mensaje SEPARADO con solo el ASIN (para copiar fácil)
+    asin_message = asin
+
+    # Retornar los 3 mensajes
+    return (message.strip(), order_number_message, asin_message)
 
 
 def check_new_sales():
@@ -638,7 +721,7 @@ def _check_new_sales_impl():
             stats["errors"] += 1
             continue
 
-        main_message, order_number_message = messages
+        main_message, order_number_message, asin_message = messages
 
         # Enviar MENSAJE PRINCIPAL (con toda la info)
         print(f"   📤 Enviando notificación principal a Telegram...")
@@ -648,7 +731,12 @@ def _check_new_sales_impl():
             # Enviar NÚMERO DE ORDEN en mensaje separado (para copiar fácil)
             print(f"   📤 Enviando número de orden separado...")
             send_telegram_message(order_number_message, parse_mode=None)
-            print(f"   ✅ Número de orden enviado en mensaje separado")
+            print(f"   ✅ Número de orden enviado")
+
+            # Enviar ASIN en mensaje separado (para copiar fácil)
+            print(f"   📤 Enviando ASIN separado...")
+            send_telegram_message(asin_message, parse_mode=None)
+            print(f"   ✅ ASIN enviado")
 
             stats["notifications_sent"] += 1
 
@@ -662,24 +750,9 @@ def _check_new_sales_impl():
                 "asin": asin
             })
 
-            # Registrar venta en DB y actualizar Excel + Dropbox
-            print(f"   💾 Registrando venta en DB y actualizando Excel...")
-            try:
-                import subprocess
-                import sys
-
-                # 1. Registrar venta en DB (track_sales.py)
-                track_cmd = [sys.executable, "scripts/tools/track_sales.py"]
-                subprocess.run(track_cmd, cwd=str(PROJECT_ROOT), timeout=30, capture_output=True)
-
-                # 2. Generar Excel y subir a Dropbox (generate_excel_desktop.py hace todo)
-                excel_cmd = [sys.executable, "scripts/tools/generate_excel_desktop.py"]
-                subprocess.run(excel_cmd, cwd=str(PROJECT_ROOT), timeout=30, capture_output=True)
-
-                print(f"   ✅ Venta registrada, Excel generado y subido a Dropbox")
-
-            except Exception as e:
-                print(f"   ⚠️  Error: {e}")
+            # NOTA: El sales_tracking_daemon se encarga de registrar ventas y generar Excel
+            # Solo cuando hay ventas nuevas. El notificador solo envía la notificación.
+            # Esto evita generar Excel cada 60 segundos innecesariamente.
 
         else:
             print(f"   ❌ Error enviando notificación")
@@ -713,11 +786,66 @@ def _check_new_sales_impl():
 
 
 def main():
-    """Función principal"""
+    """Función principal - Loop infinito cada 60 segundos"""
+    import time
+    import signal
+
+    # Colores
+    class Colors:
+        GREEN = '\033[0;32m'
+        RED = '\033[0;31m'
+        YELLOW = '\033[1;33m'
+        BLUE = '\033[0;34m'
+        CYAN = '\033[0;36m'
+        NC = '\033[0m'
+
+    # Variable para manejar señales
+    running = True
+
+    def signal_handler(sig, frame):
+        nonlocal running
+        running = False
+        print(f"\n\n{Colors.YELLOW}⛔ Detenido por usuario (Ctrl+C){Colors.NC}")
+
+    signal.signal(signal.SIGINT, signal_handler)
+    signal.signal(signal.SIGTERM, signal_handler)
+
+    iteration = 0
+
     try:
-        check_new_sales()
+        while running:
+            iteration += 1
+
+            print(f"\n{'='*80}")
+            print(f"ITERACIÓN #{iteration} - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print(f"{'='*80}\n")
+
+            try:
+                check_new_sales()
+            except Exception as e:
+                print(f"\n{Colors.RED}❌ Error en iteración #{iteration}: {e}{Colors.NC}")
+                import traceback
+                traceback.print_exc()
+
+            if not running:
+                break
+
+            # Countdown de 60 segundos
+            print(f"\n{Colors.CYAN}⏰ Próxima verificación en 60 segundos{Colors.NC}\n")
+
+            for remaining in range(60, 0, -1):
+                if not running:
+                    break
+
+                minutes = remaining // 60
+                seconds = remaining % 60
+                print(f"\r{Colors.YELLOW}⏸️  Esperando: {minutes:02d}m {seconds:02d}s{Colors.NC}    ", end='', flush=True)
+                time.sleep(1)
+
+            print()  # Nueva línea después del countdown
+
     except Exception as e:
-        print(f"\n❌ Error inesperado: {e}")
+        print(f"\n{Colors.RED}❌ Error inesperado: {e}{Colors.NC}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

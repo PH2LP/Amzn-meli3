@@ -797,7 +797,8 @@ def get_ai_copy_and_category(amazon_json) -> Tuple[str, str, str, str]:
     Usa GPT-4o con prompt robusto para español natural + keyword canónica de categoría.
     """
     fallback_title = amazon_json.get("title") or amazon_json.get("asin") or "Producto"
-    fallback_desc = (f"{fallback_title}. Producto nuevo e importado. "
+    fallback_desc = ("⚠️ PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.\n\n"
+                     f"{fallback_title}. Producto nuevo e importado. "
                      "Ideal para regalar o ampliar tu colección.\n\n"
                      "🔎 Información importante para compras internacionales\n\n"
                      "• Producto nuevo y original\n"
@@ -806,7 +807,6 @@ def get_ai_copy_and_category(amazon_json) -> Tuple[str, str, str, str]:
                      "• Compra protegida por Mercado Libre\n"
                      "• Garantía de 30 días desde la entrega\n"
                      "• Factura emitida por Mercado Libre (no factura local del país)\n"
-                     "• PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.\n"
                      "• Medidas y peso pueden aparecer en sistema imperial\n"
                      "• Si incluye baterías, pueden enviarse retiradas por normas aéreas\n"
                      "• Atención al cliente en español e inglés\n\n"
@@ -826,7 +826,7 @@ Eres un copywriter experto en Amazon/Mercado Libre. Devuelve SOLO JSON válido:
 
 {{
   "title": "string (<=60, español, Mayúscula inicial, natural; si es LEGO incluye número de set si existe)",
-  "description": "string (3–5 párrafos, sin HTML ni emojis, \\n entre párrafos, cierre persuasivo) + bloque fijo al final",
+  "description": "string (3–5 párrafos, sin HTML ni emojis, \\n entre párrafos, cierre persuasivo) + bloque fijo al principio y al final",
   "model": "modelo real (NO ASIN). Si LEGO: número 4–6 dígitos + nombre corto si aplica (<=60).",
   "category_keyword": "2–5 palabras en español (tipo de producto canónico para domain_discovery)"
 }}
@@ -836,7 +836,10 @@ Reglas de estilo:
 - Sin HTML, sin emojis. No inventes especificaciones.
 - Título natural (no lista de keywords), con Mayúscula inicial. Asegura acrónimos (LEGO) en mayúsculas.
 - Si el título original sirve, condénsalo a 60 caracteres en buen español.
-- Al final de la descripción agrega EXACTO:
+- IMPORTANTE: La descripción DEBE COMENZAR con este disclaimer:
+"⚠️ PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable."
+
+- Y al final de la descripción agrega EXACTO:
 "🔎 Información importante para compras internacionales
 
 • Producto nuevo y original
@@ -845,7 +848,6 @@ Reglas de estilo:
 • Compra protegida por Mercado Libre
 • Garantía de 30 días desde la entrega
 • Factura emitida por Mercado Libre (no factura local del país)
-• PRODUCTOS ELÉCTRICOS: POR FAVOR LEA ATENTAMENTE LAS INDICACIONES DEL PRODUCTO. Si es solo 120V y no 220V, usted va a necesitar un adaptador a 220V, de lo contrario el equipo puede quemarse y no es reembolsable.
 • Medidas y peso pueden aparecer en sistema imperial
 • Si incluye baterías, pueden enviarse retiradas por normas aéreas
 • Atención al cliente en español e inglés
@@ -1859,30 +1861,35 @@ Devuelve SOLO un array JSON con los atributos rellenados.
             continue  # Volver al inicio del loop para reintentar
 
     # Guardar en la base de datos para sincronización
-    try:
-        from scripts.tools.save_listing_data import save_listing, init_database
-        init_database()  # Asegurarse de que existe la BD
+    disable_db_save = os.getenv("DISABLE_DB_SAVE", "false").lower() == "true"
 
-        # Extraer site_items de la respuesta (países donde se publicó exitosamente)
-        site_items = res.get("site_items", []) if res else []
+    if disable_db_save:
+        print(f"⏭️  [DB SAVE DISABLED] {mini.get('asin', 'N/A')} → {item_id} NO guardado en BD")
+    else:
+        try:
+            from scripts.tools.save_listing_data import save_listing, init_database
+            init_database()  # Asegurarse de que existe la BD
 
-        save_listing(
-            item_id=item_id,
-            mini_ml=mini,
-            marketplaces=mini.get("marketplaces", ["MLM", "MLB", "MLC", "MCO", "MLA"]),
-            site_items=site_items
-        )
-        qprint(f"💾 Guardado en BD para sincronización: {mini.get('asin', 'N/A')} → {item_id}")
-        if site_items:
-            # País activo = tiene item_id (publicación exitosa)
-            # ✅ Filtrar solo elementos dict válidos antes de acceder con .get()
-            active_countries = [s.get("site_id") for s in site_items if isinstance(s, dict) and s.get("item_id")]
-            if active_countries:
-                print(f"   Países activos: {', '.join(active_countries)}")
-    except Exception as e:
-        print(f"⚠️ Error guardando en BD (no crítico): {e}")
-        import traceback
-        traceback.print_exc()  # Mostrar traceback completo para debugging
+            # Extraer site_items de la respuesta (países donde se publicó exitosamente)
+            site_items = res.get("site_items", []) if res else []
+
+            save_listing(
+                item_id=item_id,
+                mini_ml=mini,
+                marketplaces=mini.get("marketplaces", ["MLM", "MLB", "MLC", "MCO", "MLA"]),
+                site_items=site_items
+            )
+            qprint(f"💾 Guardado en BD para sincronización: {mini.get('asin', 'N/A')} → {item_id}")
+            if site_items:
+                # País activo = tiene item_id (publicación exitosa)
+                # ✅ Filtrar solo elementos dict válidos antes de acceder con .get()
+                active_countries = [s.get("site_id") for s in site_items if isinstance(s, dict) and s.get("item_id")]
+                if active_countries:
+                    print(f"   Países activos: {', '.join(active_countries)}")
+        except Exception as e:
+            print(f"⚠️ Error guardando en BD (no crítico): {e}")
+            import traceback
+            traceback.print_exc()  # Mostrar traceback completo para debugging
 
     return res
         
@@ -1892,7 +1899,14 @@ def main():
     mini_ml_dir = "storage/logs/publish_ready"
     files = sorted(glob.glob(os.path.join(mini_ml_dir, "*_mini_ml.json")))
 
-    print(f"\n🚀 Publicador CBT iniciado ({len(files)} productos)\n")
+    # Mostrar estado de guardado en BD
+    disable_db_save = os.getenv("DISABLE_DB_SAVE", "false").lower() == "true"
+    db_status = "❌ DESHABILITADO" if disable_db_save else "✅ HABILITADO"
+
+    print(f"\n🚀 Publicador CBT iniciado ({len(files)} productos)")
+    print(f"💾 Guardado en BD: {db_status} (DISABLE_DB_SAVE={os.getenv('DISABLE_DB_SAVE', 'false')})")
+    print()
+
     if not files:
         print("⚠️ No hay archivos mini_ml para publicar.")
         print(f"   Busqué en: {mini_ml_dir}/")

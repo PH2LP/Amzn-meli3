@@ -137,10 +137,7 @@ def notify_sync_complete(stats, duration_minutes=0, prev_sync_stats=None):
 
     message += f"📊 <b>Resumen:</b>\n"
     message += f"   • Total procesados: {total}\n"
-
-    if reactivated > 0:
-        message += f"   • ♻️ Reactivados: {reactivated}\n"
-
+    message += f"   • ♻️ Reactivados: {reactivated}\n"
     message += f"   • 💲 Precios actualizados: {updated}\n"
 
     # Mostrar pausados con detalle si tenemos datos del sync anterior

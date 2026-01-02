@@ -1,40 +1,16 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-02_publish.py - Pipeline Profesional Amazon → MercadoLibre CBT
-═══════════════════════════════════════════════════════════════════════════════
-
-¿Qué hace?
-    Publica productos de la DB a MercadoLibre (uno por uno)
-
-USO:
-    python3 02_publish.py
-
-Pipeline completo con validación IA, retry inteligente y tracking de estado.
-
-Flujo optimizado:
-1. Pre-flight checks (credenciales, conexión, rate limits)
-2. Download: Descarga datos de Amazon SP-API con retry
-3. Transform: Transforma con IA + validación completa
-4. Validate: Validación IA de imágenes y categorías
-5. Publish: Publicación en MercadoLibre CBT con retry inteligente
-6. Sync: Sincronización multi-marketplace
-
-Características:
-- ✅ Validación IA pre-publicación (imágenes + categorías)
-- ✅ Retry inteligente con estrategias diferentes
-- ✅ Base de datos SQLite para tracking
-- ✅ Health checks automáticos
-- ✅ Rate limiting inteligente
-- ✅ Logs detallados por fase
-- ✅ Modo dry-run para testing
-- ✅ Recuperación de errores automática
-- ✅ Reportes detallados con estadísticas
-
-Autor: Pipeline v2.0 Optimizado
-Fecha: 2025-01-03
-"""
-
+# ═══════════════════════════════════════════════════════════════════════════════
+# 02_publish.py - PUBLICAR PRODUCTOS (1 POR 1)
+# ═══════════════════════════════════════════════════════════════════════════════
+# 
+# ¿Qué hace?
+#   Publica productos de Amazon en MercadoLibre de forma secuencial.
+#   Lee ASINs desde asins.txt y los publica uno por uno.
+# 
+# Comando:
+#   python3 02_publish.py
+# 
+# ═══════════════════════════════════════════════════════════════════════════════
 import os
 import sys
 import json
@@ -917,120 +893,154 @@ class PublishPhase(PipelinePhase):
                         return {"error": error_msg, "error_code": "7810"}
 
 
-                # Error de categoría incorrecta
-                if "category" in error_str.lower() or "Title and photos did not match" in error_str or "All countries failed" in error_str:
-                    if successful_sites:
-                        mini_ml = load_json_file(str(mini_path))
-                        current_category = mini_ml.get("category_id")
-                        blocked_categories = mini_ml.get("blocked_categories", [])
-                        if current_category and current_category not in blocked_categories:
-                            blocked_categories.append(current_category)
+                # ========================================================================
+                # CLASIFICACIÓN MEJORADA DE ERRORES DE ML
+                # ========================================================================
+                # Traducir errores técnicos a lenguaje humano ANTES de decidir acción
+                import re
+                human_error = None
+                is_category_error = False  # Flag para saber si es problema de categoría
 
-                        self.log(asin, f"Retry con cat alternativa", "WARNING")
-                        transform_phase = TransformPhase(self.db)
-                        mini_ml_regenerated = transform_phase.execute(asin, blocked_categories=blocked_categories)
+                # Log del error crudo para debugging
+                self.log(asin, f"Error ML (raw): {error_str[:200]}", "DEBUG")
 
-                        if mini_ml_regenerated:
-                            continue
-                        else:
-                            if successful_sites:
-                                self.log(asin, f"Aceptando parcial ({len(successful_sites)} países)", "WARNING")
-                                self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
-                                return item_id
-                            else:
-                                error_msg = "Sin categoría alternativa disponible"
-                                self.log(asin, error_msg, "ERROR")
-                                self.db.update_asin_status(asin, Status.FAILED, "No alt category")
-                                return {"error": error_msg}
+                # 1. Errores de CATEGORÍA (solo estos justifican regenerar categoría)
+                if "not_allowed" in error_str.lower():
+                    human_error = "Categoría no permitida en este país"
+                    is_category_error = True
+                elif "category" in error_str.lower() and "invalid" in error_str.lower():
+                    human_error = "Categoría inválida para este producto"
+                    is_category_error = True
+                elif "Title and photos did not match" in error_str:
+                    human_error = "Título e imágenes no coinciden con la categoría"
+                    is_category_error = True
+
+                # 2. Errores de ATRIBUTOS (NO regenerar categoría, faltan datos)
+                elif "required_attribute" in error_str.lower() or "missing_required" in error_str.lower():
+                    match = re.search(r'attribute["\s:]+([A-Z_]+)', error_str)
+                    if match:
+                        attr = match.group(1)
+                        human_error = f"Falta atributo requerido: {attr}"
                     else:
-                        # Traducir errores técnicos a lenguaje humano
-                        import re
-                        human_error = None
+                        human_error = "Faltan atributos requeridos"
 
-                        # Errores de dimensiones/peso
-                        if "package_height" in error_str.lower():
-                            human_error = "Producto muy alto para MercadoLibre"
-                        elif "package_weight" in error_str.lower():
-                            human_error = "Producto muy pesado para MercadoLibre"
-                        elif "package_length" in error_str.lower():
-                            human_error = "Producto muy largo para MercadoLibre"
-                        elif "package_width" in error_str.lower():
-                            human_error = "Producto muy ancho para MercadoLibre"
-                        elif "package_dimensions" in error_str.lower():
-                            human_error = "Dimensiones del producto inválidas"
+                # 3. Errores de DIMENSIONES/PESO (NO regenerar categoría, producto no apto)
+                elif "package_height" in error_str.lower():
+                    human_error = "Producto muy alto para MercadoLibre"
+                elif "package_weight" in error_str.lower():
+                    human_error = "Producto muy pesado para MercadoLibre"
+                elif "package_length" in error_str.lower():
+                    human_error = "Producto muy largo para MercadoLibre"
+                elif "package_width" in error_str.lower():
+                    human_error = "Producto muy ancho para MercadoLibre"
+                elif "package_dimensions" in error_str.lower():
+                    human_error = "Dimensiones del producto inválidas"
 
-                        # Errores de GTIN
-                        elif "3701" in error_str or "invalid_product_identifier" in error_str:
-                            human_error = "GTIN duplicado o inválido"
-                        elif "gtin" in error_str.lower() and "required" in error_str.lower():
-                            human_error = "Esta categoría requiere GTIN y el producto no lo tiene"
+                # 4. Errores de IMÁGENES (NO regenerar categoría, problema de imágenes)
+                elif "pictures" in error_str.lower() or "image" in error_str.lower():
+                    human_error = "Error en las imágenes del producto"
 
-                        # Errores de atributos
-                        elif "required_attribute" in error_str.lower():
-                            match = re.search(r'attribute["\s:]+([A-Z_]+)', error_str)
-                            if match:
-                                attr = match.group(1)
-                                human_error = f"Falta atributo requerido: {attr}"
+                # 5. Errores de TÍTULO/DESCRIPCIÓN (NO regenerar categoría, problema de texto)
+                elif "title" in error_str.lower() and ("invalid" in error_str.lower() or "prohibited" in error_str.lower()):
+                    human_error = "Título contiene palabras prohibidas o inválidas"
+
+                # 6. Errores de PRECIO (NO regenerar categoría, ajustar precio)
+                elif "price" in error_str.lower() and ("invalid" in error_str.lower() or "minimum" in error_str.lower()):
+                    human_error = "Precio fuera del rango permitido"
+
+                # 7. Errores de STOCK/CANTIDAD
+                elif "available_quantity" in error_str.lower():
+                    human_error = "Cantidad disponible inválida"
+
+                # 8. Error genérico con código 5004 (extraer código específico)
+                elif "5004" in error_str:
+                    match = re.search(r'"code":\s*"([^"]+)"', error_str)
+                    if match:
+                        code = match.group(1).replace("item.", "").replace("_", " ")
+                        human_error = f"Error ML: {code}"
+                    else:
+                        human_error = "Error de validación de MercadoLibre"
+
+                # 9. Si no pudimos identificar el error específico, mostrar raw
+                if not human_error:
+                    # Extraer mensaje útil del error JSON si es posible
+                    try:
+                        import json
+                        if "{" in error_str:
+                            json_start = error_str.find("{")
+                            error_dict = json.loads(error_str[json_start:])
+                            # Intentar extraer mensaje útil
+                            if "message" in error_dict:
+                                human_error = f"Error ML: {error_dict['message'][:60]}"
+                            elif "cause" in error_dict and error_dict["cause"]:
+                                cause = error_dict["cause"][0] if isinstance(error_dict["cause"], list) else error_dict["cause"]
+                                human_error = f"Error ML: {cause.get('code', 'unknown')}"
                             else:
-                                human_error = "Faltan atributos requeridos en esta categoría"
+                                human_error = f"Error de validación: {error_str[:80]}"
+                        else:
+                            human_error = f"Error: {error_str[:80]}"
+                    except:
+                        human_error = f"Error: {error_str[:80]}"
 
-                        # Errores de precio
-                        elif "price" in error_str.lower() and ("invalid" in error_str.lower() or "minimum" in error_str.lower()):
-                            human_error = "Precio fuera del rango permitido"
+                error_msg = human_error
+                self.log(asin, f"Error detectado: {human_error}", "WARNING")
 
-                        # Errores de stock/cantidad
-                        elif "available_quantity" in error_str.lower():
-                            human_error = "Cantidad disponible inválida"
+                # ========================================================================
+                # DECISIÓN: ¿Regenerar categoría o abortar?
+                # ========================================================================
 
-                        # Errores de título/descripción
-                        elif "title" in error_str.lower() and "photos" in error_str.lower():
-                            human_error = "Título e imágenes no coinciden con la categoría"
-                        elif "title" in error_str.lower() and ("invalid" in error_str.lower() or "prohibited" in error_str.lower()):
-                            human_error = "Título contiene palabras prohibidas o inválidas"
+                # SOLO regenerar categoría si es_category_error == True
+                if is_category_error and attempt < max_retries:
+                    self.log(asin, "Error de categoría → Intentando con categoría alternativa", "WARNING")
 
-                        # Errores de categoría
-                        elif "not_allowed" in error_str.lower():
-                            human_error = "Categoría no permitida en este país"
-                        elif "category" in error_str.lower():
-                            human_error = "Categoría incorrecta para este producto"
+                    mini_ml = load_json_file(str(mini_path))
+                    current_category = mini_ml.get("category_id")
+                    blocked_categories = mini_ml.get("blocked_categories", [])
 
-                        # Error genérico con código 5004
-                        elif "5004" in error_str:
-                            match = re.search(r'"code":\s*"([^"]+)"', error_str)
-                            if match:
-                                code = match.group(1).replace("item.", "").replace("_", " ")
-                                human_error = f"Error de validación: {code}"
-                            else:
-                                human_error = "Error de validación de MercadoLibre"
+                    if current_category and current_category not in blocked_categories:
+                        blocked_categories.append(current_category)
 
-                        # Si no pudimos identificar el error específico
-                        if not human_error:
-                            human_error = "Error de validación - probando con otra categoría"
+                    transform_phase = TransformPhase(self.db)
+                    mini_ml_regenerated = transform_phase.execute(asin, blocked_categories=blocked_categories)
 
-                        error_msg = human_error
-                        self.log(asin, human_error, "WARNING")
-
-                        # IMPORTANTE: Si ya tenemos item_id de publicación parcial, NO lo perdemos
-                        # Preservar información de publicación parcial incluso cuando hay retry
-                        if item_id and successful_sites:
-                            self.log(asin, f"⚠️ Publicación parcial: {item_id} en {len(successful_sites)} países", "WARNING")
-                            # NO borrar mini_ml para preservar el registro
-                            # mini_path.unlink()  # ← COMENTADO
-                            self.db.update_asin_status(asin, Status.DOWNLOADED)
-                            # Retornar info de publicación parcial + error
+                    if mini_ml_regenerated:
+                        continue  # Reintentar con nueva categoría
+                    else:
+                        # No hay categoría alternativa
+                        if successful_sites:
+                            self.log(asin, f"Sin cat alternativa, aceptando parcial ({len(successful_sites)} países)", "WARNING")
+                            self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
                             return {
                                 "item_id": item_id,
                                 "countries_ok": successful_sites,
-                                "countries_failed": countries_failed,  # ← FIXED: usar countries_failed en lugar de failed_countries
+                                "countries_failed": countries_failed,
                                 "partial_success": True,
-                                "error": error_msg,
-                                "retry": True
+                                "error": error_msg
                             }
                         else:
-                            # Sin éxito parcial, borrar y reintentar completamente
-                            mini_path.unlink()
-                            self.db.update_asin_status(asin, Status.DOWNLOADED)
-                            return {"error": error_msg, "retry": True}
+                            self.log(asin, "Sin categoría alternativa disponible", "ERROR")
+                            self.db.update_asin_status(asin, Status.FAILED, "No alt category")
+                            return {"error": error_msg}
+                else:
+                    # NO es error de categoría, o ya agotamos intentos
+                    # NO regenerar, abortar con error específico
+
+                    # Si hay publicación parcial, preservarla
+                    if item_id and successful_sites:
+                        self.log(asin, f"⚠️ Publicación parcial: {item_id} en {len(successful_sites)} países", "WARNING")
+                        self.db.update_asin_status(asin, Status.PUBLISHED, item_id=item_id)
+                        return {
+                            "item_id": item_id,
+                            "countries_ok": successful_sites,
+                            "countries_failed": countries_failed,
+                            "partial_success": True,
+                            "error": error_msg
+                        }
+                    else:
+                        # Sin éxito parcial, marcar como failed
+                        self.log(asin, f"Error no recuperable: {error_msg}", "ERROR")
+                        self.db.update_asin_status(asin, Status.FAILED, error_msg[:200])
+                        return {"error": error_msg}
 
                 # Error de rate limiting
                 if "429" in error_str or "rate" in error_str.lower():
@@ -1408,7 +1418,7 @@ class Pipeline:
         if results["failed"]:
             print(f"\n⚠️  Fallidos ({len(results['failed'])}):")
             for asin in results["failed"]:
-                print(f"   • {asin}")
+                print(asin)
 
         print(f"\n✅ {len(results['success'])} OK | ❌ {len(results['failed'])} FAIL | ⏱️  {elapsed_time/60:.1f} min\n")
 

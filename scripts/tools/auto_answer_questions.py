@@ -1964,9 +1964,14 @@ if __name__ == "__main__":
 
             auto_answer_loop(dry_run=False)
 
-            # Esperar 60 segundos antes de volver a verificar
-            print(f"\n⏸️  Esperando 60 segundos...")
-            time.sleep(60)
+            # Countdown de 60 segundos
+            print(f"\n⏸️  Esperando 60 segundos...\n")
+            for remaining in range(60, 0, -1):
+                minutes = remaining // 60
+                seconds = remaining % 60
+                print(f"\r⏸️  Esperando: {minutes:02d}m {seconds:02d}s    ", end='', flush=True)
+                time.sleep(1)
+            print()  # Nueva línea después del countdown
 
         except KeyboardInterrupt:
             print("\n\n⛔ Detenido por usuario (Ctrl+C)")
@@ -1974,4 +1979,9 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"\n❌ Error en loop: {e}")
             print("   Esperando 60 segundos antes de reintentar...\n")
-            time.sleep(60)
+            for remaining in range(60, 0, -1):
+                minutes = remaining // 60
+                seconds = remaining % 60
+                print(f"\r⏸️  Esperando: {minutes:02d}m {seconds:02d}s    ", end='', flush=True)
+                time.sleep(1)
+            print()  # Nueva línea después del countdown

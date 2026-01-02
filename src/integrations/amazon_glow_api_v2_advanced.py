@@ -95,20 +95,36 @@ class SessionRotator:
                 'en-US,en;q=0.8,es;q=0.6',
             ]
 
-            self.session.headers.update({
+            # Headers más realistas para evitar bot detection
+            # Variar entre Chrome y Firefox
+            is_chrome = 'Chrome' in user_agent
+
+            base_headers = {
                 'User-Agent': user_agent,
                 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
                 'Accept-Language': random.choice(accept_languages),
                 'Accept-Encoding': 'gzip, deflate, br',
-                'DNT': '1',
                 'Connection': 'keep-alive',
                 'Upgrade-Insecure-Requests': '1',
-                'Sec-Fetch-Dest': 'document',
-                'Sec-Fetch-Mode': 'navigate',
-                'Sec-Fetch-Site': 'none',
-                'Sec-Fetch-User': '?1',
                 'Cache-Control': 'max-age=0',
-            })
+            }
+
+            # Headers específicos de Chrome (más comunes)
+            if is_chrome:
+                base_headers.update({
+                    'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="131", "Google Chrome";v="131"',
+                    'sec-ch-ua-mobile': '?0',
+                    'sec-ch-ua-platform': '"macOS"' if 'Mac' in user_agent else '"Windows"',
+                    'Sec-Fetch-Dest': 'document',
+                    'Sec-Fetch-Mode': 'navigate',
+                    'Sec-Fetch-Site': 'none',
+                    'Sec-Fetch-User': '?1',
+                })
+            # Firefox no usa sec-ch-ua pero sí DNT
+            else:
+                base_headers['DNT'] = '1'
+
+            self.session.headers.update(base_headers)
 
             print(f"   🆕 Nueva sesión creada (User-Agent: {user_agent[:50]}...)")
 
@@ -414,7 +430,23 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
 
             # Paso 1: GET product page
             url = f"https://www.amazon.com/dp/{asin}"
-            response = session.get(url, timeout=30)
+
+            # Headers adicionales para el GET inicial simulando tráfico orgánico
+            # Simular que viene de Google search (60% del tiempo) o directo (40%)
+            get_headers = {}
+            if random.random() < 0.6:
+                # Simular tráfico de Google
+                search_queries = [
+                    f"{asin} amazon",
+                    f"buy {asin}",
+                    f"{asin} price",
+                    f"{asin} review"
+                ]
+                query = random.choice(search_queries)
+                get_headers['Referer'] = f"https://www.google.com/search?q={query.replace(' ', '+')}"
+                get_headers['Sec-Fetch-Site'] = 'cross-site'
+
+            response = session.get(url, headers=get_headers, timeout=30)
 
             # Detectar bloqueo
             if is_blocked_response(response.text, response.status_code):

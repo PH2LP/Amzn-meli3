@@ -356,6 +356,17 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
+  "SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "read_only": true,
+      "used_hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "MPN": {
     "value_type": "string",
     "values": {},

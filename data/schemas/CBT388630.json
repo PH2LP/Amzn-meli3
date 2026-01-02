@@ -360,6 +360,17 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "read_only": true,
+      "used_hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "SOLAR_CELL_GRADING": {
     "value_type": "string",
     "values": {

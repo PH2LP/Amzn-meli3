@@ -1359,6 +1359,77 @@ Full JSON (truncated):
         return [], []
 
 # ---------- 8) Categoría (CategoryMatcherV2: embeddings + IA) ----------
+def predict_category_ml_api(title, excluded_categories=None):
+    """
+    Usa el endpoint oficial de predicción de categorías de MercadoLibre
+    Marketplace endpoint: devuelve categorías CBT directamente (Global Selling)
+
+    Args:
+        title: Título del producto (en inglés preferentemente)
+        excluded_categories: Lista de categorías CBT a excluir
+
+    Returns:
+        dict con category_id (CBT), category_name, confidence
+    """
+    import requests
+
+    excluded_categories = excluded_categories or []
+
+    # Endpoint para Global Selling (CBT categories) - REQUIERE AUTH
+    url = "https://api.mercadolibre.com/marketplace/domain_discovery/search"
+
+    params = {
+        "q": title,
+        "limit": 10  # Pedir más opciones para filtrar excluidas
+    }
+
+    # Obtener token de ML (recargar fresco del .env)
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
+    ml_token = os.getenv("ML_ACCESS_TOKEN")
+
+    headers = {}
+    if ml_token:
+        headers["Authorization"] = f"Bearer {ml_token}"
+
+    try:
+        response = requests.get(url, params=params, headers=headers, timeout=10)
+
+        if response.status_code == 200:
+            data = response.json()
+
+            # Filtrar categorías excluidas
+            for item in data:
+                category_id = item.get("category_id")  # Ya viene como CBT
+
+                # Saltar si está en la lista de excluidas
+                if category_id in excluded_categories:
+                    print(f"   ⏭️  {category_id} excluida, probando siguiente...")
+                    continue
+
+                category_name = item.get("category_name", "")
+                domain_id = item.get("domain_id", "")
+                domain_name = item.get("domain_name", "")
+
+                # Retornar la primera categoría válida
+                return {
+                    "category_id": category_id,
+                    "category_name": category_name,
+                    "confidence": 0.95,  # ML Predictor es muy confiable
+                    "method": "ML_PREDICTOR_API",
+                    "domain_id": domain_id,
+                    "domain_name": domain_name
+                }
+
+            # Si todas están excluidas
+            print(f"   ⚠️  Todas las categorías predichas por ML están excluidas")
+            return None
+
+    except Exception as e:
+        print(f"❌ Error ML Predictor API: {e}")
+        return None
+
+
 def detect_category(amazon_json, excluded_categories=None)->Tuple[str,str,float]:
     asin = amazon_json.get("asin") or amazon_json.get("ASIN") or ""
     excluded_categories = excluded_categories or []
@@ -1369,7 +1440,13 @@ def detect_category(amazon_json, excluded_categories=None)->Tuple[str,str,float]
         (amazon_json.get("attributes",{}).get("item_name",[{}])[0].get("value", "") \
         if amazon_json.get("attributes",{}).get("item_name") else "Generic Product")
 
-    qprint("🧭 Detectando categoría con CategoryMatcherV2 (embeddings + IA)…")
+    # Leer modo de categorización desde .env
+    CATEGORY_MATCHER_MODE = os.getenv("CATEGORY_MATCHER_MODE", "v2").lower()
+
+    if CATEGORY_MATCHER_MODE == "ml_predictor":
+        print("🤖 Modo: ML Predictor API (rápido, gratis)")
+    else:
+        print("🤖 Modo: CategoryMatcherV2 (embeddings + IA)")
 
     # 📌 Cache por ASIN - DESHABILITADO PERMANENTEMENTE
     CAT_CACHE_PATH = "storage/logs/category_cache.json"
@@ -1432,17 +1509,33 @@ def detect_category(amazon_json, excluded_categories=None)->Tuple[str,str,float]
             cat_name = "Building Blocks & Figures"
             sim = 1.0
             result = {"category_id": cat_id, "category_name": cat_name, "confidence": sim, "method": "LEGO_OVERRIDE"}
+        elif CATEGORY_MATCHER_MODE == "ml_predictor":
+            # Usar ML Predictor API (oficial de MercadoLibre - Global Selling)
+            result = predict_category_ml_api(title, excluded_categories)
+            if not result:
+                print("⚠️  ML Predictor sin resultado → 🔄 FALLBACK a CategoryMatcherV2")
+                matcher = get_category_matcher()
+                result = matcher.find_category(product_data, use_ai=True, excluded_categories=excluded_categories)
         else:
             # Llamar a CategoryMatcherV2 con exclusión de categorías bloqueadas
             matcher = get_category_matcher()
             result = matcher.find_category(product_data, use_ai=True, excluded_categories=excluded_categories)
 
-            cat_id = result.get("category_id", "CBT1157")
-            cat_name = result.get("category_name", "Default")
-            sim = float(result.get("confidence", 0.0))
+        # Extraer resultado (común para todos los métodos)
+        cat_id = result.get("category_id", "CBT1157")
+        cat_name = result.get("category_name", "Default")
+        sim = float(result.get("confidence", 0.0))
+        method = result.get('method', 'unknown')
 
-        qprint(f"🤖 CategoryMatcherV2 → {cat_name} (confidence: {sim:.2f})")
-        qprint(f"   Método: {result.get('method', 'unknown')}")
+        # Mensaje de resultado con método usado
+        if method == "ML_PREDICTOR_API":
+            print(f"✅ ML Predictor → {cat_id} ({cat_name})")
+        elif method == "ai_validated":
+            print(f"✅ CategoryMatcherV2 → {cat_id} ({cat_name})")
+        elif method == "LEGO_OVERRIDE":
+            print(f"✅ LEGO Override → {cat_id} ({cat_name})")
+        else:
+            print(f"✅ Categoría → {cat_id} ({cat_name}) [método: {method}]")
 
         # Guardar en cache
         cat_cache[asin] = {"id": cat_id, "name": cat_name, "sim": sim}

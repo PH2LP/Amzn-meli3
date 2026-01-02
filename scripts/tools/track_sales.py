@@ -139,10 +139,14 @@ def get_ml_orders(since_date=None):
         from datetime import timezone
         since_date = datetime.now(timezone.utc) - timedelta(days=1)
 
+    # Recargar token FRESCO del .env (el daemon corre en loop y necesita token actualizado)
+    load_dotenv(override=True)
+    ml_token = os.getenv("ML_ACCESS_TOKEN")
+
     url = f"https://api.mercadolibre.com/marketplace/orders/search"
 
     headers = {
-        "Authorization": f"Bearer {ML_ACCESS_TOKEN}"
+        "Authorization": f"Bearer {ml_token}"
     }
 
     params = {
@@ -198,6 +202,142 @@ def get_ml_orders(since_date=None):
     return all_orders
 
 
+def find_global_item_id(ml_item_id):
+    """
+    Encuentra el item ID global (CBT principal) desde un item de variante
+
+    Args:
+        ml_item_id: ID del item (puede ser variante o principal)
+
+    Returns:
+        str: Item ID global o el mismo ID si no se encuentra
+    """
+    try:
+        # Recargar token FRESCO
+        load_dotenv(override=True)
+        ml_token = os.getenv("ML_ACCESS_TOKEN")
+
+        # Consultar ML API para obtener info del item
+        url = f"https://api.mercadolibre.com/items/{ml_item_id}"
+        headers = {"Authorization": f"Bearer {ml_token}"}
+        response = requests.get(url, headers=headers, timeout=10)
+
+        if response.status_code != 200:
+            return ml_item_id
+
+        item_data = response.json()
+        catalog_product_id = item_data.get("catalog_product_id")
+
+        if not catalog_product_id:
+            return ml_item_id
+
+        # Buscar todos los items con ese catalog_product_id en nuestra DB
+        conn = sqlite3.connect(LISTINGS_DB_PATH, timeout=10)
+        cursor = conn.cursor()
+
+        # Buscar en site_items JSON para encontrar match
+        cursor.execute("SELECT item_id, site_items FROM listings")
+        rows = cursor.fetchall()
+        conn.close()
+
+        # Intentar encontrar un item que exista en nuestra DB
+        for row in rows:
+            item_id = row[0]
+            site_items_json = row[1]
+
+            if site_items_json:
+                try:
+                    site_items = json.loads(site_items_json)
+                    # Verificar si alguno de los site_items coincide con el ml_item_id buscado
+                    for site_item in site_items:
+                        if site_item.get("item_id") == ml_item_id:
+                            # Encontramos el item global que contiene esta variante
+                            print(f"{Colors.GREEN}   ✅ Encontrado item global: {item_id} (variante: {ml_item_id}){Colors.NC}")
+
+                            # Guardar variante en DB clonando el item global
+                            try:
+                                conn_save = sqlite3.connect(LISTINGS_DB_PATH, timeout=10)
+                                cursor_save = conn_save.cursor()
+
+                                # Copiar todos los datos del item global
+                                cursor_save.execute("""
+                                    INSERT OR IGNORE INTO listings
+                                    (item_id, asin, title, description, brand, model, category_id, category_name,
+                                     price_usd, length_cm, width_cm, height_cm, weight_kg, images_urls, attributes,
+                                     main_features, marketplaces, site_items, date_published, date_updated,
+                                     amazon_price_last, costo_amazon)
+                                    SELECT ?, asin, title, description, brand, model, category_id, category_name,
+                                           price_usd, length_cm, width_cm, height_cm, weight_kg, images_urls, attributes,
+                                           main_features, marketplaces, site_items, datetime('now'), datetime('now'),
+                                           amazon_price_last, costo_amazon
+                                    FROM listings WHERE item_id = ?
+                                """, (ml_item_id, item_id))
+
+                                conn_save.commit()
+                                conn_save.close()
+
+                                if cursor_save.rowcount > 0:
+                                    print(f"{Colors.GREEN}   💾 Variante {ml_item_id} guardada en DB{Colors.NC}")
+                            except Exception as e:
+                                print(f"{Colors.YELLOW}   ⚠️ Error guardando variante en DB: {e}{Colors.NC}")
+
+                            return item_id
+                except:
+                    pass
+
+        # Si no encontramos nada, devolver el original
+        return ml_item_id
+
+    except Exception as e:
+        print(f"{Colors.YELLOW}   ⚠️ Error buscando item global: {e}{Colors.NC}")
+        return ml_item_id
+
+
+def get_asin_from_ml_api(ml_item_id):
+    """
+    Obtiene el ASIN directamente de la API de MercadoLibre leyendo el atributo SELLER_SKU
+
+    Args:
+        ml_item_id: ID del item en ML (ej: CBT123...)
+
+    Returns:
+        tuple: (asin, title) o (None, None) si no se encuentra
+    """
+    try:
+        # Recargar token FRESCO
+        load_dotenv(override=True)
+        ml_token = os.getenv("ML_ACCESS_TOKEN")
+
+        url = f"https://api.mercadolibre.com/items/{ml_item_id}"
+        headers = {"Authorization": f"Bearer {ml_token}"}
+        response = requests.get(url, headers=headers, timeout=10)
+
+        if response.status_code != 200:
+            print(f"{Colors.RED}   ❌ Error consultando ML API: {response.status_code}{Colors.NC}")
+            return None, None
+
+        item_data = response.json()
+        title = item_data.get("title", "Unknown")
+
+        # Buscar ASIN en el atributo SELLER_SKU
+        asin = None
+        for attr in item_data.get("attributes", []):
+            if attr.get("id") == "SELLER_SKU":
+                asin = attr.get("value_name")
+                break
+
+        if asin:
+            print(f"{Colors.GREEN}   ✅ ASIN obtenido de ML API (SELLER_SKU): {asin}{Colors.NC}")
+            return asin, title
+        else:
+            print(f"{Colors.RED}   ❌ No se encontró SELLER_SKU en el item {ml_item_id}{Colors.NC}")
+            return None, title
+
+    except Exception as e:
+        print(f"{Colors.RED}   ❌ Error obteniendo ASIN de ML API: {e}{Colors.NC}")
+        return None, None
+
+
 def get_item_data_from_listing(ml_item_id):
     """
     Obtiene datos del producto desde la base de datos de listings
@@ -209,6 +349,7 @@ def get_item_data_from_listing(ml_item_id):
         dict: {asin, amazon_cost, title} o None
     """
     try:
+        # Primero intentar con el ID directo
         conn = sqlite3.connect(LISTINGS_DB_PATH, timeout=10)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
@@ -220,13 +361,36 @@ def get_item_data_from_listing(ml_item_id):
         """, (ml_item_id,))
 
         row = cursor.fetchone()
+
+        # Si no se encuentra, intentar buscar el item global
+        if not row:
+            conn.close()
+            print(f"{Colors.YELLOW}   ⚠️ Item {ml_item_id} no encontrado en DB, buscando item global...{Colors.NC}")
+            global_item_id = find_global_item_id(ml_item_id)
+
+            if global_item_id != ml_item_id:
+                # Reintentar con el item global
+                conn = sqlite3.connect(LISTINGS_DB_PATH, timeout=10)
+                conn.row_factory = sqlite3.Row
+                cursor = conn.cursor()
+                cursor.execute("""
+                    SELECT asin, title
+                    FROM listings
+                    WHERE item_id = ?
+                """, (global_item_id,))
+                row = cursor.fetchone()
+
         conn.close()
 
+        # Si aún no se encuentra, obtener ASIN directamente de ML API (SELLER_SKU)
         if not row:
-            return None
-
-        asin = row["asin"]
-        title = row["title"]
+            print(f"{Colors.YELLOW}   ⚠️ Item no encontrado en DB, consultando ML API para obtener SELLER_SKU...{Colors.NC}")
+            asin, title = get_asin_from_ml_api(ml_item_id)
+            if not asin:
+                return None
+        else:
+            asin = row["asin"]
+            title = row["title"]
 
         # Obtener precio de Amazon en TIEMPO REAL desde Glow API
         amazon_cost = 0
@@ -324,6 +488,8 @@ def get_order_billing(order):
         if shipping_id:
             try:
                 import requests
+                # Recargar token FRESCO
+                load_dotenv(override=True)
                 ml_token = os.getenv("ML_ACCESS_TOKEN")
                 headers = {"Authorization": f"Bearer {ml_token}"}
                 r = requests.get(f"https://api.mercadolibre.com/marketplace/shipments/{shipping_id}",
@@ -424,6 +590,30 @@ def process_order(order):
         else:
             # No hay ASIN, usar lo que venga del listing
             amazon_cost = listing_data["amazon_cost"]
+    else:
+        # Si no se encontró en listings DB, intentar obtener ASIN directamente de ML API
+        print(f"{Colors.YELLOW}   ⚠️ Item no encontrado en DB, consultando ML API...{Colors.NC}")
+        asin_from_api, title_from_api = get_asin_from_ml_api(parent_item_id if parent_item_id else ml_item_id)
+
+        if asin_from_api:
+            asin = asin_from_api
+            print(f"{Colors.GREEN}   ✅ ASIN obtenido de ML API: {asin}{Colors.NC}")
+
+            # Obtener precio de Glow API
+            print(f"{Colors.CYAN}   🔄 Obteniendo precio de Glow API...{Colors.NC}")
+            try:
+                sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+                from src.integrations.amazon_glow_api import check_real_availability_glow_api
+
+                glow_data = check_real_availability_glow_api(asin)
+                if glow_data and glow_data.get("price"):
+                    amazon_cost = glow_data["price"]
+                    print(f"{Colors.GREEN}   ✅ Precio de Glow API: ${amazon_cost}{Colors.NC}")
+            except Exception as e:
+                print(f"{Colors.YELLOW}   ⚠️ Error con Glow API: {e}{Colors.NC}")
+                amazon_cost = 0
+        else:
+            print(f"{Colors.RED}   ❌ No se pudo obtener ASIN para este item{Colors.NC}")
 
     # Datos del comprador
     buyer = order.get("buyer", {})
@@ -472,8 +662,9 @@ def process_order(order):
         total_cost = round(amazon_cost_total + amazon_tax + FULFILLMENT_FEE, 2)
         profit = round(ml_finances["net_proceeds"] - total_cost, 2)
 
-        if ml_finances["sale_price"] > 0:
-            profit_margin = round((profit / ml_finances["sale_price"]) * 100, 2)
+        # Margen = ganancia sobre el costo, no sobre la venta
+        if total_cost > 0:
+            profit_margin = round((profit / total_cost) * 100, 2)
 
     # Insertar en DB
     cursor.execute("""
@@ -527,7 +718,12 @@ def process_order(order):
 
 
 def track_new_sales():
-    """Revisa y registra nuevas ventas de las últimas 24 horas"""
+    """
+    Revisa y registra nuevas ventas de las últimas 24 horas
+
+    Returns:
+        int: Número de ventas nuevas registradas
+    """
     print(f"\n{Colors.BLUE}{'═' * 80}{Colors.NC}")
     print(f"{Colors.BLUE}TRACKING DE VENTAS - ÚLTIMAS 24 HORAS{Colors.NC}")
     print(f"{Colors.BLUE}{'═' * 80}{Colors.NC}\n")
@@ -540,7 +736,7 @@ def track_new_sales():
 
     if not orders:
         print(f"{Colors.YELLOW}⚠️  No hay nuevas órdenes{Colors.NC}")
-        return
+        return 0
 
     # Procesar cada orden
     new_sales = 0
@@ -551,6 +747,8 @@ def track_new_sales():
     print(f"\n{Colors.GREEN}{'═' * 80}{Colors.NC}")
     print(f"{Colors.GREEN}✅ Procesamiento completado: {new_sales} nuevas ventas registradas{Colors.NC}")
     print(f"{Colors.GREEN}{'═' * 80}{Colors.NC}\n")
+
+    return new_sales
 
 
 def show_stats():

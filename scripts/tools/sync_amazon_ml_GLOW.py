@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-MÓDULO DE SINCRONIZACIÓN AMAZON <-> MERCADOLIBRE
-================================================
+MÓDULO DE SINCRONIZACIÓN AMAZON <-> MERCADOLIBRE (VERSIÓN V2 ADVANCED)
+========================================================================
 Este script sincroniza automáticamente los listings de MercadoLibre con Amazon:
 - Detecta productos pausados/descontinuados en Amazon → Pausa en ML
 - Detecta cambios de precio en Amazon → Actualiza precio en ML proporcionalmente
-- Aplica filtro de Fast Fulfillment (pausa productos con backorder o >24h warehouse time)
+- Aplica filtro de Fast Fulfillment (delivery ≤ MAX_DELIVERY_DAYS)
 - Se ejecuta cada 3 días vía cron job
 
-Filtros aplicados (desde amazon_pricing.py):
-- Solo productos Prime + FBA
-- availabilityType = "NOW" con maximumHours ≤ 24
-- O availabilityType = "FUTURE_WITH_DATE" con ≤7 días
-- Rechaza backorders largos y productos sin fecha
+NUEVA VERSIÓN V2 - Sistema Anti-Detección Profesional:
+- ✅ Session Rotation (nueva sesión cada 100 requests)
+- ✅ Exponential Backoff con Jitter (auto-recovery de bloqueos)
+- ✅ Rate Limiting Inteligente (~0.5 req/sec)
+- ✅ Randomized Processing Order
+- ✅ User-Agent Rotation (10 navegadores diferentes)
+- ✅ NO requiere delays manuales (todo integrado en la API)
+
+Usa amazon_glow_api_v2_advanced.py para obtener:
+- Precio REAL del HTML de Amazon.com
+- Fecha de delivery REAL usando el zipcode configurado (BUYER_ZIPCODE en .env)
+- Validación de disponibilidad y stock
 
 Configuración del cron job:
-0 9 */3 * * cd /Users/felipemelucci/Desktop/revancha && ./venv/bin/python3 sync_amazon_ml.py >> logs/sync_amazon_ml.log 2>&1
+0 9 */3 * * cd /Users/felipemelucci/Desktop/revancha && ./venv/bin/python3 scripts/tools/sync_amazon_ml_GLOW.py >> logs/sync_amazon_ml.log 2>&1
 """
 
 import os
@@ -25,16 +32,19 @@ import json
 import sqlite3
 import requests
 import time
+import random
+import subprocess
 from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
 
 # Cargar variables de entorno
-load_dotenv(override=True)
+# override=False para respetar variables pasadas por script wrapper (28/29)
+load_dotenv(override=False)
 
 # Agregar directorio raíz al path para imports
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from src.integrations.amazon_availability_scraper import check_real_availability
+from src.integrations.amazon_glow_api_v2_advanced import check_availability_v2_advanced
 from src.integrations.mainglobal import refresh_ml_token
 
 # Importar notificaciones Telegram (bot separado para sync)
@@ -70,7 +80,28 @@ LOG_DIR.mkdir(parents=True, exist_ok=True)
 SPAPI_BASE = "https://sellingpartnerapi-na.amazon.com"
 MARKETPLACE_ID = "ATVPDKIKX0DER"  # Amazon US
 ML_API = "https://api.mercadolibre.com"
-ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
+
+# Obtener token del .env local (mantenido actualizado por 08_token_loop.py)
+def get_fresh_ml_token():
+    """
+    Lee el ML_ACCESS_TOKEN del .env local.
+
+    El .env local es actualizado automáticamente cada 6 horas por 08_token_loop.py,
+    por lo que siempre contiene un token fresco y válido.
+
+    Returns:
+        str: Token de MercadoLibre
+    """
+    env_token = os.getenv("ML_ACCESS_TOKEN")
+    if env_token and env_token.startswith("APP_USR-"):
+        print(f"✅ Usando token del .env local (últimos 10 chars: ...{env_token[-10:]})", flush=True)
+        return env_token
+    else:
+        print(f"⚠️ Token no encontrado en .env", flush=True)
+        return ""
+
+# Obtener token fresco al inicio
+ML_TOKEN = get_fresh_ml_token()
 ML_USER_ID = os.getenv("ML_USER_ID")  # Para detectar items de otra cuenta
 
 # Seller IDs conocidos de NEXO (diferentes por marketplace)
@@ -180,7 +211,7 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
         return {}
 
     # Configuración desde .env
-    max_delivery_days = int(os.getenv("MAX_DELIVERY_DAYS", "2"))
+    max_delivery_days = int(os.getenv("MAX_DELIVERY_DAYS", "3"))
     buyer_zipcode = os.getenv("BUYER_ZIPCODE", "33172")
 
     results = {}
@@ -197,13 +228,14 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
             print(f"   [{i}/{total}] {asin}...", end=" ", flush=True)
 
         try:
-            # Llamar a Glow API
-            glow_result = check_real_availability(asin, buyer_zipcode)
+            # Llamar a Glow API V2 Advanced (con anti-detección integrado)
+            glow_result = check_availability_v2_advanced(asin, buyer_zipcode)
 
             # Verificar si tiene error
             if glow_result.get("error"):
+                error_msg = str(glow_result.get("error")) if glow_result.get("error") else "Error desconocido"
                 if show_progress:
-                    print(f"❌ {glow_result['error'][:50]}")
+                    print(f"❌ {error_msg[:50]}")
                 results[asin] = None
                 continue
 
@@ -246,16 +278,9 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
                 print(f"❌ Error: {str(e)[:50]}")
             results[asin] = None
 
-        # Delay entre requests para evitar bloqueos de Amazon
-        if i < total:
-            # Delay base de 1.5s entre cada request
-            time.sleep(1.5)
-
-            # Delay adicional cada 10 productos para ser más conservador
-            if i % 10 == 0:
-                if show_progress:
-                    print(f"   ⏸️  Pausa preventiva (cada 10 productos)...")
-                time.sleep(3)
+        # NOTA: Los delays ya están manejados DENTRO de check_availability_v2_advanced()
+        # con Session Rotation, Rate Limiting, y Exponential Backoff
+        # No necesitamos delays adicionales aquí
 
     if show_progress:
         passed = sum(1 for v in results.values() if v is not None)
@@ -775,11 +800,20 @@ def sync_one_listing(listing, glow_cache, changes_log):
         # NUEVA LÓGICA: Comparar precio de Amazon actual vs último precio conocido
         # Esto previene que el sync sobreescriba los precios bajados por la función
         # de catálogo automático de MercadoLibre
+        #
+        # SYNC_FORCE_PRICE_UPDATE (en .env):
+        #   - true:  Actualiza TODOS los precios siempre (ignora si cambió en Amazon)
+        #   - false: Solo actualiza si el precio cambió en Amazon (comportamiento inteligente)
 
         PRICE_CHANGE_THRESHOLD = 2.0  # Umbral de cambio en Amazon (2%)
+        FORCE_UPDATE = os.getenv("SYNC_FORCE_PRICE_UPDATE", "false").lower() == "true"
         should_update = False
 
-        if amazon_price_last is None:
+        if FORCE_UPDATE:
+            # Modo FORCE: Siempre actualizar, comparando precio ML actual vs precio calculado
+            print(f"   🔄 MODO FORCE ACTIVADO: Actualizando precio independientemente de cambios en Amazon")
+            should_update = True
+        elif amazon_price_last is None:
             # Primera vez que sincronizamos este producto, siempre actualizar
             print(f"   ℹ️ Primera sincronización para este producto")
             print(f"   🔄 ACCIÓN: Actualizar precio y guardar precio Amazon de referencia")
@@ -808,9 +842,14 @@ def sync_one_listing(listing, glow_cache, changes_log):
                 # Actualizar en BD el precio de ML Y el último precio de Amazon
                 update_listing_price_in_db(item_id, new_ml_price, amazon_price)
 
-                result["action"] = "price_updated"
+                # Solo cambiar action a "price_updated" si NO fue reactivado antes
+                if result["action"] != "reactivated":
+                    result["action"] = "price_updated"
+                else:
+                    # Si fue reactivado, actualizar el mensaje para incluir el precio
+                    result["message"] = f"Producto reactivado (stock: 0 → 10) y precio actualizado: ${current_price} → ${new_ml_price} USD"
+
                 result["success"] = True
-                result["message"] = f"Precio actualizado: ${current_price} → ${new_ml_price} USD (Amazon: ${amazon_price})"
                 result["old_price"] = current_price
                 result["new_price"] = new_ml_price
                 result["amazon_price"] = amazon_price
@@ -872,8 +911,8 @@ def main():
         print("⚠️ Token de ML ya está vigente", flush=True)
     print(flush=True)
 
-    # Recargar .env después de refresh para obtener el nuevo token
-    load_dotenv(override=True)
+    # Recargar .env después de refresh (sin sobrescribir env vars ya seteadas por el loop)
+    load_dotenv(override=False)
     global ML_TOKEN
     ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
 
@@ -881,6 +920,7 @@ def main():
     current_markup = float(os.getenv("PRICE_MARKUP", "30"))
     use_tax = os.getenv("USE_TAX", "true").lower() == "true"
     fulfillment_fee = float(os.getenv("FULFILLMENT_FEE", "4.0"))
+    max_delivery_days = int(os.getenv("MAX_DELIVERY_DAYS", "3"))
 
     print("=" * 80, flush=True)
     print("🔄 SINCRONIZACIÓN AMAZON → MERCADOLIBRE", flush=True)
@@ -889,6 +929,7 @@ def main():
     print(f"💰 Markup configurado: {current_markup}%", flush=True)
     print(f"💵 Tax (7% Florida): {'ACTIVADO' if use_tax else 'DESACTIVADO'}", flush=True)
     print(f"📦 Fulfillment Fee: ${fulfillment_fee} USD", flush=True)
+    print(f"🚚 Max Delivery Days: {max_delivery_days} días (productos con delivery >{max_delivery_days}d serán pausados)", flush=True)
     print(flush=True)
 
     # Verificar que existe la BD
@@ -1002,14 +1043,27 @@ def main():
 
     # Resumen final
     print("\n" + "=" * 80)
+    # Contar total de productos pausados en la DB
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("SELECT COUNT(*) FROM listings WHERE stock = 0")
+        total_paused = cursor.fetchone()[0]
+        conn.close()
+    except Exception as e:
+        print(f"⚠️ Error contando productos pausados: {e}")
+        total_paused = None
+
     print("📊 RESUMEN DE SINCRONIZACIÓN")
     print("=" * 80)
-    print(f"Total procesados:       {stats['total']}")
-    print(f"Productos reactivados:  {stats['reactivated']}")
-    print(f"Publicaciones pausadas: {stats['paused']}")
-    print(f"Precios actualizados:   {stats['price_updated']}")
-    print(f"Sin cambios:            {stats['no_change']}")
-    print(f"Errores:                {stats['errors']}")
+    print(f"Total procesados:              {stats['total']}")
+    print(f"Productos reactivados:         {stats['reactivated']}")
+    print(f"Publicaciones pausadas ahora:  {stats['paused']}")
+    if total_paused is not None:
+        print(f"Total publicaciones pausadas:  {total_paused}")
+    print(f"Precios actualizados:          {stats['price_updated']}")
+    print(f"Sin cambios:                   {stats['no_change']}")
+    print(f"Errores:                       {stats['errors']}")
 
     # Desglose de errores
     if stats['errors'] > 0:
@@ -1020,6 +1074,37 @@ def main():
     print()
     print(f"📄 Log guardado en: {log_file}")
     print(f"⏱️ Duración: {duration:.1f} minutos")
+
+    # Mostrar detalle de errores si los hay
+    if stats['errors'] > 0:
+        print("\n" + "=" * 80)
+        print("❌ DETALLE DE ERRORES")
+        print("=" * 80)
+
+        error_changes = [c for c in changes_log if not c.get("success", True)]
+
+        for i, change in enumerate(error_changes, 1):
+            print(f"\n[{i}/{len(error_changes)}] ASIN: {change.get('asin', 'N/A')}")
+            print(f"   ML Item ID: {change.get('item_id', 'N/A')}")
+            print(f"   Acción intentada: {change.get('action', 'N/A')}")
+            print(f"   Razón del error: {change.get('message', 'N/A')}")
+
+            # Mostrar qué cambio se intentó aplicar
+            if change.get('action') == 'pause_failed':
+                print(f"   Cambio que falló: Intentó pausar el listing")
+                amazon_status = change.get('amazon_status', {})
+                print(f"   Por qué se quiso pausar: {amazon_status.get('error', 'N/A')}")
+
+            elif change.get('action') in ['price_update_failed', 'reactivate_failed']:
+                old_price = change.get('old_price')
+                new_price = change.get('new_price')
+                if old_price and new_price:
+                    print(f"   Cambio que falló: Precio ${old_price} → ${new_price} USD")
+
+                amazon_price = change.get('amazon_price')
+                if amazon_price:
+                    print(f"   Precio Amazon actual: ${amazon_price} USD")
+
     print("\n✅ Sincronización completada")
 
     # Notificar finalización de sync

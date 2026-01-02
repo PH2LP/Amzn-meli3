@@ -433,52 +433,59 @@ def extract_smart_context(asin: str) -> Dict:
     # Usar mini_ml preferentemente (más compacto y limpio)
     source_data = mini_ml or amazon_json
 
-    # Limitar tamaño para el prompt (8000 chars para capturar más info)
-    source_json_str = json.dumps(source_data, ensure_ascii=False)[:8000]
+    # Limitar tamaño para el prompt (12000 chars para capturar más info)
+    source_json_str = json.dumps(source_data, ensure_ascii=False)[:12000]
 
     # 3. Prompt para extracción inteligente
-    extraction_prompt = f"""Analiza este producto y extrae información estructurada.
+    extraction_prompt = f"""Analiza este producto y extrae TODA la información técnica disponible.
 
-DATOS DEL PRODUCTO:
+DATOS DEL PRODUCTO (JSON completo):
 {source_json_str}
 
-INSTRUCCIONES DE EXTRACCIÓN:
+═══════════════════════════════════════════════════════════════
+INSTRUCCIONES DE EXTRACCIÓN DINÁMICA
+═══════════════════════════════════════════════════════════════
 
-1. Busca información en TODOS estos campos del JSON:
+1. BUSCA información en TODOS estos campos del JSON:
    - title / itemName / title_ai
-   - bullet_points / bullet_point
-   - attributes / attributes_mapped
-   - main_characteristics
+   - bullet_points / bullet_point / features
+   - attributes / attributes_mapped / main_characteristics / second_characteristics
    - description / description_ai
    - whats_included / package_includes
+   - dimensions / weight / package
+   - battery / power / voltage
+   - connectivity / wireless / bluetooth / wifi
+   - memory / storage / flash_memory
+   - warranty / guarantee
+   - material / color / style
+   - ¡Y CUALQUIER OTRO CAMPO QUE ENCUENTRES!
 
-2. Para cada spec técnica, BUSCA PRIMERO si hay información:
+2. EXTRAE TODAS LAS ESPECIFICACIONES TÉCNICAS que encuentres:
+   - NO te limites a categorías predefinidas
+   - Si ves un campo con información útil → INCLÚYELO en key_specs
+   - Ejemplos de lo que debes buscar:
+     * Almacenamiento: "flash_memory", "storage", "SD", "microSD", "128GB"
+     * Batería: "battery", "rechargeable", "40H", "AAA", "lithium"
+     * Dimensiones: "dimensions", "weight", "size", "height", "width", "depth"
+     * Conectividad: "bluetooth", "wifi", "USB", "Lightning", "wireless"
+     * Resistencia: "waterproof", "IP65", "water_resistant"
+     * Material: "plastic", "metal", "aluminum", "stainless steel"
+     * Voltaje: "110v", "220v", "voltage", "power_source"
+     * Profundidad de teclas: "key_travel", "key_depth", "stroke"
+     * Peso máximo: "max_weight", "capacity", "load_capacity"
+     * Cualquier spec técnica: sensor, resolution, speed, rpm, watts, etc.
 
-   BATERÍA:
-   - Busca en título: "40H", "battery", "batería", "rechargeable", "recargable"
-   - Busca en contenido: "charging case", "estuche de carga", "USB cable", "cable USB"
-   - Si encuentras "charging case" o "cable USB" → es recargable
-   - Si dice "40H battery" → duración: 40 horas, recargable
-   - Si dice "AAA batteries" → usa pilas AAA
-   - NUNCA pongas "no especificada" si encontraste alguna pista
+3. FORMATO para key_specs:
+   - Usa nombres descriptivos en español
+   - Valor claro y conciso
+   - Si NO encuentras una spec → NO la incluyas (no pongas "no especificada")
+   - Ejemplo: "almacenamiento": "Tarjetas Micro SD (no incluidas)"
+   - Ejemplo: "profundidad_teclas": "4mm de recorrido"
+   - Ejemplo: "peso_maximo": "Soporta hasta 150kg"
 
-   CONECTIVIDAD:
-   - Busca: "WiFi", "Bluetooth", "wireless", "inalámbrico", "USB", "Lightning", "USB-C"
+4. Extrae las 10 características MÁS IMPORTANTES para un comprador
 
-   RESISTENCIA AL AGUA:
-   - Busca: "IP65", "IP67", "waterproof", "water resistant", "resistente al agua"
-
-   DIMENSIONES/PESO:
-   - Busca en attributes, dimensions, weight, package
-
-   VOLTAJE/POTENCIA:
-   - Busca: "voltage", "voltaje", "110v", "220v", "power_source"
-   - Si dice "220.0 volts" → "220V"
-   - Si dice "Corded Electric" → también mencionar que es eléctrico con cable
-
-3. Extrae las 10 características MÁS IMPORTANTES para un comprador
-
-4. Da un score de completitud (0.0-1.0) según cuánta info útil encontraste
+5. Da un score de completitud (0.0-1.0) según cuánta info útil encontraste
 
 Responde SOLO este JSON:
 {{
@@ -488,26 +495,26 @@ Responde SOLO este JSON:
   "title_short": "título resumido en 60 caracteres",
   "top_features": ["feature 1", "feature 2", ..., "feature 10"],
   "key_specs": {{
-    "battery": "información de batería o 'no especificada' solo si NO encontraste NADA",
-    "voltage": "voltaje eléctrico (ej: 220V, 110V) o 'no especificada'",
-    "power_source": "fuente de alimentación (ej: cable eléctrico, batería, pilas)",
-    "connectivity": "...",
-    "water_resistance": "...",
-    "weight": "...",
-    "dimensions": "...",
+    "spec_name_1": "valor claro y útil",
+    "spec_name_2": "valor claro y útil",
     ...
+    (INCLUYE TODAS las specs técnicas que encuentres - puede ser 5, 10, 20 o más)
   }},
   "whats_included": ["item 1", "item 2", ...],
   "completeness_score": 0.0-1.0
 }}
 
-IMPORTANTE: Extrae datos REALES. Si ves "40H Battery" en el título, eso ES información de batería."""
+IMPORTANTE:
+- Extrae TODO lo que encuentres - no te limites
+- USA nombres descriptivos en español para las specs
+- Si algo está en inglés en el JSON, tradúcelo al español
+- NO inventes información que no está en el JSON"""
 
     try:
         response = call_openai(
             extraction_prompt,
             model=CONFIG["models"]["fast"],
-            max_tokens=1000,
+            max_tokens=3000,  # Tokens generosos para extraer todas las specs posibles
             temperature=0.1
         )
 
@@ -550,7 +557,12 @@ def generate_answer_with_reasoning(
     context_str = json.dumps(product_context, ensure_ascii=False, indent=2)
 
     # Prompt con Chain-of-Thought
-    reasoning_prompt = f"""Eres un asistente de ventas experto respondiendo preguntas de clientes.
+    reasoning_prompt = f"""Eres un VENDEDOR de MercadoLibre respondiendo preguntas de clientes en tu publicación.
+
+CONTEXTO IMPORTANTE:
+- Respondés DIRECTO como vendedor, sin formalidades excesivas
+- Si no tenés la información específica, NO INVENTÉS ni des respuestas genéricas
+- Para temas de IMPORTACIÓN/ADUANAS/IMPUESTOS: Explicá que MercadoLibre se encarga de toda la gestión
 
 INFORMACIÓN DEL PRODUCTO:
 {context_str}
@@ -581,8 +593,13 @@ PASO 3 - ENTENDER LA INTENCIÓN:
 - ¿Qué información le ayudaría a tomar la decisión de compra?
 
 PASO 4 - BUSCAR LA INFORMACIÓN:
-- ¿Tengo la información específica que necesita?
-- ¿Dónde está en el contexto del producto?
+- La INFORMACIÓN DEL PRODUCTO tiene todas las specs extraídas del JSON
+- Busca en key_specs la información que el cliente necesita
+- Ejemplo: si pregunta "memory" o "storage", busca en specs: "almacenamiento", "storage", "memoria"
+- Ejemplo: si pregunta "garantía", busca: "garantia", "warranty"
+- Ejemplo: si pregunta "peso", busca: "peso", "weight"
+- Ejemplo: si pregunta "profundidad de teclas", busca: "profundidad_teclas", "key_travel", "recorrido"
+- ¿Tengo la información específica que necesita en las specs?
 - Si son múltiples preguntas, identifica cuáles SÍ puedes responder
 - IMPORTANTE: Si son varias preguntas y no puedes responder TODAS, responde SOLO las que SÍ sabes
 - NO menciones que falta información o que no sabes algo
@@ -620,17 +637,48 @@ FORMATO (escribe TODO entre los tags, NO dejes tags vacíos):
 ═══════════════════════════════════════════════════════════════
 
 REGLAS ABSOLUTAS:
+
 1. NUNCA inventes información que no está en el contexto
-2. Si NO tienes info para responder, pon confidence=0
-3. Sé POSITIVO pero HONESTO - destaca beneficios sin mentir
-4. Evita lenguaje robótico o frases template
-5. NO generes saludos ("Hola") ni despedidas - se agregan automáticamente
-6. Empieza DIRECTO con la respuesta
-7. Si preguntan "funciona con X" y tiene "Y integrado", destaca lo POSITIVO de Y primero
-8. NUNCA te contradigas en la misma respuesta
-9. Si es COMPARACIÓN, enfócate solo en ESTE producto
-10. Si es NEGATIVA, entiende bien: "¿No usa pilas?" = pregunta si NO usa pilas
-11. VOLTAJE - Reglas importantes:
+
+2. ⚠️ MUY IMPORTANTE - FALTA DE INFORMACIÓN:
+   Si NO tienes la información específica que el cliente pregunta:
+   - PON confidence=0 (CERO)
+   - DEJA answer VACÍO o con texto mínimo explicando que no tienes esa info
+   - Ejemplos de preguntas SIN INFO: watts, amperes, potencia, consumo eléctrico específico
+   - Si el JSON no tiene esa spec técnica → confidence=0 SIEMPRE
+   - NO des respuestas genéricas tipo "Te recomendaría verificar con el fabricante"
+
+3. 🚢 IMPORTACIÓN, ADUANAS E IMPUESTOS - Regla especial:
+   Si preguntan sobre:
+   - Costos de importación
+   - Aranceles o tarifas aduaneras
+   - Impuestos de importación
+   - Gestión de aduana
+   - Trámites de importación
+
+   RESPUESTA EXACTA:
+   "MercadoLibre se encarga de toda la gestión de importación, aduanas e impuestos. El precio publicado es el precio final que pagás, sin costos adicionales sorpresa."
+
+   Confidence: 95% (es información general de cómo funciona ML)
+   NUNCA digas "verificá con el vendedor" o "consultar con ML" - vos SOS el vendedor
+
+4. Sé POSITIVO pero HONESTO - destaca beneficios sin mentir
+
+5. Evita lenguaje robótico o frases template
+
+6. NO generes saludos ("Hola") ni despedidas - se agregan automáticamente
+
+7. Empieza DIRECTO con la respuesta
+
+8. Si preguntan "funciona con X" y tiene "Y integrado", destaca lo POSITIVO de Y primero
+
+9. NUNCA te contradigas en la misma respuesta
+
+10. Si es COMPARACIÓN, enfócate solo en ESTE producto
+
+11. Si es NEGATIVA, entiende bien: "¿No usa pilas?" = pregunta si NO usa pilas
+
+12. VOLTAJE - Reglas importantes:
     - Si el JSON dice "110-120V" → Menciona "clavija americana recta" + "necesitará transformador para 220V"
     - Si el JSON NO especifica voltaje → Di "Su ficha técnica no indica el voltaje específico, usualmente este tipo de dispositivos funcionan tanto con 110V como 220V"
     - NUNCA digas "no se especifica" o "te recomendaría verificar" - suena poco profesional
@@ -749,21 +797,25 @@ def calculate_final_confidence(
     factors.append(("answer_length", length_score, 0.1))
 
     # Factor 4: No contiene palabras sospechosas (peso 15% - reducido)
-    # Palabras que indican incertidumbre REAL
+    # Palabras que indican incertidumbre REAL o falta de información
     critical_uncertain_words = [
         "no tengo información",
         "no sé",
         "no estoy seguro",
         "no puedo confirmar",
         "debés consultar",
+        "no especifica",  # Movido a críticas - indica falta de info
+        "no indica",      # Similar a "no especifica"
+        "no menciona",    # Similar a "no especifica"
+        "no se especifica",
+        "no está especificado",
         "[", "]"  # Placeholders
     ]
 
     # Palabras menos críticas (pueden ser válidas en ciertos contextos)
     minor_uncertain_words = [
         "consulta",
-        "verifica",
-        "no especifica"
+        "verifica"
     ]
 
     answer_lower = result.get("answer", "").lower()

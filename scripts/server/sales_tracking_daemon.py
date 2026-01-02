@@ -37,6 +37,12 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
+# Import dropbox auth with auto-refresh
+try:
+    from scripts.tools.dropbox_auth import get_dropbox_client
+except ImportError:
+    get_dropbox_client = None
+
 # Configuración
 CHECK_INTERVAL_HOURS = float(os.getenv("SALES_TRACKING_INTERVAL_HOURS", "1"))
 DB_SALES_PATH = "storage/sales_tracking.db"
@@ -66,7 +72,7 @@ def track_sales():
     Ejecuta el tracking de ventas
 
     Returns:
-        bool: True si se ejecutó correctamente
+        int: Número de ventas nuevas registradas, o -1 si hay error
     """
     print(f"\n{Colors.CYAN}📊 PASO 1: Tracking de ventas...{Colors.NC}", flush=True)
 
@@ -78,16 +84,16 @@ def track_sales():
             init_database()
 
         # Trackear ventas
-        track_new_sales()
+        new_sales_count = track_new_sales()
 
         print(f"{Colors.GREEN}   ✅ Tracking completado{Colors.NC}", flush=True)
-        return True
+        return new_sales_count
 
     except Exception as e:
         print(f"{Colors.RED}   ❌ Error en tracking: {e}{Colors.NC}", flush=True)
         import traceback
         traceback.print_exc()
-        return False
+        return -1
 
 
 def generate_excel():
@@ -128,17 +134,23 @@ def upload_to_dropbox(local_path, dropbox_path):
     try:
         import dropbox
 
-        access_token = os.getenv("DROPBOX_ACCESS_TOKEN")
-        if not access_token:
-            print(f"{Colors.YELLOW}   ⚠️  DROPBOX_ACCESS_TOKEN no configurado{Colors.NC}", flush=True)
-            return False
-
         if not os.path.exists(local_path):
             print(f"{Colors.RED}   ❌ Archivo no existe: {local_path}{Colors.NC}", flush=True)
             return False
 
-        # Conectar a Dropbox
-        dbx = dropbox.Dropbox(access_token)
+        # Conectar a Dropbox con auto-refresh
+        if get_dropbox_client:
+            dbx = get_dropbox_client()
+            if not dbx:
+                print(f"{Colors.YELLOW}   ⚠️  No se pudo obtener cliente Dropbox{Colors.NC}", flush=True)
+                return False
+        else:
+            # Fallback to old method if import failed
+            access_token = os.getenv("DROPBOX_ACCESS_TOKEN")
+            if not access_token:
+                print(f"{Colors.YELLOW}   ⚠️  DROPBOX_ACCESS_TOKEN no configurado{Colors.NC}", flush=True)
+                return False
+            dbx = dropbox.Dropbox(access_token)
 
         # Leer archivo
         with open(local_path, 'rb') as f:
@@ -212,6 +224,7 @@ def show_stats():
         cursor.execute("""
             SELECT
                 COUNT(*) as total_sales,
+                SUM(sale_price_usd) as total_revenue,
                 SUM(profit) as total_profit,
                 AVG(profit_margin) as avg_margin
             FROM sales
@@ -224,8 +237,9 @@ def show_stats():
             print(f"\n{Colors.BLUE}{'─' * 80}{Colors.NC}", flush=True)
             print(f"{Colors.CYAN}   📊 ESTADÍSTICAS:{Colors.NC}", flush=True)
             print(f"      Total ventas:      {row[0]}", flush=True)
-            print(f"      Ganancia total:    ${row[1]:.2f}", flush=True)
-            print(f"      Margen promedio:   {row[2]:.1f}%", flush=True)
+            print(f"      Facturación total: ${row[1]:.2f}", flush=True)
+            print(f"      Ganancia total:    ${row[2]:.2f}", flush=True)
+            print(f"      Margen promedio:   {row[3]:.1f}%", flush=True)
             print(f"{Colors.BLUE}{'─' * 80}{Colors.NC}", flush=True)
 
     except Exception as e:
@@ -260,13 +274,20 @@ def main():
 
         try:
             # PASO 1: Track sales
-            track_sales()
+            new_sales_count = track_sales()
 
-            # PASO 2: Generar Excel
-            excel_path = generate_excel()
+            # PASO 2 y 3: Solo generar Excel y subir si hay ventas nuevas
+            if new_sales_count > 0:
+                print(f"\n{Colors.CYAN}🆕 {new_sales_count} venta(s) nueva(s) detectada(s){Colors.NC}", flush=True)
+                print(f"{Colors.CYAN}   Generando Excel y subiendo a Dropbox...{Colors.NC}", flush=True)
 
-            # PASO 3: Subir a Dropbox
-            sync_to_dropbox(excel_path)
+                # Generar Excel
+                excel_path = generate_excel()
+
+                # Subir a Dropbox
+                sync_to_dropbox(excel_path)
+            else:
+                print(f"\n{Colors.YELLOW}⏭️  No hay ventas nuevas, saltando generación de Excel{Colors.NC}", flush=True)
 
             # Mostrar stats
             show_stats()
@@ -283,10 +304,19 @@ def main():
 
             print(f"\n{Colors.GREEN}✅ Ciclo completado exitosamente{Colors.NC}", flush=True)
             print(f"{Colors.CYAN}⏰ Próxima ejecución: {next_run.strftime('%Y-%m-%d %H:%M')}{Colors.NC}", flush=True)
-            print(f"{Colors.YELLOW}💤 Durmiendo por {CHECK_INTERVAL_HOURS} hora(s)...{Colors.NC}\n", flush=True)
 
-            # Dormir
-            time.sleep(CHECK_INTERVAL_HOURS * 3600)
+            # Calcular segundos totales
+            total_seconds = int(CHECK_INTERVAL_HOURS * 3600)
+
+            # Countdown con formato HH:MM:SS
+            for remaining in range(total_seconds, 0, -1):
+                hours = remaining // 3600
+                minutes = (remaining % 3600) // 60
+                seconds = remaining % 60
+                print(f"\r{Colors.YELLOW}⏸️  Esperando: {hours:02d}h {minutes:02d}m {seconds:02d}s{Colors.NC}    ", end='', flush=True)
+                time.sleep(1)
+
+            print()  # Nueva línea al terminar
 
         except KeyboardInterrupt:
             print(f"\n{Colors.YELLOW}🛑 Detenido por usuario{Colors.NC}", flush=True)

@@ -180,133 +180,39 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "MAIN_COLOR": {
+  "EMPTY_GTIN_REASON": {
     "value_type": "list",
     "values": {
-      "black": "2450295",
-      "blue": "2450293",
-      "red": "2450307",
-      "violet": "2450311",
-      "brown": "2450291",
-      "green": "2450314",
-      "orange": "2450327",
-      "sky blue": "2450278",
-      "pink": "2450312",
-      "golden": "2450289",
-      "silver": "2450303",
-      "yellow": "2450296",
-      "gray": "2450294",
-      "multicolored": "46671867",
-      "white": "2450308",
-      "beige": "2450281"
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
     },
     "allowed_units": [],
     "tags": {
-      "variation_attribute": true
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
     },
-    "hierarchy": "CHILD_DEPENDENT",
+    "hierarchy": "ITEM",
     "relevance": 1
   },
-  "FILTRABLE_COLOR": {
-    "value_type": "list",
+  "VERTICAL_TAGS": {
+    "value_type": "string",
     "values": {
-      "black": "2450295",
-      "blue": "2450293",
-      "red": "2450307",
-      "violet": "2450311",
-      "brown": "2450291",
-      "green": "2450314",
-      "orange": "2450327",
-      "sky blue": "2450278",
-      "pink": "2450312",
-      "golden": "2450289",
-      "silver": "2450303",
-      "yellow": "2450296",
-      "gray": "2450294",
-      "multicolored": "46671867",
-      "white": "2450308",
-      "beige": "2450281"
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
     },
     "allowed_units": [],
     "tags": {
       "hidden": true,
       "multivalued": true,
-      "read_only": true,
-      "variation_attribute": true
+      "read_only": true
     },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "PACKAGE_HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "PACKAGE_WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "PACKAGE_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "PACKAGE_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg",
-      "lb",
-      "mg",
-      "oz"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "WEIGHT": {
@@ -509,37 +415,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "GTIN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "conditional_required": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 1
-  },
-  "EMPTY_GTIN_REASON": {
-    "value_type": "list",
-    "values": {
-      "the product is a handcrafted piece": "17055158",
-      "the product is a kit or pack": "17055159",
-      "the product does not have registered code": "17055160",
-      "another reason": "17055161"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "INCLUDES_ASSEMBLY_MANUAL": {
     "value_type": "boolean",
     "values": {
@@ -554,84 +429,148 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "VERTICAL_TAGS": {
-    "value_type": "string",
-    "values": {
-      "is_tom_brand": "53559152",
-      "is_polos": "53559153",
-      "is_social_brands": "53559154",
-      "is_beauty_premium": "53559155",
-      "has_dimensions_images": "53559156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SELLER_PACKAGE_HEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SELLER_PACKAGE_TYPE": {
+  "MAIN_COLOR": {
     "value_type": "list",
     "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
+      "black": "2450295",
+      "blue": "2450293",
+      "red": "2450307",
+      "violet": "2450311",
+      "brown": "2450291",
+      "green": "2450314",
+      "orange": "2450327",
+      "sky blue": "2450278",
+      "pink": "2450312",
+      "golden": "2450289",
+      "silver": "2450303",
+      "yellow": "2450296",
+      "gray": "2450294",
+      "multicolored": "46671867",
+      "white": "2450308",
+      "beige": "2450281"
     },
     "allowed_units": [],
     "tags": {
-      "hidden": true
+      "variation_attribute": true
     },
-    "hierarchy": "ITEM",
+    "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
-  "SELLER_PACKAGE_LENGTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
+  "FILTRABLE_COLOR": {
+    "value_type": "list",
+    "values": {
+      "black": "2450295",
+      "blue": "2450293",
+      "red": "2450307",
+      "violet": "2450311",
+      "brown": "2450291",
+      "green": "2450314",
+      "orange": "2450327",
+      "sky blue": "2450278",
+      "pink": "2450312",
+      "golden": "2450289",
+      "silver": "2450303",
+      "yellow": "2450296",
+      "gray": "2450294",
+      "multicolored": "46671867",
+      "white": "2450308",
+      "beige": "2450281"
     },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SELLER_PACKAGE_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "MPN": {
-    "value_type": "string",
-    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true,
       "multivalued": true,
+      "read_only": true,
       "variation_attribute": true
     },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
+    "relevance": 1
   },
   "ITEM_CONDITION": {
     "value_type": "list",
@@ -657,29 +596,6 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
-  "SELLER_PACKAGE_DATA_SOURCE": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "SELLER_PACKAGE_WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "cm"
-    ],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
   "PACKAGE_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
@@ -689,6 +605,18 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {
@@ -742,33 +670,64 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true,
       "read_only": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 2
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
     "tags": {
-      "hidden": true,
-      "read_only": true
+      "hidden": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 2
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -1042,6 +1001,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   }
 }

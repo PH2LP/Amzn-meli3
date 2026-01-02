@@ -1,0 +1,16 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "IS_ADJUSTABLE": [],
+  "DIFFUSER_NOZZLE_DIAMETER": [
+    "attributes.included_components[0].value"
+  ],
+  "OUTLET_SURFACE_DIAMETER": [],
+  "VERTICAL_TAGS": []
+}

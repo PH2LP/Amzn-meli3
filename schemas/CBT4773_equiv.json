@@ -1,0 +1,49 @@
+{
+  "VOLTAGE": [
+    "voltage[0].value"
+  ],
+  "POWER": [
+    "wattage[0].value"
+  ],
+  "MAIN_COLOR": [
+    "color[0].value"
+  ],
+  "IS_IONIC": [
+    "special_feature[2].value"
+  ],
+  "IS_CERAMIC": [],
+  "IS_PROFESSIONAL": [],
+  "WITH_COOL_SHOT": [],
+  "SET_PIECES": [],
+  "SPEEDS_NUMBER": [
+    "number_of_speeds[0].value"
+  ],
+  "SEC_STAMP": [],
+  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": [],
+  "OCP_CERTIFICATION_AGENCY": [],
+  "PRODUCT_LIFE": [],
+  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": [],
+  "VERTICAL_TAGS": [],
+  "DEPTH": [
+    "item_depth_width_height[0].depth.value"
+  ],
+  "WITH_TOURMALINE": [],
+  "WITH_TITANIUM": [],
+  "MOTOR_TYPE": [],
+  "CABLE_LENGTH": [
+    "cable[0].length[0].decimal_value"
+  ],
+  "TEMPERATURE_LEVELS_NUMBER": [
+    "maximum_temperature[0].value"
+  ],
+  "WITH_HOOP_FOR_HANGING": [],
+  "WITH_TURBO_FUNCTION": [],
+  "WITH_REMOVABLE_FILTER": [
+    "special_feature[3].value"
+  ],
+  "IS_SILENT": [],
+  "IS_MINI": [],
+  "IS_FOLDABLE": [
+    "special_feature[4].value"
+  ]
+}
