@@ -534,6 +534,7 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
             delivery = extract_delivery_info(html)
             if delivery['found']:
                 result["delivery_date"] = delivery['text']
+                result["delivery_date_clean"] = delivery['date']  # Fecha limpia YYYY-MM-DD
                 result["days_until_delivery"] = delivery['days']
 
             # Marcar como disponible si tiene precio Y delivery

@@ -255,6 +255,7 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
             # Validar delivery days (FREE delivery ≤ max_delivery_days)
             days_until = glow_result.get("days_until_delivery")
             delivery_date_text = glow_result.get("delivery_date", "")
+            delivery_date_clean = glow_result.get("delivery_date_clean")  # Fecha limpia YYYY-MM-DD
 
             # Caso especial: delivery_date existe pero days_until es None (rango de fechas)
             if days_until is None:
@@ -269,7 +270,8 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
             # Validar que no exceda max_delivery_days
             if days_until > max_delivery_days:
                 if show_progress:
-                    print(f"❌ Llega: {delivery_date_text[:30]}, Días: {days_until} (max: {max_delivery_days}, RECHAZADO)")
+                    fecha_display = delivery_date_clean if delivery_date_clean else delivery_date_text[:30]
+                    print(f"❌ Llega: {fecha_display}, Días: {days_until} (max: {max_delivery_days}, RECHAZADO)")
                 results[asin] = None
                 continue
 
@@ -284,7 +286,8 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
             }
 
             if show_progress:
-                print(f"✅ Precio: ${glow_result['price']:.2f}, Llega: {delivery_date_text[:30]}, Días: {days_until} (APROBADO)")
+                fecha_display = delivery_date_clean if delivery_date_clean else delivery_date_text[:30]
+                print(f"✅ Precio: ${glow_result['price']:.2f}, Llega: {fecha_display}, Días: {days_until} (APROBADO)")
 
         except Exception as e:
             if show_progress:
