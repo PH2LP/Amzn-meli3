@@ -168,19 +168,20 @@ def send_telegram_message(text, parse_mode="HTML"):
 # FUNCIONES DE MERCADOLIBRE
 # ============================================================
 
-def get_ml_orders(user_id, limit=50):
+def get_ml_orders(user_id, ml_token, limit=50):
     """
     Obtiene órdenes recientes del seller (CBT - Cross Border Trade).
 
     Args:
         user_id: ID del usuario vendedor
+        ml_token: Token de acceso de MercadoLibre
         limit: Número máximo de órdenes a obtener
 
     Returns:
         list: Lista de órdenes completas (con pack_id agregado)
     """
     url = f"{ML_API}/marketplace/orders/search"
-    headers = {"Authorization": f"Bearer {ML_TOKEN}"}
+    headers = {"Authorization": f"Bearer {ml_token}"}
     params = {
         "seller": user_id,
         "sort": "date_desc",
@@ -220,10 +221,10 @@ def get_ml_orders(user_id, limit=50):
         return []
 
 
-def get_ml_user_id():
+def get_ml_user_id(ml_token):
     """Obtiene el user_id del seller"""
     url = f"{ML_API}/users/me"
-    headers = {"Authorization": f"Bearer {ML_TOKEN}"}
+    headers = {"Authorization": f"Bearer {ml_token}"}
 
     try:
         r = requests.get(url, headers=headers, timeout=30)
@@ -239,13 +240,14 @@ def get_ml_user_id():
 # FUNCIONES DE BASE DE DATOS
 # ============================================================
 
-def get_asin_by_item_id(item_id):
+def get_asin_by_item_id(item_id, ml_token):
     """
     Busca el ASIN asociado a un item_id de MercadoLibre.
     Busca tanto en item_id (CBT) como en site_items (IDs locales de cada marketplace).
 
     Args:
         item_id: ID del item en MercadoLibre (puede ser CBT o local como MLB, MLM, etc.)
+        ml_token: Token de acceso de MercadoLibre
 
     Returns:
         dict: {asin, title, brand, model, permalink, amazon_cost} o None
@@ -283,7 +285,7 @@ def get_asin_by_item_id(item_id):
 
         try:
             url = f"https://api.mercadolibre.com/items/{item_id}"
-            headers = {"Authorization": f"Bearer {ML_TOKEN}"}
+            headers = {"Authorization": f"Bearer {ml_token}"}
             response = requests.get(url, headers=headers, timeout=10)
 
             if response.status_code == 200:
@@ -434,13 +436,14 @@ def save_notified_sale(order_id, order_data):
 # LÓGICA PRINCIPAL
 # ============================================================
 
-def format_sale_notification(order, asin_data):
+def format_sale_notification(order, asin_data, ml_token):
     """
     Formatea el mensaje de notificación de venta.
 
     Args:
         order: Datos de la orden de MercadoLibre
         asin_data: Datos del ASIN desde la BD
+        ml_token: Token de acceso de MercadoLibre
 
     Returns:
         str: Mensaje formateado en HTML para Telegram
@@ -473,7 +476,7 @@ def format_sale_notification(order, asin_data):
     if shipping_id:
         try:
             import requests
-            headers = {"Authorization": f"Bearer {ML_TOKEN}"}
+            headers = {"Authorization": f"Bearer {ml_token}"}
             r = requests.get(f"{ML_API}/marketplace/shipments/{shipping_id}",
                            headers=headers, timeout=10)
             if r.status_code == 200:
@@ -599,8 +602,12 @@ def _check_new_sales_impl():
         dict: Estadísticas de ventas procesadas
     """
 
+    # Recargar .env para obtener token fresco (por si se refrescó)
+    load_dotenv(override=True)
+    ml_token = os.getenv("ML_ACCESS_TOKEN")
+
     # Verificar credenciales
-    if not ML_TOKEN:
+    if not ml_token:
         print("❌ ML_ACCESS_TOKEN no configurado en .env")
         return {"error": "Missing ML token"}
 
@@ -611,7 +618,7 @@ def _check_new_sales_impl():
 
     # Obtener user_id
     print("🔐 Obteniendo información del seller...")
-    user_id = get_ml_user_id()
+    user_id = get_ml_user_id(ml_token)
     if not user_id:
         print("❌ No se pudo obtener el user_id")
         return {"error": "Could not get user_id"}
@@ -624,7 +631,7 @@ def _check_new_sales_impl():
 
     # Obtener órdenes recientes
     print("📦 Consultando órdenes recientes...")
-    orders = get_ml_orders(user_id, limit=50)
+    orders = get_ml_orders(user_id, ml_token, limit=50)
     print(f"✅ Encontradas {len(orders)} órdenes\n")
 
     # Estadísticas
@@ -684,12 +691,12 @@ def _check_new_sales_impl():
         asin_data = None
         if parent_item_id:
             print(f"      Buscando por CBT: {parent_item_id}")
-            asin_data = get_asin_by_item_id(parent_item_id)
+            asin_data = get_asin_by_item_id(parent_item_id, ml_token)
 
         # Si no encuentra, intentar con item_id local (MLB, MLM, etc.)
         if not asin_data:
             print(f"      Buscando por item_id local: {item_id}")
-            asin_data = get_asin_by_item_id(item_id)
+            asin_data = get_asin_by_item_id(item_id, ml_token)
 
         if not asin_data:
             print(f"   ⚠️ No se encontró ASIN para:")
@@ -713,8 +720,8 @@ def _check_new_sales_impl():
             stats["already_notified"] += 1
             continue
 
-        # Formatear mensaje (retorna 2 mensajes: principal y número de orden)
-        messages = format_sale_notification(order, asin_data)
+        # Formatear mensaje (retorna 3 mensajes: principal, número de orden y ASIN)
+        messages = format_sale_notification(order, asin_data, ml_token)
 
         if not messages:
             print(f"   ❌ Error formateando mensaje")
