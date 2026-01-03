@@ -175,6 +175,102 @@ _session_rotator = SessionRotator()
 _rate_limiter = RateLimiter()
 
 
+def detect_and_resolve_variants(html_content: str, original_asin: str) -> Optional[Dict]:
+    """
+    FALLBACK: Detecta si un ASIN tiene variantes y extrae información para seleccionarla.
+
+    Solo se llama cuando el producto ya fue marcado como unavailable.
+
+    Args:
+        html_content: HTML de la página de Amazon
+        original_asin: ASIN que TENEMOS en la BD
+
+    Returns:
+        Dict con:
+        - asin: El ASIN de la variante
+        - dimensions: Dict con dimensiones (ej: {"size_name": "7", "color_name": "Black"})
+        - variant_info: Lista con valores de la variante
+        O None si no tiene variantes o no se pudo extraer
+    """
+
+    # DETECCIÓN: ¿Es producto con variantes?
+    has_variant_selector = (
+        'To buy, select' in html_content or
+        'Choose from options' in html_content or
+        re.search(r'Select (Size|Color|Style)', html_content) or
+        'id="twister"' in html_content
+    )
+
+    if not has_variant_selector:
+        return None  # No tiene variantes
+
+    # EXTRACCIÓN 1: Buscar dimensionValuesDisplayData (mapeo ASIN -> valores)
+    dim_data_match = re.search(
+        r'"dimensionValuesDisplayData"\s*:\s*(\{[^}]+\})',
+        html_content
+    )
+
+    if not dim_data_match:
+        return None  # No se pudo extraer mapa de variantes
+
+    try:
+        import json
+        variant_map = json.loads(dim_data_match.group(1))
+
+        # VERIFICACIÓN: ¿Nuestro ASIN está en el mapa?
+        if original_asin not in variant_map:
+            print(f"   ⚠️  ASIN padre detectado (no es variante específica)")
+            print(f"      Variantes disponibles: {list(variant_map.keys())[:3]}")
+            return None
+
+        variant_info = variant_map[original_asin]
+
+        # EXTRACCIÓN 2: Buscar dimensionToAsinMap (mapeo valores -> ASIN)
+        # Esto nos da los nombres de las dimensiones (size_name, color_name, etc)
+        dim_to_asin_match = re.search(
+            r'"dimensionToAsinMap"\s*:\s*(\{.+?\})\s*,',
+            html_content,
+            re.DOTALL
+        )
+
+        dimensions = {}
+        if dim_to_asin_match:
+            try:
+                dim_to_asin = json.loads(dim_to_asin_match.group(1))
+                # dim_to_asin tiene estructura: {"{size_value},{color_value}": "ASIN", ...}
+                # Necesitamos encontrar qué keys corresponden a nuestro ASIN
+                for key, asin in dim_to_asin.items():
+                    if asin == original_asin:
+                        # Parsear los valores (ej: "7,Black" -> ["7", "Black"])
+                        values = key.split(',')
+                        # Asumimos orden: primer dimensión = size, segunda = color
+                        # (esto puede variar, pero es lo más común)
+                        if len(values) >= 1:
+                            dimensions['dimension_1'] = values[0]
+                        if len(values) >= 2:
+                            dimensions['dimension_2'] = values[1]
+                        break
+            except:
+                pass
+
+        print(f"   🔄 FALLBACK: Producto con variantes detectado")
+        print(f"      ASIN: {original_asin}")
+        print(f"      Variante: {' - '.join(str(v) for v in variant_info)}")
+        print(f"      Total variantes: {len(variant_map)}")
+        if dimensions:
+            print(f"      Dimensiones: {dimensions}")
+
+        return {
+            'asin': original_asin,
+            'variant_info': variant_info,
+            'dimensions': dimensions
+        }
+
+    except Exception as e:
+        print(f"   ⚠️  Error detectando variantes: {str(e)[:100]}")
+        return None
+
+
 def extract_delivery_info(html_content: str) -> Dict:
     """
     Extrae información de delivery del HTML
@@ -364,6 +460,7 @@ def is_blocked_response(html_content: str, status_code: int) -> bool:
     - Robot check
     - Página muy pequeña
     - Sin precio Y sin delivery
+    - Mensaje de "automated access"
     """
 
     if status_code != 200:
@@ -376,6 +473,13 @@ def is_blocked_response(html_content: str, status_code: int) -> bool:
         return True
 
     if 'robot check' in html_content.lower():
+        return True
+
+    # NUEVO: Detectar mensaje de "automated access to Amazon"
+    if 'automated access to Amazon data' in html_content:
+        return True
+
+    if 'api-services-support@amazon.com' in html_content:
         return True
 
     # Si no tiene delivery block ni precio, probablemente bloqueado
@@ -546,7 +650,158 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
                 if result["days_until_delivery"] and result["days_until_delivery"] <= max_days:
                     result["is_fast_delivery"] = True
 
-            # Éxito - salir del loop de retry
+                # Éxito - salir del loop de retry
+                return result
+
+            # FALLBACK: Si tiene precio pero NO tiene delivery, puede ser variante
+            if result["price"] and not result["delivery_date"]:
+                print(f"   ⚠️  Producto con precio pero sin delivery - intentando fallback de variantes...")
+
+                variant_data = detect_and_resolve_variants(html, asin)
+
+                if variant_data:
+                    # ESTRATEGIA: Agregar parámetros th=1&psc=1 para forzar selección de variante
+                    print(f"   🔄 Consultando variante con parámetros de selección...")
+
+                    # Construir URL con parámetros que fuerzan la selección de la variante
+                    variant_url = f"https://www.amazon.com/dp/{asin}?th=1&psc=1"
+
+                    # Pequeño delay antes del request adicional
+                    time.sleep(1.5)
+
+                    # GET con parámetros de variante
+                    variant_response = session.get(variant_url, timeout=30)
+
+                    if is_blocked_response(variant_response.text, variant_response.status_code):
+                        print(f"   ⚠️  Bloqueo en consulta de variante")
+                        # Continuar con retry normal
+                        backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
+                        jitter = random.uniform(0, backoff_time * 0.1)
+                        _session_rotator.reset()
+                        time.sleep(backoff_time + jitter)
+                        continue
+
+                    variant_html = variant_response.text
+
+                    # Extraer CSRF token de la variante
+                    csrf_token_variant = None
+                    csrf_match_variant = re.search(r'"anti-csrftoken-a2z"\s*:\s*"([^"]+)"', variant_html)
+                    if csrf_match_variant:
+                        csrf_token_variant = csrf_match_variant.group(1)
+
+                    # Glow API para actualizar zipcode en la variante seleccionada
+                    print(f"   🔄 Ejecutando Glow API para variante seleccionada...")
+                    glow_url_variant = "https://www.amazon.com/portal-migration/hz/glow/address-change"
+                    params_variant = {
+                        'actionSource': 'glow',
+                        'deviceType': 'desktop',
+                        'pageType': 'Detail',
+                        'storeContext': 'pc'
+                    }
+                    payload_variant = {
+                        'locationType': 'LOCATION_INPUT',
+                        'zipCode': zipcode,
+                        'deviceType': 'web',
+                        'storeContext': 'generic',
+                        'pageType': 'Detail'
+                    }
+                    glow_headers_variant = {
+                        'Accept': 'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Referer': variant_url
+                    }
+                    if csrf_token_variant:
+                        glow_headers_variant['anti-csrftoken-a2z'] = csrf_token_variant
+
+                    # Glow API call
+                    try:
+                        glow_response_variant = session.post(
+                            glow_url_variant,
+                            params=params_variant,
+                            json=payload_variant,
+                            headers=glow_headers_variant,
+                            timeout=15
+                        )
+                        if glow_response_variant.status_code == 200:
+                            print(f"   ✅ Glow API ejecutado para variante")
+                    except:
+                        print(f"   ⚠️  Glow API falló para variante (continuando...)")
+
+                    # GET actualizado con delivery para la variante
+                    time.sleep(0.5)
+                    variant_response_updated = session.get(variant_url, timeout=30)
+                    variant_html = variant_response_updated.text
+
+                    # VALIDACIÓN CRÍTICA: Verificar que el ASIN en la página sea el correcto
+                    # Buscar el ASIN actual en el HTML (múltiples patrones)
+                    asin_patterns = [
+                        r'"ASIN"\s*:\s*"([A-Z0-9]+)"',
+                        r'data-asin="([A-Z0-9]+)"',
+                        r'"asin"\s*:\s*"([A-Z0-9]+)"',
+                        r'/dp/([A-Z0-9]{10})',
+                    ]
+
+                    current_asin = None
+                    for pattern in asin_patterns:
+                        asin_match = re.search(pattern, variant_html)
+                        if asin_match:
+                            current_asin = asin_match.group(1)
+                            break
+
+                    if not current_asin:
+                        print(f"   ⚠️  FALLBACK ABORTADO: No se pudo extraer ASIN del HTML")
+                        print(f"      No podemos verificar que el precio/delivery sean del producto correcto")
+                        # Rechazar por seguridad - no sabemos de qué producto es el precio
+                        result["available"] = False
+                        result["price"] = None
+                        result["delivery_date"] = None
+                        return result
+
+                    if current_asin != asin:
+                        print(f"   ⚠️  FALLBACK ABORTADO: ASIN incorrecto detectado")
+                        print(f"      Buscábamos: {asin}")
+                        print(f"      Amazon mostró: {current_asin}")
+                        print(f"      Esto indica que Amazon redirigió a otra variante")
+                        # NO usar este resultado - el precio/delivery es de otro producto
+                        result["available"] = False
+                        result["price"] = None
+                        result["delivery_date"] = None
+                        return result
+
+                    # Re-extraer PRECIO de la variante (puede haber cambiado)
+                    variant_price = extract_price(variant_html)
+                    if variant_price and variant_price != result["price"]:
+                        print(f"   ⚠️  Precio cambió después de seleccionar variante:")
+                        print(f"      Antes: ${result['price']}")
+                        print(f"      Ahora: ${variant_price}")
+                        result["price"] = variant_price  # Usar el precio actualizado
+
+                    # Re-extraer delivery de la variante
+                    variant_delivery = extract_delivery_info(variant_html)
+                    if variant_delivery['found']:
+                        result["delivery_date"] = variant_delivery['text']
+                        result["delivery_date_clean"] = variant_delivery['date']
+                        result["days_until_delivery"] = variant_delivery['days']
+
+                        # Marcar como disponible
+                        if result["delivery_date"]:
+                            result["available"] = True
+                            result["in_stock"] = True
+
+                            max_days = int(os.getenv("MAX_DELIVERY_DAYS", "3"))
+                            if result["days_until_delivery"] and result["days_until_delivery"] <= max_days:
+                                result["is_fast_delivery"] = True
+
+                            print(f"   ✅ FALLBACK exitoso - delivery encontrado")
+                            print(f"   ✅ ASIN verificado: {current_asin}")
+                            return result
+                        else:
+                            print(f"   ⚠️  FALLBACK: delivery aún no encontrado")
+                    else:
+                        print(f"   ⚠️  FALLBACK: no se pudo extraer delivery de variante")
+
+            # Si llegamos aquí, no hay delivery (con o sin fallback)
             return result
 
         except Exception as e:
