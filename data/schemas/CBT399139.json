@@ -209,6 +209,291 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
+  "OCP_CERTIFICATION_AGENCY": {
+    "value_type": "list",
+    "values": {
+      "bureau veritas argentina s.a.": "11695662",
+      "instituto del gas argentino s.a.": "11695663",
+      "intertek argentina certificaciones s.a.": "11695664",
+      "inti instituto nacional de tecnología industrial": "11695665",
+      "iqc s.a.": "11695666",
+      "iram instituto argentino de normalización y certificación": "11695667",
+      "lenor s.r.l.": "11695668",
+      "net connection international s.r.l. (ncc)": "11695669",
+      "qetkra s.r.l.": "11695670",
+      "tüv rheinland argentina s.a. (tuv)": "11695671",
+      "ul de argentina s.r.l.": "11695672",
+      "other (unspecified)": "11695673"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "URSEA_AUTORIZATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ENERGY_EFFICIENCY_LABEL": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SEC_STAMP": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VERTICAL_TAGS": {
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_LABEL": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "POWER": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "W",
+      "kW"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LIGHT_SOURCES_TYPES": {
+    "value_type": "string",
+    "values": {
+      "halogen": "3137302",
+      "incandescent": "3137301",
+      "led": "7387210",
+      "fluorescent": "3137300"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "POWER_SUPPLY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "battery": "4491927",
+      "domestic current": "49713698",
+      "cell battery": "1176674",
+      "solar energy": "38547771",
+      "battery/domestic current": "53603540",
+      "battery/cell battery": "53603541",
+      "battery/solar energy": "53690418",
+      "domestic current/cell battery": "53603543",
+      "domestic current/solar energy": "53690419",
+      "cell battery/solar energy": "53690420",
+      "battery/domestic current/cell battery": "53603544",
+      "battery/domestic current/solar energy": "53690421",
+      "battery/cell battery/solar energy": "53690422",
+      "domestic current/cell battery/solar energy": "53690423",
+      "battery/domestic current/cell battery/solar energy": "53690424"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LAMP_FORMAT": {
+    "value_type": "string",
+    "values": {
+      "lantern": "13077254",
+      "ceiling light": "13077255",
+      "chandelier": "13077256",
+      "cage": "13077257",
+      "hoop": "13077258"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MOUNTING_PLACES": {
+    "value_type": "list",
+    "values": {
+      "ceiling": "7720909",
+      "floor": "963439",
+      "wall": "7720908"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MATERIALS": {
+    "value_type": "string",
+    "values": {
+      "acrylic": "1258137",
+      "aluminum": "2748301",
+      "bamboo": "4327467",
+      "ceramic": "2282603",
+      "fabric": "2469707",
+      "glass": "2431731",
+      "iron": "2431883",
+      "metal": "112648",
+      "plastic": "2748302",
+      "rattan": "2957316",
+      "stainless steel": "4086949",
+      "wood": "2431881"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "multivalued": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "COMPATIBLE_SMART_APPS": {
+    "value_type": "string",
+    "values": {
+      "google home": "12306601",
+      "smart life": "12306602"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LIGHT_BULBS_CAPACITY": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_BULBS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_WI_FI": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_WIRELESS": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LIGHT_BULB_SOCKET_TYPE": {
+    "value_type": "string",
+    "values": {
+      "e14": "2236854",
+      "e27": "344372",
+      "gu10": "4086864",
+      "gx53": "4086865"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "MAIN_COLOR": {
     "value_type": "list",
     "values": {
@@ -308,185 +593,6 @@
     "hierarchy": "CHILD_DEPENDENT",
     "relevance": 1
   },
-  "POWER": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "W",
-      "kW"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "LIGHT_SOURCES_TYPES": {
-    "value_type": "string",
-    "values": {
-      "halogen": "3137302",
-      "incandescent": "3137301",
-      "led": "7387210",
-      "fluorescent": "3137300"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "POWER_SUPPLY_TYPE": {
-    "value_type": "string",
-    "values": {
-      "battery": "4491927",
-      "domestic current": "49713698",
-      "cell battery": "1176674",
-      "solar energy": "38547771",
-      "battery/domestic current": "53603540",
-      "battery/cell battery": "53603541",
-      "battery/solar energy": "53690418",
-      "domestic current/cell battery": "53603543",
-      "domestic current/solar energy": "53690419",
-      "cell battery/solar energy": "53690420",
-      "battery/domestic current/cell battery": "53603544",
-      "battery/domestic current/solar energy": "53690421",
-      "battery/cell battery/solar energy": "53690422",
-      "domestic current/cell battery/solar energy": "53690423",
-      "battery/domestic current/cell battery/solar energy": "53690424"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "BATTERY_VOLTAGE": {
-    "value_type": "string",
-    "values": {
-      "1.2v": "14223009",
-      "3.2v": "6865722"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "LAMP_FORMAT": {
-    "value_type": "string",
-    "values": {
-      "lantern": "13077254",
-      "ceiling light": "13077255",
-      "chandelier": "13077256",
-      "cage": "13077257",
-      "hoop": "13077258"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "MOUNTING_PLACES": {
-    "value_type": "list",
-    "values": {
-      "ceiling": "7720909",
-      "floor": "963439",
-      "wall": "7720908"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "MATERIALS": {
-    "value_type": "string",
-    "values": {
-      "acrylic": "1258137",
-      "aluminum": "2748301",
-      "bamboo": "4327467",
-      "ceramic": "2282603",
-      "fabric": "2469707",
-      "glass": "2431731",
-      "iron": "2431883",
-      "metal": "112648",
-      "plastic": "2748302",
-      "rattan": "2957316",
-      "stainless steel": "4086949",
-      "wood": "2431881"
-    },
-    "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "multivalued": true,
-      "required": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "COMPATIBLE_SMART_APPS": {
-    "value_type": "string",
-    "values": {
-      "google home": "12306601",
-      "smart life": "12306602"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "ENERGY_EFFICIENCY": {
-    "value_type": "list",
-    "values": {
-      "a": "98473",
-      "b": "103827",
-      "c": "417553",
-      "d": "417554",
-      "e": "417555",
-      "f": "417556",
-      "g": "7079211",
-      "a+": "2307502",
-      "a++": "2307503",
-      "a+++": "2307504"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "LIGHT_BULBS_CAPACITY": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_BULBS": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "catalog_required": true,
-      "required": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "IS_WIRELESS": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "GTIN": {
     "value_type": "string",
     "values": {},
@@ -501,111 +607,18 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
-  "OCP_CERTIFICATION_AGENCY": {
+  "ITEM_CONDITION": {
     "value_type": "list",
     "values": {
-      "bureau veritas argentina s.a.": "11695662",
-      "instituto del gas argentino s.a.": "11695663",
-      "intertek argentina certificaciones s.a.": "11695664",
-      "inti instituto nacional de tecnología industrial": "11695665",
-      "iqc s.a.": "11695666",
-      "iram instituto argentino de normalización y certificación": "11695667",
-      "lenor s.r.l.": "11695668",
-      "net connection international s.r.l. (ncc)": "11695669",
-      "qetkra s.r.l.": "11695670",
-      "tüv rheinland argentina s.a. (tuv)": "11695671",
-      "ul de argentina s.r.l.": "11695672",
-      "other (unspecified)": "11695673"
+      "new": "2230284",
+      "refurbished": "2230582"
     },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "URSEA_AUTORIZATION_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ENERGY_EFFICIENCY_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "EMPTY_GTIN_REASON": {
-    "value_type": "list",
-    "values": {
-      "the product is a handcrafted piece": "17055158",
-      "the product is a kit or pack": "17055159",
-      "the product does not have registered code": "17055160",
-      "another reason": "17055161"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SEC_STAMP": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ANATEL_HOMOLOGATION_NUMBER": {
-    "value_type": "number",
-    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "VERTICAL_TAGS": {
-    "value_type": "string",
-    "values": {
-      "is_tom_brand": "53559152",
-      "is_polos": "53559153",
-      "is_social_brands": "53559154",
-      "is_beauty_premium": "53559155",
-      "has_dimensions_images": "53559156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
     "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ANATEL_HOMOLOGATION_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
+    "relevance": 2
   },
   "LENGTH": {
     "value_type": "number_unit",
@@ -659,19 +672,6 @@
       "variation_attribute": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {
@@ -772,19 +772,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -796,34 +783,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -1108,6 +1067,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

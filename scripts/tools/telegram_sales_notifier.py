@@ -468,10 +468,11 @@ def format_sale_notification(order, asin_data, ml_token):
     payments = order.get("payments", [])
     total_paid_by_customer = payments[0].get("total_paid_amount", 0) if payments else unit_price
 
-    # Obtener shipping cost desde el endpoint de shipments
+    # Obtener shipping cost y fecha límite desde el endpoint de shipments
     shipping = order.get("shipping", {})
     shipping_id = shipping.get("id")
     shipping_cost = 0
+    handling_deadline = None
 
     if shipping_id:
         try:
@@ -483,6 +484,10 @@ def format_sale_notification(order, asin_data, ml_token):
                 shipment_data = r.json()
                 lead_time = shipment_data.get("lead_time", {})
                 shipping_cost = lead_time.get("list_cost", 0)
+
+                # Obtener fecha límite de handling (cuándo hay que despachar)
+                if "promise_limit" in shipment_data:
+                    handling_deadline = shipment_data.get("promise_limit")
         except:
             pass
 
@@ -534,13 +539,25 @@ def format_sale_notification(order, asin_data, ml_token):
     # Calcular precio total de Amazon (producto + warehouse)
     amazon_total_price = amazon_cost + fulfillment_fee
 
+    # Formatear fecha límite de despacho si está disponible
+    deadline_text = ""
+    if handling_deadline:
+        try:
+            from datetime import datetime
+            # El formato es ISO 8601: "2024-01-15T23:59:00.000-03:00"
+            deadline_dt = datetime.fromisoformat(handling_deadline.replace('Z', '+00:00'))
+            deadline_formatted = deadline_dt.strftime("%d/%m/%Y %H:%M")
+            deadline_text = f"\n⏰ <b>Despachar antes de:</b> {deadline_formatted}"
+        except:
+            pass
+
     # Formato del mensaje PRINCIPAL (sin número de orden)
     message = f"""
 🎉 <b>¡NUEVA VENTA!</b>
 
 📦 <b>{item_title}</b>
 🏷️ Marca: <b>{brand}</b>
-👤 Comprador: <b>{buyer_nickname}</b>
+👤 Comprador: <b>{buyer_nickname}</b>{deadline_text}
 
 ━━━━━━━━━━━━━━━━━━━━━
 💰 <b>FINANCIERO</b>

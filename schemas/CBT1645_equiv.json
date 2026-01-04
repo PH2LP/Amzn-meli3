@@ -1,0 +1,45 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material"
+  ],
+  "NOISE_LEVEL": [
+    "noise_level",
+    "attributes.noise_level[0].value"
+  ],
+  "POWER_SUPPLY_TYPE": [
+    "power_source_type",
+    "attributes.power_source_type[0].value"
+  ],
+  "WITH_REMOTE_CONTROL": [
+    "included_components",
+    "attributes.included_components[0].value"
+  ],
+  "WITH_LIGHT": [
+    "special_feature",
+    "attributes.special_feature[3].value"
+  ],
+  "WITH_WI_FI": [
+    "special_feature",
+    "attributes.special_feature[5].value"
+  ],
+  "IS_PROGRAMMABLE": [
+    "has_automatic_shutoff",
+    "attributes.has_automatic_shutoff[0].value"
+  ],
+  "BLADES_NUMBER": [
+    "number_of_blades",
+    "attributes.number_of_blades[0].value"
+  ],
+  "FAN_TYPE": [
+    "electric_fan_design",
+    "attributes.electric_fan_design[0].value"
+  ],
+  "DIAMETER": [
+    "size",
+    "attributes.size[0].value"
+  ]
+}

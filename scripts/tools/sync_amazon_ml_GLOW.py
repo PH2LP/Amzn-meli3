@@ -37,6 +37,7 @@ import subprocess
 from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Cargar variables de entorno
 # override=False para respetar variables pasadas por script wrapper (28/29)
@@ -192,7 +193,7 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
     - Validación de stock
 
     Args:
-        asins: Lista de ASINs
+        asins: Lista de ASINs (puede contener duplicados)
         show_progress: Mostrar progreso en consola
 
     Returns:
@@ -210,22 +211,29 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
     if not asins:
         return {}
 
+    # Deduplicar ASINs para no consultar el mismo ASIN múltiples veces
+    # (cuando un ASIN tiene múltiples CBT IDs)
+    unique_asins = list(set(asins))
+    total_listings = len(asins)
+    total_unique = len(unique_asins)
+
     # Configuración desde .env
     max_delivery_days = int(os.getenv("MAX_DELIVERY_DAYS", "3"))
     buyer_zipcode = os.getenv("BUYER_ZIPCODE", "33172")
 
     results = {}
-    total = len(asins)
 
     if show_progress:
-        print(f"🌐 Consultando Glow API para {total} productos...")
-        print(f"   Zipcode: {buyer_zipcode}")
-        print(f"   Max delivery: {max_delivery_days} días")
-        print()
+        print(f"🌐 Consultando Glow API para {total_unique} ASINs únicos (de {total_listings} listings)...", flush=True)
+        if total_unique < total_listings:
+            print(f"   ⚡ Optimización: {total_listings - total_unique} consultas ahorradas", flush=True)
+        print(f"   Zipcode: {buyer_zipcode}", flush=True)
+        print(f"   Max delivery: {max_delivery_days} días", flush=True)
+        print(flush=True)
 
-    for i, asin in enumerate(asins, 1):
+    for i, asin in enumerate(unique_asins, 1):
         if show_progress:
-            print(f"   [{i}/{total}] {asin}...", end=" ", flush=True)
+            print(f"   [{i}/{total_unique}] {asin}...", end=" ", flush=True)
 
         try:
             # Llamar a Glow API V2 Advanced (con anti-detección integrado)
@@ -301,7 +309,7 @@ def get_glow_data_batch(asins: list, show_progress: bool = True) -> dict:
     if show_progress:
         passed = sum(1 for v in results.values() if v is not None)
         print()
-        print(f"✅ Resultados: {passed}/{total} productos aprobados")
+        print(f"✅ Resultados: {passed}/{total_unique} productos aprobados")
         print()
 
     return results
@@ -531,16 +539,16 @@ def update_ml_price(item_id, new_price_usd, site_items=None):
                 print(f"      ⚠️ No hay países válidos para actualizar")
                 return (False, [])
 
-            # Actualizar país por país individualmente
-            print(f"      Actualizando {len(valid_countries)} país(es) individualmente...")
+            # Actualizar países en paralelo para mayor velocidad
+            print(f"      Actualizando {len(valid_countries)} país(es) en paralelo...")
             success_count = 0
             failed_countries = []
 
-            for site_item in valid_countries:
+            def update_country(site_item):
+                """Función auxiliar para actualizar un país individual"""
                 site_id = site_item.get("site_id")
                 listing_item_id = site_item.get("item_id")
 
-                # Request individual por país
                 site_listings = [{
                     "logistic_type": site_item.get("logistic_type", "remote"),
                     "listing_item_id": listing_item_id,
@@ -550,11 +558,20 @@ def update_ml_price(item_id, new_price_usd, site_items=None):
                 body = {"site_listings": site_listings}
                 result = ml_http_put(url, body)
 
-                if result is None:
-                    failed_countries.append(site_id)
-                    print(f"      ❌ {site_id}: Error")
-                else:
-                    success_count += 1
+                return (site_id, result is not None)
+
+            # Ejecutar actualizaciones en paralelo (max 5 threads para no saturar API)
+            with ThreadPoolExecutor(max_workers=5) as executor:
+                futures = {executor.submit(update_country, site_item): site_item
+                          for site_item in valid_countries}
+
+                for future in as_completed(futures):
+                    site_id, success = future.result()
+                    if success:
+                        success_count += 1
+                    else:
+                        failed_countries.append(site_id)
+                        print(f"      ❌ {site_id}: Error")
 
             # Si al menos uno funcionó, considerar éxito
             if success_count > 0:
@@ -589,6 +606,8 @@ def get_all_published_listings():
     """
     Obtiene todos los listings publicados desde la base de datos.
     Retorna lista de dicts con: item_id, asin, price_usd, amazon_price_last, site_items
+
+    Si TEST_MODE=true en .env, solo retorna 25 items incluyendo el item de prueba.
     """
     print("   → Conectando a base de datos...", flush=True)
     conn = sqlite3.connect(DB_PATH, timeout=30)
@@ -604,16 +623,52 @@ def get_all_published_listings():
         cursor.execute("ALTER TABLE listings ADD COLUMN amazon_price_last REAL DEFAULT NULL")
         conn.commit()
 
-    print("   → Ejecutando query SQL...", flush=True)
-    cursor.execute("""
-        SELECT item_id, asin, price_usd, amazon_price_last, title, site_items
-        FROM listings
-        WHERE item_id IS NOT NULL
-        ORDER BY date_updated DESC
-    """)
+    # Verificar modo de prueba
+    test_mode = os.getenv("TEST_MODE", "false").lower() == "true"
+    test_item_ids = ["CBT3185262588", "CBT3185577890"]  # MLA2670052640, MLB6056961332
 
-    print("   → Convirtiendo resultados...", flush=True)
-    listings = [dict(row) for row in cursor.fetchall()]
+    if test_mode:
+        print("   ⚠️  MODO DE PRUEBA ACTIVADO (TEST_MODE=true)", flush=True)
+        print(f"   → Cargando solo 25 items incluyendo items de prueba...", flush=True)
+
+        # Primero obtener los items de prueba
+        placeholders = ','.join('?' * len(test_item_ids))
+        cursor.execute(f"""
+            SELECT item_id, asin, price_usd, amazon_price_last, title, site_items
+            FROM listings
+            WHERE item_id IN ({placeholders})
+        """, test_item_ids)
+
+        listings = [dict(row) for row in cursor.fetchall()]
+        loaded_test_items = len(listings)
+
+        # Luego obtener items adicionales para completar 25 (excluyendo items de prueba)
+        remaining = 25 - loaded_test_items
+        if remaining > 0:
+            cursor.execute(f"""
+                SELECT item_id, asin, price_usd, amazon_price_last, title, site_items
+                FROM listings
+                WHERE item_id IS NOT NULL AND item_id NOT IN ({placeholders})
+                ORDER BY date_updated DESC
+                LIMIT ?
+            """, test_item_ids + [remaining])
+
+            listings.extend([dict(row) for row in cursor.fetchall()])
+
+        print(f"   → Items de prueba incluidos: {loaded_test_items}", flush=True)
+
+    else:
+        print("   → Ejecutando query SQL...", flush=True)
+        cursor.execute("""
+            SELECT item_id, asin, price_usd, amazon_price_last, title, site_items
+            FROM listings
+            WHERE item_id IS NOT NULL
+            ORDER BY date_updated DESC
+        """)
+
+        print("   → Convirtiendo resultados...", flush=True)
+        listings = [dict(row) for row in cursor.fetchall()]
+
     conn.close()
     print(f"   → Listo! {len(listings)} listings cargados", flush=True)
     return listings
@@ -631,21 +686,28 @@ def update_listing_price_in_db(item_id, new_price_usd, amazon_price=None):
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
+    now = datetime.now().isoformat()
+
     if amazon_price is not None:
         cursor.execute("""
             UPDATE listings
             SET price_usd = ?,
+                costo_amazon = ?,
+                precio_actual = ?,
                 amazon_price_last = ?,
+                ultima_actualizacion_precio = ?,
                 date_updated = ?
             WHERE item_id = ?
-        """, (new_price_usd, amazon_price, datetime.now().isoformat(), item_id))
+        """, (new_price_usd, amazon_price, new_price_usd, amazon_price, now, now, item_id))
     else:
         cursor.execute("""
             UPDATE listings
             SET price_usd = ?,
+                precio_actual = ?,
+                ultima_actualizacion_precio = ?,
                 date_updated = ?
             WHERE item_id = ?
-        """, (new_price_usd, datetime.now().isoformat(), item_id))
+        """, (new_price_usd, new_price_usd, now, now, item_id))
 
     conn.commit()
     conn.close()

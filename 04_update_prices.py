@@ -274,8 +274,13 @@ def main():
     if not args.skip_amazon_check:
         log("🔍 Consultando precios actuales en Amazon (Glow API)...", Colors.CYAN)
         try:
-            # Extraer todos los ASINs
+            # Extraer todos los ASINs y deduplicar
             asins = [asin for asin, _, _, _, _ in listings]
+            unique_asins = list(set(asins))
+
+            log(f"   Total listings: {len(listings)}", Colors.CYAN)
+            log(f"   ASINs únicos: {len(unique_asins)}", Colors.CYAN)
+            log(f"   Consultas ahorradas: {len(asins) - len(unique_asins)}", Colors.GREEN)
 
             # Obtener zipcode desde .env
             buyer_zipcode = os.getenv("BUYER_ZIPCODE", "33172")
@@ -285,9 +290,9 @@ def main():
             log(f"   Max delivery: {max_delivery_days} días", Colors.CYAN)
             print()
 
-            # Consultar cada ASIN con Glow API
-            for i, asin in enumerate(asins, 1):
-                print(f"   [{i}/{len(asins)}] {asin}...", end=" ", flush=True)
+            # Consultar cada ASIN ÚNICO con Glow API
+            for i, asin in enumerate(unique_asins, 1):
+                print(f"   [{i}/{len(unique_asins)}] {asin}...", end=" ", flush=True)
 
                 try:
                     glow_result = check_availability_v2_advanced(asin, buyer_zipcode)
@@ -324,7 +329,7 @@ def main():
 
             available_count = sum(1 for v in amazon_prices.values() if v)
             print()
-            log(f"   ✅ {available_count}/{len(asins)} productos disponibles en Amazon\n", Colors.GREEN)
+            log(f"   ✅ {available_count}/{len(unique_asins)} ASINs disponibles en Amazon\n", Colors.GREEN)
         except Exception as e:
             log(f"   ⚠️  Error consultando Amazon: {e}", Colors.YELLOW)
             log(f"   Continuando con precios de la DB...\n", Colors.YELLOW)

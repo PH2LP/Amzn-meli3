@@ -12,7 +12,7 @@
 # 
 # ═══════════════════════════════════════════════════════════════════════════════
 def remove_duplicate_asins():
-    input_file = 'data/asins subidos con cat mal.txt'
+    input_file = 'asins.txt'
 
     # Leer todos los ASINs
     with open(input_file, 'r') as f:

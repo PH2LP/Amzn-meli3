@@ -209,103 +209,100 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "MAIN_COLOR": {
+  "OCP_CERTIFICATION_AGENCY": {
     "value_type": "list",
     "values": {
-      "black": "2450295",
-      "blue": "2450293",
-      "red": "2450307",
-      "violet": "2450311",
-      "brown": "2450291",
-      "green": "2450314",
-      "orange": "2450327",
-      "sky blue": "2450278",
-      "pink": "2450312",
-      "golden": "2450289",
-      "silver": "2450303",
-      "yellow": "2450296",
-      "gray": "2450294",
-      "multicolored": "46671867",
-      "white": "2450308",
-      "beige": "2450281"
+      "bureau veritas argentina s.a.": "11695662",
+      "instituto del gas argentino s.a.": "11695663",
+      "intertek argentina certificaciones s.a.": "11695664",
+      "inti instituto nacional de tecnología industrial": "11695665",
+      "iqc s.a.": "11695666",
+      "iram instituto argentino de normalización y certificación": "11695667",
+      "lenor s.r.l.": "11695668",
+      "net connection international s.r.l. (ncc)": "11695669",
+      "qetkra s.r.l.": "11695670",
+      "tüv rheinland argentina s.a. (tuv)": "11695671",
+      "ul de argentina s.r.l.": "11695672",
+      "other (unspecified)": "11695673"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "URSEA_AUTORIZATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ENERGY_EFFICIENCY_LABEL": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
     },
     "allowed_units": [],
     "tags": {
-      "variation_attribute": true
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
     },
-    "hierarchy": "CHILD_DEPENDENT",
+    "hierarchy": "ITEM",
     "relevance": 1
   },
-  "PACKAGE_HEIGHT": {
-    "value_type": "number_unit",
+  "SEC_STAMP": {
+    "value_type": "picture_id",
     "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
-  "PACKAGE_WIDTH": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
+  "VERTICAL_TAGS": {
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
     },
-    "hierarchy": "CHILD_DEPENDENT",
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
     "relevance": 1
   },
-  "PACKAGE_LENGTH": {
-    "value_type": "number_unit",
+  "ANATEL_HOMOLOGATION_LABEL": {
+    "value_type": "picture_id",
     "values": {},
-    "allowed_units": [
-      "\"",
-      "cm",
-      "ft",
-      "m",
-      "mm"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
-    "relevance": 1
-  },
-  "PACKAGE_WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "g",
-      "kg",
-      "lb",
-      "mg",
-      "oz"
-    ],
-    "tags": {
-      "required": true,
-      "variation_attribute": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "CHILD_DEPENDENT",
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "POWER": {
@@ -487,6 +484,115 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "ANATEL_HOMOLOGATION_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MAIN_COLOR": {
+    "value_type": "list",
+    "values": {
+      "black": "2450295",
+      "blue": "2450293",
+      "red": "2450307",
+      "violet": "2450311",
+      "brown": "2450291",
+      "green": "2450314",
+      "orange": "2450327",
+      "sky blue": "2450278",
+      "pink": "2450312",
+      "golden": "2450289",
+      "silver": "2450303",
+      "yellow": "2450296",
+      "gray": "2450294",
+      "multicolored": "46671867",
+      "white": "2450308",
+      "beige": "2450281"
+    },
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
   "GTIN": {
     "value_type": "string",
     "values": {},
@@ -501,111 +607,18 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
-  "OCP_CERTIFICATION_AGENCY": {
+  "ITEM_CONDITION": {
     "value_type": "list",
     "values": {
-      "bureau veritas argentina s.a.": "11695662",
-      "instituto del gas argentino s.a.": "11695663",
-      "intertek argentina certificaciones s.a.": "11695664",
-      "inti instituto nacional de tecnología industrial": "11695665",
-      "iqc s.a.": "11695666",
-      "iram instituto argentino de normalización y certificación": "11695667",
-      "lenor s.r.l.": "11695668",
-      "net connection international s.r.l. (ncc)": "11695669",
-      "qetkra s.r.l.": "11695670",
-      "tüv rheinland argentina s.a. (tuv)": "11695671",
-      "ul de argentina s.r.l.": "11695672",
-      "other (unspecified)": "11695673"
+      "new": "2230284",
+      "refurbished": "2230582"
     },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "URSEA_AUTORIZATION_NUMBER": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ENERGY_EFFICIENCY_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "EMPTY_GTIN_REASON": {
-    "value_type": "list",
-    "values": {
-      "the product is a handcrafted piece": "17055158",
-      "the product is a kit or pack": "17055159",
-      "the product does not have registered code": "17055160",
-      "another reason": "17055161"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "SEC_STAMP": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ANATEL_HOMOLOGATION_NUMBER": {
-    "value_type": "number",
-    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "VERTICAL_TAGS": {
-    "value_type": "string",
-    "values": {
-      "is_tom_brand": "53559152",
-      "is_polos": "53559153",
-      "is_social_brands": "53559154",
-      "is_beauty_premium": "53559155",
-      "has_dimensions_images": "53559156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
     "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "ANATEL_HOMOLOGATION_LABEL": {
-    "value_type": "picture_id",
-    "values": {},
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
+    "relevance": 2
   },
   "LENGTH": {
     "value_type": "number_unit",
@@ -659,19 +672,6 @@
       "variation_attribute": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {

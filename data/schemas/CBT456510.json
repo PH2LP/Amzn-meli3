@@ -142,9 +142,9 @@
     },
     "allowed_units": [],
     "tags": {
+      "read_only": true,
       "variation_attribute": true,
-      "used_hidden": true,
-      "conditional_required": true
+      "used_hidden": true
     },
     "hierarchy": "ITEM",
     "relevance": 1

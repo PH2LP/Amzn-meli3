@@ -249,19 +249,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -273,33 +260,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "MPN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -586,6 +546,20 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
   "PACKAGE_DATA_SOURCE": {
     "value_type": "string",
     "values": {},
@@ -595,6 +569,19 @@
       "read_only": true
     },
     "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 2
   }
 }

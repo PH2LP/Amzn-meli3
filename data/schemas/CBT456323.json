@@ -195,21 +195,6 @@
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
-  "GTIN": {
-    "value_type": "string",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "conditional_required": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 1
-  },
   "VALUE_ADDED_TAX": {
     "value_type": "string",
     "values": {},
@@ -308,19 +293,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -333,33 +305,20 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
     "allowed_units": [],
     "tags": {
       "hidden": true,
-      "read_only": true
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
     },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -644,6 +603,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

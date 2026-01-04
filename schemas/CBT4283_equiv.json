@@ -1,0 +1,26 @@
+{
+  "LINE_CAPACITY": [
+    "line_capacity[0].value"
+  ],
+  "HANDLE_SIDE": [
+    "handle[0].material[0].value"
+  ],
+  "BEARINGS_NUMBER": [
+    "bearing[0].number[0].value"
+  ],
+  "GEAR_RATIO": [
+    "gearbox_ratio[0].value"
+  ],
+  "BODY_MATERIALS": [
+    "material[0].value"
+  ],
+  "REEL_TYPE": [
+    "fishing_technique[0].value"
+  ],
+  "WITH_DIGITAL_DISPLAY": [
+    "special_feature[0].value"
+  ],
+  "WITH_LINE_OUT_ALARM": [
+    "batteries_required[0].value"
+  ]
+}

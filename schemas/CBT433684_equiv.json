@@ -1,0 +1,46 @@
+{
+  "MANUFACTURER": [
+    "manufacturer",
+    "attributes.manufacturer[0].value"
+  ],
+  "VERSION": [
+    "model_number",
+    "attributes.model_number[0].value"
+  ],
+  "SCALE": [
+    "size",
+    "attributes.size[0].value"
+  ],
+  "CHARACTER": [],
+  "VEHICLE_POWER_SUPPLY_TYPE": [
+    "power_source_type",
+    "attributes.power_source_type[0].value"
+  ],
+  "REMOTE_CONTROL_POWER_SUPPLY_TYPE": [],
+  "INCLUDES_CELL_BATTERIES": [
+    "batteries_included",
+    "attributes.batteries_included[0].value"
+  ],
+  "REMOTE_CONTROL_BATTERIES_TYPE": [
+    "num_batteries",
+    "attributes.num_batteries[0].type"
+  ],
+  "REMOTE_CONTROL_BATTERIES_NUMBER": [
+    "num_batteries",
+    "attributes.num_batteries[0].quantity"
+  ],
+  "MAX_SPEED": [],
+  "VEHICLE_CLASSIFICATION": [],
+  "ALPHANUMERIC_MODELS": [],
+  "ANATEL_HOMOLOGATION_NUMBER": [],
+  "INCLUDES_ACCESSORIES": [
+    "included_components",
+    "attributes.included_components"
+  ],
+  "ANATEL_HOMOLOGATION_LABEL": [],
+  "REMOTE_CONTROL_REACH": [],
+  "ESTIMATED_CHARGING_TIME": [],
+  "ESTIMATED_OPERATING_TIME": [],
+  "FUNCTIONS": [],
+  "WHEELS_MATERIALS": []
+}

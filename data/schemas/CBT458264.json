@@ -201,8 +201,8 @@
     "allowed_units": [],
     "tags": {
       "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
+      "read_only": true,
+      "variation_attribute": true
     },
     "hierarchy": "ITEM",
     "relevance": 1

@@ -66,7 +66,16 @@
       "Bash(/tmp/ml_token_loop_backup.py)",
       "Bash(timeout 10 python3:*)",
       "Bash(timeout 90 tail:*)",
-      "Bash(timeout 5 python3:*)"
+      "Bash(timeout 5 python3:*)",
+      "Bash(/tmp/asins_unique.txt)",
+      "Bash(for cbt_id in CBT3179159688 CBT3179196282 CBT3179261214)",
+      "Bash(do echo \"========================================================================\" echo \"EJEMPLO: $cbt_id\" echo \"========================================================================\" grep -A 40 \"CBT ID: $cbt_id\" ml_items_simple_export_20260104_012821.txt)",
+      "Bash(while read cbt_id)",
+      "Bash(do echo \"========================================================================\" echo \"CBT ID: $cbt_id\" echo \"------------------------------------------------------------------------\" grep -A 35 \"CBT ID: $cbt_id\" ml_items_simple_export_20260104_012821.txt)",
+      "Bash(tee:*)",
+      "Bash(/tmp/cols_old.txt)",
+      "Bash(/tmp/cols_new.txt)",
+      "Bash(xargs cat:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,0 +1,39 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material"
+  ],
+  "PEDALS_TYPE": [
+    "attributes.item_type_keyword[0].value"
+  ],
+  "BEARING_TYPE": [
+    "attributes.bullet_point[2].value"
+  ],
+  "RECOMMENDED_BICYCLES": [
+    "attributes.recommended_bicycles"
+  ],
+  "ACCESSORIES_INCLUDED": [
+    "attributes.included_components[0].value"
+  ],
+  "AGE_GROUP": [
+    "attributes.age_group"
+  ],
+  "PEDAL_THREAD_SIZE": [
+    "attributes.thread[0].size[0].value"
+  ],
+  "INCLUDES_CLEATS": [
+    "attributes.includes_cleats"
+  ],
+  "IS_NON_SLIP": [
+    "attributes.bullet_point[1].value"
+  ],
+  "PEDALS_NUMBER": [
+    "attributes.pedals_number"
+  ],
+  "ORIGIN": [
+    "attributes.import_designation[0].value"
+  ]
+}
