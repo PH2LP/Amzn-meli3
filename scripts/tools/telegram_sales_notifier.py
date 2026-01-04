@@ -488,8 +488,13 @@ def format_sale_notification(order, asin_data, ml_token):
                 # Obtener fecha límite de handling (cuándo hay que despachar)
                 if "promise_limit" in shipment_data:
                     handling_deadline = shipment_data.get("promise_limit")
-        except:
-            pass
+                    print(f"   [DEBUG] Shipment {shipping_id} tiene promise_limit: {handling_deadline}")
+                else:
+                    print(f"   [DEBUG] Shipment {shipping_id} NO tiene promise_limit")
+            else:
+                print(f"   [DEBUG] Error al obtener shipment {shipping_id}: HTTP {r.status_code}")
+        except Exception as e:
+            print(f"   [DEBUG] Excepción al obtener shipment: {e}")
 
     # NET PROCEEDS - Calcular manualmente para TODAS las unidades
     # = (Precio de venta * cantidad) - (Fee ML * cantidad) - Shipping
@@ -577,8 +582,47 @@ def format_sale_notification(order, asin_data, ml_token):
 <a href="{ml_order_link}">🔗 Ver orden completa en MercadoLibre</a>
 """
 
+    # Mapeo de marketplace a código de país
+    country_codes = {
+        "MLM": "MX",
+        "MLB": "BR",
+        "MLC": "CH",
+        "MCO": "CO",
+        "MLA": "AR",
+        "MLU": "UY",
+        "MLV": "VE",
+        "MPA": "PA",
+        "MPE": "PE"
+    }
+    country_code = country_codes.get(marketplace, marketplace[:2])
+
+    # Calcular fecha de despacho (1 día hábil antes del deadline)
+    dispatch_date_str = ""
+    if handling_deadline:
+        try:
+            from datetime import timedelta
+            deadline_dt = datetime.fromisoformat(handling_deadline.replace('Z', '+00:00'))
+
+            # Restar 1 día hábil (saltar fines de semana)
+            dispatch_dt = deadline_dt - timedelta(days=1)
+
+            # Si cae en domingo (6), retroceder a viernes
+            if dispatch_dt.weekday() == 6:  # Domingo
+                dispatch_dt = dispatch_dt - timedelta(days=2)
+            # Si cae en sábado (5), retroceder a viernes
+            elif dispatch_dt.weekday() == 5:  # Sábado
+                dispatch_dt = dispatch_dt - timedelta(days=1)
+
+            dispatch_date_str = f" {dispatch_dt.strftime('%m/%d')}"
+            print(f"   [DEBUG] Deadline: {handling_deadline} → Dispatch: {dispatch_dt.strftime('%m/%d')}")
+        except Exception as e:
+            print(f"   [DEBUG] Error calculando fecha: {e}")
+    else:
+        print(f"   [DEBUG] No hay handling_deadline para pack_id {pack_id}")
+
     # Mensaje SEPARADO con solo el número de orden (para copiar fácil)
-    order_number_message = f"{marketplace}-{pack_id}"
+    # Formato: OW - MX 2000010867103805 01/06
+    order_number_message = f"OW - {country_code} {pack_id}{dispatch_date_str}"
 
     # Mensaje SEPARADO con solo el ASIN (para copiar fácil)
     asin_message = asin
