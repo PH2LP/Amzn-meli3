@@ -1,0 +1,29 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material"
+  ],
+  "ALPHANUMERIC_MODEL": [
+    "part_number",
+    "attributes.part_number[0].value"
+  ],
+  "IS_ARTICULATED": [
+    "special_feature",
+    "attributes.special_feature[0].value"
+  ],
+  "DOLLS_NUMBER": [
+    "unit_count",
+    "attributes.unit_count[0].value"
+  ],
+  "WITH_SOUND": [
+    "batteries_required",
+    "attributes.batteries_required[0].value"
+  ],
+  "SAFETY_CERTIFICATIONS": [
+    "cpsia_cautionary_statement",
+    "attributes.cpsia_cautionary_statement[0].value"
+  ]
+}

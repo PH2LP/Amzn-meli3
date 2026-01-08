@@ -1,0 +1,10 @@
+{
+  "MAX_WEIGHT_SUPPORTED": [
+    "maximum_weight_recommendation[0].value",
+    "attributes.maximum_weight_recommendation[0].value"
+  ],
+  "PAIRS_NUMBER": [
+    "item_package_quantity[0].value",
+    "attributes.item_package_quantity[0].value"
+  ]
+}

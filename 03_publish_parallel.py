@@ -229,7 +229,7 @@ def main():
     # TODOS los workers se abren en nuevas terminales
     for i, part in enumerate(parts):
         run_worker(part, in_new_terminal=True)
-        time.sleep(1.5)  # Delay para que las terminales se abran ordenadamente
+        time.sleep(5)  # Delay para que las terminales se abran ordenadamente
 
     print("\n✅ Todos los workers están corriendo en terminales separadas")
     print("💡 Podés cerrar esta terminal, los workers seguirán ejecutándose")

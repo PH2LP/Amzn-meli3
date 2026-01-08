@@ -1,0 +1,49 @@
+{
+  "WITH_TRANSDUCER": [],
+  "PRELOADED_MAPS_INCLUDED": [],
+  "GPS_TYPE": [
+    "supported_satellite_navigation_system"
+  ],
+  "VEHICLE_TYPE": [
+    "compatible_with_vehicle_type"
+  ],
+  "WITH_TOUCHSCREEN": [
+    "touch_screen_type"
+  ],
+  "DISPLAY_SIZE": [
+    "display[0].size[0].value"
+  ],
+  "DISPLAY_RESOLUTION": [
+    "resolution"
+  ],
+  "ACCURACY": [],
+  "BATTERY_TYPE": [
+    "num_batteries[0].type"
+  ],
+  "BATTERY_LIFE": [
+    "battery[0].average_life[0].value"
+  ],
+  "TRIP_FUNCTIONS": [],
+  "MEMORY_TYPE": [],
+  "INTERNAL_MEMORY": [
+    "memory_storage_capacity[0].value"
+  ],
+  "USING_SYSTEM": [
+    "operating_system[0].value"
+  ],
+  "MEMORY_RAM": [],
+  "WITH_EXPANSION_SLOT_FOR_DATA_CARD": [],
+  "EXPANSION_SLOT_TYPE": [],
+  "CONNECTIVITY": [
+    "connectivity_technology[0].value"
+  ],
+  "ANTENNA_TYPES": [],
+  "POINTS_OF_INTEREST": [],
+  "WITH_BLUETOOTH": [],
+  "WITH_VOICE_COMMAND": [],
+  "WITH_VOICE_INSTRUCTIONS": [],
+  "WITH_MAP_UPDATES": [],
+  "WITH_ABILITY_TO_ADD_MAPS": [],
+  "WITH_ABILITY_TO_ADD_POINTS_OF_INTEREST": [],
+  "WITH_PRELOADED_MAPS": []
+}

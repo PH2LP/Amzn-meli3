@@ -126,16 +126,6 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "UNITS_PER_PACK": {
-    "value_type": "number",
-    "values": {},
-    "allowed_units": [],
-    "tags": {
-      "conditional_required": true
-    },
-    "hierarchy": "CHILD_PK",
-    "relevance": 1
-  },
   "SALE_FORMAT": {
     "value_type": "list",
     "values": {
@@ -144,6 +134,16 @@
     },
     "allowed_units": [],
     "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "UNITS_PER_PACK": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "conditional_required": true
+    },
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },

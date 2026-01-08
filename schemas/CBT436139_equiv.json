@@ -1,0 +1,23 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "SALE_FORMAT": [],
+  "UNITS_PER_PACK": [
+    "number_of_items",
+    "attributes.number_of_items[0].value"
+  ],
+  "CLOSURE_TYPE": [
+    "closure",
+    "attributes.closure[0].type[0].value"
+  ],
+  "RNPUD_PRODUCT_INSCRIPTION_NUMBER": [],
+  "RNE_ESTABLISHMENT_NATIONAL_REGISTRATION_NUMBER": [],
+  "PRODUCT_REGISTRY": [],
+  "ESTABLISHMENT_REGISTRY": []
+}

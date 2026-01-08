@@ -1,0 +1,13 @@
+{
+  "OUTPUT_VOLTAGE": [
+    "output_voltage",
+    "attributes.output_voltage[0].value"
+  ],
+  "PORT_TYPE": [
+    "connector_type",
+    "attributes.connector_type[0].value"
+  ],
+  "PINS_NUMBER": [],
+  "ENERGY_EFFICIENCY_LABEL": [],
+  "ENERGY_EFFICIENCY": []
+}

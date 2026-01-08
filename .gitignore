@@ -76,3 +76,4 @@ asins_json/*.json
 !REPORTE_FINAL.md
 !.gitignore
 asins_with_deleted_pictures/
+.env.bak*

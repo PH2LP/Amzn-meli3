@@ -1,0 +1,74 @@
+{
+  "IS_DUAL_SIM": [
+    "attributes.telephone_type[0].value"
+  ],
+  "RAM": [
+    "attributes.ram_memory[0].installed_size[0].value"
+  ],
+  "SIM_CARD_SLOTS_NUMBER": [
+    "attributes.sim_card_slot_count[0].value"
+  ],
+  "OPERATING_SYSTEM_NAME": [
+    "attributes.operating_system[0].value"
+  ],
+  "MOBILE_NETWORK": [
+    "attributes.cellular_technology[0].value"
+  ],
+  "PROCESSOR_MODEL": [
+    "attributes.processor_description[0].value"
+  ],
+  "PROCESSOR_SPEED": [
+    "attributes.cpu_model[0].family[0].value"
+  ],
+  "IS_GAMING_CELLPHONE": [
+    "attributes.specific_uses_for_product[0].value"
+  ],
+  "CELLPHONE_TRADE_IN_PROGRAM": [
+    "summaries[0].tradeInEligible"
+  ],
+  "WITH_IMEI": [
+    "attributes.with_imei"
+  ],
+  "CARRIER": [
+    "attributes.wireless_provider[0].value"
+  ],
+  "DISPLAY_RESOLUTION_TYPE": [
+    "attributes.display[0].resolution_maximum[0].value"
+  ],
+  "MAIN_REAR_CAMERA_RESOLUTION": [
+    "attributes.rear_camera_lens[0].photo_sensor_resolution.value"
+  ],
+  "BATTERY_CAPACITY": [
+    "attributes.battery[0].capacity[0].value"
+  ],
+  "WITH_FINGERPRINT_READER": [
+    "attributes.biometric_security_feature[0].value"
+  ],
+  "WITH_CAMERA": [
+    "attributes.camera_description[0].value"
+  ],
+  "WITH_WIFI": [
+    "attributes.connectivity_technology[0].value"
+  ],
+  "WITH_GPS": [
+    "attributes.gps_navigation[0].value"
+  ],
+  "WITH_NFC": [
+    "attributes.connectivity_technology[2].value"
+  ],
+  "WITH_USB_CONNECTOR": [
+    "attributes.connector_type[0].value"
+  ],
+  "WITH_3_5_MM_JACK_CONNECTOR": [
+    "attributes.headphones_jack[0].value"
+  ],
+  "WITH_FAST_CHARGING": [
+    "attributes.special_feature[2].value"
+  ],
+  "IS_SPLASH_RESISTANT": [
+    "attributes.water_resistance_level[0].value"
+  ],
+  "IS_DROP_RESISTANT": [
+    "attributes.water_resistance_level[0].value"
+  ]
+}

@@ -1,0 +1,1827 @@
+{
+  "BRAND": {
+    "value_type": "string",
+    "values": {
+      "acer": "15903",
+      "alienware": "52037",
+      "apple": "9344",
+      "asus": "7294334",
+      "bak": "9799",
+      "commodore": "86284",
+      "compaq": "11476",
+      "dell": "8216",
+      "eurocase": "17603",
+      "gateway": "38503",
+      "gigabyte": "18623",
+      "hp": "49944",
+      "ibm": "2864",
+      "lg": "215",
+      "lenovo": "7494",
+      "msi": "16215",
+      "microsoft": "15770",
+      "olivetti": "11005",
+      "packard bell": "351880",
+      "panasonic": "8",
+      "philco": "479",
+      "positivo": "13346",
+      "rca": "21980",
+      "razer": "17587",
+      "samsung": "206",
+      "sony": "995",
+      "toshiba": "2045",
+      "vaio": "6020328",
+      "xiaomi": "59387",
+      "emachines": "22429"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "LINE": {
+    "value_type": "string",
+    "values": {
+      "ativ book": "2398503",
+      "macbook air": "95565",
+      "macbook pro": "95588",
+      "powerbook": "2508866",
+      "premium": "884",
+      "unique": "124650",
+      "win": "223948",
+      "ibook": "2508865"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "ALPHANUMERIC_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {
+      "allow_variations": true,
+      "defines_picture": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "INTEL_OPTANE_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "KB",
+      "MB",
+      "TB"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "RAM_MEMORY_MODULE_TOTAL_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "MB",
+      "GB",
+      "KB"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "HARD_DRIVE_DATA_STORAGE_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "KB",
+      "MB",
+      "TB"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "SSD_DATA_STORAGE_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "KB",
+      "MB",
+      "TB"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DISPLAY_REFRESH_RATE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "Hz"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DISPLAY_RESOLUTION": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "GRAPHIC_CARD": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "PROCESSOR_BRAND": {
+    "value_type": "list",
+    "values": {
+      "intel": "7855833",
+      "amd": "18034",
+      "apple": "9344",
+      "samsung": "206",
+      "qualcomm": "3383461",
+      "mediatek": "1064968"
+    },
+    "allowed_units": [],
+    "tags": {
+      "required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "PROCESSOR_LINE": {
+    "value_type": "string",
+    "values": {
+      "celeron": "44273",
+      "core i3": "7769179",
+      "core i4": "7855837",
+      "core i5": "7769178",
+      "core i6": "7855839",
+      "core i7": "7769180"
+    },
+    "allowed_units": [],
+    "tags": {
+      "required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "PROCESSOR_MODEL": {
+    "value_type": "string",
+    "values": {
+      "8250u": "7855841",
+      "a4": "66459"
+    },
+    "allowed_units": [],
+    "tags": {
+      "required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "OS_NAME": {
+    "value_type": "list",
+    "values": {
+      "linux": "5902548",
+      "freedos": "6283188",
+      "macos": "7232871",
+      "windows": "4830885",
+      "android": "4743192",
+      "google chrome": "8770659"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "OS_VERSION": {
+    "value_type": "string",
+    "values": {
+      "sierra": "2343275",
+      "el capitan": "2343276",
+      "yosemite": "2343277",
+      "mavericks": "2343278",
+      "high sierra": "2343274"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "OS_EDITION": {
+    "value_type": "string",
+    "values": {
+      "home": "6127363",
+      "pro": "6127364"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "WITH_TOUCH_SCREEN": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "INTEGRATED_GRAPHIC_CARD_BRAND": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "INTEGRATED_GRAPHIC_CARD_LINE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "INTEGRATED_GRAPHIC_CARD_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DEDICATED_GRAPHIC_CARD_BRAND": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DEDICATED_GRAPHIC_CARD_LINE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "DEDICATED_GRAPHIC_CARD_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "M2_DATA_STORAGE_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "MB",
+      "TB"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "GAMING": {
+    "value_type": "list",
+    "values": {
+      "not recommended": "58523357",
+      "basic": "67143229",
+      "intermediate": "67143230",
+      "advanced": "67143231",
+      "ultra": "58523361"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "RAM_MEMORY_SPEED": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GHz",
+      "MHz"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "MAX_PROCESSOR_SPEED": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GHz",
+      "MHz"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "MIN_PROCESSOR_SPEED": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GHz",
+      "MHz"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "MAIN_COLOR": {
+    "value_type": "list",
+    "values": {
+      "black": "2450295",
+      "blue": "2450293",
+      "red": "2450307",
+      "violet": "2450311",
+      "brown": "2450291",
+      "green": "2450314",
+      "orange": "2450327",
+      "sky blue": "2450278",
+      "pink": "2450312",
+      "golden": "2450289",
+      "silver": "2450303",
+      "yellow": "2450296",
+      "gray": "2450294",
+      "white": "2450308"
+    },
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "DETAILED_MODEL": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "variation_attribute": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "RAM_MEMORY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "ddr2": "83820",
+      "ddr3": "83821",
+      "ddr5": "83823",
+      "ddr4": "83822",
+      "ddr": "83819"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "VIDEO_MEMORY_TYPES": {
+    "value_type": "string",
+    "values": {
+      "ddr2": "83825",
+      "ddr3": "83826",
+      "ddr5": "83828",
+      "ddr4": "83827",
+      "ddr": "83824"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "VIDEO_MEMORY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "MB",
+      "GB",
+      "KB"
+    ],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "HOME_DAILY_USE": {
+    "value_type": "list",
+    "values": {
+      "intermediate": "58523364",
+      "advanced": "58523365",
+      "ultra": "58523366",
+      "not recommended": "58523362",
+      "basic": "58523363"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "CORES_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "DESIGN_CREATION": {
+    "value_type": "list",
+    "values": {
+      "basic": "58523368",
+      "intermediate": "58523369",
+      "advanced": "58523370",
+      "ultra": "58523371",
+      "not recommended": "58523367"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "DISPLAY_RESOLUTION_TYPE": {
+    "value_type": "string",
+    "values": {
+      "full hd": "9607110",
+      "hd": "9613319"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "WORK_STUDY": {
+    "value_type": "list",
+    "values": {
+      "not recommended": "58523372",
+      "basic": "58523373",
+      "intermediate": "58523374",
+      "advanced": "58523375",
+      "ultra": "58523376"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "ft",
+      "m",
+      "mm"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg",
+      "lb",
+      "mg",
+      "oz"
+    ],
+    "tags": {
+      "required": true,
+      "variation_attribute": true,
+      "catalog_listing_required": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 1
+  },
+  "PRODUCT_TYPE": {
+    "value_type": "list",
+    "values": {
+      "notebook": "51377614",
+      "ultrabook": "51377615",
+      "2 in 1": "6081795",
+      "netbook": "51377616"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_BLUETOOTH": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_WEBCAM": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_MICROPHONE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_HEADPHONES_OUTPUT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_NUMERIC_PAD": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_FINGERPRINT_READER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_BACKLIGHT_KEYBOARD": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_RETINA_DISPLAY": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_MEMORY_CARD_READER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WITH_ANTIREFLEX_SCREEN": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "DISPLAY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "lcd": "81834",
+      "led": "81830",
+      "3d": "97910"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SOUND_MODES": {
+    "value_type": "string",
+    "values": {
+      "stereo": "19335190",
+      "mono": "564758",
+      "ultra surround": "7673600",
+      "surround": "564756",
+      "dolby digital": "9859596"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ACCESSORIES_INCLUDED": {
+    "value_type": "string",
+    "values": {
+      "adapter": "2296418",
+      "cable": "9292081",
+      "stylus": "11933535"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEBCAM_VIDEO_RESOLUTION_TYPE": {
+    "value_type": "string",
+    "values": {
+      "hd": "11280990",
+      "full hd": "11280991"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEBCAM_VIDEO_RESOLUTION": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEBCAM_STILL_IMAGE_RESOLUTION": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "Mpx"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MAX_BATTERY_LIFE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "m",
+      "s",
+      "h"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RAM_SLOTS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CONNECTIVITY": {
+    "value_type": "string",
+    "values": {
+      "usb-c": "2113108",
+      "displayport": "3330899",
+      "dvi-i": "7609635",
+      "dvi": "2270015",
+      "hdmi": "2270014",
+      "vga": "2270016"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RELEASE_YEAR": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MATERIAL": {
+    "value_type": "string",
+    "values": {
+      "aluminum": "2748301",
+      "plastic": "2748302"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "INCLUDES_OS_TRIAL": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_GAMER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "KEYBOARD_LANGUAGE": {
+    "value_type": "string",
+    "values": {
+      "spanish": "9026934",
+      "english": "11280988",
+      "portuguese": "11280989"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "MANUFACTURER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "BATTERY_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "Ah",
+      "mAh"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "DISPLAY_SIZE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\""
+    ],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "COOLING_TYPE": {
+    "value_type": "list",
+    "values": {
+      "air": "47685204",
+      "liquid": "47685205",
+      "passive": "47685206",
+      "vapor chamber": "51377617"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "mm",
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "DEPTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "mm",
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "mm",
+      "cm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "OPTIMIZED_FOR_AI": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "OPTICAL_DRIVES": {
+    "value_type": "string",
+    "values": {
+      "dvd drive": "97917",
+      "blu ray drive": "97919",
+      "cd drive": "97918"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "BATTERY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "lithium-ion": "95013",
+      "lithium polymer": "7573636"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 1
+  },
+  "SEC_STAMP": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "HAZMAT_TRANSPORTABILITY": {
+    "value_type": "list",
+    "values": {
+      "excepted": "13414677",
+      "limited": "13414678",
+      "exceeded": "13414679",
+      "indeterminate": "13414680"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "PRODUCT_LIFE": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "months",
+      "years"
+    ],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "GRADING": {
+    "value_type": "list",
+    "values": {
+      "excellent": "40108830",
+      "good": "40108831",
+      "acceptable": "40108832"
+    },
+    "allowed_units": [],
+    "tags": {
+      "used_hidden": true,
+      "conditional_required": true,
+      "new_hidden": true,
+      "open_box_hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "ANATEL_HOMOLOGATION_LABEL": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SSD_INTERFACE": {
+    "value_type": "string",
+    "values": {
+      "sata 3": "7855849",
+      "pcie": "7855850"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 2
+  },
+  "HARD_DRIVE_INTERFACE": {
+    "value_type": "string",
+    "values": {
+      "sata 3": "83840",
+      "sata 1": "97924",
+      "sata 2": "97925"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 2
+  },
+  "DISK_TYPE": {
+    "value_type": "list",
+    "values": {
+      "hdd": "20683226",
+      "ssd": "20683227",
+      "hybrid": "20683228"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 2
+  },
+  "TOTAL_DISK_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB",
+      "KB",
+      "MB",
+      "TB"
+    ],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 2
+  },
+  "ASPECT_RATIO": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "CHILD_DEPENDENT",
+    "relevance": 2
+  },
+  "PANEL_TYPE": {
+    "value_type": "string",
+    "values": {
+      "ips": "9603039",
+      "tn": "9603037",
+      "wva": "11455028",
+      "sva": "11506615"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "VIDEO_PORT_TYPES": {
+    "value_type": "string",
+    "values": {
+      "vga": "84422",
+      "rgb": "98832",
+      "dvi": "84424",
+      "displayport": "98830",
+      "s-video": "84423"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MAX_SUPPORTED_RAM_MEMORY_CAPACITY": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "GB"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FILTRABLE_USE": {
+    "value_type": "list",
+    "values": {
+      "gaming": "58523353",
+      "work & study": "58523354",
+      "design": "58523355",
+      "home": "58523356"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "COLOR_GAMUT": {
+    "value_type": "string",
+    "values": {
+      "100% srgb": "11280992",
+      "72% ntsc": "11280993"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "TASK_FOCUS": {
+    "value_type": "list",
+    "values": {
+      "photo editing": "65178873",
+      "video editing": "65178874",
+      "3d modeling": "65178875",
+      "graphic design": "65178876",
+      "animation": "65178877"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SPEAKERS_NUMBER": {
+    "value_type": "number",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "FREQUENTLY_PLAYED": {
+    "value_type": "list",
+    "values": {
+      "online competitive": "65178878",
+      "action & adventure": "65178879",
+      "indies": "65178880",
+      "virtual reality": "65178881",
+      "sports": "65178882",
+      "strategy": "65178883"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "WITH_WI_FI": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "MPN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284",
+      "refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "VALUE_ADDED_TAX": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IMPORT_DUTY": {
+    "value_type": "list",
+    "values": {
+      "0 %": "49553239",
+      "1 %": "49553240",
+      "2.5 %": "49553241",
+      "4 %": "49553242",
+      "5 %": "49553243",
+      "8 %": "49553244",
+      "9.5 %": "49553245",
+      "10 %": "49553246",
+      "14 %": "49553247",
+      "15 %": "49553248",
+      "18 %": "49553249",
+      "19 %": "49553250",
+      "20 %": "49553251",
+      "23 %": "49553252",
+      "25 %": "49553253",
+      "26 %": "49553254",
+      "70 %": "49553255"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_SKU": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "SELLER_PACKAGE_WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g"
+    ],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "IS_KIT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "DESCRIPTIVE_TAGS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_CHEMICAL_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "flammable": "7651070",
+      "aerosol": "7651071",
+      "oxidizer": "7651072",
+      "corrosive": "7651073",
+      "explosive": "7651074",
+      "toxic or infectious": "7651075"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "FOODS_AND_DRINKS": {
+    "value_type": "list",
+    "values": {
+      "for humans": "7575926",
+      "for animals": "7575927"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "MEDICINES": {
+    "value_type": "list",
+    "values": {
+      "for humans with a medical prescription": "7575930",
+      "for humans without a medical prescription": "7575931",
+      "for animals with a medical prescription": "7575932",
+      "for animals without a medical prescription": "7575933"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "BATTERIES_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "stand-alone lithium (loose or isolated)": "7575934",
+      "lithium installed": "7575935",
+      "for cars (lead-acid)": "7575936"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SHIPMENT_PACKING": {
+    "value_type": "list",
+    "values": {
+      "bag": "7435891",
+      "box": "7435892",
+      "envelope": "7575937",
+      "self-shipping": "7575939",
+      "exb": "27037932"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ADDITIONAL_INFO_REQUIRED": {
+    "value_type": "list",
+    "values": {
+      "has imei": "7435893",
+      "has serial number": "7435894"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "EXCLUDED_PLATFORMS": {
+    "value_type": "list",
+    "values": {
+      "android": "9936777",
+      "ios": "9936778",
+      "desktop": "9936779",
+      "mobile": "9936780"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_SHIPMENT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "LIMITED_MARKETPLACE_VISIBILITY_REASONS": {
+    "value_type": "string",
+    "values": {
+      "pharma": "24219544"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "HAS_COMPATIBILITIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "CATALOG_TITLE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SEARCH_ENHANCEMENT_FIELDS": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "PRODUCT_FEATURES": {
+    "value_type": "list",
+    "values": {
+      "contains liquid": "7435885",
+      "fragile": "7435883",
+      "with expiration": "7435888",
+      "without expiration": "8847339",
+      "health device": "7575925",
+      "disinfectant and sanitizer": "7575917",
+      "mapa": "7575924",
+      "health and correlates": "7575923",
+      "voluminous": "8721108",
+      "unflyable": "10490116",
+      "no rotatable": "12928414",
+      "folding": "41722098",
+      "magnetic": "52092586",
+      "can roll": "52233302"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_NEW_OFFER": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "SYI_PYMES_ID": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "PACKAGE_DATA_SOURCE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  }
+}

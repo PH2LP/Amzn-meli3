@@ -14,8 +14,95 @@
     "value_type": "string",
     "values": {},
     "allowed_units": [],
-    "tags": {},
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
     "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "POWER_SUPPLY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "domestic current": "49713698",
+      "manual operation": "49605648",
+      "domestic current/manual operation": "53832744"
+    },
+    "allowed_units": [],
+    "tags": {
+      "catalog_required": true,
+      "required": true
+    },
+    "hierarchy": "PARENT_PK",
+    "relevance": 1
+  },
+  "VOLTAGE": {
+    "value_type": "string",
+    "values": {
+      "220v": "198813",
+      "110v": "39205162",
+      "110/220v": "39205163"
+    },
+    "allowed_units": [],
+    "tags": {
+      "conditional_required": true
+    },
+    "hierarchy": "CHILD_PK",
+    "relevance": 1
+  },
+  "MATERIAL": {
+    "value_type": "string",
+    "values": {
+      "plastic": "2748302",
+      "silicone": "2466987"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "LENGTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "mm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WIDTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm",
+      "mm",
+      "\""
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "DEPTH": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm",
+      "mm",
+      "\""
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "SEC_STAMP": {
+    "value_type": "picture_id",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "PACKAGE_HEIGHT": {
@@ -36,6 +123,14 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "OCP_CERTIFICATION_AGENCY": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "PACKAGE_WIDTH": {
     "value_type": "number_unit",
     "values": {},
@@ -52,6 +147,14 @@
       "catalog_listing_required": true
     },
     "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "RSPEBT_PRODUCT_REGISTRATION_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
     "relevance": 1
   },
   "PACKAGE_LENGTH": {
@@ -72,6 +175,14 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "ELECTRICAL_SAFETY_CERTIFICATE_NUMBER": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -87,6 +198,88 @@
       "variation_attribute": true,
       "catalog_listing_required": true
     },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "COLOR": {
+    "value_type": "string",
+    "values": {
+      "dark green": "52019",
+      "turquoise": "283160",
+      "water": "52022",
+      "indigo": "283162",
+      "lavender": "52036",
+      "pink gum": "283163",
+      "maroon": "51998",
+      "nude": "52003",
+      "white": "52055",
+      "navy blue": "283161",
+      "cream": "52008",
+      "pale pink": "52045",
+      "cleat": "283153",
+      "light orange": "283150",
+      "blue": "52028",
+      "light pink": "52043",
+      "light coral": "283148",
+      "coral": "283149",
+      "heavenly": "52021",
+      "blue steel": "52031",
+      "khaki": "283156",
+      "beige": "52001",
+      "red": "51993",
+      "terracotta": "51996",
+      "gray": "283165",
+      "violet": "52035",
+      "light brown": "283154",
+      "black": "52049",
+      "dark brown": "283155",
+      "silver": "52053",
+      "dark violet": "52047",
+      "pink": "51994",
+      "yellow": "52007",
+      "lime green": "283157",
+      "dark gold": "52012",
+      "light green": "52015",
+      "dark orange": "283151",
+      "oil blue": "52024",
+      "dark grey": "52051",
+      "chocolate": "283152",
+      "green": "52014",
+      "golden": "283164",
+      "orange": "52000",
+      "dark blue": "52033",
+      "ochre": "52010",
+      "moss green": "283158",
+      "brown": "52005",
+      "lilac": "52038",
+      "fuchsia": "52042",
+      "cyan": "338779",
+      "light blue": "52029"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_BPA_FREE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_DISHWASHER_SAFE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -121,28 +314,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "PRODUCT_LIFE": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "TECHNICAL_SERVICE_OR_REPLACEMENT_PARTS_PERIOD": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "months",
-      "years"
-    ],
-    "tags": {},
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "VERTICAL_TAGS": {
     "value_type": "string",
     "values": {
@@ -159,6 +330,35 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WITH_NON_STICK_SURFACE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "POWER": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "W"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "FREQUENCY": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "MPN": {
@@ -283,19 +483,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -307,34 +494,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -619,6 +778,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

@@ -1,0 +1,14 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "MODEL": [
+    "model_number",
+    "attributes.model_number[0].value"
+  ]
+}

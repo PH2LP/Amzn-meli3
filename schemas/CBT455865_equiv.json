@@ -1,0 +1,29 @@
+{
+  "CELL_BATTERIES_TYPE": [
+    "battery[0].cell_composition[0].value"
+  ],
+  "POWER_SUPPLY_TYPES": [
+    "power_source_type[0].value"
+  ],
+  "MAX_HOURS_AUTONOMY": [
+    "bullet_point[2].value"
+  ],
+  "IS_WIRELESS": [
+    "is_cordless[0].value"
+  ],
+  "INCLUDES_USB_CABLE": [
+    "special_feature[0].value"
+  ],
+  "WITH_SAFETY_CLIP": [
+    "bullet_point[4].value"
+  ],
+  "WITH_LED_LIGHTS": [
+    "bullet_point[1].value"
+  ],
+  "WITH_BASE": [
+    "mounting_type[0].value"
+  ],
+  "RSPEBT_PRODUCT_REGISTRATION_NUMBER": [
+    "model_number[0].value"
+  ]
+}

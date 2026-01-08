@@ -1,0 +1,22 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "WEIGHT": [
+    "item_weight",
+    "attributes.item_weight[0].value"
+  ],
+  "SIZE": [
+    "size",
+    "attributes.size[0].value"
+  ],
+  "AGE_RANGE": [
+    "age_range_description",
+    "attributes.age_range_description[0].value"
+  ]
+}

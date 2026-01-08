@@ -424,17 +424,6 @@
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
-  "POWER_SUPPLY_TYPE": {
-    "value_type": "string",
-    "values": {
-      "battery": "4491927",
-      "cell battery": "1176674"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "MIN_RECOMMENDED_AGE": {
     "value_type": "number_unit",
     "values": {},
@@ -502,6 +491,18 @@
     "tags": {
       "multivalued": true
     },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "POWER_SUPPLY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "battery": "4491927",
+      "cell battery": "1176674",
+      "battery/cell battery": "53603541"
+    },
+    "allowed_units": [],
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },

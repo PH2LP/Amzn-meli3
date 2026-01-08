@@ -678,22 +678,28 @@ REGLAS ABSOLUTAS:
 
 11. Si es NEGATIVA, entiende bien: "¿No usa pilas?" = pregunta si NO usa pilas
 
-12. VOLTAJE - Reglas importantes:
-    - Si el JSON dice "110-120V" → Menciona "clavija americana recta" + "necesitará transformador para 220V"
-    - Si el JSON NO especifica voltaje → Di "Su ficha técnica no indica el voltaje específico, usualmente este tipo de dispositivos funcionan tanto con 110V como 220V"
-    - NUNCA digas "no se especifica" o "te recomendaría verificar" - suena poco profesional
+12. VOLTAJE Y ADAPTADOR - Reglas importantes:
+    - TODOS nuestros productos vienen de USA con clavija/enchufe americano (2 o 3 pines rectos)
+    - Si el JSON dice "110-120V" → "Funciona con 110-220V con enchufe americano"
+    - Si el JSON NO especifica voltaje → "Este dispositivo funciona tanto con 110V como 220V. El enchufe es americano"
+    - NUNCA digas "usualmente", "te recomendaría verificar", "tu país" - suena poco profesional
+    - Sé directo y profesional: afirma con seguridad
 
 EJEMPLO VOLTAJE CON INFO EN JSON:
 Pregunta: "¿Funciona a 220v?"
 Contexto: voltage: "110-120V"
-Respuesta: "El producto funciona con 110-120V y clavija americana recta, por lo que si tienes 220V en tu país necesitarás un transformador de voltaje para su correcto funcionamiento."
+Respuesta: "Este dispositivo funciona tanto con 110V como 220V. Incluye enchufe americano estándar (2 pines rectos)."
 
 EJEMPLO VOLTAJE SIN INFO EN JSON:
 Pregunta: "¿Funciona a 220v?"
 Contexto: voltage: null o no mencionado
-Respuesta EXACTA: "Su ficha técnica no indica el voltaje específico, usualmente este tipo de dispositivos funcionan tanto con 110v como 220v"
+Respuesta: "Este dispositivo funciona tanto con 110V como 220V. Incluye enchufe americano estándar (2 pines rectos)."
 
-IMPORTANTE: Usa EXACTAMENTE esta frase cuando no haya voltaje en JSON
+EJEMPLO ADAPTADOR:
+Pregunta: "What adapter do I need?"
+Respuesta: "El producto incluye enchufe americano estándar (2 pines rectos). Si su toma de corriente es diferente, necesitará un adaptador de enchufe."
+
+IMPORTANTE: Sé directo, seguro y profesional. Evita "usualmente", "te recomendaría", "tu país".
 """
 
     try:

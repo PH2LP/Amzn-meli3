@@ -167,6 +167,41 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VERTICAL_TAGS": {
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
   "EXERCISE_TYPES": {
     "value_type": "string",
     "values": {
@@ -206,6 +241,17 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "INCLUDES_BAR": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "MAX_WEIGHT_CAPACITY": {
     "value_type": "number_unit",
     "values": {},
@@ -223,17 +269,6 @@
     "allowed_units": [
       "kg"
     ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "INCLUDES_BAR": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
     "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
@@ -331,17 +366,6 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "WEIGHT": {
-    "value_type": "number_unit",
-    "values": {},
-    "allowed_units": [
-      "kg",
-      "lb"
-    ],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
   "PACKAGE_HEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -357,6 +381,17 @@
       "variation_attribute": true,
       "catalog_listing_required": true
     },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "kg",
+      "lb"
+    ],
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -414,6 +449,17 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "INCLUDES_ACCESSORIES": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "GTIN": {
     "value_type": "string",
     "values": {},
@@ -428,64 +474,17 @@
     "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
-  "EMPTY_GTIN_REASON": {
+  "ITEM_CONDITION": {
     "value_type": "list",
     "values": {
-      "the product is a handcrafted piece": "17055158",
-      "the product is a kit or pack": "17055159",
-      "the product does not have registered code": "17055160",
-      "another reason": "17055161"
+      "new": "2230284"
     },
     "allowed_units": [],
     "tags": {
-      "hidden": true,
-      "variation_attribute": true,
-      "conditional_required": true
+      "hidden": true
     },
     "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "VERTICAL_TAGS": {
-    "value_type": "string",
-    "values": {
-      "is_tom_brand": "53559152",
-      "is_polos": "53559153",
-      "is_social_brands": "53559154",
-      "is_beauty_premium": "53559155",
-      "has_dimensions_images": "53559156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
-  "INCLUDES_ACCESSORIES": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {},
-    "hierarchy": "FAMILY",
-    "relevance": 1
-  },
-  "ACCESSORIES_INCLUDED": {
-    "value_type": "string",
-    "values": {
-      "straps": "8215590",
-      "tricep rope": "18178827"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 1
+    "relevance": 2
   },
   "MPN": {
     "value_type": "string",
@@ -497,18 +496,6 @@
       "variation_attribute": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "VALUE_ADDED_TAX": {
@@ -609,19 +596,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -633,34 +607,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -945,6 +891,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

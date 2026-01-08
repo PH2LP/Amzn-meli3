@@ -5,8 +5,7 @@
     "allowed_units": [],
     "tags": {
       "catalog_required": true,
-      "required": true,
-      "catalog_listing_required": true
+      "required": true
     },
     "hierarchy": "PARENT_PK",
     "relevance": 1
@@ -15,18 +14,25 @@
     "value_type": "string",
     "values": {},
     "allowed_units": [],
-    "tags": {},
+    "tags": {
+      "catalog_required": true
+    },
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
   "WALL_CLOCK_TYPE": {
     "value_type": "string",
     "values": {
+      "3d": "18881879",
       "analog": "2508906",
-      "digital": "2508907"
+      "cuckoo": "3974527",
+      "digital": "2508907",
+      "pendulum": "5671346"
     },
     "allowed_units": [],
-    "tags": {},
+    "tags": {
+      "catalog_required": true
+    },
     "hierarchy": "PARENT_PK",
     "relevance": 1
   },
@@ -40,7 +46,7 @@
       "lavender": "52036",
       "pink gum": "283163",
       "maroon": "51998",
-      "fur": "52003",
+      "nude": "52003",
       "white": "52055",
       "navy blue": "283161",
       "cream": "52008",
@@ -103,7 +109,7 @@
       "lavender": "52036",
       "pink gum": "283163",
       "maroon": "51998",
-      "fur": "52003",
+      "nude": "52003",
       "white": "52055",
       "navy blue": "283161",
       "cream": "52008",
@@ -156,7 +162,70 @@
     "hierarchy": "CHILD_PK",
     "relevance": 1
   },
-  "WALL_CLOCK_MATERIAL": {
+  "EMPTY_GTIN_REASON": {
+    "value_type": "list",
+    "values": {
+      "the product is a handcrafted piece": "17055158",
+      "the product is a kit or pack": "17055159",
+      "the product does not have registered code": "17055160",
+      "another reason": "17055161"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "variation_attribute": true,
+      "conditional_required": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "VERTICAL_TAGS": {
+    "value_type": "string",
+    "values": {
+      "is_tom_brand": "53559152",
+      "is_polos": "53559153",
+      "is_social_brands": "53559154",
+      "is_beauty_premium": "53559155",
+      "has_dimensions_images": "53559156"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 1
+  },
+  "WALL_CLOCK_DESIGN": {
+    "value_type": "string",
+    "values": {
+      "batman": "18881881",
+      "jungle": "18881882",
+      "unicorn": "18881880",
+      "vintage": "2508914"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CLOCK_SHAPE": {
+    "value_type": "string",
+    "values": {
+      "round": "18881883",
+      "square": "18881884"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WALL_CLOCK_MATERIALS": {
     "value_type": "string",
     "values": {
       "iron": "2508910",
@@ -170,55 +239,96 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "NEEDLES_MATERIAL": {
+    "value_type": "string",
+    "values": {
+      "metal": "18881885",
+      "plastic": "18881886"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "NUMBERS_FORMAT": {
+    "value_type": "string",
+    "values": {
+      "digitals": "18881887",
+      "roman": "18881888",
+      "without numbers": "18881889"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "WALL_CLOCK_DIAMETER": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
-      "\"",
-      "cm"
+      "cm",
+      "\""
     ],
     "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "WALL_CLOCK_DESIGN": {
-    "value_type": "string",
-    "values": {
-      "cuckoo clock": "2508915",
-      "pendulum": "2508916",
-      "vintage": "2508914"
-    },
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true
-    },
+  "HEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "cm",
+      "mm",
+      "\""
+    ],
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "GTIN": {
-    "value_type": "string",
+  "WIDTH": {
+    "value_type": "number_unit",
     "values": {},
-    "allowed_units": [],
-    "tags": {
-      "multivalued": true,
-      "required": true,
-      "variation_attribute": true,
-      "used_hidden": true,
-      "validate": true,
-      "catalog_listing_required": true
-    },
-    "hierarchy": "PRODUCT_IDENTIFIER",
+    "allowed_units": [
+      "cm",
+      "mm",
+      "\""
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "THICKNESS": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "\"",
+      "cm",
+      "mm"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "WEIGHT": {
+    "value_type": "number_unit",
+    "values": {},
+    "allowed_units": [
+      "g",
+      "kg"
+    ],
+    "tags": {},
+    "hierarchy": "FAMILY",
     "relevance": 1
   },
   "PACKAGE_HEIGHT": {
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
-      "mm",
-      "cm",
-      "m",
       "\"",
-      "ft"
+      "cm",
+      "ft",
+      "m",
+      "mm"
     ],
     "tags": {
       "required": true,
@@ -232,11 +342,11 @@
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
-      "mm",
-      "cm",
-      "m",
       "\"",
-      "ft"
+      "cm",
+      "ft",
+      "m",
+      "mm"
     ],
     "tags": {
       "required": true,
@@ -250,11 +360,11 @@
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
-      "mm",
-      "cm",
-      "m",
       "\"",
-      "ft"
+      "cm",
+      "ft",
+      "m",
+      "mm"
     ],
     "tags": {
       "required": true,
@@ -268,10 +378,10 @@
     "value_type": "number_unit",
     "values": {},
     "allowed_units": [
-      "mg",
       "g",
       "kg",
       "lb",
+      "mg",
       "oz"
     ],
     "tags": {
@@ -282,7 +392,7 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
-  "INCLUDES_BATTERIES": {
+  "INCLUDES_CELL_BATTERIES": {
     "value_type": "boolean",
     "values": {
       "no": "242084",
@@ -291,6 +401,39 @@
     "allowed_units": [],
     "tags": {},
     "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "CELL_BATTERY_TYPE": {
+    "value_type": "string",
+    "values": {
+      "aaa": "6178423",
+      "aa": "6178424"
+    },
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "BATTERY_VOLTAGE": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "GTIN": {
+    "value_type": "string",
+    "values": {},
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true,
+      "variation_attribute": true,
+      "used_hidden": true,
+      "validate": true,
+      "conditional_required": true
+    },
+    "hierarchy": "PRODUCT_IDENTIFIER",
     "relevance": 1
   },
   "ITEM_CONDITION": {
@@ -305,11 +448,24 @@
     "hierarchy": "ITEM",
     "relevance": 2
   },
+  "IS_SILENT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
   "ADDITIONAL_FEATURES": {
     "value_type": "string",
     "values": {
       "date": "2508926",
-      "displays temperature": "2508927",
+      "temperature": "2508927",
       "alarm": "2508928"
     },
     "allowed_units": [],
@@ -320,11 +476,16 @@
     "hierarchy": "FAMILY",
     "relevance": 2
   },
-  "POWER_SUPPLY": {
+  "POWER_SUPPLY_TYPE": {
     "value_type": "string",
     "values": {
-      "aa": "6073398",
-      "aaa": "6073399"
+      "battery": "4491927",
+      "cell battery": "1176674",
+      "solar energy": "38547771",
+      "battery/cell battery": "53603541",
+      "battery/solar energy": "53690418",
+      "cell battery/solar energy": "53690420",
+      "battery/cell battery/solar energy": "53690422"
     },
     "allowed_units": [],
     "tags": {
@@ -456,19 +617,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -480,34 +628,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -792,6 +912,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

@@ -1,0 +1,95 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "attributes.band[0].material[0].value",
+    "attributes.case[0].material[0].value"
+  ],
+  "GENDER": [
+    "attributes.target_gender[0].value",
+    "attributes.department[0].value"
+  ],
+  "CLASP_TYPE": [
+    "attributes.clasp_type[0].value"
+  ],
+  "MOVEMENT_TYPE": [
+    "attributes.watch_movement_type[0].value"
+  ],
+  "WATER_RESISTANCE_DEPTH": [
+    "attributes.water_resistance_depth[0].value"
+  ],
+  "CASE_DIAMETER": [
+    "attributes.case[0].diameter[0].value"
+  ],
+  "CASE_MATERIALS": [
+    "attributes.case[0].material[0].value"
+  ],
+  "IS_WATER_RESISTANT": [
+    "attributes.water_resistance_level[0].value"
+  ],
+  "WITH_CHRONOGRAPH": [
+    "attributes.special_feature[0].value"
+  ],
+  "WITH_CALENDAR": [
+    "attributes.calendar_type[0].value"
+  ],
+  "WITH_ALARM": [
+    "attributes.bullet_point[2].value"
+  ],
+  "WITH_BACKLIGHTING": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_TOUCH_SCREEN": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_SOLAR_CHARGING_SYSTEM": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_TIMER": [
+    "attributes.bullet_point[2].value"
+  ],
+  "IS_SHOCK_RESISTANT": [
+    "attributes.bullet_point[3].value"
+  ],
+  "IS_BRAILLE": [
+    "attributes.bullet_point[3].value"
+  ],
+  "IS_TALKING_WATCH": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_VIRTUAL_TRY_ON": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_DUAL_TIME": [
+    "attributes.bullet_point[2].value"
+  ],
+  "WITH_COMPASS": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_TACHYMETER": [
+    "attributes.bullet_point[2].value"
+  ],
+  "WITH_ALTIMETER": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_RADIO_CONTROLLED_SYSTEM": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_DAWN_EVENING_INDICATOR": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_WORLD_TIME": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_AUTO_LED_LIGHT": [
+    "attributes.bullet_point[3].value"
+  ],
+  "WITH_THERMOMETER": [
+    "attributes.bullet_point[3].value"
+  ],
+  "IS_EMERGING_BRAND": [
+    "attributes.brand[0].value"
+  ]
+}

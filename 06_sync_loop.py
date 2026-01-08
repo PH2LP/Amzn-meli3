@@ -23,7 +23,9 @@ from dotenv import load_dotenv, dotenv_values
 load_dotenv()
 
 # Configuración
-SCHEDULED_TIMES = ['00:10', '06:10', '12:10', '18:10']
+# Leer horarios del .env o usar default
+SYNC_SCHEDULED_TIMES = os.getenv('SYNC_SCHEDULED_TIMES', '00:10,06:10,12:10,18:10')
+SCHEDULED_TIMES = [time.strip() for time in SYNC_SCHEDULED_TIMES.split(',')]
 LOG_FILE = 'logs/full_sync_loop.log'
 
 # Crear directorio de logs si no existe

@@ -1,0 +1,37 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material"
+  ],
+  "HEART_RATE_MONITOR_SIZE": [
+    "size",
+    "attributes.size[0].value"
+  ],
+  "STRAP_TYPE": [
+    "form_factor",
+    "attributes.form_factor[0].value"
+  ],
+  "COMPATIBLE_APPLICATIONS": [
+    "compatible_devices",
+    "attributes.compatible_devices[0].value"
+  ],
+  "RECOMMENDED_DEVICES": [
+    "recommended_uses_for_product",
+    "attributes.recommended_uses_for_product"
+  ],
+  "WATER_RESISTANCE_TYPE": [
+    "water_resistance",
+    "attributes.water_resistance"
+  ],
+  "MAX_WATER_RESISTANCE_DEPTH": [
+    "max_water_resistance_depth",
+    "attributes.max_water_resistance_depth"
+  ],
+  "WITH_ANT_CONNECTION": [
+    "ant_connection",
+    "attributes.with_ant_connection"
+  ]
+}

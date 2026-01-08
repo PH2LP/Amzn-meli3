@@ -1,0 +1,42 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "SALE_FORMAT": [
+    "item_package_quantity",
+    "attributes.item_package_quantity[0].value"
+  ],
+  "UNITS_PER_PACK": [
+    "number_of_items",
+    "attributes.number_of_items[0].value"
+  ],
+  "BIKE_TYPE": [
+    "bike_type",
+    "attributes.bike_type[0].value"
+  ],
+  "MAX_PRESSURE": [
+    "tensile_strength",
+    "attributes.tensile_strength[0].value"
+  ],
+  "BEARING_RESISTANCE": [
+    "tread",
+    "attributes.tread[0].depth[0].value"
+  ],
+  "WET_TRACK_GRIP": [
+    "grip",
+    "attributes.grip[0].type[0].value"
+  ],
+  "EXTERNAL_NOISE": [
+    "external_noise",
+    "attributes.unspsc_code[0].value"
+  ],
+  "SAFETY_CERTIFICATE_NUMBER": [
+    "safety_certificate_number",
+    "attributes.part_number[0].value"
+  ]
+}

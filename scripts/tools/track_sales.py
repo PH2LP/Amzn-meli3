@@ -13,8 +13,9 @@ Monitorea ventas en MercadoLibre y registra:
 - Ganancia neta y margen
 
 USO:
-    python3 scripts/tools/track_sales.py              # Revisar nuevas ventas
-    python3 scripts/tools/track_sales.py --backfill   # Importar ventas históricas
+    python3 scripts/tools/track_sales.py              # Revisar ventas (último día)
+    python3 scripts/tools/track_sales.py --check-all  # Revisar TODAS las ventas
+    python3 scripts/tools/track_sales.py --stats      # Ver estadísticas
     python3 scripts/tools/track_sales.py --export     # Exportar a Excel
 
 WEBHOOK (opcional):
@@ -30,6 +31,7 @@ import requests
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
@@ -125,19 +127,24 @@ def init_database():
     print(f"{Colors.GREEN}✅ Base de datos inicializada: {DB_PATH}{Colors.NC}")
 
 
-def get_ml_orders(since_date=None):
+def get_ml_orders(since_date=None, get_all=False, limit_orders=None, days_back=None):
     """
     Obtiene órdenes de MercadoLibre
 
     Args:
-        since_date: datetime - Fecha desde la cual buscar (default: últimas 24h)
+        since_date: datetime - Fecha desde la cual buscar
+        get_all: bool - Si es True, trae TODAS las órdenes sin filtro de fecha
+        limit_orders: int - Si se especifica, limita a N órdenes (para chequeos rápidos)
+        days_back: int - Días hacia atrás (default: 1 día)
 
     Returns:
         list: Lista de órdenes
     """
-    if not since_date:
+    if not get_all and not since_date:
         from datetime import timezone
-        since_date = datetime.now(timezone.utc) - timedelta(days=1)
+        # Default: último día (para chequeos rápidos cada 1 min)
+        days = days_back if days_back else 1
+        since_date = datetime.now(timezone.utc) - timedelta(days=days)
 
     # Recargar token FRESCO del .env (el daemon corre en loop y necesita token actualizado)
     load_dotenv(override=True)
@@ -155,6 +162,11 @@ def get_ml_orders(since_date=None):
         "offset": 0,
         "limit": 50
     }
+
+    # Agregar filtro de fecha si corresponde
+    if not get_all and since_date:
+        # Formato: yyyy-MM-ddThh:mm:ss.ms-TZD
+        params["date_created.from"] = since_date.strftime("%Y-%m-%dT%H:%M:%S-00:00")
 
     all_orders = []
 
@@ -174,29 +186,46 @@ def get_ml_orders(since_date=None):
 
         # En CBT, cada resultado es un "cart" que contiene "orders"
         for cart in carts:
+            # Usar fecha del cart para filtrar (evita llamadas innecesarias)
+            cart_date_str = cart.get("date_created")
+
+            if not get_all and cart_date_str:
+                cart_date = datetime.fromisoformat(cart_date_str.replace("Z", "+00:00"))
+                if cart_date < since_date:
+                    return all_orders  # Ya llegamos a carts más viejos, salir
+
             orders = cart.get("orders", [])
             for order in orders:
                 order_id = order.get("id")
 
-                # Obtener detalles completos de la orden
+                # Obtener detalles completos (necesario para status y datos financieros)
                 order_url = f"https://api.mercadolibre.com/marketplace/orders/{order_id}"
                 order_resp = requests.get(order_url, headers=headers, timeout=10)
 
                 if order_resp.status_code == 200:
                     full_order = order_resp.json()
 
-                    # Filtrar por fecha
-                    order_date = datetime.fromisoformat(full_order["date_created"].replace("Z", "+00:00"))
-                    if order_date >= since_date:
-                        all_orders.append(full_order)
-                    else:
-                        return all_orders  # Ya llegamos a órdenes más viejas
+                    # Filtrar por fecha de la orden individual (más preciso)
+                    if not get_all:
+                        order_date = datetime.fromisoformat(full_order["date_created"].replace("Z", "+00:00"))
+                        if order_date < since_date:
+                            continue  # Saltar esta orden vieja
+
+                    all_orders.append(full_order)
+
+                    # Si hay límite de órdenes, salir cuando lo alcancemos
+                    if limit_orders and len(all_orders) >= limit_orders:
+                        return all_orders
 
         # Paginación
         params["offset"] += params["limit"]
 
-        # Límite de seguridad
-        if params["offset"] >= 200:
+        # Límite de seguridad (solo si no estamos trayendo todas)
+        if not get_all and params["offset"] >= 200:
+            break
+
+        # Si hay límite de órdenes y ya lo alcanzamos, salir
+        if limit_orders and len(all_orders) >= limit_orders:
             break
 
     return all_orders
@@ -525,22 +554,75 @@ def get_order_billing(order):
 def process_order(order):
     """
     Procesa una orden de ML y la registra en la DB
+    Si ya existe, actualiza el status (para detectar cancelaciones)
 
     Args:
         order: Orden de MercadoLibre API
 
     Returns:
-        bool: True si se procesó exitosamente
+        bool: True si se procesó exitosamente (nueva venta o actualización)
     """
     order_id = order["id"]
+
+    # Status de la orden
+    order_status = order.get("status", "pending")
 
     # Verificar si ya existe
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
-    cursor.execute("SELECT id FROM sales WHERE order_id = ?", (str(order_id),))
-    if cursor.fetchone():
+    cursor.execute("SELECT id, status FROM sales WHERE order_id = ?", (str(order_id),))
+    existing = cursor.fetchone()
+
+    if existing:
+        existing_id, existing_status = existing
+
+        # Si el status cambió, actualizar el registro
+        if existing_status != order_status:
+            print(f"\n{Colors.YELLOW}⚠️  CAMBIO DE STATUS DETECTADO{Colors.NC}")
+            print(f"   Orden:        {order_id}")
+            print(f"   Status prev:  {existing_status}")
+            print(f"   Status nuevo: {order_status}")
+
+            # Actualizar status y timestamp
+            cursor.execute("""
+                UPDATE sales
+                SET status = ?,
+                    last_updated = CURRENT_TIMESTAMP,
+                    raw_ml_data = ?
+                WHERE order_id = ?
+            """, (order_status, json.dumps(order), str(order_id)))
+
+            conn.commit()
+
+            # Si fue cancelada, ajustar las estadísticas
+            if order_status == "cancelled":
+                print(f"{Colors.RED}   ❌ VENTA CANCELADA{Colors.NC}")
+                # Marcar profit como 0 para que no cuente en estadísticas
+                cursor.execute("""
+                    UPDATE sales
+                    SET profit = 0,
+                        profit_margin = 0,
+                        notes = 'Cancelada por el comprador'
+                    WHERE order_id = ?
+                """, (str(order_id),))
+                conn.commit()
+
+            # Si fue entregada, registrar la entrega
+            elif order_status == "delivered":
+                print(f"{Colors.GREEN}   ✅ VENTA ENTREGADA{Colors.NC}")
+                # Actualizar nota
+                cursor.execute("""
+                    UPDATE sales
+                    SET notes = 'Entregada al comprador'
+                    WHERE order_id = ?
+                """, (str(order_id),))
+                conn.commit()
+
+            conn.close()
+            return True  # Se actualizó
+
         conn.close()
-        return False  # Ya existe
+        return False  # Ya existe y no cambió
 
     # Extraer datos de la orden
     order_items = order.get("order_items", [])
@@ -717,20 +799,30 @@ def process_order(order):
     return True
 
 
-def track_new_sales():
+def track_new_sales(check_all=False, days_back=1, limit_orders=None):
     """
-    Revisa y registra nuevas ventas de las últimas 24 horas
+    Revisa y registra nuevas ventas
+
+    Args:
+        check_all: bool - Si es True, revisa todas las ventas históricas
+        days_back: int - Cuántos días hacia atrás revisar (default: 1 día)
+        limit_orders: int - Si se especifica, limita a N órdenes más recientes
 
     Returns:
-        int: Número de ventas nuevas registradas
+        int: Número de ventas nuevas registradas o actualizadas
     """
     print(f"\n{Colors.BLUE}{'═' * 80}{Colors.NC}")
-    print(f"{Colors.BLUE}TRACKING DE VENTAS - ÚLTIMAS 24 HORAS{Colors.NC}")
+    if check_all:
+        print(f"{Colors.BLUE}TRACKING DE VENTAS - TODAS LAS ÓRDENES{Colors.NC}")
+    elif limit_orders:
+        print(f"{Colors.BLUE}TRACKING DE VENTAS - ÚLTIMAS {limit_orders} ÓRDENES (RÁPIDO){Colors.NC}")
+    else:
+        print(f"{Colors.BLUE}TRACKING DE VENTAS - ÚLTIMOS {days_back} DÍA(S){Colors.NC}")
     print(f"{Colors.BLUE}{'═' * 80}{Colors.NC}\n")
 
     # Obtener órdenes
     print(f"{Colors.CYAN}📡 Obteniendo órdenes de MercadoLibre...{Colors.NC}")
-    orders = get_ml_orders()
+    orders = get_ml_orders(get_all=check_all, days_back=days_back, limit_orders=limit_orders)
 
     print(f"   Encontradas: {len(orders)} órdenes\n")
 
@@ -739,16 +831,16 @@ def track_new_sales():
         return 0
 
     # Procesar cada orden
-    new_sales = 0
+    changes = 0  # Cuenta nuevas ventas Y actualizaciones (cancelaciones)
     for order in orders:
         if process_order(order):
-            new_sales += 1
+            changes += 1
 
     print(f"\n{Colors.GREEN}{'═' * 80}{Colors.NC}")
-    print(f"{Colors.GREEN}✅ Procesamiento completado: {new_sales} nuevas ventas registradas{Colors.NC}")
+    print(f"{Colors.GREEN}✅ Procesamiento completado: {changes} cambio(s) detectado(s){Colors.NC}")
     print(f"{Colors.GREEN}{'═' * 80}{Colors.NC}\n")
 
-    return new_sales
+    return changes
 
 
 def show_stats():
@@ -757,7 +849,7 @@ def show_stats():
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # Stats generales
+    # Stats generales (excluyendo canceladas)
     cursor.execute("""
         SELECT
             COUNT(*) as total_sales,
@@ -766,6 +858,7 @@ def show_stats():
             SUM(profit) as total_profit,
             AVG(profit_margin) as avg_margin
         FROM sales
+        WHERE status != 'cancelled'
     """)
 
     stats = cursor.fetchone()
@@ -787,7 +880,7 @@ def show_stats():
     print(f"   {Colors.GREEN}Ganancia total:     ${stats['total_profit'] or 0:.2f}{Colors.NC}")
     print(f"   Margen promedio:    {stats['avg_margin'] or 0:.1f}%")
 
-    # Top productos
+    # Top productos (excluyendo canceladas)
     print(f"\n{Colors.CYAN}🏆 TOP 5 PRODUCTOS MÁS VENDIDOS:{Colors.NC}\n")
 
     cursor.execute("""
@@ -798,6 +891,7 @@ def show_stats():
             SUM(quantity) as units,
             SUM(profit) as total_profit
         FROM sales
+        WHERE status != 'cancelled'
         GROUP BY asin
         ORDER BY sales DESC
         LIMIT 5
@@ -853,6 +947,7 @@ def main():
     parser.add_argument("--backfill", action="store_true", help="Import historical sales")
     parser.add_argument("--stats", action="store_true", help="Show statistics")
     parser.add_argument("--export", action="store_true", help="Export to Excel")
+    parser.add_argument("--check-all", action="store_true", help="Check ALL orders (not just last 24h)")
 
     args = parser.parse_args()
 
@@ -873,9 +968,12 @@ def main():
         print(f"{Colors.YELLOW}📅 Importando ventas históricas (últimos 30 días)...{Colors.NC}")
         # TODO: Implementar backfill
         print(f"{Colors.YELLOW}⚠️  Función en desarrollo{Colors.NC}")
+    elif args.check_all:
+        # Check ALL orders (update status for existing ones)
+        track_new_sales(check_all=True)
     else:
-        # Default: track new sales
-        track_new_sales()
+        # Default: track new sales (last 24h only)
+        track_new_sales(check_all=False)
 
 
 if __name__ == "__main__":

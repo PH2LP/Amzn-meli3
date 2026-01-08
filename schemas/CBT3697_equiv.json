@@ -1,0 +1,72 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material"
+  ],
+  "LIGHT_COLOR": [],
+  "HEADPHONE_FORMAT": [],
+  "WITH_MICROPHONE": [
+    "special_feature[1]"
+  ],
+  "IS_MONAURAL": [],
+  "IS_GAMER": [],
+  "IS_INFANT": [],
+  "WITH_LED_LIGHT": [],
+  "GRADING": [],
+  "MEMORY_SIZE": [],
+  "WIRELESS_RANGE": [],
+  "DIAPHRAGM_UNIT": [],
+  "IMPEDANCE": [
+    "impedance[0].value"
+  ],
+  "FREQUENCY_RESPONSE": [],
+  "SENSITIVITY": [
+    "sensitivity[0].value"
+  ],
+  "HEADPHONE_MAX_BATTERY_LIFE": [
+    "battery[0].average_life[0].value"
+  ],
+  "HEADPHONE_CHARGING_TIME": [
+    "battery[0].charge_time[0].value"
+  ],
+  "CASE_CHARGING_TIME": [],
+  "HEADPHONE_BATTERY_CAPACITY": [],
+  "CHARGING_CASE_BATTERY_CAPACITY": [],
+  "INCLUDES_CHARGING_CASE": [
+    "batteries_included[0].value"
+  ],
+  "WITH_WIRELESS_CHARGING": [],
+  "WITH_TWS_TECHNOLOGY": [],
+  "WITH_PROXIMITY_SENSOR": [],
+  "WITH_HANDS_FREE_MODE": [],
+  "WITH_MP3_PLAYER": [],
+  "WITH_FM_RADIO": [],
+  "WITH_NOISE_CANCELLING": [],
+  "IS_WATERPROOF": [
+    "water_resistance_level[0].value"
+  ],
+  "IS_DUST_RESISTANT": [],
+  "WITH_DETACHABLE_CABLE": [],
+  "WITH_DETACHABLE_MICROPHONE": [],
+  "WITH_FLEXIBLE_MICROPHONE": [],
+  "WITH_INTEGRATED_VOICE_ASSISTANTS": [],
+  "MICROPHONES_NUMBER": [],
+  "IP_RATING": [],
+  "INTEGRATED_VOICE_ASSISTANTS": [],
+  "CONNECTOR_TYPES": [
+    "connector_type[0].value"
+  ],
+  "BLUETOOTH_VERSION": [
+    "bluetooth_version[0].value"
+  ],
+  "MICROPHONE_ORIENTATIONS": [],
+  "SUITABLE_USES": [],
+  "CONTROL_FUNCTIONS": [
+    "control_method[0].value"
+  ],
+  "COMPATIBLE_GAME_CONSOLES": [],
+  "CHANNEL_SETUP": []
+}

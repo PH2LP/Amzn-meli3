@@ -44,7 +44,8 @@ except ImportError:
     get_dropbox_client = None
 
 # Configuración
-CHECK_INTERVAL_HOURS = float(os.getenv("SALES_TRACKING_INTERVAL_HOURS", "1"))
+CHECK_INTERVAL_MINUTES = int(os.getenv("SALES_TRACKING_INTERVAL_MINUTES", "1"))  # Cada 1 minuto
+FULL_CHECK_INTERVAL_HOURS = 6  # Cada 6 horas hacer chequeo completo de 40 días
 DB_SALES_PATH = "storage/sales_tracking.db"
 DB_LISTINGS_PATH = "storage/listings_database.db"
 LOOP_ACTIVE = True
@@ -65,35 +66,6 @@ def signal_handler(sig, frame):
     print(f"\n\n{Colors.YELLOW}🛑 Daemon detenido (señal recibida){Colors.NC}", flush=True)
     LOOP_ACTIVE = False
     sys.exit(0)
-
-
-def track_sales():
-    """
-    Ejecuta el tracking de ventas
-
-    Returns:
-        int: Número de ventas nuevas registradas, o -1 si hay error
-    """
-    print(f"\n{Colors.CYAN}📊 PASO 1: Tracking de ventas...{Colors.NC}", flush=True)
-
-    try:
-        from scripts.tools.track_sales import track_new_sales, init_database
-
-        # Inicializar DB si no existe
-        if not os.path.exists(DB_SALES_PATH):
-            init_database()
-
-        # Trackear ventas
-        new_sales_count = track_new_sales()
-
-        print(f"{Colors.GREEN}   ✅ Tracking completado{Colors.NC}", flush=True)
-        return new_sales_count
-
-    except Exception as e:
-        print(f"{Colors.RED}   ❌ Error en tracking: {e}{Colors.NC}", flush=True)
-        import traceback
-        traceback.print_exc()
-        return -1
 
 
 def generate_excel():
@@ -220,7 +192,7 @@ def show_stats():
         conn = sqlite3.connect(DB_SALES_PATH)
         cursor = conn.cursor()
 
-        # Stats básicas
+        # Stats básicas (excluyendo canceladas)
         cursor.execute("""
             SELECT
                 COUNT(*) as total_sales,
@@ -228,6 +200,7 @@ def show_stats():
                 SUM(profit) as total_profit,
                 AVG(profit_margin) as avg_margin
             FROM sales
+            WHERE status != 'cancelled'
         """)
 
         row = cursor.fetchone()
@@ -257,7 +230,8 @@ def main():
     print(f"{Colors.BLUE}╔════════════════════════════════════════════════════════════════╗{Colors.NC}", flush=True)
     print(f"{Colors.BLUE}║      SALES TRACKING DAEMON - AMAZON → MERCADOLIBRE           ║{Colors.NC}", flush=True)
     print(f"{Colors.BLUE}╚════════════════════════════════════════════════════════════════╝{Colors.NC}", flush=True)
-    print(f"{Colors.CYAN}⏱️  Intervalo: {CHECK_INTERVAL_HOURS} hora(s){Colors.NC}", flush=True)
+    print(f"{Colors.CYAN}⚡ Chequeo rápido: cada {CHECK_INTERVAL_MINUTES} min (últimas 10 órdenes){Colors.NC}", flush=True)
+    print(f"{Colors.CYAN}🔍 Chequeo completo: cada {FULL_CHECK_INTERVAL_HOURS}h (últimos 40 días){Colors.NC}", flush=True)
     print(f"{Colors.CYAN}💾 DBs: ventas + productos{Colors.NC}", flush=True)
     print(f"{Colors.CYAN}☁️  Dropbox: Excel + DBs{Colors.NC}", flush=True)
     print(f"{Colors.CYAN}💡 Detener: Ctrl+C o kill -TERM <PID>{Colors.NC}", flush=True)
@@ -274,11 +248,28 @@ def main():
 
         try:
             # PASO 1: Track sales
-            new_sales_count = track_sales()
+            # Calcular si toca chequeo completo (cada 6 horas = cada 360 iteraciones de 1 min)
+            iterations_per_full_check = FULL_CHECK_INTERVAL_HOURS * 60  # 6h * 60min = 360 iteraciones
+            is_full_check = (iteration % iterations_per_full_check == 0)
 
-            # PASO 2 y 3: Solo generar Excel y subir si hay ventas nuevas
-            if new_sales_count > 0:
-                print(f"\n{Colors.CYAN}🆕 {new_sales_count} venta(s) nueva(s) detectada(s){Colors.NC}", flush=True)
+            if is_full_check:
+                print(f"{Colors.YELLOW}🔍 Chequeo COMPLETO (últimos 40 días){Colors.NC}", flush=True)
+                # Trackear con 40 días
+                from scripts.tools.track_sales import track_new_sales, init_database
+                if not os.path.exists(DB_SALES_PATH):
+                    init_database()
+                changes_count = track_new_sales(days_back=40)
+            else:
+                print(f"{Colors.CYAN}⚡ Chequeo RÁPIDO (últimas 10 órdenes){Colors.NC}", flush=True)
+                # Trackear solo últimas 10 órdenes (súper rápido)
+                from scripts.tools.track_sales import track_new_sales, init_database
+                if not os.path.exists(DB_SALES_PATH):
+                    init_database()
+                changes_count = track_new_sales(limit_orders=10)
+
+            # PASO 2 y 3: Generar Excel y subir si hay CUALQUIER cambio (nuevas ventas O cancelaciones)
+            if changes_count > 0:
+                print(f"\n{Colors.CYAN}🆕 {changes_count} cambio(s) detectado(s) (ventas nuevas o cancelaciones){Colors.NC}", flush=True)
                 print(f"{Colors.CYAN}   Generando Excel y subiendo a Dropbox...{Colors.NC}", flush=True)
 
                 # Generar Excel
@@ -287,33 +278,24 @@ def main():
                 # Subir a Dropbox
                 sync_to_dropbox(excel_path)
             else:
-                print(f"\n{Colors.YELLOW}⏭️  No hay ventas nuevas, saltando generación de Excel{Colors.NC}", flush=True)
+                print(f"\n{Colors.YELLOW}⏭️  No hay cambios, saltando generación de Excel{Colors.NC}", flush=True)
 
             # Mostrar stats
             show_stats()
 
-            # Calcular próxima ejecución
-            next_run = datetime.now()
-            hours_to_add = int(CHECK_INTERVAL_HOURS)
-            next_run = next_run.replace(
-                hour=(next_run.hour + hours_to_add) % 24,
-                minute=0,
-                second=0,
-                microsecond=0
-            )
-
             print(f"\n{Colors.GREEN}✅ Ciclo completado exitosamente{Colors.NC}", flush=True)
-            print(f"{Colors.CYAN}⏰ Próxima ejecución: {next_run.strftime('%Y-%m-%d %H:%M')}{Colors.NC}", flush=True)
 
-            # Calcular segundos totales
-            total_seconds = int(CHECK_INTERVAL_HOURS * 3600)
+            # Calcular segundos totales (intervalo en minutos)
+            total_seconds = CHECK_INTERVAL_MINUTES * 60
 
-            # Countdown con formato HH:MM:SS
+            # Countdown con formato MM:SS
             for remaining in range(total_seconds, 0, -1):
-                hours = remaining // 3600
-                minutes = (remaining % 3600) // 60
+                minutes = remaining // 60
                 seconds = remaining % 60
-                print(f"\r{Colors.YELLOW}⏸️  Esperando: {hours:02d}h {minutes:02d}m {seconds:02d}s{Colors.NC}    ", end='', flush=True)
+                # Mostrar próximo chequeo completo
+                iterations_until_full = iterations_per_full_check - (iteration % iterations_per_full_check)
+                minutes_until_full = iterations_until_full * CHECK_INTERVAL_MINUTES
+                print(f"\r{Colors.YELLOW}⏸️  Próximo: {minutes:02d}m {seconds:02d}s | Chequeo completo en: {minutes_until_full} min{Colors.NC}    ", end='', flush=True)
                 time.sleep(1)
 
             print()  # Nueva línea al terminar

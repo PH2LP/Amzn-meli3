@@ -1,0 +1,15 @@
+{
+  "CONNECTIVITIES": [
+    "attributes.connectivity_technology[0].value"
+  ],
+  "COMPATIBLE_DEVICES": [
+    "attributes.compatible_devices[0].value",
+    "attributes.compatible_devices[1].value",
+    "attributes.compatible_devices[2].value",
+    "attributes.compatible_devices[3].value",
+    "attributes.compatible_devices[4].value"
+  ],
+  "STEERING_WHEEL_MATERIALS": [
+    "material"
+  ]
+}

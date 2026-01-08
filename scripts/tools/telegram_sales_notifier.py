@@ -477,7 +477,10 @@ def format_sale_notification(order, asin_data, ml_token):
     if shipping_id:
         try:
             import requests
-            headers = {"Authorization": f"Bearer {ml_token}"}
+            headers = {
+                "Authorization": f"Bearer {ml_token}",
+                "x-format-new": "true"
+            }
             r = requests.get(f"{ML_API}/marketplace/shipments/{shipping_id}",
                            headers=headers, timeout=10)
             if r.status_code == 200:
@@ -486,11 +489,19 @@ def format_sale_notification(order, asin_data, ml_token):
                 shipping_cost = lead_time.get("list_cost", 0)
 
                 # Obtener fecha límite de handling (cuándo hay que despachar)
+                # Puede estar en "promise_limit" o en "lead_time.estimated_delivery_time.pay_before"
                 if "promise_limit" in shipment_data:
                     handling_deadline = shipment_data.get("promise_limit")
                     print(f"   [DEBUG] Shipment {shipping_id} tiene promise_limit: {handling_deadline}")
                 else:
-                    print(f"   [DEBUG] Shipment {shipping_id} NO tiene promise_limit")
+                    # Buscar en estimated_delivery_time.pay_before
+                    estimated_delivery = lead_time.get("estimated_delivery_time", {})
+                    pay_before = estimated_delivery.get("pay_before")
+                    if pay_before:
+                        handling_deadline = pay_before
+                        print(f"   [DEBUG] Shipment {shipping_id} tiene pay_before: {handling_deadline}")
+                    else:
+                        print(f"   [DEBUG] Shipment {shipping_id} NO tiene deadline (ni promise_limit ni pay_before)")
             else:
                 print(f"   [DEBUG] Error al obtener shipment {shipping_id}: HTTP {r.status_code}")
         except Exception as e:
@@ -544,17 +555,79 @@ def format_sale_notification(order, asin_data, ml_token):
     # Calcular precio total de Amazon (producto + warehouse)
     amazon_total_price = amazon_cost + fulfillment_fee
 
-    # Formatear fecha límite de despacho si está disponible
+    # Mapeo de marketplace a código de país
+    country_codes = {
+        "MLM": "MX",
+        "MLB": "BR",
+        "MLC": "CH",
+        "MCO": "CO",
+        "MLA": "AR",
+        "MLU": "UY",
+        "MLV": "VE",
+        "MPA": "PA",
+        "MPE": "PE"
+    }
+    country_code = country_codes.get(marketplace, marketplace[:2])
+
+    # Calcular fecha de despacho basado en fecha de venta + 4 días hábiles
+    dispatch_date_str = ""
     deadline_text = ""
-    if handling_deadline:
-        try:
-            from datetime import datetime
-            # El formato es ISO 8601: "2024-01-15T23:59:00.000-03:00"
-            deadline_dt = datetime.fromisoformat(handling_deadline.replace('Z', '+00:00'))
-            deadline_formatted = deadline_dt.strftime("%d/%m/%Y %H:%M")
-            deadline_text = f"\n⏰ <b>Despachar antes de:</b> {deadline_formatted}"
-        except:
-            pass
+    try:
+        from datetime import timedelta
+        import pytz
+
+        # Obtener fecha de venta de la orden
+        date_created = order.get("date_created")
+        if date_created:
+            # Convertir a timezone de Miami (US/Eastern)
+            miami_tz = pytz.timezone('US/Eastern')
+            sale_dt = datetime.fromisoformat(date_created.replace('Z', '+00:00'))
+            sale_miami = sale_dt.astimezone(miami_tz)
+
+            print(f"   [DEBUG] Fecha venta (Miami): {sale_miami.strftime('%Y-%m-%d %H:%M:%S %Z')}")
+
+            # Si es después de las 23:00, cuenta como el día siguiente
+            if sale_miami.hour >= 23:
+                sale_miami = sale_miami + timedelta(days=1)
+                sale_miami = sale_miami.replace(hour=0, minute=0, second=0, microsecond=0)
+                print(f"   [DEBUG] Después de 23:00, ajustado a: {sale_miami.strftime('%Y-%m-%d')}")
+            else:
+                sale_miami = sale_miami.replace(hour=0, minute=0, second=0, microsecond=0)
+
+            # Si la venta cae en fin de semana, mover al lunes
+            if sale_miami.weekday() == 5:  # Sábado
+                sale_miami = sale_miami + timedelta(days=2)
+                print(f"   [DEBUG] Sábado, movido a lunes: {sale_miami.strftime('%Y-%m-%d')}")
+            elif sale_miami.weekday() == 6:  # Domingo
+                sale_miami = sale_miami + timedelta(days=1)
+                print(f"   [DEBUG] Domingo, movido a lunes: {sale_miami.strftime('%Y-%m-%d')}")
+
+            # Contar 4 días hábiles desde el siguiente día hábil
+            current_date = sale_miami + timedelta(days=1)
+            business_days_count = 0
+
+            while business_days_count < 4:
+                # Si es día hábil (Lun-Vie), contar
+                if current_date.weekday() < 5:
+                    business_days_count += 1
+                    if business_days_count < 4:
+                        current_date = current_date + timedelta(days=1)
+                else:
+                    # Saltar fin de semana
+                    current_date = current_date + timedelta(days=1)
+
+            # Para el mensaje principal: fecha REAL (sin restar)
+            deadline_text = f"\n⏰ <b>Despachar antes de:</b> {current_date.strftime('%m/%d/%Y')}"
+            print(f"   [DEBUG] Fecha despacho REAL (mensaje): {current_date.strftime('%Y-%m-%d (%A)')}")
+
+            # Para el mensaje de orden: restar 1 día
+            dispatch_date = current_date - timedelta(days=1)
+            dispatch_date_str = f" {dispatch_date.strftime('%m/%d')}"
+            print(f"   [DEBUG] Fecha despacho -1 día (orden): {dispatch_date.strftime('%Y-%m-%d (%A)')}")
+        else:
+            print(f"   [DEBUG] No hay date_created en la orden")
+    except Exception as e:
+        print(f"   [DEBUG] Error calculando fecha: {e}")
 
     # Formato del mensaje PRINCIPAL (sin número de orden)
     message = f"""
@@ -581,44 +654,6 @@ def format_sale_notification(order, asin_data, ml_token):
 
 <a href="{ml_order_link}">🔗 Ver orden completa en MercadoLibre</a>
 """
-
-    # Mapeo de marketplace a código de país
-    country_codes = {
-        "MLM": "MX",
-        "MLB": "BR",
-        "MLC": "CH",
-        "MCO": "CO",
-        "MLA": "AR",
-        "MLU": "UY",
-        "MLV": "VE",
-        "MPA": "PA",
-        "MPE": "PE"
-    }
-    country_code = country_codes.get(marketplace, marketplace[:2])
-
-    # Calcular fecha de despacho (1 día hábil antes del deadline)
-    dispatch_date_str = ""
-    if handling_deadline:
-        try:
-            from datetime import timedelta
-            deadline_dt = datetime.fromisoformat(handling_deadline.replace('Z', '+00:00'))
-
-            # Restar 1 día hábil (saltar fines de semana)
-            dispatch_dt = deadline_dt - timedelta(days=1)
-
-            # Si cae en domingo (6), retroceder a viernes
-            if dispatch_dt.weekday() == 6:  # Domingo
-                dispatch_dt = dispatch_dt - timedelta(days=2)
-            # Si cae en sábado (5), retroceder a viernes
-            elif dispatch_dt.weekday() == 5:  # Sábado
-                dispatch_dt = dispatch_dt - timedelta(days=1)
-
-            dispatch_date_str = f" {dispatch_dt.strftime('%m/%d')}"
-            print(f"   [DEBUG] Deadline: {handling_deadline} → Dispatch: {dispatch_dt.strftime('%m/%d')}")
-        except Exception as e:
-            print(f"   [DEBUG] Error calculando fecha: {e}")
-    else:
-        print(f"   [DEBUG] No hay handling_deadline para pack_id {pack_id}")
 
     # Mensaje SEPARADO con solo el número de orden (para copiar fácil)
     # Formato: OW - MX 2000010867103805 01/06

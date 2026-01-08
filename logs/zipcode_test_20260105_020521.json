@@ -1,0 +1,29 @@
+{
+  "asin": "B09B4V3N5W",
+  "zipcode_requested": "33172",
+  "zipcode_detected_initial": "33305",
+  "zipcode_detected_final": "33305",
+  "location_display_initial": "Delivering to Fort Laud... 33305Update location",
+  "location_display_final": "Delivering to Fort Laud... 33305Update location",
+  "glow_api_status": 200,
+  "glow_api_response": "(vac\u00edo)",
+  "zipcode_changed_successfully": false,
+  "price": 19.99,
+  "delivery_date": "OrPrime membersget FREE deliveryTomorrow, January 6. Order within10 hrs 39 mins.Join Prime",
+  "delivery_days": 1,
+  "cookies_initial": {
+    "session-id": "132-6192874-2476451",
+    "session-id-time": "2082787201l",
+    "i18n-prefs": "USD",
+    "lc-main": "en_US"
+  },
+  "cookies_after_glow": {
+    "session-id": "132-6192874-2476451",
+    "session-id-time": "2082787201l",
+    "i18n-prefs": "USD",
+    "lc-main": "en_US",
+    "ubid-main": "132-5653729-7253660"
+  },
+  "csrf_token": "1@gyKIFKf6FDsRX3QWMvHWV28mHOVMPHRmC5O9rfhS7DiuAAAAAQAAAABpW2KtcmF3AAAAABVX8CwXqz42z+J7i/ABqA==@NLD_CUCUCJ",
+  "error": null
+}

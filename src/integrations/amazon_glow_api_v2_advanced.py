@@ -17,6 +17,7 @@ import requests
 import random
 import time
 import hashlib
+import json
 from datetime import datetime
 from typing import Optional, Dict, List
 from bs4 import BeautifulSoup
@@ -48,6 +49,28 @@ INITIAL_BACKOFF = 5  # Primer retry después de 5s
 MAX_BACKOFF = 120  # Máximo 2 minutos de backoff
 BACKOFF_MULTIPLIER = 2  # Duplicar cada retry
 MAX_RETRIES = 3  # Máximo 3 reintentos
+
+# === AMAZON PRIME SESSION ===
+COOKIES_FILE = "cache/amazon_session_cookies.json"
+
+
+def load_amazon_cookies() -> Optional[Dict]:
+    """
+    Carga cookies de Amazon Prime desde archivo
+
+    Returns:
+        Dict con cookies o None si no existe el archivo
+    """
+    if not os.path.exists(COOKIES_FILE):
+        return None
+
+    try:
+        with open(COOKIES_FILE, 'r') as f:
+            cookies = json.load(f)
+        return cookies
+    except Exception as e:
+        print(f"   ⚠️  Error cargando cookies: {e}")
+        return None
 
 
 class SessionRotator:
@@ -125,6 +148,21 @@ class SessionRotator:
                 base_headers['DNT'] = '1'
 
             self.session.headers.update(base_headers)
+
+            # Cargar cookies de Amazon Prime si existen
+            amazon_cookies = load_amazon_cookies()
+            if amazon_cookies:
+                # Aplicar cookies a la sesión
+                for cookie_name, cookie_data in amazon_cookies.items():
+                    self.session.cookies.set(
+                        cookie_name,
+                        cookie_data['value'],
+                        domain=cookie_data.get('domain', '.amazon.com'),
+                        path=cookie_data.get('path', '/')
+                    )
+                print(f"   🔐 Sesión Prime cargada ({len(amazon_cookies)} cookies)")
+            else:
+                print(f"   ⚠️  Sin cookies de Prime - usando sesión anónima")
 
             print(f"   🆕 Nueva sesión creada (User-Agent: {user_agent[:50]}...)")
 
@@ -289,8 +327,27 @@ def extract_delivery_info(html_content: str) -> Dict:
     delivery_text = ""
 
     # PRIORIDAD 1: Buscar en atributos data-csa-c-delivery-time
-    # Buscar TODOS los spans con data-csa-c-delivery-time
-    delivery_spans = soup.find_all('span', attrs={'data-csa-c-delivery-time': True})
+    # IMPORTANTE: Solo buscar dentro del delivery block del producto principal
+    # para evitar extraer fechas de productos patrocinados (ads)
+    delivery_block = soup.find(id='deliveryBlockMessage')
+    if not delivery_block:
+        # Fallback: buscar contenedor principal de delivery
+        delivery_block = soup.find(id='mir-layout-DELIVERY_BLOCK')
+
+    if delivery_block:
+        # Buscar SOLO dentro del delivery block del producto principal
+        delivery_spans = delivery_block.find_all('span', attrs={'data-csa-c-delivery-time': True})
+    else:
+        # Si no hay delivery block, buscar en toda la página pero con cuidado
+        # Excluir secciones de productos patrocinados
+        all_spans = soup.find_all('span', attrs={'data-csa-c-delivery-time': True})
+        delivery_spans = []
+        for span in all_spans:
+            # Verificar que el span NO esté dentro de un ad/sponsored product
+            parent_text = ' '.join([p.get('id', '') + ' ' + ' '.join(p.get('class', []))
+                                    for p in span.parents])
+            if 'sp_detail' not in parent_text and 'acswidget' not in parent_text:
+                delivery_spans.append(span)
 
     fastest_days = None
     fastest_date = None
@@ -298,9 +355,22 @@ def extract_delivery_info(html_content: str) -> Dict:
 
     for span in delivery_spans:
         delivery_time = span.get('data-csa-c-delivery-time', '')
+        span_text = span.get_text(strip=True)
 
+        # Detectar "Overnight" (entrega al día siguiente)
+        if 'Overnight' in delivery_time or 'Overnight' in span_text:
+            from datetime import timedelta
+            current_date = datetime.now()
+            delivery_date = current_date + timedelta(days=1)
+            days_until = 1
+            delivery_text = span_text[:150]
+            # Overnight es entrega mañana
+            fastest_days = 1
+            fastest_date = delivery_date
+            fastest_text = delivery_text
+            break
         # Detectar "Tomorrow" o "Today"
-        if 'Tomorrow' in delivery_time:
+        elif 'Tomorrow' in delivery_time:
             from datetime import timedelta
             current_date = datetime.now()
             delivery_date = current_date + timedelta(days=1)
@@ -321,19 +391,87 @@ def extract_delivery_info(html_content: str) -> Dict:
             fastest_text = delivery_text
             break
         else:
-            # Parsear fecha en data-csa-c-delivery-time
-            date_pattern = r'(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(\w+)\s+(\d+)'
-            date_match = re.search(date_pattern, delivery_time)
+            # Parsear fecha en data-csa-c-delivery-time (inglés y español)
+            date_pattern_en = r'(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(\w+)\s+(\d+)'
+            date_pattern_es = r'(lunes|martes|miércoles|jueves|viernes|sábado|domingo),\s+(\d+)\s+de\s+(\w+)'
+            # Rango de fechas (ej: "February 2 - March 4" o "January 14 - 16")
+            # Capturar AMBAS fechas del rango para tomar la última
+            date_range_pattern = r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d+)\s*-\s*(?:(January|February|March|April|May|June|July|August|September|October|November|December)\s+)?(\d+)'
+
+            date_match = re.search(date_pattern_en, delivery_time)
+            is_spanish = False
+            is_range = False
+
+            if not date_match:
+                # Intentar español
+                date_match = re.search(date_pattern_es, delivery_time, re.IGNORECASE)
+                is_spanish = True
+
+            if not date_match:
+                # Intentar rango de fechas (tomar la primera fecha)
+                # Buscar tanto en delivery_time como en span_text
+                range_match = re.search(date_range_pattern, delivery_time)
+                if not range_match:
+                    range_match = re.search(date_range_pattern, span_text)
+
+                if range_match:
+                    # Crear un match "fake" compatible con el formato normal
+                    # Tomar la ÚLTIMA fecha del rango (más conservador)
+                    is_range = True
+                    is_spanish = False  # Los rangos siempre son en inglés
+
+                    # Grupos del regex:
+                    # 1: Primer mes (siempre presente)
+                    # 2: Primer día
+                    # 3: Segundo mes (opcional, puede ser None si es mismo mes)
+                    # 4: Segundo día (fecha final del rango)
+
+                    # Si hay segundo mes, usarlo. Si no, usar el primero
+                    month_str = range_match.group(3) if range_match.group(3) else range_match.group(1)
+                    day_str = range_match.group(4)  # Siempre el último día
+
+                    # Simular match compatible
+                    class FakeMatch:
+                        def __init__(self, month, day):
+                            self._month = month
+                            self._day = day
+                        def group(self, n):
+                            if n == 1:
+                                return self._month
+                            elif n == 2:
+                                return self._day
+                            return None
+                    date_match = FakeMatch(month_str, day_str)
 
             if date_match:
-                month_map = {
+                month_map_en = {
                     'January': 1, 'February': 2, 'March': 3, 'April': 4,
                     'May': 5, 'June': 6, 'July': 7, 'August': 8,
                     'September': 9, 'October': 10, 'November': 11, 'December': 12
                 }
+                month_map_es = {
+                    'enero': 1, 'febrero': 2, 'marzo': 3, 'abril': 4,
+                    'mayo': 5, 'junio': 6, 'julio': 7, 'agosto': 8,
+                    'septiembre': 9, 'octubre': 10, 'noviembre': 11, 'diciembre': 12
+                }
 
-                month_num = month_map.get(date_match.group(2))
-                day = int(date_match.group(3))
+                month_map = month_map_es if is_spanish else month_map_en
+
+                # El orden de día/mes es diferente en español vs inglés vs rango
+                if is_range:
+                    # Rango: "February 2 - March 4" -> ya está en FakeMatch
+                    month_str = date_match.group(1)  # February
+                    day = int(date_match.group(2))   # 2
+                elif is_spanish:
+                    # Español: "sábado, 10 de enero" -> grupo(2)=día, grupo(3)=mes
+                    day = int(date_match.group(2))
+                    month_str = date_match.group(3).lower()
+                else:
+                    # Inglés: "Monday, January 10" -> grupo(2)=mes, grupo(3)=día
+                    month_str = date_match.group(2)
+                    day = int(date_match.group(3))
+
+                month_num = month_map.get(month_str)
 
                 if month_num:
                     try:
@@ -344,9 +482,9 @@ def extract_delivery_info(html_content: str) -> Dict:
                             year += 1
 
                         temp_delivery_date = datetime(year, month_num, day)
-                        # Calcular días de calendario (no horas completas)
-                        # Incluye el día de entrega en el conteo
-                        temp_days = (temp_delivery_date.date() - current_date.date()).days + 1
+                        # Calcular días hasta la entrega (diferencia de fechas)
+                        # Si hoy es 8 y llega el 15 = 15-8 = 7 días
+                        temp_days = (temp_delivery_date.date() - current_date.date()).days
 
                         # Quedarse con la fecha más rápida
                         if fastest_days is None or temp_days < fastest_days:
@@ -364,24 +502,75 @@ def extract_delivery_info(html_content: str) -> Dict:
 
     # FALLBACK: Si no encontramos nada en data attributes, buscar en DELIVERY_BLOCK
     if days_until is None:
-        delivery_block = soup.find(id='mir-layout-DELIVERY_BLOCK')
-
+        # Usar el mismo delivery_block que encontramos al principio
+        # (puede ser deliveryBlockMessage o mir-layout-DELIVERY_BLOCK)
         if not delivery_block:
             return {'found': False, 'text': None, 'date': None, 'days': None}
 
         delivery_text = delivery_block.get_text(strip=True)
-        date_pattern = r'(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(\w+)\s+(\d+)'
-        date_match = re.search(date_pattern, delivery_text)
+
+        # Intentar inglés primero, después español, después rangos
+        date_pattern_en = r'(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),\s+(\w+)\s+(\d+)'
+        date_pattern_es = r'(lunes|martes|miércoles|jueves|viernes|sábado|domingo),\s+(\d+)\s+de\s+(\w+)'
+        date_range_pattern = r'(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d+)\s*-\s*(?:(January|February|March|April|May|June|July|August|September|October|November|December)\s+)?(\d+)'
+
+        date_match = re.search(date_pattern_en, delivery_text)
+        is_spanish = False
+        is_range = False
+
+        if not date_match:
+            date_match = re.search(date_pattern_es, delivery_text, re.IGNORECASE)
+            is_spanish = True
+
+        if not date_match:
+            # Intentar rango de fechas
+            range_match = re.search(date_range_pattern, delivery_text)
+            if range_match:
+                is_range = True
+                is_spanish = False  # Los rangos siempre son en inglés
+
+                # Si hay segundo mes, usarlo. Si no, usar el primero
+                month_str = range_match.group(3) if range_match.group(3) else range_match.group(1)
+                day_str = range_match.group(4)  # Siempre el último día
+
+                class FakeMatch:
+                    def __init__(self, month, day):
+                        self._month = month
+                        self._day = day
+                    def group(self, n):
+                        if n == 1:
+                            return self._month
+                        elif n == 2:
+                            return self._day
+                        return None
+                date_match = FakeMatch(month_str, day_str)
 
         if date_match:
-            month_map = {
+            month_map_en = {
                 'January': 1, 'February': 2, 'March': 3, 'April': 4,
                 'May': 5, 'June': 6, 'July': 7, 'August': 8,
                 'September': 9, 'October': 10, 'November': 11, 'December': 12
             }
+            month_map_es = {
+                'enero': 1, 'febrero': 2, 'marzo': 3, 'abril': 4,
+                'mayo': 5, 'junio': 6, 'julio': 7, 'agosto': 8,
+                'septiembre': 9, 'octubre': 10, 'noviembre': 11, 'diciembre': 12
+            }
 
-            month_num = month_map.get(date_match.group(2))
-            day = int(date_match.group(3))
+            month_map = month_map_es if is_spanish else month_map_en
+
+            if is_range:
+                # Rango: ya está en FakeMatch
+                month_str = date_match.group(1)
+                day = int(date_match.group(2))
+            elif is_spanish:
+                day = int(date_match.group(2))
+                month_str = date_match.group(3).lower()
+            else:
+                month_str = date_match.group(2)
+                day = int(date_match.group(3))
+
+            month_num = month_map.get(month_str)
 
             if month_num:
                 try:
@@ -601,35 +790,61 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
             if csrf_token:
                 headers['anti-csrftoken-a2z'] = csrf_token
 
-            # Glow API con retry
+            # Glow API con retry mejorado
             glow_success = False
-            for retry in range(2):
+            for retry in range(3):  # Aumentar a 3 intentos
                 try:
                     glow_response = session.post(glow_url, params=params, json=payload, headers=headers, timeout=15)
                     if glow_response.status_code == 200:
                         glow_success = True
+                        # Delay mayor para dar tiempo a Amazon a procesar el cambio
+                        time.sleep(2.5)
                         break
                     elif glow_response.status_code == 503:
-                        if retry < 1:
-                            time.sleep(1)
+                        if retry < 2:
+                            time.sleep(2)
                             continue
                 except:
-                    if retry < 1:
-                        time.sleep(1)
+                    if retry < 2:
+                        time.sleep(2)
                         continue
 
             # Paso 3: GET actualizado con delivery
+            # Verificar que el zipcode se aplicó correctamente
             response = session.get(url, timeout=30)
+            html = response.text
 
-            if is_blocked_response(response.text, response.status_code):
+            # VERIFICACIÓN: ¿El zipcode se aplicó correctamente?
+            # Si vemos "Select delivery location", significa que NO se aplicó
+            zipcode_applied = zipcode in html or 'deliveryBlockMessage' in html
+            if not zipcode_applied and 'Select delivery location' in html:
+                # El Glow API falló silenciosamente - reintentar con estrategia alternativa
+                print(f"   ⚠️  Zipcode no se aplicó - reintentando con estrategia alternativa...")
+
+                # Estrategia alternativa: Hacer un GET con el zipcode en la URL
+                alt_url = f"{url}?zipCode={zipcode}"
+                time.sleep(1)
+                response = session.get(alt_url, timeout=30)
+                html = response.text
+
+                # Si aún no funciona, reintent con Glow API de nuevo
+                if zipcode not in html and 'Select delivery location' in html:
+                    time.sleep(1.5)
+                    try:
+                        session.post(glow_url, params=params, json=payload, headers=headers, timeout=15)
+                        time.sleep(3)  # Delay aún mayor
+                        response = session.get(url, timeout=30)
+                        html = response.text
+                    except:
+                        pass
+
+            if is_blocked_response(html, response.status_code):
                 # Bloqueo después de Glow API
                 backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
                 jitter = random.uniform(0, backoff_time * 0.1)
                 _session_rotator.reset()
                 time.sleep(backoff_time + jitter)
                 continue
-
-            html = response.text
 
             # Extraer precio
             result["price"] = extract_price(html)
