@@ -1,26 +1,44 @@
 {
-  "696aaed76275126c": {
-    "timestamp": "2026-01-07T15:04:48.959718",
-    "pack_id": "2000010924907401",
-    "marketplace": "MLM",
-    "asin": "B01LQCIL88"
-  },
-  "4a57b8b7f1907395": {
-    "timestamp": "2026-01-07T17:02:33.781131",
-    "pack_id": "2000010926968079",
-    "marketplace": "MLA",
-    "asin": "B0CRMB9Z84"
-  },
-  "d677d264b473183d": {
-    "timestamp": "2026-01-08T10:52:42.942593",
-    "pack_id": "2000010925568027",
-    "marketplace": "MLA",
-    "asin": "B09D5PW315"
-  },
   "78445a0ebad496ae": {
     "timestamp": "2026-01-08T14:41:35.385297",
     "pack_id": "2000010942998443",
     "marketplace": "MLM",
     "asin": "B0FGJ19BJ5"
+  },
+  "ac5bc0c67b53bf16": {
+    "timestamp": "2026-01-08T20:31:12.420422",
+    "pack_id": "2000010949014187",
+    "marketplace": "MLB",
+    "asin": "B0B5LMQXXH"
+  },
+  "0c465cf7302ff02a": {
+    "timestamp": "2026-01-08T20:56:20.057758",
+    "pack_id": "2000010949433183",
+    "marketplace": "MLB",
+    "asin": "B0DDKCMJDY"
+  },
+  "0c445813b5aadd05": {
+    "timestamp": "2026-01-08T21:20:20.188135",
+    "pack_id": "2000010949777939",
+    "marketplace": "MLA",
+    "asin": "B0CS3JBP67"
+  },
+  "bf14b5c3891c1888": {
+    "timestamp": "2026-01-08T21:22:00.372279",
+    "pack_id": "2000010949797359",
+    "marketplace": "MLA",
+    "asin": "B00NHQF6MG"
+  },
+  "7749e867c2f77370": {
+    "timestamp": "2026-01-09T09:53:33.343969",
+    "pack_id": "2000010955737939",
+    "marketplace": "MLA",
+    "asin": "B08GTYFC37"
+  },
+  "ffa62be465739986": {
+    "timestamp": "2026-01-09T11:37:38.549177",
+    "pack_id": "2000010957589275",
+    "marketplace": "MLA",
+    "asin": "B0CX299SX8"
   }
 }

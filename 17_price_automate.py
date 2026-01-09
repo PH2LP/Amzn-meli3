@@ -21,8 +21,8 @@ load_dotenv(override=True)
 # Configuración
 DB_PATH = "storage/listings_database.db"
 ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
-PRICE_MARKUP_MAX = 100  # 100% máximo para automatización
-PRICE_MARKUP_MIN = 15  # 15% mínimo
+PRICE_MARKUP_MAX = int(os.getenv("PRICE_AUTOMATE_MAX_MARKUP", "80"))  # Máximo para automatización (configurable)
+PRICE_MARKUP_MIN = int(os.getenv("PRICE_AUTOMATE_MIN_MARKUP", "15"))  # Mínimo (configurable)
 USE_TAX = os.getenv("USE_TAX", "true").lower() == "true"
 TAX_RATE = 0.07
 FULFILLMENT_FEE = 4.0
@@ -308,12 +308,12 @@ def main():
 
     # Mostrar configuración
     log("⚙️  CONFIGURACIÓN:", Colors.CYAN)
-    log(f"   Markup máximo:           {int(PRICE_MARKUP_MAX)}%", Colors.GREEN)
-    log(f"   Markup mínimo:           {int(PRICE_MARKUP_MIN)}%", Colors.YELLOW)
+    log(f"   Markup máximo:           {PRICE_MARKUP_MAX}%", Colors.GREEN)
+    log(f"   Markup mínimo:           {PRICE_MARKUP_MIN}%", Colors.YELLOW)
     tax_status = f"{int(TAX_RATE * 100)}% ACTIVADO" if USE_TAX else "DESACTIVADO"
     log(f"   Tax (Florida):           {tax_status}")
     log(f"   Fulfillment fee:         ${FULFILLMENT_FEE}")
-    log(f"   Regla de competencia:    INT_EXT (Solo dentro de ML)", Colors.CYAN)
+    log(f"   Regla de competencia:    INT (Solo dentro de ML)", Colors.CYAN)
     print()
 
     # Confirmar
@@ -494,7 +494,7 @@ def main():
 
     if stats["created"] + stats["updated"] > 0:
         log(f"✅ Automatización activada en {stats['created'] + stats['updated']} items!", Colors.GREEN)
-        log("💡 Los precios se ajustarán automáticamente entre 15% y 100% de ganancia", Colors.CYAN)
+        log(f"💡 Los precios se ajustarán automáticamente entre {PRICE_MARKUP_MIN}% y {PRICE_MARKUP_MAX}% de ganancia", Colors.CYAN)
     else:
         log("ℹ️  No se crearon ni actualizaron automatizaciones nuevas", Colors.YELLOW)
 

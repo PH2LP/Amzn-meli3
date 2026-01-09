@@ -99,7 +99,15 @@
       "Bash(ls:*)",
       "Bash(git reset:*)",
       "Bash(git restore:*)",
-      "Bash(.gitignore)"
+      "Bash(.gitignore)",
+      "Bash(./setup_cuenta2.sh:*)",
+      "Bash(source:*)",
+      "Bash(cp:*)",
+      "Bash(.last_sales_count)",
+      "Bash(telegram_messages_sent.json)",
+      "Bash(ml_monitor_state.json)",
+      "Bash(notified_questions.json)",
+      "Bash(KEYWORDS_FILE=/tmp/test_keywords.txt python3:*)"
     ],
     "deny": [],
     "ask": []
