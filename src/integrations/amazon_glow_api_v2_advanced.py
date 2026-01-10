@@ -1,26 +1,44 @@
 #!/usr/bin/env python3
 """
-Amazon Glow API v2 - Advanced Anti-Detection System
+Amazon Glow API v3 - HYBRID Anti-Detection System
 
-Sistema profesional de scraping con técnicas de ingeniería para evitar bloqueos:
-- Session Rotation (nueva sesión cada 100 requests)
+Sistema híbrido profesional con:
+- curl_cffi: TLS fingerprint idéntico a Chrome (método principal)
+- httpx HTTP/2: Fallback con HTTP/2 nativo
+- CAPTCHA Auto-Solver: Resuelve soft CAPTCHAs automáticamente
+- Session Rotation
 - Exponential Backoff con Jitter
-- Randomized request timing
-- Token Bucket respecting
+- Headers en orden exacto de Chrome
 
-Basado en investigación de AWS WAF Bot Control y Amazon rate limiting.
+Basado en ingeniería inversa de AWS WAF Bot Control.
 """
 
 import os
 import re
-import requests
 import random
 import time
 import hashlib
 import json
+from collections import OrderedDict
 from datetime import datetime
 from typing import Optional, Dict, List
 from bs4 import BeautifulSoup
+
+# Intentar imports con fallback
+try:
+    from curl_cffi import requests as curl_requests
+    CURL_CFFI_AVAILABLE = True
+except ImportError:
+    CURL_CFFI_AVAILABLE = False
+    print("⚠️  curl_cffi no disponible, usando fallback")
+
+try:
+    import httpx
+    HTTPX_AVAILABLE = True
+except ImportError:
+    HTTPX_AVAILABLE = False
+    import requests  # Fallback final
+    print("⚠️  httpx no disponible, usando requests estándar")
 
 # Lista expandida de User-Agents (rotar para simular múltiples usuarios)
 USER_AGENTS = [
@@ -37,18 +55,26 @@ USER_AGENTS = [
 ]
 
 # === CONFIGURACIÓN DE RATE LIMITING ===
-BASE_DELAY = 2.0  # Respetar refill rate de Amazon (~0.5 req/sec)
+# Delays variables (no fijos) para evitar patrones predecibles
+BASE_DELAY = 2.0  # Delay base
 JITTER_RANGE = 0.4  # ±20% variación (1.6-2.4s)
 
 # === SESSION MANAGEMENT ===
-MAX_REQUESTS_PER_SESSION = 100  # Nueva sesión cada 100 requests
-SESSION_COOLDOWN = 30  # 30s entre fin de sesión y nueva sesión
+# Valores variables para evitar patrones (no siempre 100 requests exactos)
+MIN_REQUESTS_PER_SESSION = 80  # Entre 80-120 requests por sesión
+MAX_REQUESTS_PER_SESSION = 120
+SESSION_COOLDOWN_MIN = 25  # Entre 25-35s de cooldown
+SESSION_COOLDOWN_MAX = 35
 
 # === EXPONENTIAL BACKOFF ===
 INITIAL_BACKOFF = 5  # Primer retry después de 5s
 MAX_BACKOFF = 120  # Máximo 2 minutos de backoff
 BACKOFF_MULTIPLIER = 2  # Duplicar cada retry
 MAX_RETRIES = 3  # Máximo 3 reintentos
+
+# === BROWSER FINGERPRINT ROTATION ===
+# Rotar entre diferentes browsers para parecer múltiples usuarios
+BROWSER_FINGERPRINTS = ["chrome120", "chrome119", "chrome116", "safari15_5", "safari15_3"]
 
 # === AMAZON PRIME SESSION ===
 COOKIES_FILE = "cache/amazon_session_cookies.json"
@@ -77,9 +103,12 @@ class SessionRotator:
     """
     Gestiona rotación de sesiones para evitar tracking de Amazon.
 
+    CAMBIO CRÍTICO: Usa curl_cffi con impersonate="chrome120" para bypass de WAF.
+
     Cada sesión tiene:
     - Nuevo User-Agent
-    - Nuevas cookies
+    - COOKIES FRESCAS generadas por curl_cffi (no reusar cookies de browser)
+    - TLS fingerprint idéntico a Chrome 120
     - Headers ligeramente diferentes
     """
 
@@ -87,28 +116,44 @@ class SessionRotator:
         self.session = None
         self.request_count = 0
         self.session_created_at = None
+        # ROTAR browser fingerprint (no siempre Chrome 120)
+        self.impersonate_browser = random.choice(BROWSER_FINGERPRINTS)
+        # Límite variable de requests por sesión (evitar patrón fijo de 100)
+        self.session_request_limit = random.randint(MIN_REQUESTS_PER_SESSION, MAX_REQUESTS_PER_SESSION)
 
-    def get_session(self) -> requests.Session:
+    def get_session(self):
         """Obtiene sesión actual o crea nueva si es necesario"""
 
         # Crear nueva sesión si:
         # 1. No hay sesión
-        # 2. Se excedió MAX_REQUESTS_PER_SESSION
-        if self.session is None or self.request_count >= MAX_REQUESTS_PER_SESSION:
-            # Si hay sesión anterior, esperar cooldown
+        # 2. Se excedió el límite variable de requests
+        if self.session is None or self.request_count >= self.session_request_limit:
+            # Si hay sesión anterior, esperar cooldown VARIABLE (no siempre el mismo tiempo)
             if self.session is not None:
+                cooldown = random.uniform(SESSION_COOLDOWN_MIN, SESSION_COOLDOWN_MAX)
                 elapsed = time.time() - self.session_created_at
-                if elapsed < SESSION_COOLDOWN:
-                    wait = SESSION_COOLDOWN - elapsed
+                if elapsed < cooldown:
+                    wait = cooldown - elapsed
                     print(f"   🔄 Session rotation cooldown: {wait:.1f}s...")
                     time.sleep(wait)
 
-            # Crear nueva sesión
-            self.session = requests.Session()
+            # CRÍTICO: Usar curl_cffi en lugar de requests
+            if CURL_CFFI_AVAILABLE:
+                # Crear sesión con curl_cffi (TLS fingerprint)
+                self.session = curl_requests.Session()
+                # ROTAR fingerprint cada sesión nueva (más realista)
+                self.impersonate_browser = random.choice(BROWSER_FINGERPRINTS)
+                print(f"   ✅ Sesión curl_cffi creada (fingerprint={self.impersonate_browser})")
+            else:
+                # Fallback a requests estándar (no recomendado)
+                import requests
+                self.session = requests.Session()
+                print(f"   ⚠️  Fallback a requests estándar (sin fingerprint)")
+
             self.session_created_at = time.time()
             self.request_count = 0
 
-            # User-Agent aleatorio
+            # User-Agent aleatorio (Chrome 120 range)
             user_agent = random.choice(USER_AGENTS)
 
             # Accept-Language aleatorio (simula diferentes regiones)
@@ -149,7 +194,7 @@ class SessionRotator:
 
             self.session.headers.update(base_headers)
 
-            # Cargar cookies de Amazon Prime si existen
+            # Cargar cookies de Amazon Prime (si existen)
             amazon_cookies = load_amazon_cookies()
             if amazon_cookies:
                 # Aplicar cookies a la sesión
@@ -162,9 +207,27 @@ class SessionRotator:
                     )
                 print(f"   🔐 Sesión Prime cargada ({len(amazon_cookies)} cookies)")
             else:
-                print(f"   ⚠️  Sin cookies de Prime - usando sesión anónima")
+                # Si no hay cookies de Prime, generar cookies frescas con curl_cffi
+                zipcode = os.getenv("BUYER_ZIPCODE")
+                if zipcode and CURL_CFFI_AVAILABLE:
+                    try:
+                        # Visitar homepage para generar cookies iniciales
+                        _ = self.session.get(
+                            "https://www.amazon.com",
+                            headers=base_headers,
+                            impersonate=self.impersonate_browser,
+                            timeout=15
+                        )
+                        print(f"   🍪 Cookies frescas generadas vía curl_cffi")
+                    except Exception as e:
+                        print(f"   ⚠️  Error generando cookies: {e}")
+                else:
+                    print(f"   ⚠️  Sin cookies de Prime - usando sesión anónima")
 
-            print(f"   🆕 Nueva sesión creada (User-Agent: {user_agent[:50]}...)")
+            # Generar nuevo límite aleatorio para esta sesión
+            self.session_request_limit = random.randint(MIN_REQUESTS_PER_SESSION, MAX_REQUESTS_PER_SESSION)
+            print(f"   🆕 Nueva sesión creada (límite: {self.session_request_limit} requests)")
+            print(f"   👤 User-Agent: {user_agent[:50]}...")
 
         self.request_count += 1
         return self.session
@@ -173,14 +236,15 @@ class SessionRotator:
         """Forzar reset de sesión"""
         self.session = None
         self.request_count = 0
+        # Regenerar límite para próxima sesión
+        self.session_request_limit = random.randint(MIN_REQUESTS_PER_SESSION, MAX_REQUESTS_PER_SESSION)
 
 
 class RateLimiter:
     """
-    Implementa rate limiting inteligente con:
-    - Respeto al Token Bucket de Amazon
-    - Jitter para simular comportamiento humano
-    - Exponential backoff en caso de bloqueo
+    Implementa rate limiting con delays variables
+    - NO espera siempre el mismo tiempo (evita patrones predecibles)
+    - Usa jitter para simular variabilidad natural
     """
 
     def __init__(self):
@@ -189,13 +253,13 @@ class RateLimiter:
     def wait(self):
         """Espera el tiempo necesario antes del próximo request"""
 
-        # Calcular delay con jitter
-        delay = BASE_DELAY * random.uniform(1 - JITTER_RANGE/2, 1 + JITTER_RANGE/2)
-
         # Si es el primer request, no esperar
         if self.last_request_time == 0:
             self.last_request_time = time.time()
             return
+
+        # Calcular delay con jitter (variable, no fijo)
+        delay = BASE_DELAY * random.uniform(1 - JITTER_RANGE/2, 1 + JITTER_RANGE/2)
 
         # Calcular tiempo desde último request
         elapsed = time.time() - self.last_request_time
@@ -740,10 +804,24 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
                 get_headers['Referer'] = f"https://www.google.com/search?q={query.replace(' ', '+')}"
                 get_headers['Sec-Fetch-Site'] = 'cross-site'
 
-            response = session.get(url, headers=get_headers, timeout=30)
+            # CRÍTICO: Agregar impersonate si usamos curl_cffi
+            get_kwargs = {'headers': get_headers, 'timeout': 30}
+            if CURL_CFFI_AVAILABLE:
+                get_kwargs['impersonate'] = _session_rotator.impersonate_browser
+
+            response = session.get(url, **get_kwargs)
 
             # Detectar bloqueo
             if is_blocked_response(response.text, response.status_code):
+                # TEMPORAL: Guardar HTML para debugging
+                debug_file = f"/tmp/amazon_block_{asin}.html"
+                with open(debug_file, 'w', encoding='utf-8') as f:
+                    f.write(response.text)
+                print(f"   🔍 DEBUG: URL bloqueada: {url}")
+                print(f"   🔍 DEBUG: Status Code: {response.status_code}")
+                print(f"   🔍 DEBUG: HTML guardado en: {debug_file}")
+                print(f"   🔍 DEBUG: Tamaño HTML: {len(response.text)} bytes")
+
                 # Bloqueo detectado - aplicar exponential backoff
                 backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
                 jitter = random.uniform(0, backoff_time * 0.1)
@@ -794,7 +872,12 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
             glow_success = False
             for retry in range(3):  # Aumentar a 3 intentos
                 try:
-                    glow_response = session.post(glow_url, params=params, json=payload, headers=headers, timeout=15)
+                    # CRÍTICO: Agregar impersonate para POST también
+                    post_kwargs = {'params': params, 'json': payload, 'headers': headers, 'timeout': 15}
+                    if CURL_CFFI_AVAILABLE:
+                        post_kwargs['impersonate'] = _session_rotator.impersonate_browser
+
+                    glow_response = session.post(glow_url, **post_kwargs)
                     if glow_response.status_code == 200:
                         glow_success = True
                         # Delay mayor para dar tiempo a Amazon a procesar el cambio
@@ -811,7 +894,11 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
 
             # Paso 3: GET actualizado con delivery
             # Verificar que el zipcode se aplicó correctamente
-            response = session.get(url, timeout=30)
+            get_kwargs_final = {'timeout': 30}
+            if CURL_CFFI_AVAILABLE:
+                get_kwargs_final['impersonate'] = _session_rotator.impersonate_browser
+
+            response = session.get(url, **get_kwargs_final)
             html = response.text
 
             # VERIFICACIÓN: ¿El zipcode se aplicó correctamente?
