@@ -306,9 +306,11 @@ def create_professional_excel():
                 ws_summary[f'E{row}'].font = Font(name='Arial', size=12, bold=True, color="CC0000")
             row += 1
 
-        # ═══ SECCIÓN 4: GRÁFICO DE FACTURACIÓN POR DÍA/MES/AÑO ═══
-        ws_summary['A12'] = '📈 FACTURACIÓN EN EL TIEMPO'
-        ws_summary['A12'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
+        # ═══ SECCIÓN 4: GRÁFICO DE FACTURACIÓN TEMPORAL ═══
+        ws_summary['A12'] = '📈 EVOLUCIÓN DE FACTURACIÓN'
+        ws_summary['A12'].font = Font(name='Arial', size=16, bold=True, color="1F4E78")
+        ws_summary.merge_cells('A12:F12')
+        ws_summary['A12'].alignment = Alignment(horizontal='center', vertical='center')
 
         # Preparar datos temporales (solo confirmadas)
         df_time = df_confirmed.copy()
@@ -318,66 +320,56 @@ def create_professional_excel():
 
         # Agrupar por día para el gráfico
         daily_revenue = df_time.groupby('Fecha_Solo').agg({
-            'Precio Venta': 'sum'
+            'Precio Venta': 'sum',
+            'GANANCIA': 'sum'
         }).reset_index().sort_values('Fecha_Solo')
 
-        # Escribir datos para el gráfico (últimos 30 días o todos si son menos)
-        ws_summary['A14'] = 'Fecha'
-        ws_summary['B14'] = 'Revenue'
-        ws_summary['A14'].font = Font(name='Arial', size=10, bold=True)
-        ws_summary['B14'].font = Font(name='Arial', size=10, bold=True)
-
+        # Escribir datos para el gráfico en columnas ocultas (G, H, I)
         # Tomar últimos 30 días o todos los disponibles
         recent_data = daily_revenue.tail(30)
 
+        ws_summary['G14'] = 'Fecha'
+        ws_summary['H14'] = 'Revenue'
+        ws_summary['I14'] = 'Ganancia'
+
         chart_row = 15
         for idx, row_data in recent_data.iterrows():
-            ws_summary[f'A{chart_row}'] = str(row_data['Fecha_Solo'])
-            ws_summary[f'B{chart_row}'] = row_data['Precio Venta']
+            ws_summary[f'G{chart_row}'] = str(row_data['Fecha_Solo'])
+            ws_summary[f'H{chart_row}'] = row_data['Precio Venta']
+            ws_summary[f'I{chart_row}'] = row_data['GANANCIA']
             chart_row += 1
 
-        # Crear gráfico de líneas
-        line_chart = LineChart()
-        line_chart.title = "Facturación Diaria (Últimos 30 días)"
-        line_chart.style = 13
-        line_chart.y_axis.title = 'Revenue (USD)'
-        line_chart.x_axis.title = 'Fecha'
-        line_chart.height = 12
-        line_chart.width = 20
+        # Crear gráfico de líneas profesional con 2 series
+        from openpyxl.chart.marker import Marker
 
-        data = Reference(ws_summary, min_col=2, min_row=14, max_row=14 + len(recent_data))
-        cats = Reference(ws_summary, min_col=1, min_row=15, max_row=14 + len(recent_data))
+        line_chart = LineChart()
+        line_chart.title = None  # Sin título (ya está en la celda)
+        line_chart.style = 12  # Estilo más moderno
+        line_chart.y_axis.title = 'USD'
+        line_chart.x_axis.title = None
+        line_chart.height = 15  # Más alto
+        line_chart.width = 24   # Más ancho - ocupa casi todo el ancho
+        line_chart.y_axis.majorGridlines = None  # Sin líneas de grilla
+
+        # Datos: Revenue y Ganancia
+        data = Reference(ws_summary, min_col=8, min_row=14, max_col=9, max_row=14 + len(recent_data))
+        cats = Reference(ws_summary, min_col=7, min_row=15, max_row=14 + len(recent_data))
         line_chart.add_data(data, titles_from_data=True)
         line_chart.set_categories(cats)
 
-        ws_summary.add_chart(line_chart, "D12")
+        # Estilizar las líneas
+        line_chart.series[0].graphicalProperties.line.width = 2.5  # Revenue más gruesa
+        line_chart.series[0].smooth = True  # Línea suave
 
-        # ═══ SECCIÓN 5: GRÁFICO DE GANANCIA POR PRODUCTO ═══
-        # Preparar datos para gráfico
-        ws_summary['A48'] = 'GANANCIA POR PRODUCTO'
-        ws_summary['A48'].font = Font(name='Arial', size=12, bold=True, color="1F4E78")
+        line_chart.series[1].graphicalProperties.line.width = 2.5  # Ganancia más gruesa
+        line_chart.series[1].smooth = True  # Línea suave
 
-        chart_row = 49
-        for idx, prod_row in top_products.iterrows():
-            ws_summary[f'A{chart_row}'] = prod_row['Producto'][:25]
-            ws_summary[f'B{chart_row}'] = prod_row['GANANCIA']
-            chart_row += 1
+        ws_summary.add_chart(line_chart, "A14")
 
-        # Crear gráfico de barras
-        chart1 = BarChart()
-        chart1.type = "col"
-        chart1.style = 10
-        chart1.title = "Top 5 Productos por Ganancia"
-        chart1.y_axis.title = 'Ganancia (USD)'
-
-        data = Reference(ws_summary, min_col=2, min_row=48, max_row=48 + len(top_products))
-        cats = Reference(ws_summary, min_col=1, min_row=49, max_row=48 + len(top_products))
-        chart1.add_data(data, titles_from_data=True)
-        chart1.set_categories(cats)
-        chart1.height = 10
-        chart1.width = 15
-
-        ws_summary.add_chart(chart1, "D35")
+        # Ocultar columnas con datos (G, H, I) para que solo se vea el gráfico
+        ws_summary.column_dimensions['G'].hidden = True
+        ws_summary.column_dimensions['H'].hidden = True
+        ws_summary.column_dimensions['I'].hidden = True
 
         # Ajustar anchos de columna
         ws_summary.column_dimensions['A'].width = 22
