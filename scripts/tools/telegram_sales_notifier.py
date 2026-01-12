@@ -436,6 +436,277 @@ def save_notified_sale(order_id, order_data):
 # LÓGICA PRINCIPAL
 # ============================================================
 
+def format_pack_notification(pack_orders, ml_token):
+    """
+    Formatea el mensaje de notificación para un pack (1 o más órdenes).
+    Divide el shipping proporcionalmente entre los items.
+
+    Args:
+        pack_orders: Lista de órdenes del mismo pack
+        ml_token: Token de acceso de MercadoLibre
+
+    Returns:
+        tuple: (main_message, order_number_message, asin_list_message) o None si hay error
+    """
+    if not pack_orders:
+        return None
+
+    # Usar la primera orden para datos generales del pack
+    first_order = pack_orders[0]
+    pack_id = first_order.get("pack_id", first_order.get("id"))
+
+    # Obtener shipping cost UNA SOLA VEZ (es compartido para todo el pack)
+    shipping = first_order.get("shipping", {})
+    shipping_id = shipping.get("id")
+    total_shipping_cost = 0
+    handling_deadline = None
+
+    if shipping_id:
+        try:
+            headers = {
+                "Authorization": f"Bearer {ml_token}",
+                "x-format-new": "true"
+            }
+            r = requests.get(f"{ML_API}/marketplace/shipments/{shipping_id}",
+                           headers=headers, timeout=10)
+            if r.status_code == 200:
+                shipment_data = r.json()
+                lead_time = shipment_data.get("lead_time", {})
+                total_shipping_cost = lead_time.get("list_cost", 0)
+
+                if "promise_limit" in shipment_data:
+                    handling_deadline = shipment_data.get("promise_limit")
+                else:
+                    estimated_delivery = lead_time.get("estimated_delivery_time", {})
+                    pay_before = estimated_delivery.get("pay_before")
+                    if pay_before:
+                        handling_deadline = pay_before
+        except Exception as e:
+            print(f"   [DEBUG] Excepción al obtener shipment: {e}")
+
+    # Calcular el total de unit_price de todos los items (para distribuir shipping proporcionalmente)
+    total_unit_price = sum(
+        order.get("order_items", [{}])[0].get("unit_price", 0)
+        for order in pack_orders
+    )
+
+    # Procesar cada item del pack
+    items_data = []
+    total_paid_by_customer = 0
+    total_net_proceeds = 0
+    total_amazon_cost = 0
+    total_profit = 0
+    asin_list = []
+
+    for order in pack_orders:
+        order_items = order.get("order_items", [])
+        if not order_items:
+            continue
+
+        item = order_items[0].get("item", {})
+        item_id = item.get("id")
+        parent_item_id = item.get("parent_item_id")
+        item_title = item.get("title", "Sin título")
+        quantity = order_items[0].get("quantity", 1)
+
+        # Datos financieros
+        unit_price = order_items[0].get("unit_price", 0)
+        sale_fee = order_items[0].get("sale_fee", 0)
+
+        # Obtener el total que pagó el cliente desde payments
+        payments = order.get("payments", [])
+        paid_amount = payments[0].get("total_paid_amount", 0) if payments else unit_price
+
+        # Buscar ASIN
+        asin_data = None
+        if parent_item_id:
+            asin_data = get_asin_by_item_id(parent_item_id, ml_token)
+        if not asin_data:
+            asin_data = get_asin_by_item_id(item_id, ml_token)
+
+        if not asin_data:
+            print(f"   ⚠️ No se encontró ASIN para item {item_id}")
+            continue
+
+        asin = asin_data.get("asin", "N/A")
+        brand = asin_data.get("brand", "N/A")
+        amazon_cost = asin_data.get("amazon_cost", 0)
+
+        # Calcular la porción de shipping que le corresponde a este item
+        # Proporcionalmente según su precio
+        if total_unit_price > 0:
+            item_shipping_share = (unit_price / total_unit_price) * total_shipping_cost
+        else:
+            item_shipping_share = 0
+
+        # NET PROCEEDS para este item = (unit_price - sale_fee) - su parte del shipping
+        item_net_proceeds = (unit_price * quantity) - (sale_fee * quantity) - item_shipping_share
+
+        # Costo Amazon + warehouse
+        fulfillment_fee = 4.0
+        item_amazon_cost = (amazon_cost + fulfillment_fee) * quantity
+        item_profit = item_net_proceeds - item_amazon_cost
+
+        # Guardar datos del item
+        items_data.append({
+            "title": item_title,
+            "asin": asin,
+            "brand": brand,
+            "quantity": quantity,
+            "unit_price": unit_price,
+            "sale_fee": sale_fee,
+            "shipping_share": item_shipping_share,
+            "paid_amount": paid_amount,
+            "net_proceeds": item_net_proceeds,
+            "amazon_cost": amazon_cost,
+            "amazon_total": amazon_cost + fulfillment_fee,
+            "item_amazon_cost": item_amazon_cost,
+            "profit": item_profit
+        })
+
+        # Acumular totales
+        total_paid_by_customer += paid_amount
+        total_net_proceeds += item_net_proceeds
+        total_amazon_cost += item_amazon_cost
+        total_profit += item_profit
+        asin_list.append(asin)
+
+    if not items_data:
+        return None
+
+    # Datos generales del pack
+    context = first_order.get("context", {})
+    marketplace = context.get("site", "ML")
+    buyer = first_order.get("buyer", {})
+    buyer_nickname = buyer.get("nickname", "N/A")
+
+    # Calcular fecha de despacho
+    deadline_text = ""
+    dispatch_date_str = ""
+    try:
+        from datetime import timedelta
+        import pytz
+
+        date_created = first_order.get("date_created")
+        if date_created:
+            miami_tz = pytz.timezone('US/Eastern')
+            sale_dt = datetime.fromisoformat(date_created.replace('Z', '+00:00'))
+            sale_miami = sale_dt.astimezone(miami_tz)
+
+            if sale_miami.hour >= 23:
+                sale_miami = sale_miami + timedelta(days=1)
+                sale_miami = sale_miami.replace(hour=0, minute=0, second=0, microsecond=0)
+            else:
+                sale_miami = sale_miami.replace(hour=0, minute=0, second=0, microsecond=0)
+
+            if sale_miami.weekday() == 5:
+                sale_miami = sale_miami + timedelta(days=2)
+            elif sale_miami.weekday() == 6:
+                sale_miami = sale_miami + timedelta(days=1)
+
+            current_date = sale_miami + timedelta(days=1)
+            business_days_count = 0
+
+            while business_days_count < 4:
+                if current_date.weekday() < 5:
+                    business_days_count += 1
+                    if business_days_count < 4:
+                        current_date = current_date + timedelta(days=1)
+                else:
+                    current_date = current_date + timedelta(days=1)
+
+            deadline_text = f"\n⏰ <b>Despachar antes de:</b> {current_date.strftime('%m/%d/%Y')}"
+            dispatch_date = current_date - timedelta(days=1)
+            dispatch_date_str = f" {dispatch_date.strftime('%m/%d')}"
+    except Exception as e:
+        print(f"   [DEBUG] Error calculando fecha: {e}")
+
+    # Construir mensaje con detalles de cada item
+    items_section = ""
+    for idx, item_data in enumerate(items_data, 1):
+        profit_margin = (item_data["profit"] / item_data["item_amazon_cost"] * 100) if item_data["item_amazon_cost"] > 0 else 0
+
+        items_section += f"""
+━━━━━━━━━━━━━━━━━━━━━
+📦 <b>ITEM #{idx}</b>
+━━━━━━━━━━━━━━━━━━━━━
+🏷️ {item_data["title"]}
+🔖 Marca: <b>{item_data["brand"]}</b>
+📊 Cantidad: <b>{item_data["quantity"]}</b>
+
+💰 <b>FINANCIERO</b>
+💵 Total pagado: <b>${item_data["paid_amount"]:.2f}</b>
+📊 Precio unitario: <b>${item_data["unit_price"]:.2f}</b>
+💸 Fee ML: <b>${item_data["sale_fee"]:.2f}</b>
+🚚 Shipping (parte proporcional): <b>${item_data["shipping_share"]:.2f}</b>
+💰 Recibís (neto): <b>${item_data["net_proceeds"]:.2f}</b>
+
+🛒 <b>COMPRAR EN AMAZON</b>
+<code>{item_data["asin"]}</code>
+💲 Amazon + Warehouse = <b>${item_data["amazon_total"]:.2f} x {item_data["quantity"]} = ${item_data["item_amazon_cost"]:.2f}</b>
+✅ Ganancia: <b>${item_data["profit"]:.2f} ({profit_margin:.1f}%)</b>
+"""
+
+    # Link de MercadoLibre
+    ml_domains = {
+        "MLM": "mercadolibre.com.mx",
+        "MLA": "mercadolibre.com.ar",
+        "MLB": "mercadolibre.com.br",
+        "MLC": "mercadolibre.cl",
+        "MLU": "mercadolibre.com.uy",
+        "MCO": "mercadolibre.com.co",
+        "MLV": "mercadolibre.com.ve",
+        "MPA": "mercadolibre.com.pa",
+        "MPE": "mercadolibre.com.pe",
+    }
+    ml_domain = ml_domains.get(marketplace, "mercadolibre.com")
+    ml_order_link = f"https://www.{ml_domain}/ventas/{pack_id}/detalle"
+
+    # Calcular margen total del pack
+    total_profit_margin = (total_profit / total_amazon_cost * 100) if total_amazon_cost > 0 else 0
+
+    # Mensaje principal
+    message = f"""
+🎉 <b>¡NUEVA VENTA!</b>
+
+👤 Comprador: <b>{buyer_nickname}</b>{deadline_text}
+📦 Items en el pack: <b>{len(items_data)}</b>
+
+{items_section}
+━━━━━━━━━━━━━━━━━━━━━
+💼 <b>TOTAL DEL PACK</b>
+━━━━━━━━━━━━━━━━━━━━━
+💵 Total pagado: <b>${total_paid_by_customer:.2f}</b>
+💰 Total neto recibido: <b>${total_net_proceeds:.2f}</b>
+🛒 Total costo Amazon: <b>${total_amazon_cost:.2f}</b>
+✅ <b>Ganancia total: ${total_profit:.2f} ({total_profit_margin:.1f}%)</b>
+
+<a href="{ml_order_link}">🔗 Ver orden completa en MercadoLibre</a>
+"""
+
+    # Mapeo de marketplace a código de país
+    country_codes = {
+        "MLM": "MX",
+        "MLB": "BR",
+        "MLC": "CH",
+        "MCO": "CO",
+        "MLA": "AR",
+        "MLU": "UY",
+        "MLV": "VE",
+        "MPA": "PA",
+        "MPE": "PE"
+    }
+    country_code = country_codes.get(marketplace, marketplace[:2])
+
+    # Mensaje con número de orden
+    order_number_message = f"OW - {country_code} {pack_id}{dispatch_date_str}"
+
+    # Mensaje con ASINs (uno por línea para copiar fácil)
+    asin_list_message = "\n".join(asin_list)
+
+    return (message.strip(), order_number_message, asin_list_message)
+
+
 def format_sale_notification(order, asin_data, ml_token):
     """
     Formatea el mensaje de notificación de venta.
@@ -740,16 +1011,24 @@ def _check_new_sales_impl():
         "errors": 0
     }
 
-    # Procesar cada orden
+    # AGRUPAR ÓRDENES POR PACK_ID (para manejar packs con múltiples items)
+    packs = {}
     for order in orders:
-        order_id = str(order.get("id"))  # Order ID individual
-        pack_id = str(order.get("pack_id", order_id))  # Pack ID (lo que se ve en ML)
+        order_id = str(order.get("id"))
+        pack_id = str(order.get("pack_id", order_id))
         order_status = order.get("status")
 
         # Solo notificar órdenes pagadas
         if order_status not in ["paid", "confirmed"]:
             continue
 
+        # Agrupar por pack_id
+        if pack_id not in packs:
+            packs[pack_id] = []
+        packs[pack_id].append(order)
+
+    # Procesar cada pack (puede tener 1 o más órdenes)
+    for pack_id, pack_orders in packs.items():
         # Verificar si ya fue notificada (usar pack_id para evitar duplicados)
         if pack_id in notified_sales:
             stats["already_notified"] += 1
@@ -757,55 +1036,43 @@ def _check_new_sales_impl():
 
         stats["new_sales"] += 1
 
-        # Extraer item_id y parent_item_id (CBT)
-        order_items = order.get("order_items", [])
-        if not order_items:
-            continue
-
-        item = order_items[0].get("item", {})
-        item_id = item.get("id")  # ID local del marketplace (MLM, MLU, etc.)
-        parent_item_id = item.get("parent_item_id")  # ID de CBT (CBT...)
-
-        # Obtener marketplace del context
-        context = order.get("context", {})
+        # Obtener datos del pack
+        first_order = pack_orders[0]
+        context = first_order.get("context", {})
         marketplace = context.get("site", "MLU")
 
         print(f"\n{'─'*80}")
-        print(f"🆕 NUEVA VENTA DETECTADA")
+        print(f"🆕 NUEVA VENTA DETECTADA (PACK)")
         print(f"{'─'*80}")
         print(f"   Pack ID (ML): {pack_id}")
-        print(f"   Order ID: {order_id}")
         print(f"   Marketplace: {marketplace}")
-        print(f"   Item ID: {item_id}")
-        print(f"   CBT ID: {parent_item_id}")
-        print(f"   Estado: {order_status}")
+        print(f"   Órdenes en el pack: {len(pack_orders)}")
 
-        # Buscar ASIN en la BD usando CBT ID o item_id local
-        print(f"   🔍 Buscando ASIN en BD...")
+        # Listar items del pack
+        for idx, order in enumerate(pack_orders, 1):
+            order_items = order.get("order_items", [])
+            if order_items:
+                item = order_items[0].get("item", {})
+                item_id = item.get("id")
+                parent_item_id = item.get("parent_item_id")
+                print(f"      Item #{idx}: {item_id} (CBT: {parent_item_id})")
 
-        # Intentar primero con CBT ID (parent_item_id)
-        asin_data = None
-        if parent_item_id:
-            print(f"      Buscando por CBT: {parent_item_id}")
-            asin_data = get_asin_by_item_id(parent_item_id, ml_token)
+        # Generar hash único (usar el primer ASIN del pack)
+        first_item = pack_orders[0].get("order_items", [{}])[0].get("item", {})
+        first_parent = first_item.get("parent_item_id") or first_item.get("id")
 
-        # Si no encuentra, intentar con item_id local (MLB, MLM, etc.)
-        if not asin_data:
-            print(f"      Buscando por item_id local: {item_id}")
-            asin_data = get_asin_by_item_id(item_id, ml_token)
+        # Buscar primer ASIN para el hash
+        first_asin_data = get_asin_by_item_id(first_parent, ml_token)
+        if not first_asin_data:
+            first_asin_data = get_asin_by_item_id(first_item.get("id"), ml_token)
 
-        if not asin_data:
-            print(f"   ⚠️ No se encontró ASIN para:")
-            print(f"      CBT: {parent_item_id}")
-            print(f"      Item local: {item_id}")
+        if not first_asin_data:
+            print(f"   ⚠️ No se pudo obtener ASIN del primer item")
             stats["errors"] += 1
             continue
 
-        asin = asin_data.get('asin')
-        print(f"   ✅ ASIN encontrado: {asin}")
-
-        # Generar hash único para detectar duplicados
-        msg_hash = generate_message_hash(pack_id, marketplace, asin)
+        first_asin = first_asin_data.get('asin')
+        msg_hash = generate_message_hash(pack_id, marketplace, first_asin)
         print(f"   🔑 Hash: {msg_hash}")
 
         # Verificar si ya se envió este mensaje (deduplicación por hash)
@@ -816,18 +1083,19 @@ def _check_new_sales_impl():
             stats["already_notified"] += 1
             continue
 
-        # Formatear mensaje (retorna 3 mensajes: principal, número de orden y ASIN)
-        messages = format_sale_notification(order, asin_data, ml_token)
+        # Formatear mensaje del PACK completo (retorna 3 mensajes)
+        print(f"   🔄 Procesando pack con {len(pack_orders)} item(s)...")
+        messages = format_pack_notification(pack_orders, ml_token)
 
         if not messages:
-            print(f"   ❌ Error formateando mensaje")
+            print(f"   ❌ Error formateando mensaje del pack")
             stats["errors"] += 1
             continue
 
-        main_message, order_number_message, asin_message = messages
+        main_message, order_number_message, asin_list_message = messages
 
-        # Enviar MENSAJE PRINCIPAL (con toda la info)
-        print(f"   📤 Enviando notificación principal a Telegram...")
+        # Enviar MENSAJE PRINCIPAL (con toda la info del pack)
+        print(f"   📤 Enviando notificación del pack a Telegram...")
         if send_telegram_message(main_message):
             print(f"   ✅ Notificación principal enviada exitosamente")
 
@@ -836,21 +1104,21 @@ def _check_new_sales_impl():
             send_telegram_message(order_number_message, parse_mode=None)
             print(f"   ✅ Número de orden enviado")
 
-            # Enviar ASIN en mensaje separado (para copiar fácil)
-            print(f"   📤 Enviando ASIN separado...")
-            send_telegram_message(asin_message, parse_mode=None)
-            print(f"   ✅ ASIN enviado")
+            # Enviar ASINs en mensaje separado (uno por línea)
+            print(f"   📤 Enviando ASINs separados...")
+            send_telegram_message(asin_list_message, parse_mode=None)
+            print(f"   ✅ ASINs enviados")
 
             stats["notifications_sent"] += 1
 
             # Guardar hash del mensaje enviado para deduplicación
-            save_sent_message(msg_hash, pack_id, marketplace, asin)
+            save_sent_message(msg_hash, pack_id, marketplace, first_asin)
             print(f"   💾 Hash registrado para evitar duplicados")
 
             # Guardar como notificada en el sistema legacy
             save_notified_sale(pack_id, {
-                "item_id": item_id,
-                "asin": asin
+                "item_id": first_item.get("id"),
+                "asin": first_asin
             })
 
             # NOTA: El sales_tracking_daemon se encarga de registrar ventas y generar Excel

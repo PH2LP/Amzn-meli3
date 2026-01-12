@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """
+
+python3 17_price_automate.py 
+
 Activa automatización de precios en MercadoLibre
 Lee precios desde la DB y configura min_price (15% markup) y max_price (80% markup)
 """
@@ -21,13 +24,12 @@ load_dotenv(override=True)
 # Configuración
 DB_PATH = "storage/listings_database.db"
 ML_TOKEN = os.getenv("ML_ACCESS_TOKEN")
-PRICE_MARKUP_MAX = int(os.getenv("PRICE_AUTOMATE_MAX_MARKUP", "80"))  # Máximo para automatización (configurable)
-PRICE_MARKUP_MIN = int(os.getenv("PRICE_AUTOMATE_MIN_MARKUP", "15"))  # Mínimo (configurable)
+PRICE_MARKUP_MAX = float(os.getenv("PRICE_AUTOMATE_MAX_MARKUP", "80"))  # Leer desde .env
+PRICE_MARKUP_MIN = float(os.getenv("PRICE_AUTOMATE_MIN_MARKUP", "15"))  # Leer desde .env
 USE_TAX = os.getenv("USE_TAX", "true").lower() == "true"
 TAX_RATE = 0.07
 FULFILLMENT_FEE = 4.0
-MAX_WORKERS = 15  # Número de threads paralelos (balance entre velocidad y confiabilidad)
-RETRY_ATTEMPTS = 2  # Número de reintentos para errores temporales
+MAX_WORKERS = 10  # Número de threads paralelos
 
 # Lock para stats thread-safe
 stats_lock = Lock()
@@ -110,7 +112,7 @@ def get_automation_status(item_id: str) -> dict:
         log(f"    ⚠️  Error: {e}", Colors.YELLOW)
         return None
 
-def create_automation(item_id: str, min_price: float, max_price: float) -> bool:
+def create_automation(item_id: str, min_price: float, max_price: float) -> tuple:
     """
     Crea automatización de precios para un item
 
@@ -120,7 +122,7 @@ def create_automation(item_id: str, min_price: float, max_price: float) -> bool:
         max_price: Precio máximo (35% markup actual)
 
     Returns:
-        True si se creó correctamente
+        (True/False, error_message)
     """
     try:
         url = f"https://api.mercadolibre.com/marketplace/items/{item_id}/prices/automate"
@@ -138,135 +140,117 @@ def create_automation(item_id: str, min_price: float, max_price: float) -> bool:
         response = requests.post(url, headers=headers, json=payload, timeout=15)
 
         if response.status_code == 200:
-            return True
+            return (True, None)
         elif response.status_code == 412:
-            # Item no elegible para automatización - silencioso
-            return False
+            # Si ya existe, verificar si tiene los valores correctos
+            try:
+                error_data = response.json()
+                if error_data.get('error') == 'automation_already_created':
+                    # Verificar valores actuales
+                    check_response = requests.get(url, headers=headers, timeout=10)
+                    if check_response.status_code == 200:
+                        current = check_response.json()
+                        current_min = current.get('min_price')
+                        current_max = current.get('max_price')
+
+                        if abs(current_min - min_price) < 0.01 and abs(current_max - max_price) < 0.01:
+                            return (True, "already_configured")
+                        else:
+                            # Actualizar con valores correctos
+                            return update_automation(item_id, min_price, max_price)
+            except:
+                pass
+
+            try:
+                error_data = response.json()
+                error_msg = f"HTTP {response.status_code}: {error_data.get('error', 'unknown')}"
+            except:
+                error_msg = f"HTTP {response.status_code}"
+            return (False, error_msg)
         else:
-            # Solo mostrar otros errores
-            error_msg = response.text[:200] if len(response.text) > 200 else response.text
-            log(f"    ⚠️  Error HTTP {response.status_code}: {error_msg}", Colors.YELLOW)
-            return False
+            try:
+                error_data = response.json()
+                error_msg = f"HTTP {response.status_code}: {error_data.get('error', 'unknown')}"
+            except:
+                error_msg = f"HTTP {response.status_code}"
+            return (False, error_msg)
 
     except Exception as e:
-        log(f"    ❌ Error creando automatización: {e}", Colors.RED)
-        return False
+        return (False, str(e))
 
-def process_local_item(local_item_id: str, site_id: str, min_price: float, max_price: float, stats: dict, asin: str = None) -> dict:
+def process_local_item(local_item_id: str, site_id: str, min_price: float, max_price: float, stats: dict) -> dict:
     """
     Procesa un item local (para paralelización)
-    OPTIMIZADO: Intenta crear directamente, solo verifica si ya existe cuando falla
 
     Returns:
         dict con resultado del procesamiento
     """
+    import time
+    start_time = time.time()
+
     result = {
         "site_id": site_id,
         "item_id": local_item_id,
         "success": False,
         "action": None,
-        "error": None
+        "error": None,
+        "http_status": None,
+        "elapsed_time": 0,
+        "error_message": None
     }
 
     try:
-        # OPTIMIZACIÓN: Intentar crear directamente (1 llamada API en vez de 2)
-        url = f"https://api.mercadolibre.com/marketplace/items/{local_item_id}/prices/automate"
-        headers = {
-            "Authorization": f"Bearer {ML_TOKEN}",
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "rule_id": "INT",
-            "min_price": round(min_price, 2),
-            "max_price": round(max_price, 2)
-        }
+        # Verificar automatización existente
+        current_automation = get_automation_status(local_item_id)
 
-        # Intentar POST (crear) con reintentos
-        last_error = None
-        for attempt in range(RETRY_ATTEMPTS):
-            try:
-                response = requests.post(url, headers=headers, json=payload, timeout=15)
-                break  # Éxito, salir del loop
-            except (requests.Timeout, requests.ConnectionError) as e:
-                last_error = e
-                if attempt < RETRY_ATTEMPTS - 1:
-                    time.sleep(0.5)  # Esperar antes de reintentar
-                    continue
-                else:
-                    # Último intento falló
-                    raise
+        if current_automation:
+            current_min = current_automation.get("min_price")
+            current_max = current_automation.get("max_price")
 
-        if response.status_code == 200:
-            # Creado exitosamente
-            result["action"] = "created"
-            result["success"] = True
-            with stats_lock:
-                stats["created"] += 1
-            print(f"\r✅ {site_id}: {local_item_id} - Creado (Min: ${min_price:.2f}, Max: ${max_price:.2f})                    ")
-
-        elif response.status_code == 412:
-            # Ya existe, intentar PUT (actualizar) con reintentos
-            for attempt in range(RETRY_ATTEMPTS):
-                try:
-                    response = requests.put(url, headers=headers, json=payload, timeout=15)
-                    break
-                except (requests.Timeout, requests.ConnectionError):
-                    if attempt < RETRY_ATTEMPTS - 1:
-                        time.sleep(0.5)
-                        continue
-                    else:
-                        raise
-
-            if response.status_code == 200:
-                result["action"] = "updated"
+            if abs(current_min - min_price) < 0.01 and abs(current_max - max_price) < 0.01:
+                result["action"] = "already_configured"
                 result["success"] = True
                 with stats_lock:
-                    stats["updated"] += 1
-                print(f"\r🔄 {site_id}: {local_item_id} - Actualizado (Min: ${min_price:.2f}, Max: ${max_price:.2f})                    ")
+                    stats["already_configured"] += 1
             else:
-                # PUT falló, verificar si ya está configurado con los mismos valores
-                get_resp = requests.get(url, headers=headers, timeout=5)
-                if get_resp.status_code == 200:
-                    current = get_resp.json()
-                    current_min = current.get("min_price")
-                    current_max = current.get("max_price")
-
-                    if abs(current_min - min_price) < 0.01 and abs(current_max - max_price) < 0.01:
-                        result["action"] = "already_configured"
-                        result["success"] = True
-                        with stats_lock:
-                            stats["already_configured"] += 1
-                    else:
-                        result["action"] = "update_failed"
-                        with stats_lock:
-                            stats["errors"] += 1
+                status, error_msg = update_automation(local_item_id, min_price, max_price)
+                if status:
+                    result["action"] = "updated"
+                    result["success"] = True
+                    with stats_lock:
+                        stats["updated"] += 1
                 else:
                     result["action"] = "update_failed"
+                    result["error_message"] = error_msg
                     with stats_lock:
                         stats["errors"] += 1
-
-        elif response.status_code == 400:
-            # Error 400 - contar pero no mostrar cada uno
-            with stats_lock:
-                stats["errors"] += 1
-            result["action"] = "error_400"
-
         else:
-            # Otros errores
-            with stats_lock:
-                stats["errors"] += 1
-            result["action"] = f"error_{response.status_code}"
+            status, error_msg = create_automation(local_item_id, min_price, max_price)
+            if status:
+                result["action"] = "created"
+                result["success"] = True
+                with stats_lock:
+                    stats["created"] += 1
+            else:
+                result["action"] = "create_failed"
+                result["error_message"] = error_msg
+                with stats_lock:
+                    stats["errors"] += 1
 
     except Exception as e:
         result["error"] = str(e)
         with stats_lock:
             stats["errors"] += 1
 
+    result["elapsed_time"] = time.time() - start_time
     return result
 
-def update_automation(item_id: str, min_price: float, max_price: float) -> bool:
+def update_automation(item_id: str, min_price: float, max_price: float) -> tuple:
     """
     Actualiza automatización existente
+
+    Returns:
+        (True/False, error_message)
     """
     try:
         url = f"https://api.mercadolibre.com/marketplace/items/{item_id}/prices/automate"
@@ -284,18 +268,46 @@ def update_automation(item_id: str, min_price: float, max_price: float) -> bool:
         response = requests.put(url, headers=headers, json=payload, timeout=15)
 
         if response.status_code == 200:
-            return True
+            return (True, None)
         elif response.status_code == 412:
-            # Item no elegible para automatización - silencioso
-            return False
+            # Automatización pausada o bloqueada - intentar DELETE + CREATE
+            try:
+                error_data = response.json()
+                if 'automation_operation_not_allowed' in error_data.get('error', ''):
+                    # DELETE + CREATE
+                    delete_response = requests.delete(url, headers=headers, timeout=10)
+                    if delete_response.status_code in [200, 204]:
+                        # Recrear
+                        create_response = requests.post(url, headers=headers, json=payload, timeout=15)
+                        if create_response.status_code == 200:
+                            # Verificar si quedó pausada por item inactivo
+                            check_response = requests.get(url, headers=headers, timeout=10)
+                            if check_response.status_code == 200:
+                                auto_data = check_response.json()
+                                if auto_data.get('status') == 'PAUSED':
+                                    status_detail = auto_data.get('status_detail', {})
+                                    cause = status_detail.get('cause', 'unknown')
+                                    return (True, f"paused_{cause}")
+                            return (True, None)
+            except:
+                pass
+
+            try:
+                error_data = response.json()
+                error_msg = f"HTTP {response.status_code}: {error_data.get('error', 'unknown')}"
+            except:
+                error_msg = f"HTTP {response.status_code}"
+            return (False, error_msg)
         else:
-            error_msg = response.text[:200] if len(response.text) > 200 else response.text
-            log(f"    ⚠️  Error HTTP {response.status_code}: {error_msg}", Colors.YELLOW)
-            return False
+            try:
+                error_data = response.json()
+                error_msg = f"HTTP {response.status_code}: {error_data.get('error', 'unknown')}"
+            except:
+                error_msg = f"HTTP {response.status_code}"
+            return (False, error_msg)
 
     except Exception as e:
-        log(f"    ❌ Error actualizando automatización: {e}", Colors.RED)
-        return False
+        return (False, str(e))
 
 def main():
     if not ML_TOKEN:
@@ -308,12 +320,12 @@ def main():
 
     # Mostrar configuración
     log("⚙️  CONFIGURACIÓN:", Colors.CYAN)
-    log(f"   Markup máximo:           {PRICE_MARKUP_MAX}%", Colors.GREEN)
-    log(f"   Markup mínimo:           {PRICE_MARKUP_MIN}%", Colors.YELLOW)
+    log(f"   Markup máximo:           {int(PRICE_MARKUP_MAX)}%", Colors.GREEN)
+    log(f"   Markup mínimo:           {int(PRICE_MARKUP_MIN)}%", Colors.YELLOW)
     tax_status = f"{int(TAX_RATE * 100)}% ACTIVADO" if USE_TAX else "DESACTIVADO"
     log(f"   Tax (Florida):           {tax_status}")
     log(f"   Fulfillment fee:         ${FULFILLMENT_FEE}")
-    log(f"   Regla de competencia:    INT (Solo dentro de ML)", Colors.CYAN)
+    log(f"   Regla de competencia:    INT_EXT (Solo dentro de ML)", Colors.CYAN)
     print()
 
     # Confirmar
@@ -340,40 +352,21 @@ def main():
         "updated": 0,
         "already_configured": 0,
         "errors": 0,
-        "skipped": 0,
-        "not_eligible": 0  # Items con error 412
+        "skipped": 0
     }
 
-    # Iniciar cronómetro
-    import time
-    start_time = time.time()
-
-    # Calcular total de items (expandiendo CBTs a site_items)
-    total_items = 0
-    for _, item_id, _, _, site_items_json in listings:
-        if item_id and item_id.startswith("CBT") and site_items_json:
-            try:
-                site_items = json.loads(site_items_json) if isinstance(site_items_json, str) else site_items_json
-                total_items += len([si for si in site_items if isinstance(si, dict) and si.get("item_id")])
-            except:
-                pass
-        else:
-            total_items += 1
-
-    log(f"   Total items a procesar (expandido): {total_items}", Colors.CYAN)
-    print()
-
     # Procesar cada listing
-    items_processed = 0
     for i, (asin, item_id, costo_amazon, price_usd_current, site_items_json) in enumerate(listings, 1):
         stats["total"] += 1
-
-        # Mostrar progreso SIEMPRE (en cada listing)
-        print(f"\r[{i}/{len(listings)} CBTs | {items_processed}/{total_items} items] ✅ {stats['created']} | 🔄 {stats['updated']} | ⊗ {stats['errors']}     ", end="", flush=True)
 
         # Calcular precios
         min_price = compute_price(costo_amazon, PRICE_MARKUP_MIN)
         max_price = compute_price(costo_amazon, PRICE_MARKUP_MAX)
+
+        # Header con ASIN e Item ID global
+        print()
+        log(f"[{i}/{len(listings)}] {asin} → {item_id}", Colors.CYAN)
+        log(f"   Costo: ${costo_amazon:.2f} | Min: ${min_price:.2f} | Max: ${max_price:.2f}", Colors.BLUE)
 
         # Parsear site_items
         site_items = []
@@ -400,76 +393,60 @@ def main():
                 if local_item_id:
                     local_items_to_process.append((local_item_id, site_id))
 
-            # Procesar en paralelo con límite de workers
-            if local_items_to_process:
-                with ThreadPoolExecutor(max_workers=min(MAX_WORKERS, len(local_items_to_process))) as executor:
-                    futures = [
-                        executor.submit(process_local_item, item_id, site_id, min_price, max_price, stats, asin)
-                        for item_id, site_id in local_items_to_process
-                    ]
+            # Procesar en paralelo
+            with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+                futures = {
+                    executor.submit(process_local_item, item_id, site_id, min_price, max_price, stats): (item_id, site_id)
+                    for item_id, site_id in local_items_to_process
+                }
 
-                    # Esperar a que terminen todos
-                    for future in as_completed(futures):
-                        try:
-                            future.result()
-                            items_processed += 1
-                        except Exception as e:
-                            with stats_lock:
-                                stats["errors"] += 1
-                            items_processed += 1
+                # Esperar resultados y mostrar
+                for future in as_completed(futures):
+                    result = future.result()
+                    site_id = result["site_id"]
+                    local_id = result["item_id"]
+                    elapsed = result.get("elapsed_time", 0)
+
+                    if result["success"]:
+                        if result["action"] == "created":
+                            log(f"      {site_id} ({local_id}): ✅ CREADO ({elapsed:.2f}s)", Colors.GREEN)
+                        elif result["action"] == "updated":
+                            log(f"      {site_id} ({local_id}): 🔄 ACTUALIZADO ({elapsed:.2f}s)", Colors.CYAN)
+                        elif result["action"] == "already_configured":
+                            log(f"      {site_id} ({local_id}): ✓ Ya configurado ({elapsed:.2f}s)", Colors.YELLOW)
+                    else:
+                        error_msg = result.get("error_message", "Error desconocido")
+                        log(f"      {site_id} ({local_id}): ❌ {error_msg} ({elapsed:.2f}s)", Colors.RED)
 
         else:
-            items_processed += 1
-            # Item local o CBT sin site_items: aplicar directamente (OPTIMIZADO)
-            url = f"https://api.mercadolibre.com/marketplace/items/{item_id}/prices/automate"
-            headers = {
-                "Authorization": f"Bearer {ML_TOKEN}",
-                "Content-Type": "application/json"
-            }
-            payload = {
-                "rule_id": "INT",
-                "min_price": round(min_price, 2),
-                "max_price": round(max_price, 2)
-            }
+            # Item local o CBT sin site_items: aplicar directamente
+            current_automation = get_automation_status(item_id)
 
-            # Intentar POST (crear)
-            response = requests.post(url, headers=headers, json=payload, timeout=10)
+            if current_automation:
+                current_min = current_automation.get("min_price")
+                current_max = current_automation.get("max_price")
 
-            if response.status_code == 200:
-                stats["created"] += 1
-                print(f"\r✅ {asin} ({item_id}) - Creado (Min: ${min_price:.2f}, Max: ${max_price:.2f})                    ")
-
-            elif response.status_code == 412:
-                # Ya existe, intentar PUT (actualizar)
-                response = requests.put(url, headers=headers, json=payload, timeout=10)
-
-                if response.status_code == 200:
-                    stats["updated"] += 1
-                    print(f"\r🔄 {asin} ({item_id}) - Actualizado (Min: ${min_price:.2f}, Max: ${max_price:.2f})                    ")
+                if abs(current_min - min_price) < 0.01 and abs(current_max - max_price) < 0.01:
+                    stats["already_configured"] += 1
+                    log(f"   ✓ Ya configurado", Colors.YELLOW)
                 else:
-                    # PUT falló, verificar si ya está configurado
-                    get_resp = requests.get(url, headers=headers, timeout=5)
-                    if get_resp.status_code == 200:
-                        current = get_resp.json()
-                        current_min = current.get("min_price")
-                        current_max = current.get("max_price")
-
-                        if abs(current_min - min_price) < 0.01 and abs(current_max - max_price) < 0.01:
-                            stats["already_configured"] += 1
-                        else:
-                            stats["errors"] += 1
+                    status, error_msg = update_automation(item_id, min_price, max_price)
+                    if status:
+                        stats["updated"] += 1
+                        log(f"   🔄 ACTUALIZADO", Colors.CYAN)
                     else:
                         stats["errors"] += 1
-
+                        log(f"   ❌ {error_msg}", Colors.RED)
             else:
-                stats["errors"] += 1
+                status, error_msg = create_automation(item_id, min_price, max_price)
+                if status:
+                    stats["created"] += 1
+                    log(f"   ✅ CREADO", Colors.GREEN)
+                else:
+                    stats["errors"] += 1
+                    log(f"   ❌ {error_msg}", Colors.RED)
 
         # Sin rate limiting - ya está optimizado con paralelización
-
-    # Calcular tiempo total
-    elapsed_time = time.time() - start_time
-    minutes = int(elapsed_time // 60)
-    seconds = int(elapsed_time % 60)
 
     # Resumen final
     print()
@@ -480,34 +457,15 @@ def main():
     log(f"   ✅ Creados:              {stats['created']}", Colors.GREEN)
     log(f"   🔄 Actualizados:         {stats['updated']}", Colors.CYAN)
     log(f"   ✓ Ya configurados:       {stats['already_configured']}", Colors.YELLOW)
-    log(f"   ⊗ Salteados (errores):   {stats['errors']}", Colors.RED)
-    log(f"   ⏱️  Tiempo total:          {minutes}m {seconds}s", Colors.CYAN)
+    log(f"   ❌ Errores:              {stats['errors']}", Colors.RED)
     log("="*80, Colors.BLUE)
     print()
 
-    # Estadísticas adicionales
-    total_successful = stats['created'] + stats['updated'] + stats['already_configured']
-    success_rate = (total_successful / total_items * 100) if total_items > 0 else 0
-
-    log(f"📈 Tasa de éxito: {success_rate:.1f}% ({total_successful}/{total_items} items)", Colors.CYAN)
-    log(f"   Items procesados: {total_successful + stats['errors']}/{total_items}", Colors.CYAN)
-
     if stats["created"] + stats["updated"] > 0:
-        log(f"✅ Automatización activada en {stats['created'] + stats['updated']} items!", Colors.GREEN)
-        log(f"💡 Los precios se ajustarán automáticamente entre {PRICE_MARKUP_MIN}% y {PRICE_MARKUP_MAX}% de ganancia", Colors.CYAN)
+        log("✅ Automatización de precios activada!", Colors.GREEN)
+        log("💡 Los precios se ajustarán automáticamente entre 15% y 35% de ganancia", Colors.CYAN)
     else:
-        log("ℹ️  No se crearon ni actualizaron automatizaciones nuevas", Colors.YELLOW)
-
-    if stats['errors'] > 0:
-        log(f"\n⚠️  {stats['errors']} items fueron salteados (inactivos, no elegibles, o errores)", Colors.YELLOW)
-
-        # Preguntar si quiere reintentar los errores
-        retry = input("\n¿Reintentar items que fallaron? (s/N): ")
-        if retry.lower() == 's':
-            log("\n🔄 Reintentando items que fallaron...", Colors.CYAN)
-            # TODO: Implementar retry aquí
-            log("⚠️  Función de retry aún no implementada", Colors.YELLOW)
-
+        log("ℹ️  No se crearon ni actualizaron automatizaciones", Colors.YELLOW)
     print()
 
 if __name__ == "__main__":

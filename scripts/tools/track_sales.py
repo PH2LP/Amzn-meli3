@@ -194,7 +194,10 @@ def get_ml_orders(since_date=None, get_all=False, limit_orders=None, days_back=N
                 if cart_date < since_date:
                     return all_orders  # Ya llegamos a carts más viejos, salir
 
+            # Obtener pack_id del cart
+            pack_id = cart.get("id")
             orders = cart.get("orders", [])
+
             for order in orders:
                 order_id = order.get("id")
 
@@ -204,6 +207,9 @@ def get_ml_orders(since_date=None, get_all=False, limit_orders=None, days_back=N
 
                 if order_resp.status_code == 200:
                     full_order = order_resp.json()
+
+                    # AGREGAR pack_id a la orden (necesario para agrupar packs)
+                    full_order["pack_id"] = pack_id
 
                     # Filtrar por fecha de la orden individual (más preciso)
                     if not get_all:
@@ -799,6 +805,229 @@ def process_order(order):
     return True
 
 
+def process_pack(pack_orders):
+    """
+    Procesa un pack de órdenes (1 o más) con shipping distribuido proporcionalmente.
+
+    Args:
+        pack_orders: Lista de órdenes del mismo pack
+
+    Returns:
+        bool: True si se procesó exitosamente al menos una orden
+    """
+    if not pack_orders:
+        return False
+
+    # Obtener shipping cost UNA SOLA VEZ (es compartido para todo el pack)
+    first_order = pack_orders[0]
+    shipping = first_order.get("shipping", {})
+    shipping_id = shipping.get("id")
+    total_shipping_cost = 0
+
+    if shipping_id:
+        try:
+            load_dotenv(override=True)
+            ml_token = os.getenv("ML_ACCESS_TOKEN")
+            headers = {"Authorization": f"Bearer {ml_token}"}
+            r = requests.get(f"https://api.mercadolibre.com/marketplace/shipments/{shipping_id}",
+                           headers=headers, timeout=10)
+            if r.status_code == 200:
+                shipment_data = r.json()
+                lead_time = shipment_data.get("lead_time", {})
+                total_shipping_cost = lead_time.get("list_cost", 0)
+        except:
+            pass
+
+    # Calcular el total de unit_price de todos los items (para distribuir shipping proporcionalmente)
+    total_unit_price = sum(
+        order.get("order_items", [{}])[0].get("unit_price", 0)
+        for order in pack_orders
+    )
+
+    # Procesar cada orden del pack con su parte proporcional del shipping
+    success = False
+    for order in pack_orders:
+        order_items = order.get("order_items", [])
+        if not order_items:
+            continue
+
+        unit_price = order_items[0].get("unit_price", 0)
+
+        # Calcular la porción de shipping que le corresponde a este item
+        if total_unit_price > 0:
+            item_shipping_share = (unit_price / total_unit_price) * total_shipping_cost
+        else:
+            item_shipping_share = 0
+
+        # Procesar la orden con su shipping proporcional
+        if process_order_with_shipping(order, item_shipping_share):
+            success = True
+
+    return success
+
+
+def process_order_with_shipping(order, shipping_cost_override):
+    """
+    Procesa una orden con un shipping_cost específico (para packs con shipping distribuido).
+
+    Args:
+        order: Orden de MercadoLibre API
+        shipping_cost_override: Costo de shipping a usar (ya calculado proporcionalmente)
+
+    Returns:
+        bool: True si se procesó exitosamente
+    """
+    order_id = order["id"]
+    order_status = order.get("status", "pending")
+
+    # Verificar si ya existe
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, status FROM sales WHERE order_id = ?", (str(order_id),))
+    existing = cursor.fetchone()
+
+    if existing:
+        existing_id, existing_status = existing
+
+        # Si el status cambió, actualizar el registro
+        if existing_status != order_status:
+            print(f"\n{Colors.YELLOW}⚠️  CAMBIO DE STATUS DETECTADO{Colors.NC}")
+            print(f"   Orden:        {order_id}")
+            print(f"   Status prev:  {existing_status}")
+            print(f"   Status nuevo: {order_status}")
+
+            cursor.execute("""
+                UPDATE sales
+                SET status = ?,
+                    last_updated = CURRENT_TIMESTAMP,
+                    raw_ml_data = ?
+                WHERE order_id = ?
+            """, (order_status, json.dumps(order), str(order_id)))
+
+            conn.commit()
+
+            if order_status == "cancelled":
+                print(f"{Colors.RED}   ❌ VENTA CANCELADA{Colors.NC}")
+                cursor.execute("""
+                    UPDATE sales
+                    SET profit = 0,
+                        profit_margin = 0,
+                        notes = 'Cancelada por el comprador'
+                    WHERE order_id = ?
+                """, (str(order_id),))
+                conn.commit()
+
+            conn.close()
+            return True
+
+        # Ya existe y no cambió - saltar
+        conn.close()
+        return False
+
+    # Nueva venta - procesar
+    order_items = order.get("order_items", [])
+    if not order_items:
+        conn.close()
+        return False
+
+    first_item = order_items[0]
+    item = first_item.get("item", {})
+
+    ml_item_id = item.get("id")
+    parent_item_id = item.get("parent_item_id")
+    title = item.get("title", "Unknown")
+    quantity = first_item.get("quantity", 1)
+
+    # Obtener marketplace
+    context = order.get("context", {})
+    marketplace = context.get("site", "MLU")
+
+    # Buyer
+    buyer = order.get("buyer", {})
+    buyer_nickname = buyer.get("nickname", "Unknown")
+
+    # Financiero
+    unit_price = first_item.get("unit_price", 0)
+    sale_fee = first_item.get("sale_fee", 0)
+
+    # Usar el shipping_cost que ya viene calculado proporcionalmente
+    # NET PROCEEDS = unit_price - sale_fee - shipping_cost_proporcional
+    net_proceeds = (unit_price * quantity) - (sale_fee * quantity) - shipping_cost_override
+
+    # Buscar ASIN y costo de Amazon
+    asin = None
+    amazon_cost = 0
+
+    if parent_item_id:
+        asin_data = get_asin_info(parent_item_id)
+        if asin_data:
+            asin = asin_data.get("asin")
+            amazon_cost = asin_data.get("amazon_cost", 0)
+
+    if not asin and ml_item_id:
+        asin_data = get_asin_info(ml_item_id)
+        if asin_data:
+            asin = asin_data.get("asin")
+            amazon_cost = asin_data.get("amazon_cost", 0)
+
+    # Calcular profit
+    total_amazon_cost = (amazon_cost + FULFILLMENT_FEE) * quantity
+    profit = net_proceeds - total_amazon_cost
+    profit_margin = (profit / total_amazon_cost * 100) if total_amazon_cost > 0 else 0
+
+    # Guardar en DB
+    try:
+        cursor.execute("""
+            INSERT INTO sales (
+                order_id, ml_item_id, asin, country, marketplace,
+                buyer_nickname, product_title, quantity, sale_date,
+                sale_price_usd, ml_fee, shipping_cost, net_proceeds,
+                amazon_cost, fulfillment_fee, total_cost,
+                profit, profit_margin, status, raw_ml_data
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (
+            str(order_id),
+            ml_item_id,
+            asin,
+            marketplace[:2],
+            marketplace,
+            buyer_nickname,
+            title,
+            quantity,
+            order.get("date_created"),
+            round(unit_price * quantity, 2),
+            round(sale_fee * quantity, 2),
+            round(shipping_cost_override, 2),
+            round(net_proceeds, 2),
+            round(amazon_cost, 2),
+            round(FULFILLMENT_FEE, 2),
+            round(total_amazon_cost, 2),
+            round(profit, 2),
+            round(profit_margin, 2),
+            order_status,
+            json.dumps(order)
+        ))
+
+        conn.commit()
+        conn.close()
+
+        print(f"\n{Colors.GREEN}✅ NUEVA VENTA REGISTRADA{Colors.NC}")
+        print(f"   Orden: {order_id}")
+        print(f"   ASIN: {asin}")
+        print(f"   Producto: {title[:50]}")
+        print(f"   Cantidad: {quantity}")
+        print(f"   Net proceeds: ${net_proceeds:.2f}")
+        print(f"   Shipping (proporcional): ${shipping_cost_override:.2f}")
+        print(f"   Profit: ${profit:.2f} ({profit_margin:.1f}%)")
+
+        return True
+
+    except Exception as e:
+        print(f"{Colors.RED}❌ Error guardando venta: {e}{Colors.NC}")
+        conn.close()
+        return False
+
+
 def track_new_sales(check_all=False, days_back=1, limit_orders=None):
     """
     Revisa y registra nuevas ventas
@@ -830,11 +1059,20 @@ def track_new_sales(check_all=False, days_back=1, limit_orders=None):
         print(f"{Colors.YELLOW}⚠️  No hay nuevas órdenes{Colors.NC}")
         return 0
 
-    # Procesar cada orden
-    changes = 0  # Cuenta nuevas ventas Y actualizaciones (cancelaciones)
+    # AGRUPAR ÓRDENES POR PACK_ID (para manejar packs con múltiples items)
+    packs = {}
     for order in orders:
-        if process_order(order):
-            changes += 1
+        pack_id = str(order.get("pack_id", order.get("id")))
+        if pack_id not in packs:
+            packs[pack_id] = []
+        packs[pack_id].append(order)
+
+    # Procesar cada pack (puede tener 1 o más órdenes)
+    changes = 0  # Cuenta nuevas ventas Y actualizaciones (cancelaciones)
+    for pack_id, pack_orders in packs.items():
+        # Procesar el pack completo (distribuye shipping entre items)
+        if process_pack(pack_orders):
+            changes += len(pack_orders)  # Contar cada orden del pack
 
     print(f"\n{Colors.GREEN}{'═' * 80}{Colors.NC}")
     print(f"{Colors.GREEN}✅ Procesamiento completado: {changes} cambio(s) detectado(s){Colors.NC}")

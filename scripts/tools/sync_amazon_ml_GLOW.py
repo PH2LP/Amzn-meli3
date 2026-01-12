@@ -437,7 +437,7 @@ def pause_ml_listing(item_id, site_items=None, price_usd=None):
         print(f"   ✅ Stock actualizado a 0 exitosamente")
         print(f"   ℹ️  La propagación a todos los países puede tardar unos minutos")
 
-        # Actualizar en BD
+        # SOLO actualizar en BD si el HTTP request fue exitoso
         try:
             update_listing_stock_in_db(item_id, 0)
         except Exception as e:
@@ -445,7 +445,8 @@ def pause_ml_listing(item_id, site_items=None, price_usd=None):
 
         return True
     else:
-        print(f"   ❌ Error actualizando stock")
+        print(f"   ❌ Error actualizando stock en ML API")
+        print(f"   ⚠️ NO se actualiza BD (mantiene estado anterior)")
         return False
 
 
@@ -481,7 +482,7 @@ def reactivate_ml_listing(item_id, site_items=None, quantity=10):
         print(f"   ✅ Producto reactivado exitosamente")
         print(f"   ℹ️  La propagación a todos los países puede tardar unos minutos")
 
-        # Actualizar en BD
+        # SOLO actualizar en BD si el HTTP request fue exitoso
         try:
             update_listing_stock_in_db(item_id, quantity)
         except Exception as e:
@@ -489,7 +490,8 @@ def reactivate_ml_listing(item_id, site_items=None, quantity=10):
 
         return True
     else:
-        print(f"   ❌ Error reactivando producto")
+        print(f"   ❌ Error reactivando producto en ML API")
+        print(f"   ⚠️ NO se actualiza BD (mantiene estado anterior)")
         return False
 
 
@@ -793,6 +795,9 @@ def sync_one_listing(listing, glow_cache, changes_log):
     Returns:
         dict con resultado de la sincronización
     """
+    import time
+    start_time = time.time()
+
     item_id = listing["item_id"]
     asin = listing["asin"]
     current_price = listing["price_usd"]
@@ -819,7 +824,8 @@ def sync_one_listing(listing, glow_cache, changes_log):
         "success": False,
         "message": "",
         "amazon_status": amazon_status,
-        "site_items": site_items  # Para detectar errores por cuenta diferente
+        "site_items": site_items,  # Para detectar errores por cuenta diferente
+        "elapsed_time": 0
     }
 
     # Caso 1: Producto NO disponible / No cumple requisitos → Pausar en ML
@@ -854,12 +860,15 @@ def sync_one_listing(listing, glow_cache, changes_log):
         print(f"   💰 Precio Amazon: ${amazon_price} USD")
         print(f"   💰 Precio ML calculado (con {current_markup}% markup): ${new_ml_price} USD")
 
-        # REACTIVACIÓN: Si el producto estaba sin stock en ML, reactivarlo primero
+        # REACTIVACIÓN / ACTUALIZACIÓN DE STOCK:
         # Consultamos el stock actual en ML
+        FORCE_STOCK = os.getenv("FORCE_STOCK_UPDATE", "false").lower() == "true"
+
         ml_item_data = ml_http_get(f"{ML_API}/items/{item_id}", params={})
         if ml_item_data:
             current_ml_stock = ml_item_data.get("available_quantity", 10)
 
+            # Reactivar si stock=0 O si FORCE_STOCK_UPDATE=true
             if current_ml_stock == 0:
                 print(f"   ℹ️ Producto tiene stock=0 en ML, reactivando...")
                 if reactivate_ml_listing(item_id, site_items=site_items, quantity=10):
@@ -873,6 +882,18 @@ def sync_one_listing(listing, glow_cache, changes_log):
                         notify_listing_reactivated(asin, item_id)
                 else:
                     print(f"   ❌ Error reactivando producto")
+
+            elif FORCE_STOCK:
+                # FORCE_STOCK_UPDATE: Forzar actualización de stock para que ML replique a todos los países
+                # Aunque el stock global ya sea 10, al escribirlo de nuevo ML lo replica a todos los marketplaces
+                print(f"   🔄 FORCE_STOCK_UPDATE activado: reescribiendo stock={current_ml_stock} para forzar replicación...")
+                if reactivate_ml_listing(item_id, site_items=site_items, quantity=10):
+                    result["action"] = "stock_forced"
+                    result["success"] = True
+                    result["message"] = f"Stock forzado para replicación: {current_ml_stock} → 10"
+                    print(f"   ✅ Stock reescrito (ML replicará a todos los países)")
+                else:
+                    print(f"   ❌ Error forzando actualización de stock")
 
 
         # NUEVA LÓGICA: Comparar precio de Amazon actual vs último precio conocido
@@ -971,6 +992,13 @@ def sync_one_listing(listing, glow_cache, changes_log):
         result["action"] = "error"
         result["message"] = amazon_status.get("error", "Error desconocido")
 
+    # Calcular tiempo transcurrido
+    result["elapsed_time"] = time.time() - start_time
+    elapsed = result["elapsed_time"]
+
+    # Mostrar tiempo transcurrido
+    print(f"   ⏱️  Tiempo: {elapsed:.2f}s")
+
     # Registrar cambio en el log
     changes_log.append(result)
 
@@ -1053,11 +1081,15 @@ def main():
     print(f"{'='*80}", flush=True)
     print()
 
+    glow_start_time = datetime.now()
     glow_cache = get_glow_data_batch(asins, show_progress=True)
+    glow_end_time = datetime.now()
+    glow_duration = (glow_end_time - glow_start_time).total_seconds()
 
     print(f"{'='*80}", flush=True)
     passed = sum(1 for v in glow_cache.values() if v is not None)
     print(f"✅ Cache de Glow API listo: {passed}/{len(glow_cache)} productos aprobados")
+    print(f"⏱️  Tiempo de consulta Amazon: {glow_duration:.1f} segundos ({glow_duration/60:.1f} minutos)")
     print(f"{'='*80}", flush=True)
     print()
 
@@ -1076,6 +1108,7 @@ def main():
     }
 
     # Sincronizar cada listing usando cache de Glow
+    ml_update_start_time = datetime.now()
     for i, listing in enumerate(listings, 1):
         print(f"\n[{i}/{len(listings)}]", end=" ")
 
@@ -1115,9 +1148,12 @@ def main():
     with open(log_file, "w", encoding="utf-8") as f:
         json.dump(log_data, f, indent=2, ensure_ascii=False)
 
-    # Calcular duración
+    # Calcular duraciones
+    ml_update_end_time = datetime.now()
+    ml_update_duration = (ml_update_end_time - ml_update_start_time).total_seconds()
+
     end_time = datetime.now()
-    duration = (end_time - start_time).total_seconds() / 60  # en minutos
+    total_duration = (end_time - start_time).total_seconds()
 
     # Resumen final
     print("\n" + "=" * 80)
@@ -1150,8 +1186,51 @@ def main():
         print(f"   └─ Otros errores:     {errors_other}")
 
     print()
+    print("⏱️  TIEMPOS DE EJECUCIÓN")
+    print("=" * 80)
+
+    # Formato bonito de tiempos
+    def format_duration(seconds):
+        """Formatea segundos en formato legible"""
+        if seconds < 60:
+            return f"{seconds:.1f}s"
+        elif seconds < 3600:
+            mins = seconds / 60
+            return f"{mins:.1f}min ({seconds:.0f}s)"
+        else:
+            hours = seconds / 3600
+            mins = (seconds % 3600) / 60
+            return f"{hours:.1f}h ({mins:.0f}min)"
+
+    print(f"Consulta Amazon (Glow API):    {format_duration(glow_duration)}")
+    print(f"Actualización MercadoLibre:    {format_duration(ml_update_duration)}")
+    print(f"Otros procesos:                {format_duration(total_duration - glow_duration - ml_update_duration)}")
+    print(f"{'─'*80}")
+    print(f"TOTAL:                         {format_duration(total_duration)}")
+
+    # Velocidades
+    if glow_duration > 0:
+        asins_per_sec = len(asins) / glow_duration
+        print(f"\n📈 Velocidad Glow API:          {asins_per_sec:.1f} ASINs/segundo")
+
+    if ml_update_duration > 0:
+        updates_per_sec = stats['total'] / ml_update_duration
+        print(f"📈 Velocidad ML updates:        {updates_per_sec:.1f} items/segundo")
+
+    # Calcular tiempo promedio por ASIN
+    if changes_log:
+        elapsed_times = [c.get("elapsed_time", 0) for c in changes_log if c.get("elapsed_time")]
+        if elapsed_times:
+            avg_time = sum(elapsed_times) / len(elapsed_times)
+            min_time = min(elapsed_times)
+            max_time = max(elapsed_times)
+            print(f"\n⏱️  Tiempo por ASIN:")
+            print(f"   Promedio: {avg_time:.2f}s")
+            print(f"   Mínimo:   {min_time:.2f}s")
+            print(f"   Máximo:   {max_time:.2f}s")
+
+    print()
     print(f"📄 Log guardado en: {log_file}")
-    print(f"⏱️ Duración: {duration:.1f} minutos")
 
     # Mostrar detalle de errores si los hay
     if stats['errors'] > 0:
