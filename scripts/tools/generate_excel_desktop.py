@@ -219,27 +219,32 @@ def create_professional_excel():
         from openpyxl.chart import BarChart, PieChart, Reference, LineChart
         from openpyxl.chart.label import DataLabelList
 
-        # Calcular métricas clave
-        total_ventas = len(df)
-        total_revenue = df['Precio Venta'].sum()
-        total_ml_fees = df['Fee ML'].sum()
-        total_net_ml = df['Neto ML'].sum()
-        total_amazon_cost = df['Costo AMZ'].sum()
-        total_3pl = df['3PL'].sum()
-        total_costs = df['Total Costo'].sum()
-        total_profit = df['GANANCIA'].sum()
-        avg_margin = df['Margen %'].mean()
-        avg_ticket = df['Precio Venta'].mean()
+        # Filtrar solo ventas confirmadas para métricas (excluir canceladas)
+        df_confirmed = df[df['Estado'] != 'cancelled'].copy()
+        df_cancelled = df[df['Estado'] == 'cancelled'].copy()
+
+        # Calcular métricas clave (solo ventas confirmadas)
+        total_ventas = len(df_confirmed)
+        total_cancelled = len(df_cancelled)
+        total_revenue = df_confirmed['Precio Venta'].sum()
+        total_ml_fees = df_confirmed['Fee ML'].sum()
+        total_net_ml = df_confirmed['Neto ML'].sum()
+        total_amazon_cost = df_confirmed['Costo AMZ'].sum()
+        total_3pl = df_confirmed['3PL'].sum()
+        total_costs = df_confirmed['Total Costo'].sum()
+        total_profit = df_confirmed['GANANCIA'].sum()
+        avg_margin = df_confirmed['Margen %'].mean()
+        avg_ticket = df_confirmed['Precio Venta'].mean()
         roi = (total_profit / total_costs * 100) if total_costs > 0 else 0
 
-        # Ventas por marketplace
-        by_marketplace = df.groupby('MKT').agg({
+        # Ventas por marketplace (solo confirmadas)
+        by_marketplace = df_confirmed.groupby('MKT').agg({
             'GANANCIA': 'sum',
             'Producto': 'count'
         }).reset_index()
 
-        # Top productos
-        top_products = df.nlargest(5, 'GANANCIA')[['Producto', 'GANANCIA', 'Margen %']]
+        # Top productos (solo confirmadas)
+        top_products = df_confirmed.nlargest(5, 'GANANCIA')[['Producto', 'GANANCIA', 'Margen %']]
 
         # ═══ SECCIÓN 1: HEADER ═══
         ws_summary['A1'] = '📊 DASHBOARD DE VENTAS - AMAZON → MERCADOLIBRE'
@@ -255,6 +260,7 @@ def create_professional_excel():
 
         kpis = [
             ['Total Ventas:', total_ventas, 'unidades'],
+            ['Ventas Canceladas:', total_cancelled, 'unidades'],
             ['Revenue Total:', total_revenue, 'USD'],
             ['Ganancia Total:', total_profit, 'USD'],
             ['ROI:', roi, '%'],
@@ -300,35 +306,61 @@ def create_professional_excel():
                 ws_summary[f'E{row}'].font = Font(name='Arial', size=12, bold=True, color="CC0000")
             row += 1
 
-        # ═══ SECCIÓN 4: TOP PRODUCTOS ═══
-        ws_summary['A12'] = '🏆 TOP 5 PRODUCTOS MÁS RENTABLES'
+        # ═══ SECCIÓN 4: GRÁFICO DE FACTURACIÓN POR DÍA/MES/AÑO ═══
+        ws_summary['A12'] = '📈 FACTURACIÓN EN EL TIEMPO'
         ws_summary['A12'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
 
-        # Headers
-        headers = ['Producto', 'Ganancia', 'Margen %']
-        for col_idx, header in enumerate(headers, 1):
-            cell = ws_summary.cell(row=13, column=col_idx, value=header)
-            cell.font = Font(name='Arial', size=10, bold=True, color="FFFFFF")
-            cell.fill = PatternFill(start_color="4472C4", end_color="4472C4", fill_type="solid")
-            cell.alignment = Alignment(horizontal='center')
+        # Preparar datos temporales (solo confirmadas)
+        df_time = df_confirmed.copy()
+        df_time['Fecha_parsed'] = pd.to_datetime(df_time['Fecha'], format='mixed', errors='coerce')
+        df_time = df_time[df_time['Fecha_parsed'].notna()].copy()
+        df_time['Fecha_Solo'] = df_time['Fecha_parsed'].dt.date
 
-        # Data
-        row = 14
-        for idx, prod_row in top_products.iterrows():
-            ws_summary[f'A{row}'] = prod_row['Producto'][:40]
-            ws_summary[f'B{row}'] = f"${prod_row['GANANCIA']:,.2f}"
-            ws_summary[f'C{row}'] = f"{prod_row['Margen %']:.1f}%"
-            row += 1
+        # Agrupar por día para el gráfico
+        daily_revenue = df_time.groupby('Fecha_Solo').agg({
+            'Precio Venta': 'sum'
+        }).reset_index().sort_values('Fecha_Solo')
+
+        # Escribir datos para el gráfico (últimos 30 días o todos si son menos)
+        ws_summary['A14'] = 'Fecha'
+        ws_summary['B14'] = 'Revenue'
+        ws_summary['A14'].font = Font(name='Arial', size=10, bold=True)
+        ws_summary['B14'].font = Font(name='Arial', size=10, bold=True)
+
+        # Tomar últimos 30 días o todos los disponibles
+        recent_data = daily_revenue.tail(30)
+
+        chart_row = 15
+        for idx, row_data in recent_data.iterrows():
+            ws_summary[f'A{chart_row}'] = str(row_data['Fecha_Solo'])
+            ws_summary[f'B{chart_row}'] = row_data['Precio Venta']
+            chart_row += 1
+
+        # Crear gráfico de líneas
+        line_chart = LineChart()
+        line_chart.title = "Facturación Diaria (Últimos 30 días)"
+        line_chart.style = 13
+        line_chart.y_axis.title = 'Revenue (USD)'
+        line_chart.x_axis.title = 'Fecha'
+        line_chart.height = 12
+        line_chart.width = 20
+
+        data = Reference(ws_summary, min_col=2, min_row=14, max_row=14 + len(recent_data))
+        cats = Reference(ws_summary, min_col=1, min_row=15, max_row=14 + len(recent_data))
+        line_chart.add_data(data, titles_from_data=True)
+        line_chart.set_categories(cats)
+
+        ws_summary.add_chart(line_chart, "D12")
 
         # ═══ SECCIÓN 5: GRÁFICO DE GANANCIA POR PRODUCTO ═══
         # Preparar datos para gráfico
-        ws_summary['G3'] = 'GANANCIA POR PRODUCTO'
-        ws_summary['G3'].font = Font(name='Arial', size=12, bold=True, color="1F4E78")
+        ws_summary['A48'] = 'GANANCIA POR PRODUCTO'
+        ws_summary['A48'].font = Font(name='Arial', size=12, bold=True, color="1F4E78")
 
-        chart_row = 4
+        chart_row = 49
         for idx, prod_row in top_products.iterrows():
-            ws_summary[f'G{chart_row}'] = prod_row['Producto'][:25]
-            ws_summary[f'H{chart_row}'] = prod_row['GANANCIA']
+            ws_summary[f'A{chart_row}'] = prod_row['Producto'][:25]
+            ws_summary[f'B{chart_row}'] = prod_row['GANANCIA']
             chart_row += 1
 
         # Crear gráfico de barras
@@ -338,36 +370,14 @@ def create_professional_excel():
         chart1.title = "Top 5 Productos por Ganancia"
         chart1.y_axis.title = 'Ganancia (USD)'
 
-        data = Reference(ws_summary, min_col=8, min_row=3, max_row=3 + len(top_products))
-        cats = Reference(ws_summary, min_col=7, min_row=4, max_row=3 + len(top_products))
+        data = Reference(ws_summary, min_col=2, min_row=48, max_row=48 + len(top_products))
+        cats = Reference(ws_summary, min_col=1, min_row=49, max_row=48 + len(top_products))
         chart1.add_data(data, titles_from_data=True)
         chart1.set_categories(cats)
         chart1.height = 10
         chart1.width = 15
 
-        ws_summary.add_chart(chart1, "G13")
-
-        # ═══ SECCIÓN 6: PIE CHART - DISTRIBUCIÓN DE INGRESOS ═══
-        ws_summary['A22'] = 'DISTRIBUCIÓN DE REVENUE VS COSTOS'
-        ws_summary['A22'].font = Font(name='Arial', size=12, bold=True, color="1F4E78")
-
-        ws_summary['A23'] = 'Categoría'
-        ws_summary['B23'] = 'Monto'
-        ws_summary['A24'] = 'Ganancia Neta'
-        ws_summary['B24'] = total_profit
-        ws_summary['A25'] = 'Costos Totales'
-        ws_summary['B25'] = total_costs
-
-        pie = PieChart()
-        labels = Reference(ws_summary, min_col=1, min_row=24, max_row=25)
-        data = Reference(ws_summary, min_col=2, min_row=23, max_row=25)
-        pie.add_data(data, titles_from_data=True)
-        pie.set_categories(labels)
-        pie.title = "Revenue vs Costos"
-        pie.height = 10
-        pie.width = 15
-
-        ws_summary.add_chart(pie, "A27")
+        ws_summary.add_chart(chart1, "D35")
 
         # Ajustar anchos de columna
         ws_summary.column_dimensions['A'].width = 22
@@ -389,8 +399,8 @@ def create_professional_excel():
     ws_daily = wb.create_sheet("Ventas Por Día", 2)
 
     if len(df) > 0 and 'Fecha' in df.columns:
-        # Preparar datos diarios
-        df_copy = df.copy()
+        # Preparar datos diarios (solo ventas confirmadas)
+        df_copy = df[df['Estado'] != 'cancelled'].copy()
         df_copy['Fecha_parsed'] = pd.to_datetime(df_copy['Fecha'], format='mixed', errors='coerce')
         df_copy = df_copy[df_copy['Fecha_parsed'].notna()].copy()
         df_copy['Fecha_Solo'] = df_copy['Fecha_parsed'].dt.date
@@ -510,6 +520,135 @@ def create_professional_excel():
     else:
         ws_daily['A1'] = 'No hay datos disponibles'
         ws_daily['A1'].font = Font(name='Arial', size=12)
+
+    # ═══ HOJA 4: VENTAS POR MES ═══
+    ws_monthly = wb.create_sheet("Ventas Por Mes", 3)
+
+    if len(df) > 0 and 'Fecha' in df.columns:
+        # Preparar datos mensuales (solo ventas confirmadas)
+        df_copy = df[df['Estado'] != 'cancelled'].copy()
+        df_copy['Fecha_parsed'] = pd.to_datetime(df_copy['Fecha'], format='mixed', errors='coerce')
+        df_copy = df_copy[df_copy['Fecha_parsed'].notna()].copy()
+        df_copy['Mes'] = df_copy['Fecha_parsed'].dt.to_period('M')
+
+        # Agrupar por mes
+        monthly_summary = df_copy.groupby('Mes').agg({
+            'Producto': 'count',           # Cantidad de ventas
+            'Cant': 'sum',                 # Unidades vendidas
+            'Precio Venta': 'sum',         # Revenue
+            'Total Costo': 'sum',          # Costos
+            'GANANCIA': 'sum',             # Ganancia
+            'Margen %': 'mean',            # Margen promedio
+            'ASIN': 'nunique',             # Productos únicos
+            'MKT': 'nunique'               # Marketplaces
+        }).reset_index()
+
+        # Convertir período a string legible
+        monthly_summary['Mes'] = monthly_summary['Mes'].astype(str)
+
+        # Renombrar columnas
+        monthly_summary.columns = [
+            'Mes', 'Ventas', 'Unidades', 'Revenue',
+            'Costos Totales', 'Ganancia', 'Margen %',
+            'Productos Únicos', 'MKTs Activos'
+        ]
+
+        # Ordenar descendente (más reciente primero)
+        monthly_summary = monthly_summary.sort_values('Mes', ascending=False)
+
+        # Estilos (igual que hoja Ventas)
+        header_fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+        header_font = Font(name='Arial', size=11, bold=True, color="FFFFFF")
+
+        thick_border = Border(
+            left=Side(style='medium', color='000000'),
+            right=Side(style='medium', color='000000'),
+            top=Side(style='medium', color='000000'),
+            bottom=Side(style='medium', color='000000')
+        )
+
+        # Headers
+        headers = list(monthly_summary.columns)
+        for col_idx, header in enumerate(headers, 1):
+            cell = ws_monthly.cell(row=1, column=col_idx, value=header)
+            cell.fill = header_fill
+            cell.font = header_font
+            cell.alignment = Alignment(horizontal='center', vertical='center')
+            cell.border = thick_border
+
+        # Datos
+        for row_idx, row_data in enumerate(monthly_summary.itertuples(index=False), 2):
+            for col_idx, value in enumerate(row_data, 1):
+                cell = ws_monthly.cell(row=row_idx, column=col_idx, value=value)
+                cell.font = Font(name='Arial', size=10, bold=True)
+                cell.border = thick_border
+                cell.alignment = Alignment(vertical='center')
+
+        # Formato de números
+        for row_idx in range(2, len(monthly_summary) + 2):
+            # Revenue, Costos, Ganancia (columnas D, E, F)
+            for col in [4, 5, 6]:
+                ws_monthly.cell(row=row_idx, column=col).number_format = '$#,##0.00'
+            # Margen %
+            ws_monthly.cell(row=row_idx, column=7).number_format = '0.00"%"'
+
+        # Fila de TOTALES
+        total_row = len(monthly_summary) + 2
+        ws_monthly[f'A{total_row}'] = 'TOTAL'
+        ws_monthly[f'A{total_row}'].font = Font(name='Arial', size=10, bold=True)
+        ws_monthly[f'A{total_row}'].border = thick_border
+
+        ws_monthly[f'B{total_row}'] = monthly_summary['Ventas'].sum()
+        ws_monthly[f'B{total_row}'].font = Font(name='Arial', size=10, bold=True)
+        ws_monthly[f'B{total_row}'].border = thick_border
+
+        ws_monthly[f'C{total_row}'] = monthly_summary['Unidades'].sum()
+        ws_monthly[f'C{total_row}'].font = Font(name='Arial', size=10, bold=True)
+        ws_monthly[f'C{total_row}'].border = thick_border
+
+        ws_monthly[f'D{total_row}'] = monthly_summary['Revenue'].sum()
+        ws_monthly[f'E{total_row}'] = monthly_summary['Costos Totales'].sum()
+        ws_monthly[f'F{total_row}'] = monthly_summary['Ganancia'].sum()
+        ws_monthly[f'G{total_row}'] = monthly_summary['Margen %'].mean()
+
+        # Formato totales (columnas H, I sin datos)
+        ws_monthly[f'H{total_row}'].border = thick_border
+        ws_monthly[f'I{total_row}'].border = thick_border
+
+        # Formato totales
+        for col in [4, 5, 6]:
+            ws_monthly.cell(row=total_row, column=col).number_format = '$#,##0.00'
+            ws_monthly.cell(row=total_row, column=col).font = Font(name='Arial', size=10, bold=True)
+            ws_monthly.cell(row=total_row, column=col).border = thick_border
+        ws_monthly.cell(row=total_row, column=7).number_format = '0.00"%"'
+        ws_monthly.cell(row=total_row, column=7).font = Font(name='Arial', size=10, bold=True)
+        ws_monthly.cell(row=total_row, column=7).border = thick_border
+
+        # Filtros automáticos
+        last_col = get_column_letter(len(headers))
+        ws_monthly.auto_filter.ref = f"A1:{last_col}{len(monthly_summary) + 1}"
+
+        # Freeze panes
+        ws_monthly.freeze_panes = 'A2'
+
+        # Anchos de columna
+        column_widths = {
+            'A': 14,   # Mes
+            'B': 10,   # Ventas
+            'C': 11,   # Unidades
+            'D': 13,   # Revenue
+            'E': 14,   # Costos
+            'F': 13,   # Ganancia
+            'G': 11,   # Margen %
+            'H': 16,   # Productos Únicos
+            'I': 14    # MKTs Activos
+        }
+
+        for col, width in column_widths.items():
+            ws_monthly.column_dimensions[col].width = width
+    else:
+        ws_monthly['A1'] = 'No hay datos disponibles'
+        ws_monthly['A1'].font = Font(name='Arial', size=12)
 
     # Guardar
     wb.save(DESKTOP_PATH)
