@@ -334,9 +334,12 @@ def create_professional_excel():
 
         chart_row = 15
         for idx, row_data in recent_data.iterrows():
-            ws_summary[f'G{chart_row}'] = str(row_data['Fecha_Solo'])
-            ws_summary[f'H{chart_row}'] = row_data['Precio Venta']
-            ws_summary[f'I{chart_row}'] = row_data['GANANCIA']
+            # Convertir fecha a datetime de Excel (no string)
+            fecha_dt = pd.to_datetime(row_data['Fecha_Solo'])
+            ws_summary[f'G{chart_row}'] = fecha_dt.to_pydatetime()
+            ws_summary[f'G{chart_row}'].number_format = 'dd/mm/yyyy'
+            ws_summary[f'H{chart_row}'] = float(row_data['Precio Venta'])
+            ws_summary[f'I{chart_row}'] = float(row_data['GANANCIA'])
             chart_row += 1
 
         # Crear gráfico de líneas profesional tipo bolsa con 2 series
