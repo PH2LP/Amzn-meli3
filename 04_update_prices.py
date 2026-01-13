@@ -20,6 +20,8 @@ import argparse
 from datetime import datetime
 from pathlib import Path
 from dotenv import load_dotenv
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 # Cargar .env
 load_dotenv(override=True)
@@ -38,8 +40,12 @@ class Colors:
     CYAN = '\033[0;36m'
     NC = '\033[0m'
 
+# Lock para thread-safe printing
+print_lock = threading.Lock()
+
 def log(msg, color=Colors.NC):
-    print(f"{color}{msg}{Colors.NC}")
+    with print_lock:
+        print(f"{color}{msg}{Colors.NC}")
 
 # Configuración
 DB_PATH = "storage/listings_database.db"
@@ -174,7 +180,8 @@ def get_listings_to_update(asin_filter=None):
     Returns:
         Lista de tuplas (asin, item_id, mini_ml_data, price_usd, site_items)
     """
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)  # 30 segundos de timeout
+    conn.execute("PRAGMA journal_mode=WAL")  # Habilitar WAL mode
     cursor = conn.cursor()
 
     if asin_filter:
@@ -201,7 +208,9 @@ def main():
     parser.add_argument("--asin", help="Solo actualizar este ASIN")
     parser.add_argument("--min-diff", type=float, default=1.0, help="Diferencia mínima para actualizar (USD)")
     parser.add_argument("--exclude-sites", help="Override: Marketplaces a excluir (sobrescribe .env)")
-    parser.add_argument("--skip-amazon-check", action="store_true", help="Omitir consulta a Amazon (usar precio DB)")
+    parser.add_argument("--check-amazon", action="store_true", help="Consultar precios actuales en Amazon (Glow API) - Por defecto usa DB")
+    parser.add_argument("--quiet", "-q", action="store_true", help="Modo silencioso - solo muestra resumen cada 50 items")
+    parser.add_argument("--workers", "-w", type=int, default=10, help="Número de workers paralelos (default: 10)")
 
     args = parser.parse_args()
 
@@ -269,9 +278,9 @@ def main():
         "amazon_no_disponible": 0
     }
 
-    # Consultar precios de Amazon con Glow API
+    # Consultar precios de Amazon con Glow API (solo si se solicita con --check-amazon)
     amazon_prices = {}
-    if not args.skip_amazon_check:
+    if args.check_amazon:
         log("🔍 Consultando precios actuales en Amazon (Glow API)...", Colors.CYAN)
         try:
             # Extraer todos los ASINs y deduplicar
@@ -336,7 +345,7 @@ def main():
             import traceback
             traceback.print_exc()
     else:
-        log("⏭️  Omitiendo consulta a Amazon (usando precios DB)\n", Colors.YELLOW)
+        log("💾 Usando precios del último sync (DB) - usa --check-amazon para consultar Glow API\n", Colors.GREEN)
 
     # Procesar cada listing
     for i, (asin, item_id, mini_ml_json, current_price, site_items_json) in enumerate(listings, 1):
@@ -363,7 +372,7 @@ def main():
         base_usd = None
         source = "DB"
 
-        if asin in amazon_prices:
+        if args.check_amazon and asin in amazon_prices:
             prime_offer = amazon_prices[asin]
 
             if prime_offer and prime_offer.get("price"):
@@ -377,10 +386,23 @@ def main():
                 stats["amazon_no_disponible"] += 1
                 continue
         else:
-            # Fallback: usar precio de la DB (puede estar desactualizado)
-            if "price" in mini_ml and "base_usd" in mini_ml["price"]:
+            # Usar precio guardado por sync en DB (columna costo_amazon)
+            # Este es el precio más reciente actualizado por 06_sync_amazon_ml.py
+            conn_price = sqlite3.connect(DB_PATH, timeout=30.0)
+            conn_price.execute("PRAGMA journal_mode=WAL")  # Habilitar WAL mode
+            cursor_price = conn_price.cursor()
+            cursor_price.execute("SELECT costo_amazon FROM listings WHERE asin = ?", (asin,))
+            row = cursor_price.fetchone()
+            conn_price.close()
+
+            if row and row[0]:
+                base_usd = float(row[0])
+                source = "DB (último sync)"
+                log(f"    💵 Precio base (último sync): ${base_usd:.2f}", Colors.GREEN)
+            elif "price" in mini_ml and isinstance(mini_ml["price"], dict) and "base_usd" in mini_ml["price"]:
+                # Fallback final: precio legacy del mini_ml
                 base_usd = float(mini_ml["price"]["base_usd"])
-                source = "DB (puede estar desactualizado)"
+                source = "DB legacy (desactualizado)"
                 log(f"    💵 Precio base (DB legacy): ${base_usd:.2f}", Colors.YELLOW)
 
         if not base_usd:
@@ -418,32 +440,52 @@ def main():
             log(f"    🔄 Actualizando en MercadoLibre...", Colors.CYAN)
 
             if update_ml_price(item_id, new_price, mini_ml, exclude_sites):
-                # Actualizar DB
-                conn = sqlite3.connect(DB_PATH)
-                cursor = conn.cursor()
+                # Actualizar DB con timeout y retry
+                max_retries = 3
+                retry_count = 0
+                updated = False
 
-                cursor.execute("""
-                    UPDATE listings
-                    SET price_usd = ?,
-                        costo_amazon = ?,
-                        tax_florida = ?,
-                        precio_actual = ?,
-                        ultima_actualizacion_precio = ?
-                    WHERE asin = ?
-                """, (
-                    new_price,
-                    base_usd,
-                    price_calc['tax_usd'],
-                    new_price,
-                    datetime.now().isoformat(),
-                    asin
-                ))
+                while retry_count < max_retries and not updated:
+                    try:
+                        conn = sqlite3.connect(DB_PATH, timeout=30.0)
+                        conn.execute("PRAGMA journal_mode=WAL")  # Habilitar WAL mode
+                        cursor = conn.cursor()
 
-                conn.commit()
-                conn.close()
+                        cursor.execute("""
+                            UPDATE listings
+                            SET price_usd = ?,
+                                costo_amazon = ?,
+                                tax_florida = ?,
+                                precio_actual = ?,
+                                ultima_actualizacion_precio = ?
+                            WHERE asin = ?
+                        """, (
+                            new_price,
+                            base_usd,
+                            price_calc['tax_usd'],
+                            new_price,
+                            datetime.now().isoformat(),
+                            asin
+                        ))
 
-                log(f"    ✅ Actualizado correctamente", Colors.GREEN)
-                stats["actualizados"] += 1
+                        conn.commit()
+                        conn.close()
+                        updated = True
+
+                    except sqlite3.OperationalError as e:
+                        retry_count += 1
+                        if retry_count < max_retries:
+                            log(f"    ⚠️  DB locked, reintentando ({retry_count}/{max_retries})...", Colors.YELLOW)
+                            import time
+                            time.sleep(2)  # Esperar 2 segundos antes de reintentar
+                        else:
+                            log(f"    ❌ Error DB después de {max_retries} intentos: {e}", Colors.RED)
+                            stats["errores"] += 1
+                            continue
+
+                if updated:
+                    log(f"    ✅ Actualizado correctamente", Colors.GREEN)
+                    stats["actualizados"] += 1
             else:
                 log(f"    ❌ Error al actualizar", Colors.RED)
                 stats["errores"] += 1
