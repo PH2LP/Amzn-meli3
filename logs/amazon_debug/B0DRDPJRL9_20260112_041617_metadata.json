@@ -1,0 +1,33 @@
+{
+  "asin": "B0DRDPJRL9",
+  "url": "https://www.amazon.com/dp/B0DRDPJRL9",
+  "status_code": 200,
+  "timestamp": "20260112_041617",
+  "html_size": 809192,
+  "attempt": 1,
+  "has_captcha": false,
+  "has_robot_check": false,
+  "has_delivery_block": false,
+  "has_price": false,
+  "headers": {
+    "content-type": "text/html;charset=UTF-8",
+    "server": "Server",
+    "x-amz-rid": "98D1MGPN6HS24PP08W52",
+    "content-security-policy-report-only": "default-src 'self' blob: https: data: mediastream: 'unsafe-eval' 'unsafe-inline';report-uri https://metrics.media-amazon.com/",
+    "cache-control": "no-cache, no-transform",
+    "content-encoding": "gzip",
+    "accept-ch": "ect,rtt,downlink,device-memory,sec-ch-device-memory,viewport-width,sec-ch-viewport-width,dpr,sec-ch-dpr,sec-ch-ua-full-version-list,sec-ch-ua-platform-version",
+    "content-security-policy": "upgrade-insecure-requests;report-uri https://metrics.media-amazon.com/",
+    "x-content-type-options": "nosniff",
+    "accept-ch-lifetime": "86400",
+    "p3p": "policyref=\"https://www.amazon.com/w3c/p3p.xml\",CP=\"CAO DSP LAW CUR ADM IVAo IVDo CONo OTPo OUR DELi PUBi OTRi BUS PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA HEA PRE LOC GOV OTC \"",
+    "x-xss-protection": "1;",
+    "strict-transport-security": "max-age=47474747; includeSubDomains; preload",
+    "vary": "Content-Type,Accept-Encoding,User-Agent",
+    "x-frame-options": "SAMEORIGIN",
+    "date": "Mon, 12 Jan 2026 09:16:16 GMT",
+    "alt-svc": "h3=\":443\"; ma=93600",
+    "x-amzn-cdn-id": "ak-0.39ff3117.1768209376.44f8965a",
+    "x-cache": "NotCacheable from child"
+  }
+}

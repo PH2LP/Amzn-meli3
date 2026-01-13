@@ -339,17 +339,31 @@ def create_professional_excel():
             ws_summary[f'I{chart_row}'] = row_data['GANANCIA']
             chart_row += 1
 
-        # Crear gráfico de líneas profesional con 2 series
+        # Crear gráfico de líneas profesional tipo bolsa con 2 series
         from openpyxl.chart.marker import Marker
+        from openpyxl.chart.axis import DateAxis
 
         line_chart = LineChart()
         line_chart.title = None  # Sin título (ya está en la celda)
-        line_chart.style = 12  # Estilo más moderno
-        line_chart.y_axis.title = 'USD'
-        line_chart.x_axis.title = None
+        line_chart.style = 13  # Estilo finance/bolsa
+
+        # Eje Y - USD (más claro y profesional)
+        line_chart.y_axis.title = 'Monto (USD)'
+        line_chart.y_axis.majorGridlines = None  # Sin líneas de grilla para look más limpio
+        line_chart.y_axis.numFmt = '$#,##0.00'  # Formato moneda
+
+        # Eje X - Fechas (tipo bolsa)
+        line_chart.x_axis.title = 'Fecha'
+        line_chart.x_axis.number_format = 'dd/mm'  # Formato día/mes
+        line_chart.x_axis.majorTickMark = 'out'  # Marcas hacia afuera tipo bolsa
+        line_chart.x_axis.majorGridlines = None
+
+        # Tamaño del gráfico
         line_chart.height = 15  # Más alto
         line_chart.width = 24   # Más ancho - ocupa casi todo el ancho
-        line_chart.y_axis.majorGridlines = None  # Sin líneas de grilla
+
+        # Leyenda abajo tipo bolsa
+        line_chart.legend.position = 'b'  # Bottom
 
         # Datos: Revenue y Ganancia
         data = Reference(ws_summary, min_col=8, min_row=14, max_col=9, max_row=14 + len(recent_data))
@@ -357,11 +371,16 @@ def create_professional_excel():
         line_chart.add_data(data, titles_from_data=True)
         line_chart.set_categories(cats)
 
-        # Estilizar las líneas
-        line_chart.series[0].graphicalProperties.line.width = 2.5  # Revenue más gruesa
+        # Estilizar las líneas tipo bolsa
+        # Serie 0: Revenue (azul fuerte, línea gruesa)
+        from openpyxl.drawing.fill import SolidColorFillProperties, ColorChoice
+        line_chart.series[0].graphicalProperties.line.width = 30000  # 3pt (en EMUs)
+        line_chart.series[0].graphicalProperties.line.solidFill = "2E75B6"  # Azul bolsa
         line_chart.series[0].smooth = True  # Línea suave
 
-        line_chart.series[1].graphicalProperties.line.width = 2.5  # Ganancia más gruesa
+        # Serie 1: Ganancia (verde fuerte, línea gruesa)
+        line_chart.series[1].graphicalProperties.line.width = 30000  # 3pt (en EMUs)
+        line_chart.series[1].graphicalProperties.line.solidFill = "43AA8B"  # Verde bolsa
         line_chart.series[1].smooth = True  # Línea suave
 
         ws_summary.add_chart(line_chart, "A14")

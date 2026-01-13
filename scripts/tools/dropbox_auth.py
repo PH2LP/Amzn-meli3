@@ -19,18 +19,50 @@ from dotenv import load_dotenv, set_key
 
 # Load environment
 ENV_PATH = PROJECT_ROOT / '.env'
-load_dotenv(ENV_PATH)
+load_dotenv(ENV_PATH, override=True)
 
-APP_KEY = os.getenv('DROPBOX_APP_KEY')
-APP_SECRET = os.getenv('DROPBOX_APP_SECRET')
-ACCESS_TOKEN = os.getenv('DROPBOX_ACCESS_TOKEN')
-REFRESH_TOKEN = os.getenv('DROPBOX_REFRESH_TOKEN')
+# File to store token expiration time
+TOKEN_CACHE_FILE = PROJECT_ROOT / 'storage' / '.dropbox_token_cache.json'
 
-# Cache for token expiration time (stored in memory)
+# Cache for token expiration time
 _token_cache = {
-    'access_token': ACCESS_TOKEN,
-    'expires_at': None  # Will be set when we first detect an expired token
+    'expires_at': None
 }
+
+def get_access_token_from_env():
+    """Get the current access token from .env file"""
+    load_dotenv(ENV_PATH, override=True)
+    return os.getenv('DROPBOX_ACCESS_TOKEN')
+
+def load_token_cache():
+    """Load token cache from file"""
+    global _token_cache
+    try:
+        if TOKEN_CACHE_FILE.exists():
+            with open(TOKEN_CACHE_FILE, 'r') as f:
+                data = json.load(f)
+                if 'expires_at' in data:
+                    # Parse ISO format datetime
+                    _token_cache['expires_at'] = datetime.fromisoformat(data['expires_at'])
+    except Exception as e:
+        # If cache is corrupted, ignore and continue
+        pass
+
+def save_token_cache():
+    """Save token cache to file"""
+    try:
+        TOKEN_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        data = {}
+        if _token_cache['expires_at']:
+            data['expires_at'] = _token_cache['expires_at'].isoformat()
+        with open(TOKEN_CACHE_FILE, 'w') as f:
+            json.dump(data, f)
+    except Exception as e:
+        # Non-critical error, just print warning
+        pass
+
+# Load cache on module import
+load_token_cache()
 
 
 def refresh_access_token():
@@ -38,7 +70,12 @@ def refresh_access_token():
     Use refresh token to get a new access token.
     Returns the new access token or None if failed.
     """
-    if not REFRESH_TOKEN or not REFRESH_TOKEN.strip():
+    load_dotenv(ENV_PATH, override=True)
+    refresh_token = os.getenv('DROPBOX_REFRESH_TOKEN')
+    app_key = os.getenv('DROPBOX_APP_KEY')
+    app_secret = os.getenv('DROPBOX_APP_SECRET')
+
+    if not refresh_token or not refresh_token.strip():
         print("⚠️  DROPBOX_REFRESH_TOKEN no está configurado en .env")
         print("   Ejecutá: python3 scripts/tools/get_dropbox_refresh_token.py")
         return None
@@ -49,9 +86,9 @@ def refresh_access_token():
 
     data = {
         'grant_type': 'refresh_token',
-        'refresh_token': REFRESH_TOKEN,
-        'client_id': APP_KEY,
-        'client_secret': APP_SECRET
+        'refresh_token': refresh_token,
+        'client_id': app_key,
+        'client_secret': app_secret
     }
 
     try:
@@ -65,9 +102,14 @@ def refresh_access_token():
             # Update .env file with new token
             set_key(ENV_PATH, 'DROPBOX_ACCESS_TOKEN', new_access_token)
 
-            # Update cache
-            _token_cache['access_token'] = new_access_token
+            # Reload .env to update os.environ
+            load_dotenv(ENV_PATH, override=True)
+
+            # Update cache (expiration only, token is in .env)
             _token_cache['expires_at'] = datetime.now() + timedelta(seconds=expires_in - 300)  # Refresh 5min before expiry
+
+            # Save cache to file
+            save_token_cache()
 
             print(f"✅ Access token refrescado automáticamente (válido por {expires_in/3600:.1f}h)")
             return new_access_token
@@ -86,18 +128,28 @@ def get_valid_access_token():
     Get a valid access token, refreshing if necessary.
     Returns the current valid token or None if unable to refresh.
     """
+    # If we don't know when token expires, refresh it proactively
+    if _token_cache['expires_at'] is None:
+        print("🔄 Token sin expiración conocida, refrescando proactivamente...")
+        new_token = refresh_access_token()
+        if new_token:
+            return new_token
+        else:
+            # Refresh failed, try using current token anyway
+            return get_access_token_from_env()
+
     # Check if token is about to expire or already expired
-    if _token_cache['expires_at'] and datetime.now() >= _token_cache['expires_at']:
+    if datetime.now() >= _token_cache['expires_at']:
         # Token expired or about to expire, refresh it
         new_token = refresh_access_token()
         if new_token:
             return new_token
         else:
             # Refresh failed, try using current token anyway
-            return _token_cache['access_token']
+            return get_access_token_from_env()
 
-    # Token is still valid (or we don't know when it expires yet)
-    return _token_cache['access_token']
+    # Token is still valid
+    return get_access_token_from_env()
 
 
 def get_dropbox_client():

@@ -1,0 +1,33 @@
+{
+  "asin": "B0FJ2L67HJ",
+  "url": "https://www.amazon.com/dp/B0FJ2L67HJ",
+  "status_code": 200,
+  "timestamp": "20260112_033154",
+  "html_size": 587870,
+  "attempt": 1,
+  "has_captcha": false,
+  "has_robot_check": false,
+  "has_delivery_block": false,
+  "has_price": false,
+  "headers": {
+    "content-type": "text/html;charset=UTF-8",
+    "server": "Server",
+    "x-amz-rid": "CXPAM8GG3FV601G5G9H9",
+    "content-security-policy-report-only": "default-src 'self' blob: https: data: mediastream: 'unsafe-eval' 'unsafe-inline';report-uri https://metrics.media-amazon.com/",
+    "content-encoding": "gzip",
+    "x-content-type-options": "nosniff",
+    "x-xss-protection": "1;",
+    "accept-ch": "ect,rtt,downlink,device-memory,sec-ch-device-memory,viewport-width,sec-ch-viewport-width,dpr,sec-ch-dpr,sec-ch-ua-full-version-list",
+    "p3p": "policyref=\"https://www.amazon.com/w3c/p3p.xml\",CP=\"CAO DSP LAW CUR ADM IVAo IVDo CONo OTPo OUR DELi PUBi OTRi BUS PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA HEA PRE LOC GOV OTC \"",
+    "content-security-policy": "upgrade-insecure-requests;report-uri https://metrics.media-amazon.com/",
+    "accept-ch-lifetime": "86400",
+    "cache-control": "no-cache, no-transform",
+    "strict-transport-security": "max-age=47474747; includeSubDomains; preload",
+    "vary": "Content-Type,Accept-Encoding,User-Agent",
+    "x-frame-options": "SAMEORIGIN",
+    "date": "Mon, 12 Jan 2026 08:31:53 GMT",
+    "alt-svc": "h3=\":443\"; ma=93600",
+    "x-amzn-cdn-id": "ak-0.39ff3117.1768206713.44ef7d08",
+    "x-cache": "NotCacheable from child"
+  }
+}

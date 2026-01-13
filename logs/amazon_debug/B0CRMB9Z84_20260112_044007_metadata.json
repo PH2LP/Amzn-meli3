@@ -1,0 +1,25 @@
+{
+  "asin": "B0CRMB9Z84",
+  "url": "https://www.amazon.com/dp/B0CRMB9Z84",
+  "status_code": 200,
+  "timestamp": "20260112_044007",
+  "html_size": 5088,
+  "attempt": 3,
+  "has_captcha": true,
+  "has_robot_check": false,
+  "has_delivery_block": false,
+  "has_price": false,
+  "headers": {
+    "content-type": "text/html",
+    "server": "Server",
+    "x-amz-rid": "NDZP1HFBHYYZJSZ0NM66",
+    "vary": "Content-Type,Accept-Encoding,User-Agent",
+    "content-encoding": "gzip",
+    "strict-transport-security": "max-age=47474747; includeSubDomains; preload",
+    "date": "Mon, 12 Jan 2026 09:40:08 GMT",
+    "content-length": "1838",
+    "alt-svc": "h3=\":443\"; ma=93600",
+    "x-amzn-cdn-id": "ak-0.45c4ce17.1768210807.95b9b31e",
+    "x-cache": "NotCacheable from child"
+  }
+}

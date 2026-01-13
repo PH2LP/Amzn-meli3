@@ -56,8 +56,8 @@ USER_AGENTS = [
 
 # === CONFIGURACIÓN DE RATE LIMITING ===
 # Delays variables (no fijos) para evitar patrones predecibles
-BASE_DELAY = 2.0  # Delay base
-JITTER_RANGE = 0.4  # ±20% variación (1.6-2.4s)
+BASE_DELAY = 3.0  # Delay base (aumentado de 2.0 a 3.0 para reducir rate)
+JITTER_RANGE = 0.4  # ±20% variación (2.4-3.6s)
 
 # === SESSION MANAGEMENT ===
 # Valores variables para evitar patrones (no siempre 100 requests exactos)
@@ -711,14 +711,28 @@ def is_blocked_response(html_content: str, status_code: int) -> bool:
     Señales de bloqueo:
     - CAPTCHA
     - Robot check
-    - Página muy pequeña
+    - Página muy pequeña (pero NO 404s)
     - Sin precio Y sin delivery
     - Mensaje de "automated access"
+
+    NO es bloqueo:
+    - 404: Producto descontinuado/no existe
+    - 503/429: Error temporal del servidor (diferente a bloqueo)
     """
 
+    # 404 = producto no existe/descontinuado, NO es bloqueo WAF
+    if status_code == 404:
+        return False
+
+    # 503/429 = Rate limit/server error, reintentar pero no cambiar sesión
+    if status_code in [503, 429]:
+        return True
+
+    # Otros códigos != 200 = error/bloqueo
     if status_code != 200:
         return True
 
+    # Página muy pequeña (< 10KB) suele ser bloqueo
     if len(html_content) < 10000:
         return True
 
@@ -743,6 +757,66 @@ def is_blocked_response(html_content: str, status_code: int) -> bool:
         return True
 
     return False
+
+
+def solve_captcha_clickthrough(session, html_content: str, impersonate_browser: str) -> bool:
+    """
+    Resuelve automáticamente el CAPTCHA tipo click-through de Amazon
+
+    Args:
+        session: curl_cffi Session actual
+        html_content: HTML con el CAPTCHA
+        impersonate_browser: Browser fingerprint para mantener consistencia
+
+    Returns:
+        True si se resolvió exitosamente, False si falló
+    """
+    from urllib.parse import urlencode
+
+    # Extraer parámetros del formulario CAPTCHA
+    amzn_match = re.search(r'name="amzn"\s+value="([^"]+)"', html_content)
+    amzn_r_match = re.search(r'name="amzn-r"\s+value="([^"]+)"', html_content)
+    keywords_match = re.search(r'name="field-keywords"\s+value="([^"]+)"', html_content)
+
+    if not amzn_match:
+        print("   ❌ No se pudieron extraer parámetros del CAPTCHA")
+        return False
+
+    # Construir parámetros del formulario
+    params = {
+        'amzn': amzn_match.group(1),
+        'amzn-r': amzn_r_match.group(1) if amzn_r_match else '',
+        'field-keywords': keywords_match.group(1) if keywords_match else ''
+    }
+
+    # URL de validación
+    captcha_url = f"https://www.amazon.com/errors/validateCaptcha?{urlencode(params)}"
+
+    headers = {
+        'Referer': 'https://www.amazon.com/',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-US,en;q=0.9',
+    }
+
+    try:
+        # Simular el click del botón "Continue shopping"
+        get_kwargs = {'headers': headers, 'timeout': 30, 'allow_redirects': True}
+        if CURL_CFFI_AVAILABLE:
+            get_kwargs['impersonate'] = impersonate_browser
+
+        response = session.get(captcha_url, **get_kwargs)
+
+        # Verificar si el CAPTCHA se resolvió (Amazon devuelve página completa)
+        if len(response.text) > 50000:
+            print("   ✅ CAPTCHA resuelto exitosamente")
+            return True
+        else:
+            print(f"   ❌ CAPTCHA no resuelto (respuesta: {len(response.text)} bytes)")
+            return False
+
+    except Exception as e:
+        print(f"   ❌ Error resolviendo CAPTCHA: {e}")
+        return False
 
 
 def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
@@ -811,32 +885,122 @@ def check_availability_v2_advanced(asin: str, zipcode: str = None) -> Dict:
 
             response = session.get(url, **get_kwargs)
 
+            # Manejar 404s (producto no existe) - NO reintentar
+            if response.status_code == 404:
+                print(f"   ❌ Producto no encontrado (404) - ASIN descontinuado o inválido")
+                return {
+                    "available": False,
+                    "price": None,
+                    "buyable": False,
+                    "status": "unavailable",
+                    "error": "Product not found (404 - discontinued)",
+                    "delivery_date": None,
+                    "days_until_delivery": None,
+                    "prime_available": False,
+                    "in_stock": False
+                }
+
             # Detectar bloqueo
             if is_blocked_response(response.text, response.status_code):
-                # TEMPORAL: Guardar HTML para debugging
-                debug_file = f"/tmp/amazon_block_{asin}.html"
-                with open(debug_file, 'w', encoding='utf-8') as f:
+                # Guardar HTML y metadata para debugging
+                from pathlib import Path
+                debug_dir = Path("logs/amazon_debug")
+                debug_dir.mkdir(parents=True, exist_ok=True)
+
+                timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+                debug_html = debug_dir / f"{asin}_{timestamp}_status{response.status_code}.html"
+                debug_json = debug_dir / f"{asin}_{timestamp}_metadata.json"
+
+                # Guardar HTML
+                with open(debug_html, 'w', encoding='utf-8') as f:
                     f.write(response.text)
-                print(f"   🔍 DEBUG: URL bloqueada: {url}")
-                print(f"   🔍 DEBUG: Status Code: {response.status_code}")
-                print(f"   🔍 DEBUG: HTML guardado en: {debug_file}")
-                print(f"   🔍 DEBUG: Tamaño HTML: {len(response.text)} bytes")
 
-                # Bloqueo detectado - aplicar exponential backoff
-                backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
-                jitter = random.uniform(0, backoff_time * 0.1)
-                total_wait = backoff_time + jitter
+                # Guardar metadata
+                metadata = {
+                    "asin": asin,
+                    "url": url,
+                    "status_code": response.status_code,
+                    "timestamp": timestamp,
+                    "html_size": len(response.text),
+                    "attempt": attempt + 1,
+                    "has_captcha": 'captcha' in response.text.lower(),
+                    "has_robot_check": 'robot check' in response.text.lower(),
+                    "has_delivery_block": 'mir-layout-DELIVERY_BLOCK' in response.text,
+                    "has_price": bool(re.search(r'<span class="a-offscreen">\$([0-9,.]+)</span>', response.text)),
+                    "headers": dict(response.headers)
+                }
 
-                print(f"   ⚠️  Bloqueo detectado para {asin} (intento {attempt+1}/{MAX_RETRIES})")
-                print(f"   ⏳ Exponential backoff: {total_wait:.1f}s...")
+                with open(debug_json, 'w', encoding='utf-8') as f:
+                    json.dump(metadata, f, indent=2)
 
-                # Forzar nueva sesión después de bloqueo
-                _session_rotator.reset()
+                print(f"   🔍 DEBUG: Status {response.status_code} detectado para {asin}")
+                print(f"   📁 HTML: {debug_html.name}")
+                print(f"   📊 Metadata: has_price={metadata['has_price']}, has_delivery={metadata['has_delivery_block']}, has_captcha={metadata['has_captcha']}")
 
-                time.sleep(total_wait)
-                continue
+                # Verificar si es un CAPTCHA tipo click-through (puede resolverse automáticamente)
+                is_captcha = metadata['has_captcha'] and len(response.text) < 10000
 
-            html = response.text
+                if is_captcha:
+                    print(f"   🔓 CAPTCHA detectado para {asin} - intentando resolver...")
+
+                    # Intentar resolver CAPTCHA automáticamente
+                    if solve_captcha_clickthrough(session, response.text, _session_rotator.impersonate_browser):
+                        # CAPTCHA resuelto - esperar un momento y reintentar
+                        time.sleep(2)
+
+                        print(f"   🔄 Reintentando GET después de resolver CAPTCHA...")
+                        response = session.get(url, **get_kwargs)
+
+                        # Verificar si ahora sí obtuvimos la página
+                        if not is_blocked_response(response.text, response.status_code):
+                            print(f"   ✅ Página obtenida exitosamente después de resolver CAPTCHA")
+                            html = response.text
+                            # Continuar con el flujo normal (no hacer continue)
+                        else:
+                            print(f"   ❌ Sigue bloqueado después de resolver CAPTCHA")
+                            # Continuar con backoff normal
+                            backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
+                            jitter = random.uniform(0, backoff_time * 0.1)
+                            total_wait = backoff_time + jitter
+
+                            print(f"   ⏳ Exponential backoff: {total_wait:.1f}s...")
+                            _session_rotator.reset()
+                            _rate_limiter.last_request_time = 0
+                            time.sleep(total_wait)
+                            continue
+                    else:
+                        # No se pudo resolver CAPTCHA - aplicar backoff
+                        print(f"   ❌ No se pudo resolver CAPTCHA automáticamente")
+                        backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
+                        jitter = random.uniform(0, backoff_time * 0.1)
+                        total_wait = backoff_time + jitter
+
+                        print(f"   ⏳ Exponential backoff: {total_wait:.1f}s...")
+                        _session_rotator.reset()
+                        _rate_limiter.last_request_time = 0
+                        time.sleep(total_wait)
+                        continue
+                else:
+                    # Bloqueo que NO es CAPTCHA click-through - aplicar exponential backoff normal
+                    backoff_time = min(INITIAL_BACKOFF * (BACKOFF_MULTIPLIER ** attempt), MAX_BACKOFF)
+                    jitter = random.uniform(0, backoff_time * 0.1)
+                    total_wait = backoff_time + jitter
+
+                    print(f"   ⚠️  Bloqueo detectado para {asin} (intento {attempt+1}/{MAX_RETRIES})")
+                    print(f"   ⏳ Exponential backoff: {total_wait:.1f}s...")
+
+                    # Forzar nueva sesión después de bloqueo
+                    _session_rotator.reset()
+
+                    # CRÍTICO: Resetear rate limiter para que agregue delay después del backoff
+                    # Sin esto, el próximo request es inmediato y Amazon detecta el patrón
+                    _rate_limiter.last_request_time = 0
+
+                    time.sleep(total_wait)
+                    continue
+            else:
+                # Sin bloqueo - continuar normalmente
+                html = response.text
 
             # Extraer CSRF token
             csrf_token = None

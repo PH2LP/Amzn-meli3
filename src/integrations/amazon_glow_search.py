@@ -28,8 +28,53 @@ def get_random_user_agent():
     return random.choice(USER_AGENTS)
 
 
+def extract_price_from_product(product) -> Optional[float]:
+    """
+    Extrae el precio de un producto de los resultados de búsqueda de Amazon.
+
+    Args:
+        product: BeautifulSoup element del producto
+
+    Returns:
+        Precio como float, o None si no se encuentra
+    """
+    # Patrones comunes de precio en Amazon search results
+    price_patterns = [
+        # Precio en span con clase a-price
+        {'name': 'span', 'class_': 'a-price'},
+        # Precio en span con clase a-offscreen (precio accesible)
+        {'name': 'span', 'class_': 'a-offscreen'},
+        # Precio whole + fraction
+        {'name': 'span', 'class_': 'a-price-whole'},
+    ]
+
+    for pattern in price_patterns:
+        price_elem = product.find(pattern['name'], class_=re.compile(pattern['class_']))
+        if price_elem:
+            # Buscar dentro del elemento o en a-offscreen si existe
+            offscreen = price_elem.find('span', class_='a-offscreen')
+            if offscreen:
+                price_text = offscreen.get_text(strip=True)
+            else:
+                price_text = price_elem.get_text(strip=True)
+
+            # Limpiar y convertir: "$123.45" -> 123.45
+            price_text = price_text.replace('$', '').replace(',', '').strip()
+
+            # Intentar extraer número
+            match = re.search(r'(\d+(?:\.\d{1,2})?)', price_text)
+            if match:
+                try:
+                    return float(match.group(1))
+                except ValueError:
+                    continue
+
+    return None
+
+
 def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = None,
-                          filter_fast_delivery: bool = True) -> Dict:
+                          filter_fast_delivery: bool = True, use_blacklist: bool = True,
+                          max_delivery_days: int = 4, max_price: float = 450.0) -> Dict:
     """
     Busca una keyword en Amazon y extrae los ASINs de los resultados.
 
@@ -38,6 +83,9 @@ def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = No
         max_results: Máximo número de ASINs a retornar (default: 10)
         zipcode: Zipcode del comprador para delivery context (default: desde .env)
         filter_fast_delivery: Si True, solo retorna productos con envío rápido visible (default: True)
+        use_blacklist: Si True, aplica filtro de blacklist de marcas/categorías (default: True)
+        max_delivery_days: Máximo días de envío permitidos (default: 4)
+        max_price: Precio máximo permitido en USD (default: 450.0, None = sin límite)
 
     Returns:
         Dict con:
@@ -46,6 +94,8 @@ def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = No
             "asins": List[str],
             "total_found": int,
             "total_checked": int,  # Total de productos revisados
+            "filtered_by_blacklist": int,  # Productos filtrados por blacklist
+            "filtered_by_price": int,  # Productos filtrados por precio
             "error": str or None
         }
     """
@@ -57,8 +107,21 @@ def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = No
         "asins": [],
         "total_found": 0,
         "total_checked": 0,
+        "filtered_by_blacklist": 0,
+        "filtered_by_price": 0,
+        "using_prime": False,
         "error": None
     }
+
+    # Inicializar filtro de blacklist si está habilitado
+    if use_blacklist:
+        import sys
+        from pathlib import Path
+        sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+        from scripts.autonomous.brand_filter import ProductFilter
+        product_filter = ProductFilter()
+    else:
+        product_filter = None
 
     session = requests.Session()
     user_agent = get_random_user_agent()
@@ -156,6 +219,48 @@ def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = No
 
             products_checked += 1
 
+            # FILTRO DE PRECIO: Verificar que no exceda max_price
+            if max_price is not None:
+                price = extract_price_from_product(product)
+                if price is not None and price > max_price:
+                    result["filtered_by_price"] += 1
+                    continue
+
+            # FILTRO DE BLACKLIST: Verificar marca/categoría/keywords prohibidas
+            if product_filter:
+                # Extraer título del producto
+                title = ""
+                title_tag = product.find('h2', class_=re.compile('s-line-clamp'))
+                if title_tag:
+                    title = title_tag.get_text(strip=True)
+                if not title:
+                    title_span = product.find('span', {'aria-label': True})
+                    if title_span:
+                        title = title_span.get('aria-label', '').strip()
+                if not title:
+                    h2_tag = product.find('h2')
+                    if h2_tag:
+                        title = h2_tag.get_text(strip=True)
+
+                # Extraer marca (si está visible)
+                brand = ""
+                brand_span = product.find('span', class_=re.compile('a-size-base-plus'))
+                if brand_span:
+                    brand = brand_span.get_text(strip=True)
+
+                # Construir datos para el filtro
+                product_data = {
+                    "title": title,
+                    "brand": brand,
+                    "product_type": "",
+                }
+
+                # Aplicar filtro (modo no estricto para no rechazar por falta de brand)
+                is_allowed, reason = product_filter.is_allowed(asin, product_data, strict=False)
+                if not is_allowed:
+                    result["filtered_by_blacklist"] += 1
+                    continue
+
             # Si no queremos filtrar, agregar directamente
             if not filter_fast_delivery:
                 if asin not in asins_found:
@@ -211,7 +316,8 @@ def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = No
 
 def search_multiple_keywords(keywords: List[str], max_results_per_keyword: int = 10,
                              delay_between_requests: float = 2.0, zipcode: str = None,
-                             filter_fast_delivery: bool = True) -> List[Dict]:
+                             filter_fast_delivery: bool = True, use_blacklist: bool = True,
+                             max_delivery_days: int = 4, max_price: float = 450.0) -> List[Dict]:
     """
     Busca múltiples keywords en Amazon.
 
@@ -221,6 +327,9 @@ def search_multiple_keywords(keywords: List[str], max_results_per_keyword: int =
         delay_between_requests: Delay en segundos entre requests (para evitar rate limiting)
         zipcode: Zipcode del comprador
         filter_fast_delivery: Si True, solo retorna productos con envío rápido visible
+        use_blacklist: Si True, aplica filtro de blacklist de marcas/categorías
+        max_delivery_days: Máximo días de envío permitidos
+        max_price: Precio máximo permitido en USD (default: 450.0, None = sin límite)
 
     Returns:
         Lista de resultados (uno por keyword)
@@ -231,16 +340,21 @@ def search_multiple_keywords(keywords: List[str], max_results_per_keyword: int =
         print(f"  [{i}/{len(keywords)}] Buscando: {keyword}...")
 
         result = search_amazon_keyword(keyword, max_results=max_results_per_keyword,
-                                      zipcode=zipcode, filter_fast_delivery=filter_fast_delivery)
+                                      zipcode=zipcode, filter_fast_delivery=filter_fast_delivery,
+                                      use_blacklist=use_blacklist, max_delivery_days=max_delivery_days,
+                                      max_price=max_price)
         results.append(result)
 
         if result["error"]:
             print(f"    ⚠️  Error: {result['error']}")
         else:
+            prime_icon = "🔐" if result.get("using_prime") else ""
+            blacklist_info = f" (blacklist: {result['filtered_by_blacklist']})" if result.get('filtered_by_blacklist', 0) > 0 else ""
+            price_info = f" (precio: {result['filtered_by_price']})" if result.get('filtered_by_price', 0) > 0 else ""
             if filter_fast_delivery:
-                print(f"    ✅ Encontrados {result['total_found']} ASINs con envío rápido (revisados: {result['total_checked']})")
+                print(f"    ✅ {prime_icon} Encontrados {result['total_found']} ASINs con envío ≤{max_delivery_days}d (revisados: {result['total_checked']}){blacklist_info}{price_info}")
             else:
-                print(f"    ✅ Encontrados {result['total_found']} ASINs")
+                print(f"    ✅ {prime_icon} Encontrados {result['total_found']} ASINs{blacklist_info}{price_info}")
 
         # Delay entre requests (excepto en el último)
         if i < len(keywords):

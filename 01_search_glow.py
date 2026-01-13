@@ -48,22 +48,33 @@ def log(message, color=Colors.NC):
 
 def main():
     # Leer configuración desde .env
-    RESULTS_PER_KEYWORD = int(os.getenv("GLOW_RESULTS_PER_KEYWORD", "10"))
+    MAX_RESULTS = int(os.getenv("GLOW_MAX_RESULTS", "10"))
+    MAX_DELIVERY_DAYS = int(os.getenv("GLOW_MAX_DELIVERY_DAYS", "4"))
+    MAX_PRICE = float(os.getenv("GLOW_MAX_PRICE", "450"))
     KEYWORDS_FILE = os.getenv("KEYWORDS_FILE", "keywords.txt")
-    DELAY_BETWEEN_REQUESTS = float(os.getenv("GLOW_DELAY_BETWEEN_REQUESTS", "2.0"))
-    FILTER_FAST_DELIVERY = os.getenv("GLOW_FILTER_FAST_DELIVERY", "true").lower() == "true"
     BUYER_ZIPCODE = os.getenv("BUYER_ZIPCODE", "33172")
     PROJECT_ROOT = Path(__file__).parent.absolute()
+
+    # Configuración fija (no necesita cambiar)
+    DELAY_BETWEEN_REQUESTS = 2.0
+    FILTER_FAST_DELIVERY = True
+    USE_BLACKLIST = True
 
     log("╔════════════════════════════════════════════════════════════════╗", Colors.BLUE)
     log("║      BÚSQUEDA DE ASINs POR KEYWORDS CON GLOW API              ║", Colors.BLUE)
     log("╚════════════════════════════════════════════════════════════════╝", Colors.BLUE)
     print()
+    # Verificar si hay cookies Prime
+    import os
+    cookies_file = "cache/amazon_session_cookies.json"
+    has_prime_cookies = os.path.exists(cookies_file)
+
     log("📋 Configuración:", Colors.GREEN)
-    log(f"   ASINs por keyword:           {Colors.YELLOW}{RESULTS_PER_KEYWORD}{Colors.NC}")
+    log(f"   ASINs por keyword:           {Colors.YELLOW}{MAX_RESULTS}{Colors.NC}")
+    log(f"   Máx días de envío:           {Colors.YELLOW}{MAX_DELIVERY_DAYS} días{Colors.NC}")
+    log(f"   Precio máximo:               {Colors.YELLOW}${MAX_PRICE}{Colors.NC}")
     log(f"   Archivo de keywords:         {Colors.YELLOW}{KEYWORDS_FILE}{Colors.NC}")
-    log(f"   Delay entre requests:        {Colors.YELLOW}{DELAY_BETWEEN_REQUESTS}s{Colors.NC}")
-    log(f"   Filtrar envío rápido:        {Colors.YELLOW}{'SÍ' if FILTER_FAST_DELIVERY else 'NO'}{Colors.NC}")
+    log(f"   Sesión Prime:                {Colors.YELLOW}{'🔐 ACTIVA' if has_prime_cookies else '❌ NO (anónima)'}{Colors.NC}")
     log(f"   Buyer zipcode:               {Colors.YELLOW}{BUYER_ZIPCODE}{Colors.NC}")
     print()
 
@@ -129,10 +140,13 @@ def main():
 
     results = search_multiple_keywords(
         keywords=keywords,
-        max_results_per_keyword=RESULTS_PER_KEYWORD,
+        max_results_per_keyword=MAX_RESULTS,
         delay_between_requests=DELAY_BETWEEN_REQUESTS,
         filter_fast_delivery=FILTER_FAST_DELIVERY,
-        zipcode=BUYER_ZIPCODE
+        use_blacklist=USE_BLACKLIST,
+        zipcode=BUYER_ZIPCODE,
+        max_delivery_days=MAX_DELIVERY_DAYS,
+        max_price=MAX_PRICE
     )
 
     elapsed = (datetime.now() - start_time).total_seconds()
@@ -147,12 +161,16 @@ def main():
     all_asins = set()
     successful_keywords = 0
     failed_keywords = 0
+    total_filtered_by_blacklist = 0
+    total_filtered_by_price = 0
 
     for result in results:
         if result["error"]:
             failed_keywords += 1
         else:
             successful_keywords += 1
+            total_filtered_by_blacklist += result.get("filtered_by_blacklist", 0)
+            total_filtered_by_price += result.get("filtered_by_price", 0)
             for asin in result["asins"]:
                 all_asins.add(asin)
 
@@ -169,17 +187,21 @@ def main():
     report_data = {
         "timestamp": datetime.now().isoformat(),
         "config": {
-            "results_per_keyword": RESULTS_PER_KEYWORD,
-            "delay_between_requests": DELAY_BETWEEN_REQUESTS,
-            "filter_fast_delivery": FILTER_FAST_DELIVERY,
+            "max_results": MAX_RESULTS,
+            "max_delivery_days": MAX_DELIVERY_DAYS,
+            "max_price": MAX_PRICE,
             "buyer_zipcode": BUYER_ZIPCODE,
-            "keywords_file": KEYWORDS_FILE
+            "keywords_file": KEYWORDS_FILE,
+            "filter_fast_delivery": FILTER_FAST_DELIVERY,
+            "use_blacklist": USE_BLACKLIST
         },
         "summary": {
             "total_keywords": total_keywords,
             "successful_keywords": successful_keywords,
             "failed_keywords": failed_keywords,
             "total_asins_unique": len(all_asins),
+            "total_filtered_by_blacklist": total_filtered_by_blacklist,
+            "total_filtered_by_price": total_filtered_by_price,
             "elapsed_seconds": elapsed
         },
         "results": results
@@ -200,6 +222,10 @@ def main():
     if failed_keywords > 0:
         log(f"   Fallidas:                    {Colors.RED}{failed_keywords}{Colors.NC}")
     log(f"   Total ASINs únicos:          {Colors.YELLOW}{len(all_asins)}{Colors.NC}")
+    if USE_BLACKLIST and total_filtered_by_blacklist > 0:
+        log(f"   Filtrados por blacklist:     {Colors.YELLOW}{total_filtered_by_blacklist}{Colors.NC}")
+    if total_filtered_by_price > 0:
+        log(f"   Filtrados por precio:        {Colors.YELLOW}{total_filtered_by_price}{Colors.NC}")
     log(f"   Tiempo total:                {Colors.CYAN}{elapsed / 60:.1f} minutos{Colors.NC}")
     print()
     log(f"💾 Archivos generados:", Colors.CYAN)
