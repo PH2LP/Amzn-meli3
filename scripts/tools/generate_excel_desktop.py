@@ -306,92 +306,184 @@ def create_professional_excel():
                 ws_summary[f'E{row}'].font = Font(name='Arial', size=12, bold=True, color="CC0000")
             row += 1
 
-        # ═══ SECCIÓN 4: GRÁFICO DE FACTURACIÓN TEMPORAL ═══
-        ws_summary['A12'] = '📈 EVOLUCIÓN DE FACTURACIÓN'
-        ws_summary['A12'].font = Font(name='Arial', size=16, bold=True, color="1F4E78")
-        ws_summary.merge_cells('A12:F12')
-        ws_summary['A12'].alignment = Alignment(horizontal='center', vertical='center')
+        # ═══ SECCIÓN 4: TABLA DE DATOS PARA GRÁFICO DINÁMICO ═══
+        ws_summary['A12'] = '📊 My Sales (editable - cambiar fechas en columnas G-K para filtrar)'
+        ws_summary['A12'].font = Font(name='Arial', size=14, bold=True, color="1F4E78")
+        ws_summary.merge_cells('A12:K12')
+        ws_summary['A12'].alignment = Alignment(horizontal='left', vertical='center')
 
         # Preparar datos temporales (solo confirmadas)
         df_time = df_confirmed.copy()
         df_time['Fecha_parsed'] = pd.to_datetime(df_time['Fecha'], format='mixed', errors='coerce')
         df_time = df_time[df_time['Fecha_parsed'].notna()].copy()
+
+        # Extraer componentes de fecha
         df_time['Fecha_Solo'] = df_time['Fecha_parsed'].dt.date
+        df_time['Year'] = df_time['Fecha_parsed'].dt.year
+        df_time['Month'] = df_time['Fecha_parsed'].dt.month
+        df_time['MonthName'] = df_time['Fecha_parsed'].dt.strftime('%b')
+        df_time['Day'] = df_time['Fecha_parsed'].dt.day
 
-        # Agrupar por día para el gráfico
-        daily_revenue = df_time.groupby('Fecha_Solo').agg({
-            'Precio Venta': 'sum',
-            'GANANCIA': 'sum'
-        }).reset_index().sort_values('Fecha_Solo')
+        # Agrupar por día (nivel más granular)
+        daily_data = df_time.groupby(['Fecha_Solo', 'Year', 'Month', 'MonthName', 'Day']).agg({
+            'Cant': 'sum',           # Units Sold
+            'Precio Venta': 'sum'    # Total Transactions
+        }).reset_index()
 
-        # Escribir datos para el gráfico en columnas ocultas (G, H, I)
-        # Tomar últimos 30 días o todos los disponibles
-        recent_data = daily_revenue.tail(30)
+        # Ordenar por fecha
+        daily_data = daily_data.sort_values('Fecha_Solo')
 
-        ws_summary['G14'] = 'Fecha'
-        ws_summary['H14'] = 'Revenue'
-        ws_summary['I14'] = 'Ganancia'
+        # Escribir encabezados en fila 14
+        ws_summary['G14'] = 'Date'
+        ws_summary['H14'] = 'Year'
+        ws_summary['I14'] = 'Month'
+        ws_summary['J14'] = 'Month Name'
+        ws_summary['K14'] = 'Day'
+        ws_summary['L14'] = 'Units Sold'
+        ws_summary['M14'] = 'Total Transaction'
 
+        # Formatear encabezados
+        for col in ['G', 'H', 'I', 'J', 'K', 'L', 'M']:
+            ws_summary[f'{col}14'].font = Font(name='Arial', size=10, bold=True, color="1F4E78")
+            ws_summary[f'{col}14'].fill = PatternFill(start_color="E7E6E6", end_color="E7E6E6", fill_type="solid")
+
+        # Escribir datos
         chart_row = 15
-        for idx, row_data in recent_data.iterrows():
-            # Convertir fecha a datetime de Excel (no string)
-            fecha_dt = pd.to_datetime(row_data['Fecha_Solo'])
-            ws_summary[f'G{chart_row}'] = fecha_dt.to_pydatetime()
-            ws_summary[f'G{chart_row}'].number_format = 'dd/mm/yyyy'
-            ws_summary[f'H{chart_row}'] = float(row_data['Precio Venta'])
-            ws_summary[f'I{chart_row}'] = float(row_data['GANANCIA'])
+        for idx, row_data in daily_data.iterrows():
+            ws_summary[f'G{chart_row}'] = row_data['Fecha_Solo']
+            ws_summary[f'G{chart_row}'].number_format = 'yyyy-mm-dd'
+            ws_summary[f'H{chart_row}'] = int(row_data['Year'])
+            ws_summary[f'I{chart_row}'] = int(row_data['Month'])
+            ws_summary[f'J{chart_row}'] = row_data['MonthName']
+            ws_summary[f'K{chart_row}'] = int(row_data['Day'])
+            ws_summary[f'L{chart_row}'] = int(row_data['Cant'])
+            ws_summary[f'M{chart_row}'] = float(row_data['Precio Venta'])
             chart_row += 1
 
-        # Crear gráfico de líneas profesional tipo bolsa con 2 series
-        from openpyxl.chart.marker import Marker
-        from openpyxl.chart.axis import DateAxis
+        # Crear gráfico combinado usando datos de la tabla
+        from openpyxl.chart import BarChart, LineChart, Reference
 
+        # ═══ PREPARAR DATOS MENSUALES Y DIARIOS ═══
+
+        # 1. Datos MENSUALES (columnas O-Q)
+        monthly_summary = df_time.groupby(['Year', 'Month', 'MonthName']).agg({
+            'Cant': 'sum',
+            'Precio Venta': 'sum'
+        }).reset_index().sort_values(['Year', 'Month'])
+        monthly_summary = monthly_summary.tail(12)  # Últimos 12 meses
+
+        ws_summary['O14'] = '📅 MONTHLY'
+        ws_summary['O14'].font = Font(name='Arial', size=10, bold=True, color="1F4E78")
+        ws_summary['P14'] = 'Month'
+        ws_summary['Q14'] = 'Units'
+        ws_summary['R14'] = 'Revenue'
+
+        chart_row2 = 15
+        for idx, row_data in monthly_summary.iterrows():
+            ws_summary[f'P{chart_row2}'] = row_data['MonthName']
+            ws_summary[f'Q{chart_row2}'] = int(row_data['Cant'])
+            ws_summary[f'R{chart_row2}'] = float(row_data['Precio Venta'])
+            chart_row2 += 1
+
+        # 2. Datos DIARIOS (columnas T-V)
+        daily_summary = df_time.groupby(['Fecha_Solo']).agg({
+            'Cant': 'sum',
+            'Precio Venta': 'sum'
+        }).reset_index().sort_values('Fecha_Solo')
+        daily_summary = daily_summary.tail(30)  # Últimos 30 días
+
+        ws_summary['T14'] = '📅 DAILY'
+        ws_summary['T14'].font = Font(name='Arial', size=10, bold=True, color="1F4E78")
+        ws_summary['U14'] = 'Date'
+        ws_summary['V14'] = 'Units'
+        ws_summary['W14'] = 'Revenue'
+
+        chart_row3 = 15
+        for idx, row_data in daily_summary.iterrows():
+            ws_summary[f'U{chart_row3}'] = row_data['Fecha_Solo']
+            ws_summary[f'U{chart_row3}'].number_format = 'mm-dd'
+            ws_summary[f'V{chart_row3}'] = int(row_data['Cant'])
+            ws_summary[f'W{chart_row3}'] = float(row_data['Precio Venta'])
+            chart_row3 += 1
+
+        # ═══ GRÁFICO COMBINADO (por defecto usa datos DIARIOS) ═══
+
+        # 1. Crear gráfico de BARRAS para Units Sold
+        bar_chart = BarChart()
+        bar_chart.type = "col"
+        bar_chart.style = 11
+        bar_chart.title = None
+
+        # Datos Units - USA COLUMNAS DIARIAS (V) por defecto
+        units_data = Reference(ws_summary, min_col=22, min_row=14, max_row=14 + len(daily_summary))
+        categories = Reference(ws_summary, min_col=21, min_row=15, max_row=14 + len(daily_summary))
+
+        bar_chart.add_data(units_data, titles_from_data=True)
+        bar_chart.set_categories(categories)
+
+        # Estilizar barras (azul ML)
+        bar_chart.series[0].graphicalProperties.solidFill = "5B7FDB"
+        bar_chart.series[0].graphicalProperties.line.solidFill = "5B7FDB"
+
+        # Configurar eje Y izquierdo (Units) - SIN título visible
+        bar_chart.y_axis.axId = 100
+        bar_chart.y_axis.title = None  # Sin título "Units Sold"
+        bar_chart.y_axis.numFmt = '#,##0'
+        bar_chart.y_axis.majorGridlines = None
+        bar_chart.y_axis.delete = False
+
+        # Configurar eje X (Meses) - SIN título "Period"
+        bar_chart.x_axis.title = None
+        bar_chart.x_axis.delete = False
+
+        # 2. Crear LineChart SEPARADO para Revenue
         line_chart = LineChart()
-        line_chart.title = None  # Sin título (ya está en la celda)
-        line_chart.style = 13  # Estilo finance/bolsa
+        line_chart.style = 12
 
-        # Eje Y - USD (más claro y profesional)
-        line_chart.y_axis.title = 'Monto (USD)'
-        line_chart.y_axis.majorGridlines = None  # Sin líneas de grilla para look más limpio
-        line_chart.y_axis.numFmt = '$#,##0.00'  # Formato moneda
+        # Datos Revenue - USA COLUMNAS DIARIAS (W) por defecto
+        revenue_data = Reference(ws_summary, min_col=23, min_row=14, max_row=14 + len(daily_summary))
+        line_chart.add_data(revenue_data, titles_from_data=True)
+        line_chart.set_categories(categories)
 
-        # Eje X - Fechas (tipo bolsa)
-        line_chart.x_axis.title = 'Fecha'
-        line_chart.x_axis.number_format = 'dd/mm'  # Formato día/mes
-        line_chart.x_axis.majorTickMark = 'out'  # Marcas hacia afuera tipo bolsa
-        line_chart.x_axis.majorGridlines = None
+        # Estilizar línea (naranja)
+        line_chart.series[0].graphicalProperties.line.solidFill = "FF6B35"
+        line_chart.series[0].graphicalProperties.line.width = 30000  # 3pt
+        line_chart.series[0].smooth = True
+
+        # Configurar eje Y DERECHO para Revenue (con título y formato USD)
+        line_chart.y_axis.axId = 200
+        line_chart.y_axis.title = 'Revenue (USD)'
+        line_chart.y_axis.numFmt = '$#,##0'
+        line_chart.y_axis.delete = False
+        line_chart.y_axis.axPos = 'r'  # Posición derecha
+        line_chart.y_axis.majorUnit = 1000  # Incrementos de 1000
+
+        # 3. Combinar: agregar LineChart al BarChart
+        bar_chart.y_axis.crosses = "max"
+        bar_chart += line_chart
 
         # Tamaño del gráfico
-        line_chart.height = 15  # Más alto
-        line_chart.width = 24   # Más ancho - ocupa casi todo el ancho
+        bar_chart.height = 12
+        bar_chart.width = 20
 
-        # Leyenda abajo tipo bolsa
-        line_chart.legend.position = 'b'  # Bottom
+        # Leyenda abajo
+        bar_chart.legend.position = 'b'
 
-        # Datos: Revenue y Ganancia
-        data = Reference(ws_summary, min_col=8, min_row=14, max_col=9, max_row=14 + len(recent_data))
-        cats = Reference(ws_summary, min_col=7, min_row=15, max_row=14 + len(recent_data))
-        line_chart.add_data(data, titles_from_data=True)
-        line_chart.set_categories(cats)
+        # Agregar instrucciones ANTES del gráfico
+        ws_summary['A14'] = '💡 CAMBIAR VISTA: Click derecho en gráfico → Select Data → Edit Series → Cambiar rangos:'
+        ws_summary['A14'].font = Font(name='Arial', size=9, bold=True, color="1F4E78")
+        ws_summary.merge_cells('A14:M14')
 
-        # Estilizar las líneas tipo bolsa
-        # Serie 0: Revenue (azul fuerte, línea gruesa)
-        from openpyxl.drawing.fill import SolidColorFillProperties, ColorChoice
-        line_chart.series[0].graphicalProperties.line.width = 30000  # 3pt (en EMUs)
-        line_chart.series[0].graphicalProperties.line.solidFill = "2E75B6"  # Azul bolsa
-        line_chart.series[0].smooth = True  # Línea suave
+        ws_summary['A15'] = '   📅 MENSUAL: Units=$Q$15:$Q$XX | Revenue=$R$15:$R$XX | Categories=$P$15:$P$XX'
+        ws_summary['A15'].font = Font(name='Arial', size=8, italic=True, color="666666")
+        ws_summary.merge_cells('A15:M15')
 
-        # Serie 1: Ganancia (verde fuerte, línea gruesa)
-        line_chart.series[1].graphicalProperties.line.width = 30000  # 3pt (en EMUs)
-        line_chart.series[1].graphicalProperties.line.solidFill = "43AA8B"  # Verde bolsa
-        line_chart.series[1].smooth = True  # Línea suave
+        ws_summary['A16'] = '   📅 DIARIO: Units=$V$15:$V$XX | Revenue=$W$15:$W$XX | Categories=$U$15:$U$XX'
+        ws_summary['A16'].font = Font(name='Arial', size=8, italic=True, color="666666")
+        ws_summary.merge_cells('A16:M16')
 
-        ws_summary.add_chart(line_chart, "A14")
-
-        # Ocultar columnas con datos (G, H, I) para que solo se vea el gráfico
-        ws_summary.column_dimensions['G'].hidden = True
-        ws_summary.column_dimensions['H'].hidden = True
-        ws_summary.column_dimensions['I'].hidden = True
+        # Agregar gráfico DEBAJO de las instrucciones (fila 18)
+        ws_summary.add_chart(bar_chart, "A18")
 
         # Ajustar anchos de columna
         ws_summary.column_dimensions['A'].width = 22
@@ -666,6 +758,8 @@ def create_professional_excel():
 
     # Guardar
     wb.save(DESKTOP_PATH)
+
+    # Ya no necesitamos modificar XML - gráfico simple funciona perfecto
 
     print(f"✅ Excel creado: {DESKTOP_PATH}")
     print(f"   Total ventas: {len(df)}")
