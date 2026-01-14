@@ -1,0 +1,183 @@
+{
+  "timestamp": "2026-01-13T20:15:59.415942",
+  "config": {
+    "max_results": 5,
+    "max_delivery_days": 4,
+    "max_price": 500.0,
+    "buyer_zipcode": "33172",
+    "keywords_file": "keywords.txt",
+    "filter_fast_delivery": true,
+    "use_blacklist": true
+  },
+  "summary": {
+    "total_keywords": 10,
+    "successful_keywords": 10,
+    "failed_keywords": 0,
+    "total_asins_unique": 50,
+    "total_filtered_by_blacklist": 12,
+    "total_filtered_by_price": 0,
+    "elapsed_seconds": 36.852935
+  },
+  "results": [
+    {
+      "keyword": "ac dc converters",
+      "asins": [
+        "B07JGS8CN2",
+        "B0B2CVWNFH",
+        "B0CPDGXT5H",
+        "B0D14JSNTC",
+        "B0D2PZKXF2"
+      ],
+      "total_found": 5,
+      "total_checked": 12,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "action camera accessories",
+      "asins": [
+        "B07TR3822M",
+        "B0DV9ZCSSX",
+        "B0G5328YBB",
+        "B01171X0UW",
+        "B00PQ9YNI0"
+      ],
+      "total_found": 5,
+      "total_checked": 8,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adhesive reflective strips",
+      "asins": [
+        "B0DB5FDR61",
+        "B07TB5WCKH",
+        "B0F4RRBZ9K",
+        "B0CH56539S",
+        "B08QHX36MC"
+      ],
+      "total_found": 5,
+      "total_checked": 36,
+      "filtered_by_blacklist": 11,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable volleyball nets",
+      "asins": [
+        "B0DDT9N3FQ",
+        "B0CRJVW9NF",
+        "B0DDT24SSF",
+        "B0FBML8WMC",
+        "B0D9ZX3LHV"
+      ],
+      "total_found": 5,
+      "total_checked": 18,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "air hockey table accessories",
+      "asins": [
+        "B09WZB9JDJ",
+        "B0BN4PH1CW",
+        "B076ZN8RTY",
+        "B0C64FPQ2H",
+        "B0FFYYP1JJ"
+      ],
+      "total_found": 5,
+      "total_checked": 14,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baseball balls",
+      "asins": [
+        "B0000CA8WW",
+        "B00IUNZJQO",
+        "B0FXL5CSSQ",
+        "B00AWVNPMM",
+        "B0D3M7WZR3"
+      ],
+      "total_found": 5,
+      "total_checked": 15,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baseball bats",
+      "asins": [
+        "B0BJL4R2XT",
+        "B0F8PKCZ49",
+        "B0FY7YFCCW",
+        "B084TMDSF9",
+        "B0FDW97TSP"
+      ],
+      "total_found": 5,
+      "total_checked": 12,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baseball gloves",
+      "asins": [
+        "B013LPRKQ2",
+        "B01GX09WUE",
+        "B0F6NXX7J4",
+        "B01GX09WBI",
+        "B074HDF916"
+      ],
+      "total_found": 5,
+      "total_checked": 10,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baseball helmets",
+      "asins": [
+        "B07V2NTWC9",
+        "B07W95F1PJ",
+        "B010R04X5K",
+        "B00LI4S0PE",
+        "B010R04KSA"
+      ],
+      "total_found": 5,
+      "total_checked": 9,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "basketball hoop net",
+      "asins": [
+        "B096NXV57Z",
+        "B0792NS47G",
+        "B0G5H8WSGJ",
+        "B08VYFR6T3",
+        "B089SG87J5"
+      ],
+      "total_found": 5,
+      "total_checked": 12,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    }
+  ]
+}

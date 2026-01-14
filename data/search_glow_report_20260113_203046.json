@@ -1,0 +1,3293 @@
+{
+  "timestamp": "2026-01-13T20:30:46.516544",
+  "config": {
+    "max_results": 9,
+    "max_delivery_days": 5,
+    "max_price": 500.0,
+    "buyer_zipcode": "33172",
+    "keywords_file": "keywords.txt",
+    "filter_fast_delivery": true,
+    "use_blacklist": true
+  },
+  "summary": {
+    "total_keywords": 164,
+    "successful_keywords": 164,
+    "failed_keywords": 0,
+    "total_asins_unique": 1397,
+    "total_filtered_by_blacklist": 1127,
+    "total_filtered_by_price": 33,
+    "elapsed_seconds": 676.08455
+  },
+  "results": [
+    {
+      "keyword": "1000 piece puzzles",
+      "asins": [
+        "B0D13Z9HGV",
+        "B0DQ825B3R",
+        "B0D7VKX74W",
+        "B0F29KTKTD",
+        "B0DRJFVRXX",
+        "B086W2XM4G",
+        "B07CPR6HLD",
+        "B08SQP6HXP",
+        "0735376417"
+      ],
+      "total_found": 9,
+      "total_checked": 34,
+      "filtered_by_blacklist": 7,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "3x3 rubik's cubes",
+      "asins": [
+        "B07RSZ7W65",
+        "B0F619DLDC",
+        "B0CBPQ2XWM",
+        "B0B67PYMHB",
+        "B0C2V97CT9",
+        "B092W69J9P",
+        "B09S12SDKG",
+        "B09FG92VXC",
+        "B09Y1VF22N"
+      ],
+      "total_found": 9,
+      "total_checked": 76,
+      "filtered_by_blacklist": 28,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable artist easels",
+      "asins": [
+        "B09CKXJFL1",
+        "B0BXS3NLZ3",
+        "B0BZ3FBFR7",
+        "B09GDXN9H1",
+        "B0D5M7CX1B",
+        "B0F6N2KWXT",
+        "B0F93PYLB5",
+        "B0BHYH759M",
+        "B0CYGZZ6BY"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bpa-free baby rattles",
+      "asins": [
+        "B0B32R6CGB",
+        "B094DSB19L",
+        "B000FMQWS2",
+        "B0FF59R5T3",
+        "B0BS3GJPH4",
+        "B0F62MWKGD",
+        "B088FGHDQ8",
+        "B07QVLTW4X",
+        "B0CTJGXHTQ"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "diamond art painting kits",
+      "asins": [
+        "B08TSZKVXK",
+        "B09WY3Z6C8",
+        "B0G393Y6NB",
+        "B0D4PNSLPQ",
+        "B0DMS2L5QF",
+        "B0D45T1MB9",
+        "B0G1MK2HZR",
+        "B0DK1XQ96N",
+        "B0DRXFNPWP"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "diy jewelry making kits",
+      "asins": [
+        "B0BYJ6ZWN1",
+        "B0B4BX6SY2",
+        "B087WL6JXW",
+        "B0BWMPGFVL",
+        "B0D1C4B15H",
+        "B01N02MNVQ",
+        "B0DSZH4F34",
+        "B09G2979JS",
+        "B0747ZGTTG"
+      ],
+      "total_found": 9,
+      "total_checked": 47,
+      "filtered_by_blacklist": 14,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "educational labyrinth toys",
+      "asins": [
+        "B0006FU2W0",
+        "B00000J0JF",
+        "B0001WGISK",
+        "B0CTD4WRYW",
+        "B0DH87ZMYL",
+        "B0G1LKRZSF",
+        "B0FFW54M9C",
+        "B07PKQNGKC",
+        "B0G1BNH547"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "fidget cube toys",
+      "asins": [
+        "B0DQNQ1ZVZ",
+        "B0CVYK21SN",
+        "B0B1ZZPLN3",
+        "B08KGV5MZD",
+        "B06ZYY3Z3S",
+        "B0FK4GGJKL",
+        "B0FK4V7MWB",
+        "B097BM75VV",
+        "B07W5QM4DP"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "floating bath toys for toddlers",
+      "asins": [
+        "B0CYXGQ6N1",
+        "B083ZZSGLR",
+        "B0BCYT1RX4",
+        "B086C12NTG",
+        "B0DGWPJ5MW",
+        "B0CHF2W4HF",
+        "B0798MYPQS",
+        "B0B87VH914",
+        "B0CHS4YT13"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "interactive baby activity centers",
+      "asins": [
+        "B01J94K9OY",
+        "B00VDP9EB2",
+        "B0DV7KZZ8Y",
+        "B01COSFGEK",
+        "B0DX7J7TZJ",
+        "B08D8RSLXW",
+        "B07C5HZX1F",
+        "B071LQQHPZ",
+        "B0DSJVP8PC"
+      ],
+      "total_found": 9,
+      "total_checked": 16,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "kinetic magic sands",
+      "asins": [
+        "B084BTPVFQ",
+        "B0B4Y2XPK5",
+        "B07GTB3H8T",
+        "B0BRQXKW3C",
+        "B07JLZ38TK",
+        "B09BW36FW6",
+        "B0BJ2NGSHM",
+        "B07VLBWKWQ",
+        "B0BT23TTMK"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "loom band bracelet kits",
+      "asins": [
+        "B085WNTJT1",
+        "B0916KH81H",
+        "B08NYB13TV",
+        "B0CPD7HS93",
+        "B0CVYRQ3MJ",
+        "B08MQN5X9X",
+        "B09TVD14XT",
+        "B0B64G5DL1",
+        "B0DCKSWRNC"
+      ],
+      "total_found": 9,
+      "total_checked": 62,
+      "filtered_by_blacklist": 22,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "magnetic spinning tops",
+      "asins": [
+        "B0C33ZTYVV",
+        "B0FPF7L7W7",
+        "B01N2Z9QAP",
+        "B08HD41T6P",
+        "B0CMZYNMZJ",
+        "B0FG8CWQNG",
+        "B0CC5H8CJ8",
+        "B0C1GW6YXH",
+        "B0C59N3NLW"
+      ],
+      "total_found": 9,
+      "total_checked": 18,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "metal fidget spinners",
+      "asins": [
+        "B0FDJ3LF8H",
+        "B0BQHW1TR4",
+        "B09SH2N8PR",
+        "B0FFM51HMW",
+        "B0FPD25MZ5",
+        "B071Z68LGL",
+        "B0CDQH26JQ",
+        "B0DDPPR6V5",
+        "B07WDNSK5T"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "non-toxic modeling clays",
+      "asins": [
+        "B011EG5KTO",
+        "B0DCFPTLLF",
+        "B089T7PX27",
+        "B0C5W3847R",
+        "B00004UE4A",
+        "B0D3FT27ZX",
+        "B0CGH92TB2",
+        "B0DY2VMCMK",
+        "B0CQNCCBHP"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "plush stimulation toys for infants",
+      "asins": [
+        "B0CDWW374H",
+        "B0FL1YSJWS",
+        "B0D6P7QS1T",
+        "B094DSB19L",
+        "B0BS3GJPH4",
+        "B0DM28VZ9D",
+        "B0CXPYXXDV",
+        "B0BW45DK57",
+        "B0DCP1ZRS3"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "shape matching games for toddlers",
+      "asins": [
+        "B0C2VZ4B44",
+        "B0FNCWMNDD",
+        "B0BD3WMVMC",
+        "B0D3CXKRJN",
+        "B07P1P4K3C",
+        "B0BCQKD85W",
+        "B0DG2XVX3P",
+        "B0DBZTSZM7",
+        "B0FLY88BJ7"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "silicone pop its toys",
+      "asins": [
+        "B09F3TPJL9",
+        "B09FYWQ4LF",
+        "B0971PHPTB",
+        "B0CH96FDFS",
+        "B098TTKHT5",
+        "B0G122TVTV",
+        "B0G11Y12CX",
+        "B08VWD585W",
+        "B09PGTMWZD"
+      ],
+      "total_found": 9,
+      "total_checked": 32,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "squishies stress toys",
+      "asins": [
+        "B0DG2VRFV7",
+        "B09X2K392S",
+        "B0DQNQ1ZVZ",
+        "B081VZH4JN",
+        "B0C6XBP4CW",
+        "B0C2YFVRZM",
+        "B0DPV6Q119",
+        "B079TPCD5X",
+        "B0BVNSDG2W"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "sudoku puzzle books",
+      "asins": [
+        "B098WHPB3D",
+        "B0DKTMJ1KC",
+        "B0C2S6Q9MJ",
+        "B0FBM179D7",
+        "1559910011",
+        "B0FF34B6WY",
+        "1523508124",
+        "B0C9S8B1XP",
+        "B0BRLBRBK2"
+      ],
+      "total_found": 9,
+      "total_checked": 61,
+      "filtered_by_blacklist": 19,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "wooden rocking chairs for babies",
+      "asins": [
+        "B0DJ32PZ8T",
+        "B0DJFQFC2M",
+        "B0DMZGKMY4",
+        "B09KMRLMQN",
+        "B0F24FCK37",
+        "B0DJ2ZZVB9",
+        "B0DJ2Y4GQ1",
+        "B01MUC1CAJ",
+        "B0DJFRL8WV"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "1080p streaming webcams",
+      "asins": [
+        "B0BXGFFSL1",
+        "B0DSPJPRXD",
+        "B0CYQ5P6T7",
+        "B0FKZQLG47",
+        "B0BFJ4CRKD",
+        "B0DQ196WLW",
+        "B01LXCDPPK",
+        "B07M6Y7355",
+        "B0DSJ8WYBM"
+      ],
+      "total_found": 9,
+      "total_checked": 33,
+      "filtered_by_blacklist": 6,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "3d printers",
+      "asins": [
+        "B0CH4NYL6J",
+        "B0CH4RG161",
+        "B0DNW25S87",
+        "B0DN68QV3B",
+        "B0D91S75Y5",
+        "B0F8VM6ZB6",
+        "B0DD7F2BH9",
+        "B0F8PZ1WCT",
+        "B0F8J78BN1"
+      ],
+      "total_found": 9,
+      "total_checked": 32,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 7,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "3d printing filament",
+      "asins": [
+        "B07XG3RM58",
+        "B0FQHG8LY8",
+        "B0G487R1V8",
+        "B0C4TNQZYY",
+        "B0C8NP63GD",
+        "B07ZNHF46J",
+        "B0FQJ8CM52",
+        "B07PGY2JP1",
+        "B0DGXFXP45"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "4k action cameras",
+      "asins": [
+        "B01HGM33HG",
+        "B076DD5JNS",
+        "B0FDWTYGF9",
+        "B0FMFFWXH8",
+        "B09TL6PJQ9",
+        "B0DDSH1W1N",
+        "B0DS2DF5S5",
+        "B0FK5DRP6H",
+        "B0FR3K8GVW"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "accesorios para drones",
+      "asins": [
+        "B07FCMKK5X",
+        "B07J64TCBQ",
+        "B08PQ3HJMJ",
+        "B096VCKR97",
+        "B09H2YLX5V",
+        "B0DDQGTDHJ",
+        "B0FQJ4PWSP",
+        "B0CYFWR7FY",
+        "B0DNZ91M3T"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "action camcorders",
+      "asins": [
+        "B0FLY2M2YN",
+        "B0D9S14C6R",
+        "B0FK4HYCR5",
+        "B01HGM33HG",
+        "B076DD5JNS",
+        "B0FDWTYGF9",
+        "B08K7HFMX4",
+        "B097FC2GPQ",
+        "B0DVT1J537"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "action figure vehicles",
+      "asins": [
+        "B0CBKWYCTB",
+        "B0CCJYHZWT",
+        "B0CXZH8PLQ",
+        "B085QLMDJ9",
+        "B0CPKXW5MM",
+        "B0DDH35Z5P",
+        "B0DMWKCN8V",
+        "B09DL9HBWF",
+        "B0BG6B3DT9"
+      ],
+      "total_found": 9,
+      "total_checked": 14,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "action figures for kids",
+      "asins": [
+        "B0BS4GVV4D",
+        "B0DSCJNB2V",
+        "B083XNCRS3",
+        "B08TQB3CDZ",
+        "B07PMYKXY8",
+        "B0CJHRRHPJ",
+        "B077YYP739",
+        "B08PHZJJ62",
+        "B0DTBZJLLZ"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "action figures set",
+      "asins": [
+        "B0BS4GVV4D",
+        "B08PHZJJ62",
+        "B09PYKMD23",
+        "B0BBN9H17N",
+        "B08TQB3CDZ",
+        "B0BRT84LXC",
+        "B0BSH8DVTB",
+        "B0DTBZJLLZ",
+        "B0CVQL23V5"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "activity centers for babies",
+      "asins": [
+        "B01J94K9OY",
+        "B08D8RSLXW",
+        "B00VDP9EB2",
+        "B0DX7J7TZJ",
+        "B08398QPDM",
+        "B07QZSDWXW",
+        "B07ZHWF2NW",
+        "B08NGBZ753",
+        "B07YVTYGJD"
+      ],
+      "total_found": 9,
+      "total_checked": 29,
+      "filtered_by_blacklist": 6,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "activity tables for toddlers",
+      "asins": [
+        "B01COSFGEK",
+        "B07C5HZX1F",
+        "B08QZT41ZP",
+        "B0DR3Y13QT",
+        "B0FN3NPPJL",
+        "B01FVS6V9Y",
+        "B0DSJVP8PC",
+        "B0DP6WQ5XH",
+        "B01FG5FAEY"
+      ],
+      "total_found": 9,
+      "total_checked": 19,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adhesive reflective strips",
+      "asins": [
+        "B0DB5FDR61",
+        "B07TB5WCKH",
+        "B0F4RRBZ9K",
+        "B0CH56539S",
+        "B0855XD944",
+        "B08QHX36MC",
+        "B0DFVCGCR4",
+        "B0CZLP9JT9",
+        "B08Q8QR6Z8"
+      ],
+      "total_found": 9,
+      "total_checked": 54,
+      "filtered_by_blacklist": 13,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable ankle brace for sprain",
+      "asins": [
+        "B016F59BDU",
+        "B01LXAGV0H",
+        "B0DGV7W6P4",
+        "B005YU8V0C",
+        "B09LV4M578",
+        "B0027VKR5S",
+        "B0FX37LV37",
+        "B0FH9LY5NZ",
+        "B0FH9LR5YP"
+      ],
+      "total_found": 9,
+      "total_checked": 52,
+      "filtered_by_blacklist": 14,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable arm sling support",
+      "asins": [
+        "B07L2MWZ19",
+        "B0BZH1SF4X",
+        "B087Q8963N",
+        "B01BRS9K04",
+        "B0F8QXXTP2",
+        "B0BF8C3H1V",
+        "B0DK9YSBHF",
+        "B0CL8Z82HK",
+        "B087Q7CS5S"
+      ],
+      "total_found": 9,
+      "total_checked": 28,
+      "filtered_by_blacklist": 4,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable back brace for lumbar support",
+      "asins": [
+        "B07WZZFL9T",
+        "B0721275RT",
+        "B072MHBX44",
+        "B0FN4NWRDH",
+        "B0FZ2B8JNX",
+        "B00VLAHZN8",
+        "B0B5DJGHCZ",
+        "B0829BK46J",
+        "B0DNXLTY4M"
+      ],
+      "total_found": 9,
+      "total_checked": 130,
+      "filtered_by_blacklist": 53,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable basketball hoops",
+      "asins": [
+        "B0FH8ZJ84N",
+        "B0FTTT7ZRY",
+        "B0CB8L2HMK",
+        "B0D72SPKW4",
+        "B0DGRJV5VH",
+        "B0FR56PFSN",
+        "B0CCJBV7WS",
+        "B0DGT9RLPS",
+        "B0DGXDGHZ5"
+      ],
+      "total_found": 9,
+      "total_checked": 40,
+      "filtered_by_blacklist": 9,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable bath visors",
+      "asins": [
+        "B0CCV7KFG8",
+        "B0FHH56L6D",
+        "B0FLCTZ7YT",
+        "B0D1C886FH",
+        "B0CJ93K3B4",
+        "B0C32P5ZV7",
+        "B07ZM5ZR9D",
+        "B0F845G5PC",
+        "B0DRW16MJ8"
+      ],
+      "total_found": 9,
+      "total_checked": 94,
+      "filtered_by_blacklist": 39,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable bed frames",
+      "asins": [
+        "B015IHMK5C",
+        "B0FLX6H41M",
+        "B0FCXTLX68",
+        "B0B41XQ73V",
+        "B0G18Y2KXZ",
+        "B0F9YF4LR5",
+        "B0FLFD7JRP",
+        "B0FN391PMC",
+        "B0G6DCJQKP"
+      ],
+      "total_found": 9,
+      "total_checked": 32,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 5,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable bookshelves",
+      "asins": [
+        "B0DLBC7KD7",
+        "B09RDX9TRC",
+        "B0G64CSH5G",
+        "B0FBG8J59M",
+        "B09RF44SQL",
+        "B0F9G8L5YJ",
+        "B0CSD8FR2F",
+        "B0DKNLQ6JP",
+        "B0D285W4LG"
+      ],
+      "total_found": 9,
+      "total_checked": 123,
+      "filtered_by_blacklist": 68,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable bra extenders",
+      "asins": [
+        "B08TBDGD5S",
+        "B08QCDTNVS",
+        "B08JJ3FVS5",
+        "B0DN9QV6XK",
+        "B07FCBSD64",
+        "B0DYSB32ZT",
+        "B0FC1Z9CPC",
+        "B099Z6L9DF",
+        "B07R77G1XV"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable camera stabilizers",
+      "asins": [
+        "B0BLD1KBHQ",
+        "B01IB8T42C",
+        "B00LKK99QA",
+        "B0D7Q2TDW3",
+        "B0D456C8ZN",
+        "B09B3HSWWS",
+        "B08NPSNV57",
+        "B07MDX2HVJ",
+        "B0F1YFSMFR"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 1,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable cervical neck brace",
+      "asins": [
+        "B00E0MGSX2",
+        "B0057D84M6",
+        "B0C7W6BGS7",
+        "B0DFM2T7BX",
+        "B00E0MIGZ0",
+        "B0DJ8VFRKF",
+        "B0BJBSFY4V",
+        "B0CLLKKWRB",
+        "B0FFGQSN2R"
+      ],
+      "total_found": 9,
+      "total_checked": 108,
+      "filtered_by_blacklist": 43,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable charm necklaces",
+      "asins": [
+        "B07KGFWWPD",
+        "B0FMQX4R25",
+        "B0D54913YM",
+        "B08PC6MDVR",
+        "B0DZCR8P11",
+        "B0DZGLJDS1",
+        "B0DR2T1MPZ",
+        "B0FKC5Z89K",
+        "B0D66K3DFQ"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable computer desks",
+      "asins": [
+        "B0B41YH9B6",
+        "B0DWMNPW7D",
+        "B0FDX9FVQ2",
+        "B0CYSWYSQ4",
+        "B0CYZVFK28",
+        "B07V6ZSHF4",
+        "B0DT3Y1X96",
+        "B0F9X3FDYY",
+        "B0BZ7GXM4M"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable drywall stilts",
+      "asins": [
+        "B0BTHDQMWQ",
+        "B0BX8CBBLW",
+        "B0BTHM56GR",
+        "B0CHKGCZRB",
+        "B09LQRXBWD",
+        "B0949DBQWF",
+        "B0BFPXT9YK",
+        "B0C1R4GDFC",
+        "B08T14DFHT"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable dumbbells set",
+      "asins": [
+        "B08QTGV9BW",
+        "B0FKN4BQKQ",
+        "B0986PYJV7",
+        "B0DCZ252LV",
+        "B0DWLCMBDJ",
+        "B01J8S38LW",
+        "B09HBP8L9Q",
+        "B0CHPB4LC3",
+        "B0CYFNH5CT"
+      ],
+      "total_found": 9,
+      "total_checked": 50,
+      "filtered_by_blacklist": 11,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable elbow brace support",
+      "asins": [
+        "B0BF5SSXQF",
+        "B0BQRHQD13",
+        "B014SOZ7RE",
+        "B0F61WMGZ4",
+        "B07V32CR9J",
+        "B0F3VZLXJX",
+        "B004JCKG1I",
+        "B0793CXW6Q",
+        "B09QSL1JK2"
+      ],
+      "total_found": 9,
+      "total_checked": 158,
+      "filtered_by_blacklist": 70,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable faucet extenders",
+      "asins": [
+        "B0B28TMGLG",
+        "B0B6ZFC1W1",
+        "B07MB5PTNG",
+        "B0BXSVZ77C",
+        "B09ZNWP8YX",
+        "B0D3X6FFZ5",
+        "B0B7G455V7",
+        "B0FWC56R18",
+        "B0F6LK61M8"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable kitesurf boards",
+      "asins": [
+        "B01CT9PZ5Y",
+        "B08TGD1QSL",
+        "B0D8JT37JN",
+        "B075YDWWPB",
+        "B07QCP9P6G",
+        "B0F37J5JSB",
+        "B07D99DYBY",
+        "B0DZGQ16KV",
+        "B0F6VXXY64"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable knee brace support",
+      "asins": [
+        "B005BINV84",
+        "B0997VXC6D",
+        "B08JGP1WYM",
+        "B0057D7YWC",
+        "B001M04WVK",
+        "B000UVVY36",
+        "B0BTM2KRFW",
+        "B000UVXVH8",
+        "B0FT89F3VC"
+      ],
+      "total_found": 9,
+      "total_checked": 173,
+      "filtered_by_blacklist": 76,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable lumbar support belt",
+      "asins": [
+        "B07WZZFL9T",
+        "B072MHBX44",
+        "B0721275RT",
+        "B0FZ2B8JNX",
+        "B000095SGV",
+        "B0F9SW2NPG",
+        "B0FN4NWRDH",
+        "B0F7GN284H",
+        "B0F6TLCGHS"
+      ],
+      "total_found": 9,
+      "total_checked": 120,
+      "filtered_by_blacklist": 50,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable motorcycle footrests",
+      "asins": [
+        "B0CM8H9HFF",
+        "B0FGJBRWXK",
+        "B0FN44V6HJ",
+        "B0BTM7BGY7",
+        "B0FVWYSZ3V",
+        "B0B31H113Y",
+        "B0B27D1PTD",
+        "B0DRFV59Y9",
+        "B0DXKJPQLM"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable reading stands",
+      "asins": [
+        "B0D3111NL6",
+        "B0DDJB5CFX",
+        "B09TLSXQ4Z",
+        "B08162661S",
+        "B09ZLCFF9F",
+        "B0FD3BQNYS",
+        "B0F84J98X9",
+        "B0BHQWKZQC",
+        "B0F9YMRN5Z"
+      ],
+      "total_found": 9,
+      "total_checked": 128,
+      "filtered_by_blacklist": 55,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable shoulder brace support",
+      "asins": [
+        "B0CL8Z82HK",
+        "B0CF9C8MR3",
+        "B0G4QVXPML",
+        "B09ZQ2QSXS",
+        "B0FMWY2F1G",
+        "B0CNNJNBV3",
+        "B0F5HQ3BK1",
+        "B0FSDNXGL3",
+        "B0DNXWYNXV"
+      ],
+      "total_found": 9,
+      "total_checked": 132,
+      "filtered_by_blacklist": 53,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable sock aids",
+      "asins": [
+        "B00U9TWCXU",
+        "B0967VSWRS",
+        "B0752M1FPD",
+        "B0845ZL1HG",
+        "B09Z6S13NZ",
+        "B07GPZQKRX",
+        "B0DF7H882Y",
+        "B09YY66Q1R",
+        "B0BJDFXMMW"
+      ],
+      "total_found": 9,
+      "total_checked": 43,
+      "filtered_by_blacklist": 13,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable stationary bikes",
+      "asins": [
+        "B0F99L4VCS",
+        "B0BVHN3D72",
+        "B0CYZQYKKV",
+        "B0G2VN9VDR",
+        "B071HQFKBY",
+        "B0FRS39Z7W",
+        "B09JFX6QPM",
+        "B07BDRFMZK",
+        "B0D5MDPN2C"
+      ],
+      "total_found": 9,
+      "total_checked": 55,
+      "filtered_by_blacklist": 19,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable tv power supplies",
+      "asins": [
+        "B0FBTZ8TVQ",
+        "B0FM3T48KK",
+        "B07N18XN84",
+        "B0F2DV77HL",
+        "B0CR6F4NTR",
+        "B07QVXYBDC",
+        "B0CBK1D77J",
+        "B09KS1W8VH",
+        "B0CBK17BPF"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adjustable windshield brackets for motorcycles",
+      "asins": [
+        "B0D843QRDC",
+        "B0B51VH9B4",
+        "B0BL58KXG2",
+        "B097Q2D5X9",
+        "B0C9H32Y4P",
+        "B0DM8YLMNK",
+        "B0D62537Y1",
+        "B09T6VBJF4",
+        "B0CLZP565Q"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 5,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "adult swim training aids",
+      "asins": [
+        "B0172GZVAS",
+        "B09V6S1BK7",
+        "B0D5R18CWG",
+        "B07YLBYQT9",
+        "B00G04RY7M",
+        "B0B7BG9LGK",
+        "B0CKQQCSR8",
+        "B09BDPC2CM",
+        "B09WCS66W8"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "air compressors",
+      "asins": [
+        "B094DMH7ZM",
+        "B0D95VWQB7",
+        "B07H39S9JQ",
+        "B0DKFBFJGN",
+        "B00K34UZBW",
+        "B09BXYP2R9",
+        "B0DSW7R4VN",
+        "B0C1GL5T7G",
+        "B0CV9KC2D1"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 1,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "air dry clay for crafts",
+      "asins": [
+        "B089T7PX27",
+        "B001GAP4YA",
+        "B09QJFSTSH",
+        "B0DJ6P2CCD",
+        "B07Q9PXSYL",
+        "B0BDM5WLQX",
+        "B0B8TLRRKM",
+        "B0CBTHVNSW",
+        "B0CP92R1Y3"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "air power ball toys",
+      "asins": [
+        "B0FRQSYHYH",
+        "B0FBMCXGWN",
+        "B0CP2KN9LT",
+        "B07X5NN5GN",
+        "B0G1Y8G3CP",
+        "B0FNP8NKF9",
+        "B01CKHZL4A",
+        "B083FHWCDV",
+        "B0FN7XC7YD"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "airless paint sprayers",
+      "asins": [
+        "B0CW31GPHN",
+        "B0026SSW8G",
+        "B0026SR0FW",
+        "B004Z2090U",
+        "B0FH6S3LGW",
+        "B0F9WRVF2B",
+        "B0FX3MD9W8",
+        "B0CQP4R3HG",
+        "B0DRNNXZ6K"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "all-weather motorcycle covers",
+      "asins": [
+        "B0B1J78JFW",
+        "B098NKS6Q7",
+        "B0BZP8FVWC",
+        "B07RX9DKRP",
+        "B0F18XC6MZ",
+        "B0CC8RV6LT",
+        "B0CFZKDT2N",
+        "B0D3BV6NF4",
+        "B097PX8K46"
+      ],
+      "total_found": 9,
+      "total_checked": 45,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "american football balls",
+      "asins": [
+        "B0000ASZXN",
+        "B000FADVPQ",
+        "B07HSH7MVL",
+        "B000PD24KG",
+        "B001CEMIXK",
+        "B0028R39EM",
+        "B0000BW11X",
+        "B08BZWLBXL",
+        "B086MF1WLQ"
+      ],
+      "total_found": 9,
+      "total_checked": 18,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "anime plush figures",
+      "asins": [
+        "B0CNKQLSZ8",
+        "B0CD8RGJ7C",
+        "B0C81L31LX",
+        "B0BSN16YYT",
+        "B08ZLJ5WGY",
+        "B0BNK35FJZ",
+        "B00ZOLEXNA",
+        "B0DSJCD944",
+        "B0DP2F244R"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "anklets jewelry",
+      "asins": [
+        "B0DYJHX4C6",
+        "B0CTK7LJQF",
+        "B08518KWTM",
+        "B0BV1NDS7V",
+        "B0DW2SLM98",
+        "B0D672Z7MZ",
+        "B0CVTPW9F4",
+        "B07N8JNWQF",
+        "B0D22MVZJN"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "anti-fog helmet visors",
+      "asins": [
+        "B0C87Y4PFP",
+        "B0012Q2S4W",
+        "B092MP1VMS",
+        "B0DPHJFR2N",
+        "B082CVL87S",
+        "B0FL6NRSJL",
+        "B0CQ1KW51Q",
+        "B0F4D451K7",
+        "B0BLLGDKR5"
+      ],
+      "total_found": 9,
+      "total_checked": 66,
+      "filtered_by_blacklist": 23,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "anti-fog swimming goggles",
+      "asins": [
+        "B07P95K1ZT",
+        "B07BNSVXG8",
+        "B01LNAU866",
+        "B00005UDHZ",
+        "B0BZB8T3XZ",
+        "B0BTLXZ8FH",
+        "B0BR9N7K34",
+        "B08DCLPXGK",
+        "B001GFLSIQ"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "anti-slip baby bath mats",
+      "asins": [
+        "B07V3NJFW5",
+        "B083FDRJNX",
+        "B01F5K9YNS",
+        "B07PZGWRJ7",
+        "B0DP6NMDXP",
+        "B07TW5JDWS",
+        "B0CRWVFJTD",
+        "B0B767M8BZ",
+        "B0CZDFCQFL"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "anti-slip surfboard grips",
+      "asins": [
+        "B07QCP9P6G",
+        "B08G1BJCQD",
+        "B08DRHRPPG",
+        "B0D7PKK5CC",
+        "B0CK9SSHXY",
+        "B01M5EZJWP",
+        "B08H8FBB7N",
+        "B01N4VHR5Y",
+        "B0F2MBF7VG"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "antistatic pliers",
+      "asins": [
+        "B001D7KU7W",
+        "B001YHJKNQ",
+        "B001YHHK2Y",
+        "B01M31LE5D",
+        "B07JMBGL3W",
+        "B081DTDRFC",
+        "B001YHLPXY",
+        "B09BQGT6GZ",
+        "B0CM9K35Q9"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "antistatic wristbands",
+      "asins": [
+        "B00B2T9C8Y",
+        "B0B6VVKZL4",
+        "B0DH1Z58V2",
+        "B01BLPBOS4",
+        "B08X7D9YB6",
+        "B0DSKD9747",
+        "B0BP7FRNL4",
+        "B0DY752ZDN",
+        "B0B6FLHRT2"
+      ],
+      "total_found": 9,
+      "total_checked": 58,
+      "filtered_by_blacklist": 14,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "apparel for dogs",
+      "asins": [
+        "B0CMD17929",
+        "B0DKX4B67M",
+        "B0C1GBMM45",
+        "B0DKW8XLPV",
+        "B0F1Y7PLXD",
+        "B01LE9RYIG",
+        "B0CKYPMN34",
+        "B0CD46WLBV",
+        "B0BZ7N557Q"
+      ],
+      "total_found": 9,
+      "total_checked": 99,
+      "filtered_by_blacklist": 39,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "arc welding kits",
+      "asins": [
+        "B0D5Y3C7N3",
+        "B0CRHDY93F",
+        "B0FQTC8WB3",
+        "B0FG28Q9M8",
+        "B0C3C3RZF4",
+        "B0CTGXDKY5",
+        "B0BX682LMC",
+        "B0C96LN39Y",
+        "B09WDGL3GQ"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "architectural design tools",
+      "asins": [
+        "B0DYHJXCQK",
+        "B0C3B75W7B",
+        "B07F1TQRYK",
+        "B07X6H5M62",
+        "B01F4HU076",
+        "B0D6KPB8NK",
+        "B07QWRG5G7",
+        "B0DP2X2C8Y",
+        "B0DHVJB3MM"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "arduino microcontroller boards",
+      "asins": [
+        "B07G99NNXL",
+        "B008GRTSV6",
+        "B0F1FQMNXM",
+        "B00AFY2S56",
+        "B0D83FBYPD",
+        "B01KJR41J4",
+        "B0DZNKQKB8",
+        "B01D8KOZF4",
+        "B01EWOE0UU"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "art glass bottle cutters",
+      "asins": [
+        "B0826TL8S3",
+        "B0CD799VDG",
+        "B0DLWLLKQ5",
+        "B0DJ5C7SLP",
+        "B07PFV3GMG",
+        "B0FPM4G3MK",
+        "B077467QKS",
+        "B0B3D2G499",
+        "B0DPQJKLL4"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "art painting supplies",
+      "asins": [
+        "B0CH3VF9S4",
+        "B08RYS5XNM",
+        "B085F4JH1H",
+        "B095M9LKPN",
+        "B0BG4R99X6",
+        "B0BF4399VV",
+        "B0B9R91Z2P",
+        "B09M7D1X6Z",
+        "B0F7RJ4LS3"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "assorted sewing needles",
+      "asins": [
+        "B0BFHNR1HF",
+        "B0CR16V8LH",
+        "B08J6VH889",
+        "B09SKRVRZV",
+        "B00AQ6TFNQ",
+        "B0C52SWHNY",
+        "B0FDK28V5L",
+        "B0F2T9HY2Q",
+        "B0936H763S"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "atx pc cases",
+      "asins": [
+        "B0D2MK6NML",
+        "B0F2T66QC9",
+        "B0DFHNV7TK",
+        "B0C9H87GPK",
+        "B0D1MM3961",
+        "B0DFWQDRW1",
+        "B0D4QVMBTP",
+        "B0D92FNZB7",
+        "B00J0NZ3Q4"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "atx power supply units",
+      "asins": [
+        "B014W3EMAO",
+        "B014W3EM2W",
+        "B093NTQJSF",
+        "B0FLGMTSRQ",
+        "B0FBX9VS3B",
+        "B077BQ76TP",
+        "B0CB9MSJ5N",
+        "B0DJ6DGHCP",
+        "B0D52KSFMJ"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "audio recording microphones for video cameras",
+      "asins": [
+        "B0DDL8WGH5",
+        "B0DTYNB8YZ",
+        "B0BM8HQL6L",
+        "B0CY7P3WVK",
+        "B0723D3FVL",
+        "B074DWJ6C7",
+        "B0DTHTKK6R",
+        "B07WND4DB4",
+        "B0FCCMXY7T"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "audio tuners",
+      "asins": [
+        "B078WFDR8D",
+        "B09QLG8RC3",
+        "B0CR7C6KBC",
+        "B07FK3G173",
+        "B0CWH3FFLV",
+        "B01EMQI2CU",
+        "B0BWQFKY58",
+        "B08W5BN4FK",
+        "B0777B3TYQ"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "audio video cables",
+      "asins": [
+        "B0CPLWTZWK",
+        "B0C6Z9SR4H",
+        "B096DVP5Z6",
+        "B00BDYL93Y",
+        "B0C6Z9TZFF",
+        "B01D5H8JW0",
+        "B00BDYJMEC",
+        "B002VMINI6",
+        "B07W5YHDF9"
+      ],
+      "total_found": 9,
+      "total_checked": 41,
+      "filtered_by_blacklist": 9,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "audio video connector cables",
+      "asins": [
+        "B0CPLWTZWK",
+        "B0F8QCNMZX",
+        "B0C6Z9SR4H",
+        "B096DVP5Z6",
+        "B0DTTJY74K",
+        "B0CSFG5BKL",
+        "B01CJ5SCGW",
+        "B0CSCL2DDR",
+        "B07HBJMHVV"
+      ],
+      "total_found": 9,
+      "total_checked": 28,
+      "filtered_by_blacklist": 6,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "audio video signal converters",
+      "asins": [
+        "B0F7HF1RBX",
+        "B00R1JWTC0",
+        "B08V8KHWSF",
+        "B012MEH2V6",
+        "B0F23ZFN6S",
+        "B0CQXCRLL9",
+        "B07QNPCK8Z",
+        "B0FFMS7J2H",
+        "B07VKFSLKN"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "auto exterior trims",
+      "asins": [
+        "B071FRWWRF",
+        "B002JOVUO0",
+        "B00JR4D70K",
+        "B07R44VJHN",
+        "B0B6W1MRB2",
+        "B07H4MLR25",
+        "B07HRNKY8P",
+        "B00GZLMEN4",
+        "B0B18SVMVX"
+      ],
+      "total_found": 9,
+      "total_checked": 35,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic card cutters",
+      "asins": [
+        "B0DGXHKM1Y",
+        "B0FR4GNRGR",
+        "B0FMMY3KV6",
+        "B0F88JZ49B",
+        "B075NYWF5P",
+        "B08HWDGJ5Y",
+        "B0FDB8BS79",
+        "B0FBWLW21V",
+        "B0FPR5JD3S"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic cat feeders",
+      "asins": [
+        "B0DF7H6SGZ",
+        "B09S8WMJY9",
+        "B09LD2CD1L",
+        "B004K4ZBSI",
+        "B06ZZC83MG",
+        "B09TKH9Q31",
+        "B09V31PLMM",
+        "B0DXPKQ4HN",
+        "B0BRJVZBF8"
+      ],
+      "total_found": 9,
+      "total_checked": 92,
+      "filtered_by_blacklist": 39,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic dog feeders",
+      "asins": [
+        "B0FSRKPDW8",
+        "B09S8WMJY9",
+        "B0DF7H6SGZ",
+        "B09LD2CD1L",
+        "B06ZZC83MG",
+        "B0FWK1J4GD",
+        "B000FK03LQ",
+        "B0FQK2VCBH",
+        "B004K4ZBSI"
+      ],
+      "total_found": 9,
+      "total_checked": 70,
+      "filtered_by_blacklist": 27,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic gate openers",
+      "asins": [
+        "B07X36PGH1",
+        "B0CZL9JNZD",
+        "B0BN5T5SCP",
+        "B0CZL8KMNL",
+        "B0CJLJNB21",
+        "B0197V3OD2",
+        "B07DF879S3",
+        "B07X72J4TW",
+        "B0F8Q94MCZ"
+      ],
+      "total_found": 9,
+      "total_checked": 35,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 5,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic pipe welders",
+      "asins": [
+        "B0CPSDDY1H",
+        "B0FLJB9C2Z",
+        "B0CTB4JCY3",
+        "B0CYGWKPZ8",
+        "B0D5Y3C7N3",
+        "B08CBBHFX5",
+        "B0FYDYWCQX",
+        "B0BX682LMC",
+        "B0DG5LLN2B"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic rebar tier",
+      "asins": [
+        "B000SR49FM",
+        "B09P1H2HV6",
+        "B09SPCNTML",
+        "B0DFCJSPZK",
+        "B0CG6GKDCL",
+        "B0BX73BMKJ",
+        "B09CPH2KGJ",
+        "B082PYVY3X",
+        "B087JBY8KQ"
+      ],
+      "total_found": 9,
+      "total_checked": 55,
+      "filtered_by_blacklist": 13,
+      "filtered_by_price": 5,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automatic wristwatches",
+      "asins": [
+        "B01GLBMUGI",
+        "B0DG5F3P77",
+        "B07DM6SF35",
+        "B097M8WHGS",
+        "B08KTM1V4K",
+        "B08KVRF4S8",
+        "B0759VGGGS",
+        "B0CTML3WN4",
+        "B08KSRQFYB"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "automotive interior lighting",
+      "asins": [
+        "B0CQVLZR4M",
+        "B07Q6CPQK4",
+        "B0DNS1KQL3",
+        "B083GHXFTJ",
+        "B0DCBSR4D9",
+        "B0CMWHX9Y6",
+        "B07VKS2N7N",
+        "B08F9PF2Y5",
+        "B01ADHUXGU"
+      ],
+      "total_found": 9,
+      "total_checked": 16,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "babies strollers",
+      "asins": [
+        "B0D5Q2GKMX",
+        "B0BT4LCFHT",
+        "B07P1YSC18",
+        "B019DHBCXE",
+        "B093GS5723",
+        "B0BYTKYGZ3",
+        "B0C5463NVT",
+        "B0DJVZX2D9",
+        "B0DTY92R4J"
+      ],
+      "total_found": 9,
+      "total_checked": 29,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 1,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby activity tables",
+      "asins": [
+        "B01COSFGEK",
+        "B07C5HZX1F",
+        "B0DSJVP8PC",
+        "B01FG5FAEY",
+        "B0DSJWR967",
+        "B01J94K9OY",
+        "B0DR3Y13QT",
+        "B0D83BK9B7",
+        "B0FN3NPPJL"
+      ],
+      "total_found": 9,
+      "total_checked": 18,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bath pillows",
+      "asins": [
+        "B0CTJ578ZG",
+        "B08VJ2Q98R",
+        "B0CT8SGQLL",
+        "B074CBTQ6H",
+        "B0BBR15GNW",
+        "B0C37SRQPY",
+        "B0CDGQ14TW",
+        "B08P5PPM1C",
+        "B0BLD1D6LX"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bath robes",
+      "asins": [
+        "B08XPZX5DP",
+        "B08T82NLQ2",
+        "B0C6RKDJ48",
+        "B007E56BG6",
+        "B0DPJNJPNR",
+        "B00GS1GRL6",
+        "B096Y8YL1W",
+        "B09JKHWDNT",
+        "B0C6B5KPSY"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bath seats",
+      "asins": [
+        "B0DX73SF3Q",
+        "B078941ZC8",
+        "B0F7G6CVHZ",
+        "B0DTFDM1DP",
+        "B0F32H7LGX",
+        "B0FFMJ4L9C",
+        "B0F378QKNN",
+        "B0F5QG2F5X",
+        "B0DP2JYLXL"
+      ],
+      "total_found": 9,
+      "total_checked": 16,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bath towels",
+      "asins": [
+        "B0D7QC1R35",
+        "B0BTHQCNMK",
+        "B0F3JC4GWM",
+        "B081SFS6SW",
+        "B0FP53JBF9",
+        "B07QR384N7",
+        "B0FXX8CT13",
+        "B0CKXKR1RV",
+        "B07Y8XYJQ6"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bath visors",
+      "asins": [
+        "B00A7W0VLY",
+        "B0D1C886FH",
+        "B07ZM5ZR9D",
+        "B0F845G5PC",
+        "B0B3CX14RV",
+        "B0BXNX6GBT",
+        "B0DRW16MJ8",
+        "B0BVYMF6L9",
+        "B0BWWV3DM3"
+      ],
+      "total_found": 9,
+      "total_checked": 116,
+      "filtered_by_blacklist": 47,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bathtub seats",
+      "asins": [
+        "B0DX73SF3Q",
+        "B078941ZC8",
+        "B0FDF53FL4",
+        "B0DTFDM1DP",
+        "B0F378QKNN",
+        "B0F7G6CVHZ",
+        "B0F32H7LGX",
+        "B0DP2JYLXL",
+        "B0BYNS2365"
+      ],
+      "total_found": 9,
+      "total_checked": 16,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bathtubs",
+      "asins": [
+        "B0DVLQN538",
+        "B0C897WHDD",
+        "B07FK7BG98",
+        "B0CXSR7QM3",
+        "B008VWVS14",
+        "B0D796959L",
+        "B0D9WM7R2D",
+        "B00EBBMMQO",
+        "B01MG20ATL"
+      ],
+      "total_found": 9,
+      "total_checked": 15,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby belt pillows",
+      "asins": [
+        "B0BGXJ8Y1P",
+        "B0CWTP518V",
+        "B08HLTMDRZ",
+        "B0B1WKGK6Z",
+        "B0CGLN361T",
+        "B07VWVJNDN",
+        "B0DXZ9MVP7",
+        "B00YOLZUMO",
+        "B09V12CS7L"
+      ],
+      "total_found": 9,
+      "total_checked": 14,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bibs",
+      "asins": [
+        "B08GFCX964",
+        "B0FT2H6X9B",
+        "B0B152XRC4",
+        "B0C9ZX9C9F",
+        "B0DM58DYGR",
+        "B0BZP17DM8",
+        "B08SYGJS45",
+        "B09N45SSYG",
+        "B0743LVC1M"
+      ],
+      "total_found": 9,
+      "total_checked": 39,
+      "filtered_by_blacklist": 11,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bottle sets",
+      "asins": [
+        "B09NCJL76C",
+        "B0CQMHBV3R",
+        "B00N9X4YZW",
+        "B07G4KBQJ7",
+        "B083FT533K",
+        "B0CQMRLKKL",
+        "B0961KZ9X2",
+        "B098YHK4CN",
+        "B097Z3DKSM"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby bottle warmers",
+      "asins": [
+        "B07YJKWTYW",
+        "B00005BXKM",
+        "B0876T9DQZ",
+        "B0C2YP5NJQ",
+        "B0B97M3PX2",
+        "B0DPJ33N99",
+        "B0DHVF6YJL",
+        "B09NXLGDVM",
+        "B0D9LRTLT5"
+      ],
+      "total_found": 9,
+      "total_checked": 24,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby car organizers",
+      "asins": [
+        "B078HCPY4H",
+        "B07ZNRTQDN",
+        "B07NY9H3GP",
+        "B0B5WF7S9F",
+        "B07RNZV64Y",
+        "B08BHYPPZ6",
+        "B084G8VB9M",
+        "B08SLZCL85",
+        "B0C3C5HWVX"
+      ],
+      "total_found": 9,
+      "total_checked": 15,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby car seats",
+      "asins": [
+        "B07Y5S4VWT",
+        "B0FH7MQ9BJ",
+        "B0FH7N924X",
+        "B0CYMYTQGK",
+        "B0DXMFYHNV",
+        "B0B6LRBX5D",
+        "B0BT4LCFHT",
+        "B094NXWW9R",
+        "B08847QPWV"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby changing pads",
+      "asins": [
+        "B07WVP81Z7",
+        "B0CPPM2C2H",
+        "B0FQMQ7SJ2",
+        "B0D71R1JN7",
+        "B07NV7RX7H",
+        "B0CPPLLBHT",
+        "B0DRP7LJKK",
+        "B0D71N9LWS",
+        "B07R5DX6RQ"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby corner guards",
+      "asins": [
+        "B0771L5HN5",
+        "B0C3VN69FC",
+        "B0B3SK7RM8",
+        "B0D3V6WD71",
+        "B09M9S8F1Q",
+        "B0BD4TFPRX",
+        "B09YM39DKP",
+        "B09M9SD972",
+        "B07CNS8W5Y"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby crib mobiles",
+      "asins": [
+        "B0CMX6JH1V",
+        "B08HSNXSM6",
+        "B0CZCCYK96",
+        "B0C7SC34Z3",
+        "B0CTGY5D8J",
+        "B0DJKWN51G",
+        "B07DM86Z43",
+        "B0CDN1W7RY",
+        "B0D11BYT69"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby cribs",
+      "asins": [
+        "B07Y3WQHZ6",
+        "B00EANJX5Q",
+        "B00LFP61PW",
+        "B0D59KYGJ4",
+        "B072VG3HN7",
+        "B00EANJWH0",
+        "B071VV4CNZ",
+        "B08D4PSGN1",
+        "B0CLWXDQ2G"
+      ],
+      "total_found": 9,
+      "total_checked": 26,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby diaper organizers",
+      "asins": [
+        "B0F9LC7B7T",
+        "B0B5WF7S9F",
+        "B095XNZCSQ",
+        "B0010SGZDC",
+        "B0D1NZSLSX",
+        "B0DGLX547C",
+        "B0BGMKLZVX",
+        "B0BGMHTBP5",
+        "B0F2B26FWZ"
+      ],
+      "total_found": 9,
+      "total_checked": 10,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby drag games",
+      "asins": [],
+      "total_found": 0,
+      "total_checked": 104,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby feeding plates and utensils",
+      "asins": [
+        "B0D4J5XFX6",
+        "B0CTG6TWVG",
+        "B0CQQK9Z6G",
+        "B0B1ZZRJ3L",
+        "B00PTL7CSS",
+        "B0D4J54KZK",
+        "B0D9N89SLD",
+        "B0CLBDDGJL",
+        "B0DK3JMMCW"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby food pacifiers",
+      "asins": [
+        "B0CNVDR9SB",
+        "B07F6VXB15",
+        "B08FRS7ZSW",
+        "B0B15QG2X3",
+        "B0CN2TYHYT",
+        "B09G895LYW",
+        "B07NK6BSWQ",
+        "B0823DZYQY",
+        "B0CB41HK42"
+      ],
+      "total_found": 9,
+      "total_checked": 117,
+      "filtered_by_blacklist": 47,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby helmets for safety",
+      "asins": [
+        "B0BVGYX654",
+        "B0C1YQFS8F",
+        "B0DJXTMK9P",
+        "B0C8HFNSHP",
+        "B0CJCLHSXV",
+        "B09NVRSB45",
+        "B0BR5DZSKF",
+        "B0C8HFK84C",
+        "B0CYZN7SD1"
+      ],
+      "total_found": 9,
+      "total_checked": 38,
+      "filtered_by_blacklist": 8,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby jumpers",
+      "asins": [
+        "B01EUNA0WK",
+        "B07F24DDRF",
+        "B0F23FN4Y4",
+        "B01J94K9OY",
+        "B07ZHWF2NW",
+        "B0FCNML84W",
+        "B08D8RSLXW",
+        "B01GRXYI6K",
+        "B0FSPZVQY4"
+      ],
+      "total_found": 9,
+      "total_checked": 58,
+      "filtered_by_blacklist": 17,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby memory journals",
+      "asins": [
+        "B0F7H61N9V",
+        "B0BVMJLRVJ",
+        "B09HT7YNVL",
+        "B09BBV2FWY",
+        "1952842166",
+        "B0D9MN3TPV",
+        "B09BBKBJ5Z",
+        "B01BY1UQ7K",
+        "B0BSJLLQ36"
+      ],
+      "total_found": 9,
+      "total_checked": 74,
+      "filtered_by_blacklist": 27,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby monitoring devices",
+      "asins": [
+        "B08V8RWP3W",
+        "B00JEV5UI8",
+        "B09GM8JZM9",
+        "B0DX78K8ZZ",
+        "B0FDSC6XL6",
+        "B09NCGQSY9",
+        "B0866S3D82",
+        "B0CZDYF95R",
+        "B09YVSYGDW"
+      ],
+      "total_found": 9,
+      "total_checked": 19,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby rattles toys",
+      "asins": [
+        "B071YCHDX1",
+        "B0B33BX1ZR",
+        "B008J1QP7Y",
+        "B0B21ZM7LJ",
+        "B0F6C98ZJ3",
+        "B000FMQWS2",
+        "B019ICFYNI",
+        "B094DSB19L",
+        "B0CBQVH5CP"
+      ],
+      "total_found": 9,
+      "total_checked": 18,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby rocking chairs",
+      "asins": [
+        "B08PDPK1JS",
+        "B09S1B4YF8",
+        "B0DMZGKMY4",
+        "B0DJ32PZ8T",
+        "B0BTDRRZH3",
+        "B00BBXEJ1Q",
+        "B0F9P4PG6G",
+        "B00HESGFH8",
+        "B0DNHJ1DTG"
+      ],
+      "total_found": 9,
+      "total_checked": 33,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby room",
+      "asins": [
+        "B097YP171M",
+        "B09JGJ5ND6",
+        "B0BXY61MQT",
+        "B07KWT9LS1",
+        "B09RTLTTXV",
+        "B0D7CVJPX7",
+        "B0BRKRG294",
+        "B0771L5HN5",
+        "B0F334L6PM"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby room nest cushions",
+      "asins": [
+        "B0DJQG6YHZ",
+        "B0DJQFPNHG",
+        "B0FNQYDM5H",
+        "B0CPS66W4H",
+        "B0DK4SFP1S",
+        "B0DRTKW447",
+        "B0DK9P8N9H",
+        "B0FJWZR918",
+        "B0FKBL51W2"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby safety mats",
+      "asins": [
+        "B07GY1PH4K",
+        "B0FDH9XB1B",
+        "B0D4LVK289",
+        "B0DSVRD772",
+        "B0DBH4VZCF",
+        "B0DPJ8TXN4",
+        "B091YKYFPX",
+        "B0D7B9LKVG",
+        "B0DNZ1THTG"
+      ],
+      "total_found": 9,
+      "total_checked": 19,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby security blankets",
+      "asins": [
+        "B07PGMVVC2",
+        "B08PP8S8KZ",
+        "B0BPHJN972",
+        "B06WVSNW2B",
+        "B0B8T2YPBC",
+        "B0962TXWQM",
+        "B07JHNJLYH",
+        "B00PKP4JUM",
+        "B01MRVHKP1"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby sorting and stacking toys",
+      "asins": [
+        "B07NXDJ52C",
+        "B077H5G2Q3",
+        "B09P9HNXTM",
+        "B094D42LRN",
+        "B0DBQZVH19",
+        "B09PHJK3GR",
+        "B07M69WPLK",
+        "B0CBV56MRK",
+        "B08P5KKWBQ"
+      ],
+      "total_found": 9,
+      "total_checked": 15,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby stroller accessories",
+      "asins": [
+        "B086TZXKMJ",
+        "B0BKQDPP1Z",
+        "B0CSKCB3JX",
+        "B08K75WMWR",
+        "B0DS6GHTNB",
+        "B0CTN2CFBQ",
+        "B0C3PTM75M",
+        "B0CRKRJ6ML",
+        "B093KZ2J1K"
+      ],
+      "total_found": 9,
+      "total_checked": 19,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby sun shades for cars",
+      "asins": [
+        "B07YYMPLDV",
+        "B07ZPMHYVB",
+        "B08RZB4F63",
+        "B00X2TUW1I",
+        "B0DFVP7BK7",
+        "B0CBM4QTHC",
+        "B079DXQZ7L",
+        "B0FQJT7LFN",
+        "B00ZOKJVAG"
+      ],
+      "total_found": 9,
+      "total_checked": 13,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby teething toys",
+      "asins": [
+        "B0CD42KQ3K",
+        "B08Q2TX35L",
+        "B0G6479WZ9",
+        "B0C6DLN75N",
+        "B0BYNDL3SW",
+        "B096DH557C",
+        "B0FY6R9VVL",
+        "B01LYHTATF",
+        "B0D2W5VW9V"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby toothbrush sets",
+      "asins": [
+        "B013W6CCGI",
+        "B001G8Z3U2",
+        "B0C7J4TTKR",
+        "B0C9GZVY4Z",
+        "B013W6CCRM",
+        "B08Q2R58PG",
+        "B0F1W3Y17S",
+        "B09M4BKYK2",
+        "B01LZAGSIU"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby toy organizers",
+      "asins": [
+        "B079TXDDRW",
+        "B0C13YZ4P3",
+        "B074PSC6NN",
+        "B07Q7DXGW9",
+        "B09NS5S586",
+        "B0CY6D9CWS",
+        "B097PYH4ZG",
+        "B07CF7HWPL",
+        "B0BPSGQHLY"
+      ],
+      "total_found": 9,
+      "total_checked": 28,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "baby walking harnesses",
+      "asins": [
+        "B09DSVLYFK",
+        "B081N1W716",
+        "B09Z6HKHPJ",
+        "B0B58461DZ",
+        "B0D256758X",
+        "B00LU0D416",
+        "B09KP9TT9R",
+        "B0D92VSBJQ",
+        "B09PH3R6K8"
+      ],
+      "total_found": 9,
+      "total_checked": 23,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "backpack diaper bags for moms",
+      "asins": [
+        "B0C86S6GLQ",
+        "B098TWMRNV",
+        "B0CYSNS54Q",
+        "B08L6D34VM",
+        "B0B9MVLL77",
+        "B0CP7N4ZJS",
+        "B0C288RQ94",
+        "B0BSKZFV8Z",
+        "B0BQZ1KHYB"
+      ],
+      "total_found": 9,
+      "total_checked": 26,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "backyard tents",
+      "asins": [
+        "B078XR1CS8",
+        "B09KLV8VXW",
+        "B0DNHX5H2Q",
+        "B0050P22VK",
+        "B0D5Y23VVP",
+        "B07JKQVN47",
+        "B0D7QHY574",
+        "B09KLVQDHZ",
+        "B0D4CDBLGW"
+      ],
+      "total_found": 9,
+      "total_checked": 43,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "badminton balls pack",
+      "asins": [
+        "B07SCKW3KR",
+        "B09273FMYS",
+        "B09TWMJS4Y",
+        "B07DNSR46B",
+        "B000AS6V3M",
+        "B0DMDSJQ2V",
+        "B0DKJMHPT1",
+        "B0FGX8FS19",
+        "B0926VJNKK"
+      ],
+      "total_found": 9,
+      "total_checked": 25,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "badminton set for beginners",
+      "asins": [
+        "B0CHRPQ952",
+        "B00FPQQIAA",
+        "B08BNJT83C",
+        "B0DYTPTMD7",
+        "B07C6H8WJ4",
+        "B0DRTYNSQX",
+        "B08WZGVH2T",
+        "B00FPQQEJ0",
+        "B0F7MRZ24Y"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bar accessories",
+      "asins": [
+        "B0FTX7DRQG",
+        "B0CH9K479X",
+        "B0FX98T18M",
+        "B08BYJ8KSR",
+        "B08X77VP4S",
+        "B0D8TFHH3F",
+        "B0FY2S4PBS",
+        "B097YQCTRL",
+        "B07PJ5Q943"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bar cabinets with wine storage",
+      "asins": [
+        "B0F6BP73WJ",
+        "B0DS68X45C",
+        "B0D61JTPSZ",
+        "B0DT6W6TX7",
+        "B09G9L5PVT",
+        "B0DJ8WNMB6",
+        "B0DX22QPL1",
+        "B0FD3KPFGV",
+        "B0DTYK21QK"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bassinet bedside sleepers",
+      "asins": [
+        "B0DBHJRMW6",
+        "B07YFDJXM4",
+        "B07FYN5FS9",
+        "B0DBHHC7NM",
+        "B0DP7GB3WB",
+        "B0BNBL1YP8",
+        "B0C47KFMB8",
+        "B08DWQ4ZZF",
+        "B0C2HT7H5L"
+      ],
+      "total_found": 9,
+      "total_checked": 35,
+      "filtered_by_blacklist": 7,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bath toys for babies",
+      "asins": [
+        "B0CYXGQ6N1",
+        "B086C12NTG",
+        "B0FSCYB8H9",
+        "B0DGWPJ5MW",
+        "B08BXHC57D",
+        "B0010SGZEG",
+        "B0BZWXYXT2",
+        "B0BN7TD9T9",
+        "B09W8ZRSHR"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bathroom faucet extenders",
+      "asins": [
+        "B0B28TMGLG",
+        "B07MB5PTNG",
+        "B0C4G3BLHG",
+        "B0B6ZFC1W1",
+        "B0CFQXJL67",
+        "B0F9NJZDSP",
+        "B0DCG64HSL",
+        "B0FSQQ6WPL",
+        "B0BXSVZ77C"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 2,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bathroom storage units",
+      "asins": [
+        "B0CD2GWX2W",
+        "B07FKD2LT9",
+        "B0DNJWGFZ3",
+        "B08PF1PW6Q",
+        "B07179YRBW",
+        "B0CC4YQST2",
+        "B0BYHRYK5D",
+        "B09F6JW2BD",
+        "B0DY7Q4Z63"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bathroom vanity cabinets",
+      "asins": [
+        "B0FYF4ZYH2",
+        "B0F1YQ35ZF",
+        "B07HDSJY25",
+        "B0BZNPDHR9",
+        "B0CCP6N1WY",
+        "B0CMCXN6QG",
+        "B0F9F5QBWQ",
+        "B0F6L6LZYW",
+        "B0DYYY7JV7"
+      ],
+      "total_found": 9,
+      "total_checked": 36,
+      "filtered_by_blacklist": 4,
+      "filtered_by_price": 4,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "battery operated emergency lights",
+      "asins": [
+        "B01C5QSENQ",
+        "B082HD5JDH",
+        "B08WWX5GTZ",
+        "B00XM8HTIS",
+        "B0CW4QLRPQ",
+        "B07KJDBVC6",
+        "B075VLYM6M",
+        "B0BWQLWSHN",
+        "B0078ZTWP4"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "battery operated fairy lights",
+      "asins": [
+        "B07WG18RLT",
+        "B0BWWDPB2H",
+        "B0DCNWXM2F",
+        "B0C9C4JVSM",
+        "B07S3R6MKJ",
+        "B0F673Z2M5",
+        "B0G1XQ8ND8",
+        "B07X7H7C7V",
+        "B0FH2CW591"
+      ],
+      "total_found": 9,
+      "total_checked": 18,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "battery powered hedge trimmers",
+      "asins": [
+        "B00602J27E",
+        "B07MVLYF7L",
+        "B0DQV31TLF",
+        "B0FFSX7D31",
+        "B0DQPB23MB",
+        "B08T6BJ2HS",
+        "B0BRXK7NT2",
+        "B0F1CWY42N",
+        "B0CLSF59XP"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "battery powered ride toys",
+      "asins": [
+        "B0F8NQQ81R",
+        "B0C876283W",
+        "B0C87DM7J5",
+        "B0DB7XNQVJ",
+        "B0C87FVZXP",
+        "B0F5GHDQ4P",
+        "B0F5GM39J2",
+        "B0DMWK6DR1",
+        "B0CN2SY87Q"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beach metal detectors",
+      "asins": [
+        "B0FNRFK7XQ",
+        "B0CRDKB7XL",
+        "B0D3C25SX8",
+        "B0D3C3DJ78",
+        "B08ZY3TJLC",
+        "B0D46RWLN8",
+        "B0B394W3BQ",
+        "B0BBVTQ7MP",
+        "B0G4J6VJ1T"
+      ],
+      "total_found": 9,
+      "total_checked": 21,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beach sand toys",
+      "asins": [
+        "B0C1XQ2R9K",
+        "B0BRPSSMHV",
+        "B0DQKBVM1W",
+        "B06XZQ9196",
+        "B0DQTTLRDJ",
+        "B003AH6NII",
+        "B093JSL8SV",
+        "B08V4YJGL7",
+        "B0CSDHS15W"
+      ],
+      "total_found": 9,
+      "total_checked": 18,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beading supplies",
+      "asins": [
+        "B0DDC567FY",
+        "B0BP6TDPHH",
+        "B0G2XHP2NH",
+        "B079234LMQ",
+        "B0CGRV8PZF",
+        "B08LL5MFSS",
+        "B0G6F2CSCC",
+        "B0BNTYN4X5",
+        "B0CCDZS59X"
+      ],
+      "total_found": 9,
+      "total_checked": 29,
+      "filtered_by_blacklist": 4,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beds with storage",
+      "asins": [
+        "B0CKQSJ333",
+        "B0FF4GZN95",
+        "B09LM8KPYN",
+        "B0FFGLZJF3",
+        "B0FR44HTKN",
+        "B0FSY1LPWK",
+        "B0DJNFCPSB",
+        "B09Q38H2J4",
+        "B0DTQCNJQ6"
+      ],
+      "total_found": 9,
+      "total_checked": 50,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beer bottles for brewing",
+      "asins": [
+        "B0718XVG63",
+        "B0C8J7218N",
+        "B074VJDG49",
+        "B097S79RQ5",
+        "B0FCRJXM4T",
+        "B0F2H7YR5Z",
+        "B0CZCSXG4B",
+        "B0BXJJ6865",
+        "B0F2FJJG11"
+      ],
+      "total_found": 9,
+      "total_checked": 29,
+      "filtered_by_blacklist": 6,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beer fermenters home brew",
+      "asins": [
+        "B07RYNRKY9",
+        "B001BCFUBU",
+        "B07XKQDYRV",
+        "B0D3DT875J",
+        "B0179ZH89Y",
+        "B00N3DZFJW",
+        "B088Q4QP5D",
+        "B018NG8MZW",
+        "B085M416B1"
+      ],
+      "total_found": 9,
+      "total_checked": 17,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "beginner surfboards",
+      "asins": [
+        "B01H6VVW4S",
+        "B0D8RWMQMH",
+        "B01M36754H",
+        "B0CWJMLJZZ",
+        "B08HM1NVQ5",
+        "B0FGKSJPTC",
+        "B01H6VVWAC",
+        "B012NL9BHQ",
+        "B07YNJK845"
+      ],
+      "total_found": 9,
+      "total_checked": 33,
+      "filtered_by_blacklist": 4,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "bench grinders",
+      "asins": [
+        "B08ZVTC2VK",
+        "B0000224J4",
+        "B09T3XHS56",
+        "B00HRM509A",
+        "B08ZVXSW7V",
+        "B086JYS1Y3",
+        "B07T3L1T8S",
+        "B0FLHPTWWP",
+        "B0CW69DYM9"
+      ],
+      "total_found": 9,
+      "total_checked": 27,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 4,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "billiard ball sets",
+      "asins": [
+        "B07W3FQ85Y",
+        "B0BPXNXJK1",
+        "B091T8WHFN",
+        "B005GVH53S",
+        "B08DNT1FPV",
+        "B08Q39K7M7",
+        "B0F7QCS63P",
+        "B08D1WH8RZ",
+        "B09NPXWMF8"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 1,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "billiard cue sticks",
+      "asins": [
+        "B0B1DRT91J",
+        "B01LE1OX5G",
+        "B0G6BT52MB",
+        "B0DHS7F671",
+        "B0BJQK6GLT",
+        "B07BLPWL58",
+        "B0FXKXBZ6C",
+        "B0CBDVQP9V",
+        "B07M5HS36Z"
+      ],
+      "total_found": 9,
+      "total_checked": 22,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "billiard table covers",
+      "asins": [
+        "B09NCTXP79",
+        "B0B9R581V6",
+        "B0BWJ1DC9M",
+        "B09NVF7DC3",
+        "B09XQWR8CK",
+        "B0DYJV8DDY",
+        "B0DRCK8G7M",
+        "B0C557JWVC",
+        "B0DRBPG1B9"
+      ],
+      "total_found": 9,
+      "total_checked": 43,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "blackout curtains and accessories",
+      "asins": [
+        "B0CB3WSGWH",
+        "B0FDB22JPZ",
+        "B0D9RY9T1C",
+        "B0C3GN2MDB",
+        "B0DK6W7QQF",
+        "B071YVLK63",
+        "B0DRFBTSNX",
+        "B0F6BFSC93",
+        "B01CS31R94"
+      ],
+      "total_found": 9,
+      "total_checked": 20,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    }
+  ]
+}

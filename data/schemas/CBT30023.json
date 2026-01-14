@@ -208,9 +208,7 @@
       "yes": "242085"
     },
     "allowed_units": [],
-    "tags": {
-      "required": true
-    },
+    "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
   },
@@ -404,6 +402,20 @@
     "hierarchy": "FAMILY",
     "relevance": 1
   },
+  "FUNCTIONS": {
+    "value_type": "string",
+    "values": {
+      "adjustable height": "67836139",
+      "locking wheels": "67836140",
+      "convertible": "19359179"
+    },
+    "allowed_units": [],
+    "tags": {
+      "multivalued": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
   "WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -411,6 +423,17 @@
       "g",
       "kg"
     ],
+    "tags": {},
+    "hierarchy": "FAMILY",
+    "relevance": 1
+  },
+  "IS_MONTESSORI": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
     "tags": {},
     "hierarchy": "FAMILY",
     "relevance": 1
@@ -462,21 +485,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "CHARACTER": {
-    "value_type": "string",
-    "values": {
-      "mickey mouse": "930463",
-      "hello kitty": "507430",
-      "disney princess": "1019999",
-      "cars": "4233476"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "MPN": {
     "value_type": "string",
@@ -614,19 +622,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -638,34 +633,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -950,6 +917,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

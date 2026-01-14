@@ -1,0 +1,10 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MOTORCYCLE_RIDING_STYLE": [
+    "sport_type",
+    "attributes.sport_type[0].value"
+  ]
+}

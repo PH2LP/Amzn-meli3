@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-01-13T20:09:44.163979",
+  "config": {
+    "max_results": 14,
+    "max_delivery_days": 4,
+    "max_price": 450.0,
+    "buyer_zipcode": "33172",
+    "keywords_file": "keywords.txt",
+    "filter_fast_delivery": true,
+    "use_blacklist": true
+  },
+  "summary": {
+    "total_keywords": 2,
+    "successful_keywords": 2,
+    "failed_keywords": 0,
+    "total_asins_unique": 19,
+    "total_filtered_by_blacklist": 3,
+    "total_filtered_by_price": 14,
+    "elapsed_seconds": 7.020518
+  },
+  "results": [
+    {
+      "keyword": "all-in-one desktop computer",
+      "asins": [
+        "B0G477K9QM",
+        "B0FG7FLKYX",
+        "B0FPR12CG8",
+        "B0FWK81MKQ",
+        "B0FWRSBGYK"
+      ],
+      "total_found": 5,
+      "total_checked": 34,
+      "filtered_by_blacklist": 0,
+      "filtered_by_price": 14,
+      "using_prime": false,
+      "error": null
+    },
+    {
+      "keyword": "all-in-one garden tool kit",
+      "asins": [
+        "B0D475K847",
+        "B0D4DX9KXW",
+        "B0FLJQMPSN",
+        "B01N44B84E",
+        "B0DNJSJNQS",
+        "B0F7QZ4BYQ",
+        "B0FLJNCK7Y",
+        "B0FCFR8899",
+        "B01MUXL5V8",
+        "B0DWJD1NHQ",
+        "B0D93L31VW",
+        "B07DLTVFKK",
+        "B0D473DG67",
+        "B09F9C3KFS"
+      ],
+      "total_found": 14,
+      "total_checked": 36,
+      "filtered_by_blacklist": 3,
+      "filtered_by_price": 0,
+      "using_prime": false,
+      "error": null
+    }
+  ]
+}

@@ -182,120 +182,139 @@ def search_amazon_keyword(keyword: str, max_results: int = 10, zipcode: str = No
             # Si falla Glow, continuar de todas formas
             pass
 
-        # Paso 3: Realizar búsqueda
+        # Paso 3: Realizar búsqueda con paginación (hasta 5 páginas)
         search_url = "https://www.amazon.com/s"
-        params = {
-            'k': keyword,
-            'ref': 'nb_sb_noss'
-        }
-
-        response = session.get(search_url, params=params, timeout=30, proxies=proxies)
-
-        if response.status_code != 200:
-            result["error"] = f"HTTP {response.status_code}"
-            return result
-
-        html = response.text
-        soup = BeautifulSoup(html, 'html.parser')
-
-        # Extraer ASINs de los resultados CON filtro de delivery
         asins_found = []
         products_checked = 0
+        MAX_PAGES = 5
 
-        # Buscar productos con data-asin
-        products = soup.find_all('div', {'data-asin': True})
+        for page in range(1, MAX_PAGES + 1):
+            params = {
+                'k': keyword,
+                'page': page,
+                'ref': 'nb_sb_noss'
+            }
 
-        for product in products:
-            asin = product.get('data-asin', '').strip()
+            response = session.get(search_url, params=params, timeout=30, proxies=proxies)
 
-            # Validar ASIN
-            if not asin or len(asin) != 10:
-                continue
+            if response.status_code != 200:
+                result["error"] = f"HTTP {response.status_code}"
+                return result
 
-            # SKIP SPONSORED: Ignorar productos patrocinados
-            product_html = str(product)
-            if re.search(r'Sponsored', product_html, re.IGNORECASE):
-                continue
+            html = response.text
+            soup = BeautifulSoup(html, 'html.parser')
 
-            products_checked += 1
+            # Buscar productos con data-asin
+            products = soup.find_all('div', {'data-asin': True})
 
-            # FILTRO DE PRECIO: Verificar que no exceda max_price
-            if max_price is not None:
-                price = extract_price_from_product(product)
-                if price is not None and price > max_price:
-                    result["filtered_by_price"] += 1
+            # Si no hay productos en esta página, terminamos
+            if not products:
+                break
+
+            for product in products:
+                asin = product.get('data-asin', '').strip()
+
+                # Validar ASIN
+                if not asin or len(asin) != 10:
                     continue
 
-            # FILTRO DE BLACKLIST: Verificar marca/categoría/keywords prohibidas
-            if product_filter:
-                # Extraer título del producto
-                title = ""
-                title_tag = product.find('h2', class_=re.compile('s-line-clamp'))
-                if title_tag:
-                    title = title_tag.get_text(strip=True)
-                if not title:
-                    title_span = product.find('span', {'aria-label': True})
-                    if title_span:
-                        title = title_span.get('aria-label', '').strip()
-                if not title:
-                    h2_tag = product.find('h2')
-                    if h2_tag:
-                        title = h2_tag.get_text(strip=True)
-
-                # Extraer marca (si está visible)
-                brand = ""
-                brand_span = product.find('span', class_=re.compile('a-size-base-plus'))
-                if brand_span:
-                    brand = brand_span.get_text(strip=True)
-
-                # Construir datos para el filtro
-                product_data = {
-                    "title": title,
-                    "brand": brand,
-                    "product_type": "",
-                }
-
-                # Aplicar filtro (modo no estricto para no rechazar por falta de brand)
-                is_allowed, reason = product_filter.is_allowed(asin, product_data, strict=False)
-                if not is_allowed:
-                    result["filtered_by_blacklist"] += 1
+                # SKIP SPONSORED: Ignorar productos patrocinados
+                product_html = str(product)
+                if re.search(r'Sponsored', product_html, re.IGNORECASE):
                     continue
 
-            # Si no queremos filtrar, agregar directamente
-            if not filter_fast_delivery:
-                if asin not in asins_found:
+                products_checked += 1
+
+                # FILTRO DE PRECIO: Verificar que no exceda max_price
+                if max_price is not None:
+                    price = extract_price_from_product(product)
+                    if price is not None and price > max_price:
+                        result["filtered_by_price"] += 1
+                        continue
+
+                # FILTRO DE BLACKLIST: Verificar marca/categoría/keywords prohibidas
+                if product_filter:
+                    # Extraer título del producto
+                    title = ""
+                    title_tag = product.find('h2', class_=re.compile('s-line-clamp'))
+                    if title_tag:
+                        title = title_tag.get_text(strip=True)
+                    if not title:
+                        title_span = product.find('span', {'aria-label': True})
+                        if title_span:
+                            title = title_span.get('aria-label', '').strip()
+                    if not title:
+                        h2_tag = product.find('h2')
+                        if h2_tag:
+                            title = h2_tag.get_text(strip=True)
+
+                    # Extraer marca (si está visible)
+                    brand = ""
+                    brand_span = product.find('span', class_=re.compile('a-size-base-plus'))
+                    if brand_span:
+                        brand = brand_span.get_text(strip=True)
+
+                    # Construir datos para el filtro
+                    product_data = {
+                        "title": title,
+                        "brand": brand,
+                        "product_type": "",
+                    }
+
+                    # Filtrar productos refurbished
+                    if title and "refurbished" in title.lower():
+                        result["filtered_by_blacklist"] += 1
+                        continue
+
+                    # Aplicar filtro (modo no estricto para no rechazar por falta de brand)
+                    is_allowed, reason = product_filter.is_allowed(asin, product_data, strict=False)
+                    if not is_allowed:
+                        result["filtered_by_blacklist"] += 1
+                        continue
+
+                # Si no queremos filtrar, agregar directamente
+                if not filter_fast_delivery:
+                    if asin not in asins_found:
+                        asins_found.append(asin)
+                        if len(asins_found) >= max_results:
+                            break
+                    continue
+
+                # FILTRO DE ENVÍO RÁPIDO: Usar los mismos criterios que el sync
+                # El sync usa MAX_DELIVERY_DAYS (default: 4 días) para determinar fast delivery.
+                # En resultados de búsqueda no podemos calcular días exactos, pero buscamos
+                # los mismos indicadores que representan delivery ≤ MAX_DELIVERY_DAYS días.
+                # (product_html ya fue obtenido arriba para el check de Sponsored)
+
+                # Indicadores de envío rápido consistentes con criterio de sync:
+                # Buscar indicadores VISIBLES de delivery, no metadata JSON
+                fast_delivery_indicators = [
+                    r'FREE\s+delivery',                                    # "FREE delivery Mon, Jan 12"
+                    r'Get\s+it\s+by',                                      # "Get it by Tomorrow"
+                    r'Get\s+it\s+(today|tomorrow)',                        # "Get it today"
+                    r'Arrives\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)',        # "Arrives Mon, Jan 12"
+                    r'\$[\d.]+\s+delivery\s+in\s+\d+\s+hours',           # "$4.99 delivery in 3 hours"
+                ]
+
+                has_fast_delivery = False
+                for pattern in fast_delivery_indicators:
+                    if re.search(pattern, product_html, re.IGNORECASE):
+                        has_fast_delivery = True
+                        break
+
+                # Solo agregar si tiene envío rápido
+                if has_fast_delivery and asin not in asins_found:
                     asins_found.append(asin)
                     if len(asins_found) >= max_results:
                         break
-                continue
 
-            # FILTRO DE ENVÍO RÁPIDO: Usar los mismos criterios que el sync
-            # El sync usa MAX_DELIVERY_DAYS (default: 4 días) para determinar fast delivery.
-            # En resultados de búsqueda no podemos calcular días exactos, pero buscamos
-            # los mismos indicadores que representan delivery ≤ MAX_DELIVERY_DAYS días.
-            # (product_html ya fue obtenido arriba para el check de Sponsored)
+            # Si ya tenemos suficientes ASINs, salir del loop de páginas
+            if len(asins_found) >= max_results:
+                break
 
-            # Indicadores de envío rápido consistentes con criterio de sync:
-            # Buscar indicadores VISIBLES de delivery, no metadata JSON
-            fast_delivery_indicators = [
-                r'FREE\s+delivery',                                    # "FREE delivery Mon, Jan 12"
-                r'Get\s+it\s+by',                                      # "Get it by Tomorrow"
-                r'Get\s+it\s+(today|tomorrow)',                        # "Get it today"
-                r'Arrives\s+(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)',        # "Arrives Mon, Jan 12"
-                r'\$[\d.]+\s+delivery\s+in\s+\d+\s+hours',           # "$4.99 delivery in 3 hours"
-            ]
-
-            has_fast_delivery = False
-            for pattern in fast_delivery_indicators:
-                if re.search(pattern, product_html, re.IGNORECASE):
-                    has_fast_delivery = True
-                    break
-
-            # Solo agregar si tiene envío rápido
-            if has_fast_delivery and asin not in asins_found:
-                asins_found.append(asin)
-                if len(asins_found) >= max_results:
-                    break
+            # Delay entre páginas para evitar rate limiting
+            if page < MAX_PAGES:
+                time.sleep(1.5)
 
         result["asins"] = asins_found
         result["total_found"] = len(asins_found)

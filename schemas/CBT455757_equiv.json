@@ -1,0 +1,14 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "material",
+    "attributes.material[0].value"
+  ],
+  "UNIT_WEIGHT": [
+    "item_weight",
+    "attributes.item_weight[0].value"
+  ]
+}

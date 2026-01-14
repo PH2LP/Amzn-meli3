@@ -52,7 +52,7 @@
       "squishmallow": "49573763",
       "sonic": "49550939",
       "winnie the pooh": "49573766",
-      "spongebob": "49550855",
+      "spongebob": "49601770",
       "super mario": "49550955",
       "peppa pig": "49553433",
       "paw patrol": "49550922",
@@ -217,7 +217,7 @@
       "pikachu": "507433",
       "pluto": "507423",
       "pocahontas": "507443",
-      "sofia, the first": "930398",
+      "sofia the first": "930398",
       "shrek": "507428",
       "stitch": "4959202",
       "superman": "415867",
@@ -1028,19 +1028,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -1052,34 +1039,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -1351,6 +1310,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

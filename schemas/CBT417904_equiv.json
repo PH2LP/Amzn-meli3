@@ -1,0 +1,8 @@
+{
+  "UNITS_PER_PACKAGE": [
+    "item_package_quantity[0].value"
+  ],
+  "FAUCET_EXTENDER_SHAPE": [
+    "attributes.bullet_point[0].value"
+  ]
+}

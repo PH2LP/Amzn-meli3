@@ -65,7 +65,6 @@ def main():
     log("╚════════════════════════════════════════════════════════════════╝", Colors.BLUE)
     print()
     # Verificar si hay cookies Prime
-    import os
     cookies_file = "cache/amazon_session_cookies.json"
     has_prime_cookies = os.path.exists(cookies_file)
 

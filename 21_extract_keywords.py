@@ -31,9 +31,9 @@ load_dotenv(override=True)
 # Inicializar cliente OpenAI
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-def extract_categories_from_text(text_content):
-    """Extrae categorías del texto usando GPT-4"""
-    print(f"📝 Procesando categorías del archivo...")
+def extract_categories_from_chunk(text_chunk, chunk_num, total_chunks):
+    """Extrae categorías de un chunk de texto usando GPT-4"""
+    print(f"📝 Procesando chunk {chunk_num}/{total_chunks}...")
 
     # Llamar a OpenAI API
     try:
@@ -44,8 +44,8 @@ def extract_categories_from_text(text_content):
                     "role": "user",
                     "content": f"""Eres un experto en e-commerce que convierte categorías trending de MercadoLibre en keywords ESPECÍFICAS y COMPLETAS para buscar productos en Amazon.
 
-TEXTO A ANALIZAR:
-{text_content}
+TEXTO A ANALIZAR (Chunk {chunk_num}/{total_chunks}):
+{text_chunk}
 
 CONTEXTO IMPORTANTE:
 Estas son categorías TRENDING de MercadoLibre. Tu trabajo es convertirlas en keywords ESPECÍFICAS que se puedan usar para BUSCAR productos similares en Amazon.
@@ -149,9 +149,21 @@ IMPORTANTE: Genera entre 3-8 variaciones de keywords por cada categoría, pensan
             if k.endswith(" other") or k == "other":
                 continue
 
+            # Filtrar líneas que contengan caracteres especiales de formato
+            if '**' in k or '→' in k or k.endswith(':'):
+                continue
+
+            # Filtrar si contiene "input:" o "output:" (ejemplos de GPT)
+            if 'input:' in k or 'output:' in k:
+                continue
+
             # Remover texto innecesario
             k = k.replace(" in baby safety", "")
             k = k.replace(" in baby", "")
+
+            # Filtrar si tiene menos de 2 palabras
+            if len(k.split()) < 2:
+                continue
 
             # Agregar si no quedó vacío
             if k:
@@ -192,21 +204,45 @@ def main():
         return
 
     with open(input_file, 'r', encoding='utf-8') as f:
-        text_content = f.read()
+        lines = f.readlines()
 
+    total_lines = len(lines)
     print(f"📂 Archivo encontrado: {input_file}")
-    print(f"📄 Tamaño: {len(text_content)} caracteres")
+    print(f"📄 Total líneas: {total_lines:,}")
     print()
 
-    # Procesar el texto
-    all_keywords, stats = extract_categories_from_text(text_content)
+    # Dividir en chunks de 200 líneas para no exceder límites de tokens
+    LINES_PER_CHUNK = 200
+    chunks = []
 
+    for i in range(0, total_lines, LINES_PER_CHUNK):
+        chunk = ''.join(lines[i:i + LINES_PER_CHUNK])
+        chunks.append(chunk)
+
+    total_chunks = len(chunks)
+    print(f"📦 Dividido en {total_chunks} chunks de ~{LINES_PER_CHUNK} líneas cada uno")
+    print()
+
+    # Procesar cada chunk
+    all_keywords = []
     total_stats = {
-        "input_tokens": stats["input_tokens"],
-        "output_tokens": stats["output_tokens"],
-        "total_tokens": stats["total_tokens"],
-        "cost": stats["cost"]
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0,
+        "cost": 0.0
     }
+
+    for idx, chunk in enumerate(chunks, 1):
+        keywords, stats = extract_categories_from_chunk(chunk, idx, total_chunks)
+        all_keywords.extend(keywords)
+
+        # Acumular estadísticas
+        total_stats["input_tokens"] += stats["input_tokens"]
+        total_stats["output_tokens"] += stats["output_tokens"]
+        total_stats["total_tokens"] += stats["total_tokens"]
+        total_stats["cost"] += stats["cost"]
+
+        print()
 
     # Cargar keywords existentes si el archivo ya existe
     output_file = Path(__file__).parent / "keywords_from_ml_categories.txt"

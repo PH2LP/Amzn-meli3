@@ -195,6 +195,7 @@ def get_listings_to_update(asin_filter=None):
             SELECT asin, item_id, mini_ml_data, price_usd, site_items
             FROM listings
             WHERE item_id IS NOT NULL
+            ORDER BY date_published DESC
         """)
 
     listings = cursor.fetchall()

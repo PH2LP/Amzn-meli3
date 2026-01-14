@@ -1,0 +1,39 @@
+{
+  "FINISH": [
+    "furniture_finish[0].value",
+    "attributes.finish_type[0].value"
+  ],
+  "STYLE": [
+    "style[0].value",
+    "attributes.style[0].value"
+  ],
+  "DRAWERS_NUMBER": [
+    "number_of_drawers[0].value",
+    "attributes.number_of_drawers[0].value"
+  ],
+  "DOORS_NUMBER": [
+    "number_of_doors[0].value",
+    "attributes.number_of_doors[0].value"
+  ],
+  "SHELVES_NUMBER": [
+    "number_of_shelves[0].value",
+    "attributes.number_of_shelves[0].value"
+  ],
+  "REQUIRES_ASSEMBLY": [
+    "is_assembly_required[0].value",
+    "attributes.is_assembly_required[0].value"
+  ],
+  "WITH_HANDLE": [],
+  "WITH_DRAWERS_SLIDES": [],
+  "PACKAGING_BOXES_NUMBER": [
+    "number_of_boxes[0].value",
+    "attributes.number_of_boxes[0].value"
+  ],
+  "INCLUDES_ASSEMBLY_MANUAL": [
+    "assembly_instructions[0].value",
+    "attributes.assembly_instructions[0].value"
+  ],
+  "PU_PROVINCE": [],
+  "PU_CITY": [],
+  "PU_NEIGHBORHOOD": []
+}

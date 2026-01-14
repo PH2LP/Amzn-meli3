@@ -52,7 +52,7 @@
       "squishmallow": "49573763",
       "sonic": "49550939",
       "winnie the pooh": "49573766",
-      "spongebob": "49550855",
+      "spongebob": "49601770",
       "super mario": "49550955",
       "peppa pig": "49553433",
       "paw patrol": "49550922",
@@ -217,7 +217,7 @@
       "pikachu": "507433",
       "pluto": "507423",
       "pocahontas": "507443",
-      "sofia, the first": "930398",
+      "sofia the first": "930398",
       "shrek": "507428",
       "stitch": "4959202",
       "superman": "415867",
@@ -472,7 +472,7 @@
     "values": {
       "glow in the dark": "11662294",
       "dance": "11327992",
-      "sleep": "13709542"
+      "sleeps": "13709542"
     },
     "allowed_units": [],
     "tags": {
@@ -654,77 +654,6 @@
       "variation_attribute": true
     },
     "hierarchy": "PRODUCT_IDENTIFIER",
-    "relevance": 2
-  },
-  "ITEM_CONDITION": {
-    "value_type": "list",
-    "values": {
-      "new": "2230284",
-      "refurbished": "2230582"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "IS_TOM_BRAND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "IS_SUITABLE_FOR_WASHING_MACHINE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "IS_HIGHLIGHT_BRAND": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 2
-  },
-  "GIFTABLE": {
-    "value_type": "string",
-    "values": {
-      "vppbasic": "54973163",
-      "vppfull": "54973164",
-      "cart": "54973165",
-      "checkout": "54973166"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "multivalued": true,
-      "read_only": true
-    },
-    "hierarchy": "ITEM",
     "relevance": 2
   },
   "FILTRABLE_CHARACTER": {
@@ -924,6 +853,78 @@
     "allowed_units": [],
     "tags": {
       "hidden": true,
+      "read_only": true,
+      "variation_attribute": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "ITEM_CONDITION": {
+    "value_type": "list",
+    "values": {
+      "new": "2230284",
+      "refurbished": "2230582"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_TOM_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_SUITABLE_FOR_WASHING_MACHINE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "IS_HIGHLIGHT_BRAND": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "GIFTABLE": {
+    "value_type": "string",
+    "values": {
+      "vppbasic": "54973163",
+      "vppfull": "54973164",
+      "cart": "54973165",
+      "checkout": "54973166"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "multivalued": true,
       "read_only": true
     },
     "hierarchy": "ITEM",
@@ -1027,19 +1028,6 @@
     "hierarchy": "ITEM",
     "relevance": 1
   },
-  "SELLER_PACKAGE_TYPE": {
-    "value_type": "list",
-    "values": {
-      "no additional packaging": "47115155",
-      "with additional packaging": "47115156"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true
-    },
-    "hierarchy": "ITEM",
-    "relevance": 1
-  },
   "SELLER_PACKAGE_WEIGHT": {
     "value_type": "number_unit",
     "values": {},
@@ -1051,34 +1039,6 @@
     },
     "hierarchy": "ITEM",
     "relevance": 1
-  },
-  "IS_FLAMMABLE": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
-  },
-  "WITH_POSITIVE_IMPACT": {
-    "value_type": "boolean",
-    "values": {
-      "no": "242084",
-      "yes": "242085"
-    },
-    "allowed_units": [],
-    "tags": {
-      "hidden": true,
-      "read_only": true
-    },
-    "hierarchy": "FAMILY",
-    "relevance": 2
   },
   "HAZMAT_TRANSPORTABILITY": {
     "value_type": "list",
@@ -1350,6 +1310,34 @@
       "read_only": true
     },
     "hierarchy": "ITEM",
+    "relevance": 2
+  },
+  "IS_FLAMMABLE": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
+    "relevance": 2
+  },
+  "WITH_POSITIVE_IMPACT": {
+    "value_type": "boolean",
+    "values": {
+      "no": "242084",
+      "yes": "242085"
+    },
+    "allowed_units": [],
+    "tags": {
+      "hidden": true,
+      "read_only": true
+    },
+    "hierarchy": "FAMILY",
     "relevance": 2
   },
   "PACKAGE_DATA_SOURCE": {

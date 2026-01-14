@@ -1,0 +1,9 @@
+{
+  "COLOR": [
+    "color",
+    "attributes.color[0].value"
+  ],
+  "MATERIAL": [
+    "handle[0].material[0].value"
+  ]
+}

@@ -498,27 +498,25 @@ class DownloadPhase(PipelinePhase):
                     self.log(asin, "Obteniendo precio Prime...", "INFO")
                     prime_offer = get_prime_offer(asin)
 
+                    # Cargar el JSON existente
+                    with open(json_path, 'r', encoding='utf-8') as f:
+                        product_data = json.load(f)
+
                     if prime_offer:
-                        # Cargar el JSON existente
-                        with open(json_path, 'r', encoding='utf-8') as f:
-                            product_data = json.load(f)
-
-                        # Agregar el precio al JSON
+                        # Agregar el precio al JSON si existe
                         product_data['prime_pricing'] = prime_offer
-
-                        # Guardar el JSON actualizado
-                        with open(json_path, 'w', encoding='utf-8') as f:
-                            json.dump(product_data, f, ensure_ascii=False, indent=2)
-
                         self.log(asin, f"Amazon ✓ | Precio Prime: ${prime_offer['price']}", "SUCCESS")
-                        self.db.update_asin_status(asin, Status.DOWNLOADED)
-                        return True
                     else:
-                        # Sin precio Prime = no procesamos este producto
-                        error_msg = "No tiene oferta Prime activa"
-                        self.log(asin, f"❌ {error_msg}", "ERROR")
-                        self.db.update_asin_status(asin, Status.FAILED, error_msg)
-                        return False
+                        # Sin precio Prime = continuar igual (sync lo filtrará después)
+                        product_data['prime_pricing'] = None
+                        self.log(asin, f"Amazon ✓ | Sin precio Prime (sync filtrará)", "INFO")
+
+                    # Guardar el JSON actualizado
+                    with open(json_path, 'w', encoding='utf-8') as f:
+                        json.dump(product_data, f, ensure_ascii=False, indent=2)
+
+                    self.db.update_asin_status(asin, Status.DOWNLOADED)
+                    return True
                 else:
                     raise Exception("Archivo no creado")
 
@@ -1219,6 +1217,13 @@ class Pipeline:
                     )
             except:
                 pass
+
+        # Check: Skip refurbished products
+        if product_title and "refurbished" in product_title.lower():
+            print(f"✗ (refurbished)")
+            result["phase"] = "mapping"
+            result["error"] = "Product is refurbished"
+            return result
 
         print(f"✓{cat_info}")
 
