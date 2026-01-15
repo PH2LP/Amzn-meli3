@@ -489,6 +489,14 @@ def get_item_data_from_listing(ml_item_id):
         return None
 
 
+# Alias para compatibilidad
+def get_asin_info(ml_item_id):
+    """
+    Alias de get_item_data_from_listing para compatibilidad
+    """
+    return get_item_data_from_listing(ml_item_id)
+
+
 def get_order_billing(order):
     """
     Extrae la información financiera REAL de la orden de MercadoLibre

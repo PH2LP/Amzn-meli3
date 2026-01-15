@@ -1,8 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(for script in 03_update_prices.py 04_update_prices.py 17_price_automate.py)",
-      "Bash(do echo \"=== $script ===\" python3 -c \"compile(open(''''$script'''').read(), ''''$script'''', ''''exec''''); print(''''✓ Syntax OK'''')\")"
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []

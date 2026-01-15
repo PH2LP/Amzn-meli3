@@ -2,15 +2,15 @@
 # ============================================================
 # 🔄 LOOP AUTOMÁTICO DE RENOVACIÓN DE TOKEN MERCADOLIBRE
 # ============================================================
-# Renueva el token cada 5.5 horas automáticamente
-# Los tokens de ML duran 6 horas, renovamos a las 5.5 para seguridad
+# Renueva el token en horarios específicos configurables
+# Los tokens de ML duran 6 horas, se recomienda renovar cada 4-5 horas
 # ============================================================
 
 import os
 import sys
 import time
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from dotenv import dotenv_values
 
@@ -18,9 +18,13 @@ from dotenv import dotenv_values
 ROOT_DIR = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
-REFRESH_INTERVAL = 5.5 * 60 * 60  # 5.5 horas en segundos
 ENV_PATH = ROOT_DIR / ".env"
 LOG_FILE = ROOT_DIR / "logs" / "ml_token_refresh.log"
+
+# Leer horarios programados desde .env
+env_config = dotenv_values(ENV_PATH)
+SCHEDULED_TIMES_STR = env_config.get("ML_TOKEN_REFRESH_SCHEDULED_TIMES", "00:00,06:00,12:00,18:00")
+SCHEDULED_TIMES = [t.strip() for t in SCHEDULED_TIMES_STR.split(",")]
 
 def log(msg):
     """Log con timestamp tanto a consola como a archivo"""
@@ -83,7 +87,6 @@ def refresh_ml_token():
         log(f"✅ Token renovado exitosamente")
         log(f"   Access token: {new_access_token[:40]}...")
         log(f"   Refresh token: {new_refresh_token[:40]}...")
-        log(f"   Próxima renovación en 5.5 horas")
 
         return True
 
@@ -94,28 +97,63 @@ def refresh_ml_token():
         log(f"❌ Error inesperado al renovar token: {e}")
         return False
 
+def get_next_scheduled_time():
+    """
+    Calcula el próximo horario programado
+    """
+    now = datetime.now()
+    today_times = []
+
+    for time_str in SCHEDULED_TIMES:
+        try:
+            hour, minute = map(int, time_str.split(":"))
+            scheduled_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+
+            # Si ya pasó hoy, programar para mañana
+            if scheduled_time <= now:
+                scheduled_time += timedelta(days=1)
+
+            today_times.append(scheduled_time)
+        except ValueError:
+            log(f"⚠️  Formato de hora inválido: {time_str}")
+            continue
+
+    if not today_times:
+        # Fallback: renovar en 6 horas si no hay horarios válidos
+        log("⚠️  No hay horarios programados válidos, usando fallback de 6 horas")
+        return now + timedelta(hours=6)
+
+    # Retornar el más cercano
+    return min(today_times)
+
 def run_loop():
     """
-    Loop principal que renueva el token cada 5.5 horas
+    Loop principal que renueva el token en horarios específicos
     """
     log("=" * 60)
     log("🚀 Iniciando loop automático de renovación ML Token")
-    log(f"   Intervalo: 5.5 horas ({REFRESH_INTERVAL} segundos)")
+    log(f"   Horarios programados: {', '.join(SCHEDULED_TIMES)}")
     log(f"   Log: {LOG_FILE}")
     log("=" * 60)
 
     # Primera renovación inmediata
+    log("🔄 Ejecutando primera renovación...")
     refresh_ml_token()
 
-    # Loop infinito
-    iteration = 1
+    # Loop infinito esperando horarios programados
     while True:
         try:
-            log(f"⏳ Esperando 5.5 horas hasta próxima renovación... (iteración #{iteration})")
-            time.sleep(REFRESH_INTERVAL)
+            next_run = get_next_scheduled_time()
+            now = datetime.now()
+            wait_seconds = (next_run - now).total_seconds()
 
+            log(f"⏰ Próxima renovación programada: {next_run.strftime('%Y-%m-%d %H:%M:%S')}")
+            log(f"⏳ Esperando {wait_seconds/3600:.1f} horas...")
+
+            time.sleep(wait_seconds)
+
+            log(f"🕐 Horario alcanzado: {datetime.now().strftime('%H:%M:%S')}")
             refresh_ml_token()
-            iteration += 1
 
         except KeyboardInterrupt:
             log("\n🛑 Loop detenido manualmente (Ctrl+C)")

@@ -4,12 +4,17 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 #
 # ¿Qué hace?
-#   Renueva automáticamente el token de MercadoLibre cada 6 horas.
-#   Horarios fijos: 00:00, 06:00, 12:00, 18:00
+#   Renueva automáticamente el token de MercadoLibre en horarios configurables.
+#   Los horarios se configuran en .env con ML_TOKEN_REFRESH_SCHEDULED_TIMES
+#   Default: "00:00,06:00,12:00,18:00" (cada 6 horas)
 #   Actualiza el .env con el nuevo token.
 #
 # Comando:
 #   python3 08_token_loop.py
+#
+# Configuración:
+#   Editar ML_TOKEN_REFRESH_SCHEDULED_TIMES en .env
+#   Ejemplo: "00:00,05:00,10:00,15:00,20:00" (cada 5 horas)
 #
 # Ctrl+C para detener
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -29,7 +34,7 @@ def main():
     print(f"{Colors.BLUE}║          ML TOKEN REFRESH LOOP                               ║{Colors.NC}")
     print(f"{Colors.BLUE}╚════════════════════════════════════════════════════════════════╝{Colors.NC}\n")
 
-    print(f"{Colors.CYAN}⏰ Horarios de renovación: 00:00, 06:00, 12:00, 18:00{Colors.NC}")
+    print(f"{Colors.CYAN}⏰ Horarios configurados en .env (ML_TOKEN_REFRESH_SCHEDULED_TIMES){Colors.NC}")
     print(f"{Colors.YELLOW}⚠️  Presioná Ctrl+C para detener{Colors.NC}\n")
     print(f"{Colors.BLUE}{'─' * 64}{Colors.NC}\n")
 

@@ -20,11 +20,13 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from dotenv import dotenv_values
 
-# Horarios fijos de refresh: 00:00, 06:00, 12:00, 18:00
-REFRESH_HOURS = [0, 6, 12, 18]
-REFRESH_MINUTE = 0
 ENV_PATH = Path(__file__).parent / ".env"
 LOG_FILE = Path(__file__).parent / "logs" / "ml_token_refresh.log"
+
+# Leer horarios programados desde .env
+env_config = dotenv_values(ENV_PATH)
+SCHEDULED_TIMES_STR = env_config.get("ML_TOKEN_REFRESH_SCHEDULED_TIMES", "00:00,06:00,12:00,18:00")
+SCHEDULED_TIMES = [t.strip() for t in SCHEDULED_TIMES_STR.split(",")]
 
 def log(msg):
     """Log con timestamp tanto a consola como a archivo"""
@@ -99,26 +101,35 @@ def refresh_ml_token():
 
 def get_next_refresh_time():
     """
-    Calcula la próxima hora de refresh (00:00, 06:00, 12:00, 18:00)
+    Calcula la próxima hora de refresh basado en SCHEDULED_TIMES
 
     Returns:
         datetime: Próxima hora de refresh
     """
     now = datetime.now()
+    upcoming_times = []
 
-    # Buscar la próxima hora de refresh
-    for hour in REFRESH_HOURS:
-        next_time = now.replace(hour=hour, minute=REFRESH_MINUTE, second=0, microsecond=0)
+    # Parsear todos los horarios programados
+    for time_str in SCHEDULED_TIMES:
+        try:
+            hour, minute = map(int, time_str.split(":"))
+            next_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
 
-        # Si esta hora ya pasó hoy, usar mañana
-        if next_time <= now:
+            # Si esta hora ya pasó hoy, programar para mañana
+            if next_time <= now:
+                next_time += timedelta(days=1)
+
+            upcoming_times.append(next_time)
+        except ValueError:
+            log(f"⚠️  Formato de hora inválido: {time_str}")
             continue
 
-        return next_time
-
-    # Si todas las horas de hoy ya pasaron, usar la primera hora de mañana
-    tomorrow = now + timedelta(days=1)
-    return tomorrow.replace(hour=REFRESH_HOURS[0], minute=REFRESH_MINUTE, second=0, microsecond=0)
+    # Retornar el más cercano
+    if upcoming_times:
+        return min(upcoming_times)
+    else:
+        # Fallback: en 6 horas
+        return now + timedelta(hours=6)
 
 def main():
     """
@@ -126,7 +137,7 @@ def main():
     """
     log("=" * 60)
     log("🚀 Iniciando loop automático de renovación ML Token")
-    log(f"   Horarios de refresh: {', '.join([f'{h:02d}:00' for h in REFRESH_HOURS])}")
+    log(f"   Horarios de refresh: {', '.join(SCHEDULED_TIMES)}")
     log(f"   Log: {LOG_FILE}")
     log("=" * 60)
 
